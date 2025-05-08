@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 08 May 2025 15:28:02 +0800</lastBuildDate><atom:link href="https://kakahuote1.github.io/kakahuote.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 08 May 2025 18:19:44 +0800</lastBuildDate><atom:link href="https://kakahuote1.github.io/kakahuote.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>X</title>
+        <link>https://kakahuote1.github.io/kakahuote.github.io/p/x/</link>
+        <pubDate>Thu, 08 May 2025 18:19:44 +0800</pubDate>
+        
+        <guid>https://kakahuote1.github.io/kakahuote.github.io/p/x/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Vim</title>
         <link>https://kakahuote1.github.io/kakahuote.github.io/p/vim/</link>
         <pubDate>Thu, 08 May 2025 15:28:02 +0800</pubDate>
