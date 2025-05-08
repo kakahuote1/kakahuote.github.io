@@ -7,11 +7,11 @@
 
 <link rel='canonical' href='https://928330.xyz/'>
 
-<link rel="stylesheet" href="/scss/style.min.86e2ccbaf01317af4f54bb8ddf01ec3c966c0663731f1ca7c5d4983df2f41c69.css"><meta property='og:title' content="kakahuote'blogs">
+<link rel="stylesheet" href="/scss/style.min.f7235e1fb28e19a3570fda6c83235ece96b3d5fceea4d5eb5f1d8295eac8a2da.css"><meta property='og:title' content="kakahuote'blogs">
 <meta property='og:description' content="那很好看了">
 <meta property='og:url' content='https://928330.xyz/'>
 <meta property='og:site_name' content='kakahuote&#39;blogs'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-05-08T15:28:02&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-05-09T01:17:52&#43;08:00 '/>
 <meta name="twitter:title" content="kakahuote'blogs">
 <meta name="twitter:description" content="那很好看了"><link rel="alternate" type="application/rss&#43;xml" href="https://928330.xyz/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -264,7 +264,7 @@
                     <a href="/archives/#2025">
                         
                             <span class="year">2025</span>
-                            <span class="count">1</span>
+                            <span class="count">2</span>
                         
                     </a> 
                 </div>
@@ -306,6 +306,65 @@
     
 
     <section class="article-list">
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/minil/">MiniL</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-05-09</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 13 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+</article>
         
             
 <article class="">
@@ -400,15 +459,307 @@
 </script>
 <style>
     @font-face {
-      font-family: 'yuan';
-      src: url(https://928330.xyz/font/round.ttf) format('truetype');
+        font-family: 'yuan';
+        src: url(https://928330.xyz/font/round.ttf) format('truetype');
     }
-  
+
     :root {
-      --base-font-family: 'yuan';
-      --code-font-family: 'yuan';
+        --base-font-family: 'yuan';
+        --code-font-family: 'yuan';
+        --toc-link-color: #000;  
+        --toc-link-active-color: red;  
     }
-  </style>
-  
+
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+
+    #TableOfContents a {
+        color: var(--toc-link-color);  
+        text-decoration: none;  
+    }
+
+    #TableOfContents a.active {
+        color: var(--toc-link-active-color);  
+    }
+
+     
+    #backTopBtn {
+        position: fixed;  
+        bottom: 30px;
+        right: 450px;  
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://928330.xyz/icons/backTop.svg);  
+        background-size: cover;
+        transition: transform 0.1s linear;  
+        transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+        transform: rotate(360deg);
+    }
+
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+        transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 20px;  
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        text-align: center;  
+    }
+
+    .code-more-btn {
+        display: inline-block;  
+        padding: 5px 15px;
+        background: #f0f0f5;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        let isRotating = false;
+
+        btn.onclick = function() {
+            if (!isRotating) {
+                isRotating = true;
+                backToTop(this, () => {
+                    isRotating = false; 
+                });
+            }
+        };
+        rightSideBar.appendChild(btn);
+
+        
+        btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+        let rotation = 0;
+        let animationInterval;
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        animationInterval = setInterval(() => {
+            rotation += 30; 
+            button.style.transform = `rotate(${rotation}deg)`;
+
+            if (window.scrollY === 0) {
+                clearInterval(animationInterval);
+                button.style.transform = `rotate(0deg)`; 
+                if (onComplete) {
+                    onComplete();
+                }
+            } else if (rotation >= 360 && window.scrollY !== 0) {
+                
+            }
+        }, 20); 
+    }
+
+    
+    initScrollTop();
+
+    function initTocHide() {
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+                openUl.forEach((ul) => {
+                    ul.classList.remove("open");
+                });
+            }
+
+            
+            let currentLi = document.querySelector(".active-class");
+            if (currentLi) {
+                if (currentLi.children.length > 1) {
+                    currentLi.children[1].classList.add("open");
+                }
+                let ul = currentLi.parentElement;
+                do {
+                    ul.classList.add("open");
+                    ul = ul.parentElement.parentElement;
+                } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
+            }
+        });
+    }
+    initTocHide();
+
+    function initTocHighlight() {
+        const tocLinks = document.querySelectorAll('#TableOfContents a');
+        const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+
+        if (tocLinks.length === 0 || headings.length === 0) {
+            return;
+        }
+
+        function getOffsetTop(element) {
+            let offsetTop = 0;
+            while (element) {
+                offsetTop += element.offsetTop;
+                element = element.offsetParent;
+            }
+            return offsetTop;
+        }
+
+        function isElementInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function setActiveTocLink() {
+            const scrollPositionTop = window.scrollY;
+            const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
+            let activeLink = null;
+
+            for (let i = 0; i < headings.length; i++) {
+                const currentHeading = headings[i];
+                const currentHeadingTop = getOffsetTop(currentHeading);
+                const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
+
+                let nextHeadingTop = Infinity; 
+                if (i < headings.length - 1) {
+                    nextHeadingTop = getOffsetTop(headings[i + 1]);
+                }
+
+                
+                if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
+                    activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
+                    break; 
+                }
+            }
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            if (activeLink) {
+                activeLink.classList.add('active');
+                
+                let parentLi = activeLink.parentNode;
+                while (parentLi && parentLi.tagName === 'LI') {
+                    let siblingUl = parentLi.querySelector('ul, ol');
+                    if (siblingUl && !siblingUl.classList.contains('open')) {
+                        siblingUl.classList.add('open');
+                    }
+                    parentLi = parentLi.parentNode;
+                }
+            }
+        }
+
+        function expandTocOnView() {
+            headings.forEach(heading => {
+                if (isElementInViewport(heading)) {
+                    const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
+                    if (correspondingLink) {
+                        let parentLi = correspondingLink.parentNode;
+                        while (parentLi && parentLi.tagName === 'LI') {
+                            let siblingUl = parentLi.querySelector('ul, ol');
+                            if (siblingUl && !siblingUl.classList.contains('open')) {
+                                siblingUl.classList.add('open');
+                            }
+                            parentLi = parentLi.parentNode;
+                        }
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveTocLink);
+        window.addEventListener('scroll', expandTocOnView);
+        
+        setActiveTocLink();
+        expandTocOnView();
+    }
+    initTocHighlight();
+
+    function initCodeMoreBox() {
+        let codeBlocks = document.querySelectorAll(".highlight");
+        if (!codeBlocks) {
+            return;
+        }
+        codeBlocks.forEach(codeBlock => {
+            
+            if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+                return;
+            }
+            
+            
+            let codeMoreBox = document.createElement('div');
+            codeMoreBox.classList.add('code-more-box');
+            
+            let codeMoreBtn = document.createElement('span');
+            codeMoreBtn.classList.add('code-more-btn');
+            codeMoreBtn.innerText = '显示更多'; 
+            let isExpanded = false; 
+
+            codeMoreBtn.addEventListener('click', () => {
+                if (!isExpanded) {
+                    codeBlock.classList.add('code-show');
+                    codeMoreBtn.innerText = '折叠'; 
+                    isExpanded = true;
+                } else {
+                    codeBlock.classList.remove('code-show');
+                    codeMoreBtn.innerText = '显示更多'; 
+                    isExpanded = false;
+                }
+                
+                window.dispatchEvent(new Event('resize'));
+            });
+            
+            codeMoreBox.appendChild(codeMoreBtn);
+            codeBlock.appendChild(codeMoreBox);
+        });
+    }
+
+    initCodeMoreBox();
+</script>
     </body>
 </html>
