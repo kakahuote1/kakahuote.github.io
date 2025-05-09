@@ -10,7 +10,7 @@
 <meta property='og:description' content="吃豆人 连上环境后f12,发现脚本game.js:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 function startGame() { document.getElementById(&#34;start-screen&#34;).style.display = &#34;none&#34;; document.getElementById(&#34;game&#34;).style.display = &#34;block&#34;; initGame(); } const canvas = document.getElementById(&#34;game&#34;); const ctx = canvas.getContext(&#34;2d&#34;); const box = 20; let people, balls, score, dx, dy, isGameOver, game; let redBallCount, blueBallCount; let hasGotFlag = false; function initGame() { people = [{ x: 200, y: 200 }]; dx = box; dy = 0; score = 0; isGameOver = false; hasGotFlag = false; redBallCount = 1000; blueBallCount = 1; balls = []; spawnBalls(); if (game) clearInterval(game); game = setInterval(draw, 150); } document.addEventListener(&#34;keydown&#34;, dir); function dir(e) { if (e.key === &#34;ArrowUp&#34; &amp;&amp; dy === 0) { dx = 0; dy = -box; } else if (e.key === &#34;ArrowDown&#34; &amp;&amp; dy === 0) { dx = 0; dy = box; } else if (e.key === &#34;ArrowLeft&#34; &amp;&amp; dx === 0) { dx = -box; dy = 0; } else if (e.key === &#34;ArrowRight&#34; &amp;&amp; dx === 0) { dx = box; dy = 0; } else if (e.key === &#34; &#34;) { // 空格重开 initGame(); } } function draw() { if (isGameOver) return; ctx.clearRect(0, 0, 400, 400); ctx.strokeStyle = &#34;white&#34;; ctx.lineWidth = 2; ctx.strokeRect(0, 0, 400, 400); // ren ctx.fillStyle = &#34;lime&#34;; ctx.fillRect(people[0].x, people[0].y, box, box); // 画球 balls.forEach(ball =&gt; { ctx.fillStyle = ball.color; ctx.beginPath(); ctx.arc(ball.x + box / 2, ball.y + box / 2, box / 2 - 2, 0, Math.PI * 2); ctx.fill(); }); // 人移动 let head = { x: people[0].x + dx, y: people[0].y + dy }; // 碰撞判断 if (head.x &lt; 0 || head.x &gt;= 400 || head.y &lt; 0 || head.y &gt;= 400) { gameOver(); return; } // 吃球逻辑 let ateIndex = balls.findIndex(b =&gt; b.x === head.x &amp;&amp; b.y === head.y); if (ateIndex !== -1) { const eaten = balls[ateIndex]; if (eaten.color === &#34;red&#34;) { score += 1; redBallCount--; } else if (eaten.color === &#34;blue&#34;) { score = score * 5; blueBallCount--; } balls.splice(ateIndex, 1); } people[0] = head; // 胜利检测 if (score &gt;= 5000 &amp;&amp; !hasGotFlag) { fetch(&#39;/submit_score&#39;, { method: &#34;POST&#34;, headers: { &#34;Content-Type&#34;: &#34;application/json&#34; }, body: JSON.stringify({ score: score }) }) .then(response =&gt; response.json()) .then(data =&gt; { if (data.flag) { alert(&#34;🎉 恭喜！你的flag是：&#34; + data.flag); } else { alert(&#34;未达到指定分数！&#34;); } }); hasGotFlag = true; } // 球吃光了 if (balls.length === 0) { if (redBallCount === 0 &amp;&amp; blueBallCount === 0) { if (score &gt;= 5000) { alert(&#34;你赢了！&#34;); } else { alert(&#34;球全吃完了，但分数不足，游戏失败！&#34;); } isGameOver = true; return; } else { spawnBalls(); } } if ( redBallCount &gt; 0 &amp;&amp; balls.every(b =&gt; b.color !== &#34;red&#34;) &amp;&amp; balls.length &gt; 0 ) { spawnBalls(); } ctx.fillStyle = &#34;white&#34;; ctx.fillText(&#34;Score: &#34; + score, 10, 20); ctx.fillText(&#34;Red left: &#34; + redBallCount, 10, 40); ctx.fillText(&#34;Blue left: &#34; + blueBallCount, 10, 60); } function spawnBalls() { let num = Math.floor(Math.random() * 5) + 1; // 即使红球或蓝球库存为 0，也要刷新蓝球位置（如果还在场上） const blueIndex = balls.findIndex(b =&gt; b.color === &#34;blue&#34;); if (blueIndex !== -1) { balls.splice(blueIndex, 1); } if (redBallCount &lt;= 0 &amp;&amp; blueBallCount &lt;= 0) return; // 特例：只生成一个球 if (num === 1) { if (redBallCount &gt; 0) { balls.push(createBall(&#34;red&#34;)); } else if (blueBallCount &gt; 0) { balls.push(createBall(&#34;blue&#34;)); } return; } // 多于1个球时，先加蓝球（前提：蓝球还未被吃掉） if (blueBallCount &gt; 0) { balls.push(createBall(&#34;blue&#34;)); num--; } // 加红球（前提：库存足够） while (num &gt; 0 &amp;&amp; redBallCount &gt; 0) { balls.push(createBall(&#34;red&#34;)); num--; } } function createBall(color) { let x, y; do { x = box * Math.floor(Math.random() * 20); y = box * Math.floor(Math.random() * 20); } while (balls.some(b =&gt; b.x === x &amp;&amp; b.y === y) || (people[0].x === x &amp;&amp; people[0].y === y)); return { x, y, color }; } function gameOver() { alert(&#34;你撞墙了，游戏失败！得分：&#34; + score + &#34;\\n按空格键重新开始&#34;); isGameOver = true; } // 启动 //initGame(); 看下面这一段：\n">
 <meta property='og:url' content='https://928330.xyz/p/minil/'>
 <meta property='og:site_name' content='kakahuote&#39;blogs'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-09T01:17:52&#43;08:00'/><meta property='article:modified_time' content='2025-05-09T01:17:52&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-09T01:17:52&#43;08:00'/><meta property='article:modified_time' content='2025-05-10T00:02:39&#43;08:00'/>
 <meta name="twitter:title" content="MiniL">
 <meta name="twitter:description" content="吃豆人 连上环境后f12,发现脚本game.js:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 function startGame() { document.getElementById(&#34;start-screen&#34;).style.display = &#34;none&#34;; document.getElementById(&#34;game&#34;).style.display = &#34;block&#34;; initGame(); } const canvas = document.getElementById(&#34;game&#34;); const ctx = canvas.getContext(&#34;2d&#34;); const box = 20; let people, balls, score, dx, dy, isGameOver, game; let redBallCount, blueBallCount; let hasGotFlag = false; function initGame() { people = [{ x: 200, y: 200 }]; dx = box; dy = 0; score = 0; isGameOver = false; hasGotFlag = false; redBallCount = 1000; blueBallCount = 1; balls = []; spawnBalls(); if (game) clearInterval(game); game = setInterval(draw, 150); } document.addEventListener(&#34;keydown&#34;, dir); function dir(e) { if (e.key === &#34;ArrowUp&#34; &amp;&amp; dy === 0) { dx = 0; dy = -box; } else if (e.key === &#34;ArrowDown&#34; &amp;&amp; dy === 0) { dx = 0; dy = box; } else if (e.key === &#34;ArrowLeft&#34; &amp;&amp; dx === 0) { dx = -box; dy = 0; } else if (e.key === &#34;ArrowRight&#34; &amp;&amp; dx === 0) { dx = box; dy = 0; } else if (e.key === &#34; &#34;) { // 空格重开 initGame(); } } function draw() { if (isGameOver) return; ctx.clearRect(0, 0, 400, 400); ctx.strokeStyle = &#34;white&#34;; ctx.lineWidth = 2; ctx.strokeRect(0, 0, 400, 400); // ren ctx.fillStyle = &#34;lime&#34;; ctx.fillRect(people[0].x, people[0].y, box, box); // 画球 balls.forEach(ball =&gt; { ctx.fillStyle = ball.color; ctx.beginPath(); ctx.arc(ball.x + box / 2, ball.y + box / 2, box / 2 - 2, 0, Math.PI * 2); ctx.fill(); }); // 人移动 let head = { x: people[0].x + dx, y: people[0].y + dy }; // 碰撞判断 if (head.x &lt; 0 || head.x &gt;= 400 || head.y &lt; 0 || head.y &gt;= 400) { gameOver(); return; } // 吃球逻辑 let ateIndex = balls.findIndex(b =&gt; b.x === head.x &amp;&amp; b.y === head.y); if (ateIndex !== -1) { const eaten = balls[ateIndex]; if (eaten.color === &#34;red&#34;) { score += 1; redBallCount--; } else if (eaten.color === &#34;blue&#34;) { score = score * 5; blueBallCount--; } balls.splice(ateIndex, 1); } people[0] = head; // 胜利检测 if (score &gt;= 5000 &amp;&amp; !hasGotFlag) { fetch(&#39;/submit_score&#39;, { method: &#34;POST&#34;, headers: { &#34;Content-Type&#34;: &#34;application/json&#34; }, body: JSON.stringify({ score: score }) }) .then(response =&gt; response.json()) .then(data =&gt; { if (data.flag) { alert(&#34;🎉 恭喜！你的flag是：&#34; + data.flag); } else { alert(&#34;未达到指定分数！&#34;); } }); hasGotFlag = true; } // 球吃光了 if (balls.length === 0) { if (redBallCount === 0 &amp;&amp; blueBallCount === 0) { if (score &gt;= 5000) { alert(&#34;你赢了！&#34;); } else { alert(&#34;球全吃完了，但分数不足，游戏失败！&#34;); } isGameOver = true; return; } else { spawnBalls(); } } if ( redBallCount &gt; 0 &amp;&amp; balls.every(b =&gt; b.color !== &#34;red&#34;) &amp;&amp; balls.length &gt; 0 ) { spawnBalls(); } ctx.fillStyle = &#34;white&#34;; ctx.fillText(&#34;Score: &#34; + score, 10, 20); ctx.fillText(&#34;Red left: &#34; + redBallCount, 10, 40); ctx.fillText(&#34;Blue left: &#34; + blueBallCount, 10, 60); } function spawnBalls() { let num = Math.floor(Math.random() * 5) + 1; // 即使红球或蓝球库存为 0，也要刷新蓝球位置（如果还在场上） const blueIndex = balls.findIndex(b =&gt; b.color === &#34;blue&#34;); if (blueIndex !== -1) { balls.splice(blueIndex, 1); } if (redBallCount &lt;= 0 &amp;&amp; blueBallCount &lt;= 0) return; // 特例：只生成一个球 if (num === 1) { if (redBallCount &gt; 0) { balls.push(createBall(&#34;red&#34;)); } else if (blueBallCount &gt; 0) { balls.push(createBall(&#34;blue&#34;)); } return; } // 多于1个球时，先加蓝球（前提：蓝球还未被吃掉） if (blueBallCount &gt; 0) { balls.push(createBall(&#34;blue&#34;)); num--; } // 加红球（前提：库存足够） while (num &gt; 0 &amp;&amp; redBallCount &gt; 0) { balls.push(createBall(&#34;red&#34;)); num--; } } function createBall(color) { let x, y; do { x = box * Math.floor(Math.random() * 20); y = box * Math.floor(Math.random() * 20); } while (balls.some(b =&gt; b.x === x &amp;&amp; b.y === y) || (people[0].x === x &amp;&amp; people[0].y === y)); return { x, y, color }; } function gameOver() { alert(&#34;你撞墙了，游戏失败！得分：&#34; + score + &#34;\\n按空格键重新开始&#34;); isGameOver = true; } // 启动 //initGame(); 看下面这一段：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -191,6 +191,25 @@
             </a>
         </li>
         
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
         <li class="menu-bottom-section">
             <ol class="menu">
 
@@ -220,7 +239,39 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#吃豆人">吃豆人</a></li>
+    <li><a href="#麦霸评分">麦霸评分</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -258,8 +309,9 @@
         
 
         
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="12" cy="12" r="9" />
   <polyline points="12 7 12 12 15 15" />
@@ -267,12 +319,10 @@
 
 
 
-                <time class="article-time--reading">
-                    阅读时长: 13 分钟
-                </time>
-            </div>
-        
-    </footer>
+               <time>
+                   2025-05-10
+               </time>
+           </div></footer>
     
 
     
@@ -283,8 +333,8 @@
     <section class="article-content">
     
     
-    <h1 id="吃豆人">吃豆人
-</h1><p>连上环境后f12,发现脚本game.js:</p>
+    <h2 id="吃豆人">吃豆人
+</h2><p>连上环境后f12,发现脚本game.js:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -692,8 +742,8 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">score = 5000;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="麦霸评分">麦霸评分
-</h1><p>审查代码：</p>
+</div><h2 id="麦霸评分">麦霸评分
+</h2><p>审查代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -2366,19 +2416,19 @@
     <footer class="article-footer">
     
 
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+  <polyline points="12 7 12 12 15 15" />
 </svg>
 
 
 
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
-    </footer>
+        <span>
+            最后更新于 2025-05-10
+        </span>
+    </section></footer>
 
 
     
@@ -2391,63 +2441,41 @@
      
     
         
-    <div class="disqus-container">
-    <div id="disqus_thread"></div>
-<script>
-    window.disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
-
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
 <style>
-    .disqus-container {
+    .waline-container {
         background-color: var(--card-background);
         border-radius: var(--card-border-radius);
         box-shadow: var(--shadow-l1);
         padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
     }
-</style>
-
-<script>
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (typeof DISQUS == 'object') {
-            DISQUS.reset({
-                reload: true
-            });
-        }
-    })
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
 </script>
 
     
 
     <footer class="site-footer">
     <section class="copyright">
-        &copy; 
+        &copy;
         
         2025 Example Person
     </section>
-    
+
     <section class="powerby">
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
     </section>
 </footer>
-
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -2555,7 +2583,7 @@
         --base-font-family: 'yuan';
         --code-font-family: 'yuan';
         --toc-link-color: #000;  
-        --toc-link-active-color: red;  
+        --toc-link-active-color: orange;  
     }
 
     #TableOfContents > ul, ol {
@@ -2580,7 +2608,7 @@
     #backTopBtn {
         position: fixed;  
         bottom: 30px;
-        right: 450px;  
+        right: 50px;  
         z-index: 99;
         cursor: pointer;
         width: 30px;
@@ -2849,5 +2877,7 @@
 
     initCodeMoreBox();
 </script>
+
+
     </body>
 </html>

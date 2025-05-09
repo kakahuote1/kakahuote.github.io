@@ -7,14 +7,14 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Fri, 09 May 2025 01:17:52 +0800</lastBuildDate><atom:link href="https://928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 10 May 2025 00:13:13 +0800</lastBuildDate><atom:link href="https://928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>MiniL</title>
         <link>https://928330.xyz/p/minil/</link>
         <pubDate>Fri, 09 May 2025 01:17:52 +0800</pubDate>
         
         <guid>https://928330.xyz/p/minil/</guid>
-        <description>&lt;h1 id=&#34;吃豆人&#34;&gt;吃豆人
-&lt;/h1&gt;&lt;p&gt;连上环境后f12,发现脚本game.js:&lt;/p&gt;
+        <description>&lt;h2 id=&#34;吃豆人&#34;&gt;吃豆人
+&lt;/h2&gt;&lt;p&gt;连上环境后f12,发现脚本game.js:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -422,8 +422,8 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;score = 5000;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;麦霸评分&#34;&gt;麦霸评分
-&lt;/h1&gt;&lt;p&gt;审查代码：&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;麦霸评分&#34;&gt;麦霸评分
+&lt;/h2&gt;&lt;p&gt;审查代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -2817,7 +2817,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget http://xxx/.index.php.swp -P /home       //-P指定下载位置
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;利用vim -r来恢复文件并打开:&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;使用vim -r恢复文件并打开:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2826,7 +2826,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim -r .index.php.swp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;之后可以对网站进行代码审计利用漏洞&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;获取到网站源码后，进行代码审计即可&lt;/p&gt;
 </description>
         </item>
         
