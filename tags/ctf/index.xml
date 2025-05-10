@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 17:55:47 +0800</lastBuildDate><atom:link href="https://928330.xyz/tags/ctf/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 10 May 2025 20:53:17 +0800</lastBuildDate><atom:link href="https://928330.xyz/tags/ctf/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>MiniL</title>
         <link>https://928330.xyz/p/minil/</link>
         <pubDate>Fri, 09 May 2025 01:17:52 +0800</pubDate>
@@ -15,7 +15,7 @@
         <guid>https://928330.xyz/p/minil/</guid>
         <description>&lt;h2 id=&#34;吃豆人&#34;&gt;吃豆人
 &lt;/h2&gt;&lt;p&gt;连上环境后f12,发现脚本game.js:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;startGame&lt;/span&gt;() {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;startGame&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;document&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;getElementById&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;start-screen&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#e06c75&#34;&gt;style&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;display&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;document&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;getElementById&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;game&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#e06c75&#34;&gt;style&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;display&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;block&amp;#34;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;initGame&lt;/span&gt;();
@@ -210,8 +210,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    })
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只要满足score&amp;gt;=5000就能获取 flag&lt;/p&gt;
 &lt;p&gt;控制台输入以下命令即可：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;score = 5000;
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;麦霸评分&#34;&gt;麦霸评分
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;score&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; 5000;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;麦霸评分&#34;&gt;麦霸评分
 &lt;/h2&gt;&lt;p&gt;审查代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;!&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;DOCTYPE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&lt;/span&gt;
@@ -1024,19 +1024,19 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt;/body&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt;/html&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;发现flag获取条件如下：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;if (similarity &amp;gt;= 98) {
-    result.classList.add(&amp;#39;result-perfect&amp;#39;);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是紧接着又发现：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;if (data.flag) {
-    showFlagModal(data.flag);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;说明flag是从后端传来，改动前端similarity值不能得到flag&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;similarity &amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; 98&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result.classList.add&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;result-perfect&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是紧接着又发现：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;data.flag&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    showFlagModal&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;data.flag&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明flag是从后端传来，改动前端similarity值不能得到flag&lt;/p&gt;
 &lt;p&gt;唱歌肯定不行，那么既然网站提供了原音频下载，就可以直接提交原音频&lt;/p&gt;
 &lt;p&gt;但网页没有提供提交入口，而代码中是前端将录音文件上传到/compare-recording，那就可以直接与后端建立联系&lt;/p&gt;
 &lt;p&gt;使用curl：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -X POST http://127.0.0.1:xxxx/compare-recording -F &amp;#34;audio=@original.wav&amp;#34; 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;直接得到返回的flag&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X POST http://127.0.0.1:xxxx/compare-recording -F &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;audio=@original.wav&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;直接得到返回的flag&lt;/p&gt;
 </description>
         </item>
         
