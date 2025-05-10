@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 17:01:27 +0800</lastBuildDate><atom:link href="https://928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Vim</title>
-        <link>https://928330.xyz/p/vim/</link>
+        <lastBuildDate>Sat, 10 May 2025 17:55:47 +0800</lastBuildDate><atom:link href="https://928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Vim编辑器完全使用教程</title>
+        <link>https://928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
         <pubDate>Thu, 08 May 2025 15:28:02 +0800</pubDate>
         
-        <guid>https://928330.xyz/p/vim/</guid>
-        <description>&lt;img src="https://928330.xyz/vim.jpg" alt="Featured image of post Vim" /&gt;&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
+        <guid>https://928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
 &lt;/h1&gt;&lt;h2 id=&#34;vim键盘图&#34;&gt;vim键盘图
 &lt;/h2&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/vi-vim-cheat-sheet-sch.gif&#34; alt=&#34;img&#34; style=&#34;zoom: 80%;&#34; /&gt;
 &lt;h2 id=&#34;vim操作文件基本方式&#34;&gt;vim操作文件基本方式
@@ -65,7 +65,7 @@
 &lt;li&gt;&lt;strong&gt;:vsp file&lt;/strong&gt; &amp;ndash; 左右分割当前文件和新打开的 file&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;移动分屏&#34;&gt;移动分屏
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;大写字母&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;大写字母&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+H&lt;/strong&gt;  &amp;ndash; 将当前的分屏移动到左边&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+L&lt;/strong&gt;  &amp;ndash; 将当前的分屏移动到右边&lt;/li&gt;
@@ -73,7 +73,7 @@
 &lt;li&gt;&lt;strong&gt;Ctrl+w+K&lt;/strong&gt;  &amp;ndash; 将当前的分屏移动到下边&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;在文件间切换光标&#34;&gt;在文件间切换光标
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;小写字母&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;小写字母&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+h&lt;/strong&gt;  &amp;ndash; 将当前光标定位到左边的屏幕&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+l&lt;/strong&gt;  &amp;ndash; 将当前光标定位到左边的屏幕&lt;/li&gt;
@@ -87,13 +87,13 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;vim五大模式&#34;&gt;vim五大模式
 &lt;/h2&gt;&lt;h3 id=&#34;普通模式&#34;&gt;普通模式
-&lt;/h3&gt;&lt;p&gt;==&lt;strong&gt;用户刚刚启动 vi/vim，便进入了普通模式&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;此状态下敲击键盘动作会被 Vim 识别为命令，而非输入字符&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;用户刚刚启动 vi/vim，便进入了普通模式&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;此状态下敲击键盘动作会被 Vim 识别为命令，而非输入字符&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;h4 id=&#34;普通模式移动光标&#34;&gt;普通模式移动光标
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;快速移动光标&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;输入[数字n＋方向]，代表向某个方向移动n&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;输入[数字n＋方向]，代表向某个方向移动n&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;h / ← / [backspace]&lt;/strong&gt;：向左移动光标&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;j / ↓&lt;/strong&gt;：向下移动光标&lt;/li&gt;
@@ -151,7 +151,7 @@
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;删除&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;d 是删除的意思，通常搭配一个字符 ( 删除范围 ) 实现删除功能，常用的如下：&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;d 是删除的意思，通常搭配一个字符 ( 删除范围 ) 实现删除功能，常用的如下：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;dw&lt;/strong&gt; &amp;ndash; 删除一个单词&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;dnw&lt;/strong&gt; &amp;ndash; 删除 n 个单词，&lt;/li&gt;
@@ -171,7 +171,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;复制&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;y 是复制的意思，通常搭配一个字符（复制范围）实现复制的功能，常用的如下：&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;y 是复制的意思，通常搭配一个字符（复制范围）实现复制的功能，常用的如下：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;yw&lt;/strong&gt; &amp;ndash; 复制一个单词，还有ynw&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;yfa&lt;/strong&gt; &amp;ndash; 复制光标到下一个 a 的字符处,还有ynfa&lt;/li&gt;
@@ -184,7 +184,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;粘贴&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;p是黏贴的意思，当执行完复制或者黏贴的命令以后，VIM 会把文本寄存起来&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;p是黏贴的意思，当执行完复制或者黏贴的命令以后，VIM 会把文本寄存起来&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;p(小写)&lt;/strong&gt; &amp;ndash; 在光标后开始黏贴&lt;/p&gt;
@@ -262,7 +262,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4 id=&#34;插入模式的命令&#34;&gt;插入模式的命令
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;==必须知道的：&lt;code&gt;#&lt;/code&gt;是vim中的注释符号==&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;必须知道的：&lt;code&gt;#&lt;/code&gt;是vim中的注释符号&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;在输入模式中，可以使用以下按键：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;字符按键以及Shift组合&lt;/strong&gt;，输入字符&lt;/li&gt;
@@ -309,8 +309,8 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;命令模式&#34;&gt;命令模式
-&lt;/h3&gt;&lt;p&gt;==&lt;strong&gt;在命令模式下按下 :（英文冒号）就进入了底线命令模式&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;有的命令要输入 / 执行&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;在命令模式下按下 :（英文冒号）就进入了底线命令模式&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;有的命令要输入 / 执行&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;h4 id=&#34;命令模式常用命令&#34;&gt;命令模式常用命令
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;:w&lt;/strong&gt; &amp;ndash; 保存文件&lt;/li&gt;
@@ -339,7 +339,7 @@
 &lt;li&gt;&lt;strong&gt;:set noic&lt;/strong&gt; &amp;ndash; 编辑器将区分大小写&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;命令模式替换文本&#34;&gt;命令模式替换文本
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;格式：&lt;/strong&gt;==&lt;strong&gt;:(作用范围)s/{目标}/{替换}(/替换的标志)&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;格式：&lt;/strong&gt;&lt;mark&gt;&lt;strong&gt;:(作用范围)s/{目标}/{替换}(/替换的标志)&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;替换的作用范围&lt;/strong&gt;&lt;/p&gt;
@@ -402,7 +402,7 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;==&lt;strong&gt;替换标志可以使用多个，比如/gic&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;替换标志可以使用多个，比如/gic&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;命令模式执行linux命令&#34;&gt;命令模式执行linux命令
@@ -410,28 +410,28 @@
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;:![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;打开终端窗口并打印执行命令的结果，不会改变当前编辑的文件的内容&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;可以使用&lt;code&gt;:!bash&lt;/code&gt;打开bash shell并执行命令&lt;/strong&gt;==&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:!date		//执行 date 命令显示时间，执行完命令以后按下键盘上的 Enter 就会返回到文件
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;可以使用&lt;code&gt;:!bash&lt;/code&gt;打开bash shell并执行命令&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:!date		//执行 date 命令显示时间，执行完命令以后按下键盘上的 Enter 就会返回到文件
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;:r ![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;将shell命令command的结果插入到当前行的下一行&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:r !date		//读取系统时间并插入到当前行的下一行
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:r !date		//读取系统时间并插入到当前行的下一行
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;n1,n2 ![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;将n1至n2行范围内的内容交给命令command处理，并将处理结果替换起始行号和结束行号指定范围中的内容&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:1,4 !sort		//将第1行到第4行的内容进行排序
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;可以只指定起始行&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:1 !tr [a-z] [A-Z]		//将第1行的小写字母转为大写字母
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;可以用.表示当前光标所在行&lt;/strong&gt;  &lt;strong&gt;(输入&lt;code&gt;!!&lt;/code&gt;会变成&lt;code&gt;:.!&lt;/code&gt;)&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:. !tr [a-z] [A-Z]		//将当前行的小写转为大写
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:1,4 !sort		//将第1行到第4行的内容进行排序
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可以只指定起始行&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:1 !tr &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;a-z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;A-Z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;		//将第1行的小写字母转为大写字母
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可以用.表示当前光标所在行&lt;/strong&gt;  &lt;strong&gt;(输入&lt;code&gt;!!&lt;/code&gt;会变成&lt;code&gt;:.!&lt;/code&gt;)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:. !tr &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;a-z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;A-Z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;		//将当前行的小写转为大写
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;n1,n2 w ![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;将起始行号和结束行号所指定范围的内容作为命令command的输入，不会改变当前编辑的文件的内容&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;可以使用&lt;code&gt;:1 w !bash&lt;/code&gt;，将会把第1行的内容作为bash命令来执行并显示结果，而且不会改变当前编辑的文件的内容&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;==同样的 &lt;code&gt;: . w !bash&lt;/code&gt;将当前行的内容作为bash命令来执行==&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;可以使用&lt;code&gt;:1 w !bash&lt;/code&gt;，将会把第1行的内容作为bash命令来执行并显示结果，而且不会改变当前编辑的文件的内容&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;mark&gt;同样的 &lt;code&gt;: . w !bash&lt;/code&gt;将当前行的内容作为bash命令来执行&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;!!&lt;/strong&gt;&lt;/p&gt;
@@ -508,37 +508,37 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;==&lt;strong&gt;什么是&amp;lt;key&amp;gt;？&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;什么是&amp;lt;key&amp;gt;？&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&amp;lt;key&amp;gt; 对应的是 ^[A-Z] ， 定义快捷键时使用ctrl+v+[a-z]，使用快捷键时用对应的ctrl+[a-z]&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;==什么是递归映射？==&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:nmap j gg
-:nmap Q j
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果已经做了以上映射，那么按下Q，执行的将是gg而不是j&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;mark&gt;什么是递归映射？&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nmap j gg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nmap Q j
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果已经做了以上映射，那么按下Q，执行的将是gg而不是j&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;为了避免以上问题，应该这样定义：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:nnoremap j gg
-:nnoremap Q j
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nnoremap j gg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nnoremap Q j
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;几个例子&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:map ^D Ahelloworld&amp;lt;ESC&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;在文件的光标所在行的行尾，添加 helloworld 字符串，按住组合键 ctrl + d 就会执行操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:map ^D Ahelloworld&amp;lt;ESC&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在文件的光标所在行的行尾，添加 helloworld 字符串，按住组合键 ctrl + d 就会执行操作&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:map ^M I#&amp;lt;ESC&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;在文件光标处所在行的行首插入#，按住组合键 ctrl + m 就会执行操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:map ^M I#&amp;lt;ESC&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在文件光标处所在行的行首插入#，按住组合键 ctrl + m 就会执行操作&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:ab email xxxx@gmail.com
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;输入 email+空格 会把输入的 email 自动替换成 xxxx @gmail.com&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:ab email xxxx@gmail.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输入 email+空格 会把输入的 email 自动替换成 xxxx @gmail.com&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;可视化模式&#34;&gt;可视化模式
 &lt;/h3&gt;&lt;h4 id=&#34;进入可视化模式&#34;&gt;进入可视化模式
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;可视化模式可以分为以下三种：&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;可视化模式可以分为以下三种：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;v&lt;/strong&gt; &amp;ndash; &lt;strong&gt;字符可视化模式&lt;/strong&gt;，文本选择是以&lt;strong&gt;字符&lt;/strong&gt;为单位的&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;V&lt;/strong&gt; &amp;ndash; &lt;strong&gt;行可视化模式&lt;/strong&gt;，文本选择是&lt;strong&gt;以行&lt;/strong&gt;为单位的&lt;/li&gt;
@@ -551,20 +551,19 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;按 ESC 键可随时退出可视化模式&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h4 id=&#34;可视化模式下移动光标&#34;&gt;可视化模式下移动光标
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;命令模式下的光标移动方法仍然适用&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;进入任意可视化模式，移动光标，会从当前位置开始，以相应方式高亮选中字符&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;命令模式下的光标移动方法仍然适用&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;进入任意可视化模式，移动光标，会从当前位置开始，以相应方式高亮选中字符&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;o&lt;/strong&gt; &amp;ndash;  移动光标到已经选取的文本的&lt;strong&gt;结尾处&lt;/strong&gt;或者&lt;strong&gt;开头处&lt;/strong&gt;（根据现在光标所在位置确定）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    如果是**块可视化**模式，移动光标到**对角处**
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;如果是块可视化模式，移动光标到对角处
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;O&lt;/strong&gt; &amp;ndash; 在&lt;strong&gt;块可视化&lt;/strong&gt;模式下，移动光标到&lt;strong&gt;同一行的结尾处或者开头处&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;可视化模式下编辑&#34;&gt;可视化模式下编辑
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;大部分命令模式对内容操作的命令都能在可视化模式下使用，比如：&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;大部分命令模式对内容操作的命令都能在可视化模式下使用，比如：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;d&lt;/strong&gt; &amp;ndash; 删除高亮文本&lt;/p&gt;
@@ -605,7 +604,7 @@
 &lt;li&gt;按下 j 将光标移动到下一行行首&lt;/li&gt;
 &lt;li&gt;按下 q 键完成录制操作（&lt;strong&gt;宏录制是 q 键结束的&lt;/strong&gt;）&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;==主要步骤：&lt;strong&gt;q(开始）&lt;/strong&gt;-&amp;gt; &lt;strong&gt;a(命名)&lt;/strong&gt; -&amp;gt; &lt;strong&gt;操作&lt;/strong&gt; -&amp;gt; &lt;strong&gt;q(结束)&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;主要步骤：&lt;strong&gt;q(开始）&lt;/strong&gt;-&amp;gt; &lt;strong&gt;a(命名)&lt;/strong&gt; -&amp;gt; &lt;strong&gt;操作&lt;/strong&gt; -&amp;gt; &lt;strong&gt;q(结束)&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;h3 id=&#34;宏录制的使用&#34;&gt;宏录制的使用
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;@a&lt;/strong&gt; &amp;ndash; 执行a宏录制的一系列动作，注意&lt;strong&gt;a是录制的操作名称&lt;/strong&gt;&lt;/li&gt;

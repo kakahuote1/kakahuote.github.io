@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 17:01:27 +0800</lastBuildDate><atom:link href="https://928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 10 May 2025 17:55:47 +0800</lastBuildDate><atom:link href="https://928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>MiniL</title>
         <link>https://928330.xyz/p/minil/</link>
         <pubDate>Fri, 09 May 2025 01:17:52 +0800</pubDate>
@@ -1040,12 +1040,12 @@
 </description>
         </item>
         <item>
-        <title>Vim</title>
-        <link>https://928330.xyz/p/vim/</link>
+        <title>Vim编辑器完全使用教程</title>
+        <link>https://928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
         <pubDate>Thu, 08 May 2025 15:28:02 +0800</pubDate>
         
-        <guid>https://928330.xyz/p/vim/</guid>
-        <description>&lt;img src="https://928330.xyz/vim.jpg" alt="Featured image of post Vim" /&gt;&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
+        <guid>https://928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
 &lt;/h1&gt;&lt;h2 id=&#34;vim键盘图&#34;&gt;vim键盘图
 &lt;/h2&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/vi-vim-cheat-sheet-sch.gif&#34; alt=&#34;img&#34; style=&#34;zoom: 80%;&#34; /&gt;
 &lt;h2 id=&#34;vim操作文件基本方式&#34;&gt;vim操作文件基本方式
@@ -1097,7 +1097,7 @@
 &lt;li&gt;&lt;strong&gt;:vsp file&lt;/strong&gt; &amp;ndash; 左右分割当前文件和新打开的 file&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;移动分屏&#34;&gt;移动分屏
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;大写字母&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;大写字母&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+H&lt;/strong&gt;  &amp;ndash; 将当前的分屏移动到左边&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+L&lt;/strong&gt;  &amp;ndash; 将当前的分屏移动到右边&lt;/li&gt;
@@ -1105,7 +1105,7 @@
 &lt;li&gt;&lt;strong&gt;Ctrl+w+K&lt;/strong&gt;  &amp;ndash; 将当前的分屏移动到下边&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;在文件间切换光标&#34;&gt;在文件间切换光标
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;小写字母&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;小写字母&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+h&lt;/strong&gt;  &amp;ndash; 将当前光标定位到左边的屏幕&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Ctrl+w+l&lt;/strong&gt;  &amp;ndash; 将当前光标定位到左边的屏幕&lt;/li&gt;
@@ -1119,13 +1119,13 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;vim五大模式&#34;&gt;vim五大模式
 &lt;/h2&gt;&lt;h3 id=&#34;普通模式&#34;&gt;普通模式
-&lt;/h3&gt;&lt;p&gt;==&lt;strong&gt;用户刚刚启动 vi/vim，便进入了普通模式&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;此状态下敲击键盘动作会被 Vim 识别为命令，而非输入字符&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;用户刚刚启动 vi/vim，便进入了普通模式&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;此状态下敲击键盘动作会被 Vim 识别为命令，而非输入字符&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;h4 id=&#34;普通模式移动光标&#34;&gt;普通模式移动光标
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;快速移动光标&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;输入[数字n＋方向]，代表向某个方向移动n&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;输入[数字n＋方向]，代表向某个方向移动n&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;h / ← / [backspace]&lt;/strong&gt;：向左移动光标&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;j / ↓&lt;/strong&gt;：向下移动光标&lt;/li&gt;
@@ -1183,7 +1183,7 @@
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;删除&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;d 是删除的意思，通常搭配一个字符 ( 删除范围 ) 实现删除功能，常用的如下：&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;d 是删除的意思，通常搭配一个字符 ( 删除范围 ) 实现删除功能，常用的如下：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;dw&lt;/strong&gt; &amp;ndash; 删除一个单词&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;dnw&lt;/strong&gt; &amp;ndash; 删除 n 个单词，&lt;/li&gt;
@@ -1203,7 +1203,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;复制&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;y 是复制的意思，通常搭配一个字符（复制范围）实现复制的功能，常用的如下：&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;y 是复制的意思，通常搭配一个字符（复制范围）实现复制的功能，常用的如下：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;yw&lt;/strong&gt; &amp;ndash; 复制一个单词，还有ynw&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;yfa&lt;/strong&gt; &amp;ndash; 复制光标到下一个 a 的字符处,还有ynfa&lt;/li&gt;
@@ -1216,7 +1216,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;粘贴&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;p是黏贴的意思，当执行完复制或者黏贴的命令以后，VIM 会把文本寄存起来&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;p是黏贴的意思，当执行完复制或者黏贴的命令以后，VIM 会把文本寄存起来&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;p(小写)&lt;/strong&gt; &amp;ndash; 在光标后开始黏贴&lt;/p&gt;
@@ -1294,7 +1294,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4 id=&#34;插入模式的命令&#34;&gt;插入模式的命令
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;==必须知道的：&lt;code&gt;#&lt;/code&gt;是vim中的注释符号==&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;必须知道的：&lt;code&gt;#&lt;/code&gt;是vim中的注释符号&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;在输入模式中，可以使用以下按键：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;字符按键以及Shift组合&lt;/strong&gt;，输入字符&lt;/li&gt;
@@ -1341,8 +1341,8 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;命令模式&#34;&gt;命令模式
-&lt;/h3&gt;&lt;p&gt;==&lt;strong&gt;在命令模式下按下 :（英文冒号）就进入了底线命令模式&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;有的命令要输入 / 执行&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;在命令模式下按下 :（英文冒号）就进入了底线命令模式&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;有的命令要输入 / 执行&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;h4 id=&#34;命令模式常用命令&#34;&gt;命令模式常用命令
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;:w&lt;/strong&gt; &amp;ndash; 保存文件&lt;/li&gt;
@@ -1371,7 +1371,7 @@
 &lt;li&gt;&lt;strong&gt;:set noic&lt;/strong&gt; &amp;ndash; 编辑器将区分大小写&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;命令模式替换文本&#34;&gt;命令模式替换文本
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;格式：&lt;/strong&gt;==&lt;strong&gt;:(作用范围)s/{目标}/{替换}(/替换的标志)&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;格式：&lt;/strong&gt;&lt;mark&gt;&lt;strong&gt;:(作用范围)s/{目标}/{替换}(/替换的标志)&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;替换的作用范围&lt;/strong&gt;&lt;/p&gt;
@@ -1434,7 +1434,7 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;==&lt;strong&gt;替换标志可以使用多个，比如/gic&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;替换标志可以使用多个，比如/gic&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;命令模式执行linux命令&#34;&gt;命令模式执行linux命令
@@ -1442,28 +1442,28 @@
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;:![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;打开终端窗口并打印执行命令的结果，不会改变当前编辑的文件的内容&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;可以使用&lt;code&gt;:!bash&lt;/code&gt;打开bash shell并执行命令&lt;/strong&gt;==&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:!date		//执行 date 命令显示时间，执行完命令以后按下键盘上的 Enter 就会返回到文件
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;可以使用&lt;code&gt;:!bash&lt;/code&gt;打开bash shell并执行命令&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:!date		//执行 date 命令显示时间，执行完命令以后按下键盘上的 Enter 就会返回到文件
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;:r ![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;将shell命令command的结果插入到当前行的下一行&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:r !date		//读取系统时间并插入到当前行的下一行
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:r !date		//读取系统时间并插入到当前行的下一行
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;n1,n2 ![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;将n1至n2行范围内的内容交给命令command处理，并将处理结果替换起始行号和结束行号指定范围中的内容&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:1,4 !sort		//将第1行到第4行的内容进行排序
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;可以只指定起始行&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:1 !tr [a-z] [A-Z]		//将第1行的小写字母转为大写字母
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;可以用.表示当前光标所在行&lt;/strong&gt;  &lt;strong&gt;(输入&lt;code&gt;!!&lt;/code&gt;会变成&lt;code&gt;:.!&lt;/code&gt;)&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:. !tr [a-z] [A-Z]		//将当前行的小写转为大写
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:1,4 !sort		//将第1行到第4行的内容进行排序
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可以只指定起始行&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:1 !tr &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;a-z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;A-Z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;		//将第1行的小写字母转为大写字母
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可以用.表示当前光标所在行&lt;/strong&gt;  &lt;strong&gt;(输入&lt;code&gt;!!&lt;/code&gt;会变成&lt;code&gt;:.!&lt;/code&gt;)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:. !tr &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;a-z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;A-Z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;		//将当前行的小写转为大写
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;n1,n2 w ![command]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;将起始行号和结束行号所指定范围的内容作为命令command的输入，不会改变当前编辑的文件的内容&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;可以使用&lt;code&gt;:1 w !bash&lt;/code&gt;，将会把第1行的内容作为bash命令来执行并显示结果，而且不会改变当前编辑的文件的内容&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;==同样的 &lt;code&gt;: . w !bash&lt;/code&gt;将当前行的内容作为bash命令来执行==&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;可以使用&lt;code&gt;:1 w !bash&lt;/code&gt;，将会把第1行的内容作为bash命令来执行并显示结果，而且不会改变当前编辑的文件的内容&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;mark&gt;同样的 &lt;code&gt;: . w !bash&lt;/code&gt;将当前行的内容作为bash命令来执行&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;!!&lt;/strong&gt;&lt;/p&gt;
@@ -1540,37 +1540,37 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;==&lt;strong&gt;什么是&amp;lt;key&amp;gt;？&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;什么是&amp;lt;key&amp;gt;？&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&amp;lt;key&amp;gt; 对应的是 ^[A-Z] ， 定义快捷键时使用ctrl+v+[a-z]，使用快捷键时用对应的ctrl+[a-z]&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;==什么是递归映射？==&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:nmap j gg
-:nmap Q j
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果已经做了以上映射，那么按下Q，执行的将是gg而不是j&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;mark&gt;什么是递归映射？&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nmap j gg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nmap Q j
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果已经做了以上映射，那么按下Q，执行的将是gg而不是j&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;为了避免以上问题，应该这样定义：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:nnoremap j gg
-:nnoremap Q j
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nnoremap j gg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:nnoremap Q j
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;几个例子&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:map ^D Ahelloworld&amp;lt;ESC&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;在文件的光标所在行的行尾，添加 helloworld 字符串，按住组合键 ctrl + d 就会执行操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:map ^D Ahelloworld&amp;lt;ESC&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在文件的光标所在行的行尾，添加 helloworld 字符串，按住组合键 ctrl + d 就会执行操作&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:map ^M I#&amp;lt;ESC&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;在文件光标处所在行的行首插入#，按住组合键 ctrl + m 就会执行操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:map ^M I#&amp;lt;ESC&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在文件光标处所在行的行首插入#，按住组合键 ctrl + m 就会执行操作&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:ab email xxxx@gmail.com
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;输入 email+空格 会把输入的 email 自动替换成 xxxx @gmail.com&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:ab email xxxx@gmail.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输入 email+空格 会把输入的 email 自动替换成 xxxx @gmail.com&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;可视化模式&#34;&gt;可视化模式
 &lt;/h3&gt;&lt;h4 id=&#34;进入可视化模式&#34;&gt;进入可视化模式
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;可视化模式可以分为以下三种：&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;可视化模式可以分为以下三种：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;v&lt;/strong&gt; &amp;ndash; &lt;strong&gt;字符可视化模式&lt;/strong&gt;，文本选择是以&lt;strong&gt;字符&lt;/strong&gt;为单位的&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;V&lt;/strong&gt; &amp;ndash; &lt;strong&gt;行可视化模式&lt;/strong&gt;，文本选择是&lt;strong&gt;以行&lt;/strong&gt;为单位的&lt;/li&gt;
@@ -1583,20 +1583,19 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;按 ESC 键可随时退出可视化模式&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h4 id=&#34;可视化模式下移动光标&#34;&gt;可视化模式下移动光标
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;命令模式下的光标移动方法仍然适用&lt;/strong&gt;==&lt;/p&gt;
-&lt;p&gt;==&lt;strong&gt;进入任意可视化模式，移动光标，会从当前位置开始，以相应方式高亮选中字符&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;命令模式下的光标移动方法仍然适用&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;进入任意可视化模式，移动光标，会从当前位置开始，以相应方式高亮选中字符&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;o&lt;/strong&gt; &amp;ndash;  移动光标到已经选取的文本的&lt;strong&gt;结尾处&lt;/strong&gt;或者&lt;strong&gt;开头处&lt;/strong&gt;（根据现在光标所在位置确定）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    如果是**块可视化**模式，移动光标到**对角处**
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;如果是块可视化模式，移动光标到对角处
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;O&lt;/strong&gt; &amp;ndash; 在&lt;strong&gt;块可视化&lt;/strong&gt;模式下，移动光标到&lt;strong&gt;同一行的结尾处或者开头处&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;可视化模式下编辑&#34;&gt;可视化模式下编辑
-&lt;/h4&gt;&lt;p&gt;==&lt;strong&gt;大部分命令模式对内容操作的命令都能在可视化模式下使用，比如：&lt;/strong&gt;==&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;大部分命令模式对内容操作的命令都能在可视化模式下使用，比如：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;d&lt;/strong&gt; &amp;ndash; 删除高亮文本&lt;/p&gt;
@@ -1637,7 +1636,7 @@
 &lt;li&gt;按下 j 将光标移动到下一行行首&lt;/li&gt;
 &lt;li&gt;按下 q 键完成录制操作（&lt;strong&gt;宏录制是 q 键结束的&lt;/strong&gt;）&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;==主要步骤：&lt;strong&gt;q(开始）&lt;/strong&gt;-&amp;gt; &lt;strong&gt;a(命名)&lt;/strong&gt; -&amp;gt; &lt;strong&gt;操作&lt;/strong&gt; -&amp;gt; &lt;strong&gt;q(结束)&lt;/strong&gt;==&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;主要步骤：&lt;strong&gt;q(开始）&lt;/strong&gt;-&amp;gt; &lt;strong&gt;a(命名)&lt;/strong&gt; -&amp;gt; &lt;strong&gt;操作&lt;/strong&gt; -&amp;gt; &lt;strong&gt;q(结束)&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;h3 id=&#34;宏录制的使用&#34;&gt;宏录制的使用
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;@a&lt;/strong&gt; &amp;ndash; 执行a宏录制的一系列动作，注意&lt;strong&gt;a是录制的操作名称&lt;/strong&gt;&lt;/li&gt;
@@ -1662,191 +1661,6 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vim -r .index.php.swp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;获取到网站源码后，进行代码审计即可&lt;/p&gt;
 </description>
-        </item>
-        <item>
-        <title>Markdown Syntax Guide</title>
-        <link>https://928330.xyz/p/markdown-syntax-guide/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://928330.xyz/p/markdown-syntax-guide/</guid>
-        <description>&lt;img src="https://928330.xyz/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
-&lt;h2 id=&#34;headings&#34;&gt;Headings
-&lt;/h2&gt;&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;
-&lt;h1 id=&#34;h1&#34;&gt;H1
-&lt;/h1&gt;&lt;h2 id=&#34;h2&#34;&gt;H2
-&lt;/h2&gt;&lt;h3 id=&#34;h3&#34;&gt;H3
-&lt;/h3&gt;&lt;h4 id=&#34;h4&#34;&gt;H4
-&lt;/h4&gt;&lt;h5 id=&#34;h5&#34;&gt;H5
-&lt;/h5&gt;&lt;h6 id=&#34;h6&#34;&gt;H6
-&lt;/h6&gt;&lt;h2 id=&#34;paragraph&#34;&gt;Paragraph
-&lt;/h2&gt;&lt;p&gt;Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.&lt;/p&gt;
-&lt;p&gt;Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.&lt;/p&gt;
-&lt;h2 id=&#34;blockquotes&#34;&gt;Blockquotes
-&lt;/h2&gt;&lt;p&gt;The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a &lt;code&gt;footer&lt;/code&gt; or &lt;code&gt;cite&lt;/code&gt; element, and optionally with in-line changes such as annotations and abbreviations.&lt;/p&gt;
-&lt;h4 id=&#34;blockquote-without-attribution&#34;&gt;Blockquote without attribution
-&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-&lt;strong&gt;Note&lt;/strong&gt; that you can use &lt;em&gt;Markdown syntax&lt;/em&gt; within a blockquote.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h4 id=&#34;blockquote-with-attribution&#34;&gt;Blockquote with attribution
-&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;br&gt;
-— &lt;cite&gt;Rob Pike&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/cite&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h2 id=&#34;tables&#34;&gt;Tables
-&lt;/h2&gt;&lt;p&gt;Tables aren&amp;rsquo;t part of the core Markdown spec, but Hugo supports supports them out-of-the-box.&lt;/p&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;Name&lt;/th&gt;
-          &lt;th&gt;Age&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;Bob&lt;/td&gt;
-          &lt;td&gt;27&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;Alice&lt;/td&gt;
-          &lt;td&gt;23&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h4 id=&#34;inline-markdown-within-tables&#34;&gt;Inline Markdown within tables
-&lt;/h4&gt;&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;Italics&lt;/th&gt;
-          &lt;th&gt;Bold&lt;/th&gt;
-          &lt;th&gt;Code&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;em&gt;italics&lt;/em&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;strong&gt;bold&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;code&gt;code&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;A&lt;/th&gt;
-          &lt;th&gt;B&lt;/th&gt;
-          &lt;th&gt;C&lt;/th&gt;
-          &lt;th&gt;D&lt;/th&gt;
-          &lt;th&gt;E&lt;/th&gt;
-          &lt;th&gt;F&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/td&gt;
-          &lt;td&gt;Phasellus ultricies, sapien non euismod aliquam, dui ligula tincidunt odio, at accumsan nulla sapien eget ex.&lt;/td&gt;
-          &lt;td&gt;Proin eleifend dictum ipsum, non euismod ipsum pulvinar et. Vivamus sollicitudin, quam in pulvinar aliquam, metus elit pretium purus&lt;/td&gt;
-          &lt;td&gt;Proin sit amet velit nec enim imperdiet vehicula.&lt;/td&gt;
-          &lt;td&gt;Ut bibendum vestibulum quam, eu egestas turpis gravida nec&lt;/td&gt;
-          &lt;td&gt;Sed scelerisque nec turpis vel viverra. Vivamus vitae pretium sapien&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;code-blocks&#34;&gt;Code Blocks
-&lt;/h2&gt;&lt;h4 id=&#34;code-block-with-backticks&#34;&gt;Code block with backticks
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;meta&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;charset&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;title&lt;/span&gt;&amp;gt;Example HTML5 Document&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;title&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt;&amp;gt;Test&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;code-block-indented-with-four-spaces&#34;&gt;Code block indented with four spaces
-&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;
-&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
-&amp;lt;head&amp;gt;
-  &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
-  &amp;lt;title&amp;gt;Example HTML5 Document&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-  &amp;lt;p&amp;gt;Test&amp;lt;/p&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;code-block-with-hugos-internal-highlight-shortcode&#34;&gt;Code block with Hugo&amp;rsquo;s internal highlight shortcode
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;meta&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;charset&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;title&lt;/span&gt;&amp;gt;Example HTML5 Document&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;title&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt;&amp;gt;Test&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;diff-code-block&#34;&gt;Diff code block
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-diff&#34; data-lang=&#34;diff&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[dependencies.bevy]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git = &amp;#34;https://github.com/bevyengine/bevy&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rev = &amp;#34;11f52b8c72fc3a568e8bb4a4cd1f3eb025ac2e13&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;- features = [&amp;#34;dynamic&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379;font-weight:bold&#34;&gt;+ features = [&amp;#34;jpeg&amp;#34;, &amp;#34;dynamic&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;list-types&#34;&gt;List Types
-&lt;/h2&gt;&lt;h4 id=&#34;ordered-list&#34;&gt;Ordered List
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;First item&lt;/li&gt;
-&lt;li&gt;Second item&lt;/li&gt;
-&lt;li&gt;Third item&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;unordered-list&#34;&gt;Unordered List
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;List item&lt;/li&gt;
-&lt;li&gt;Another item&lt;/li&gt;
-&lt;li&gt;And another item&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;nested-list&#34;&gt;Nested list
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;Fruit
-&lt;ul&gt;
-&lt;li&gt;Apple&lt;/li&gt;
-&lt;li&gt;Orange&lt;/li&gt;
-&lt;li&gt;Banana&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Dairy
-&lt;ul&gt;
-&lt;li&gt;Milk&lt;/li&gt;
-&lt;li&gt;Cheese&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;other-elements--abbr-sub-sup-kbd-mark&#34;&gt;Other Elements — abbr, sub, sup, kbd, mark
-&lt;/h2&gt;&lt;p&gt;&lt;abbr title=&#34;Graphics Interchange Format&#34;&gt;GIF&lt;/abbr&gt; is a bitmap image format.&lt;/p&gt;
-&lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;
-&lt;p&gt;X&lt;sup&gt;n&lt;/sup&gt; + Y&lt;sup&gt;n&lt;/sup&gt; = Z&lt;sup&gt;n&lt;/sup&gt;&lt;/p&gt;
-&lt;p&gt;Press &lt;kbd&gt;CTRL&lt;/kbd&gt; + &lt;kbd&gt;ALT&lt;/kbd&gt; + &lt;kbd&gt;Delete&lt;/kbd&gt; to end the session.&lt;/p&gt;
-&lt;p&gt;Most &lt;mark&gt;salamanders&lt;/mark&gt; are nocturnal, and hunt for insects, worms, and other small creatures.&lt;/p&gt;
-&lt;h2 id=&#34;hyperlinked-image&#34;&gt;Hyperlinked image
-&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://google.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;&lt;img src=&#34;https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Google&#34;
-	
-	
-&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;
-&lt;p&gt;The above quote is excerpted from Rob Pike&amp;rsquo;s &lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=PAAkCSZUG1c&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;talk&lt;/a&gt; during Gopherfest, November 18, 2015.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</description>
         </item>
         
     </channel>
