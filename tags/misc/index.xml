@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Misc on kakahuote&#39;blogs</title>
-        <link>https://928330.xyz/tags/misc/</link>
+        <link>https://blog.928330.xyz/tags/misc/</link>
         <description>Recent content in Misc on kakahuote&#39;blogs</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 20:53:17 +0800</lastBuildDate><atom:link href="https://928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 10 May 2025 20:53:17 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>MiniL</title>
-        <link>https://928330.xyz/p/minil/</link>
+        <link>https://blog.928330.xyz/p/minil/</link>
         <pubDate>Fri, 09 May 2025 01:17:52 +0800</pubDate>
         
-        <guid>https://928330.xyz/p/minil/</guid>
+        <guid>https://blog.928330.xyz/p/minil/</guid>
         <description>&lt;h2 id=&#34;吃豆人&#34;&gt;吃豆人
 &lt;/h2&gt;&lt;p&gt;连上环境后f12,发现脚本game.js:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;startGame&lt;/span&gt;() {

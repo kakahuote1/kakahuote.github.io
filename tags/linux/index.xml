@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Linux on kakahuote&#39;blogs</title>
-        <link>https://928330.xyz/tags/linux/</link>
+        <link>https://blog.928330.xyz/tags/linux/</link>
         <description>Recent content in Linux on kakahuote&#39;blogs</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 17:55:47 +0800</lastBuildDate><atom:link href="https://928330.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 10 May 2025 17:55:47 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Vim编辑器完全使用教程</title>
-        <link>https://928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+        <link>https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
         <pubDate>Thu, 08 May 2025 15:28:02 +0800</pubDate>
         
-        <guid>https://928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+        <guid>https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
         <description>&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
 &lt;/h1&gt;&lt;h2 id=&#34;vim键盘图&#34;&gt;vim键盘图
 &lt;/h2&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/vi-vim-cheat-sheet-sch.gif&#34; alt=&#34;img&#34; style=&#34;zoom: 80%;&#34; /&gt;

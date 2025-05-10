@@ -2,33 +2,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Pages on kakahuote&#39;blogs</title>
-        <link>https://928330.xyz/page/</link>
+        <link>https://blog.928330.xyz/page/</link>
         <description>Recent content in Pages on kakahuote&#39;blogs</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 00:02:39 +0800</lastBuildDate><atom:link href="https://928330.xyz/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 10 May 2025 00:02:39 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/page/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>归档</title>
-        <link>https://928330.xyz/archives/</link>
+        <link>https://blog.928330.xyz/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://928330.xyz/archives/</guid>
+        <guid>https://blog.928330.xyz/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>搜索</title>
-        <link>https://928330.xyz/search/</link>
+        <link>https://blog.928330.xyz/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://928330.xyz/search/</guid>
+        <guid>https://blog.928330.xyz/search/</guid>
         <description></description>
         </item>
         <item>
         <title>友链</title>
-        <link>https://928330.xyz/%E5%8F%8B%E9%93%BE/</link>
+        <link>https://blog.928330.xyz/%E5%8F%8B%E9%93%BE/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://928330.xyz/%E5%8F%8B%E9%93%BE/</guid>
+        <guid>https://blog.928330.xyz/%E5%8F%8B%E9%93%BE/</guid>
         <description></description>
         </item>
         
