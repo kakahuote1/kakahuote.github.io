@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/archives/'>
 
-<link rel="stylesheet" href="/scss/style.min.9e02e4d001fc73f6324c0f6ee39c48281b2d52cebfae2dd0eb286983859bcf1d.css"><meta property='og:title' content="归档">
+<link rel="stylesheet" href="/scss/style.min.906e20e96332ce5f79f8781cfe9ecd8c499d39d1487cbe9b0aae52fe163f9a00.css"><meta property='og:title' content="归档">
 <meta property='og:description' content="">
 <meta property='og:url' content='https://blog.928330.xyz/archives/'>
 <meta property='og:site_name' content='kakahuote&#39;blogs'>
@@ -435,6 +435,14 @@
             </footer>
         </div>
     </a>
+
+    
+    
+    <div class="article-subtitle-archive">
+        部分misc解答，持续更新
+    </div>
+    
+
 </article>
             
                 <article>
@@ -446,6 +454,14 @@
             </footer>
         </div>
     </a>
+
+    
+    
+    <div class="article-subtitle-archive">
+        你应该放下一切，立刻学习宇宙第一编辑器Vim😎
+    </div>
+    
+
 </article>
             
         </div>
@@ -454,9 +470,12 @@
 
     <footer class="site-footer">
     <section class="copyright">
-        &copy;
-        
-        2025 Example Person
+        &copy; 2025 - 2025 kakahuote 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
     </section>
 
     <section class="powerby">
@@ -588,6 +607,21 @@
    </style>
   
    <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
      
      
      
