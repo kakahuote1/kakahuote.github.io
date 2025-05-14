@@ -7,7 +7,437 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 20:53:17 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 14 May 2025 18:09:27 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>wireshark&amp;tshark简易使用教程</title>
+        <link>https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Wed, 14 May 2025 01:15:30 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;h1 id=&#34;wireshark过滤语法&#34;&gt;wireshark过滤语法
+&lt;/h1&gt;&lt;h2 id=&#34;运算符&#34;&gt;运算符
+&lt;/h2&gt;&lt;h3 id=&#34;比较运算符&#34;&gt;比较运算符
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;操作符&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;别名&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;类C风格&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;描述&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;eq&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;any_eq&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;==&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;等于&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;ip.src == 10.0.0.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;ne&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;all_ne&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;!=&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;不等于&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;ip.src != 10.0.0.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;all_eq&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;===&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;全等&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;ip.src === 10.0.0.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;any_ne&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;!==&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;不全等&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;ip.src !== 10.0.0.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;gt&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;大于&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;frame.len &amp;gt; 10&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;lt&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;lt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;小于&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;frame.len &amp;lt; 128&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;ge&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt;=&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;大于或等于&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;frame.len ge 0x100&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;le&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;lt;=&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;小于或等于&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;frame.len &amp;lt;= 0x20&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;contains&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;协议、字段或切片包含某个值&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;sip.To contains &amp;ldquo;a1762&amp;rdquo;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;matches&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;~&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;右侧的正则表达式将被用来匹配左侧的字符串&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;http.host matches &amp;ldquo;acme.(org|com|net)&amp;rdquo;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;span style=&#34;font-size:20px;color:red&#34;&gt;&lt;strong&gt;等于（==）和全等（===）的区别：&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;== 是一种宽松的比较，只要有一个值匹配即可（any if more than one）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;=== 是一种严格的比较，所有可能的值都必须匹配（all if more than one）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;同一个包，使用等于（==）可以过滤出源或目的端口为80报文，使用全等（===）则会匹配源目的端口都为80的报文&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ip.addr &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; 10.0.0.0/8    等价于   ip.src&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;10.0.0.0/8 &lt;span style=&#34;color:#56b6c2&#34;&gt;||&lt;/span&gt; ip.dst&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;10.0.0.0/8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ip.addr &lt;span style=&#34;color:#56b6c2&#34;&gt;===&lt;/span&gt; 10.0.0.0/8    等价于   ip.src&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;10.0.0.0/8 &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ip.dst&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;10.0.0.0/8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;逻辑运算符&#34;&gt;逻辑运算符
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;操作符&lt;/th&gt;
+          &lt;th&gt;类C风格&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;and&lt;/td&gt;
+          &lt;td&gt;&amp;amp;&amp;amp;&lt;/td&gt;
+          &lt;td&gt;逻辑与&lt;/td&gt;
+          &lt;td&gt;ip.src == 10.0.0.5 &lt;strong&gt;and&lt;/strong&gt; tcp.flags.fin == 1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;or&lt;/td&gt;
+          &lt;td&gt;||&lt;/td&gt;
+          &lt;td&gt;逻辑或&lt;/td&gt;
+          &lt;td&gt;ip.src == 10.0.0.5 &lt;strong&gt;or&lt;/strong&gt; ip.src == 192.1.1.1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;xor&lt;/td&gt;
+          &lt;td&gt;^^&lt;/td&gt;
+          &lt;td&gt;逻辑异或，能且只能满足其中一个&lt;/td&gt;
+          &lt;td&gt;tr.dst[0:3] == 0.6.29 &lt;strong&gt;xor&lt;/strong&gt; tr.src[0:3] == 0.6.29&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;not&lt;/td&gt;
+          &lt;td&gt;!&lt;/td&gt;
+          &lt;td&gt;逻辑非&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;!&lt;/strong&gt; udp&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;[…]&lt;/td&gt;
+          &lt;td&gt;不涉及&lt;/td&gt;
+          &lt;td&gt;[a:b]：从第a个字符开始取b个字符&lt;/td&gt;
+          &lt;td&gt;http.request.method**[0:3]**==&amp;ldquo;GET&amp;rdquo;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;in&lt;/td&gt;
+          &lt;td&gt;不涉及&lt;/td&gt;
+          &lt;td&gt;匹配集合内的元素，代替==&lt;/td&gt;
+          &lt;td&gt;http.request.method &lt;strong&gt;in&lt;/strong&gt; {&amp;ldquo;HEAD&amp;rdquo;, &amp;ldquo;GET&amp;rdquo;}&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;函数&#34;&gt;函数
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;函数&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;upper&lt;/td&gt;
+          &lt;td&gt;将字符串字段转换为大写&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;lower&lt;/td&gt;
+          &lt;td&gt;将字符串字段转换为小写&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;len&lt;/td&gt;
+          &lt;td&gt;返回字符串字段或字节字段的字节长度&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;count&lt;/td&gt;
+          &lt;td&gt;返回帧中字段的出现次数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;string&lt;/td&gt;
+          &lt;td&gt;将非字符串字段转换为字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vals&lt;/td&gt;
+          &lt;td&gt;将字段值转换为其值字符串（如果有）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;dec&lt;/td&gt;
+          &lt;td&gt;将无符号整数字段转换为十进制字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;hex&lt;/td&gt;
+          &lt;td&gt;将无符号整数字段转换为十六进制字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;max&lt;/td&gt;
+          &lt;td&gt;返回参数的最大值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;min&lt;/td&gt;
+          &lt;td&gt;返回参数的最小值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;abs&lt;/td&gt;
+          &lt;td&gt;返回参数的绝对值&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;upperlower&#34;&gt;upper()、lower()
+&lt;/h3&gt;&lt;p&gt;可以使用这两个函数，将字符串转化为大小写，再进行正则匹配，做到不区分大小写的功能&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lower&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;http.server&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; ~ &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;apache&amp;#34;&lt;/span&gt;  //过滤HTTP响应头的server字段为apache的
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;upper&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;http.request.method&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; ~ &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;post|get&amp;#34;&lt;/span&gt;  //过滤http请求方法为POST或GET
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;len&#34;&gt;len()
+&lt;/h3&gt;&lt;p&gt;len()函数将返回字段的字节大小，因此可以和比较操作符配合使用，过滤某个报文字段符合大小要求的报文&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;len&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;http.request.uri&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; &amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;   //过滤http头部的URI字段，大于等于10字节的报文
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;len&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;http.host&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; &amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;    //过滤HTTP主机名大于等于20字节的报文
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;string&#34;&gt;string()
+&lt;/h3&gt;&lt;p&gt;当字段为非字符串类型，而又想转换为字符串字段再进行正则匹配时，很方便&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;string&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;ip.addr&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; ~ &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;^10|^11&amp;#34;&lt;/span&gt;    //过滤IP为10网段开头或者23网段开头的IP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;string&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;ip.dst&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; matches r&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;^172\.(1[6-9]|2[0-9]|3[0-1])\.[0-9]{1,3}\.255&amp;#34;&lt;/span&gt;   //匹配目的IP中以255结尾的IP地址&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;172.16到172.31&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;maxmin&#34;&gt;max()、min()
+&lt;/h3&gt;&lt;p&gt;max()和min()接受相同类型的任意数量的参数，并分别返回集合中最大/最小的参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;max&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;tcp.srcport,tcp.dstport&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1024&lt;/span&gt;   //过滤tcp源端口、目的端口，最大不能超过1024的报文
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;min&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;tcp.srcport+tcp.dstport&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt; &amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1024&lt;/span&gt;   //过滤tcp源端口+目的端口大于等于1024的报文
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;过滤ip&#34;&gt;过滤IP
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;1）源地址为192.168.0.1的包&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ip.src == 192.168.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2）目的地址为192.168.0.1的包&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ip.dst == 192.168.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;3）源地址或目的地址是192.168.0.1的包&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ip.addr == 192.168.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;要原地址和目标地址一样就用===&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4）排除上述包&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;!(表达式)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;过滤协议&#34;&gt;过滤协议
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;1）仅捕获某种协议的包&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;直接写协议名即可，如http（区分大小写）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2）捕获多种协议的包&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用逻辑或&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http or telent
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;3）排除某种协议的包&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用逻辑非&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;not http
+! http
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;过滤端口需要指明协议&#34;&gt;过滤端口（需要指明协议）
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;1）捕获某一端口的包&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;tcp.port == 80
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2）捕获多端口的包&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可以用and来表示多端口并列&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;tcp.port == 80 and 8080
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;也可以用比较运算符&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;udp.port &amp;gt;= 2048
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;过滤长度内容&#34;&gt;过滤长度、内容
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;1）长度（数据段的长度）&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;udp.length &amp;gt;= 30                        //udp的payload长度
+
+http.content_length &amp;lt;= 20          //http消息体长度
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2）数据包内容&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用matches/contains&lt;/p&gt;
+&lt;h2 id=&#34;过滤时间&#34;&gt;过滤时间
+&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;frame.time &amp;gt;= &amp;#34;Apr 16, 2021 06:00:00.0&amp;#34; &amp;amp;&amp;amp; frame.time &amp;lt;= &amp;#34;Apr 16, 2021 06:59:00.0&amp;#34;
+
+frame.time &amp;gt; &amp;#34;2024-04-11 11:00:00&amp;#34; and frame.time &amp;lt; &amp;#34;2024-04-11 11:01:00&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;注意：时间是字符串，要用双引号括起来&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;tshark基本命令&#34;&gt;tshark基本命令
+&lt;/h1&gt;&lt;h2 id=&#34;-r--从一个已有的捕获文件读取数据包进行分析&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-r&lt;/span&gt; &amp;ndash; 从一个已有的捕获文件读取数据包进行分析
+&lt;/h2&gt;&lt;p&gt;**&lt;code&gt;-r 111.pcap&lt;/code&gt;：**从名为 &lt;code&gt;111.pcap&lt;/code&gt; 的文件中读取数据包并简略打印出来&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-size:30px;color:#FF8800&#34;&gt;&lt;strong&gt;eg:&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1.837951      192.168.1.12 -&amp;gt;192.168.1.5        TCP              72                 8080   -&amp;gt;  45940          [FIN, ACK] Seq=1 ...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​      &lt;strong&gt;时间戳            原IP           目标IP          协议     数据包长度      源端口    目标端口       报文标头信息&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-n-n--禁止反向解析&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-n/-N&lt;/span&gt; &amp;ndash; 禁止反向解析
+&lt;/h2&gt;&lt;h3 id=&#34;-n--禁用域名解析不对-ip-地址和端口号进行名称解析&#34;&gt;&lt;span style=&#34;color:aqua&#34;&gt;-n&lt;/span&gt; &amp;ndash; 禁用域名解析，不对 IP 地址和端口号进行名称解析
+&lt;/h3&gt;&lt;p&gt;默认情况下，&lt;code&gt;tshark&lt;/code&gt; 会尝试将捕获到的 IP 地址解析为主机名（192.168.1.1-&amp;gt;exaple.com），同时也会将端口号转换为服务名称（如 80 变成 &lt;code&gt;http&lt;/code&gt;，443 变成 &lt;code&gt;https&lt;/code&gt; 等）&lt;/p&gt;
+&lt;p&gt;通过使用 &lt;code&gt;-n&lt;/code&gt; 参数，可以避免这些解析，直接显示原始的 IP 地址和端口号&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-size:30px;color:#FF8800&#34;&gt;&lt;strong&gt;eg:&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -r file.pcap   //直接输出
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;192.168.1.1 -&amp;gt; example.com &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -n -r file.pcap  //-n输出
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;192.168.1.1 -&amp;gt; 93.184.216.34 &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;-n--精准控制解析哪些层级&#34;&gt;&lt;span style=&#34;color:aqua&#34;&gt;-N&lt;/span&gt; &amp;ndash; 精准控制解析哪些层级
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;格式：-N &amp;lt;反向解析flag1&amp;gt; -N &amp;lt;反向解析flag2&amp;gt;&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;flag取值&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;d&lt;/td&gt;
+          &lt;td&gt;对于DNS包启用解析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;m&lt;/td&gt;
+          &lt;td&gt;启用MAC地址解析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;n&lt;/td&gt;
+          &lt;td&gt;启用网络地址解析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;N&lt;/td&gt;
+          &lt;td&gt;使用外部解析器（例如DNS）进行网络地址解析，n需要被同时启用才有效果&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;t&lt;/td&gt;
+          &lt;td&gt;启用传输层端口解析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;v&lt;/td&gt;
+          &lt;td&gt;启用VLAN ID的名称解析&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;span style=&#34;font-size:30px;color:#FF8800&#34;&gt;&lt;strong&gt;eg：&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -r file.pcap   //直接输出
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.837951 192.168.1.12 -&amp;gt; 192.168.1.5 TCP &lt;span style=&#34;color:#d19a66&#34;&gt;72&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;45940&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;FIN, ACK&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Seq&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Ack&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -N t -r file.pcap  //-N t&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;解析传输层端口&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt;输出
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.837951 192.168.1.12 -&amp;gt; 192.168.1.5 TCP &lt;span style=&#34;color:#d19a66&#34;&gt;72&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;45940&lt;/span&gt; -&amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;http&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;FIN, ACK&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Seq&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Ack&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                                                            ↑
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-t--指定输出格式&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-T&lt;/span&gt; &amp;ndash; 指定输出格式
+&lt;/h2&gt;&lt;p&gt;**&lt;code&gt;-T fields&lt;/code&gt;：**仅输出指定的字段（需配合 -e 使用）&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-T text&lt;/code&gt;：**以普通文本格式输出（默认）&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-T json&lt;/code&gt;：**以 JSON 格式输出&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-T jsonraw&lt;/code&gt;：**以 JSON（包含原始数据）格式输出&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-T ek&lt;/code&gt;：**以 ElasticSearch 格式输出&lt;/p&gt;
+&lt;h2 id=&#34;-e--指定显示数据包中的特定字段&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-e&lt;/span&gt; &amp;ndash; 指定显示数据包中的特定字段
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;格式：-e &amp;ldquo;字段1&amp;rdquo; -e &amp;ldquo;字段2&amp;rdquo;&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;ip.src&lt;/code&gt;：**显示源 IP 地址&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;ip.dst&lt;/code&gt;：**显示目标 IP 地址&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;http.host&lt;/code&gt;：**显示 HTTP 请求中的主机名&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;http.request.uri&lt;/code&gt;：**显示 HTTP 请求中的 URI（即请求的 URL 路径）&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;usbhid.data&lt;/code&gt;：**只提取USB HID 设备数据&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;frame.number&lt;/code&gt;：**显示数据包的报文帧数&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;frame.time&lt;/code&gt;：**显示数据包捕获的时间戳&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;frame.len&lt;/code&gt;：**显示数据包的长度&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-size:30px;color:#FF8800&#34;&gt;&lt;strong&gt;eg:&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -n -r file.pcap -e &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;frame.number&amp;#34;&lt;/span&gt; -e &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;ip.addr&amp;#34;&lt;/span&gt; -e &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;tcp.port&amp;#34;&lt;/span&gt; -e tcp -T fields
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;//输出报文帧数、ip地址、端口、tcp协议的字段
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;                  192.168.1.12,192.168.1.8                    37546,80                Transmission Control Protocol,SrcPort: ... 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;报文帧数                        ip地址                                        端口                                   tcp协议的字段
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-y--筛选过滤报文&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-Y&lt;/span&gt; &amp;ndash; 筛选过滤报文
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;格式：-Y &amp;ldquo;过滤条件&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用来过滤分析符合过滤表达式的报文，相当于wireshark最上面的过滤筛选栏功能&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-size:30px;color:#FF8800&#34;&gt;&lt;strong&gt;eg:&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -n -r &amp;lt;filename&amp;gt; -Y &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;http.host == &amp;#34;&lt;/span&gt;web-server1&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;  //通过http.host过滤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -n -r http-keep-alive.pcap -Y &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;tcp.flags.syn==1&amp;amp;&amp;amp;tcp.flags.ack==0&amp;#34;&lt;/span&gt;  //过滤第一次握手的请求
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-e--设置输出的控制字段&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-E&lt;/span&gt; &amp;ndash; 设置输出的控制字段
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;通过&lt;code&gt;-T&lt;/code&gt;参数来输出特定格式时，可以配合&lt;code&gt;-E&lt;/code&gt;参数来设置一些选项&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;参数选项&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;默认&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;bom=y|n&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;n&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;在输出前加上UTF-8字节顺序标记（十六进制ef、bb、bf）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;header=y|n&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;n&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;打印一个使用-e作为输出第一行的字段名称头部&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;separator=/t|/s|&amp;lt;character&amp;gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;/t&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;设置字段分隔符，默认为/t，可以指定/s，即单个空格，或者自定义的其它字符&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;occurrence=f|l|a&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;a&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;打印每个字段的第一次(f)/最后一次(l)/或所有出现的内容(a)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;aggregator=,|/s|&amp;lt;character&amp;gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;,&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;设置用于每个字段内的分割字符&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;quote=d|s|n&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;n&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;设置用于环绕字段的引号字符&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;n是null，无设置&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;font-size:30px;color:#FF8800&#34;&gt;&lt;strong&gt;eg:&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tshark -n -r file.pcap  -E &lt;span style=&#34;color:#e06c75&#34;&gt;header&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;y -E &lt;span style=&#34;color:#e06c75&#34;&gt;occurrence&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;l -Y &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;icmp.seq==21&amp;#39;&lt;/span&gt; -e &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;icmp.seq&amp;#39;&lt;/span&gt; ...  -T fields |column -t
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;//    -E &lt;span style=&#34;color:#e06c75&#34;&gt;occurrence&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;l：包通过IPIP封装，occurrence&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;l指定输出外层IP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;//    -Y &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;icmp.seq==21&amp;#39;&lt;/span&gt;：指定icmp.seq等于21的ICMP包
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;//    | column -t：将输出通过管道传输给 column 命令，使结果以表格的形式对齐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;icmp.seq                          ip.src                            ip.dst                                ip     
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;21&lt;/span&gt;                                    114.132.116.32            113.145.123.23                 Internet Protocol Version 4，Src:，Dst:
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-2--二次依赖分析&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-2&lt;/span&gt; &amp;ndash; 二次依赖分析
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;没有2以外的参数&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;tshark会根据上下文报文的依赖关系（tshark称之为&lt;strong&gt;two-pass&lt;/strong&gt;，即进行两次分析），来显示相关报文关联信息，如：&lt;code&gt;response in frame #&lt;/code&gt;、&lt;code&gt;reply in frame&lt;/code&gt;、&lt;code&gt;TCP Port numbers reused&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-i--指定要捕获数据的网络接口&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-i&lt;/span&gt; &amp;ndash; 指定要捕获数据的网络接口
+&lt;/h2&gt;&lt;p&gt;**&lt;code&gt;-i eth0&lt;/code&gt;：**表示从 &lt;code&gt;eth0&lt;/code&gt; 网络接口捕获数据包&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-i wlan0&lt;/code&gt;：**表示从无线网卡 &lt;code&gt;wlan0&lt;/code&gt; 捕获数据包&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-i any&lt;/code&gt;：**表示捕获所有接口的流量&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-&lt;/code&gt;：**表示从标准输入（stdin）捕获数据流&lt;/p&gt;
+&lt;h2 id=&#34;-f--应用捕获过滤器只捕获特定的流量&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-f&lt;/span&gt; &amp;ndash; 应用捕获过滤器，只捕获特定的流量
+&lt;/h2&gt;&lt;p&gt;**&lt;code&gt;-f &amp;quot;tcp&amp;quot;&lt;/code&gt;：**只捕获 TCP 流量&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-f &amp;quot;port 80&amp;quot;&lt;/code&gt;：**只捕获端口为 80（HTTP）的流量&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-f &amp;quot;src host 192.168.1.1&amp;quot;&lt;/code&gt;：**只捕获源地址为 &lt;code&gt;192.168.1.1&lt;/code&gt; 的流量&lt;/p&gt;
+&lt;h2 id=&#34;-w--将捕获的数据包写入到文件中&#34;&gt;&lt;span style=&#34;color:red&#34;&gt;-w&lt;/span&gt; &amp;ndash; 将捕获的数据包写入到文件中
+&lt;/h2&gt;&lt;p&gt;**&lt;code&gt;-w output.pcap&lt;/code&gt;：**将捕获的数据包保存到 &lt;code&gt;output.pcap&lt;/code&gt; 文件&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-&lt;/code&gt;：**将捕获的内容输出到标准输出（stdout）&lt;/p&gt;
+&lt;h2 id=&#34;options--其他可选参数&#34;&gt;&lt;span style=&#34;color:aqua&#34;&gt;options&lt;/span&gt; &amp;ndash; 其他可选参数
+&lt;/h2&gt;&lt;p&gt;**&lt;code&gt;-V&lt;/code&gt;：**显示详细的包信息&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-c &amp;lt;count&amp;gt;&lt;/code&gt;：**捕获指定数量的包后停止&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;-n&lt;/code&gt;：**禁止域名解析，使用 IP 地址而不是主机名显示&lt;/p&gt;
+&lt;h2 id=&#34;filter指定显示过滤器&#34;&gt;&lt;span style=&#34;color:aqua&#34;&gt;&amp;lt;filter&amp;gt; &lt;/span&gt;指定显示过滤器
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;如果要用过滤器，一定要放到最后&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;ip.addr == 192.168.1.1&lt;/code&gt;：**仅显示源或目标地址为 &lt;code&gt;192.168.1.1&lt;/code&gt; 的包。&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;tcp.port == 443&lt;/code&gt;：**仅显示端口为 443 的 TCP 数据包（通常用于 HTTPS 流量）。&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;http&lt;/code&gt;：**仅显示 HTTP 协议的数据包&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>MiniL</title>
         <link>https://blog.928330.xyz/p/minil/</link>
         <pubDate>Fri, 09 May 2025 01:17:52 +0800</pubDate>

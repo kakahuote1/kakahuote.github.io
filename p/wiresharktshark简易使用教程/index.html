@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="原来网络捕获器是这样找东西的">
+<title>wireshark&amp;tshark简易使用教程</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.2ffd64d0486a5c15ff60c9ea76a37d46a4b7d4aa6760d01ca5bd94cfcb5c4726.css"><meta property='og:title' content="wireshark&tshark简易使用教程">
+<meta property='og:description' content="原来网络捕获器是这样找东西的">
+<meta property='og:url' content='https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-05-14T01:15:30&#43;08:00'/><meta property='article:modified_time' content='2025-05-14T18:09:27&#43;08:00'/>
+<meta name="twitter:title" content="wireshark&tshark简易使用教程">
+<meta name="twitter:description" content="原来网络捕获器是这样找东西的">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">握握手，握握双手</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#运算符">运算符</a>
+      <ol>
+        <li><a href="#比较运算符">比较运算符</a></li>
+        <li><a href="#逻辑运算符">逻辑运算符</a></li>
+      </ol>
+    </li>
+    <li><a href="#函数">函数</a>
+      <ol>
+        <li><a href="#upperlower">upper()、lower()</a></li>
+        <li><a href="#len">len()</a></li>
+        <li><a href="#string">string()</a></li>
+        <li><a href="#maxmin">max()、min()</a></li>
+      </ol>
+    </li>
+    <li><a href="#过滤ip">过滤IP</a></li>
+    <li><a href="#过滤协议">过滤协议</a></li>
+    <li><a href="#过滤端口需要指明协议">过滤端口（需要指明协议）</a></li>
+    <li><a href="#过滤长度内容">过滤长度、内容</a></li>
+    <li><a href="#过滤时间">过滤时间</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#-r--从一个已有的捕获文件读取数据包进行分析"><span style="color:red">-r</span> &ndash; 从一个已有的捕获文件读取数据包进行分析</a></li>
+    <li><a href="#-n-n--禁止反向解析"><span style="color:red">-n/-N</span> &ndash; 禁止反向解析</a>
+      <ol>
+        <li><a href="#-n--禁用域名解析不对-ip-地址和端口号进行名称解析"><span style="color:aqua">-n</span> &ndash; 禁用域名解析，不对 IP 地址和端口号进行名称解析</a></li>
+        <li><a href="#-n--精准控制解析哪些层级"><span style="color:aqua">-N</span> &ndash; 精准控制解析哪些层级</a></li>
+      </ol>
+    </li>
+    <li><a href="#-t--指定输出格式"><span style="color:red">-T</span> &ndash; 指定输出格式</a></li>
+    <li><a href="#-e--指定显示数据包中的特定字段"><span style="color:red">-e</span> &ndash; 指定显示数据包中的特定字段</a></li>
+    <li><a href="#-y--筛选过滤报文"><span style="color:red">-Y</span> &ndash; 筛选过滤报文</a></li>
+    <li><a href="#-e--设置输出的控制字段"><span style="color:red">-E</span> &ndash; 设置输出的控制字段</a></li>
+    <li><a href="#-2--二次依赖分析"><span style="color:red">-2</span> &ndash; 二次依赖分析</a></li>
+    <li><a href="#-i--指定要捕获数据的网络接口"><span style="color:red">-i</span> &ndash; 指定要捕获数据的网络接口</a></li>
+    <li><a href="#-f--应用捕获过滤器只捕获特定的流量"><span style="color:red">-f</span> &ndash; 应用捕获过滤器，只捕获特定的流量</a></li>
+    <li><a href="#-w--将捕获的数据包写入到文件中"><span style="color:red">-w</span> &ndash; 将捕获的数据包写入到文件中</a></li>
+    <li><a href="#options--其他可选参数"><span style="color:aqua">options</span> &ndash; 其他可选参数</a></li>
+    <li><a href="#filter指定显示过滤器"><span style="color:aqua">&lt;filter&gt; </span>指定显示过滤器</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
+                技术学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">wireshark&amp;tshark简易使用教程</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            原来网络捕获器是这样找东西的
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-05-14</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-05-14
+               </time>
+           </div></footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="wireshark过滤语法">wireshark过滤语法
+</h1><h2 id="运算符">运算符
+</h2><h3 id="比较运算符">比较运算符
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">操作符</th>
+          <th style="text-align: left">别名</th>
+          <th style="text-align: left">类C风格</th>
+          <th style="text-align: left">描述</th>
+          <th style="text-align: left">示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">eq</td>
+          <td style="text-align: left">any_eq</td>
+          <td style="text-align: left">==</td>
+          <td style="text-align: left">等于</td>
+          <td style="text-align: left">ip.src == 10.0.0.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">ne</td>
+          <td style="text-align: left">all_ne</td>
+          <td style="text-align: left">!=</td>
+          <td style="text-align: left">不等于</td>
+          <td style="text-align: left">ip.src != 10.0.0.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">all_eq</td>
+          <td style="text-align: left">===</td>
+          <td style="text-align: left">全等</td>
+          <td style="text-align: left">ip.src === 10.0.0.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">any_ne</td>
+          <td style="text-align: left">!==</td>
+          <td style="text-align: left">不全等</td>
+          <td style="text-align: left">ip.src !== 10.0.0.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">gt</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">&gt;</td>
+          <td style="text-align: left">大于</td>
+          <td style="text-align: left">frame.len &gt; 10</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">lt</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">&lt;</td>
+          <td style="text-align: left">小于</td>
+          <td style="text-align: left">frame.len &lt; 128</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">ge</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">&gt;=</td>
+          <td style="text-align: left">大于或等于</td>
+          <td style="text-align: left">frame.len ge 0x100</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">le</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">&lt;=</td>
+          <td style="text-align: left">小于或等于</td>
+          <td style="text-align: left">frame.len &lt;= 0x20</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">contains</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">协议、字段或切片包含某个值</td>
+          <td style="text-align: left">sip.To contains &ldquo;a1762&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">matches</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">~</td>
+          <td style="text-align: left">右侧的正则表达式将被用来匹配左侧的字符串</td>
+          <td style="text-align: left">http.host matches &ldquo;acme.(org|com|net)&rdquo;</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><span style="font-size:20px;color:red"><strong>等于（==）和全等（===）的区别：</strong></span></p>
+<p><strong>== 是一种宽松的比较，只要有一个值匹配即可（any if more than one）</strong></p>
+<p><strong>=== 是一种严格的比较，所有可能的值都必须匹配（all if more than one）</strong></p>
+<p>同一个包，使用等于（==）可以过滤出源或目的端口为80报文，使用全等（===）则会匹配源目的端口都为80的报文</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ip.addr <span style="color:#56b6c2">==</span> 10.0.0.0/8    等价于   ip.src<span style="color:#56b6c2">==</span>10.0.0.0/8 <span style="color:#56b6c2">||</span> ip.dst<span style="color:#56b6c2">==</span>10.0.0.0/8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ip.addr <span style="color:#56b6c2">===</span> 10.0.0.0/8    等价于   ip.src<span style="color:#56b6c2">==</span>10.0.0.0/8 <span style="color:#56b6c2">&amp;&amp;</span> ip.dst<span style="color:#56b6c2">==</span>10.0.0.0/8
+</span></span></code></pre></div><h3 id="逻辑运算符">逻辑运算符
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>操作符</th>
+          <th>类C风格</th>
+          <th>描述</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>and</td>
+          <td>&amp;&amp;</td>
+          <td>逻辑与</td>
+          <td>ip.src == 10.0.0.5 <strong>and</strong> tcp.flags.fin == 1</td>
+      </tr>
+      <tr>
+          <td>or</td>
+          <td>||</td>
+          <td>逻辑或</td>
+          <td>ip.src == 10.0.0.5 <strong>or</strong> ip.src == 192.1.1.1</td>
+      </tr>
+      <tr>
+          <td>xor</td>
+          <td>^^</td>
+          <td>逻辑异或，能且只能满足其中一个</td>
+          <td>tr.dst[0:3] == 0.6.29 <strong>xor</strong> tr.src[0:3] == 0.6.29</td>
+      </tr>
+      <tr>
+          <td>not</td>
+          <td>!</td>
+          <td>逻辑非</td>
+          <td><strong>!</strong> udp</td>
+      </tr>
+      <tr>
+          <td>[…]</td>
+          <td>不涉及</td>
+          <td>[a:b]：从第a个字符开始取b个字符</td>
+          <td>http.request.method**[0:3]**==&ldquo;GET&rdquo;</td>
+      </tr>
+      <tr>
+          <td>in</td>
+          <td>不涉及</td>
+          <td>匹配集合内的元素，代替==</td>
+          <td>http.request.method <strong>in</strong> {&ldquo;HEAD&rdquo;, &ldquo;GET&rdquo;}</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="函数">函数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>函数</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>upper</td>
+          <td>将字符串字段转换为大写</td>
+      </tr>
+      <tr>
+          <td>lower</td>
+          <td>将字符串字段转换为小写</td>
+      </tr>
+      <tr>
+          <td>len</td>
+          <td>返回字符串字段或字节字段的字节长度</td>
+      </tr>
+      <tr>
+          <td>count</td>
+          <td>返回帧中字段的出现次数</td>
+      </tr>
+      <tr>
+          <td>string</td>
+          <td>将非字符串字段转换为字符串</td>
+      </tr>
+      <tr>
+          <td>vals</td>
+          <td>将字段值转换为其值字符串（如果有）</td>
+      </tr>
+      <tr>
+          <td>dec</td>
+          <td>将无符号整数字段转换为十进制字符串</td>
+      </tr>
+      <tr>
+          <td>hex</td>
+          <td>将无符号整数字段转换为十六进制字符串</td>
+      </tr>
+      <tr>
+          <td>max</td>
+          <td>返回参数的最大值</td>
+      </tr>
+      <tr>
+          <td>min</td>
+          <td>返回参数的最小值</td>
+      </tr>
+      <tr>
+          <td>abs</td>
+          <td>返回参数的绝对值</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="upperlower">upper()、lower()
+</h3><p>可以使用这两个函数，将字符串转化为大小写，再进行正则匹配，做到不区分大小写的功能</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>lower<span style="color:#56b6c2">(</span>http.server<span style="color:#56b6c2">)</span> ~ <span style="color:#98c379">&#34;apache&#34;</span>  //过滤HTTP响应头的server字段为apache的
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>upper<span style="color:#56b6c2">(</span>http.request.method<span style="color:#56b6c2">)</span> ~ <span style="color:#98c379">&#34;post|get&#34;</span>  //过滤http请求方法为POST或GET
+</span></span></code></pre></div><h3 id="len">len()
+</h3><p>len()函数将返回字段的字节大小，因此可以和比较操作符配合使用，过滤某个报文字段符合大小要求的报文</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>len<span style="color:#56b6c2">(</span>http.request.uri<span style="color:#56b6c2">)</span> &gt;<span style="color:#56b6c2">=</span> <span style="color:#d19a66">10</span>   //过滤http头部的URI字段，大于等于10字节的报文
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>len<span style="color:#56b6c2">(</span>http.host<span style="color:#56b6c2">)</span> &gt;<span style="color:#56b6c2">=</span> <span style="color:#d19a66">20</span>    //过滤HTTP主机名大于等于20字节的报文
+</span></span></code></pre></div><h3 id="string">string()
+</h3><p>当字段为非字符串类型，而又想转换为字符串字段再进行正则匹配时，很方便</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>string<span style="color:#56b6c2">(</span>ip.addr<span style="color:#56b6c2">)</span> ~ <span style="color:#98c379">&#34;^10|^11&#34;</span>    //过滤IP为10网段开头或者23网段开头的IP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>string<span style="color:#56b6c2">(</span>ip.dst<span style="color:#56b6c2">)</span> matches r<span style="color:#98c379">&#34;^172\.(1[6-9]|2[0-9]|3[0-1])\.[0-9]{1,3}\.255&#34;</span>   //匹配目的IP中以255结尾的IP地址<span style="color:#56b6c2">(</span>172.16到172.31<span style="color:#56b6c2">)</span>
+</span></span></code></pre></div><h3 id="maxmin">max()、min()
+</h3><p>max()和min()接受相同类型的任意数量的参数，并分别返回集合中最大/最小的参数</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>max<span style="color:#56b6c2">(</span>tcp.srcport,tcp.dstport<span style="color:#56b6c2">)</span> &lt;<span style="color:#56b6c2">=</span> <span style="color:#d19a66">1024</span>   //过滤tcp源端口、目的端口，最大不能超过1024的报文
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>min<span style="color:#56b6c2">(</span>tcp.srcport+tcp.dstport<span style="color:#56b6c2">)</span> &gt;<span style="color:#56b6c2">=</span> <span style="color:#d19a66">1024</span>   //过滤tcp源端口+目的端口大于等于1024的报文
+</span></span></code></pre></div><h2 id="过滤ip">过滤IP
+</h2><p><strong>1）源地址为192.168.0.1的包</strong></p>
+<pre tabindex="0"><code>ip.src == 192.168.0.1
+</code></pre><p><strong>2）目的地址为192.168.0.1的包</strong></p>
+<pre tabindex="0"><code>ip.dst == 192.168.0.1
+</code></pre><p><strong>3）源地址或目的地址是192.168.0.1的包</strong></p>
+<pre tabindex="0"><code>ip.addr == 192.168.0.1
+</code></pre><p>要原地址和目标地址一样就用===</p>
+<p><strong>4）排除上述包</strong></p>
+<pre tabindex="0"><code>!(表达式)
+</code></pre><h2 id="过滤协议">过滤协议
+</h2><p><strong>1）仅捕获某种协议的包</strong></p>
+<p>直接写协议名即可，如http（区分大小写）</p>
+<p><strong>2）捕获多种协议的包</strong></p>
+<p>使用逻辑或</p>
+<pre tabindex="0"><code>http or telent
+</code></pre><p><strong>3）排除某种协议的包</strong></p>
+<p>使用逻辑非</p>
+<pre tabindex="0"><code>not http
+! http
+</code></pre><h2 id="过滤端口需要指明协议">过滤端口（需要指明协议）
+</h2><p><strong>1）捕获某一端口的包</strong></p>
+<pre tabindex="0"><code>tcp.port == 80
+</code></pre><p><strong>2）捕获多端口的包</strong></p>
+<p>可以用and来表示多端口并列</p>
+<pre tabindex="0"><code>tcp.port == 80 and 8080
+</code></pre><p>也可以用比较运算符</p>
+<pre tabindex="0"><code>udp.port &gt;= 2048
+</code></pre><h2 id="过滤长度内容">过滤长度、内容
+</h2><p><strong>1）长度（数据段的长度）</strong></p>
+<pre tabindex="0"><code>udp.length &gt;= 30                        //udp的payload长度
+
+http.content_length &lt;= 20          //http消息体长度
+</code></pre><p><strong>2）数据包内容</strong></p>
+<p>使用matches/contains</p>
+<h2 id="过滤时间">过滤时间
+</h2><pre tabindex="0"><code>frame.time &gt;= &#34;Apr 16, 2021 06:00:00.0&#34; &amp;&amp; frame.time &lt;= &#34;Apr 16, 2021 06:59:00.0&#34;
+
+frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-11 11:01:00&#34;
+</code></pre><p><strong>注意：时间是字符串，要用双引号括起来</strong></p>
+<h1 id="tshark基本命令">tshark基本命令
+</h1><h2 id="-r--从一个已有的捕获文件读取数据包进行分析"><span style="color:red">-r</span> &ndash; 从一个已有的捕获文件读取数据包进行分析
+</h2><p>**<code>-r 111.pcap</code>：**从名为 <code>111.pcap</code> 的文件中读取数据包并简略打印出来</p>
+<p><span style="font-size:30px;color:#FF8800"><strong>eg:</strong></span></p>
+<pre tabindex="0"><code>1.837951      192.168.1.12 -&gt;192.168.1.5        TCP              72                 8080   -&gt;  45940          [FIN, ACK] Seq=1 ...
+</code></pre><p>​      <strong>时间戳            原IP           目标IP          协议     数据包长度      源端口    目标端口       报文标头信息</strong></p>
+<h2 id="-n-n--禁止反向解析"><span style="color:red">-n/-N</span> &ndash; 禁止反向解析
+</h2><h3 id="-n--禁用域名解析不对-ip-地址和端口号进行名称解析"><span style="color:aqua">-n</span> &ndash; 禁用域名解析，不对 IP 地址和端口号进行名称解析
+</h3><p>默认情况下，<code>tshark</code> 会尝试将捕获到的 IP 地址解析为主机名（192.168.1.1-&gt;exaple.com），同时也会将端口号转换为服务名称（如 80 变成 <code>http</code>，443 变成 <code>https</code> 等）</p>
+<p>通过使用 <code>-n</code> 参数，可以避免这些解析，直接显示原始的 IP 地址和端口号</p>
+<p><span style="font-size:30px;color:#FF8800"><strong>eg:</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tshark -r file.pcap   //直接输出
+</span></span><span style="display:flex;"><span>192.168.1.1 -&gt; example.com <span style="color:#d19a66">80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tshark -n -r file.pcap  //-n输出
+</span></span><span style="display:flex;"><span>192.168.1.1 -&gt; 93.184.216.34 <span style="color:#d19a66">80</span>
+</span></span></code></pre></div><h3 id="-n--精准控制解析哪些层级"><span style="color:aqua">-N</span> &ndash; 精准控制解析哪些层级
+</h3><p><strong>格式：-N &lt;反向解析flag1&gt; -N &lt;反向解析flag2&gt;&hellip;</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">flag取值</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">d</td>
+          <td>对于DNS包启用解析</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">m</td>
+          <td>启用MAC地址解析</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">n</td>
+          <td>启用网络地址解析</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">N</td>
+          <td>使用外部解析器（例如DNS）进行网络地址解析，n需要被同时启用才有效果</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">t</td>
+          <td>启用传输层端口解析</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">v</td>
+          <td>启用VLAN ID的名称解析</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><span style="font-size:30px;color:#FF8800"><strong>eg：</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tshark -r file.pcap   //直接输出
+</span></span><span style="display:flex;"><span>1.837951 192.168.1.12 -&gt; 192.168.1.5 TCP <span style="color:#d19a66">72</span> <span style="color:#d19a66">45940</span> -&gt; <span style="color:#d19a66">80</span> <span style="color:#56b6c2">[</span>FIN, ACK<span style="color:#56b6c2">]</span> <span style="color:#e06c75">Seq</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span> <span style="color:#e06c75">Ack</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span> ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tshark -N t -r file.pcap  //-N t<span style="color:#56b6c2">(</span>解析传输层端口<span style="color:#56b6c2">)</span>输出
+</span></span><span style="display:flex;"><span>1.837951 192.168.1.12 -&gt; 192.168.1.5 TCP <span style="color:#d19a66">72</span> <span style="color:#d19a66">45940</span> -&gt;<span style="color:#56b6c2">(</span>http<span style="color:#56b6c2">)</span><span style="color:#d19a66">80</span> <span style="color:#56b6c2">[</span>FIN, ACK<span style="color:#56b6c2">]</span> <span style="color:#e06c75">Seq</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span> <span style="color:#e06c75">Ack</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span> ...
+</span></span><span style="display:flex;"><span>                                                                                            ↑
+</span></span></code></pre></div><h2 id="-t--指定输出格式"><span style="color:red">-T</span> &ndash; 指定输出格式
+</h2><p>**<code>-T fields</code>：**仅输出指定的字段（需配合 -e 使用）</p>
+<p>**<code>-T text</code>：**以普通文本格式输出（默认）</p>
+<p>**<code>-T json</code>：**以 JSON 格式输出</p>
+<p>**<code>-T jsonraw</code>：**以 JSON（包含原始数据）格式输出</p>
+<p>**<code>-T ek</code>：**以 ElasticSearch 格式输出</p>
+<h2 id="-e--指定显示数据包中的特定字段"><span style="color:red">-e</span> &ndash; 指定显示数据包中的特定字段
+</h2><p><strong>格式：-e &ldquo;字段1&rdquo; -e &ldquo;字段2&rdquo;&hellip;</strong></p>
+<p>**<code>ip.src</code>：**显示源 IP 地址</p>
+<p>**<code>ip.dst</code>：**显示目标 IP 地址</p>
+<p>**<code>http.host</code>：**显示 HTTP 请求中的主机名</p>
+<p>**<code>http.request.uri</code>：**显示 HTTP 请求中的 URI（即请求的 URL 路径）</p>
+<p>**<code>usbhid.data</code>：**只提取USB HID 设备数据</p>
+<p>**<code>frame.number</code>：**显示数据包的报文帧数</p>
+<p>**<code>frame.time</code>：**显示数据包捕获的时间戳</p>
+<p>**<code>frame.len</code>：**显示数据包的长度</p>
+<p><span style="font-size:30px;color:#FF8800"><strong>eg:</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tshark -n -r file.pcap -e <span style="color:#98c379">&#34;frame.number&#34;</span> -e <span style="color:#98c379">&#34;ip.addr&#34;</span> -e <span style="color:#98c379">&#34;tcp.port&#34;</span> -e tcp -T fields
+</span></span><span style="display:flex;"><span>//输出报文帧数、ip地址、端口、tcp协议的字段
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#d19a66">1</span>                  192.168.1.12,192.168.1.8                    37546,80                Transmission Control Protocol,SrcPort: ... 
+</span></span><span style="display:flex;"><span>报文帧数                        ip地址                                        端口                                   tcp协议的字段
+</span></span></code></pre></div><h2 id="-y--筛选过滤报文"><span style="color:red">-Y</span> &ndash; 筛选过滤报文
+</h2><p><strong>格式：-Y &ldquo;过滤条件&rdquo;</strong></p>
+<p>用来过滤分析符合过滤表达式的报文，相当于wireshark最上面的过滤筛选栏功能</p>
+<p><span style="font-size:30px;color:#FF8800"><strong>eg:</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tshark -n -r &lt;filename&gt; -Y <span style="color:#98c379">&#34;http.host == &#34;</span>web-server1<span style="color:#98c379">&#34;&#34;</span>  //通过http.host过滤
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tshark -n -r http-keep-alive.pcap -Y <span style="color:#98c379">&#34;tcp.flags.syn==1&amp;&amp;tcp.flags.ack==0&#34;</span>  //过滤第一次握手的请求
+</span></span></code></pre></div><h2 id="-e--设置输出的控制字段"><span style="color:red">-E</span> &ndash; 设置输出的控制字段
+</h2><p><strong>通过<code>-T</code>参数来输出特定格式时，可以配合<code>-E</code>参数来设置一些选项</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">参数选项</th>
+          <th style="text-align: left">默认</th>
+          <th style="text-align: left">含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">bom=y|n</td>
+          <td style="text-align: left">n</td>
+          <td style="text-align: left">在输出前加上UTF-8字节顺序标记（十六进制ef、bb、bf）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">header=y|n</td>
+          <td style="text-align: left">n</td>
+          <td style="text-align: left">打印一个使用-e作为输出第一行的字段名称头部</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">separator=/t|/s|&lt;character&gt;</td>
+          <td style="text-align: left">/t</td>
+          <td style="text-align: left">设置字段分隔符，默认为/t，可以指定/s，即单个空格，或者自定义的其它字符</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">occurrence=f|l|a</td>
+          <td style="text-align: left">a</td>
+          <td style="text-align: left">打印每个字段的第一次(f)/最后一次(l)/或所有出现的内容(a)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">aggregator=,|/s|&lt;character&gt;</td>
+          <td style="text-align: left">,</td>
+          <td style="text-align: left">设置用于每个字段内的分割字符</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">quote=d|s|n</td>
+          <td style="text-align: left">n</td>
+          <td style="text-align: left">设置用于环绕字段的引号字符</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><mark><strong>n是null，无设置</strong></mark></p>
+<p><span style="font-size:30px;color:#FF8800"><strong>eg:</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tshark -n -r file.pcap  -E <span style="color:#e06c75">header</span><span style="color:#56b6c2">=</span>y -E <span style="color:#e06c75">occurrence</span><span style="color:#56b6c2">=</span>l -Y <span style="color:#98c379">&#39;icmp.seq==21&#39;</span> -e <span style="color:#98c379">&#39;icmp.seq&#39;</span> ...  -T fields |column -t
+</span></span><span style="display:flex;"><span>//    -E <span style="color:#e06c75">occurrence</span><span style="color:#56b6c2">=</span>l：包通过IPIP封装，occurrence<span style="color:#56b6c2">=</span>l指定输出外层IP
+</span></span><span style="display:flex;"><span>//    -Y <span style="color:#98c379">&#39;icmp.seq==21&#39;</span>：指定icmp.seq等于21的ICMP包
+</span></span><span style="display:flex;"><span>//    | column -t：将输出通过管道传输给 column 命令，使结果以表格的形式对齐
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>icmp.seq                          ip.src                            ip.dst                                ip     
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">21</span>                                    114.132.116.32            113.145.123.23                 Internet Protocol Version 4，Src:，Dst:
+</span></span></code></pre></div><h2 id="-2--二次依赖分析"><span style="color:red">-2</span> &ndash; 二次依赖分析
+</h2><p><strong><mark>没有2以外的参数</mark></strong></p>
+<p>tshark会根据上下文报文的依赖关系（tshark称之为<strong>two-pass</strong>，即进行两次分析），来显示相关报文关联信息，如：<code>response in frame #</code>、<code>reply in frame</code>、<code>TCP Port numbers reused</code></p>
+<h2 id="-i--指定要捕获数据的网络接口"><span style="color:red">-i</span> &ndash; 指定要捕获数据的网络接口
+</h2><p>**<code>-i eth0</code>：**表示从 <code>eth0</code> 网络接口捕获数据包</p>
+<p>**<code>-i wlan0</code>：**表示从无线网卡 <code>wlan0</code> 捕获数据包</p>
+<p>**<code>-i any</code>：**表示捕获所有接口的流量</p>
+<p>**<code>-</code>：**表示从标准输入（stdin）捕获数据流</p>
+<h2 id="-f--应用捕获过滤器只捕获特定的流量"><span style="color:red">-f</span> &ndash; 应用捕获过滤器，只捕获特定的流量
+</h2><p>**<code>-f &quot;tcp&quot;</code>：**只捕获 TCP 流量</p>
+<p>**<code>-f &quot;port 80&quot;</code>：**只捕获端口为 80（HTTP）的流量</p>
+<p>**<code>-f &quot;src host 192.168.1.1&quot;</code>：**只捕获源地址为 <code>192.168.1.1</code> 的流量</p>
+<h2 id="-w--将捕获的数据包写入到文件中"><span style="color:red">-w</span> &ndash; 将捕获的数据包写入到文件中
+</h2><p>**<code>-w output.pcap</code>：**将捕获的数据包保存到 <code>output.pcap</code> 文件</p>
+<p>**<code>-</code>：**将捕获的内容输出到标准输出（stdout）</p>
+<h2 id="options--其他可选参数"><span style="color:aqua">options</span> &ndash; 其他可选参数
+</h2><p>**<code>-V</code>：**显示详细的包信息</p>
+<p>**<code>-c &lt;count&gt;</code>：**捕获指定数量的包后停止</p>
+<p>**<code>-n</code>：**禁止域名解析，使用 IP 地址而不是主机名显示</p>
+<h2 id="filter指定显示过滤器"><span style="color:aqua">&lt;filter&gt; </span>指定显示过滤器
+</h2><p><strong><mark>如果要用过滤器，一定要放到最后</mark></strong></p>
+<p>**<code>ip.addr == 192.168.1.1</code>：**仅显示源或目标地址为 <code>192.168.1.1</code> 的包。</p>
+<p>**<code>tcp.port == 443</code>：**仅显示端口为 443 的 TCP 数据包（通常用于 HTTPS 流量）。</p>
+<p>**<code>http</code>：**仅显示 HTTP 协议的数据包</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/web/">Web</a>
+        
+            <a href="/tags/misc/">Misc</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-05-14
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+  
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+     --toc-link-color: #000;  
+     --toc-link-active-color: orange;  
+    }
+  
+     
+     
+     
+    #TableOfContents > ul,
+    ol {
+     ul,
+     ol {
+      display: none;  
+     }
+  
+     .open {
+      display: block;  
+     }
+    }
+  
+    #TableOfContents a {
+     color: var(--toc-link-color);  
+     text-decoration: none;  
+    }
+  
+    #TableOfContents a.active {
+     color: var(--toc-link-active-color);  
+     font-weight: normal;  
+    }
+  
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+  
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+  
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+  
+    .code-show {
+     max-height: none !important;  
+    }
+  
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+  
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+  
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+  
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+  
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+  
+     
+     btn.style.display = "block";
+    }
+  
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+  
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+  
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+  
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+  
+    
+    initScrollTop();
+  
+     
+     
+     
+    function initTocHide() {
+     let toc = document.querySelector(".widget--toc");
+     if (!toc) {
+      return;
+     }
+  
+     window.addEventListener('scroll', function() {
+      
+      let openUl = document.querySelectorAll(".open");
+      if (openUl.length > 0) {
+       openUl.forEach((ul) => {
+        ul.classList.remove("open");
+       });
+      }
+  
+      
+      let currentLi = document.querySelector(".active-class");
+      if (currentLi) {
+       if (currentLi.children.length > 1) {
+        currentLi.children[1].classList.add("open"); 
+       }
+       let ul = currentLi.parentElement;
+       do {
+        ul.classList.add("open"); 
+        ul = ul.parentElement.parentElement;
+       } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
+      }
+     });
+    }
+    initTocHide();
+  
+     
+     
+     
+    function initTocHighlight() {
+     const tocLinks = document.querySelectorAll('#TableOfContents a');
+     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+  
+     if (tocLinks.length === 0 || headings.length === 0) {
+      return;
+     }
+  
+     function getOffsetTop(element) {
+      let offsetTop = 0;
+      while (element) {
+       offsetTop += element.offsetTop;
+       element = element.offsetParent;
+      }
+      return offsetTop;
+     }
+  
+     function isElementInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+       rect.top >= 0 &&
+       rect.left >= 0 &&
+       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+     }
+  
+     function setActiveTocLink() {
+      const scrollPositionTop = window.scrollY;
+      const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
+      let activeLink = null;
+  
+      for (let i = 0; i < headings.length; i++) {
+       const currentHeading = headings[i];
+       const currentHeadingTop = getOffsetTop(currentHeading);
+       const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
+  
+       let nextHeadingTop = Infinity; 
+       if (i < headings.length - 1) {
+        nextHeadingTop = getOffsetTop(headings[i + 1]);
+       }
+  
+       
+       if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
+        activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
+        break; 
+       }
+      }
+  
+      
+      tocLinks.forEach(link => {
+       link.classList.remove('active');
+      });
+  
+      if (activeLink) {
+       activeLink.classList.add('active'); 
+       
+       let parentLi = activeLink.parentNode;
+       while (parentLi && parentLi.tagName === 'LI') {
+        let siblingUl = parentLi.querySelector('ul, ol');
+        if (siblingUl && !siblingUl.classList.contains('open')) {
+         siblingUl.classList.add('open');
+        }
+        parentLi = parentLi.parentNode;
+       }
+      }
+     }
+  
+     function expandTocOnView() {
+      headings.forEach(heading => {
+       if (isElementInViewport(heading)) {
+        const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
+        if (correspondingLink) {
+         let parentLi = correspondingLink.parentNode;
+         while (parentLi && parentLi.tagName === 'LI') {
+          let siblingUl = parentLi.querySelector('ul, ol');
+          if (siblingUl && !siblingUl.classList.contains('open')) {
+           siblingUl.classList.add('open');
+          }
+          parentLi = parentLi.parentNode;
+         }
+        }
+       }
+      });
+     }
+  
+     window.addEventListener('scroll', setActiveTocLink); 
+     window.addEventListener('scroll', expandTocOnView); 
+     
+     setActiveTocLink();
+     expandTocOnView();
+    }
+    initTocHighlight();
+  
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+  
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+  
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>

@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 10 May 2025 17:55:47 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/vim/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 14 May 2025 18:09:27 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/vim/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Vim编辑器完全使用教程</title>
         <link>https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
         <pubDate>Thu, 08 May 2025 15:28:02 +0800</pubDate>
@@ -612,7 +612,7 @@
 &lt;li&gt;&lt;strong&gt;@@&lt;/strong&gt; &amp;ndash; 重复上一次使用的宏操作&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;vim相关案例&#34;&gt;VIM相关案例
-&lt;/h1&gt;&lt;h2 id=&#34;vim缓存泄露&#34;&gt;VIM缓存泄露
+&lt;/h1&gt;&lt;h2 id=&#34;vim缓存泄露&#34;&gt;vim缓存泄露
 &lt;/h2&gt;&lt;h3 id=&#34;vim交换文件&#34;&gt;vim交换文件
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;现在用vim打开文件1.txt，直接关闭终端，再次试图用vim打开1.txt时会出现如下提示：&lt;/p&gt;

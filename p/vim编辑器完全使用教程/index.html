@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.7e4864fecd674619e7e8cc3b0ebf850528bade991b9e130e8bde591b64c1675d.css"><meta property='og:title' content="Vim编辑器完全使用教程">
+<link rel="stylesheet" href="/scss/style.min.2ffd64d0486a5c15ff60c9ea76a37d46a4b7d4aa6760d01ca5bd94cfcb5c4726.css"><meta property='og:title' content="Vim编辑器完全使用教程">
 <meta property='og:description' content="你应该放下一切，立刻学习宇宙第一编辑器Vim😎">
 <meta property='og:url' content='https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='vim' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-05-08T15:28:02&#43;08:00'/><meta property='article:modified_time' content='2025-05-10T17:55:47&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='vim' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-05-08T15:28:02&#43;08:00'/><meta property='article:modified_time' content='2025-05-14T18:09:27&#43;08:00'/>
 <meta name="twitter:title" content="Vim编辑器完全使用教程">
 <meta name="twitter:description" content="你应该放下一切，立刻学习宇宙第一编辑器Vim😎">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -187,26 +187,30 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_3082651d1b16d882.png" width="300"
-                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
                     
                 
                 </a>
                 
-                    <span class="emoji">🤓</span>
+                    <span class="emoji">🤝</span>
                 
             </figure>
             
         
-        
+
         <div class="site-meta">
             <h1 class="site-name"><a href="/">kakahuote</a></h1>
-            <h2 class="site-description">那很好看了</h2>
+            <h2 class="site-description">握握手，握握双手</h2>
         </div>
-    </header><ol class="menu-social">
-            
+    </header>
+
+    <ol class="menu-social">
                 <li>
-                    <a 
+                    <a
                         href='https://bilibili.com'
                         target="_blank"
                         title="bilibili"
@@ -220,7 +224,7 @@
                 </li>
             
                 <li>
-                    <a 
+                    <a
                         href='https://github.com'
                         target="_blank"
                         title="GitHub"
@@ -238,8 +242,9 @@
                         
                     </a>
                 </li>
-            
-        </ol><ol class="menu" id="main-menu">
+            </ol>
+
+    <ol class="menu" id="main-menu">
         
         
         
@@ -348,7 +353,6 @@
         </li>
     </ol>
 </aside>
-
     <aside class="sidebar right-sidebar sticky">
         
             
@@ -436,7 +440,7 @@
   </ol>
 
   <ol>
-    <li><a href="#vim缓存泄露">VIM缓存泄露</a>
+    <li><a href="#vim缓存泄露">vim缓存泄露</a>
       <ol>
         <li><a href="#vim交换文件">vim交换文件</a></li>
         <li><a href="#例题">例题</a></li>
@@ -514,7 +518,7 @@
 
 
                <time>
-                   更新时间：2025-05-10
+                   更新时间：2025-05-14
                </time>
            </div></footer>
     
@@ -1126,7 +1130,7 @@
 <li><strong>@@</strong> &ndash; 重复上一次使用的宏操作</li>
 </ul>
 <h1 id="vim相关案例">VIM相关案例
-</h1><h2 id="vim缓存泄露">VIM缓存泄露
+</h1><h2 id="vim缓存泄露">vim缓存泄露
 </h2><h3 id="vim交换文件">vim交换文件
 </h3><p><strong>在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</strong></p>
 <p>现在用vim打开文件1.txt，直接关闭终端，再次试图用vim打开1.txt时会出现如下提示：</p>
@@ -1167,7 +1171,7 @@
 
 
         <span>
-            最后更新于 2025-05-10
+            最后更新于 2025-05-14
         </span>
     </section></footer>
 
@@ -1178,6 +1182,28 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wireshark&amp;tshark简易使用教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -1205,7 +1231,7 @@
 
     <footer class="site-footer">
     <section class="copyright">
-        &copy; 2025 - 2025 kakahuote 引用请注明文章链接
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
     </section>
 
     <section class="running-time">
