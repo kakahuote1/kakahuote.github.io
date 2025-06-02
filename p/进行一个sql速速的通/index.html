@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学完了就能去学怎么注入了">
+<title>进行一个SQL速速的通</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="进行一个SQL速速的通">
+<meta property='og:description' content="学完了就能去学怎么注入了">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-06-03T01:22:59&#43;08:00'/>
+<meta name="twitter:title" content="进行一个SQL速速的通">
+<meta name="twitter:description" content="学完了就能去学怎么注入了">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">握握手，握握双手</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#模式">模式</a>
+      <ol>
+        <li><a href="#定义模式">定义模式</a></li>
+        <li><a href="#删除模式">删除模式</a></li>
+      </ol>
+    </li>
+    <li><a href="#基本表">基本表</a>
+      <ol>
+        <li><a href="#定义基本元素">定义基本元素</a>
+          <ol>
+            <li><a href="#数据类型">数据类型</a></li>
+            <li><a href="#列级完整性约束条件">列级完整性约束条件</a></li>
+            <li><a href="#表级完整性约束条件">表级完整性约束条件</a></li>
+          </ol>
+        </li>
+        <li><a href="#定义基本表">定义基本表</a></li>
+        <li><a href="#在模式中定义表">在模式中定义表</a>
+          <ol>
+            <li><a href="#创建表的时候指出模式">创建表的时候指出模式</a></li>
+            <li><a href="#创建模式时直接定义表">创建模式时直接定义表</a></li>
+            <li><a href="#事先设置所属的模式">事先设置所属的模式</a></li>
+          </ol>
+        </li>
+        <li><a href="#修改基本表">修改基本表</a>
+          <ol>
+            <li><a href="#增加新的属性列">增加新的属性列</a></li>
+            <li><a href="#增加列级完整性约束条件">增加列级完整性约束条件</a></li>
+            <li><a href="#增加表级完整性约束条件">增加表级完整性约束条件</a></li>
+            <li><a href="#删除列">删除列</a></li>
+            <li><a href="#删除指定的完整性约束条件">删除指定的完整性约束条件</a></li>
+            <li><a href="#修改列">修改列</a></li>
+          </ol>
+        </li>
+        <li><a href="#删除基本表">删除基本表</a></li>
+      </ol>
+    </li>
+    <li><a href="#索引">索引</a>
+      <ol>
+        <li><a href="#建立索引">建立索引</a>
+          <ol>
+            <li><a href="#建立唯一索引">建立唯一索引</a></li>
+            <li><a href="#建立聚簇索引">建立聚簇索引</a></li>
+            <li><a href="#重命名索引">重命名索引</a></li>
+            <li><a href="#删除索引">删除索引</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#查询数据select语句">查询数据&ndash;SELECT语句</a>
+      <ol>
+        <li><a href="#一般格式">一般格式</a></li>
+        <li><a href="#select-目标列表达式">SELECT 目标列表达式</a>
+          <ol>
+            <li><a href="#查询指定的列">查询指定的列</a></li>
+            <li><a href="#查询全部的列">查询全部的列</a></li>
+            <li><a href="#查询计算后的值">查询计算后的值</a></li>
+            <li><a href="#改变查询结果的列标题">改变查询结果的列标题</a></li>
+            <li><a href="#去除查询结果的重复行">去除查询结果的重复行</a></li>
+          </ol>
+        </li>
+        <li><a href="#聚集函数">聚集函数</a>
+          <ol>
+            <li><a href="#统计元组个数">统计元组个数</a></li>
+            <li><a href="#统计某一列值的个数">统计某一列值的个数</a></li>
+            <li><a href="#计算某一列值的平均数该列必须为数值型">计算某一列值的平均数（该列必须为数值型）</a></li>
+            <li><a href="#计算某一列值的总和该列必须为数值型">计算某一列值的总和（该列必须为数值型）</a></li>
+            <li><a href="#计算某一列值的最大值最小值">计算某一列值的最大值/最小值</a></li>
+          </ol>
+        </li>
+        <li><a href="#where-条件表达式">WHERE 条件表达式</a>
+          <ol>
+            <li><a href="#比较大小">比较大小</a></li>
+            <li><a href="#确定范围">确定范围</a></li>
+            <li><a href="#确定集合">确定集合</a></li>
+            <li><a href="#字符匹配">字符匹配</a></li>
+            <li><a href="#空值查询">空值查询</a></li>
+            <li><a href="#多重条件查询">多重条件查询</a></li>
+          </ol>
+        </li>
+        <li><a href="#group-by-列名-having-条件表达式">GROUP BY 列名 HAVING 条件表达式</a>
+          <ol>
+            <li><a href="#group-by-列名">GROUP BY 列名</a></li>
+            <li><a href="#group-by-列名-having-筛选条件">GROUP BY 列名 HAVING 筛选条件</a></li>
+          </ol>
+        </li>
+        <li><a href="#order-by-次序">ORDER BY 次序</a></li>
+        <li><a href="#连接查询">连接查询</a>
+          <ol>
+            <li><a href="#两表连接查询">两表连接查询</a></li>
+            <li><a href="#单表连接查询">单表连接查询</a></li>
+            <li><a href="#外连接查询">外连接查询</a></li>
+            <li><a href="#多表连接查询">多表连接查询</a></li>
+          </ol>
+        </li>
+        <li><a href="#嵌套查询">嵌套查询</a>
+          <ol>
+            <li><a href="#集合判断in子查询">集合判断IN子查询</a></li>
+            <li><a href="#比较运算符子查询">比较运算符子查询</a></li>
+            <li><a href="#anyall子查询">ANY/ALL子查询</a></li>
+            <li><a href="#exists子查询">EXISTS子查询</a></li>
+          </ol>
+        </li>
+        <li><a href="#集合查询">集合查询</a>
+          <ol>
+            <li><a href="#union并操作满足前者或满足后者">UNION并操作（满足前者或满足后者）</a></li>
+            <li><a href="#intersect交操作前后都满足">INTERSECT交操作（前后都满足）</a></li>
+            <li><a href="#except差操作满足前者不满足后者">EXCEPT差操作（满足前者，不满足后者）</a></li>
+          </ol>
+        </li>
+        <li><a href="#基于派生表的查询">基于派生表的查询</a></li>
+      </ol>
+    </li>
+    <li><a href="#插入数据insert语句">插入数据&ndash;INSERT语句</a>
+      <ol>
+        <li><a href="#插入元组">插入元组</a>
+          <ol>
+            <li><a href="#一般格式-1">一般格式</a></li>
+            <li><a href="#假设现在有tab1表有c1到c4四列其中c4列是字符串常量"><span style="font-size:20px;color:red"><strong>假设现在有TAB1表，有C1到C4四列，其中C4列是字符串常量：</strong></span></a></li>
+            <li><a href="#情况1明确给出新增元组要在哪些属性上赋值插入数据包含全部属性列">情况1：明确给出新增元组要在哪些属性上赋值（插入数据包含全部属性列）</a></li>
+            <li><a href="#情况2明确给出新增元组要在哪些属性上赋值插入数据只包含部分属性列">情况2：明确给出新增元组要在哪些属性上赋值（插入数据只包含部分属性列）</a></li>
+            <li><a href="#情况3仅指出要在tab1表上插入元组插入数据包含全部属性列">情况3：仅指出要在TAB1表上插入元组（插入数据包含全部属性列）</a></li>
+            <li><a href="#情况4仅指出要在tab1表上插入元组插入数据只包含部分属性列">情况4：仅指出要在TAB1表上插入元组（插入数据只包含部分属性列）</a></li>
+          </ol>
+        </li>
+        <li><a href="#插入子查询结果">插入子查询结果</a>
+          <ol>
+            <li><a href="#一般格式-2">一般格式</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#修改数据update语句">修改数据&ndash;UPDATE语句</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#一般格式-3">一般格式</a></li>
+            <li><a href="#情况1修改某一个元组的值">情况1：修改某一个元组的值</a></li>
+            <li><a href="#情况2修改多个元组的值">情况2：修改多个元组的值</a></li>
+            <li><a href="#情况3带子查询的修改语句">情况3：带子查询的修改语句</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#删除语句delete语句">删除语句&ndash;DELETE语句</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#一般格式-4">一般格式</a></li>
+            <li><a href="#情况1删除某一个元组的值">情况1：删除某一个元组的值</a></li>
+            <li><a href="#情况2修改多个元组的值-1">情况2：修改多个元组的值</a></li>
+            <li><a href="#情况3带子查询的修改语句-1">情况3：带子查询的修改语句</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#view-视图">VIEW 视图</a>
+      <ol>
+        <li><a href="#建立视图">建立视图</a>
+          <ol>
+            <li><a href="#一般格式-5">一般格式</a></li>
+            <li><a href="#情况1建立完全视图">情况1：建立完全视图</a></li>
+            <li><a href="#情况2建立带有增删改条件的视图">情况2：建立带有增删改条件的视图</a></li>
+            <li><a href="#情况3由视图新建视图">情况3：由视图新建视图</a></li>
+            <li><a href="#情况4带有派生数据的视图">情况4：带有派生数据的视图</a></li>
+            <li><a href="#情况5带有聚集函数和group-by的分组视图">情况5：带有聚集函数和GROUP BY的分组视图</a></li>
+          </ol>
+        </li>
+        <li><a href="#删除视图">删除视图</a></li>
+        <li><a href="#查询和更新视图">查询和更新视图</a></li>
+      </ol>
+    </li>
+    <li><a href="#空值">空值</a>
+      <ol>
+        <li><a href="#判断属性为空值">判断属性为空值</a></li>
+        <li><a href="#空值的运算">空值的运算</a>
+          <ol>
+            <li><a href="#算数运算">算数运算</a></li>
+            <li><a href="#比较运算">比较运算</a></li>
+            <li><a href="#在查询语句中的处理">在查询语句中的处理</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
+                技术学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/">进行一个SQL速速的通</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            学完了就能去学怎么注入了
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-06-03</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-06-03
+               </time>
+           </div></footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="模式">模式
+</h2><h3 id="定义模式">定义模式
+</h3><p><mark><strong>CREATE SCHEMA 模式名 AUTHORIZATION 用户名</strong></mark></p>
+<p>eg:为用户ZHANG定义一个S-T模式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">SCHEMA</span> <span style="color:#98c379">&#34;S-T&#34;</span> <span style="color:#c678dd">AUTHORIZATION</span> <span style="color:#e06c75">ZHANG</span>
+</span></span></code></pre></div><p>eg:为用户ZHANG定义一个未命名的模式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">SCHEMA</span> <span style="color:#c678dd">AUTHORIZATION</span> <span style="color:#e06c75">ZHANG</span>
+</span></span></code></pre></div><p><strong>未定义模式名称的时候，默认模式为用户名</strong></p>
+<h3 id="删除模式">删除模式
+</h3><p><mark><strong>DROP SCHEAM 模式名</strong></mark></p>
+<p><strong>普通</strong>：用于删除空的模式，如果模式下面有对象（表、视图）等，拒绝删除</p>
+<p><mark><strong>DROP SCHEAM 模式名 CASCADE</strong></mark></p>
+<p><strong>级联</strong>：把模式里面的对象一并删除</p>
+<p><mark><strong>DROP SCHEAM 模式名 RESTRICT</strong></mark></p>
+<p><strong>限制</strong>：会把对象转移到公共模式保留并删除模式，但如果对象和模式有联系，则拒绝删除模式</p>
+<h2 id="基本表">基本表
+</h2><h3 id="定义基本元素">定义基本元素
+</h3><h4 id="数据类型">数据类型
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">数据类型</th>
+          <th style="text-align: center">表示内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">CHAR(n)</td>
+          <td style="text-align: center">长度为n的字符型</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">VARCHAR(n)</td>
+          <td style="text-align: center">最大长度为n的<strong>变长</strong>字符型</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">NUMBER(n)</td>
+          <td style="text-align: center">长度为n的数字型</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">INT</td>
+          <td style="text-align: center">长整型(4B)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SMALLINT</td>
+          <td style="text-align: center">短整型(4B)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">BIGINT</td>
+          <td style="text-align: center">大整型(8B)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">FLOAT(n)</td>
+          <td style="text-align: center">精度至少为n位的浮点数</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">DATE</td>
+          <td style="text-align: center">日期，格式为<strong>YYYY-MM-DD</strong></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">TIME</td>
+          <td style="text-align: center">时间，格式为<strong>HH:MM:SS</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="列级完整性约束条件">列级完整性约束条件
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">约束条件</th>
+          <th style="text-align: center">意义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">PRIMARY KEY</td>
+          <td style="text-align: center">主码（元素唯一不能重复）：当<strong>只有一个主码</strong>时，可直接在对应的属性列标注</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">NOT NULL</td>
+          <td style="text-align: center">非空：表示该属性列不能取空值</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">UNIQUE</td>
+          <td style="text-align: center">唯一值：表示该属性列只能取唯一值</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">CHECK</td>
+          <td style="text-align: center">检查：检查该列是否满足某个条件，比如CHECK(某属性&gt;20)</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="表级完整性约束条件">表级完整性约束条件
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">约束条件</th>
+          <th style="text-align: center">意义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">PRIMARY KEY(列名1,&hellip;,列名n)</td>
+          <td style="text-align: center">多个主码：当<strong>主码由多个属性构成</strong>时，<br />必须作为表级完整性定义</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">FOREIGN KEY(列名1) REFERENCES 被参照表(列名1)</td>
+          <td style="text-align: center">外码：被参照的列必须是 <strong>PRIMARY KEY</strong> <br />或 <strong>UNIQUE 约束</strong> 的列，<br />本表所有值来<strong>源于被参照的列</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="定义基本表">定义基本表
+</h3><p><mark><strong>CREATE TABLE 表名</strong></mark>
+<mark><strong>(列名1 数据类型 列级完整性约束条件,</strong></mark>
+<mark><strong>列名n 数据类型 列级完整性约束条件,</strong></mark>
+<mark><strong>表级完整性约束条件1,</strong></mark>
+<mark><strong>表级完整性约束条件n</strong></mark>
+<mark><strong>);</strong></mark></p>
+<p>eg:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#e06c75">Ch</span> <span style="color:#e5c07b">VARCHAR</span>(<span style="color:#d19a66">10</span>),
+</span></span><span style="display:flex;"><span> <span style="color:#e06c75">Nu</span> <span style="color:#e5c07b">NUMBER</span>(<span style="color:#d19a66">10</span>),
+</span></span><span style="display:flex;"><span> <span style="color:#e06c75">Grade</span> <span style="color:#e5c07b">INT</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">NULL</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#c678dd">PRIMARY</span> <span style="color:#c678dd">KEY</span>(<span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">Nu</span>),     <span style="color:#7f848e">-- 多个主码
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span> <span style="color:#c678dd">FOREIGN</span> <span style="color:#c678dd">KEY</span>(<span style="color:#e06c75">Ch</span>) <span style="color:#c678dd">REFERENCES</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Ch</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="在模式中定义表">在模式中定义表
+</h3><p><strong>一个模式包含很多基本表，有三种方式在模式里面定义基本表</strong></p>
+<h4 id="创建表的时候指出模式">创建表的时候指出模式
+</h4><p><mark><strong>CREATE TABLE 模式名.表名();</strong></mark></p>
+<h4 id="创建模式时直接定义表">创建模式时直接定义表
+</h4><p><strong><mark>CREATE SCHEMA 模式名 AUTHORIZATION 用户名 CREATE TABLE 表名();</mark></strong></p>
+<h4 id="事先设置所属的模式">事先设置所属的模式
+</h4><p><strong><mark>SET SCHEMA &lsquo;my_schema&rsquo;</mark></strong></p>
+<p>eg.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#c678dd">SCHEMA</span> <span style="color:#98c379">&#39;my_schema&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">my_table</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">id</span> <span style="color:#e5c07b">INT</span> <span style="color:#c678dd">PRIMARY</span> <span style="color:#c678dd">KEY</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">name</span> <span style="color:#e5c07b">VARCHAR</span>(<span style="color:#d19a66">100</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p><strong>my_table 将被创建在 my_schema 模式下</strong></p>
+<h3 id="修改基本表">修改基本表
+</h3><p><strong>同样的，修改表时想要指定模式里面的表，就使用“模式名.表名”的方式指定表名</strong></p>
+<h4 id="增加新的属性列">增加新的属性列
+</h4><p><strong><mark>ALTER TABLE 表名 ADD 新列名 数据类型 完整性约束条件;</mark></strong></p>
+<p>eg.向TAB1里增加时间列Time：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">ADD</span> <span style="color:#e06c75">Time</span> <span style="color:#e5c07b">DATE</span>;
+</span></span></code></pre></div><p>当然，还能在ADD后面加上修饰词COLUMN，这样会更容易理解是在添加列，<strong>对功能没有影响</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">COLUMN</span> <span style="color:#e06c75">Time</span> <span style="color:#e5c07b">DATE</span>;
+</span></span><span style="display:flex;"><span>                                    <span style="color:#56b6c2">~~~~~~</span>
+</span></span></code></pre></div><h4 id="增加列级完整性约束条件">增加列级完整性约束条件
+</h4><p><strong><mark>ALTER TABLE SC ADD 列级完整性约束条件;</mark></strong></p>
+<p>eg.向TAB1里增加Grade列必须取唯一值的条件：（Grade必须要已经存在）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">ADD</span> <span style="color:#c678dd">UNIQUE</span>(<span style="color:#e06c75">Grade</span>);
+</span></span></code></pre></div><h4 id="增加表级完整性约束条件">增加表级完整性约束条件
+</h4><p><strong><mark>ALTER TABLE SC ADD 表级完整性约束条件;</mark></strong></p>
+<p>eg.向TAB1里增加Ch为外码的条件，参照表是TAB2：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">ADD</span> <span style="color:#c678dd">FOREIGN</span> <span style="color:#c678dd">KEY</span>(<span style="color:#e06c75">Ch</span>) <span style="color:#c678dd">REFERENCES</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Ch</span>);
+</span></span></code></pre></div><h4 id="删除列">删除列
+</h4><p><strong><mark>ALTER TABLE 表名 DROP CASCADE;</mark></strong></p>
+<p><strong>级联</strong>：引用了该列的其他对象（例如视图）一起删除</p>
+<p><strong><mark>ALTER TABLE 表名 DROP RESTRICT;</mark></strong></p>
+<p><strong>限制</strong>：若该列被其他对象引用，则拒绝删除</p>
+<h4 id="删除指定的完整性约束条件">删除指定的完整性约束条件
+</h4><p><strong><mark>ALTER TABLE 表名 DROP CONSTRAINT 完整性约束名 CASCADE/RESTRICT;</mark></strong></p>
+<h4 id="修改列">修改列
+</h4><p><strong><mark>ALTER TABLE 表名 ALTER COLUMN 列名 数据类型;</mark></strong></p>
+<p>eg.把Grade由INT型修改成字符型：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> 表名 <span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">COLUMN</span> 列名 数据类型；
+</span></span></code></pre></div><h3 id="删除基本表">删除基本表
+</h3><p><mark><strong>DROP TABLE 表名 CASCADE;</strong></mark></p>
+<p><strong>级联</strong>：把表相关的依赖对象（比如视图）一并删除</p>
+<p><mark><strong>DROP TABLE 表名 RESTRICT;</strong></mark></p>
+<p><strong>限制</strong>：如果此表被其他表依赖（外码）或者有视图等，拒绝被删除</p>
+<h2 id="索引">索引
+</h2><h3 id="建立索引">建立索引
+</h3><h4 id="建立唯一索引">建立唯一索引
+</h4><p><strong><mark>CREATE UNIQUE INDEX 索引名 ON 表名(列名1 次序,列名n 次序);</mark></strong></p>
+<p><strong>唯一索引</strong> 是关于<strong>数据值是否唯一</strong>的，它强制数据的唯一性，并帮助快速查找特定值</p>
+<p>eg.为表TAB1按照学号升序和时间降序建立唯一的索引：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">UNIQUE</span> <span style="color:#c678dd">INDEX</span> <span style="color:#e06c75">NewIndex</span> <span style="color:#c678dd">ON</span> <span style="color:#e06c75">TAB1</span>(<span style="color:#e06c75">Nu</span> <span style="color:#c678dd">ASC</span>,<span style="color:#e06c75">Time</span> <span style="color:#c678dd">DESC</span>);
+</span></span></code></pre></div><p><strong>ASC</strong>：asceding，<strong>升序</strong>
+<strong>DESC</strong>：descending，<strong>降序</strong></p>
+<h4 id="建立聚簇索引">建立聚簇索引
+</h4><p><strong><mark>CREATE CLUSTER INDEX 索引名 ON 表名(列名1 次序,列名n 次序);</mark></strong></p>
+<p><strong>聚簇索引</strong> 是关于<strong>数据如何物理存储</strong>的，它把数据和索引紧密地绑定在一起，让查找和范围查询非常快</p>
+<h4 id="重命名索引">重命名索引
+</h4><p><strong><mark>ALTER INDEX 旧索引名 RENAME TO 新索引名;</mark></strong></p>
+<p>eg.把TAB1表的NewIndex索引重命名为OldIndex：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">INDEX</span> <span style="color:#e06c75">NewIndex</span> <span style="color:#c678dd">RENAME</span> <span style="color:#c678dd">TO</span> <span style="color:#e06c75">OldIndex</span>;
+</span></span></code></pre></div><h4 id="删除索引">删除索引
+</h4><p><strong><mark>DROP INDEX 索引名;</mark></strong></p>
+<h2 id="查询数据select语句">查询数据&ndash;SELECT语句
+</h2><h3 id="一般格式">一般格式
+</h3><p><mark><strong>SELECT ALL/DISTINCT 目标列表达式</strong></mark></p>
+<p><mark><strong>FROM 表名/视图名</strong></mark></p>
+<p><mark><strong>WHERE 条件表达式</strong></mark></p>
+<p><mark><strong>GROUP BY 列名 HAVING 条件表达式</strong></mark></p>
+<p><mark><strong>ORDER BY 列名 次序;</strong></mark></p>
+<h3 id="select-目标列表达式">SELECT 目标列表达式
+</h3><h4 id="查询指定的列">查询指定的列
+</h4><p><strong><mark>SELECT 列名1，列名n</mark></strong></p>
+<p>eg.查询TAB1的Ch列和Nu列：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">Nu</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span></code></pre></div><h4 id="查询全部的列">查询全部的列
+</h4><p><strong><mark>SELECT *</mark></strong></p>
+<p>eg.查询TAB1的全部记录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span></code></pre></div><h4 id="查询计算后的值">查询计算后的值
+</h4><p><strong><mark>SELECT 表达式</mark></strong></p>
+<p><strong>表达式可以是算术表达式（+、-&hellip;)，字符串常量，函数等等</strong></p>
+<p>eg.查询TAB1里面所有Grade减去2的值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span><span style="color:#56b6c2">-</span><span style="color:#d19a66">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span></code></pre></div><h4 id="改变查询结果的列标题">改变查询结果的列标题
+</h4><p><strong><mark>SELECT 列名 别名</mark></strong></p>
+<p>eg.查询TAB1里面的Ch列和Nu列，在结果里面使用Chinese和Num显示</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span> <span style="color:#e06c75">Chinese</span>,<span style="color:#e06c75">Nu</span> <span style="color:#e5c07b">Number</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span></code></pre></div><h4 id="去除查询结果的重复行">去除查询结果的重复行
+</h4><p><strong><mark>SELECT DISTINCT 列名</mark></strong></p>
+<p><strong>如果没有使用DISTINCT，默认为ALL</strong></p>
+<h3 id="聚集函数">聚集函数
+</h3><p><span style="color:red;font-size:18px"><strong>聚集函数只处理非空值</strong></span></p>
+<p><span style="color:red;font-size:18px"><strong>聚集函数只能用于SELECT语句和CROUP BY中的HAVING子句</strong></span></p>
+<h4 id="统计元组个数">统计元组个数
+</h4><p><mark><strong>COUNT(*)</strong></mark></p>
+<p><strong>某个元组的一个或者部分取空值的时候，不影响统计结果</strong></p>
+<p>eg.查询TAB1里面的总数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">COUNT</span>(<span style="color:#56b6c2">*</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span></code></pre></div><h4 id="统计某一列值的个数">统计某一列值的个数
+</h4><p><strong><mark>COUNT(DISTINCT/ALL 列名)</mark></strong></p>
+<p><strong>指定DISTINCT会去重，NULL不计入总数</strong></p>
+<h4 id="计算某一列值的平均数该列必须为数值型">计算某一列值的平均数（该列必须为数值型）
+</h4><p><strong><mark>AVG(DISTINCT/ALL 列名)</mark></strong></p>
+<p>eg.查询TAB1里面的Grade平均值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">AVG</span>(<span style="color:#c678dd">ALL</span> <span style="color:#e06c75">Grade</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span></code></pre></div><h4 id="计算某一列值的总和该列必须为数值型">计算某一列值的总和（该列必须为数值型）
+</h4><p><strong><mark>SUM(DISTINCT/ALL 列名)</mark></strong></p>
+<h4 id="计算某一列值的最大值最小值">计算某一列值的最大值/最小值
+</h4><p><strong><mark>MAX/MIN(DISTINCT/ALL 列名)</mark></strong></p>
+<h3 id="where-条件表达式">WHERE 条件表达式
+</h3><h4 id="比较大小">比较大小
+</h4><p><strong><mark>WHERE 列名 运算式</mark></strong></p>
+<p><strong>==常用运算符：=	&gt;	&lt;	&gt;=	&lt;=	!=/&lt;&gt;	!&gt;	!&lt;==</strong></p>
+<p>eg.查询TAB1里面所有三年级（Grade=3）的学生的姓名：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>;
+</span></span></code></pre></div><p>eg.查询TAB1里面所有学号2300开头学生（Nu&gt;23000）的学生的年级：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;</span><span style="color:#d19a66">23000</span>;
+</span></span></code></pre></div><h4 id="确定范围">确定范围
+</h4><p><mark><strong>WHERE 列名 BETWEEN 最小值 AND 最大值</strong></mark></p>
+<p><mark><strong>WHERE 列名 NOT BETWEEN 最小值 AND 最大值</strong></mark></p>
+<p>eg.查询TAB1里面年级在1到3之间的学生的姓名：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span> <span style="color:#c678dd">BETWEEN</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">AND</span> <span style="color:#d19a66">3</span>;
+</span></span></code></pre></div><p>eg.查询学号不在23000到24000之间的学生的姓名：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#e06c75">Nu</span> <span style="color:#c678dd">BETWEEN</span> <span style="color:#d19a66">23000</span> <span style="color:#c678dd">AND</span> <span style="color:#d19a66">24000</span>;
+</span></span></code></pre></div><h4 id="确定集合">确定集合
+</h4><p><mark><strong>WHERE 列名 IN (&lsquo;列值1&rsquo;,&lsquo;列值n&rsquo;)</strong></mark></p>
+<p><mark><strong>WHERE 列名 NOT IN (&lsquo;列值1&rsquo;,&lsquo;列值n&rsquo;)</strong></mark></p>
+<p>eg.查询学号不是23001也不是23002的学生年级：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">IN</span> (<span style="color:#98c379">&#39;23001&#39;</span>,<span style="color:#98c379">&#39;23002&#39;</span>);
+</span></span></code></pre></div><p><strong>相当于多重条件查询的=语句</strong></p>
+<h4 id="字符匹配">字符匹配
+</h4><p><strong><span style="color:orange">百分号 % </span>	表示任意长度的字符串(类似正则.*)，比如<code>a%b</code>就是以a开头，b结尾的任意长度字符串</strong></p>
+<p><strong><span style="color:orange">下划线 _ </span>	  表示单个字符，比如<code>a_ _ _b</code>（不用空格，这里方便看）是以a开头b结尾的长度为5的字符串</strong></p>
+<p><span style="color:red"><strong>在ASCII码表里，一个汉字长度为2，需要两个下划线</strong></span></p>
+<p><strong><span style="color:orange">反斜杠 \ </span> 	  表示转义，跟在 % 和 _ 前面（<code>\%</code> 、<code>\_</code>）让他们变成普通字符而非通配符</strong></p>
+<p><span style="color:red"><strong>使用 ESCAPE &lsquo;符号&rsquo; 设置转义字符，但一般使用反斜杠</strong> </span></p>
+<p><span style="color:red"><strong>根据环境决定要不要加上ESCAPE（有的数据库默认由\转义）</strong></span></p>
+<p><mark><strong>WHERE 列名 LIKE &lsquo;字符串&rsquo; ESCAPE &lsquo;\&rsquo;</strong></mark></p>
+<p><mark><strong>WHERE 列名 NOT LIKE &lsquo;字符串&rsquo; ESCAPE &lsquo;\&rsquo;</strong></mark></p>
+<p>eg.查询TAB1中姓名满足a%i_e的学生的年级：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Ch</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;a%i_e&#39;</span>;
+</span></span></code></pre></div><h4 id="空值查询">空值查询
+</h4><p><mark><strong>WHERE 列名 IS NULL</strong></mark></p>
+<p><mark><strong>WHERE 列名 IS NOT NULL</strong></mark></p>
+<p>eg.查询TAB1中缺少学号的学生的年级：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NULL</span>;
+</span></span></code></pre></div><h4 id="多重条件查询">多重条件查询
+</h4><p><mark><strong>WHERE 条件表达式1 AND 条件表达式2</strong></mark></p>
+<p><mark><strong>WHERE 条件表达式1 OR 条件表达式2</strong></mark></p>
+<p><strong>可以把AND和OR组合使用，其中AND优先级大于OR</strong></p>
+<h3 id="group-by-列名-having-条件表达式">GROUP BY 列名 HAVING 条件表达式
+</h3><p><span style="color:red;font-size:18px"><strong>用于将查询结果按某一列或多列的值分组，值相等的为一组</strong></span>
+<span style="color:red;font-size:18px"><strong>目的是细化聚集函数的作用对象，分组后聚集函数将作用于每一个组，每一组都有一个函数值</strong></span></p>
+<h4 id="group-by-列名">GROUP BY 列名
+</h4><p>eg.求TAB1表里面各个年级和对应的人数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>,<span style="color:#c678dd">COUNT</span>(<span style="color:#e06c75">Ch</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">Grade</span>;
+</span></span></code></pre></div><p><strong>以Grade分组，在每一组中求取Ch的数量</strong></p>
+<h4 id="group-by-列名-having-筛选条件">GROUP BY 列名 HAVING 筛选条件
+</h4><p><mark><strong>HAVING用于从组中选择满足条件的组</strong></mark>
+<strong><mark>WHERE用于从基本表或视图中选择满足条件的元组（注意：WHERE子句不可以接聚集函数）</mark></strong></p>
+<p>eg.求TAB1表里面各个年级和对应的人数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>,<span style="color:#c678dd">COUNT</span>(<span style="color:#e06c75">Ch</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> .<span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">Grade</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">HAVING</span> <span style="color:#e06c75">GRADE</span><span style="color:#56b6c2">&gt;=</span><span style="color:#d19a66">2</span>;
+</span></span></code></pre></div><p><strong>以Grade分组，在每一组中求取Ch的数量</strong></p>
+<h3 id="order-by-次序">ORDER BY 次序
+</h3><p><mark><strong>ORDER BY 列名1 列名n ASC</strong></mark></p>
+<p><mark><strong>ORDER BY 列名1 列名n DESC</strong></mark></p>
+<p><strong>如果不设置，默认升序（ASC）</strong></p>
+<p>eg.查询TAB1中学生的年级，按照降序排列：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">ORDER</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">GRADE</span> <span style="color:#c678dd">DESC</span>;
+</span></span></code></pre></div><h3 id="连接查询">连接查询
+</h3><h4 id="两表连接查询">两表连接查询
+</h4><p><strong><mark>WHERE 表名1.列名1 比较运算符 表名2.列名2</mark></strong></p>
+<p><strong>当列名在参与连接的各表中唯一时，可省去表名前缀</strong></p>
+<p>eg.查询TAB1和TAB2中所有数据，并在一个查询结果里面展示</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#56b6c2">*</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>.<span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>;
+</span></span></code></pre></div><p><strong>若想获得自然连接，则列举全部属性列，并去掉一个相同的属性列即可。可以将上述SELECT语句改写如下：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">Grade</span>,<span style="color:#e06c75">Cla</span>,<span style="color:#e06c75">Hom</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>  <span style="color:#7f848e">-- 去掉了其中一个Nu
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>;
+</span></span></code></pre></div><p>eg.在TAB1和TAB2里查询选了英语课，并且是三年级的学生的学号:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#98c379">&#34;tab2&#34;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;ENGLISH&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">GRADE</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>;
+</span></span></code></pre></div><h4 id="单表连接查询">单表连接查询
+</h4><p><span style="color:red;font-size:15px"><strong>通过取两个别名，对同一个表进行自连接</strong></span></p>
+<p>eg.查询cla和cla2相同的学生学号：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">FIRST</span>.<span style="color:#56b6c2">*</span>,<span style="color:#c678dd">SECOND</span>.<span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span> <span style="color:#c678dd">FIRST</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">tab2</span> <span style="color:#c678dd">SECOND</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">FIRST</span>.<span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#c678dd">SECOND</span>.<span style="color:#e06c75">CLA2</span>;
+</span></span></code></pre></div><h4 id="外连接查询">外连接查询
+</h4><p><strong>左外连接保留左表的所有记录，并尽可能地匹配右表中的记录</strong>
+<strong>右外连接保留右表的所有记录，并尽可能地匹配左表中的记录</strong></p>
+<p><span style="color:red;font-size:15px"><strong>将悬浮元组保留在结果关系中，没有属性值的位置填上NULL</strong></span></p>
+<p><strong><mark>SELECT 列名 FROM 表名1 LEFT OUTER JOIN 表名2 ON(连接条件)</mark></strong></p>
+<p><strong><mark>SELECT 列名 FROM 表名1 RIGHT OUTER JOIN 表名2 ON(连接条件)</mark></strong></p>
+<p>eg.以TAB1为主体，列出每个学生选课cla的结果</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">CLA</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">LEFT</span> <span style="color:#c678dd">OUTER</span> <span style="color:#c678dd">JOIN</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span> <span style="color:#c678dd">ON</span>(<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>);
+</span></span></code></pre></div><p><strong>此时会保留TAB1里面的所有记录，匹配对应的TAB2记录</strong></p>
+<h4 id="多表连接查询">多表连接查询
+</h4><p><strong>==WHERE 表名1.列名1 = 表名2.列名2 AND 表名2.列名2 = 表名3.列名3==</strong></p>
+<p><strong>多表连接一般是先进行两个表的连接操作，再将其连接结果与第三个表执行连接</strong></p>
+<h3 id="嵌套查询">嵌套查询
+</h3><p><strong><span style="color:orange">查询块</span>：SELECT-FROM-WHERE</strong>
+<strong><span style="color:orange">嵌套查询</span>：将一个查询块嵌套在另一个查询块的WHERE子句或者HAVING子句</strong>
+<strong>上层的查询块称为外层查询/父查询；下层的查询块称为内层查询/子查询</strong>
+<span style="color:red;font-size:18px"><strong>子查询的SELECT语句中不能使用ORDERBY子句，ORDERBY子句只能对最终查询结果排序</strong></span></p>
+<h4 id="集合判断in子查询">集合判断IN子查询
+</h4><p><mark><strong>WHERE 列名 IN (子查询)</strong></mark></p>
+<p>eg.查询alice的年级：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">GRADE</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CH</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;alice&#39;</span>;
+</span></span></code></pre></div><p>查询结果为alice在三年级，再查找三年级的其他学生：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">CH</span>,<span style="color:#e06c75">NU</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">GRADE</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>;
+</span></span></code></pre></div><p>上面两个查询结合为嵌套查询：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">CH</span>,<span style="color:#e06c75">NU</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">GRADE</span> <span style="color:#c678dd">IN</span>
+</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">GRADE</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CH</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;alice&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span></code></pre></div><p><strong>本例的子查询条件不依赖于父查询，这类子查询称为不相关子查询</strong></p>
+<h4 id="比较运算符子查询">比较运算符子查询
+</h4><p><strong><mark>WHERE 列名 比较运算符 (子查询)</mark></strong></p>
+<p><strong>当明确知道子查询结果是单个值而不是集合的时候使用</strong></p>
+<p>eg．在SC表中，找出每个学生（Sno）超过他自己选修课程平均成绩（Grade）的课程号（Cno)</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span>, <span style="color:#e06c75">Cno</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">x</span>    <span style="color:#7f848e">-- x是表 SC 的别名，又称为元组变量，可以用来表示 SC 的一个元组
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span> <span style="color:#56b6c2">&gt;=</span>
+</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">AVG</span>(<span style="color:#e06c75">Grade</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">y</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">y</span>.<span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">x</span>.<span style="color:#e06c75">Sno</span>);
+</span></span></code></pre></div><p><strong>这里必须加上WHERE y.Sno=x.Sno这个条件，此时内外对应的sno才会相同，否则求的不是单个学生的平均成绩，而是所有学生的平均成绩</strong></p>
+<p><strong>本例的子查询条件依赖于父查询，这类子查询称为相关子查询，整个查询称为相关嵌套查询</strong></p>
+<h4 id="anyall子查询">ANY/ALL子查询
+</h4><p><strong>WHERE 列名 比较运算符 ANY/ALL (子查询)</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>谓词</th>
+          <th>语义</th>
+          <th>与聚集函数或 IN 的等价转换</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>&gt;ANY</td>
+          <td>大于子查询结果中的某个值</td>
+          <td>&gt;MIN</td>
+      </tr>
+      <tr>
+          <td>&gt;ALL</td>
+          <td>大于子查询结果中的所有值</td>
+          <td>&gt;MAX</td>
+      </tr>
+      <tr>
+          <td>&lt;ANY</td>
+          <td>小于子查询结果中的某个值</td>
+          <td>&lt;MAX</td>
+      </tr>
+      <tr>
+          <td>&lt;ALL</td>
+          <td>小于子查询结果中的所有值</td>
+          <td>&lt;MIN</td>
+      </tr>
+      <tr>
+          <td>&gt;=ANY</td>
+          <td>大于等于子查询结果中的某个值</td>
+          <td>&gt;=MIN</td>
+      </tr>
+      <tr>
+          <td>&gt;=ALL</td>
+          <td>大于等于子查询结果中的所有值</td>
+          <td>&gt;=MAX</td>
+      </tr>
+      <tr>
+          <td>&lt;=ANY</td>
+          <td>小于等于子查询结果中的某个值</td>
+          <td>&lt;=MAX</td>
+      </tr>
+      <tr>
+          <td>&lt;=ALL</td>
+          <td>小于等于子查询结果中的所有值</td>
+          <td>&lt;=MIN</td>
+      </tr>
+      <tr>
+          <td>=ANY</td>
+          <td>等于子查询结果中的某个值</td>
+          <td>IN</td>
+      </tr>
+      <tr>
+          <td>=ALL</td>
+          <td>等于子查询结果中的所有值（通常无实际意义）</td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td>!=(或&lt;&gt;)ANY</td>
+          <td>不等于子查询结果中的某个值</td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td>!=(或&lt;&gt;)ALL</td>
+          <td>不等于子查询结果中的任何值</td>
+          <td>NOT IN</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>eg.查询TAB1里面三年级学生学号大于23000的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;=</span><span style="color:#c678dd">ANY</span>
+</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Nu</span>
+</span></span><span style="display:flex;"><span>	 <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#98c379">&#34;tab1&#34;</span> 
+</span></span><span style="display:flex;"><span>	 <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>
+</span></span><span style="display:flex;"><span>	);
+</span></span></code></pre></div><h4 id="exists子查询">EXISTS子查询
+</h4><p><span style="color:red;font-size:15px"><strong>EXISTS代表存在量词，对应的为NOT EXISTS</strong></span></p>
+<p><span style="color:red;font-size:15px"><strong>EXISTS谓词的子查询不返回数据，只返回逻辑&rsquo;true&rsquo;和&rsquo;false&rsquo;</strong></span></p>
+<p>eg1.在SC表中查询至少选修了1号学生选修的全部课程（Cno）的学生的学号（Sno)</p>
+<p><strong>查询学号为 x 的学生，对所有的课程 y，只要 1 号学生选修了课程 y，则 x 也选修了 y。</strong></p>
+<p><strong>令 p 表示&quot;学生 1 号选修了课程 y&quot;</strong></p>
+<p><strong>令 q 表示&quot;学生 x 选修了课程 y&quot;</strong></p>
+<p><strong>则上述查询可以表示为(∀y)p→q</strong></p>
+<p><strong>通过等价转换，可得(∀y)p→q ≡ ¬(∃y(¬(p→q))) ≡ ¬(∃y(¬(¬p∨q))) ≡ ¬∃y(p∧¬q)</strong></p>
+<p><strong>最终用 SQL 实现的表达式 ¬∃y(p∧¬q)，语义：不存在这样的课程 y，学生 1 号选修了 y，而学生 x 没有选修</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">DISTINCT</span> <span style="color:#e06c75">Sno</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">SCX</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>                            <span style="color:#7f848e">-- 由EXISTS引I出的子查询，其目标列表达式通常都用*
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">SCY</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">SCY</span>.<span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
+</span></span><span style="display:flex;"><span>         (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">SCZ</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">SCZ</span>.<span style="color:#e06c75">Sno</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">SCX</span>.<span style="color:#e06c75">Sno</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">SCZ</span>.<span style="color:#e06c75">Cno</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">SCY</span>.<span style="color:#e06c75">Cno</span>)   <span style="color:#7f848e">-- 保证内外指向相同的学生
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    );
+</span></span></code></pre></div><p>eg2.基于 SC 表，查询选修了全部课程（Course 表）的学生姓名（Student 表）</p>
+<p><strong>令 p 表示&quot;课程 x 被学生 y 选修了&quot;，则有(∀x)p ≡ ¬(∃x(¬p))，语义：查询没有任何课程是其不选修的学生 y</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sname</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">Student</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">Course</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
+</span></span><span style="display:flex;"><span>         (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">Student</span>.<span style="color:#e06c75">Sno</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">Cno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">Course</span>.<span style="color:#e06c75">Cno</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span></code></pre></div><h3 id="集合查询">集合查询
+</h3><p><span style="color:red;font-size:18px"><strong>多个SELECT语句的结果可以进行集合的并（UNION)、交（INTERSECT)、差（EXCEPT）</strong></span>
+<span style="color:red;font-size:18px"><strong>参加集合操作的各查询结果的列数必须相同，对应项的数据类型也必须相同</strong></span></p>
+<h4 id="union并操作满足前者或满足后者">UNION并操作（满足前者或满足后者）
+</h4><p><mark><strong>UNION合并查询结果时，系统会自动去掉重复元组，若需保留，则采用UNIONALL</strong></mark></p>
+<p>eg.在TAB2中查询学号大于等于23003的学生和选择了MATH科目的学生</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;=</span><span style="color:#d19a66">23003</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">UNION</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span>;
+</span></span></code></pre></div><h4 id="intersect交操作前后都满足">INTERSECT交操作（前后都满足）
+</h4><p>eg.在TAB2中查询选了MATH又选了history的学生</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;history&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;history&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTERSECT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span>;
+</span></span></code></pre></div><h4 id="except差操作满足前者不满足后者">EXCEPT差操作（满足前者，不满足后者）
+</h4><p>eg.在TAB2中查询学号大于23002的学生和选修了MATH的学生的差集</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;</span><span style="color:#d19a66">23002</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">EXCEPT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span>;
+</span></span></code></pre></div><h3 id="基于派生表的查询">基于派生表的查询
+</h3><p><span style="color:red;font-size:18px"><strong>子查询出现在FROM子句时，子查询将生成临时的派生表，成为主查询的查询对象</strong></span></p>
+<p><strong><mark>FROM (子查询) AS 别名 (属性列名1,属性列名2)</mark></strong></p>
+<p><strong>如果子查询中没有聚集函数，派生表可以不指定属性列，子查询SELECT子句后面的列名为其默认属性</strong>
+<strong>AS可以省略，但必须为派生表关系指定一个别名</strong></p>
+<p>eg1.找出每个学生超过他自己选修课程平均成绩的课程号</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span>, <span style="color:#e06c75">Cno</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span>, 
+</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span>, <span style="color:#c678dd">Avg</span>(<span style="color:#e06c75">Grade</span>) 
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">Sno</span>
+</span></span><span style="display:flex;"><span>    ) 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span> <span style="color:#e06c75">Avg_sc</span>(<span style="color:#e06c75">avg_sno</span>, <span style="color:#e06c75">avg_grade</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">SC</span>.<span style="color:#e06c75">Sno</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Avg_sc</span>.<span style="color:#e06c75">avg_sno</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">SC</span>.<span style="color:#e06c75">Grade</span><span style="color:#56b6c2">&gt;</span> <span style="color:#56b6c2">=</span><span style="color:#e06c75">Avg_sc</span>.<span style="color:#e06c75">avg_grade</span>;
+</span></span></code></pre></div><p>eg2.查询所有选修了1号课程的学生姓名</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sname</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">Student</span>, 
+</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Cno</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;1&#39;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span> <span style="color:#e06c75">SC1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Student</span>.<span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">SC1</span>.<span style="color:#e06c75">Sno</span>;
+</span></span></code></pre></div><h2 id="插入数据insert语句">插入数据&ndash;INSERT语句
+</h2><h3 id="插入元组">插入元组
+</h3><h4 id="一般格式-1">一般格式
+</h4><p><mark><strong>INSERT</strong></mark></p>
+<p><mark><strong>INTO 表名(列名1,列名n)</strong></mark></p>
+<p><mark><strong>VALUES(常量1,常量n);</strong></mark>    //字符串常量要用单引号&rsquo;&lsquo;括起来</p>
+<h4 id="假设现在有tab1表有c1到c4四列其中c4列是字符串常量"><span style="font-size:20px;color:red"><strong>假设现在有TAB1表，有C1到C4四列，其中C4列是字符串常量：</strong></span>
+</h4><h4 id="情况1明确给出新增元组要在哪些属性上赋值插入数据包含全部属性列">情况1：明确给出新增元组要在哪些属性上赋值（插入数据包含全部属性列）
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>,<span style="color:#e06c75">C4</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span>,<span style="color:#98c379">&#39;4&#39;</span>);
+</span></span></code></pre></div><h4 id="情况2明确给出新增元组要在哪些属性上赋值插入数据只包含部分属性列">情况2：明确给出新增元组要在哪些属性上赋值（插入数据只包含部分属性列）
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span>)
+</span></span></code></pre></div><p><strong>这种情况下C4列会被赋值NULL，如果C4有约束条件NOT NULL则会报错</strong></p>
+<h4 id="情况3仅指出要在tab1表上插入元组插入数据包含全部属性列">情况3：仅指出要在TAB1表上插入元组（插入数据包含全部属性列）
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span><span style="color:#98c379">&#39;4&#39;</span>);
+</span></span></code></pre></div><p><strong>这种情况表示要在全部属性列上赋值，插入数据顺序必须和列的顺序对应</strong></p>
+<h4 id="情况4仅指出要在tab1表上插入元组插入数据只包含部分属性列">情况4：仅指出要在TAB1表上插入元组（插入数据只包含部分属性列）
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span>,<span style="color:#c678dd">NULL</span>);
+</span></span></code></pre></div><p><strong>这种情况必须明确未赋值的属性列为NULL</strong></p>
+<h3 id="插入子查询结果">插入子查询结果
+</h3><h4 id="一般格式-2">一般格式
+</h4><p><mark><strong>INSERT</strong></mark></p>
+<p><mark><strong>INTO TAB1(属性列1,属性列2)</strong></mark></p>
+<p><mark><strong>子查询;</strong></mark></p>
+<p>eg.假设现有TAB1表（如上），并按C1列分组求C2列的平均值，并存入TAB2表（其中TAB2表的C1列存放
+C1，avg_C2列存放C2列的均值)</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB2</span> (<span style="color:#e06c75">C1</span>, <span style="color:#e06c75">avg_C2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>, <span style="color:#c678dd">AVG</span>(<span style="color:#e06c75">C2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">FROMTAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">C1</span>;
+</span></span></code></pre></div><h2 id="修改数据update语句">修改数据&ndash;UPDATE语句
+</h2><h4 id="一般格式-3">一般格式
+</h4><p><mark><strong>UPDATE 表名</strong></mark></p>
+<p>==<strong>SET 列名1=表达式1,列名n=表达式n</strong><mark></p>
+<p></mark><strong>WHERE 条件;</strong>==</p>
+<p><strong>WHERE语句若省略，则表示修改表中所有元组</strong></p>
+<h4 id="情况1修改某一个元组的值">情况1：修改某一个元组的值
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">UPDATE</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#e06c75">C4</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>;
+</span></span></code></pre></div><h4 id="情况2修改多个元组的值">情况2：修改多个元组的值
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">UPDATE</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#e06c75">C3</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">C3</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">1</span>;
+</span></span></code></pre></div><h4 id="情况3带子查询的修改语句">情况3：带子查询的修改语句
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">UPDATE</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#e06c75">C4</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span> <span style="color:#c678dd">IN</span>
+</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">avg_C2</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span></code></pre></div><h2 id="删除语句delete语句">删除语句&ndash;DELETE语句
+</h2><h4 id="一般格式-4">一般格式
+</h4><p><mark><strong>DELETE</strong></mark></p>
+<p><mark><strong>FROM 表名</strong></mark></p>
+<p><mark><strong>WHERE 条件;</strong></mark></p>
+<p><strong>WHERE语句若省略，则表示删除表中所有元组</strong></p>
+<h4 id="情况1删除某一个元组的值">情况1：删除某一个元组的值
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">DELETE</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>;
+</span></span></code></pre></div><h4 id="情况2修改多个元组的值-1">情况2：修改多个元组的值
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">DELETE</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span></code></pre></div><h4 id="情况3带子查询的修改语句-1">情况3：带子查询的修改语句
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">DELETE</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span> <span style="color:#c678dd">IN</span>
+</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB2</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">avg_C2</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span></code></pre></div><h2 id="view-视图">VIEW 视图
+</h2><h3 id="建立视图">建立视图
+</h3><h4 id="一般格式-5">一般格式
+</h4><p><mark><strong>CREATE VIEW 视图名 (列名1,列名n)</strong></mark></p>
+<p><mark><strong>AS 子查询</strong></mark></p>
+<p><mark><strong>WITH CHECK OPTION;</strong></mark></p>
+<p><strong>若省略视图名后的列名，则该视图由子查询中SELECT的目标列字段组成</strong></p>
+<p><strong>若添加WITH句，则表示对视图进行增删改时要满足子查询中的条件表达式</strong></p>
+<p><strong><span style="color:RED">在以下情况中必须明确指定组成视图的列名：</span></strong>
+<strong>1.某个目标列不是单纯的列名，而是聚集函数或列表达式</strong>
+<strong>2.多表连接时选出了几个同名列作为视图的字段</strong>
+<strong>3.需要在视图中为某个列启用新的更合适的名字</strong></p>
+<p><strong><span style="color:orange">行列子集视图</span>：由单个基本表导出，仅去掉了基本表的某些行和某些列，但保留了主码</strong></p>
+<p><strong>若某些视图是建立在另一个表的全部属性列上的（视图与基本表的各列是一一对应的）那么当修改基本表的结构时，基本表和视图的映像关系会被破坏。这种情况最好在修改基本表后删除该视图，然后重建该视图</strong></p>
+<h4 id="情况1建立完全视图">情况1：建立完全视图
+</h4><p>eg1.建立C1为1时TAB1的视图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>,<span style="color:#e06c75">C4</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>;
+</span></span></code></pre></div><h4 id="情况2建立带有增删改条件的视图">情况2：建立带有增删改条件的视图
+</h4><p>eg2.建立C4为4时TAB1的视图，并且以后每次增删改时都要满足C4=4</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>,<span style="color:#e06c75">C4</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C4</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;4&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WITH</span> <span style="color:#c678dd">CHECK</span> <span style="color:#c678dd">OPTION</span>;
+</span></span></code></pre></div><h4 id="情况3由视图新建视图">情况3：由视图新建视图
+</h4><p>eg3.建立在一个或多个已定义的视图上</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB3</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">V_TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C2</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span>;
+</span></span></code></pre></div><h4 id="情况4带有派生数据的视图">情况4：带有派生数据的视图
+</h4><p><strong>减少冗余数据，定义基本表时一般只存放基本数据。当需要使用计算得出的派生数据时，可以设置在视图</strong>
+<strong>中的派生属性列上，也称为虚拟列。带虚拟列的视图也称为带表达式的视图</strong></p>
+<p>eg4.建立有派生数据的视图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB4</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">new_C2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#d19a66">10</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">C2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span></code></pre></div><h4 id="情况5带有聚集函数和group-by的分组视图">情况5：带有聚集函数和GROUP BY的分组视图
+</h4><p>eg5.建立包含聚集函数的分组视图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB5</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">avg_C2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#c678dd">AVG</span>(<span style="color:#e06c75">C2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">C1</span>;
+</span></span></code></pre></div><h3 id="删除视图">删除视图
+</h3><p><strong><mark>DROP VIEW 视图名 CASCADE;</mark></strong></p>
+<p><strong>如果使用了CASCADE级联删除语句，则将把该视图导出的所有视图一并删除</strong></p>
+<h3 id="查询和更新视图">查询和更新视图
+</h3><p><strong>视图定义后，对视图进行查询和更新的语句和语法与基本表相同</strong>
+<strong>视图的查询与更新最终都会转换为对基本表的查询和更新，这一过程也被称为视图消解</strong>
+<strong>一般来说，行列子集视图的查询和更新都可以顺利转换，其他则不一定</strong></p>
+<h2 id="空值">空值
+</h2><h3 id="判断属性为空值">判断属性为空值
+</h3><p><strong>这部分和WHERE语句里面空值判断一样啦</strong></p>
+<p><mark><strong>属性 IS NULL;</strong></mark></p>
+<p><mark><strong>属性 IS NOT NULL;</strong></mark></p>
+<p>eg.查找TAB1中名字为空的学生：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Ch</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NULL</span>;
+</span></span></code></pre></div><h3 id="空值的运算">空值的运算
+</h3><h4 id="算数运算">算数运算
+</h4><p><span style="color:red"><strong>空值与另一个值的算术运算结果为空值</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">+</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 NULL
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">10</span> <span style="color:#56b6c2">/</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 NULL
+</span></span></span></code></pre></div><h4 id="比较运算">比较运算
+</h4><p><span style="color:red"><strong>空值与另一个值的比较运算结果为 UNKNOWN</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 UNKNOWN
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">&lt;&gt;</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 UNKNOWN
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 UNKNOWN
+</span></span></span></code></pre></div><h4 id="在查询语句中的处理">在查询语句中的处理
+</h4><p><span style="color:red"><strong>在查询语句中，只有使WHERE和HAVING子句的选择条件为TRUE的元组才会被选出作为输出结果（即不包括UNKNOWN的情况)</strong></span></p>
+<p>eg1:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">employees</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">salary</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">50000</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">commission</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">NULL</span>;
+</span></span></code></pre></div><p><strong>这个查询会返回所有工资大于 50000 且佣金不为 NULL 的员工记录</strong></p>
+<p>eg2:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">employees</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">commission</span> <span style="color:#56b6c2">&lt;&gt;</span> <span style="color:#d19a66">0</span>; 
+</span></span></code></pre></div><p><strong>查询过程中commission可能为NULL，这部分运算后产生UNKNOWN，对应元组会被忽略</strong></p>
+<p><strong>要让所有都能被输出，最好做如下改动：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">employees</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">commission</span> <span style="color:#56b6c2">&lt;&gt;</span> <span style="color:#d19a66">0</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">commission</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NULL</span>;
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/sql/">SQL</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-06-03
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wireshark&amp;tshark简易指北</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+  
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+     --toc-link-color: #000;  
+     --toc-link-active-color: orange;  
+    }
+  
+     
+     
+     
+    #TableOfContents > ul,
+    ol {
+     ul,
+     ol {
+      display: none;  
+     }
+  
+     .open {
+      display: block;  
+     }
+    }
+  
+    #TableOfContents a {
+     color: var(--toc-link-color);  
+     text-decoration: none;  
+    }
+  
+    #TableOfContents a.active {
+     color: var(--toc-link-active-color);  
+     font-weight: normal;  
+    }
+  
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+  
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+  
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+  
+    .code-show {
+     max-height: none !important;  
+    }
+  
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+  
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+  
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+  
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+  
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+  
+     
+     btn.style.display = "block";
+    }
+  
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+  
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+  
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+  
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+  
+    
+    initScrollTop();
+  
+     
+     
+     
+    function initTocHide() {
+     let toc = document.querySelector(".widget--toc");
+     if (!toc) {
+      return;
+     }
+  
+     window.addEventListener('scroll', function() {
+      
+      let openUl = document.querySelectorAll(".open");
+      if (openUl.length > 0) {
+       openUl.forEach((ul) => {
+        ul.classList.remove("open");
+       });
+      }
+  
+      
+      let currentLi = document.querySelector(".active-class");
+      if (currentLi) {
+       if (currentLi.children.length > 1) {
+        currentLi.children[1].classList.add("open"); 
+       }
+       let ul = currentLi.parentElement;
+       do {
+        ul.classList.add("open"); 
+        ul = ul.parentElement.parentElement;
+       } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
+      }
+     });
+    }
+    initTocHide();
+  
+     
+     
+     
+    function initTocHighlight() {
+     const tocLinks = document.querySelectorAll('#TableOfContents a');
+     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+  
+     if (tocLinks.length === 0 || headings.length === 0) {
+      return;
+     }
+  
+     function getOffsetTop(element) {
+      let offsetTop = 0;
+      while (element) {
+       offsetTop += element.offsetTop;
+       element = element.offsetParent;
+      }
+      return offsetTop;
+     }
+  
+     function isElementInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+       rect.top >= 0 &&
+       rect.left >= 0 &&
+       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+     }
+  
+     function setActiveTocLink() {
+      const scrollPositionTop = window.scrollY;
+      const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
+      let activeLink = null;
+  
+      for (let i = 0; i < headings.length; i++) {
+       const currentHeading = headings[i];
+       const currentHeadingTop = getOffsetTop(currentHeading);
+       const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
+  
+       let nextHeadingTop = Infinity; 
+       if (i < headings.length - 1) {
+        nextHeadingTop = getOffsetTop(headings[i + 1]);
+       }
+  
+       
+       if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
+        activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
+        break; 
+       }
+      }
+  
+      
+      tocLinks.forEach(link => {
+       link.classList.remove('active');
+      });
+  
+      if (activeLink) {
+       activeLink.classList.add('active'); 
+       
+       let parentLi = activeLink.parentNode;
+       while (parentLi && parentLi.tagName === 'LI') {
+        let siblingUl = parentLi.querySelector('ul, ol');
+        if (siblingUl && !siblingUl.classList.contains('open')) {
+         siblingUl.classList.add('open');
+        }
+        parentLi = parentLi.parentNode;
+       }
+      }
+     }
+  
+     function expandTocOnView() {
+      headings.forEach(heading => {
+       if (isElementInViewport(heading)) {
+        const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
+        if (correspondingLink) {
+         let parentLi = correspondingLink.parentNode;
+         while (parentLi && parentLi.tagName === 'LI') {
+          let siblingUl = parentLi.querySelector('ul, ol');
+          if (siblingUl && !siblingUl.classList.contains('open')) {
+           siblingUl.classList.add('open');
+          }
+          parentLi = parentLi.parentNode;
+         }
+        }
+       }
+      });
+     }
+  
+     window.addEventListener('scroll', setActiveTocLink); 
+     window.addEventListener('scroll', expandTocOnView); 
+     
+     setActiveTocLink();
+     expandTocOnView();
+    }
+    initTocHighlight();
+  
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+  
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+  
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>
