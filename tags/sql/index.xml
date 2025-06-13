@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Fri, 13 Jun 2025 22:23:51 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/sql/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 14 Jun 2025 00:41:50 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/sql/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>进行一个SQL速速的通</title>
         <link>https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/</link>
         <pubDate>Tue, 03 Jun 2025 01:14:02 +0800</pubDate>
@@ -123,6 +123,72 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h3 id=&#34;特殊完整性约束条件断言&#34;&gt;特殊完整性约束条件——断言
+&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:18px&#34;&gt;&lt;strong&gt;相较于列级的CHECK语句，断言能指定更一般的约束&lt;/strong&gt;&lt;/SPAN&gt;&lt;/p&gt;
+&lt;h4 id=&#34;创建断言&#34;&gt;创建断言
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;CREATE ASSERTION 断言名 CHECK字句;&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg.限制A课程最多60人选修：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ASSERTION&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ASSE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;CHECK&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;60&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            					     &lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;COUNT&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;) 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                     &lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB1&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;TAB2&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                     &lt;span style=&#34;color:#c678dd&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB1&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;NUM&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;TAB2&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;NUM&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AND&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB2&lt;/span&gt;.&lt;span style=&#34;color:#c678dd&#34;&gt;CLASS&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;);  &lt;span style=&#34;color:#7f848e&#34;&gt;-- 此处具体操作原理往后看
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除断言&#34;&gt;删除断言
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;DROP ASSERTION 断言名;&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;特殊完整性约束条件触发器&#34;&gt;特殊完整性约束条件——触发器
+&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:18px&#34;&gt;&lt;strong&gt;触发器是用户定义在关系表上的一类由事件驱动的特殊过程&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;表的拥有者才能在表上创建触发器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;触发器只能定义在基本表上，不能定义在视图上&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;定义触发器&#34;&gt;定义触发器
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;CREATE TRIGGER 触发器名&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;{BEFORE|AFTER} 触发事件 ON 表名&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;REFERENCING NEW|OLD ROW AS 变量&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;FOR EACH {ROW|STATEMENT}&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;[WHEN 触发条件]触发动作体&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;触发事件&lt;/strong&gt;：INSERT DELETE UPDATE 或者他们的组合&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	 还可以UPDATE OF&amp;lt;触发列1,...&amp;gt;，即进一步指明修改哪些列时激活触发器
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;BEFORE/AFTER&lt;/strong&gt;：触发时机，表示在触发事件的操作执行之前激活触发器&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ROW/STATEMENT&lt;/strong&gt;：指明是行级/语句级触发器，行级有多少行就触发多少次，语句级只触发一次&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;触发条件&lt;/strong&gt;：只有触发条件为真时才执行动作体，省略WHEN则立即执行动作体&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;触发动作体&lt;/strong&gt;：行级可以使用NEW/OLD引用事件之后的新值和事件之前的旧值，语句级不行&lt;/p&gt;
+&lt;p&gt;eg.对TAB1的Grade属性修改时，若增加了10%，则将操作记录在TAB2(Name,OldGrade,NewGrade)中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CERATE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;TRIGGER&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB1_T&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;AFTER&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;UPDATE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;OF&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ON&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;REFERENCING&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;OLD&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;NEW&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;NewTuple&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;FOR&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;EACH&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ROW&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;WHEN&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;NewTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;.&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;INTO&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB2&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;OldGrade&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;NewGrade&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;VALUES&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;NewTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果触发器内有多个语句，要定义新的定界符（不常用的），并使用BEGIN和END包裹：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;-- 1. 将定界符从 ; 改为 //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;DELIMITER&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;//&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;-- 2. 定义包含多条语句的触发器
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;TRIGGER&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB1_T&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;AFTER&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;UPDATE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;OF&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ON&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;REFERENCING&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;OLD&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;NEW&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;NewTuple&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;FOR&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;EACH&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ROW&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;BEGIN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;-- 检查条件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;IF&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;NewTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;.&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt;) &lt;span style=&#34;color:#c678dd&#34;&gt;THEN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#7f848e&#34;&gt;-- 这是块内的第一条语句，用 ; 结尾
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;INTO&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB2&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;OldGrade&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;NewGrade&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;VALUES&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;OldTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;NewTuple&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Grade&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;END&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;IF&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;-- IF语句也需要用 ; 结尾
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;-- 3. 使用新的定界符 // 来结束整个 CREATE TRIGGER 命令
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;END&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;//&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;-- 4. 将定界符改回默认的 ;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;DELIMITER&lt;/span&gt; ;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;激活触发器&#34;&gt;激活触发器
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;多个触发器执行顺序：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;执行BEFORE触发器 -&amp;gt; 激活触发器的SQL语句 -&amp;gt; 执行AFTER触发器&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;h4 id=&#34;删除触发器&#34;&gt;删除触发器
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;DROP TRIGGER 触发器名 ON 表名;&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;定义基本表&#34;&gt;定义基本表
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;CREATE TABLE 表名&lt;/strong&gt;&lt;/mark&gt;
 &lt;mark&gt;&lt;strong&gt;(列名1 数据类型 列级完整性约束条件,&lt;/strong&gt;&lt;/mark&gt;

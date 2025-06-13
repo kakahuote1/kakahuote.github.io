@@ -10,7 +10,7 @@
 <meta property='og:description' content="学完了就能去学怎么注入了">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-06-13T22:23:51&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-06-14T00:41:50&#43;08:00'/>
 <meta name="twitter:title" content="进行一个SQL速速的通">
 <meta name="twitter:description" content="学完了就能去学怎么注入了">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -390,6 +390,19 @@
             <li><a href="#表级完整性约束条件">表级完整性约束条件</a></li>
           </ol>
         </li>
+        <li><a href="#特殊完整性约束条件断言">特殊完整性约束条件——断言</a>
+          <ol>
+            <li><a href="#创建断言">创建断言</a></li>
+            <li><a href="#删除断言">删除断言</a></li>
+          </ol>
+        </li>
+        <li><a href="#特殊完整性约束条件触发器">特殊完整性约束条件——触发器</a>
+          <ol>
+            <li><a href="#定义触发器">定义触发器</a></li>
+            <li><a href="#激活触发器">激活触发器</a></li>
+            <li><a href="#删除触发器">删除触发器</a></li>
+          </ol>
+        </li>
         <li><a href="#定义基本表">定义基本表</a></li>
         <li><a href="#在模式中定义表">在模式中定义表</a>
           <ol>
@@ -649,7 +662,7 @@
 
 
                <time>
-                   更新时间：2025-06-13
+                   更新时间：2025-06-14
                </time>
            </div></footer>
     
@@ -772,6 +785,72 @@
       </tr>
   </tbody>
 </table></div>
+<h3 id="特殊完整性约束条件断言">特殊完整性约束条件——断言
+</h3><p><span style="color:red;font-size:18px"><strong>相较于列级的CHECK语句，断言能指定更一般的约束</strong></SPAN></p>
+<h4 id="创建断言">创建断言
+</h4><p><strong><mark>CREATE ASSERTION 断言名 CHECK字句;</mark></strong></p>
+<p>eg.限制A课程最多60人选修：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">ASSERTION</span> <span style="color:#e06c75">ASSE</span> <span style="color:#c678dd">CHECK</span>(<span style="color:#d19a66">60</span><span style="color:#56b6c2">&gt;=</span>
+</span></span><span style="display:flex;"><span>                            					     <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">COUNT</span>(<span style="color:#56b6c2">*</span>) 
+</span></span><span style="display:flex;"><span>                                                     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">TAB2</span> 
+</span></span><span style="display:flex;"><span>                                                     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">NUM</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">NUM</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">TAB2</span>.<span style="color:#c678dd">CLASS</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;A&#34;</span>);  <span style="color:#7f848e">-- 此处具体操作原理往后看
+</span></span></span></code></pre></div><h4 id="删除断言">删除断言
+</h4><p><strong><mark>DROP ASSERTION 断言名;</mark></strong></p>
+<h3 id="特殊完整性约束条件触发器">特殊完整性约束条件——触发器
+</h3><p><span style="color:red;font-size:18px"><strong>触发器是用户定义在关系表上的一类由事件驱动的特殊过程</strong></span></p>
+<p><strong>表的拥有者才能在表上创建触发器</strong></p>
+<p><strong>触发器只能定义在基本表上，不能定义在视图上</strong></p>
+<h4 id="定义触发器">定义触发器
+</h4><p><mark><strong>CREATE TRIGGER 触发器名</strong></mark></p>
+<p><mark><strong>{BEFORE|AFTER} 触发事件 ON 表名</strong></mark></p>
+<p><mark><strong>REFERENCING NEW|OLD ROW AS 变量</strong></mark></p>
+<p><mark><strong>FOR EACH {ROW|STATEMENT}</strong></mark></p>
+<p><mark><strong>[WHEN 触发条件]触发动作体</strong></mark></p>
+<p><strong>触发事件</strong>：INSERT DELETE UPDATE 或者他们的组合</p>
+<pre><code>	 还可以UPDATE OF&lt;触发列1,...&gt;，即进一步指明修改哪些列时激活触发器
+</code></pre>
+<p><strong>BEFORE/AFTER</strong>：触发时机，表示在触发事件的操作执行之前激活触发器</p>
+<p><strong>ROW/STATEMENT</strong>：指明是行级/语句级触发器，行级有多少行就触发多少次，语句级只触发一次</p>
+<p><strong>触发条件</strong>：只有触发条件为真时才执行动作体，省略WHEN则立即执行动作体</p>
+<p><strong>触发动作体</strong>：行级可以使用NEW/OLD引用事件之后的新值和事件之前的旧值，语句级不行</p>
+<p>eg.对TAB1的Grade属性修改时，若增加了10%，则将操作记录在TAB2(Name,OldGrade,NewGrade)中</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e06c75">CERATE</span> <span style="color:#c678dd">TRIGGER</span> <span style="color:#e06c75">TAB1_T</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AFTER</span> <span style="color:#c678dd">UPDATE</span> <span style="color:#c678dd">OF</span> <span style="color:#e06c75">Grade</span> <span style="color:#c678dd">ON</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">REFERENCING</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">OLD</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">OldTuple</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">NEW</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">NewTuple</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FOR</span> <span style="color:#c678dd">EACH</span> <span style="color:#c678dd">ROW</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHEN</span>(<span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span><span style="color:#56b6c2">&gt;=</span><span style="color:#d19a66">1</span>.<span style="color:#d19a66">1</span><span style="color:#56b6c2">*</span><span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">INSERT</span> <span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Name</span>,<span style="color:#e06c75">OldGrade</span>,<span style="color:#e06c75">NewGrade</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">VALUES</span>(<span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Name</span>,<span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>,<span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span>);
+</span></span></code></pre></div><p>如果触发器内有多个语句，要定义新的定界符（不常用的），并使用BEGIN和END包裹：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#7f848e">-- 1. 将定界符从 ; 改为 //
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">DELIMITER</span> <span style="color:#56b6c2">//</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">-- 2. 定义包含多条语句的触发器
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">TRIGGER</span> <span style="color:#e06c75">TAB1_T</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">AFTER</span> <span style="color:#c678dd">UPDATE</span> <span style="color:#c678dd">OF</span> <span style="color:#e06c75">Grade</span> <span style="color:#c678dd">ON</span> <span style="color:#e06c75">TAB1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">REFERENCING</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">OLD</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">OldTuple</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">NEW</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">NewTuple</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FOR</span> <span style="color:#c678dd">EACH</span> <span style="color:#c678dd">ROW</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">BEGIN</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">-- 检查条件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">IF</span> (<span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span> <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">1</span>.<span style="color:#d19a66">1</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>) <span style="color:#c678dd">THEN</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">-- 这是块内的第一条语句，用 ; 结尾
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">INSERT</span> <span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Name</span>, <span style="color:#e06c75">OldGrade</span>, <span style="color:#e06c75">NewGrade</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">VALUES</span>(<span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Name</span>, <span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>, <span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">END</span> <span style="color:#c678dd">IF</span>; <span style="color:#7f848e">-- IF语句也需要用 ; 结尾
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">-- 3. 使用新的定界符 // 来结束整个 CREATE TRIGGER 命令
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">END</span> <span style="color:#56b6c2">//</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">-- 4. 将定界符改回默认的 ;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">DELIMITER</span> ;
+</span></span></code></pre></div><h4 id="激活触发器">激活触发器
+</h4><p><mark><strong>多个触发器执行顺序：</strong></mark></p>
+<p><mark><strong>执行BEFORE触发器 -&gt; 激活触发器的SQL语句 -&gt; 执行AFTER触发器</strong></mark></p>
+<h4 id="删除触发器">删除触发器
+</h4><p><strong><mark>DROP TRIGGER 触发器名 ON 表名;</mark></strong></p>
 <h3 id="定义基本表">定义基本表
 </h3><p><mark><strong>CREATE TABLE 表名</strong></mark>
 <mark><strong>(列名1 数据类型 列级完整性约束条件,</strong></mark>
@@ -1458,7 +1537,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
 
         <span>
-            最后更新于 2025-06-13
+            最后更新于 2025-06-14
         </span>
     </section></footer>
 
