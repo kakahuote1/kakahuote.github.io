@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Tue, 03 Jun 2025 01:22:59 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 13 Jun 2025 22:23:51 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>进行一个SQL速速的通</title>
         <link>https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/</link>
         <pubDate>Tue, 03 Jun 2025 01:14:02 +0800</pubDate>
@@ -261,7 +261,7 @@
 &lt;h3 id=&#34;where-条件表达式&#34;&gt;WHERE 条件表达式
 &lt;/h3&gt;&lt;h4 id=&#34;比较大小&#34;&gt;比较大小
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;WHERE 列名 运算式&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;==常用运算符：=	&amp;gt;	&amp;lt;	&amp;gt;=	&amp;lt;=	!=/&amp;lt;&amp;gt;	!&amp;gt;	!&amp;lt;==&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;mark&gt;常用运算符：=	&amp;gt;	&amp;lt;	&amp;gt;=	&amp;lt;=	!=/&amp;lt;&amp;gt;	!&amp;gt;	!&amp;laquo;/mark&amp;gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;eg.查询TAB1里面所有三年级（Grade=3）的学生的姓名：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Ch&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TAB1&lt;/span&gt;
@@ -372,7 +372,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;STUDY&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;TAB1&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;LEFT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;OUTER&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;JOIN&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;STUDY&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;TAB2&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ON&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;STUDY&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;TAB1&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Nu&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;STUDY&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;TAB2&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Nu&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;此时会保留TAB1里面的所有记录，匹配对应的TAB2记录&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;多表连接查询&#34;&gt;多表连接查询
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;==WHERE 表名1.列名1 = 表名2.列名2 AND 表名2.列名2 = 表名3.列名3==&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;WHERE 表名1.列名1 = 表名2.列名2 AND 表名2.列名2 = 表名3.列名3&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;多表连接一般是先进行两个表的连接操作，再将其连接结果与第三个表执行连接&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;嵌套查询&#34;&gt;嵌套查询
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;span style=&#34;color:orange&#34;&gt;查询块&lt;/span&gt;：SELECT-FROM-WHERE&lt;/strong&gt;
@@ -750,7 +750,43 @@ C1，avg_C2列存放C2列的均值)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;employees&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;commission&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;OR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;commission&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;IS&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;NULL&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;数据库安全&#34;&gt;数据库安全
+&lt;/h2&gt;&lt;h3 id=&#34;授权&#34;&gt;授权
+&lt;/h3&gt;&lt;h4 id=&#34;授予用户权限&#34;&gt;授予用户权限
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;GRANT 权限 ON 对象类型 对象名 TO 用户名 [WITH GRANT OPTION];&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;权限：&lt;/strong&gt;&lt;/span&gt;查询权限 SELECT，全部操作权限 ALL PRIVILEGES&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;对象类型：&lt;/strong&gt;&lt;/span&gt;TABLE/VIEW&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;对象名：&lt;/strong&gt;&lt;/span&gt;表和视图的名称&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;用户名：&lt;/strong&gt;&lt;/span&gt;可以指定用户，也可以全体用户PUBLIC&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果没有WITH GRANT OPTION语句，那么用户不能传播这个权限&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SQL不允许循环授权，被授权者不能把权限传递给授权者或其祖先&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg.假设我们有一个名为employees的表，现在想让用户user_A只能查询这张表&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;GRANT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ON&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;employees&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;TO&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;user_A&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果要让A还能把权限授权给别人：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;GRANT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ON&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;employees&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;TO&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;user_A&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;WITH&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;GRANT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;OPTION&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;收回用户权限&#34;&gt;收回用户权限
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;REVOKE 权限 ON 对象类型 对象名 FROM 用户名 [CASCADE/RESTRICT];&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CASCADE&lt;/strong&gt;：级联回收，把用户传播出去的权限一并收回&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;RESTRICT&lt;/strong&gt;：受限回收，如果用户传播过该权限，回收会失败（默认行为）&lt;/p&gt;
+&lt;p&gt;eg.收回user_A的权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;REVOKE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;ON&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;employees&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;user_A&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;创建数据库模式的权限&#34;&gt;创建数据库模式的权限
+&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:18px&#34;&gt;&lt;strong&gt;对创建数据库模式一类的数据库对象的授权在数据库管理员创建用户的时候实现&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;mark&gt;CREATE USER 用户名 [WITH DBA|RESOURCE|CONNECT];&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;DBA&lt;/strong&gt;：可以创建新用户、模式、表、视图等，还可以把这些权限授予其他用户&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;RESOURCE&lt;/strong&gt;：可以创建表、视图，但是不能创建新的模式和用户&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CONNECT&lt;/strong&gt;：只能登录数据库，或者被授予权限后操作&lt;/p&gt;
+&lt;h3 id=&#34;数据库角色&#34;&gt;数据库角色
+&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:18px&#34;&gt;&lt;strong&gt;角色是权限的集合，可以为一组相同权限的用户创建同一个角色，使用角色管理权限，简化授权过程&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h4 id=&#34;创建角色&#34;&gt;创建角色
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;CREATE ROLE 角色名;&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;给角色添加角色用户&#34;&gt;给角色添加角色/用户
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;GRANT 角色 TO 某角色/某用户 [WITH ADMIN OPTION];&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;给角色授权&#34;&gt;给角色授权
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;GRANT 权限 ON 对象类型 对象名 TO 角色；&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;收回角色权限&#34;&gt;收回角色权限
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;REVOKE 权限 ON 对象类型 对象名 FROM 角色;&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>wireshark&amp;tshark简易指北</title>

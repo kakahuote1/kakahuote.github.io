@@ -10,7 +10,7 @@
 <meta property='og:description' content="学完了就能去学怎么注入了">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-06-03T01:22:59&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-06-13T22:23:51&#43;08:00'/>
 <meta name="twitter:title" content="进行一个SQL速速的通">
 <meta name="twitter:description" content="学完了就能去学怎么注入了">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -558,6 +558,25 @@
         </li>
       </ol>
     </li>
+    <li><a href="#数据库安全">数据库安全</a>
+      <ol>
+        <li><a href="#授权">授权</a>
+          <ol>
+            <li><a href="#授予用户权限">授予用户权限</a></li>
+            <li><a href="#收回用户权限">收回用户权限</a></li>
+          </ol>
+        </li>
+        <li><a href="#创建数据库模式的权限">创建数据库模式的权限</a></li>
+        <li><a href="#数据库角色">数据库角色</a>
+          <ol>
+            <li><a href="#创建角色">创建角色</a></li>
+            <li><a href="#给角色添加角色用户">给角色添加角色/用户</a></li>
+            <li><a href="#给角色授权">给角色授权</a></li>
+            <li><a href="#收回角色权限">收回角色权限</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -630,7 +649,7 @@
 
 
                <time>
-                   更新时间：2025-06-03
+                   更新时间：2025-06-13
                </time>
            </div></footer>
     
@@ -891,7 +910,7 @@
 <h3 id="where-条件表达式">WHERE 条件表达式
 </h3><h4 id="比较大小">比较大小
 </h4><p><strong><mark>WHERE 列名 运算式</mark></strong></p>
-<p><strong>==常用运算符：=	&gt;	&lt;	&gt;=	&lt;=	!=/&lt;&gt;	!&gt;	!&lt;==</strong></p>
+<p><strong><mark>常用运算符：=	&gt;	&lt;	&gt;=	&lt;=	!=/&lt;&gt;	!&gt;	!&laquo;/mark&gt;</strong></p>
 <p>eg.查询TAB1里面所有三年级（Grade=3）的学生的姓名：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
@@ -1002,7 +1021,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">LEFT</span> <span style="color:#c678dd">OUTER</span> <span style="color:#c678dd">JOIN</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span> <span style="color:#c678dd">ON</span>(<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>);
 </span></span></code></pre></div><p><strong>此时会保留TAB1里面的所有记录，匹配对应的TAB2记录</strong></p>
 <h4 id="多表连接查询">多表连接查询
-</h4><p><strong>==WHERE 表名1.列名1 = 表名2.列名2 AND 表名2.列名2 = 表名3.列名3==</strong></p>
+</h4><p><strong><mark>WHERE 表名1.列名1 = 表名2.列名2 AND 表名2.列名2 = 表名3.列名3</mark></strong></p>
 <p><strong>多表连接一般是先进行两个表的连接操作，再将其连接结果与第三个表执行连接</strong></p>
 <h3 id="嵌套查询">嵌套查询
 </h3><p><strong><span style="color:orange">查询块</span>：SELECT-FROM-WHERE</strong>
@@ -1380,7 +1399,43 @@ C1，avg_C2列存放C2列的均值)</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">employees</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">commission</span> <span style="color:#56b6c2">&lt;&gt;</span> <span style="color:#d19a66">0</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">commission</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NULL</span>;
-</span></span></code></pre></div>
+</span></span></code></pre></div><h2 id="数据库安全">数据库安全
+</h2><h3 id="授权">授权
+</h3><h4 id="授予用户权限">授予用户权限
+</h4><p><strong><mark>GRANT 权限 ON 对象类型 对象名 TO 用户名 [WITH GRANT OPTION];</mark></strong></p>
+<p><span style="color:orange"><strong>权限：</strong></span>查询权限 SELECT，全部操作权限 ALL PRIVILEGES</p>
+<p><span style="color:orange"><strong>对象类型：</strong></span>TABLE/VIEW</p>
+<p><span style="color:orange"><strong>对象名：</strong></span>表和视图的名称</p>
+<p><span style="color:orange"><strong>用户名：</strong></span>可以指定用户，也可以全体用户PUBLIC</p>
+<p><strong>如果没有WITH GRANT OPTION语句，那么用户不能传播这个权限</strong></p>
+<p><strong>SQL不允许循环授权，被授权者不能把权限传递给授权者或其祖先</strong></p>
+<p>eg.假设我们有一个名为employees的表，现在想让用户user_A只能查询这张表</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">GRANT</span> <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">ON</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">employees</span> <span style="color:#c678dd">TO</span> <span style="color:#e06c75">user_A</span>;
+</span></span></code></pre></div><p>如果要让A还能把权限授权给别人：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">GRANT</span> <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">ON</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">employees</span> <span style="color:#c678dd">TO</span> <span style="color:#e06c75">user_A</span> <span style="color:#c678dd">WITH</span> <span style="color:#c678dd">GRANT</span> <span style="color:#c678dd">OPTION</span>;
+</span></span></code></pre></div><h4 id="收回用户权限">收回用户权限
+</h4><p><strong><mark>REVOKE 权限 ON 对象类型 对象名 FROM 用户名 [CASCADE/RESTRICT];</mark></strong></p>
+<p><strong>CASCADE</strong>：级联回收，把用户传播出去的权限一并收回</p>
+<p><strong>RESTRICT</strong>：受限回收，如果用户传播过该权限，回收会失败（默认行为）</p>
+<p>eg.收回user_A的权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">REVOKE</span> <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">ON</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">employees</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">user_A</span>;
+</span></span></code></pre></div><h3 id="创建数据库模式的权限">创建数据库模式的权限
+</h3><p><span style="color:red;font-size:18px"><strong>对创建数据库模式一类的数据库对象的授权在数据库管理员创建用户的时候实现</strong></span></p>
+<p><strong><mark>CREATE USER 用户名 [WITH DBA|RESOURCE|CONNECT];</mark></strong></p>
+<p><strong>DBA</strong>：可以创建新用户、模式、表、视图等，还可以把这些权限授予其他用户</p>
+<p><strong>RESOURCE</strong>：可以创建表、视图，但是不能创建新的模式和用户</p>
+<p><strong>CONNECT</strong>：只能登录数据库，或者被授予权限后操作</p>
+<h3 id="数据库角色">数据库角色
+</h3><p><span style="color:red;font-size:18px"><strong>角色是权限的集合，可以为一组相同权限的用户创建同一个角色，使用角色管理权限，简化授权过程</strong></span></p>
+<h4 id="创建角色">创建角色
+</h4><p><strong><mark>CREATE ROLE 角色名;</mark></strong></p>
+<h4 id="给角色添加角色用户">给角色添加角色/用户
+</h4><p><strong><mark>GRANT 角色 TO 某角色/某用户 [WITH ADMIN OPTION];</mark></strong></p>
+<h4 id="给角色授权">给角色授权
+</h4><p><strong><mark>GRANT 权限 ON 对象类型 对象名 TO 角色；</mark></strong></p>
+<h4 id="收回角色权限">收回角色权限
+</h4><p><strong><mark>REVOKE 权限 ON 对象类型 对象名 FROM 角色;</mark></strong></p>
+
 </section>
 
 
@@ -1403,7 +1458,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
 
         <span>
-            最后更新于 2025-06-03
+            最后更新于 2025-06-13
         </span>
     </section></footer>
 
