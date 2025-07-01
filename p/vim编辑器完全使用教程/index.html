@@ -10,7 +10,7 @@
 <meta property='og:description' content="你应该放下一切，立刻学习宇宙第一编辑器Vim😎">
 <meta property='og:url' content='https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='vim' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-05-08T15:28:02&#43;08:00'/><meta property='article:modified_time' content='2025-05-14T18:09:27&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='vim' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-05-08T15:28:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-02T01:28:30&#43;08:00'/>
 <meta name="twitter:title" content="Vim编辑器完全使用教程">
 <meta name="twitter:description" content="你应该放下一切，立刻学习宇宙第一编辑器Vim😎">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -204,7 +204,7 @@
 
         <div class="site-meta">
             <h1 class="site-name"><a href="/">kakahuote</a></h1>
-            <h2 class="site-description">握握手，握握双手</h2>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
         </div>
     </header>
 
@@ -375,75 +375,80 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#vim键盘图">vim键盘图</a></li>
-    <li><a href="#vim操作文件基本方式">vim操作文件基本方式</a>
+    <li><a href="#vim使用方式">VIM使用方式</a>
       <ol>
-        <li><a href="#打开文件">打开文件</a></li>
-        <li><a href="#文件之间的切换">文件之间的切换</a></li>
-        <li><a href="#显示多个文件">显示多个文件</a></li>
-        <li><a href="#分屏操作ctrlw系列">分屏操作（ctrl+w系列）</a>
+        <li><a href="#vim键盘图">vim键盘图</a></li>
+        <li><a href="#vim操作文件基本方式">vim操作文件基本方式</a>
           <ol>
-            <li><a href="#左右分屏">左右分屏</a></li>
-            <li><a href="#上下分屏">上下分屏</a></li>
-            <li><a href="#移动分屏">移动分屏</a></li>
-            <li><a href="#在文件间切换光标">在文件间切换光标</a></li>
-            <li><a href="#关闭分屏">关闭分屏</a></li>
+            <li><a href="#打开文件">打开文件</a></li>
+            <li><a href="#文件之间的切换">文件之间的切换</a></li>
+            <li><a href="#显示多个文件">显示多个文件</a></li>
+            <li><a href="#分屏操作ctrlw系列">分屏操作（ctrl+w系列）</a>
+              <ol>
+                <li><a href="#左右分屏">左右分屏</a></li>
+                <li><a href="#上下分屏">上下分屏</a></li>
+                <li><a href="#移动分屏">移动分屏</a></li>
+                <li><a href="#在文件间切换光标">在文件间切换光标</a></li>
+                <li><a href="#关闭分屏">关闭分屏</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#vim五大模式">vim五大模式</a>
+          <ol>
+            <li><a href="#普通模式">普通模式</a>
+              <ol>
+                <li><a href="#普通模式移动光标">普通模式移动光标</a></li>
+                <li><a href="#普通模式操作文本">普通模式操作文本</a></li>
+              </ol>
+            </li>
+            <li><a href="#插入模式">插入模式</a>
+              <ol>
+                <li><a href="#进入插入模式">进入插入模式</a></li>
+                <li><a href="#插入模式的命令">插入模式的命令</a></li>
+              </ol>
+            </li>
+            <li><a href="#替换模式">替换模式</a>
+              <ol>
+                <li><a href="#进入替换模式">进入替换模式</a></li>
+                <li><a href="#虚拟替换模式">虚拟替换模式</a></li>
+              </ol>
+            </li>
+            <li><a href="#命令模式">命令模式</a>
+              <ol>
+                <li><a href="#命令模式常用命令">命令模式常用命令</a></li>
+                <li><a href="#命令模式处理文件">命令模式处理文件</a></li>
+                <li><a href="#命令模式搜索文本">命令模式搜索文本</a></li>
+                <li><a href="#命令模式替换文本">命令模式替换文本</a></li>
+                <li><a href="#命令模式执行linux命令">命令模式执行linux命令</a></li>
+                <li><a href="#命令模式定义快捷键">命令模式定义快捷键</a></li>
+              </ol>
+            </li>
+            <li><a href="#可视化模式">可视化模式</a>
+              <ol>
+                <li><a href="#进入可视化模式">进入可视化模式</a></li>
+                <li><a href="#可视化模式下移动光标">可视化模式下移动光标</a></li>
+                <li><a href="#可视化模式下编辑">可视化模式下编辑</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#vim宏录制">vim宏录制</a>
+          <ol>
+            <li><a href="#宏录制的录制操作">宏录制的录制操作</a></li>
+            <li><a href="#宏录制的使用">宏录制的使用</a></li>
           </ol>
         </li>
       </ol>
     </li>
-    <li><a href="#vim五大模式">vim五大模式</a>
+    <li><a href="#vim相关案例">VIM相关案例</a>
       <ol>
-        <li><a href="#普通模式">普通模式</a>
+        <li><a href="#vim缓存泄露">vim缓存泄露</a>
           <ol>
-            <li><a href="#普通模式移动光标">普通模式移动光标</a></li>
-            <li><a href="#普通模式操作文本">普通模式操作文本</a></li>
+            <li><a href="#vim交换文件">vim交换文件</a></li>
+            <li><a href="#例题">例题</a></li>
           </ol>
         </li>
-        <li><a href="#插入模式">插入模式</a>
-          <ol>
-            <li><a href="#进入插入模式">进入插入模式</a></li>
-            <li><a href="#插入模式的命令">插入模式的命令</a></li>
-          </ol>
-        </li>
-        <li><a href="#替换模式">替换模式</a>
-          <ol>
-            <li><a href="#进入替换模式">进入替换模式</a></li>
-            <li><a href="#虚拟替换模式">虚拟替换模式</a></li>
-          </ol>
-        </li>
-        <li><a href="#命令模式">命令模式</a>
-          <ol>
-            <li><a href="#命令模式常用命令">命令模式常用命令</a></li>
-            <li><a href="#命令模式处理文件">命令模式处理文件</a></li>
-            <li><a href="#命令模式搜索文本">命令模式搜索文本</a></li>
-            <li><a href="#命令模式替换文本">命令模式替换文本</a></li>
-            <li><a href="#命令模式执行linux命令">命令模式执行linux命令</a></li>
-            <li><a href="#命令模式定义快捷键">命令模式定义快捷键</a></li>
-          </ol>
-        </li>
-        <li><a href="#可视化模式">可视化模式</a>
-          <ol>
-            <li><a href="#进入可视化模式">进入可视化模式</a></li>
-            <li><a href="#可视化模式下移动光标">可视化模式下移动光标</a></li>
-            <li><a href="#可视化模式下编辑">可视化模式下编辑</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#vim宏录制">vim宏录制</a>
-      <ol>
-        <li><a href="#宏录制的录制操作">宏录制的录制操作</a></li>
-        <li><a href="#宏录制的使用">宏录制的使用</a></li>
-      </ol>
-    </li>
-  </ol>
-
-  <ol>
-    <li><a href="#vim缓存泄露">vim缓存泄露</a>
-      <ol>
-        <li><a href="#vim交换文件">vim交换文件</a></li>
-        <li><a href="#例题">例题</a></li>
       </ol>
     </li>
   </ol>
@@ -518,9 +523,16 @@
 
 
                <time>
-                   更新时间：2025-05-14
+                   更新时间：2025-07-02
                </time>
-           </div></footer>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
     
 
     
@@ -1171,7 +1183,7 @@
 
 
         <span>
-            最后更新于 2025-05-14
+            最后更新于 2025-07-02
         </span>
     </section></footer>
 
@@ -1190,12 +1202,25 @@
             
                 
 <article class="">
-    <a href="/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/">
+    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">进行一个SQL速速的通</h2>
+            <h2 class="article-title">SQL注入：从入门到入土</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速入门SQL</h2>
         </div>
     </a>
 </article>
@@ -1237,7 +1262,7 @@
     }
 </style><script>
     
-    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
 </script>
 
     
@@ -1364,42 +1389,18 @@
      font-family: 'yuan';  
      src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
     }
-  
+
      
      
      
     :root {
      --base-font-family: 'yuan';  
      --code-font-family: 'yuan';  
-     --toc-link-color: #000;  
-     --toc-link-active-color: orange;  
+      
     }
-  
+
      
-     
-     
-    #TableOfContents > ul,
-    ol {
-     ul,
-     ol {
-      display: none;  
-     }
-  
-     .open {
-      display: block;  
-     }
-    }
-  
-    #TableOfContents a {
-     color: var(--toc-link-color);  
-     text-decoration: none;  
-    }
-  
-    #TableOfContents a.active {
-     color: var(--toc-link-active-color);  
-     font-weight: normal;  
-    }
-  
+
      
      
      
@@ -1416,11 +1417,11 @@
      transition: transform 0.1s linear;  
      transform-origin: center center;  
     }
-  
+
     #backTopBtn.rotating {
      transform: rotate(360deg);  
     }
-  
+
      
      
      
@@ -1431,11 +1432,11 @@
      position: relative;  
      transition: max-height 0.3s ease-out;  
     }
-  
+
     .code-show {
      max-height: none !important;  
     }
-  
+
     .code-more-box {
      width: 100%;  
      padding-top: 20px;  
@@ -1447,7 +1448,7 @@
      z-index: 1;  
      text-align: center;  
     }
-  
+
     .code-more-btn {
      display: inline-block;  
      padding: 5px 15px;  
@@ -1457,7 +1458,7 @@
      font-size: 0.9em;  
     }
    </style>
-  
+
    <script>
      
      
@@ -1473,7 +1474,10 @@
     let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
 
     let result = days + "天" + hours + "小时" + minutes + "分钟";
-    document.getElementById('runningdays').innerHTML = result;
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
      
      
      
@@ -1484,12 +1488,12 @@
      if (!rightSideBar) {
       return;
      }
-  
+
      
      let btn = document.createElement("div");
      btn.id = "backTopBtn";
      let isRotating = false; 
-  
+
      btn.onclick = function() {
       if (!isRotating) {
        isRotating = true;
@@ -1499,23 +1503,23 @@
       }
      };
      rightSideBar.appendChild(btn);
-  
+
      
      btn.style.display = "block";
     }
-  
+
     
 
     function backToTop(button, onComplete) {
      let rotation = 0;
      let animationInterval;
-  
+
      window.scrollTo({ top: 0, behavior: "smooth" }); 
-  
+
      animationInterval = setInterval(() => {
       rotation += 30; 
       button.style.transform = `rotate(${rotation}deg)`;
-  
+
       if (window.scrollY === 0) {
        clearInterval(animationInterval); 
        button.style.transform = `rotate(0deg)`; 
@@ -1527,141 +1531,13 @@
       }
      }, 20); 
     }
-  
+
     
     initScrollTop();
-  
-     
-     
-     
-    function initTocHide() {
-     let toc = document.querySelector(".widget--toc");
-     if (!toc) {
-      return;
-     }
-  
-     window.addEventListener('scroll', function() {
-      
-      let openUl = document.querySelectorAll(".open");
-      if (openUl.length > 0) {
-       openUl.forEach((ul) => {
-        ul.classList.remove("open");
-       });
-      }
-  
-      
-      let currentLi = document.querySelector(".active-class");
-      if (currentLi) {
-       if (currentLi.children.length > 1) {
-        currentLi.children[1].classList.add("open"); 
-       }
-       let ul = currentLi.parentElement;
-       do {
-        ul.classList.add("open"); 
-        ul = ul.parentElement.parentElement;
-       } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
-      }
-     });
-    }
-    initTocHide();
-  
-     
-     
-     
-    function initTocHighlight() {
-     const tocLinks = document.querySelectorAll('#TableOfContents a');
-     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
-  
-     if (tocLinks.length === 0 || headings.length === 0) {
-      return;
-     }
-  
-     function getOffsetTop(element) {
-      let offsetTop = 0;
-      while (element) {
-       offsetTop += element.offsetTop;
-       element = element.offsetParent;
-      }
-      return offsetTop;
-     }
-  
-     function isElementInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-       rect.top >= 0 &&
-       rect.left >= 0 &&
-       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-     }
-  
-     function setActiveTocLink() {
-      const scrollPositionTop = window.scrollY;
-      const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
-      let activeLink = null;
-  
-      for (let i = 0; i < headings.length; i++) {
-       const currentHeading = headings[i];
-       const currentHeadingTop = getOffsetTop(currentHeading);
-       const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
-  
-       let nextHeadingTop = Infinity; 
-       if (i < headings.length - 1) {
-        nextHeadingTop = getOffsetTop(headings[i + 1]);
-       }
-  
-       
-       if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
-        activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
-        break; 
-       }
-      }
-  
-      
-      tocLinks.forEach(link => {
-       link.classList.remove('active');
-      });
-  
-      if (activeLink) {
-       activeLink.classList.add('active'); 
-       
-       let parentLi = activeLink.parentNode;
-       while (parentLi && parentLi.tagName === 'LI') {
-        let siblingUl = parentLi.querySelector('ul, ol');
-        if (siblingUl && !siblingUl.classList.contains('open')) {
-         siblingUl.classList.add('open');
-        }
-        parentLi = parentLi.parentNode;
-       }
-      }
-     }
-  
-     function expandTocOnView() {
-      headings.forEach(heading => {
-       if (isElementInViewport(heading)) {
-        const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
-        if (correspondingLink) {
-         let parentLi = correspondingLink.parentNode;
-         while (parentLi && parentLi.tagName === 'LI') {
-          let siblingUl = parentLi.querySelector('ul, ol');
-          if (siblingUl && !siblingUl.classList.contains('open')) {
-           siblingUl.classList.add('open');
-          }
-          parentLi = parentLi.parentNode;
-         }
-        }
-       }
-      });
-     }
-  
-     window.addEventListener('scroll', setActiveTocLink); 
-     window.addEventListener('scroll', expandTocOnView); 
-     
-     setActiveTocLink();
-     expandTocOnView();
-    }
-    initTocHighlight();
-  
+    
+    
+
+
      
      
      
@@ -1684,7 +1560,7 @@
       codeMoreBtn.classList.add('code-more-btn');
       codeMoreBtn.innerText = '显示更多'; 
       let isExpanded = false; 
-  
+
       codeMoreBtn.addEventListener('click', () => {
        if (!isExpanded) {
         codeBlock.classList.add('code-show'); 
@@ -1703,7 +1579,7 @@
       codeBlock.appendChild(codeMoreBox);
      });
     }
-  
+
     initCodeMoreBox();
    </script>
     </body>

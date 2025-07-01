@@ -10,7 +10,7 @@
 <meta property='og:description' content="原来网络捕获器是这样找东西的">
 <meta property='og:url' content='https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-05-14T01:15:30&#43;08:00'/><meta property='article:modified_time' content='2025-06-03T01:22:59&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-05-14T01:15:30&#43;08:00'/><meta property='article:modified_time' content='2025-07-02T01:28:30&#43;08:00'/>
 <meta name="twitter:title" content="wireshark&tshark简易指北">
 <meta name="twitter:description" content="原来网络捕获器是这样找东西的">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -204,7 +204,7 @@
 
         <div class="site-meta">
             <h1 class="site-name"><a href="/">kakahuote</a></h1>
-            <h2 class="site-description">握握手，握握双手</h2>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
         </div>
     </header>
 
@@ -375,45 +375,50 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#运算符">运算符</a>
+    <li><a href="#wireshark过滤语法">wireshark过滤语法</a>
       <ol>
-        <li><a href="#比较运算符">比较运算符</a></li>
-        <li><a href="#逻辑运算符">逻辑运算符</a></li>
+        <li><a href="#运算符">运算符</a>
+          <ol>
+            <li><a href="#比较运算符">比较运算符</a></li>
+            <li><a href="#逻辑运算符">逻辑运算符</a></li>
+          </ol>
+        </li>
+        <li><a href="#函数">函数</a>
+          <ol>
+            <li><a href="#upperlower">upper()、lower()</a></li>
+            <li><a href="#len">len()</a></li>
+            <li><a href="#string">string()</a></li>
+            <li><a href="#maxmin">max()、min()</a></li>
+          </ol>
+        </li>
+        <li><a href="#过滤ip">过滤IP</a></li>
+        <li><a href="#过滤协议">过滤协议</a></li>
+        <li><a href="#过滤端口需要指明协议">过滤端口（需要指明协议）</a></li>
+        <li><a href="#过滤长度内容">过滤长度、内容</a></li>
+        <li><a href="#过滤时间">过滤时间</a></li>
       </ol>
     </li>
-    <li><a href="#函数">函数</a>
+    <li><a href="#tshark基本命令">tshark基本命令</a>
       <ol>
-        <li><a href="#upperlower">upper()、lower()</a></li>
-        <li><a href="#len">len()</a></li>
-        <li><a href="#string">string()</a></li>
-        <li><a href="#maxmin">max()、min()</a></li>
+        <li><a href="#-r--从一个已有的捕获文件读取数据包进行分析"><span style="color:red">-r</span> &ndash; 从一个已有的捕获文件读取数据包进行分析</a></li>
+        <li><a href="#-n-n--禁止反向解析"><span style="color:red">-n/-N</span> &ndash; 禁止反向解析</a>
+          <ol>
+            <li><a href="#-n--禁用域名解析不对-ip-地址和端口号进行名称解析"><span style="color:aqua">-n</span> &ndash; 禁用域名解析，不对 IP 地址和端口号进行名称解析</a></li>
+            <li><a href="#-n--精准控制解析哪些层级"><span style="color:aqua">-N</span> &ndash; 精准控制解析哪些层级</a></li>
+          </ol>
+        </li>
+        <li><a href="#-t--指定输出格式"><span style="color:red">-T</span> &ndash; 指定输出格式</a></li>
+        <li><a href="#-e--指定显示数据包中的特定字段"><span style="color:red">-e</span> &ndash; 指定显示数据包中的特定字段</a></li>
+        <li><a href="#-y--筛选过滤报文"><span style="color:red">-Y</span> &ndash; 筛选过滤报文</a></li>
+        <li><a href="#-e--设置输出的控制字段"><span style="color:red">-E</span> &ndash; 设置输出的控制字段</a></li>
+        <li><a href="#-2--二次依赖分析"><span style="color:red">-2</span> &ndash; 二次依赖分析</a></li>
+        <li><a href="#-i--指定要捕获数据的网络接口"><span style="color:red">-i</span> &ndash; 指定要捕获数据的网络接口</a></li>
+        <li><a href="#-f--应用捕获过滤器只捕获特定的流量"><span style="color:red">-f</span> &ndash; 应用捕获过滤器，只捕获特定的流量</a></li>
+        <li><a href="#-w--将捕获的数据包写入到文件中"><span style="color:red">-w</span> &ndash; 将捕获的数据包写入到文件中</a></li>
+        <li><a href="#options--其他可选参数"><span style="color:aqua">options</span> &ndash; 其他可选参数</a></li>
+        <li><a href="#filter指定显示过滤器"><span style="color:aqua">&lt;filter&gt; </span>指定显示过滤器</a></li>
       </ol>
     </li>
-    <li><a href="#过滤ip">过滤IP</a></li>
-    <li><a href="#过滤协议">过滤协议</a></li>
-    <li><a href="#过滤端口需要指明协议">过滤端口（需要指明协议）</a></li>
-    <li><a href="#过滤长度内容">过滤长度、内容</a></li>
-    <li><a href="#过滤时间">过滤时间</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#-r--从一个已有的捕获文件读取数据包进行分析"><span style="color:red">-r</span> &ndash; 从一个已有的捕获文件读取数据包进行分析</a></li>
-    <li><a href="#-n-n--禁止反向解析"><span style="color:red">-n/-N</span> &ndash; 禁止反向解析</a>
-      <ol>
-        <li><a href="#-n--禁用域名解析不对-ip-地址和端口号进行名称解析"><span style="color:aqua">-n</span> &ndash; 禁用域名解析，不对 IP 地址和端口号进行名称解析</a></li>
-        <li><a href="#-n--精准控制解析哪些层级"><span style="color:aqua">-N</span> &ndash; 精准控制解析哪些层级</a></li>
-      </ol>
-    </li>
-    <li><a href="#-t--指定输出格式"><span style="color:red">-T</span> &ndash; 指定输出格式</a></li>
-    <li><a href="#-e--指定显示数据包中的特定字段"><span style="color:red">-e</span> &ndash; 指定显示数据包中的特定字段</a></li>
-    <li><a href="#-y--筛选过滤报文"><span style="color:red">-Y</span> &ndash; 筛选过滤报文</a></li>
-    <li><a href="#-e--设置输出的控制字段"><span style="color:red">-E</span> &ndash; 设置输出的控制字段</a></li>
-    <li><a href="#-2--二次依赖分析"><span style="color:red">-2</span> &ndash; 二次依赖分析</a></li>
-    <li><a href="#-i--指定要捕获数据的网络接口"><span style="color:red">-i</span> &ndash; 指定要捕获数据的网络接口</a></li>
-    <li><a href="#-f--应用捕获过滤器只捕获特定的流量"><span style="color:red">-f</span> &ndash; 应用捕获过滤器，只捕获特定的流量</a></li>
-    <li><a href="#-w--将捕获的数据包写入到文件中"><span style="color:red">-w</span> &ndash; 将捕获的数据包写入到文件中</a></li>
-    <li><a href="#options--其他可选参数"><span style="color:aqua">options</span> &ndash; 其他可选参数</a></li>
-    <li><a href="#filter指定显示过滤器"><span style="color:aqua">&lt;filter&gt; </span>指定显示过滤器</a></li>
   </ol>
 </nav>
         </div>
@@ -486,9 +491,16 @@
 
 
                <time>
-                   更新时间：2025-06-03
+                   更新时间：2025-07-02
                </time>
-           </div></footer>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
     
 
     
@@ -946,7 +958,7 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
 
 
         <span>
-            最后更新于 2025-06-03
+            最后更新于 2025-07-02
         </span>
     </section></footer>
 
@@ -965,12 +977,25 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
             
                 
 <article class="">
-    <a href="/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/">
+    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">进行一个SQL速速的通</h2>
+            <h2 class="article-title">SQL注入：从入门到入土</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速入门SQL</h2>
         </div>
     </a>
 </article>
@@ -1012,7 +1037,7 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
     }
 </style><script>
     
-    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
 </script>
 
     
@@ -1139,42 +1164,18 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
      font-family: 'yuan';  
      src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
     }
-  
+
      
      
      
     :root {
      --base-font-family: 'yuan';  
      --code-font-family: 'yuan';  
-     --toc-link-color: #000;  
-     --toc-link-active-color: orange;  
+      
     }
-  
+
      
-     
-     
-    #TableOfContents > ul,
-    ol {
-     ul,
-     ol {
-      display: none;  
-     }
-  
-     .open {
-      display: block;  
-     }
-    }
-  
-    #TableOfContents a {
-     color: var(--toc-link-color);  
-     text-decoration: none;  
-    }
-  
-    #TableOfContents a.active {
-     color: var(--toc-link-active-color);  
-     font-weight: normal;  
-    }
-  
+
      
      
      
@@ -1191,11 +1192,11 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
      transition: transform 0.1s linear;  
      transform-origin: center center;  
     }
-  
+
     #backTopBtn.rotating {
      transform: rotate(360deg);  
     }
-  
+
      
      
      
@@ -1206,11 +1207,11 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
      position: relative;  
      transition: max-height 0.3s ease-out;  
     }
-  
+
     .code-show {
      max-height: none !important;  
     }
-  
+
     .code-more-box {
      width: 100%;  
      padding-top: 20px;  
@@ -1222,7 +1223,7 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
      z-index: 1;  
      text-align: center;  
     }
-  
+
     .code-more-btn {
      display: inline-block;  
      padding: 5px 15px;  
@@ -1232,7 +1233,7 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
      font-size: 0.9em;  
     }
    </style>
-  
+
    <script>
      
      
@@ -1248,7 +1249,10 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
     let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
 
     let result = days + "天" + hours + "小时" + minutes + "分钟";
-    document.getElementById('runningdays').innerHTML = result;
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
      
      
      
@@ -1259,12 +1263,12 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
      if (!rightSideBar) {
       return;
      }
-  
+
      
      let btn = document.createElement("div");
      btn.id = "backTopBtn";
      let isRotating = false; 
-  
+
      btn.onclick = function() {
       if (!isRotating) {
        isRotating = true;
@@ -1274,23 +1278,23 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
       }
      };
      rightSideBar.appendChild(btn);
-  
+
      
      btn.style.display = "block";
     }
-  
+
     
 
     function backToTop(button, onComplete) {
      let rotation = 0;
      let animationInterval;
-  
+
      window.scrollTo({ top: 0, behavior: "smooth" }); 
-  
+
      animationInterval = setInterval(() => {
       rotation += 30; 
       button.style.transform = `rotate(${rotation}deg)`;
-  
+
       if (window.scrollY === 0) {
        clearInterval(animationInterval); 
        button.style.transform = `rotate(0deg)`; 
@@ -1302,141 +1306,13 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
       }
      }, 20); 
     }
-  
+
     
     initScrollTop();
-  
-     
-     
-     
-    function initTocHide() {
-     let toc = document.querySelector(".widget--toc");
-     if (!toc) {
-      return;
-     }
-  
-     window.addEventListener('scroll', function() {
-      
-      let openUl = document.querySelectorAll(".open");
-      if (openUl.length > 0) {
-       openUl.forEach((ul) => {
-        ul.classList.remove("open");
-       });
-      }
-  
-      
-      let currentLi = document.querySelector(".active-class");
-      if (currentLi) {
-       if (currentLi.children.length > 1) {
-        currentLi.children[1].classList.add("open"); 
-       }
-       let ul = currentLi.parentElement;
-       do {
-        ul.classList.add("open"); 
-        ul = ul.parentElement.parentElement;
-       } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
-      }
-     });
-    }
-    initTocHide();
-  
-     
-     
-     
-    function initTocHighlight() {
-     const tocLinks = document.querySelectorAll('#TableOfContents a');
-     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
-  
-     if (tocLinks.length === 0 || headings.length === 0) {
-      return;
-     }
-  
-     function getOffsetTop(element) {
-      let offsetTop = 0;
-      while (element) {
-       offsetTop += element.offsetTop;
-       element = element.offsetParent;
-      }
-      return offsetTop;
-     }
-  
-     function isElementInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-       rect.top >= 0 &&
-       rect.left >= 0 &&
-       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-     }
-  
-     function setActiveTocLink() {
-      const scrollPositionTop = window.scrollY;
-      const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
-      let activeLink = null;
-  
-      for (let i = 0; i < headings.length; i++) {
-       const currentHeading = headings[i];
-       const currentHeadingTop = getOffsetTop(currentHeading);
-       const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
-  
-       let nextHeadingTop = Infinity; 
-       if (i < headings.length - 1) {
-        nextHeadingTop = getOffsetTop(headings[i + 1]);
-       }
-  
-       
-       if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
-        activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
-        break; 
-       }
-      }
-  
-      
-      tocLinks.forEach(link => {
-       link.classList.remove('active');
-      });
-  
-      if (activeLink) {
-       activeLink.classList.add('active'); 
-       
-       let parentLi = activeLink.parentNode;
-       while (parentLi && parentLi.tagName === 'LI') {
-        let siblingUl = parentLi.querySelector('ul, ol');
-        if (siblingUl && !siblingUl.classList.contains('open')) {
-         siblingUl.classList.add('open');
-        }
-        parentLi = parentLi.parentNode;
-       }
-      }
-     }
-  
-     function expandTocOnView() {
-      headings.forEach(heading => {
-       if (isElementInViewport(heading)) {
-        const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
-        if (correspondingLink) {
-         let parentLi = correspondingLink.parentNode;
-         while (parentLi && parentLi.tagName === 'LI') {
-          let siblingUl = parentLi.querySelector('ul, ol');
-          if (siblingUl && !siblingUl.classList.contains('open')) {
-           siblingUl.classList.add('open');
-          }
-          parentLi = parentLi.parentNode;
-         }
-        }
-       }
-      });
-     }
-  
-     window.addEventListener('scroll', setActiveTocLink); 
-     window.addEventListener('scroll', expandTocOnView); 
-     
-     setActiveTocLink();
-     expandTocOnView();
-    }
-    initTocHighlight();
-  
+    
+    
+
+
      
      
      
@@ -1459,7 +1335,7 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
       codeMoreBtn.classList.add('code-more-btn');
       codeMoreBtn.innerText = '显示更多'; 
       let isExpanded = false; 
-  
+
       codeMoreBtn.addEventListener('click', () => {
        if (!isExpanded) {
         codeBlock.classList.add('code-show'); 
@@ -1478,7 +1354,7 @@ frame.time &gt; &#34;2024-04-11 11:00:00&#34; and frame.time &lt; &#34;2024-04-1
       codeBlock.appendChild(codeMoreBox);
      });
     }
-  
+
     initCodeMoreBox();
    </script>
     </body>

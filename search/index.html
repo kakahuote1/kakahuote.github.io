@@ -202,7 +202,7 @@
 
         <div class="site-meta">
             <h1 class="site-name"><a href="/">kakahuote</a></h1>
-            <h2 class="site-description">握握手，握握双手</h2>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
         </div>
     </header>
 
@@ -423,42 +423,18 @@
      font-family: 'yuan';  
      src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
     }
-  
+
      
      
      
     :root {
      --base-font-family: 'yuan';  
      --code-font-family: 'yuan';  
-     --toc-link-color: #000;  
-     --toc-link-active-color: orange;  
+      
     }
-  
+
      
-     
-     
-    #TableOfContents > ul,
-    ol {
-     ul,
-     ol {
-      display: none;  
-     }
-  
-     .open {
-      display: block;  
-     }
-    }
-  
-    #TableOfContents a {
-     color: var(--toc-link-color);  
-     text-decoration: none;  
-    }
-  
-    #TableOfContents a.active {
-     color: var(--toc-link-active-color);  
-     font-weight: normal;  
-    }
-  
+
      
      
      
@@ -475,11 +451,11 @@
      transition: transform 0.1s linear;  
      transform-origin: center center;  
     }
-  
+
     #backTopBtn.rotating {
      transform: rotate(360deg);  
     }
-  
+
      
      
      
@@ -490,11 +466,11 @@
      position: relative;  
      transition: max-height 0.3s ease-out;  
     }
-  
+
     .code-show {
      max-height: none !important;  
     }
-  
+
     .code-more-box {
      width: 100%;  
      padding-top: 20px;  
@@ -506,7 +482,7 @@
      z-index: 1;  
      text-align: center;  
     }
-  
+
     .code-more-btn {
      display: inline-block;  
      padding: 5px 15px;  
@@ -516,7 +492,7 @@
      font-size: 0.9em;  
     }
    </style>
-  
+
    <script>
      
      
@@ -532,7 +508,10 @@
     let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
 
     let result = days + "天" + hours + "小时" + minutes + "分钟";
-    document.getElementById('runningdays').innerHTML = result;
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
      
      
      
@@ -543,12 +522,12 @@
      if (!rightSideBar) {
       return;
      }
-  
+
      
      let btn = document.createElement("div");
      btn.id = "backTopBtn";
      let isRotating = false; 
-  
+
      btn.onclick = function() {
       if (!isRotating) {
        isRotating = true;
@@ -558,23 +537,23 @@
       }
      };
      rightSideBar.appendChild(btn);
-  
+
      
      btn.style.display = "block";
     }
-  
+
     
 
     function backToTop(button, onComplete) {
      let rotation = 0;
      let animationInterval;
-  
+
      window.scrollTo({ top: 0, behavior: "smooth" }); 
-  
+
      animationInterval = setInterval(() => {
       rotation += 30; 
       button.style.transform = `rotate(${rotation}deg)`;
-  
+
       if (window.scrollY === 0) {
        clearInterval(animationInterval); 
        button.style.transform = `rotate(0deg)`; 
@@ -586,141 +565,13 @@
       }
      }, 20); 
     }
-  
+
     
     initScrollTop();
-  
-     
-     
-     
-    function initTocHide() {
-     let toc = document.querySelector(".widget--toc");
-     if (!toc) {
-      return;
-     }
-  
-     window.addEventListener('scroll', function() {
-      
-      let openUl = document.querySelectorAll(".open");
-      if (openUl.length > 0) {
-       openUl.forEach((ul) => {
-        ul.classList.remove("open");
-       });
-      }
-  
-      
-      let currentLi = document.querySelector(".active-class");
-      if (currentLi) {
-       if (currentLi.children.length > 1) {
-        currentLi.children[1].classList.add("open"); 
-       }
-       let ul = currentLi.parentElement;
-       do {
-        ul.classList.add("open"); 
-        ul = ul.parentElement.parentElement;
-       } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
-      }
-     });
-    }
-    initTocHide();
-  
-     
-     
-     
-    function initTocHighlight() {
-     const tocLinks = document.querySelectorAll('#TableOfContents a');
-     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
-  
-     if (tocLinks.length === 0 || headings.length === 0) {
-      return;
-     }
-  
-     function getOffsetTop(element) {
-      let offsetTop = 0;
-      while (element) {
-       offsetTop += element.offsetTop;
-       element = element.offsetParent;
-      }
-      return offsetTop;
-     }
-  
-     function isElementInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-       rect.top >= 0 &&
-       rect.left >= 0 &&
-       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-     }
-  
-     function setActiveTocLink() {
-      const scrollPositionTop = window.scrollY;
-      const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
-      let activeLink = null;
-  
-      for (let i = 0; i < headings.length; i++) {
-       const currentHeading = headings[i];
-       const currentHeadingTop = getOffsetTop(currentHeading);
-       const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
-  
-       let nextHeadingTop = Infinity; 
-       if (i < headings.length - 1) {
-        nextHeadingTop = getOffsetTop(headings[i + 1]);
-       }
-  
-       
-       if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
-        activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
-        break; 
-       }
-      }
-  
-      
-      tocLinks.forEach(link => {
-       link.classList.remove('active');
-      });
-  
-      if (activeLink) {
-       activeLink.classList.add('active'); 
-       
-       let parentLi = activeLink.parentNode;
-       while (parentLi && parentLi.tagName === 'LI') {
-        let siblingUl = parentLi.querySelector('ul, ol');
-        if (siblingUl && !siblingUl.classList.contains('open')) {
-         siblingUl.classList.add('open');
-        }
-        parentLi = parentLi.parentNode;
-       }
-      }
-     }
-  
-     function expandTocOnView() {
-      headings.forEach(heading => {
-       if (isElementInViewport(heading)) {
-        const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
-        if (correspondingLink) {
-         let parentLi = correspondingLink.parentNode;
-         while (parentLi && parentLi.tagName === 'LI') {
-          let siblingUl = parentLi.querySelector('ul, ol');
-          if (siblingUl && !siblingUl.classList.contains('open')) {
-           siblingUl.classList.add('open');
-          }
-          parentLi = parentLi.parentNode;
-         }
-        }
-       }
-      });
-     }
-  
-     window.addEventListener('scroll', setActiveTocLink); 
-     window.addEventListener('scroll', expandTocOnView); 
-     
-     setActiveTocLink();
-     expandTocOnView();
-    }
-    initTocHighlight();
-  
+    
+    
+
+
      
      
      
@@ -743,7 +594,7 @@
       codeMoreBtn.classList.add('code-more-btn');
       codeMoreBtn.innerText = '显示更多'; 
       let isExpanded = false; 
-  
+
       codeMoreBtn.addEventListener('click', () => {
        if (!isExpanded) {
         codeBlock.classList.add('code-show'); 
@@ -762,7 +613,7 @@
       codeBlock.appendChild(codeMoreBox);
      });
     }
-  
+
     initCodeMoreBox();
    </script>
     </body>

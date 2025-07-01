@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学完了就能去学怎么注入了">
-<title>进行一个SQL速速的通</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据处理最高的山">
+<title>快速入门SQL</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/'>
+<link rel='canonical' href='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/'>
 
-<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="进行一个SQL速速的通">
-<meta property='og:description' content="学完了就能去学怎么注入了">
-<meta property='og:url' content='https://blog.928330.xyz/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/'>
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="快速入门SQL">
+<meta property='og:description' content="数据处理最高的山">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-06-14T00:41:50&#43;08:00'/>
-<meta name="twitter:title" content="进行一个SQL速速的通">
-<meta name="twitter:description" content="学完了就能去学怎么注入了">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-02T01:28:30&#43;08:00'/>
+<meta name="twitter:title" content="快速入门SQL">
+<meta name="twitter:description" content="数据处理最高的山">
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -204,7 +204,7 @@
 
         <div class="site-meta">
             <h1 class="site-name"><a href="/">kakahuote</a></h1>
-            <h2 class="site-description">握握手，握握双手</h2>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
         </div>
     </header>
 
@@ -375,217 +375,221 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#模式">模式</a>
+    <li>
       <ol>
-        <li><a href="#定义模式">定义模式</a></li>
-        <li><a href="#删除模式">删除模式</a></li>
-      </ol>
-    </li>
-    <li><a href="#基本表">基本表</a>
-      <ol>
-        <li><a href="#定义基本元素">定义基本元素</a>
+        <li><a href="#模式">模式</a>
           <ol>
-            <li><a href="#数据类型">数据类型</a></li>
-            <li><a href="#列级完整性约束条件">列级完整性约束条件</a></li>
-            <li><a href="#表级完整性约束条件">表级完整性约束条件</a></li>
+            <li><a href="#定义模式">定义模式</a></li>
+            <li><a href="#删除模式">删除模式</a></li>
           </ol>
         </li>
-        <li><a href="#特殊完整性约束条件断言">特殊完整性约束条件——断言</a>
+        <li><a href="#基本表">基本表</a>
           <ol>
-            <li><a href="#创建断言">创建断言</a></li>
-            <li><a href="#删除断言">删除断言</a></li>
+            <li><a href="#定义基本元素">定义基本元素</a>
+              <ol>
+                <li><a href="#数据类型">数据类型</a></li>
+                <li><a href="#列级完整性约束条件">列级完整性约束条件</a></li>
+                <li><a href="#表级完整性约束条件">表级完整性约束条件</a></li>
+              </ol>
+            </li>
+            <li><a href="#特殊完整性约束条件断言">特殊完整性约束条件——断言</a>
+              <ol>
+                <li><a href="#创建断言">创建断言</a></li>
+                <li><a href="#删除断言">删除断言</a></li>
+              </ol>
+            </li>
+            <li><a href="#特殊完整性约束条件触发器">特殊完整性约束条件——触发器</a>
+              <ol>
+                <li><a href="#定义触发器">定义触发器</a></li>
+                <li><a href="#激活触发器">激活触发器</a></li>
+                <li><a href="#删除触发器">删除触发器</a></li>
+              </ol>
+            </li>
+            <li><a href="#定义基本表">定义基本表</a></li>
+            <li><a href="#在模式中定义表">在模式中定义表</a>
+              <ol>
+                <li><a href="#创建表的时候指出模式">创建表的时候指出模式</a></li>
+                <li><a href="#创建模式时直接定义表">创建模式时直接定义表</a></li>
+                <li><a href="#事先设置所属的模式">事先设置所属的模式</a></li>
+              </ol>
+            </li>
+            <li><a href="#修改基本表">修改基本表</a>
+              <ol>
+                <li><a href="#增加新的属性列">增加新的属性列</a></li>
+                <li><a href="#增加列级完整性约束条件">增加列级完整性约束条件</a></li>
+                <li><a href="#增加表级完整性约束条件">增加表级完整性约束条件</a></li>
+                <li><a href="#删除列">删除列</a></li>
+                <li><a href="#删除指定的完整性约束条件">删除指定的完整性约束条件</a></li>
+                <li><a href="#修改列">修改列</a></li>
+              </ol>
+            </li>
+            <li><a href="#删除基本表">删除基本表</a></li>
           </ol>
         </li>
-        <li><a href="#特殊完整性约束条件触发器">特殊完整性约束条件——触发器</a>
+        <li><a href="#索引">索引</a>
           <ol>
-            <li><a href="#定义触发器">定义触发器</a></li>
-            <li><a href="#激活触发器">激活触发器</a></li>
-            <li><a href="#删除触发器">删除触发器</a></li>
+            <li><a href="#建立索引">建立索引</a>
+              <ol>
+                <li><a href="#建立唯一索引">建立唯一索引</a></li>
+                <li><a href="#建立聚簇索引">建立聚簇索引</a></li>
+                <li><a href="#重命名索引">重命名索引</a></li>
+                <li><a href="#删除索引">删除索引</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#定义基本表">定义基本表</a></li>
-        <li><a href="#在模式中定义表">在模式中定义表</a>
+        <li><a href="#查询数据select语句">查询数据&ndash;SELECT语句</a>
           <ol>
-            <li><a href="#创建表的时候指出模式">创建表的时候指出模式</a></li>
-            <li><a href="#创建模式时直接定义表">创建模式时直接定义表</a></li>
-            <li><a href="#事先设置所属的模式">事先设置所属的模式</a></li>
+            <li><a href="#一般格式">一般格式</a></li>
+            <li><a href="#select-目标列表达式">SELECT 目标列表达式</a>
+              <ol>
+                <li><a href="#查询指定的列">查询指定的列</a></li>
+                <li><a href="#查询全部的列">查询全部的列</a></li>
+                <li><a href="#查询计算后的值">查询计算后的值</a></li>
+                <li><a href="#改变查询结果的列标题">改变查询结果的列标题</a></li>
+                <li><a href="#去除查询结果的重复行">去除查询结果的重复行</a></li>
+              </ol>
+            </li>
+            <li><a href="#聚集函数">聚集函数</a>
+              <ol>
+                <li><a href="#统计元组个数">统计元组个数</a></li>
+                <li><a href="#统计某一列值的个数">统计某一列值的个数</a></li>
+                <li><a href="#计算某一列值的平均数该列必须为数值型">计算某一列值的平均数（该列必须为数值型）</a></li>
+                <li><a href="#计算某一列值的总和该列必须为数值型">计算某一列值的总和（该列必须为数值型）</a></li>
+                <li><a href="#计算某一列值的最大值最小值">计算某一列值的最大值/最小值</a></li>
+              </ol>
+            </li>
+            <li><a href="#where-条件表达式">WHERE 条件表达式</a>
+              <ol>
+                <li><a href="#比较大小">比较大小</a></li>
+                <li><a href="#确定范围">确定范围</a></li>
+                <li><a href="#确定集合">确定集合</a></li>
+                <li><a href="#字符匹配">字符匹配</a></li>
+                <li><a href="#空值查询">空值查询</a></li>
+                <li><a href="#多重条件查询">多重条件查询</a></li>
+              </ol>
+            </li>
+            <li><a href="#group-by-列名-having-条件表达式">GROUP BY 列名 HAVING 条件表达式</a>
+              <ol>
+                <li><a href="#group-by-列名">GROUP BY 列名</a></li>
+                <li><a href="#group-by-列名-having-筛选条件">GROUP BY 列名 HAVING 筛选条件</a></li>
+              </ol>
+            </li>
+            <li><a href="#order-by-次序">ORDER BY 次序</a></li>
+            <li><a href="#连接查询">连接查询</a>
+              <ol>
+                <li><a href="#两表连接查询">两表连接查询</a></li>
+                <li><a href="#单表连接查询">单表连接查询</a></li>
+                <li><a href="#外连接查询">外连接查询</a></li>
+                <li><a href="#多表连接查询">多表连接查询</a></li>
+              </ol>
+            </li>
+            <li><a href="#嵌套查询">嵌套查询</a>
+              <ol>
+                <li><a href="#集合判断in子查询">集合判断IN子查询</a></li>
+                <li><a href="#比较运算符子查询">比较运算符子查询</a></li>
+                <li><a href="#anyall子查询">ANY/ALL子查询</a></li>
+                <li><a href="#exists子查询">EXISTS子查询</a></li>
+              </ol>
+            </li>
+            <li><a href="#集合查询">集合查询</a>
+              <ol>
+                <li><a href="#union并操作满足前者或满足后者">UNION并操作（满足前者或满足后者）</a></li>
+                <li><a href="#intersect交操作前后都满足">INTERSECT交操作（前后都满足）</a></li>
+                <li><a href="#except差操作满足前者不满足后者">EXCEPT差操作（满足前者，不满足后者）</a></li>
+              </ol>
+            </li>
+            <li><a href="#基于派生表的查询">基于派生表的查询</a></li>
           </ol>
         </li>
-        <li><a href="#修改基本表">修改基本表</a>
+        <li><a href="#插入数据insert语句">插入数据&ndash;INSERT语句</a>
           <ol>
-            <li><a href="#增加新的属性列">增加新的属性列</a></li>
-            <li><a href="#增加列级完整性约束条件">增加列级完整性约束条件</a></li>
-            <li><a href="#增加表级完整性约束条件">增加表级完整性约束条件</a></li>
-            <li><a href="#删除列">删除列</a></li>
-            <li><a href="#删除指定的完整性约束条件">删除指定的完整性约束条件</a></li>
-            <li><a href="#修改列">修改列</a></li>
+            <li><a href="#插入元组">插入元组</a>
+              <ol>
+                <li><a href="#一般格式-1">一般格式</a></li>
+                <li><a href="#假设现在有tab1表有c1到c4四列其中c4列是字符串常量"><span style="font-size:20px;color:red"><strong>假设现在有TAB1表，有C1到C4四列，其中C4列是字符串常量：</strong></span></a></li>
+                <li><a href="#情况1明确给出新增元组要在哪些属性上赋值插入数据包含全部属性列">情况1：明确给出新增元组要在哪些属性上赋值（插入数据包含全部属性列）</a></li>
+                <li><a href="#情况2明确给出新增元组要在哪些属性上赋值插入数据只包含部分属性列">情况2：明确给出新增元组要在哪些属性上赋值（插入数据只包含部分属性列）</a></li>
+                <li><a href="#情况3仅指出要在tab1表上插入元组插入数据包含全部属性列">情况3：仅指出要在TAB1表上插入元组（插入数据包含全部属性列）</a></li>
+                <li><a href="#情况4仅指出要在tab1表上插入元组插入数据只包含部分属性列">情况4：仅指出要在TAB1表上插入元组（插入数据只包含部分属性列）</a></li>
+              </ol>
+            </li>
+            <li><a href="#插入子查询结果">插入子查询结果</a>
+              <ol>
+                <li><a href="#一般格式-2">一般格式</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#删除基本表">删除基本表</a></li>
-      </ol>
-    </li>
-    <li><a href="#索引">索引</a>
-      <ol>
-        <li><a href="#建立索引">建立索引</a>
+        <li><a href="#修改数据update语句">修改数据&ndash;UPDATE语句</a>
           <ol>
-            <li><a href="#建立唯一索引">建立唯一索引</a></li>
-            <li><a href="#建立聚簇索引">建立聚簇索引</a></li>
-            <li><a href="#重命名索引">重命名索引</a></li>
-            <li><a href="#删除索引">删除索引</a></li>
+            <li>
+              <ol>
+                <li><a href="#一般格式-3">一般格式</a></li>
+                <li><a href="#情况1修改某一个元组的值">情况1：修改某一个元组的值</a></li>
+                <li><a href="#情况2修改多个元组的值">情况2：修改多个元组的值</a></li>
+                <li><a href="#情况3带子查询的修改语句">情况3：带子查询的修改语句</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#查询数据select语句">查询数据&ndash;SELECT语句</a>
-      <ol>
-        <li><a href="#一般格式">一般格式</a></li>
-        <li><a href="#select-目标列表达式">SELECT 目标列表达式</a>
+        <li><a href="#删除语句delete语句">删除语句&ndash;DELETE语句</a>
           <ol>
-            <li><a href="#查询指定的列">查询指定的列</a></li>
-            <li><a href="#查询全部的列">查询全部的列</a></li>
-            <li><a href="#查询计算后的值">查询计算后的值</a></li>
-            <li><a href="#改变查询结果的列标题">改变查询结果的列标题</a></li>
-            <li><a href="#去除查询结果的重复行">去除查询结果的重复行</a></li>
+            <li>
+              <ol>
+                <li><a href="#一般格式-4">一般格式</a></li>
+                <li><a href="#情况1删除某一个元组的值">情况1：删除某一个元组的值</a></li>
+                <li><a href="#情况2修改多个元组的值-1">情况2：修改多个元组的值</a></li>
+                <li><a href="#情况3带子查询的修改语句-1">情况3：带子查询的修改语句</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#聚集函数">聚集函数</a>
+        <li><a href="#view-视图">VIEW 视图</a>
           <ol>
-            <li><a href="#统计元组个数">统计元组个数</a></li>
-            <li><a href="#统计某一列值的个数">统计某一列值的个数</a></li>
-            <li><a href="#计算某一列值的平均数该列必须为数值型">计算某一列值的平均数（该列必须为数值型）</a></li>
-            <li><a href="#计算某一列值的总和该列必须为数值型">计算某一列值的总和（该列必须为数值型）</a></li>
-            <li><a href="#计算某一列值的最大值最小值">计算某一列值的最大值/最小值</a></li>
+            <li><a href="#建立视图">建立视图</a>
+              <ol>
+                <li><a href="#一般格式-5">一般格式</a></li>
+                <li><a href="#情况1建立完全视图">情况1：建立完全视图</a></li>
+                <li><a href="#情况2建立带有增删改条件的视图">情况2：建立带有增删改条件的视图</a></li>
+                <li><a href="#情况3由视图新建视图">情况3：由视图新建视图</a></li>
+                <li><a href="#情况4带有派生数据的视图">情况4：带有派生数据的视图</a></li>
+                <li><a href="#情况5带有聚集函数和group-by的分组视图">情况5：带有聚集函数和GROUP BY的分组视图</a></li>
+              </ol>
+            </li>
+            <li><a href="#删除视图">删除视图</a></li>
+            <li><a href="#查询和更新视图">查询和更新视图</a></li>
           </ol>
         </li>
-        <li><a href="#where-条件表达式">WHERE 条件表达式</a>
+        <li><a href="#空值">空值</a>
           <ol>
-            <li><a href="#比较大小">比较大小</a></li>
-            <li><a href="#确定范围">确定范围</a></li>
-            <li><a href="#确定集合">确定集合</a></li>
-            <li><a href="#字符匹配">字符匹配</a></li>
-            <li><a href="#空值查询">空值查询</a></li>
-            <li><a href="#多重条件查询">多重条件查询</a></li>
+            <li><a href="#判断属性为空值">判断属性为空值</a></li>
+            <li><a href="#空值的运算">空值的运算</a>
+              <ol>
+                <li><a href="#算数运算">算数运算</a></li>
+                <li><a href="#比较运算">比较运算</a></li>
+                <li><a href="#在查询语句中的处理">在查询语句中的处理</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#group-by-列名-having-条件表达式">GROUP BY 列名 HAVING 条件表达式</a>
+        <li><a href="#数据库安全">数据库安全</a>
           <ol>
-            <li><a href="#group-by-列名">GROUP BY 列名</a></li>
-            <li><a href="#group-by-列名-having-筛选条件">GROUP BY 列名 HAVING 筛选条件</a></li>
-          </ol>
-        </li>
-        <li><a href="#order-by-次序">ORDER BY 次序</a></li>
-        <li><a href="#连接查询">连接查询</a>
-          <ol>
-            <li><a href="#两表连接查询">两表连接查询</a></li>
-            <li><a href="#单表连接查询">单表连接查询</a></li>
-            <li><a href="#外连接查询">外连接查询</a></li>
-            <li><a href="#多表连接查询">多表连接查询</a></li>
-          </ol>
-        </li>
-        <li><a href="#嵌套查询">嵌套查询</a>
-          <ol>
-            <li><a href="#集合判断in子查询">集合判断IN子查询</a></li>
-            <li><a href="#比较运算符子查询">比较运算符子查询</a></li>
-            <li><a href="#anyall子查询">ANY/ALL子查询</a></li>
-            <li><a href="#exists子查询">EXISTS子查询</a></li>
-          </ol>
-        </li>
-        <li><a href="#集合查询">集合查询</a>
-          <ol>
-            <li><a href="#union并操作满足前者或满足后者">UNION并操作（满足前者或满足后者）</a></li>
-            <li><a href="#intersect交操作前后都满足">INTERSECT交操作（前后都满足）</a></li>
-            <li><a href="#except差操作满足前者不满足后者">EXCEPT差操作（满足前者，不满足后者）</a></li>
-          </ol>
-        </li>
-        <li><a href="#基于派生表的查询">基于派生表的查询</a></li>
-      </ol>
-    </li>
-    <li><a href="#插入数据insert语句">插入数据&ndash;INSERT语句</a>
-      <ol>
-        <li><a href="#插入元组">插入元组</a>
-          <ol>
-            <li><a href="#一般格式-1">一般格式</a></li>
-            <li><a href="#假设现在有tab1表有c1到c4四列其中c4列是字符串常量"><span style="font-size:20px;color:red"><strong>假设现在有TAB1表，有C1到C4四列，其中C4列是字符串常量：</strong></span></a></li>
-            <li><a href="#情况1明确给出新增元组要在哪些属性上赋值插入数据包含全部属性列">情况1：明确给出新增元组要在哪些属性上赋值（插入数据包含全部属性列）</a></li>
-            <li><a href="#情况2明确给出新增元组要在哪些属性上赋值插入数据只包含部分属性列">情况2：明确给出新增元组要在哪些属性上赋值（插入数据只包含部分属性列）</a></li>
-            <li><a href="#情况3仅指出要在tab1表上插入元组插入数据包含全部属性列">情况3：仅指出要在TAB1表上插入元组（插入数据包含全部属性列）</a></li>
-            <li><a href="#情况4仅指出要在tab1表上插入元组插入数据只包含部分属性列">情况4：仅指出要在TAB1表上插入元组（插入数据只包含部分属性列）</a></li>
-          </ol>
-        </li>
-        <li><a href="#插入子查询结果">插入子查询结果</a>
-          <ol>
-            <li><a href="#一般格式-2">一般格式</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#修改数据update语句">修改数据&ndash;UPDATE语句</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#一般格式-3">一般格式</a></li>
-            <li><a href="#情况1修改某一个元组的值">情况1：修改某一个元组的值</a></li>
-            <li><a href="#情况2修改多个元组的值">情况2：修改多个元组的值</a></li>
-            <li><a href="#情况3带子查询的修改语句">情况3：带子查询的修改语句</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#删除语句delete语句">删除语句&ndash;DELETE语句</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#一般格式-4">一般格式</a></li>
-            <li><a href="#情况1删除某一个元组的值">情况1：删除某一个元组的值</a></li>
-            <li><a href="#情况2修改多个元组的值-1">情况2：修改多个元组的值</a></li>
-            <li><a href="#情况3带子查询的修改语句-1">情况3：带子查询的修改语句</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#view-视图">VIEW 视图</a>
-      <ol>
-        <li><a href="#建立视图">建立视图</a>
-          <ol>
-            <li><a href="#一般格式-5">一般格式</a></li>
-            <li><a href="#情况1建立完全视图">情况1：建立完全视图</a></li>
-            <li><a href="#情况2建立带有增删改条件的视图">情况2：建立带有增删改条件的视图</a></li>
-            <li><a href="#情况3由视图新建视图">情况3：由视图新建视图</a></li>
-            <li><a href="#情况4带有派生数据的视图">情况4：带有派生数据的视图</a></li>
-            <li><a href="#情况5带有聚集函数和group-by的分组视图">情况5：带有聚集函数和GROUP BY的分组视图</a></li>
-          </ol>
-        </li>
-        <li><a href="#删除视图">删除视图</a></li>
-        <li><a href="#查询和更新视图">查询和更新视图</a></li>
-      </ol>
-    </li>
-    <li><a href="#空值">空值</a>
-      <ol>
-        <li><a href="#判断属性为空值">判断属性为空值</a></li>
-        <li><a href="#空值的运算">空值的运算</a>
-          <ol>
-            <li><a href="#算数运算">算数运算</a></li>
-            <li><a href="#比较运算">比较运算</a></li>
-            <li><a href="#在查询语句中的处理">在查询语句中的处理</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#数据库安全">数据库安全</a>
-      <ol>
-        <li><a href="#授权">授权</a>
-          <ol>
-            <li><a href="#授予用户权限">授予用户权限</a></li>
-            <li><a href="#收回用户权限">收回用户权限</a></li>
-          </ol>
-        </li>
-        <li><a href="#创建数据库模式的权限">创建数据库模式的权限</a></li>
-        <li><a href="#数据库角色">数据库角色</a>
-          <ol>
-            <li><a href="#创建角色">创建角色</a></li>
-            <li><a href="#给角色添加角色用户">给角色添加角色/用户</a></li>
-            <li><a href="#给角色授权">给角色授权</a></li>
-            <li><a href="#收回角色权限">收回角色权限</a></li>
+            <li><a href="#授权">授权</a>
+              <ol>
+                <li><a href="#授予用户权限">授予用户权限</a></li>
+                <li><a href="#收回用户权限">收回用户权限</a></li>
+              </ol>
+            </li>
+            <li><a href="#创建数据库模式的权限">创建数据库模式的权限</a></li>
+            <li><a href="#数据库角色">数据库角色</a>
+              <ol>
+                <li><a href="#创建角色">创建角色</a></li>
+                <li><a href="#给角色添加角色用户">给角色添加角色/用户</a></li>
+                <li><a href="#给角色授权">给角色授权</a></li>
+                <li><a href="#收回角色权限">收回角色权限</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
       </ol>
@@ -619,11 +623,11 @@
 
 
         <h2 class="article-title">
-            <a href="/p/%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E9%80%9F%E9%80%9F%E7%9A%84%E9%80%9A/">进行一个SQL速速的通</a>
+            <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">快速入门SQL</a>
         </h2>
         
         <h3 class="article-subtitle">
-            学完了就能去学怎么注入了
+            数据处理最高的山
         </h3>
         
 
@@ -662,9 +666,16 @@
 
 
                <time>
-                   更新时间：2025-06-14
+                   更新时间：2025-07-02
                </time>
-           </div></footer>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
     
 
     
@@ -1537,7 +1548,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
 
         <span>
-            最后更新于 2025-06-14
+            最后更新于 2025-07-02
         </span>
     </section></footer>
 
@@ -1553,6 +1564,19 @@ C1，avg_C2列存放C2列的均值)</p>
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SQL注入：从入门到入土</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="">
@@ -1603,7 +1627,7 @@ C1，avg_C2列存放C2列的均值)</p>
     }
 </style><script>
     
-    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
 </script>
 
     
@@ -1730,42 +1754,18 @@ C1，avg_C2列存放C2列的均值)</p>
      font-family: 'yuan';  
      src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
     }
-  
+
      
      
      
     :root {
      --base-font-family: 'yuan';  
      --code-font-family: 'yuan';  
-     --toc-link-color: #000;  
-     --toc-link-active-color: orange;  
+      
     }
-  
+
      
-     
-     
-    #TableOfContents > ul,
-    ol {
-     ul,
-     ol {
-      display: none;  
-     }
-  
-     .open {
-      display: block;  
-     }
-    }
-  
-    #TableOfContents a {
-     color: var(--toc-link-color);  
-     text-decoration: none;  
-    }
-  
-    #TableOfContents a.active {
-     color: var(--toc-link-active-color);  
-     font-weight: normal;  
-    }
-  
+
      
      
      
@@ -1782,11 +1782,11 @@ C1，avg_C2列存放C2列的均值)</p>
      transition: transform 0.1s linear;  
      transform-origin: center center;  
     }
-  
+
     #backTopBtn.rotating {
      transform: rotate(360deg);  
     }
-  
+
      
      
      
@@ -1797,11 +1797,11 @@ C1，avg_C2列存放C2列的均值)</p>
      position: relative;  
      transition: max-height 0.3s ease-out;  
     }
-  
+
     .code-show {
      max-height: none !important;  
     }
-  
+
     .code-more-box {
      width: 100%;  
      padding-top: 20px;  
@@ -1813,7 +1813,7 @@ C1，avg_C2列存放C2列的均值)</p>
      z-index: 1;  
      text-align: center;  
     }
-  
+
     .code-more-btn {
      display: inline-block;  
      padding: 5px 15px;  
@@ -1823,7 +1823,7 @@ C1，avg_C2列存放C2列的均值)</p>
      font-size: 0.9em;  
     }
    </style>
-  
+
    <script>
      
      
@@ -1839,7 +1839,10 @@ C1，avg_C2列存放C2列的均值)</p>
     let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
 
     let result = days + "天" + hours + "小时" + minutes + "分钟";
-    document.getElementById('runningdays').innerHTML = result;
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
      
      
      
@@ -1850,12 +1853,12 @@ C1，avg_C2列存放C2列的均值)</p>
      if (!rightSideBar) {
       return;
      }
-  
+
      
      let btn = document.createElement("div");
      btn.id = "backTopBtn";
      let isRotating = false; 
-  
+
      btn.onclick = function() {
       if (!isRotating) {
        isRotating = true;
@@ -1865,23 +1868,23 @@ C1，avg_C2列存放C2列的均值)</p>
       }
      };
      rightSideBar.appendChild(btn);
-  
+
      
      btn.style.display = "block";
     }
-  
+
     
 
     function backToTop(button, onComplete) {
      let rotation = 0;
      let animationInterval;
-  
+
      window.scrollTo({ top: 0, behavior: "smooth" }); 
-  
+
      animationInterval = setInterval(() => {
       rotation += 30; 
       button.style.transform = `rotate(${rotation}deg)`;
-  
+
       if (window.scrollY === 0) {
        clearInterval(animationInterval); 
        button.style.transform = `rotate(0deg)`; 
@@ -1893,141 +1896,13 @@ C1，avg_C2列存放C2列的均值)</p>
       }
      }, 20); 
     }
-  
+
     
     initScrollTop();
-  
-     
-     
-     
-    function initTocHide() {
-     let toc = document.querySelector(".widget--toc");
-     if (!toc) {
-      return;
-     }
-  
-     window.addEventListener('scroll', function() {
-      
-      let openUl = document.querySelectorAll(".open");
-      if (openUl.length > 0) {
-       openUl.forEach((ul) => {
-        ul.classList.remove("open");
-       });
-      }
-  
-      
-      let currentLi = document.querySelector(".active-class");
-      if (currentLi) {
-       if (currentLi.children.length > 1) {
-        currentLi.children[1].classList.add("open"); 
-       }
-       let ul = currentLi.parentElement;
-       do {
-        ul.classList.add("open"); 
-        ul = ul.parentElement.parentElement;
-       } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
-      }
-     });
-    }
-    initTocHide();
-  
-     
-     
-     
-    function initTocHighlight() {
-     const tocLinks = document.querySelectorAll('#TableOfContents a');
-     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
-  
-     if (tocLinks.length === 0 || headings.length === 0) {
-      return;
-     }
-  
-     function getOffsetTop(element) {
-      let offsetTop = 0;
-      while (element) {
-       offsetTop += element.offsetTop;
-       element = element.offsetParent;
-      }
-      return offsetTop;
-     }
-  
-     function isElementInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-       rect.top >= 0 &&
-       rect.left >= 0 &&
-       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-     }
-  
-     function setActiveTocLink() {
-      const scrollPositionTop = window.scrollY;
-      const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
-      let activeLink = null;
-  
-      for (let i = 0; i < headings.length; i++) {
-       const currentHeading = headings[i];
-       const currentHeadingTop = getOffsetTop(currentHeading);
-       const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
-  
-       let nextHeadingTop = Infinity; 
-       if (i < headings.length - 1) {
-        nextHeadingTop = getOffsetTop(headings[i + 1]);
-       }
-  
-       
-       if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
-        activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
-        break; 
-       }
-      }
-  
-      
-      tocLinks.forEach(link => {
-       link.classList.remove('active');
-      });
-  
-      if (activeLink) {
-       activeLink.classList.add('active'); 
-       
-       let parentLi = activeLink.parentNode;
-       while (parentLi && parentLi.tagName === 'LI') {
-        let siblingUl = parentLi.querySelector('ul, ol');
-        if (siblingUl && !siblingUl.classList.contains('open')) {
-         siblingUl.classList.add('open');
-        }
-        parentLi = parentLi.parentNode;
-       }
-      }
-     }
-  
-     function expandTocOnView() {
-      headings.forEach(heading => {
-       if (isElementInViewport(heading)) {
-        const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
-        if (correspondingLink) {
-         let parentLi = correspondingLink.parentNode;
-         while (parentLi && parentLi.tagName === 'LI') {
-          let siblingUl = parentLi.querySelector('ul, ol');
-          if (siblingUl && !siblingUl.classList.contains('open')) {
-           siblingUl.classList.add('open');
-          }
-          parentLi = parentLi.parentNode;
-         }
-        }
-       }
-      });
-     }
-  
-     window.addEventListener('scroll', setActiveTocLink); 
-     window.addEventListener('scroll', expandTocOnView); 
-     
-     setActiveTocLink();
-     expandTocOnView();
-    }
-    initTocHighlight();
-  
+    
+    
+
+
      
      
      
@@ -2050,7 +1925,7 @@ C1，avg_C2列存放C2列的均值)</p>
       codeMoreBtn.classList.add('code-more-btn');
       codeMoreBtn.innerText = '显示更多'; 
       let isExpanded = false; 
-  
+
       codeMoreBtn.addEventListener('click', () => {
        if (!isExpanded) {
         codeBlock.classList.add('code-show'); 
@@ -2069,7 +1944,7 @@ C1，avg_C2列存放C2列的均值)</p>
       codeBlock.appendChild(codeMoreBox);
      });
     }
-  
+
     initCodeMoreBox();
    </script>
     </body>

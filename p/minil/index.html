@@ -10,7 +10,7 @@
 <meta property='og:description' content="部分misc解答，持续更新">
 <meta property='og:url' content='https://blog.928330.xyz/p/minil/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='ctf' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-05-09T01:17:52&#43;08:00'/><meta property='article:modified_time' content='2025-05-10T20:53:17&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='ctf' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-05-09T01:17:52&#43;08:00'/><meta property='article:modified_time' content='2025-07-02T01:28:30&#43;08:00'/>
 <meta name="twitter:title" content="MiniL">
 <meta name="twitter:description" content="部分misc解答，持续更新">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -204,7 +204,7 @@
 
         <div class="site-meta">
             <h1 class="site-name"><a href="/">kakahuote</a></h1>
-            <h2 class="site-description">握握手，握握双手</h2>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
         </div>
     </header>
 
@@ -375,8 +375,12 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#吃豆人">吃豆人</a></li>
-    <li><a href="#麦霸评分">麦霸评分</a></li>
+    <li>
+      <ol>
+        <li><a href="#吃豆人">吃豆人</a></li>
+        <li><a href="#麦霸评分">麦霸评分</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -449,9 +453,16 @@
 
 
                <time>
-                   更新时间：2025-05-10
+                   更新时间：2025-07-02
                </time>
-           </div></footer>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
     
 
     
@@ -1511,7 +1522,7 @@
 
 
         <span>
-            最后更新于 2025-05-10
+            最后更新于 2025-07-02
         </span>
     </section></footer>
 
@@ -1542,7 +1553,7 @@
     }
 </style><script>
     
-    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
 </script>
 
     
@@ -1669,42 +1680,18 @@
      font-family: 'yuan';  
      src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
     }
-  
+
      
      
      
     :root {
      --base-font-family: 'yuan';  
      --code-font-family: 'yuan';  
-     --toc-link-color: #000;  
-     --toc-link-active-color: orange;  
+      
     }
-  
+
      
-     
-     
-    #TableOfContents > ul,
-    ol {
-     ul,
-     ol {
-      display: none;  
-     }
-  
-     .open {
-      display: block;  
-     }
-    }
-  
-    #TableOfContents a {
-     color: var(--toc-link-color);  
-     text-decoration: none;  
-    }
-  
-    #TableOfContents a.active {
-     color: var(--toc-link-active-color);  
-     font-weight: normal;  
-    }
-  
+
      
      
      
@@ -1721,11 +1708,11 @@
      transition: transform 0.1s linear;  
      transform-origin: center center;  
     }
-  
+
     #backTopBtn.rotating {
      transform: rotate(360deg);  
     }
-  
+
      
      
      
@@ -1736,11 +1723,11 @@
      position: relative;  
      transition: max-height 0.3s ease-out;  
     }
-  
+
     .code-show {
      max-height: none !important;  
     }
-  
+
     .code-more-box {
      width: 100%;  
      padding-top: 20px;  
@@ -1752,7 +1739,7 @@
      z-index: 1;  
      text-align: center;  
     }
-  
+
     .code-more-btn {
      display: inline-block;  
      padding: 5px 15px;  
@@ -1762,7 +1749,7 @@
      font-size: 0.9em;  
     }
    </style>
-  
+
    <script>
      
      
@@ -1778,7 +1765,10 @@
     let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
 
     let result = days + "天" + hours + "小时" + minutes + "分钟";
-    document.getElementById('runningdays').innerHTML = result;
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
      
      
      
@@ -1789,12 +1779,12 @@
      if (!rightSideBar) {
       return;
      }
-  
+
      
      let btn = document.createElement("div");
      btn.id = "backTopBtn";
      let isRotating = false; 
-  
+
      btn.onclick = function() {
       if (!isRotating) {
        isRotating = true;
@@ -1804,23 +1794,23 @@
       }
      };
      rightSideBar.appendChild(btn);
-  
+
      
      btn.style.display = "block";
     }
-  
+
     
 
     function backToTop(button, onComplete) {
      let rotation = 0;
      let animationInterval;
-  
+
      window.scrollTo({ top: 0, behavior: "smooth" }); 
-  
+
      animationInterval = setInterval(() => {
       rotation += 30; 
       button.style.transform = `rotate(${rotation}deg)`;
-  
+
       if (window.scrollY === 0) {
        clearInterval(animationInterval); 
        button.style.transform = `rotate(0deg)`; 
@@ -1832,141 +1822,13 @@
       }
      }, 20); 
     }
-  
+
     
     initScrollTop();
-  
-     
-     
-     
-    function initTocHide() {
-     let toc = document.querySelector(".widget--toc");
-     if (!toc) {
-      return;
-     }
-  
-     window.addEventListener('scroll', function() {
-      
-      let openUl = document.querySelectorAll(".open");
-      if (openUl.length > 0) {
-       openUl.forEach((ul) => {
-        ul.classList.remove("open");
-       });
-      }
-  
-      
-      let currentLi = document.querySelector(".active-class");
-      if (currentLi) {
-       if (currentLi.children.length > 1) {
-        currentLi.children[1].classList.add("open"); 
-       }
-       let ul = currentLi.parentElement;
-       do {
-        ul.classList.add("open"); 
-        ul = ul.parentElement.parentElement;
-       } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
-      }
-     });
-    }
-    initTocHide();
-  
-     
-     
-     
-    function initTocHighlight() {
-     const tocLinks = document.querySelectorAll('#TableOfContents a');
-     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
-  
-     if (tocLinks.length === 0 || headings.length === 0) {
-      return;
-     }
-  
-     function getOffsetTop(element) {
-      let offsetTop = 0;
-      while (element) {
-       offsetTop += element.offsetTop;
-       element = element.offsetParent;
-      }
-      return offsetTop;
-     }
-  
-     function isElementInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-       rect.top >= 0 &&
-       rect.left >= 0 &&
-       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-     }
-  
-     function setActiveTocLink() {
-      const scrollPositionTop = window.scrollY;
-      const scrollPositionCenter = scrollPositionTop + window.innerHeight / 2; 
-      let activeLink = null;
-  
-      for (let i = 0; i < headings.length; i++) {
-       const currentHeading = headings[i];
-       const currentHeadingTop = getOffsetTop(currentHeading);
-       const currentHeadingBottom = currentHeadingTop + currentHeading.offsetHeight;
-  
-       let nextHeadingTop = Infinity; 
-       if (i < headings.length - 1) {
-        nextHeadingTop = getOffsetTop(headings[i + 1]);
-       }
-  
-       
-       if (scrollPositionCenter >= currentHeadingTop && scrollPositionCenter < nextHeadingTop) {
-        activeLink = document.querySelector(`#TableOfContents a[href="#${currentHeading.id}"]`);
-        break; 
-       }
-      }
-  
-      
-      tocLinks.forEach(link => {
-       link.classList.remove('active');
-      });
-  
-      if (activeLink) {
-       activeLink.classList.add('active'); 
-       
-       let parentLi = activeLink.parentNode;
-       while (parentLi && parentLi.tagName === 'LI') {
-        let siblingUl = parentLi.querySelector('ul, ol');
-        if (siblingUl && !siblingUl.classList.contains('open')) {
-         siblingUl.classList.add('open');
-        }
-        parentLi = parentLi.parentNode;
-       }
-      }
-     }
-  
-     function expandTocOnView() {
-      headings.forEach(heading => {
-       if (isElementInViewport(heading)) {
-        const correspondingLink = document.querySelector(`#TableOfContents a[href="#${heading.id}"]`);
-        if (correspondingLink) {
-         let parentLi = correspondingLink.parentNode;
-         while (parentLi && parentLi.tagName === 'LI') {
-          let siblingUl = parentLi.querySelector('ul, ol');
-          if (siblingUl && !siblingUl.classList.contains('open')) {
-           siblingUl.classList.add('open');
-          }
-          parentLi = parentLi.parentNode;
-         }
-        }
-       }
-      });
-     }
-  
-     window.addEventListener('scroll', setActiveTocLink); 
-     window.addEventListener('scroll', expandTocOnView); 
-     
-     setActiveTocLink();
-     expandTocOnView();
-    }
-    initTocHighlight();
-  
+    
+    
+
+
      
      
      
@@ -1989,7 +1851,7 @@
       codeMoreBtn.classList.add('code-more-btn');
       codeMoreBtn.innerText = '显示更多'; 
       let isExpanded = false; 
-  
+
       codeMoreBtn.addEventListener('click', () => {
        if (!isExpanded) {
         codeBlock.classList.add('code-show'); 
@@ -2008,7 +1870,7 @@
       codeBlock.appendChild(codeMoreBox);
      });
     }
-  
+
     initCodeMoreBox();
    </script>
     </body>

