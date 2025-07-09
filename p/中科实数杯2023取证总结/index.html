@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="\"第一次接触\"">
+<title>中科实数杯2023取证总结</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="中科实数杯2023取证总结">
+<meta property='og:description' content="\"第一次接触\"">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-07-09T21:17:30&#43;08:00'/><meta property='article:modified_time' content='2025-07-09T21:25:59&#43;08:00'/>
+<meta name="twitter:title" content="中科实数杯2023取证总结">
+<meta name="twitter:description" content="\"第一次接触\"">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#火眼证据分析">火眼证据分析</a></li>
+    <li><a href="#检材1计算机磁盘镜像">检材1(计算机磁盘镜像)</a>
+      <ol>
+        <li><a href="#1检材一硬盘的-md5-值为多少">1.检材一硬盘的 MD5 值为多少</a></li>
+        <li><a href="#2检材一-bitlocker-的恢复密钥是多少">2.检材一 BitLocker 的恢复密钥是多少</a></li>
+        <li><a href="#3检材一镜像中用户最近一次打开的文件名是什么">3.检材一镜像中用户最近一次打开的文件名是什么</a></li>
+        <li><a href="#4检材一硬盘系统分区的起始位置">4.检材一硬盘系统分区的起始位置</a></li>
+        <li><a href="#5检材一系统的版本号是多少格式xxxx">5.检材一系统的版本号是多少(格式:x.x.x.x)</a></li>
+        <li><a href="#6检材一回收站中的文件被删除前的路径">6.检材一回收站中的文件被删除前的路径</a></li>
+        <li><a href="#7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss">7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss">8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）</a></li>
+        <li><a href="#9检材一-chrome-浏览器最后一次搜索过的关键词是什么">9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么</a></li>
+        <li><a href="#10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码">10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码</a></li>
+        <li><a href="#11检材一-edge-浏览器最早一次下载过的文件文件名是">11.检材一 Edge 浏览器最早一次下载过的文件文件名是</a></li>
+        <li><a href="#12嫌疑人访问的微博的密码的-md5-值">12.嫌疑人访问的微博的密码的 MD5 值</a></li>
+      </ol>
+    </li>
+    <li><a href="#检材二iphone-备份数据">检材二(iPhone 备份数据)</a>
+      <ol>
+        <li><a href="#13检材二备份的设备名称是什么">13.检材二备份的设备名称是什么</a></li>
+        <li><a href="#14检材二手机的-ios-系统版本是多少">14.检材二手机的 iOS 系统版本是多少</a></li>
+        <li><a href="#15检材二备份的时间是多少格式-yyyy-mm-dd-hhmmss">15.检材二备份的时间是多少?(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss">16嫌疑人 iPhone 手机给号码&quot;13502409024&quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#17检材二使用过的号码-iccid-是多少">17.检材二使用过的号码 ICCID 是多少</a></li>
+        <li><a href="#18检材二手机中高德地图最后搜索的地址">18.检材二手机中高德地图最后搜索的地址</a></li>
+        <li><a href="#19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss">19.检材二手机最后一次登陆/注册&quot;HotsCoin&quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)</a></li>
+        <li><a href="#20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss">20.检材二手机中照片&quot;IMG_0002&quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#21检材二中小西米语音-app-的bundle-id是什么">21.检材二中&quot;小西米语音&quot; app 的Bundle ID是什么</a></li>
+        <li><a href="#22检材二中浏览器最后一次搜索的关键词是什么">22.检材二中浏览器最后一次搜索的关键词是什么</a></li>
+        <li><a href="#23嫌疑人和洗钱人员约定电子钱包的品牌是什么-如有多个用顿号分隔">23.嫌疑人和洗钱人员约定电子钱包的品牌是什么, 如有多个用顿号分隔</a></li>
+        <li><a href="#24嫌疑人和洗钱人员约定电子钱包的金额比例是什么">24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么</a></li>
+      </ol>
+    </li>
+    <li><a href="#检材三计算机内存镜像">检材三(计算机内存镜像)</a>
+      <ol>
+        <li><a href="#25检材三中进程ftk-imagerexe的-pid-是多少">25.检材三中进程&quot;FTK Imager.exe&quot;的 PID 是多少</a></li>
+        <li><a href="#26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss">26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#27检材三中记录的当前系统ip是多少">27.检材三中记录的当前系统ip是多少?</a></li>
+      </ol>
+    </li>
+    <li><a href="#检材四-红米手机备份数据">检材四 (红米手机备份数据)</a>
+      <ol>
+        <li><a href="#28检材四中迅雷下载过的文件名是什么">28.检材四中迅雷下载过的文件名是什么?</a></li>
+        <li><a href="#29检材四中安装了哪些可是实现翻墙vpn功能的-app">29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?</a></li>
+        <li><a href="#30检材四备份的设备系统版本是多少">30.检材四备份的设备系统版本是多少?</a></li>
+        <li><a href="#31检材四备份的时间是多少答案以-13-位时间戳表示">31.检材四备份的时间是多少(答案以 13 位时间戳表示)</a></li>
+        <li><a href="#32检材四中-filecompress-app-包名是什么">32.检材四中 FileCompress app 包名是什么?</a></li>
+        <li><a href="#33检材四中备忘录记录的内容是什么">33.检材四中备忘录记录的内容是什么?</a></li>
+        <li><a href="#34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔">34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔</a></li>
+        <li><a href="#35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么">35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?</a></li>
+        <li><a href="#36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置">36.MD5 值为&quot;FF3DABD0A610230C2486BFFBE15E5DFF&quot;的文件在检材四中的位置</a></li>
+      </ol>
+    </li>
+    <li><a href="#综合题目">综合题目</a>
+      <ol>
+        <li><a href="#37检材中受害人的微信号是多少">37.检材中受害人的微信号是多少?</a></li>
+        <li><a href="#38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是">38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是</a></li>
+        <li><a href="#39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码">39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码</a></li>
+        <li><a href="#40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量">40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量</a></li>
+        <li><a href="#41受害人小浩的手机号码是多少">41.受害人小浩的手机号码是多少</a></li>
+        <li><a href="#42完整的受害人名单是几个人">42.完整的受害人名单是几个人</a></li>
+        <li><a href="#43受害人转账的总金额是多少">43.受害人转账的总金额是多少</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/" >
+                比赛复盘
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">中科实数杯2023取证总结</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            &#34;第一次接触&#34;
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-07-09</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-07-09
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="火眼证据分析">火眼证据分析
+</h1><p>火眼证据分析中新建案件，选择镜像文件检材一，打开就会自动创建分析任务进行分析：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709132752466.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709132752466"
+	
+	
+></p>
+<p>也可以点击快速分析，选择任务进行分析：
+<img src="http://picture.928330.xyz/typora/image-20250709133222223.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709133222223"
+	
+	
+></p>
+<h1 id="检材1计算机磁盘镜像">检材1(计算机磁盘镜像)
+</h1><h2 id="1检材一硬盘的-md5-值为多少">1.检材一硬盘的 MD5 值为多少
+</h2><p>计算哈希，选择md5</p>
+<p>计算过程需要对加密卷解密（文件 -&gt; 右键加密分区 -&gt; 解密），因此最好先把下一问做完再进行计算：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709144006846.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709144006846"
+	
+	
+></p>
+<pre tabindex="0"><code>80518BC0DBF3315F806E9EDF7EE13C12
+</code></pre><h2 id="2检材一-bitlocker-的恢复密钥是多少">2.检材一 BitLocker 的恢复密钥是多少
+</h2><p>使用EFDD，配合检材三给出的的内存镜像爆破：</p>
+<img src="http://picture.928330.xyz/typora/image-20250709131041349.png" alt="image-20250709131041349" style="zoom:67%;" />
+<img src="http://picture.928330.xyz/typora/image-20250709131000961.png" alt="image-20250709131000961" style="zoom:67%;" />
+<pre tabindex="0"><code>585805-292292-462539-352495-691284-509212-527219-095942
+</code></pre><h2 id="3检材一镜像中用户最近一次打开的文件名是什么">3.检材一镜像中用户最近一次打开的文件名是什么
+</h2><p>依次点击：分析 -&gt; 经典视图 -&gt; 查看最后访问时间</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709134325642.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709134325642"
+	
+	
+></p>
+<p>最后一个文件名称为：</p>
+<pre tabindex="0"><code>列表.xlsx
+</code></pre><h2 id="4检材一硬盘系统分区的起始位置">4.检材一硬盘系统分区的起始位置
+</h2><p>查看系统分区：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709134940238.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709134940238"
+	
+	
+></p>
+<p>分区4是引导加载程序位置，之后的分区六应该才是主系统分区（硬盘分区），起始位置为：</p>
+<pre tabindex="0"><code>649216
+</code></pre><h2 id="5检材一系统的版本号是多少格式xxxx">5.检材一系统的版本号是多少(格式:x.x.x.x)
+</h2><p>分析 -&gt; 基本信息 -&gt; 系统信息：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709140134139.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709140134139"
+	
+	
+></p>
+<p>这里有两个版本号，组合在一起才是题目要求的格式</p>
+<p>在win10和win11中，第二位数字（次要版本号）固定为0：</p>
+<pre tabindex="0"><code>10.0.19042.508
+</code></pre><h2 id="6检材一回收站中的文件被删除前的路径">6.检材一回收站中的文件被删除前的路径
+</h2><p>分析 -&gt; 基本信息 -&gt; 回收站记录：</p>
+<p><img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250709141748631.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709141748631"
+	
+	
+></p>
+<pre tabindex="0"><code>C:/Users/rd/Desktop/iTunes(12.13.0.9).exe
+</code></pre><h2 id="7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss">7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>分析 -&gt; 基本信息 -&gt; 系统时间变更 -&gt; 时间变更记录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142136256.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709142136256"
+	
+	
+></p>
+<p>比对各个更改时间的记录的操作时间，找出最晚操作的时间的原系统时间：</p>
+<pre tabindex="0"><code>2023-12-12 16:37:12
+</code></pre><h2 id="8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss">8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）
+</h2><p>分析 -&gt; 远程桌面 -&gt; 远程连接过本机的记录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142426055.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709142426055"
+	
+	
+></p>
+<p>查看连接成功记录，比对最晚的连接时间：</p>
+<pre tabindex="0"><code>2023-12-11 15:57:02
+</code></pre><h2 id="9检材一-chrome-浏览器最后一次搜索过的关键词是什么">9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么
+</h2><p>分析 -&gt; Chrome浏览器 -&gt; 历史记录 -&gt; 最后访问时间 ：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142606570.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709142606570"
+	
+	
+></p>
+<p>从url里面看出搜索内容：</p>
+<pre tabindex="0"><code>常见的诈骗话术2023
+</code></pre><h2 id="10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码">10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码
+</h2><p>分析 -&gt; 基本信息 -&gt; USB最近使用记录 -&gt; 操作时间：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142917357.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709142917357"
+	
+	
+></p>
+<p>查看接入过的最后一个设备：</p>
+<pre tabindex="0"><code>FC2005927F271
+</code></pre><h2 id="11检材一-edge-浏览器最早一次下载过的文件文件名是">11.检材一 Edge 浏览器最早一次下载过的文件文件名是
+</h2><p>分析 -&gt; Edge浏览器 -&gt; 下载记录 -&gt; 结束时间倒序：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709143212778.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709143212778"
+	
+	
+></p>
+<p>第一个i4tools8不知道为什么没有时间，但详细条目显示时间晚于winrar：</p>
+<pre tabindex="0"><code> winrar-x64-624scp.exe
+</code></pre><h2 id="12嫌疑人访问的微博的密码的-md5-值">12.嫌疑人访问的微博的密码的 MD5 值
+</h2><p>分析 -&gt; Chrome浏览器 -&gt; 保存的密码：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709143425660.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709143425660"
+	
+	
+></p>
+<p>微博密码是<code>!dfrDj*&amp;j98_jUe8</code>，计算MD5值：</p>
+<pre tabindex="0"><code>5cb42860b3b61ef6dd361ad556f48e05
+</code></pre><h1 id="检材二iphone-备份数据">检材二(iPhone 备份数据)
+</h1><h2 id="13检材二备份的设备名称是什么">13.检材二备份的设备名称是什么
+</h2><p>分析 -&gt; 基本信息 -&gt; 设备信息：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709162101944.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709162101944"
+	
+	
+></p>
+<pre tabindex="0"><code>&#34;User&#34;的iPhone
+</code></pre><h2 id="14检材二手机的-ios-系统版本是多少">14.检材二手机的 iOS 系统版本是多少
+</h2><p>同13题图</p>
+<pre tabindex="0"><code>17.0
+</code></pre><h2 id="15检材二备份的时间是多少格式-yyyy-mm-dd-hhmmss">15.检材二备份的时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>同13题图</p>
+<pre tabindex="0"><code>2023-12-09 15:02:28
+</code></pre><h2 id="16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss">16嫌疑人 iPhone 手机给号码&quot;13502409024&quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>当前的备份文件中没有通话记录，其实这个藏在检材一中</p>
+<p>分析 -&gt; 嵌套证据识别 -&gt; IOS备份：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709171132291.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709171132291"
+	
+	
+></p>
+<p>给出了一个info.plist文件的地址，但他只是配置文件，我们需要回到上层目录，导出完整备份文件：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709171433124.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709171433124"
+	
+	
+></p>
+<p>同时，我们也能把它添加为新检材，扫描过程中会发现这是加密后的文件，需要密码</p>
+<p>使用Passware Kit Forensic爆破，这里需要爆破的文件是Manifest.plist，从后文（22题）知道是五位数密码</p>
+<p>选择Customize Settings高级设置：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173210769.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709173210769"
+	
+	
+></p>
+<p>只保留brute-force，修改成五位数字：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173334793.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709173334793"
+	
+	
+></p>
+<p>爆破：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173141338.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709173141338"
+	
+	
+></p>
+<p>输入密码后继续分析，分析完成后刷新一下，就会多出新的检材分析结果了</p>
+<p>分析 -&gt; 基本信息 -&gt; 通话记录 -&gt; 时间：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709172024138.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709172024138"
+	
+	
+></p>
+<pre tabindex="0"><code> 2023-12-04 13:18:50
+</code></pre><h2 id="17检材二使用过的号码-iccid-是多少">17.检材二使用过的号码 ICCID 是多少
+</h2><p>同13题图</p>
+<pre tabindex="0"><code>89860000191997734908
+</code></pre><h2 id="18检材二手机中高德地图最后搜索的地址">18.检材二手机中高德地图最后搜索的地址
+</h2><p>分析 -&gt; 高德地图 -&gt; 搜索点：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709170611265.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709170611265"
+	
+	
+></p>
+<pre tabindex="0"><code> 双山大道3号
+</code></pre><h2 id="19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss">19.检材二手机最后一次登陆/注册&quot;HotsCoin&quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)
+</h2><p>HotsCoin是数字交易平台，从短信中能得到登录时间</p>
+<p>分析 -&gt; 基本信息 -&gt; 短信：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709172344826.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709172344826"
+	
+	
+></p>
+<pre tabindex="0"><code>2023-12-04 13:28:14
+</code></pre><h2 id="20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss">20.检材二手机中照片&quot;IMG_0002&quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>分析 -&gt; 基本信息 -&gt; 图片 -&gt; IMG_0002：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709172828523.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709172828523"
+	
+	
+></p>
+<pre tabindex="0"><code>2023-12-06 11:08:30
+</code></pre><h2 id="21检材二中小西米语音-app-的bundle-id是什么">21.检材二中&quot;小西米语音&quot; app 的Bundle ID是什么
+</h2><p>Bundle ID是iOS应用唯一标识符，也就是包名</p>
+<p>分析 -&gt; 基本信息 -&gt; 应用列表 -&gt; 搜索小西米语音：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173624166.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709173624166"
+	
+	
+></p>
+<pre tabindex="0"><code>com.titashow.tangliao
+</code></pre><h2 id="22检材二中浏览器最后一次搜索的关键词是什么">22.检材二中浏览器最后一次搜索的关键词是什么
+</h2><p>浏览器不是uc浏览器，指的是safari</p>
+<p>分析 -&gt; Safari -&gt; 搜索历史：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173822647.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709173822647"
+	
+	
+></p>
+<pre tabindex="0"><code>ios备份密码忘了怎么办 五位纯数字
+</code></pre><p>这里也就是在提示前面的加密备份文件的密码</p>
+<h2 id="23嫌疑人和洗钱人员约定电子钱包的品牌是什么-如有多个用顿号分隔">23.嫌疑人和洗钱人员约定电子钱包的品牌是什么, 如有多个用顿号分隔
+</h2><p>微信聊天记录和信息里都没有相关信息，其他应用里面只有小西米语音有可能了</p>
+<p>分析 -&gt; 其他应用 -&gt; 小西米语音 -&gt; 在线连麦平台 -&gt; 文件分类 -&gt; SQLite 文件</p>
+<p>其他应用是耗时分析，火眼不会自动分析，需要手动进行选择分析</p>
+<blockquote>
+<p>本来应该是有im5db这个数据库的，我的分析结果里面没有，其他六个都有，也许是因为后缀的原因？</p>
+<p>所以直接沿着下面这个路径找了：</p>
+<p>/Documents/IM5_CN/9031bc3c805ac5e55ecaa151092c2c4b/IM5_storage/1399634813467579522/im5db</p></blockquote>
+<p>查看message表的content字段：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709180909839.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709180909839"
+	
+	
+></p>
+<pre tabindex="0"><code>imToken、Bitcoin
+</code></pre><h2 id="24嫌疑人和洗钱人员约定电子钱包的金额比例是什么">24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么
+</h2><p>同上题图：</p>
+<pre tabindex="0"><code>0.2
+</code></pre><h1 id="检材三计算机内存镜像">检材三(计算机内存镜像)
+</h1><h2 id="25检材三中进程ftk-imagerexe的-pid-是多少">25.检材三中进程&quot;FTK Imager.exe&quot;的 PID 是多少
+</h2><p>不知道为什么我的volatility2不能分析出win10的结果，只好使用volatility3：</p>
+<pre tabindex="0"><code>python3 vol.py -f ../memdump2023.raw windows.pslist.PsList | grep FTK
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250709195208579.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709195208579"
+	
+	
+></p>
+<pre tabindex="0"><code>11328
+</code></pre><h2 id="26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss">26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+</h2><pre tabindex="0"><code>python3 vol.py -f ../memdump2023.raw windows.info.Info  
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250709211018795.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709211018795"
+	
+	
+></p>
+<pre tabindex="0"><code> 2023-12-12 04:06:25
+</code></pre><h2 id="27检材三中记录的当前系统ip是多少">27.检材三中记录的当前系统ip是多少?
+</h2><pre tabindex="0"><code>python3 vol.py -f ../memdump2023.raw windows.netscan.NetScan
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250709200824096.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709200824096"
+	
+	
+></p>
+<pre tabindex="0"><code>172.18.7.229
+</code></pre><h1 id="检材四-红米手机备份数据">检材四 (红米手机备份数据)
+</h1><h2 id="28检材四中迅雷下载过的文件名是什么">28.检材四中迅雷下载过的文件名是什么?
+</h2><p>分析 -&gt; 迅雷 -&gt; 云盘 -&gt; 离线下载目录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709193648459.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709193648459"
+	
+	
+></p>
+<pre tabindex="0"><code>《向银河靠近》.txt
+</code></pre><h2 id="29检材四中安装了哪些可是实现翻墙vpn功能的-app">29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?
+</h2><p>没啥说的：
+<img src="http://picture.928330.xyz/typora/image-20250709193825301.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709193825301"
+	
+	
+></p>
+<pre tabindex="0"><code>clash
+</code></pre><h2 id="30检材四备份的设备系统版本是多少">30.检材四备份的设备系统版本是多少?
+</h2><p>分析 -&gt; 基本信息-&gt; 设备信息 -&gt; 厂商版本：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709193935053.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709193935053"
+	
+	
+></p>
+<pre tabindex="0"><code> V14.0.2.0.TKSCNXM
+</code></pre><h2 id="31检材四备份的时间是多少答案以-13-位时间戳表示">31.检材四备份的时间是多少(答案以 13 位时间戳表示)
+</h2><p>同上题图，转换时间戳（2023-12-13 17:20:32）：</p>
+<pre tabindex="0"><code>1702459232429
+</code></pre><h2 id="32检材四中-filecompress-app-包名是什么">32.检材四中 FileCompress app 包名是什么?
+</h2><p>包名就在检材里面列出，复制黏贴就行：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709195000907.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709195000907"
+	
+	
+></p>
+<pre tabindex="0"><code>com.zs.filecompress
+</code></pre><h2 id="33检材四中备忘录记录的内容是什么">33.检材四中备忘录记录的内容是什么?
+</h2><p>分析 -&gt; 基本信息-&gt; 便签：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709194341673.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709194341673"
+	
+	
+></p>
+<pre tabindex="0"><code>Vcpswd:edgewallet
+</code></pre><h2 id="34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔">34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔
+</h2><p>直接搜索检材里的app，一共六个：
+<img src="http://picture.928330.xyz/typora/image-20250709195051880.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709195051880"
+	
+	
+></p>
+<pre tabindex="0"><code>de.schildbach.wallet、com.bitcoin.mwallet、 piuk.blockchain.android、im.token.app、com.paxful.wallet、pro.huobi
+</code></pre><h2 id="35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么">35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?
+</h2><p>在下面路径中找到并导出日志文件：</p>
+<pre tabindex="0"><code>Bitcoin Wallet(de.schildbach.wallet).bak/apps/de.schildbach.wallet/f/log/wallet.log
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250709200125980.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709200125980"
+	
+	
+></p>
+<p>搜索<code>walletaddress</code>：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709200547089.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709200547089"
+	
+	
+></p>
+<pre tabindex="0"><code>bc1q4ru3a8r0vzymwwcmawvtdyf6hkvt2x9477hjkt
+</code></pre><h2 id="36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置">36.MD5 值为&quot;FF3DABD0A610230C2486BFFBE15E5DFF&quot;的文件在检材四中的位置
+</h2><p>这一题据说是结合前面提到的FileCompress一路找下去就能发现，不过太电波了</p>
+<p>这里更好的办法是用HashMyFiles，全部算一遍再搜索：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709202128966.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709202128966"
+	
+	
+></p>
+<pre tabindex="0"><code>FileCompress(com.zs.filecompress).bak\FileCompress\11月.txt
+</code></pre><h1 id="综合题目">综合题目
+</h1><h2 id="37检材中受害人的微信号是多少">37.检材中受害人的微信号是多少?
+</h2><p>检材二 -&gt; 微信 -&gt; 好友消息，根据聊天记录能判断出受害者就是小浩：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709202302479.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709202302479"
+	
+	
+></p>
+<pre tabindex="0"><code>B-I-N-A-R-Y
+</code></pre><h2 id="38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是">38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是
+</h2><p>从另一个微信好友里面能发现购买数据库的名称为database.sqlite：
+<img src="http://picture.928330.xyz/typora/image-20250709202654797.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709202654797"
+	
+	
+></p>
+<p>这个数据库手机看不了，在电脑里能看：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709202742412.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709202742412"
+	
+	
+></p>
+<p>链接数据库后查找：</p>
+<pre tabindex="0"><code>章敏
+</code></pre><h2 id="39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码">39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码
+</h2><p>加密iOS备份 -&gt; 钥匙串 -&gt; 网站与应用密码，我们已经知道小西米的包名<code>com.titashow.tangliao</code>：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709203150613.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709203150613"
+	
+	
+></p>
+<pre tabindex="0"><code> jamvU1@wiwgug$bo
+</code></pre><h2 id="40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量">40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量
+</h2><p>在38题中得到的database数据库里进行查询：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#c678dd">count</span>(<span style="color:#56b6c2">*</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">users</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> (<span style="color:#98c379">&#39;2023&#39;</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">substr</span>(<span style="color:#e06c75">IDCARD</span>, <span style="color:#d19a66">7</span>, <span style="color:#d19a66">4</span>)) <span style="color:#c678dd">between</span> <span style="color:#d19a66">18</span> <span style="color:#c678dd">and</span> <span style="color:#d19a66">30</span>;
+</span></span></code></pre></div><p>得到结果：</p>
+<pre tabindex="0"><code class="language-sq" data-lang="sq">1717
+</code></pre><h2 id="41受害人小浩的手机号码是多少">41.受害人小浩的手机号码是多少
+</h2><p>在上面的数据库中没有找到叫小浩的人，微信和短信也没有小浩的联系方式</p>
+<p>结果是之前找到的11月.txt是受害者名单，怎么发现的呢？</p>
+<p>在检材1的20231212.E01/分区6/Users/rd/Documents下有一个新建文本文档.txt，有80+MB</p>
+<p>之前备忘录发现的内容Vcpswd:edgewallet，在检材一edge密码中找到对应内容：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709205612210.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709205612210"
+	
+	
+></p>
+<p>从字面猜测这个密码应该就是vc加密的密码<code>pR7)nZ5&amp;yQ2-oR0&lt;</code>，而加密卷应该就是那个很大的txt文件</p>
+<p>挂载：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709205220440.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709205220440"
+	
+	
+></p>
+<p>发现里面存在9月和10月两个名单：
+<img src="http://picture.928330.xyz/typora/image-20250709205824323.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709205824323"
+	
+	
+>九月是未加密的txt文件，十月却不是txt文件，而是一个pk开头的压缩包，应该是和11月一样的加密方式</p>
+<p>压缩包密码藏在了FileCompress软件中，jadx逆向得到<code>1!8Da9Re5it2b3a.</code>，解密10月和11月：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709210608385.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250709210608385"
+	
+	
+></p>
+<p>小浩的手机号：</p>
+<pre tabindex="0"><code class="language-sq" data-lang="sq">13533333333
+</code></pre><h2 id="42完整的受害人名单是几个人">42.完整的受害人名单是几个人
+</h2><p>上题得知，一共6人</p>
+<h2 id="43受害人转账的总金额是多少">43.受害人转账的总金额是多少
+</h2><p>检材二中有一次付款，加密备份中有两次付款，每次都是200，通过上下文语境能知道三次付款没有重叠</p>
+<pre tabindex="0"><code class="language-sq" data-lang="sq">600
+</code></pre>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/forensics/">Forensics</a>
+        
+            <a href="/tags/misc/">Misc</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-07-09
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>

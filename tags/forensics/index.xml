@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Forensics on kakahuote</title>
+        <link>https://blog.928330.xyz/tags/forensics/</link>
+        <description>Recent content in Forensics on kakahuote</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Example Person</copyright>
+        <lastBuildDate>Wed, 09 Jul 2025 21:25:59 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/forensics/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>中科实数杯2023取证总结</title>
+        <link>https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
+        <pubDate>Wed, 09 Jul 2025 21:17:30 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;h1 id=&#34;火眼证据分析&#34;&gt;火眼证据分析
+&lt;/h1&gt;&lt;p&gt;火眼证据分析中新建案件，选择镜像文件检材一，打开就会自动创建分析任务进行分析：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709132752466.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709132752466&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;也可以点击快速分析，选择任务进行分析：
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709133222223.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709133222223&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;检材1计算机磁盘镜像&#34;&gt;检材1(计算机磁盘镜像)
+&lt;/h1&gt;&lt;h2 id=&#34;1检材一硬盘的-md5-值为多少&#34;&gt;1.检材一硬盘的 MD5 值为多少
+&lt;/h2&gt;&lt;p&gt;计算哈希，选择md5&lt;/p&gt;
+&lt;p&gt;计算过程需要对加密卷解密（文件 -&amp;gt; 右键加密分区 -&amp;gt; 解密），因此最好先把下一问做完再进行计算：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709144006846.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709144006846&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;80518BC0DBF3315F806E9EDF7EE13C12
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2检材一-bitlocker-的恢复密钥是多少&#34;&gt;2.检材一 BitLocker 的恢复密钥是多少
+&lt;/h2&gt;&lt;p&gt;使用EFDD，配合检材三给出的的内存镜像爆破：&lt;/p&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709131041349.png&#34; alt=&#34;image-20250709131041349&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709131000961.png&#34; alt=&#34;image-20250709131000961&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;585805-292292-462539-352495-691284-509212-527219-095942
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;3检材一镜像中用户最近一次打开的文件名是什么&#34;&gt;3.检材一镜像中用户最近一次打开的文件名是什么
+&lt;/h2&gt;&lt;p&gt;依次点击：分析 -&amp;gt; 经典视图 -&amp;gt; 查看最后访问时间&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709134325642.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709134325642&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;最后一个文件名称为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;列表.xlsx
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;4检材一硬盘系统分区的起始位置&#34;&gt;4.检材一硬盘系统分区的起始位置
+&lt;/h2&gt;&lt;p&gt;查看系统分区：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709134940238.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709134940238&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;分区4是引导加载程序位置，之后的分区六应该才是主系统分区（硬盘分区），起始位置为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;649216
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;5检材一系统的版本号是多少格式xxxx&#34;&gt;5.检材一系统的版本号是多少(格式:x.x.x.x)
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 系统信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709140134139.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709140134139&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里有两个版本号，组合在一起才是题目要求的格式&lt;/p&gt;
+&lt;p&gt;在win10和win11中，第二位数字（次要版本号）固定为0：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;10.0.19042.508
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;6检材一回收站中的文件被删除前的路径&#34;&gt;6.检材一回收站中的文件被删除前的路径
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 回收站记录：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250709141748631.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709141748631&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:/Users/rd/Desktop/iTunes(12.13.0.9).exe
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss&#34;&gt;7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 系统时间变更 -&amp;gt; 时间变更记录：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142136256.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709142136256&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;比对各个更改时间的记录的操作时间，找出最晚操作的时间的原系统时间：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-12 16:37:12
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss&#34;&gt;8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 远程桌面 -&amp;gt; 远程连接过本机的记录：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142426055.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709142426055&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看连接成功记录，比对最晚的连接时间：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-11 15:57:02
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;9检材一-chrome-浏览器最后一次搜索过的关键词是什么&#34;&gt;9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; Chrome浏览器 -&amp;gt; 历史记录 -&amp;gt; 最后访问时间 ：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142606570.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709142606570&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;从url里面看出搜索内容：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;常见的诈骗话术2023
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码&#34;&gt;10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; USB最近使用记录 -&amp;gt; 操作时间：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142917357.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709142917357&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看接入过的最后一个设备：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;FC2005927F271
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;11检材一-edge-浏览器最早一次下载过的文件文件名是&#34;&gt;11.检材一 Edge 浏览器最早一次下载过的文件文件名是
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; Edge浏览器 -&amp;gt; 下载记录 -&amp;gt; 结束时间倒序：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709143212778.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709143212778&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;第一个i4tools8不知道为什么没有时间，但详细条目显示时间晚于winrar：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; winrar-x64-624scp.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;12嫌疑人访问的微博的密码的-md5-值&#34;&gt;12.嫌疑人访问的微博的密码的 MD5 值
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; Chrome浏览器 -&amp;gt; 保存的密码：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709143425660.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709143425660&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;微博密码是&lt;code&gt;!dfrDj*&amp;amp;j98_jUe8&lt;/code&gt;，计算MD5值：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;5cb42860b3b61ef6dd361ad556f48e05
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;检材二iphone-备份数据&#34;&gt;检材二(iPhone 备份数据)
+&lt;/h1&gt;&lt;h2 id=&#34;13检材二备份的设备名称是什么&#34;&gt;13.检材二备份的设备名称是什么
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 设备信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709162101944.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709162101944&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;User&amp;#34;的iPhone
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;14检材二手机的-ios-系统版本是多少&#34;&gt;14.检材二手机的 iOS 系统版本是多少
+&lt;/h2&gt;&lt;p&gt;同13题图&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;17.0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;15检材二备份的时间是多少格式-yyyy-mm-dd-hhmmss&#34;&gt;15.检材二备份的时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+&lt;/h2&gt;&lt;p&gt;同13题图&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-09 15:02:28
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss&#34;&gt;16嫌疑人 iPhone 手机给号码&amp;quot;13502409024&amp;quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)
+&lt;/h2&gt;&lt;p&gt;当前的备份文件中没有通话记录，其实这个藏在检材一中&lt;/p&gt;
+&lt;p&gt;分析 -&amp;gt; 嵌套证据识别 -&amp;gt; IOS备份：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709171132291.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709171132291&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;给出了一个info.plist文件的地址，但他只是配置文件，我们需要回到上层目录，导出完整备份文件：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709171433124.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709171433124&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;同时，我们也能把它添加为新检材，扫描过程中会发现这是加密后的文件，需要密码&lt;/p&gt;
+&lt;p&gt;使用Passware Kit Forensic爆破，这里需要爆破的文件是Manifest.plist，从后文（22题）知道是五位数密码&lt;/p&gt;
+&lt;p&gt;选择Customize Settings高级设置：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709173210769.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709173210769&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;只保留brute-force，修改成五位数字：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709173334793.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709173334793&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;爆破：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709173141338.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709173141338&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;输入密码后继续分析，分析完成后刷新一下，就会多出新的检材分析结果了&lt;/p&gt;
+&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 通话记录 -&amp;gt; 时间：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709172024138.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709172024138&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 2023-12-04 13:18:50
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;17检材二使用过的号码-iccid-是多少&#34;&gt;17.检材二使用过的号码 ICCID 是多少
+&lt;/h2&gt;&lt;p&gt;同13题图&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;89860000191997734908
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;18检材二手机中高德地图最后搜索的地址&#34;&gt;18.检材二手机中高德地图最后搜索的地址
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 高德地图 -&amp;gt; 搜索点：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709170611265.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709170611265&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 双山大道3号
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss&#34;&gt;19.检材二手机最后一次登陆/注册&amp;quot;HotsCoin&amp;quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)
+&lt;/h2&gt;&lt;p&gt;HotsCoin是数字交易平台，从短信中能得到登录时间&lt;/p&gt;
+&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 短信：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709172344826.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709172344826&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-04 13:28:14
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss&#34;&gt;20.检材二手机中照片&amp;quot;IMG_0002&amp;quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 图片 -&amp;gt; IMG_0002：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709172828523.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709172828523&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-06 11:08:30
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;21检材二中小西米语音-app-的bundle-id是什么&#34;&gt;21.检材二中&amp;quot;小西米语音&amp;quot; app 的Bundle ID是什么
+&lt;/h2&gt;&lt;p&gt;Bundle ID是iOS应用唯一标识符，也就是包名&lt;/p&gt;
+&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 应用列表 -&amp;gt; 搜索小西米语音：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709173624166.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709173624166&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;com.titashow.tangliao
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;22检材二中浏览器最后一次搜索的关键词是什么&#34;&gt;22.检材二中浏览器最后一次搜索的关键词是什么
+&lt;/h2&gt;&lt;p&gt;浏览器不是uc浏览器，指的是safari&lt;/p&gt;
+&lt;p&gt;分析 -&amp;gt; Safari -&amp;gt; 搜索历史：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709173822647.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709173822647&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ios备份密码忘了怎么办 五位纯数字
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里也就是在提示前面的加密备份文件的密码&lt;/p&gt;
+&lt;h2 id=&#34;23嫌疑人和洗钱人员约定电子钱包的品牌是什么-如有多个用顿号分隔&#34;&gt;23.嫌疑人和洗钱人员约定电子钱包的品牌是什么, 如有多个用顿号分隔
+&lt;/h2&gt;&lt;p&gt;微信聊天记录和信息里都没有相关信息，其他应用里面只有小西米语音有可能了&lt;/p&gt;
+&lt;p&gt;分析 -&amp;gt; 其他应用 -&amp;gt; 小西米语音 -&amp;gt; 在线连麦平台 -&amp;gt; 文件分类 -&amp;gt; SQLite 文件&lt;/p&gt;
+&lt;p&gt;其他应用是耗时分析，火眼不会自动分析，需要手动进行选择分析&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本来应该是有im5db这个数据库的，我的分析结果里面没有，其他六个都有，也许是因为后缀的原因？&lt;/p&gt;
+&lt;p&gt;所以直接沿着下面这个路径找了：&lt;/p&gt;
+&lt;p&gt;/Documents/IM5_CN/9031bc3c805ac5e55ecaa151092c2c4b/IM5_storage/1399634813467579522/im5db&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;查看message表的content字段：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709180909839.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709180909839&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;imToken、Bitcoin
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;24嫌疑人和洗钱人员约定电子钱包的金额比例是什么&#34;&gt;24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么
+&lt;/h2&gt;&lt;p&gt;同上题图：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;0.2
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;检材三计算机内存镜像&#34;&gt;检材三(计算机内存镜像)
+&lt;/h1&gt;&lt;h2 id=&#34;25检材三中进程ftk-imagerexe的-pid-是多少&#34;&gt;25.检材三中进程&amp;quot;FTK Imager.exe&amp;quot;的 PID 是多少
+&lt;/h2&gt;&lt;p&gt;不知道为什么我的volatility2不能分析出win10的结果，只好使用volatility3：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 vol.py -f ../memdump2023.raw windows.pslist.PsList | grep FTK
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709195208579.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709195208579&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;11328
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss&#34;&gt;26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 vol.py -f ../memdump2023.raw windows.info.Info  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709211018795.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709211018795&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 2023-12-12 04:06:25
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;27检材三中记录的当前系统ip是多少&#34;&gt;27.检材三中记录的当前系统ip是多少?
+&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 vol.py -f ../memdump2023.raw windows.netscan.NetScan
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200824096.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709200824096&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;172.18.7.229
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;检材四-红米手机备份数据&#34;&gt;检材四 (红米手机备份数据)
+&lt;/h1&gt;&lt;h2 id=&#34;28检材四中迅雷下载过的文件名是什么&#34;&gt;28.检材四中迅雷下载过的文件名是什么?
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 迅雷 -&amp;gt; 云盘 -&amp;gt; 离线下载目录：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709193648459.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709193648459&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;《向银河靠近》.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;29检材四中安装了哪些可是实现翻墙vpn功能的-app&#34;&gt;29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?
+&lt;/h2&gt;&lt;p&gt;没啥说的：
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709193825301.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709193825301&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;clash
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;30检材四备份的设备系统版本是多少&#34;&gt;30.检材四备份的设备系统版本是多少?
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息-&amp;gt; 设备信息 -&amp;gt; 厂商版本：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709193935053.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709193935053&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; V14.0.2.0.TKSCNXM
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;31检材四备份的时间是多少答案以-13-位时间戳表示&#34;&gt;31.检材四备份的时间是多少(答案以 13 位时间戳表示)
+&lt;/h2&gt;&lt;p&gt;同上题图，转换时间戳（2023-12-13 17:20:32）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1702459232429
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;32检材四中-filecompress-app-包名是什么&#34;&gt;32.检材四中 FileCompress app 包名是什么?
+&lt;/h2&gt;&lt;p&gt;包名就在检材里面列出，复制黏贴就行：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709195000907.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709195000907&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;com.zs.filecompress
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;33检材四中备忘录记录的内容是什么&#34;&gt;33.检材四中备忘录记录的内容是什么?
+&lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息-&amp;gt; 便签：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709194341673.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709194341673&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Vcpswd:edgewallet
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔&#34;&gt;34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔
+&lt;/h2&gt;&lt;p&gt;直接搜索检材里的app，一共六个：
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709195051880.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709195051880&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;de.schildbach.wallet、com.bitcoin.mwallet、 piuk.blockchain.android、im.token.app、com.paxful.wallet、pro.huobi
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么&#34;&gt;35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?
+&lt;/h2&gt;&lt;p&gt;在下面路径中找到并导出日志文件：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Bitcoin Wallet(de.schildbach.wallet).bak/apps/de.schildbach.wallet/f/log/wallet.log
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200125980.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709200125980&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;搜索&lt;code&gt;walletaddress&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200547089.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709200547089&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bc1q4ru3a8r0vzymwwcmawvtdyf6hkvt2x9477hjkt
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置&#34;&gt;36.MD5 值为&amp;quot;FF3DABD0A610230C2486BFFBE15E5DFF&amp;quot;的文件在检材四中的位置
+&lt;/h2&gt;&lt;p&gt;这一题据说是结合前面提到的FileCompress一路找下去就能发现，不过太电波了&lt;/p&gt;
+&lt;p&gt;这里更好的办法是用HashMyFiles，全部算一遍再搜索：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709202128966.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709202128966&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;FileCompress(com.zs.filecompress).bak\FileCompress\11月.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;综合题目&#34;&gt;综合题目
+&lt;/h1&gt;&lt;h2 id=&#34;37检材中受害人的微信号是多少&#34;&gt;37.检材中受害人的微信号是多少?
+&lt;/h2&gt;&lt;p&gt;检材二 -&amp;gt; 微信 -&amp;gt; 好友消息，根据聊天记录能判断出受害者就是小浩：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709202302479.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709202302479&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;B-I-N-A-R-Y
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是&#34;&gt;38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是
+&lt;/h2&gt;&lt;p&gt;从另一个微信好友里面能发现购买数据库的名称为database.sqlite：
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709202654797.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709202654797&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这个数据库手机看不了，在电脑里能看：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709202742412.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709202742412&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;链接数据库后查找：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;章敏
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码&#34;&gt;39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码
+&lt;/h2&gt;&lt;p&gt;加密iOS备份 -&amp;gt; 钥匙串 -&amp;gt; 网站与应用密码，我们已经知道小西米的包名&lt;code&gt;com.titashow.tangliao&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709203150613.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709203150613&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; jamvU1@wiwgug$bo
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量&#34;&gt;40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量
+&lt;/h2&gt;&lt;p&gt;在38题中得到的database数据库里进行查询：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;count&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;users&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; (&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;2023&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;substr&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;IDCARD&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;)) &lt;span style=&#34;color:#c678dd&#34;&gt;between&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;18&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;30&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;得到结果：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-sq&#34; data-lang=&#34;sq&#34;&gt;1717
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;41受害人小浩的手机号码是多少&#34;&gt;41.受害人小浩的手机号码是多少
+&lt;/h2&gt;&lt;p&gt;在上面的数据库中没有找到叫小浩的人，微信和短信也没有小浩的联系方式&lt;/p&gt;
+&lt;p&gt;结果是之前找到的11月.txt是受害者名单，怎么发现的呢？&lt;/p&gt;
+&lt;p&gt;在检材1的20231212.E01/分区6/Users/rd/Documents下有一个新建文本文档.txt，有80+MB&lt;/p&gt;
+&lt;p&gt;之前备忘录发现的内容Vcpswd:edgewallet，在检材一edge密码中找到对应内容：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709205612210.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709205612210&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;从字面猜测这个密码应该就是vc加密的密码&lt;code&gt;pR7)nZ5&amp;amp;yQ2-oR0&amp;lt;&lt;/code&gt;，而加密卷应该就是那个很大的txt文件&lt;/p&gt;
+&lt;p&gt;挂载：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709205220440.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709205220440&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;发现里面存在9月和10月两个名单：
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709205824323.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709205824323&#34;
+	
+	
+&gt;九月是未加密的txt文件，十月却不是txt文件，而是一个pk开头的压缩包，应该是和11月一样的加密方式&lt;/p&gt;
+&lt;p&gt;压缩包密码藏在了FileCompress软件中，jadx逆向得到&lt;code&gt;1!8Da9Re5it2b3a.&lt;/code&gt;，解密10月和11月：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709210608385.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250709210608385&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;小浩的手机号：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-sq&#34; data-lang=&#34;sq&#34;&gt;13533333333
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;42完整的受害人名单是几个人&#34;&gt;42.完整的受害人名单是几个人
+&lt;/h2&gt;&lt;p&gt;上题得知，一共6人&lt;/p&gt;
+&lt;h2 id=&#34;43受害人转账的总金额是多少&#34;&gt;43.受害人转账的总金额是多少
+&lt;/h2&gt;&lt;p&gt;检材二中有一次付款，加密备份中有两次付款，每次都是200，通过上下文语境能知道三次付款没有重叠&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-sq&#34; data-lang=&#34;sq&#34;&gt;600
+&lt;/code&gt;&lt;/pre&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

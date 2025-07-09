@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Wed, 02 Jul 2025 01:28:30 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 09 Jul 2025 21:25:59 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Forensics</title>
+        <link>https://blog.928330.xyz/tags/forensics/</link>
+        <pubDate>Wed, 09 Jul 2025 21:17:30 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/tags/forensics/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Misc</title>
+        <link>https://blog.928330.xyz/tags/misc/</link>
+        <pubDate>Wed, 09 Jul 2025 21:17:30 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/tags/misc/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>SQL</title>
         <link>https://blog.928330.xyz/tags/sql/</link>
         <pubDate>Wed, 02 Jul 2025 00:52:02 +0800</pubDate>
@@ -16,27 +32,11 @@
         <description></description>
         </item>
         <item>
-        <title>Misc</title>
-        <link>https://blog.928330.xyz/tags/misc/</link>
-        <pubDate>Wed, 14 May 2025 01:15:30 +0800</pubDate>
-        
-        <guid>https://blog.928330.xyz/tags/misc/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>Web</title>
         <link>https://blog.928330.xyz/tags/web/</link>
         <pubDate>Wed, 14 May 2025 01:15:30 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/tags/web/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Ctf</title>
-        <link>https://blog.928330.xyz/tags/ctf/</link>
-        <pubDate>Fri, 09 May 2025 01:17:52 +0800</pubDate>
-        
-        <guid>https://blog.928330.xyz/tags/ctf/</guid>
         <description></description>
         </item>
         <item>

