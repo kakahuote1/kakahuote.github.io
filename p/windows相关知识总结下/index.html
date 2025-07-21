@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="进程 • DLL • 系统调用 • 驱动 • 内核回调">
+<title>windows相关知识总结（下）</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="windows相关知识总结（下）">
+<meta property='og:description' content="进程 • DLL • 系统调用 • 驱动 • 内核回调">
+<meta property='og:url' content='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-07-21T12:18:54&#43;08:00'/><meta property='article:modified_time' content='2025-07-21T13:15:36&#43;08:00'/>
+<meta name="twitter:title" content="windows相关知识总结（下）">
+<meta name="twitter:description" content="进程 • DLL • 系统调用 • 驱动 • 内核回调">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#进程">进程</a>
+      <ol>
+        <li><a href="#常见进程">常见进程</a>
+          <ol>
+            <li><a href="#初始化进程">初始化进程</a>
+              <ol>
+                <li><a href="#system">System</a></li>
+                <li><a href="#smssexe">smss.exe</a></li>
+                <li><a href="#csrssexe">csrss.exe</a></li>
+                <li><a href="#wininitexe">wininit.exe</a></li>
+                <li><a href="#winlogonexe">winlogon.exe</a></li>
+                <li><a href="#userinitexe">userinit.exe</a></li>
+                <li><a href="#explorerexe">explorer.exe</a></li>
+              </ol>
+            </li>
+            <li><a href="#核心服务进程">核心服务进程</a>
+              <ol>
+                <li><a href="#servicesexe">services.exe</a></li>
+                <li><a href="#lsassexe">lsass.exe</a></li>
+                <li><a href="#lsmexe">lsm.exe</a></li>
+                <li><a href="#svchostexe">svchost.exe</a></li>
+              </ol>
+            </li>
+            <li><a href="#脚本执行进程">脚本执行进程</a>
+              <ol>
+                <li><a href="#rundll32exe">rundll32.exe</a></li>
+                <li><a href="#powershellexe">powershell.exe</a></li>
+                <li><a href="#conhostexe">conhost.exe</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#进程权限">进程权限</a>
+          <ol>
+            <li><a href="#系统级核心特权">系统级核心特权</a>
+              <ol>
+                <li><a href="#setcbprivilege">SeTcbPrivilege</a></li>
+                <li><a href="#sedebugprivilege">SeDebugPrivilege</a></li>
+                <li><a href="#seloaddriverprivilege">SeLoadDriverPrivilege</a></li>
+              </ol>
+            </li>
+            <li><a href="#安全与审计特权">安全与审计特权</a>
+              <ol>
+                <li><a href="#setakeownershipprivilege">SeTakeOwnershipPrivilege</a></li>
+                <li><a href="#sebackupprivilege">SeBackupPrivilege</a></li>
+                <li><a href="#serestoreprivilege">SeRestorePrivilege</a></li>
+                <li><a href="#sesecurityprivilege">SeSecurityPrivilege</a></li>
+              </ol>
+            </li>
+            <li><a href="#常规特权">常规特权</a>
+              <ol>
+                <li><a href="#seshutdownprivilege">SeShutdownPrivilege</a></li>
+                <li><a href="#seimpersonateprivilege">SeImpersonatePrivilege</a></li>
+                <li><a href="#sechangenotifyprivilege">SeChangeNotifyPrivilege</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#dll">DLL</a>
+      <ol>
+        <li><a href="#什么是dll">什么是DLL</a></li>
+        <li><a href="#dll的调用方式">DLL的调用方式</a>
+          <ol>
+            <li><a href="#1-静态调用--隐式链接">1. 静态调用 / 隐式链接</a></li>
+            <li><a href="#2-动态调用--显式链接">2. 动态调用 / 显式链接</a></li>
+          </ol>
+        </li>
+        <li><a href="#常见dll">常见DLL</a>
+          <ol>
+            <li><a href="#核心系统库-几乎所有进程都会加载">核心系统库 (几乎所有进程都会加载)</a>
+              <ol>
+                <li><a href="#ntdlldll">ntdll.dll</a></li>
+                <li><a href="#kernel32dll--kernelbasedll">kernel32.dll / kernelbase.dll</a></li>
+                <li><a href="#user32dll">user32.dll</a></li>
+                <li><a href="#gdi32dll">gdi32.dll</a></li>
+                <li><a href="#comdlg32dll">comdlg32.dll</a></li>
+                <li><a href="#advapi32dll">advapi32.dll</a></li>
+              </ol>
+            </li>
+            <li><a href="#网络通信库-判断网络行为的关键">网络通信库 (判断网络行为的关键)</a>
+              <ol>
+                <li><a href="#ws2_32dll--wsock32dll">ws2_32.dll / wsock32.dll</a></li>
+                <li><a href="#wininetdll">wininet.dll</a></li>
+                <li><a href="#dnsapidll">dnsapi.dll</a></li>
+              </ol>
+            </li>
+            <li><a href="#脚本与执行相关库">脚本与执行相关库</a>
+              <ol>
+                <li><a href="#shell32dll">shell32.dll</a></li>
+                <li><a href="#ole32dll--oleaut32dll">ole32.dll / oleaut32.dll</a></li>
+                <li><a href="#jscriptdll--vbscriptdll">jscript.dll / vbscript.dll</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#系统调用">系统调用</a>
+      <ol>
+        <li><a href="#什么是系统调用">什么是系统调用</a></li>
+        <li><a href="#系统调用工作过程">系统调用工作过程</a>
+          <ol>
+            <li><a href="#准备阶段">准备阶段</a></li>
+            <li><a href="#中介阶段">中介阶段</a></li>
+            <li><a href="#切换阶段">切换阶段</a></li>
+            <li><a href="#特权级转换">特权级转换</a></li>
+            <li><a href="#派阶段">派阶段</a></li>
+            <li><a href="#执行阶段">执行阶段</a></li>
+            <li><a href="#返回阶段">返回阶段</a></li>
+          </ol>
+        </li>
+        <li><a href="#ssdt">SSDT</a></li>
+        <li><a href="#ssdthook">SSDThook</a></li>
+        <li><a href="#系统用的分类">系统用的分类</a>
+          <ol>
+            <li><a href="#进程与线程管理">进程与线程管理</a>
+              <ol>
+                <li><a href="#ntcreateprocess">NtCreateProcess</a></li>
+                <li><a href="#ntterminateprocess">NtTerminateProcess</a></li>
+                <li><a href="#ntcreatethread">NtCreateThread</a></li>
+                <li><a href="#ntopenprocess">NtOpenProcess</a></li>
+              </ol>
+            </li>
+            <li><a href="#文件与-io-操作">文件与 I/O 操作</a>
+              <ol>
+                <li><a href="#ntcreatefile">NtCreateFile</a></li>
+                <li><a href="#ntreadfile">NtReadFile</a></li>
+                <li><a href="#ntwritefile">NtWriteFile</a></li>
+                <li><a href="#ntdeviceiocontrolfile">NtDeviceIoControlFile</a></li>
+              </ol>
+            </li>
+            <li><a href="#注册表操作">注册表操作</a>
+              <ol>
+                <li><a href="#ntopenkey">NtOpenKey</a></li>
+                <li><a href="#ntqueryvaluekey">NtQueryValueKey</a></li>
+                <li><a href="#ntsetvaluekey">NtSetValueKey</a></li>
+              </ol>
+            </li>
+            <li><a href="#内存管理">内存管理</a>
+              <ol>
+                <li><a href="#ntallocatevirtualmemory">NtAllocateVirtualMemory</a></li>
+                <li><a href="#ntprotectvirtualmemory">NtProtectVirtualMemory</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#驱动">驱动</a>
+      <ol>
+        <li><a href="#什么是驱动">什么是驱动</a></li>
+        <li><a href="#cpu的特权级别">CPU的特权级别</a>
+          <ol>
+            <li><a href="#ring-0-内核态kernel-mode">Ring 0: 内核态（Kernel Mode）</a></li>
+            <li><a href="#ring-1--ring-2-准核心态驱动层rarely-used">Ring 1 &amp; Ring 2: 准核心态/驱动层（Rarely Used）</a></li>
+            <li><a href="#ring-3-用户态user-mode">Ring 3: 用户态（User Mode）</a></li>
+          </ol>
+        </li>
+        <li><a href="#驱动的文件形式">驱动的文件形式</a>
+          <ol>
+            <li><a href="#sys文件">.sys文件</a></li>
+            <li><a href="#dll文件">.dll文件</a></li>
+          </ol>
+        </li>
+        <li><a href="#驱动程序的分类">驱动程序的分类</a>
+          <ol>
+            <li><a href="#按运行模式分类">按运行模式分类</a>
+              <ol>
+                <li><a href="#内核模式驱动程序">内核模式驱动程序</a></li>
+                <li><a href="#用户模式驱动程序">用户模式驱动程序</a></li>
+              </ol>
+            </li>
+            <li><a href="#按功能层次分类">按功能层次分类</a>
+              <ol>
+                <li><a href="#总线驱动程序">总线驱动程序</a></li>
+                <li><a href="#功能驱动程序">功能驱动程序</a></li>
+                <li><a href="#筛选驱动程序">筛选驱动程序</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#常见的核心系统驱动">常见的核心系统驱动</a>
+          <ol>
+            <li><a href="#内核核心模块">内核核心模块</a>
+              <ol>
+                <li><a href="#ntoskrnlexe">ntoskrnl.exe</a></li>
+              </ol>
+            </li>
+            <li><a href="#内核支持模块">内核支持模块</a>
+              <ol>
+                <li><a href="#haldll">hal.dll</a></li>
+                <li><a href="#kdcomdll">kdcom.dll</a></li>
+                <li><a href="#cidll">ci.dll</a></li>
+                <li><a href="#bootviddll">bootvid.dll</a></li>
+              </ol>
+            </li>
+            <li><a href="#内核设备驱动程序">内核设备驱动程序</a>
+              <ol>
+                <li><a href="#tcpipsys">tcpip.sys</a></li>
+                <li><a href="#ntfssys">ntfs.sys</a></li>
+                <li><a href="#acpisys">acpi.sys</a></li>
+                <li><a href="#partmgrsys">partmgr.sys</a></li>
+                <li><a href="#storportsys">storport.sys</a></li>
+                <li><a href="#disksys">disk.sys</a></li>
+              </ol>
+            </li>
+            <li><a href="#输入与图形类驱动">输入与图形类驱动</a>
+              <ol>
+                <li><a href="#kbdclasssysmouclasssys">kbdclass.sys/mouclass.sys</a></li>
+                <li><a href="#dxgkrnlsys">dxgkrnl.sys</a></li>
+              </ol>
+            </li>
+            <li><a href="#驱动开发支持框架模块">驱动开发支持框架模块</a>
+              <ol>
+                <li><a href="#wdf01000sys">Wdf01000.sys</a></li>
+                <li><a href="#wdfldrsys">WdfLdr.sys</a></li>
+                <li><a href="#winusbsys">WinUsb.sys</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#驱动栈">驱动栈</a>
+          <ol>
+            <li><a href="#什么是驱动栈">什么是驱动栈</a></li>
+            <li><a href="#驱动栈的结构">驱动栈的结构</a></li>
+            <li><a href="#驱动栈工作过程">驱动栈工作过程</a></li>
+            <li><a href="#其它类型的驱动栈">其它类型的驱动栈</a>
+              <ol>
+                <li><a href="#usb-驱动栈简化">USB 驱动栈（简化）：</a></li>
+                <li><a href="#网络驱动栈ndis">网络驱动栈（NDIS）：</a></li>
+                <li><a href="#显示设备驱动栈windows显示驱动模型wddm">显示设备驱动栈（Windows显示驱动模型WDDM）</a></li>
+                <li><a href="#音频设备驱动栈">音频设备驱动栈</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#irp">IRP</a>
+      <ol>
+        <li><a href="#irp-是什么">IRP 是什么</a></li>
+        <li><a href="#irp在驱动栈中的传递">IRP在驱动栈中的传递</a>
+          <ol>
+            <li><a href="#irp创建">IRP创建</a></li>
+            <li><a href="#irp发送到驱动栈顶层驱动">IRP发送到驱动栈顶层驱动</a></li>
+            <li><a href="#驱动处理irp">驱动处理IRP</a></li>
+            <li><a href="#irp向下传递给下一个驱动">IRP向下传递给下一个驱动</a></li>
+            <li><a href="#依次传递直到最底层驱动">依次传递直到最底层驱动</a></li>
+            <li><a href="#irp完成">IRP完成</a></li>
+          </ol>
+        </li>
+        <li><a href="#常见irp主要功能码">常见IRP主要功能码</a>
+          <ol>
+            <li><a href="#文件与设备管理">文件与设备管理</a>
+              <ol>
+                <li><a href="#irp_mj_create">IRP_MJ_CREATE</a></li>
+                <li><a href="#irp_mj_close">IRP_MJ_CLOSE</a></li>
+                <li><a href="#irp_mj_read">IRP_MJ_READ</a></li>
+                <li><a href="#irp_mj_write">IRP_MJ_WRITE</a></li>
+                <li><a href="#irp_mj_query_information">IRP_MJ_QUERY_INFORMATION</a></li>
+                <li><a href="#irp_mj_set_information">IRP_MJ_SET_INFORMATION</a></li>
+              </ol>
+            </li>
+            <li><a href="#设备控制">设备控制</a>
+              <ol>
+                <li><a href="#irp_mj_device_control">IRP_MJ_DEVICE_CONTROL</a></li>
+                <li><a href="#irp_mj_internal_device_control">IRP_MJ_INTERNAL_DEVICE_CONTROL</a></li>
+              </ol>
+            </li>
+            <li><a href="#即插即用pnp">即插即用（PnP）</a>
+              <ol>
+                <li><a href="#irp_mj_pnp">IRP_MJ_PNP</a></li>
+              </ol>
+            </li>
+            <li><a href="#电源管理">电源管理</a>
+              <ol>
+                <li><a href="#irp_mj_power">IRP_MJ_POWER</a></li>
+              </ol>
+            </li>
+            <li><a href="#文件系统控制">文件系统控制</a>
+              <ol>
+                <li><a href="#irp_mj_file_system_control">IRP_MJ_FILE_SYSTEM_CONTROL</a></li>
+              </ol>
+            </li>
+            <li><a href="#系统管理">系统管理</a>
+              <ol>
+                <li><a href="#irp_mj_shutdown">IRP_MJ_SHUTDOWN</a></li>
+                <li><a href="#irp_mj_create_mailslot">IRP_MJ_CREATE_MAILSLOT</a></li>
+                <li><a href="#irp_mj_query_security">IRP_MJ_QUERY_SECURITY</a></li>
+                <li><a href="#irp_mj_set_security">IRP_MJ_SET_SECURITY</a></li>
+              </ol>
+            </li>
+            <li><a href="#其他常见功能码">其他常见功能码</a>
+              <ol>
+                <li><a href="#irp_mj_query_volume_information">IRP_MJ_QUERY_VOLUME_INFORMATION</a></li>
+                <li><a href="#irp_mj_set_volume_information">IRP_MJ_SET_VOLUME_INFORMATION</a></li>
+                <li><a href="#irp_mj_cleanup">IRP_MJ_CLEANUP</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#内核回调">内核回调</a>
+      <ol>
+        <li><a href="#什么是内核回调">什么是内核回调</a></li>
+        <li><a href="#内核回调工作过程">内核回调工作过程</a>
+          <ol>
+            <li><a href="#注册">注册</a></li>
+            <li><a href="#触发">触发</a></li>
+            <li><a href="#调用">调用</a></li>
+            <li><a href="#处理">处理</a></li>
+          </ol>
+        </li>
+        <li><a href="#常见内核回调">常见内核回调</a>
+          <ol>
+            <li><a href="#进程与线程相关回调">进程与线程相关回调</a>
+              <ol>
+                <li><a href="#pssetcreateprocessnotifyroutine">PsSetCreateProcessNotifyRoutine</a></li>
+                <li><a href="#pssetcreatethreadnotifyroutine">PsSetCreateThreadNotifyRoutine</a></li>
+              </ol>
+            </li>
+            <li><a href="#映像加载相关回调">映像加载相关回调</a>
+              <ol>
+                <li><a href="#pssetloadimagenotifyroutine">PsSetLoadImageNotifyRoutine</a></li>
+              </ol>
+            </li>
+            <li><a href="#注册表操作回调">注册表操作回调</a>
+              <ol>
+                <li><a href="#cmregistercallbackcmregistercallbackex">CmRegisterCallback/CmRegisterCallbackEx</a></li>
+              </ol>
+            </li>
+            <li><a href="#文件系统监控回调">文件系统监控回调</a>
+              <ol>
+                <li><a href="#fsrtlregisterfilesystemfiltercallbacks">FsRtlRegisterFileSystemFilterCallbacks</a></li>
+              </ol>
+            </li>
+            <li><a href="#电源管理与关机回调">电源管理与关机回调</a>
+              <ol>
+                <li><a href="#ioregistershutdownnotification">IoRegisterShutdownNotification</a></li>
+                <li><a href="#poregisterpowersettingcallback">PoRegisterPowerSettingCallback</a></li>
+              </ol>
+            </li>
+            <li><a href="#蓝屏-bugcheck-回调">蓝屏 (BugCheck) 回调</a>
+              <ol>
+                <li><a href="#keregisterbugcheckcallback">KeRegisterBugCheckCallback</a></li>
+              </ol>
+            </li>
+            <li><a href="#windows事件通知类回调">Windows事件通知类回调</a>
+              <ol>
+                <li><a href="#exregistercallback">ExRegisterCallback</a></li>
+              </ol>
+            </li>
+            <li><a href="#网络相关回调">网络相关回调</a>
+              <ol>
+                <li><a href="#fwpscalloutregister">FwpsCalloutRegister</a></li>
+                <li><a href="#ndisregisterprotocoldriver">NdisRegisterProtocolDriver</a></li>
+              </ol>
+            </li>
+            <li><a href="#安全与对象管理回调">安全与对象管理回调</a>
+              <ol>
+                <li><a href="#obregistercallbacks">ObRegisterCallbacks</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
+                技术学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/">windows相关知识总结（下）</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            进程 • DLL • 系统调用 • 驱动 • 内核回调
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-07-21</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-07-21
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><strong>windows相关知识总结（上）：</strong></p>
+<p><a class="link" href="http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/"  target="_blank" rel="noopener"
+    >http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<h1 id="进程">进程
+</h1><h2 id="常见进程">常见进程
+</h2><h3 id="初始化进程">初始化进程
+</h3><h4 id="system">System
+</h4><p>进程ID通常为4，是内核级线程的宿主，是运行<code>ntoskrnl.exe</code>的容器</p>
+<p>（<code>ntoskrnl.exe</code>负责内存管理、进程/线程调度、硬件抽象、系统调用处理等功能）</p>
+<p>它是进程树的根，没有父进程，如果看到有用户模式的进程成为它的子进程，需要高度警惕</p>
+<h4 id="smssexe">smss.exe
+</h4><p>会话管理器子系统，负责创建新的用户会话，是系统中的第一个真实进程</p>
+<p>它会启动<code>csrss.exe</code>和<code>winlogon.exe</code></p>
+<h4 id="csrssexe">csrss.exe
+</h4><p>客户端/服务器运行时子系统，负责管理窗口、线程和控制台等，每个会话中都会有一个实例</p>
+<p>其父进程必须是<code>smss.exe</code></p>
+<h4 id="wininitexe">wininit.exe
+</h4><p>Windows初始化进程，在系统引导时启动，会一直保留在后台运行</p>
+<p>它的核心任务是启动三个关键进程：<code>services.exe</code>、<code>lsass.exe</code>和<code>lsm.exe</code>，任何其他进程都值得审查</p>
+<p>其父进程应为空</p>
+<h4 id="winlogonexe">winlogon.exe
+</h4><p>Windows 登录管理器，负责处理用户的交互式登录与注销过程，并加载用户配置文件</p>
+<p>在用户成功登录后，它会负责启动<code>userinit.exe</code></p>
+<p>其父进程必须是<code>smss.exe</code></p>
+<h4 id="userinitexe">userinit.exe
+</h4><p>用户初始化进程，负责在用户登录后执行登录脚本、恢复网络连接，并启动用户外壳程序（Shell）</p>
+<p>它在启动了用户的桌面环境（默认为 <code>explorer.exe</code>）后会立刻退出，<strong>因此在正常的进程列表中几乎看不到它</strong></p>
+<p>其父进程必须是<code>winlogon.exe</code></p>
+<h4 id="explorerexe">explorer.exe
+</h4><p>Windows资源管理器，也是用户登录后启动的第一个进程，是所有用户图形化操作的起点</p>
+<p>在一个标准的 Windows 会话中，它有四个功能：</p>
+<ol>
+<li><strong>文件管理器</strong>：打开“我的电脑”时看到的那些文件和文件夹窗口</li>
+<li><strong>任务栏与开始菜单</strong>：屏幕底部的任务栏、开始按钮、系统托盘区</li>
+<li><strong>桌面图标管理器</strong>：桌面图标，以及对它们的点击、拖拽等交互</li>
+<li><strong>桌面背景绘制</strong>：桌面壁纸等</li>
+</ol>
+<p>恶意软件经常向其注入DLL，以获取用户权限并保持持久化</p>
+<h3 id="核心服务进程">核心服务进程
+</h3><h4 id="servicesexe">services.exe
+</h4><p>服务控制管理器，负责启动和管理所有系统服务，是所有通过正常方式启动的<code>svchost.exe</code>的父进程</p>
+<p>其父进程必须是<code>wininit.exe</code></p>
+<h4 id="lsassexe">lsass.exe
+</h4><p>本地安全机构子系统服务，内存中存放着用户的密码哈希等敏感凭证，系统中必须有且只有一个实例</p>
+<p>其父进程必须是<code>wininit.exe</code></p>
+<h4 id="lsmexe">lsm.exe
+</h4><p>本地会话管理器服务，处理与用户登录、注销、远程桌面连接和快速用户切换相关的终端服务</p>
+<p>其父进程必须是<code>wininit.exe</code></p>
+<h4 id="svchostexe">svchost.exe
+</h4><p>服务宿主进程，是 Windows 系统中的一个核心进程，专门用作运行各种系统服务的“容器”或“宿主”</p>
+<p>它也是最常见的伪装和注入目标：</p>
+<ul>
+<li>
+<p><strong>父进程</strong>：必须是<code>services.exe</code></p>
+</li>
+<li>
+<p><strong>文件路径</strong>：必须位于<code>C:\Windows\System32\</code></p>
+</li>
+<li>
+<p><strong>网络连接</strong>：它承载的系统服务中，哪些建立了网络连接，连接到哪里</p>
+</li>
+</ul>
+<h3 id="脚本执行进程">脚本执行进程
+</h3><h4 id="rundll32exe">rundll32.exe
+</h4><p>用于执行DLL文件中的函数，攻击者常用它来加载恶意DLL，从而绕过基于程序名的检测</p>
+<p>分析时应关注其父进程是谁，以及它加载了哪个DLL</p>
+<h4 id="powershellexe">powershell.exe
+</h4><p>是命令行和脚本引擎，现代无文件攻击的首选工具</p>
+<p>任何<code>powershell.exe</code>的出现都值得审查，特别是其命令行参数中是否包含编码（<code>-e</code>）、混淆或下载链接</p>
+<h4 id="conhostexe">conhost.exe
+</h4><p>控制台窗口主机，为<code>cmd.exe</code>等命令行程序提供交互界面</p>
+<p>它的内存中存储了该命令行窗口中所有输入过的命令和输出过的结果</p>
+<h2 id="进程权限">进程权限
+</h2><h3 id="系统级核心特权">系统级核心特权
+</h3><h4 id="setcbprivilege">SeTcbPrivilege
+</h4><p>**这是Windows中权限最高、最强大的特权之一。**全称是作为操作系统的一部分(Act as part of the operating system)，通常被称为可信计算基（Trusted Computer Base, TCB）特权</p>
+<p>拥有此特权的进程被视为系统核心信任的一部分，可以执行几乎任何操作，包括创建安全令牌来冒充任何用户，除了极少数核心系统进程，任何程序都不应拥有它</p>
+<h4 id="sedebugprivilege">SeDebugPrivilege
+</h4><p>**调试程序特权。**它授予一个进程附加到其他任意进程并检查、修改其内存的能力</p>
+<p>攻击者常利用它来从<code>lsass.exe</code>中窃取密码，除了调试器和核心安全软件，任何普通程序（如记事本、浏览器）拥有它都极度可疑</p>
+<h4 id="seloaddriverprivilege">SeLoadDriverPrivilege
+</h4><p>**加载和卸载设备驱动程序特权。**它授予一个进程将内核模式驱动程序（<code>.sys</code>文件）加载到Windows内核中或从内核中卸载的能力</p>
+<p>这是通往内核模式的入口，恶意软件一旦获得此特权，就可以加载自己的恶意驱动，从而隐藏文件、进程、网络连接，并完全绕过用户态的安全软件</p>
+<h3 id="安全与审计特权">安全与审计特权
+</h3><h4 id="setakeownershipprivilege">SeTakeOwnershipPrivilege
+</h4><p>**获取对象所有权特权。**它授予进程获取系统上任何安全对象（如文件、文件夹、注册表项）的所有权的能力，即使该进程原本没有访问该对象的权限</p>
+<p>攻击者获得它之后，就可以强行霸占受系统保护的文件或注册表键，然后赋予自己读写权限，进而篡改系统配置或替换核心文件</p>
+<h4 id="sebackupprivilege">SeBackupPrivilege
+</h4><p>**备份文件和目录特权，可以做到读取一切。**它允许进程在读取文件时，绕过所有常规的文件和目录权限检查（ACL），其初衷是让备份软件可以备份系统上的所有文件</p>
+<p>数据窃取类木马和勒索软件经常利用此特权来读取它们本无权访问的敏感用户文档、数据库文件或配置文件，以便进行窃取或加密</p>
+<h4 id="serestoreprivilege">SeRestorePrivilege
+</h4><p>**还原文件和目录特权，可以做到写入一切。**与<code>SeBackupPrivilege</code>对应，它允许进程在写入文件时，绕过所有权限检查</p>
+<p>恶意软件可以利用它来覆盖受保护的系统文件、在系统目录中释放恶意程序，或修改锁定的配置文件以实现持久化</p>
+<h4 id="sesecurityprivilege">SeSecurityPrivilege
+</h4><p>**管理审核和安全日志特权，可以做到删除痕迹。**主要允许进程查看和清空 Windows 安全事件日志</p>
+<p>攻击者在完成入侵后，会利用这个特权来清空安全日志，从而抹去自己的登录尝试、账户创建、权限使用等痕迹</p>
+<h3 id="常规特权">常规特权
+</h3><h4 id="seshutdownprivilege">SeShutdownPrivilege
+</h4><p>**关闭系统特权。**授予进程关闭本地计算机的权力</p>
+<h4 id="seimpersonateprivilege">SeImpersonatePrivilege
+</h4><p>**身份验证后模拟客户端特权。**通常授予服务类账户，允许一个服务进程模拟连接到它的客户端的安全上下文</p>
+<p>攻击者可以诱使一个高权限进程（如SYSTEM）来连接自己，然后利用此特权“模拟”这个高权限进程，从而将自己从一个低权限的服务账户提升到<code>SYSTEM</code>权限</p>
+<h4 id="sechangenotifyprivilege">SeChangeNotifyPrivilege
+</h4><p>**绕过遍历检查特权。**它允许进程在访问一个对象时，无需检查路径中所有上级目录的权限</p>
+<p><strong>这是一个正常无害的特权，Windows 默认会将其授予所有用户，包括最低权限的用户</strong></p>
+<h1 id="dll">DLL
+</h1><h2 id="什么是dll">什么是DLL
+</h2><p><strong>DLL(Dynamic Link Library)文件为动态链接库文件，又称“应用程序拓展”</strong>，是软件文件类型</p>
+<p>在Windows中，许多应用程序并不是一个完整的可执行文件，它们被分割成一些相对独立的动态链接库，即DLL文件，放置于系统中，当我们执行某一个程序时，相应的DLL文件就会被调用</p>
+<p>一个应用程序可使用多个DLL文件，一个DLL文件也可能被不同的应用程序使用，这样的DLL文件被称为共享DLL文件</p>
+<p>DLL文件中存放的是各类程序的函数(子过程)实现过程，当程序需要调用函数时需要先载入DLL，然后取得函数的地址，最后进行调用</p>
+<p>使用DLL文件的好处是程序不需要在运行之初加载所有代码，只有在程序需要某个函数的时候才从DLL中取出</p>
+<h2 id="dll的调用方式">DLL的调用方式
+</h2><h3 id="1-静态调用--隐式链接">1. 静态调用 / 隐式链接
+</h3><p><strong>在运行程序前，必须先把所有的DLL都准备好，少一个都不行</strong></p>
+<ol>
+<li>在编译程序的时候，开发者就已经在代码中明确声明了需要用到哪些DLL里的哪些函数</li>
+<li>这些依赖关系被记录在最终生成的可执行文件（<code>.exe</code>）的头部，一个叫做“导入表“（Import Table）的地方</li>
+<li>当运行这个.exe文件时，Windows加载器会首先读取这个表</li>
+<li>加载器会根据导入表的信息，在硬盘上找到所有必需的DLL文件，并将它们加载到该进程的内存空间中</li>
+<li>所有函数地址都链接好之后，程序的主代码才开始执行</li>
+</ol>
+<h3 id="2-动态调用--显式链接">2. 动态调用 / 显式链接
+</h3><p><strong>在运行程序前，不需要把所有的DLL都准备好，少了哪个就引入哪个</strong></p>
+<ol>
+<li>程序在编译时，并不知道自己会用到哪些DLL</li>
+<li>程序在运行过程中，根据当时的逻辑判断，临时决定需要某个DLL的功能</li>
+<li>程序会调用特定的WindowsAPI函数来手动加载这个DLL
+<ul>
+<li><code>LoadLibrary()</code>：这个函数用来将指定的DLL文件加载到内存中</li>
+<li><code>GetProcAddress()</code>：加载成功后，用这个函数从DLL中获取特定函数的地址</li>
+</ul>
+</li>
+<li>拿到函数地址后，程序就可以像调用自己的函数一样调用它了</li>
+<li>当不再需要时，可以调用<code>FreeLibrary()</code>将其从内存中卸载</li>
+</ol>
+<h2 id="常见dll">常见DLL
+</h2><h3 id="核心系统库-几乎所有进程都会加载">核心系统库 (几乎所有进程都会加载)
+</h3><h4 id="ntdlldll">ntdll.dll
+</h4><p>WindowsNT核心库，是用户态程序与系统内核之间最底层的接口，封装了大量的系统调用，例如进程和线程的创建、内存管理、文件I/O以及与内核对象的交互</p>
+<p>其他更高层的核心库（如<code>kernel32.dll</code>）最终也需要调用<code>ntdll.dll</code>中的函数来完成实际的工作</p>
+<h4 id="kernel32dll--kernelbasedll">kernel32.dll / kernelbase.dll
+</h4><p><code>kernel32.dll</code>是Windows中最核心的用户模式库之一，为应用程序提供了访问操作系统的基础功能，如内存管理、文件I/O和进程线程管理</p>
+<p>从Windows7开始，许多<code>kernel32.dll</code>的核心功能被重构并移入了<code>kernelbase.dll</code>，而<code>kernel32.dll</code>本身则更多地作为调用这些新功能的一个“转发层”</p>
+<h4 id="user32dll">user32.dll
+</h4><p>负责所有用户图形界面（GUI）的功能设计，如窗口、菜单、按钮、鼠标和键盘输入等，即<strong>结构和交互</strong></p>
+<p>在早期32-bit 版本的Windows中，用户控件是在<code>ComCtl32</code>中实现的，但是一些控件的显示功能是在<code>User32.dll</code>中实现的，例如在一个窗口中非客户区域（边框和菜单）的绘制就是由<code>User32.dll</code>来完成的</p>
+<p><code>User32.dll</code>是操作系统的一个核心控件，它和操作系统是紧密联系在一起的，不同版本的Windows中<code>User32.dll</code>是不同，因此，应用程序在不同版本的Windows中运行的时候，由于<code>User32.dll</code>的不同，会导致应用程序的界面通常会有微小的不同</p>
+<h4 id="gdi32dll">gdi32.dll
+</h4><p>负责图形化窗口的图形绘制与内容输出，包括像素、线条、字体、位图、画刷等，即<strong>内容和外观</strong></p>
+<h4 id="comdlg32dll">comdlg32.dll
+</h4><p>通用对话框库（Common Dialog Box Library），这个库为应用程序提供了标准的、预制好的对话框，比如常见的“打开文件”、“保存文件”和“打印”等窗口</p>
+<p>当<code>user32.dll</code>需要一个“打开文件”对话框时，它不去自己一点点造，而是直接从<code>comdlg32.dll</code>这里拿一个现成的、标准化的来用</p>
+<h4 id="advapi32dll">advapi32.dll
+</h4><p>高级Windows32位应用程序接口，负责处理注册表操作、系统服务管理、账户和安全相关的函数</p>
+<h3 id="网络通信库-判断网络行为的关键">网络通信库 (判断网络行为的关键)
+</h3><h4 id="ws2_32dll--wsock32dll">ws2_32.dll / wsock32.dll
+</h4><p>Windows Sockets（套接字）库，是所有 TCP/IP 网络编程的基础</p>
+<p>这是一个最重要的网络行为指标</p>
+<h4 id="wininetdll">wininet.dll
+</h4><p>更高层的互联网协议库，封装了 HTTP、HTTPS 和 FTP 等协议，让程序能更方便地访问网页和传输文件。</p>
+<h4 id="dnsapidll">dnsapi.dll
+</h4><p>负责进行 DNS 域名解析，即将网址（如 <code>www.google.com</code>）转换为 IP 地址</p>
+<h3 id="脚本与执行相关库">脚本与执行相关库
+</h3><h4 id="shell32dll">shell32.dll
+</h4><p>提供了核心的 Windows Shell（外壳）功能，如打开文件、显示属性、处理快捷方式等</p>
+<h4 id="ole32dll--oleaut32dll">ole32.dll / oleaut32.dll
+</h4><p>负责处理 OLE（对象链接与嵌入）和 COM（组件对象模型）技术</p>
+<p>Office 宏病毒和许多漏洞利用（如利用文档中嵌入的恶意对象）都严重依赖这两个库的功能</p>
+<h4 id="jscriptdll--vbscriptdll">jscript.dll / vbscript.dll
+</h4><p>分别用于解析和执行 JScript 和 VBScript 脚本的引擎</p>
+<p>当<code>wscript.exe</code>或<code>mshta.exe</code>等脚本执行进程加载它们时，表明有相应的脚本正在运行</p>
+<h1 id="系统调用">系统调用
+</h1><h2 id="什么是系统调用">什么是系统调用
+</h2><p>系统调用是运行在用户模式 (UserMode/Ring3) 的应用程序，向操作系统内核 (KernelMode / Ring0) 请求服务或资源的唯一、规范化的接口</p>
+<p><strong>这是操作系统为了保护自身稳定性和安全性而设定的核心机制</strong>，应用程序不能随心所欲地直接访问硬件或关键内存，所有这些敏感操作都必须通过系统调用，以一种受控的方式“委托”给内核来完成</p>
+<h2 id="系统调用工作过程">系统调用工作过程
+</h2><h3 id="准备阶段">准备阶段
+</h3><p>用户模式的应用程序（例如<code>notepad.exe</code>）准备调用一个Win32API函数，比如 <code>WriteFile</code>，<code>WriteFile</code> 函数本身位于<code>kernel32.dll</code>中</p>
+<h3 id="中介阶段">中介阶段
+</h3><p><code>kernel32.dll</code>中的<code>WriteFile</code>函数并不会直接执行写文件操作，它是一个包装函数</p>
+<p>它会把真正的写文件操作对应的系统调用编号（比如写文件的<code>NtWriteFile</code> 的编号）放入CPU的<code>EAX</code>寄存器中，并将其他参数（如文件句柄、数据缓冲区等）放入其他指定的寄存器</p>
+<h3 id="切换阶段">切换阶段
+</h3><p>准备好之后，<code>ntdll.dll</code>中的代码会执行一条特殊的CPU指令，例如<code>SYSCALL</code></p>
+<h3 id="特权级转换">特权级转换
+</h3><p><code>SYSCALL</code>指令会使CPU立即从用户模式切换到内核模式，并将控制权交给内核中一个预设好的系统调用总处理程序</p>
+<h3 id="派阶段">派阶段
+</h3><p>内核的总处理程序接管控制权后，会查看<code>EAX</code>寄存器中的系统调用编号，然后利用这个编号去<strong>SSDT</strong>中查找对应的内核函数地址</p>
+<h3 id="执行阶段">执行阶段
+</h3><p>找到地址后，内核会跳转到该地址（例如内核中的<code>NtWriteFile</code>函数）去执行真正的文件写入操作</p>
+<h3 id="返回阶段">返回阶段
+</h3><p>内核函数执行完毕后，会将结果返回，CPU 再从内核模式切换回用户模式，应用程序继续执行</p>
+<h2 id="ssdt">SSDT
+</h2><p><strong>SSDT 的全称是System Service Dispatch Table（系统服务分派表）</strong></p>
+<p>它就是我们在上面流程中提到的那个函数地址查询表，它是一个存放在内核内存中的数组，数组的每一个元素都是一个函数指针，指向了实现具体系统调用的内核函数的内存地址</p>
+<p>当系统调用发生时，内核就是通过<code>系统调用编号</code>作为索引，在这个 SSDT 数组中找到并调用正确的内核函数</p>
+<h2 id="ssdthook">SSDThook
+</h2><p>由于 SSDT 是所有关键操作的必经之路，它成为了内核级 Rootkit 的首要攻击目标</p>
+<p>Rootkit（通常是一个恶意的<code>.sys</code>驱动）会获取到 SSDT 在内存中的地址，然后用自己的恶意函数地址，去覆盖表中某个正常系统函数的地址</p>
+<p>比如一个文件隐藏Rootkit，可能会用自己的<code>HookedNtQueryDirectoryFile</code>函数地址，替换掉SSDT中原始的 <code>NtQueryDirectoryFile</code>（用于列出目录内容）的地址</p>
+<p>此后，当任何程序（包括 <code>explorer.exe</code>）尝试列出目录内容时，系统调用都会被重定向到这个恶意的 <code>HookedNtQueryDirectoryFile</code>函数这个恶意函数会先获取原始的目录列表，然后将其中所有与Rootkit自身相关的恶意文件名都过滤掉，最后再将一个“干净”的列表返回给应用程序，这样，用户就永远无法看到这些恶意文件了</p>
+<p><strong>如果一个函数的地址指向的不是官方的 <code>ntoskrnl.exe</code> (或 <code>win32k.sys</code>)，而是指向了一个第三方的、可疑的驱动文件，那么就意味着SSDT已被劫持</strong></p>
+<h2 id="系统用的分类">系统用的分类
+</h2><h3 id="进程与线程管理">进程与线程管理
+</h3><h4 id="ntcreateprocess">NtCreateProcess
+</h4><p>创建一个新进程</p>
+<h4 id="ntterminateprocess">NtTerminateProcess
+</h4><p>终止一个进程</p>
+<h4 id="ntcreatethread">NtCreateThread
+</h4><p>创建一个新线程</p>
+<h4 id="ntopenprocess">NtOpenProcess
+</h4><p>打开一个已存在进程的句柄</p>
+<h3 id="文件与-io-操作">文件与 I/O 操作
+</h3><h4 id="ntcreatefile">NtCreateFile
+</h4><p>创建或打开一个文件</p>
+<h4 id="ntreadfile">NtReadFile
+</h4><p>从文件中读取数据</p>
+<h4 id="ntwritefile">NtWriteFile
+</h4><p>向文件中写入数据</p>
+<h4 id="ntdeviceiocontrolfile">NtDeviceIoControlFile
+</h4><p>向设备驱动发送控制命令</p>
+<h3 id="注册表操作">注册表操作
+</h3><h4 id="ntopenkey">NtOpenKey
+</h4><p>打开一个注册表项</p>
+<h4 id="ntqueryvaluekey">NtQueryValueKey
+</h4><p>查询一个注册表键值的数据</p>
+<h4 id="ntsetvaluekey">NtSetValueKey
+</h4><p>设置一个注册表键值的数据</p>
+<h3 id="内存管理">内存管理
+</h3><h4 id="ntallocatevirtualmemory">NtAllocateVirtualMemory
+</h4><p>在进程的虚拟地址空间中分配内存</p>
+<h4 id="ntprotectvirtualmemory">NtProtectVirtualMemory
+</h4><p>修改内存页的保护属性（如可读、可写、可执行）</p>
+<h1 id="驱动">驱动
+</h1><h2 id="什么是驱动">什么是驱动
+</h2><p><strong>驱动程序（Driver）是一个软件组件，它充当了操作系统内核与物理硬件或虚拟设备之间的通信桥梁</strong></p>
+<p>当应用程序需要与硬件（如打印机、网卡、磁盘）交互时，它会向操作系统发出一个通用请求</p>
+<p>操作系统内核的I/O管理器接收到这个请求后，不会直接与硬件对话，而是将请求打包成<strong>IRP请求</strong>转发给相应的驱动程序</p>
+<p>驱动程序负责将这个标准化的请求翻译成硬件能够理解的特定指令，并与硬件通信</p>
+<h2 id="cpu的特权级别">CPU的特权级别
+</h2><p><strong>在了解驱动文件之前，我们得先知道x86架构CPU的四个特权级别</strong></p>
+<p>特权级别在x86架构中也被称为保护环（Protection Rings），是CPU硬件层面实现的一种访问控制机制</p>
+<p><strong>x86架构定义了四个特权级别，从Ring0到Ring3，数字越小，代表权限越高</strong></p>
+<h3 id="ring-0-内核态kernel-mode">Ring 0: 内核态（Kernel Mode）
+</h3><ul>
+<li>
+<p><strong>权限：最高</strong>。运行在Ring0的代码可以执行 CPU 的所有指令集，并能直接访问任何内存地址、I/O端口和硬件设备</p>
+</li>
+<li>
+<p><strong>运行实体: 操作系统内核本身</strong>。例如<code>ntoskrnl.exe</code>和绝大多数设备驱动程序(<code>.sys</code> 文件)</p>
+</li>
+<li>
+<p>这是操作系统的核心，负责管理系统所有资源，包括进程调度、内存管理、I/O 控制等</p>
+<p>如果Ring0的代码崩溃，整个系统将立即蓝屏（BSOD）或宕机（Kernel Panic）</p>
+</li>
+</ul>
+<h3 id="ring-1--ring-2-准核心态驱动层rarely-used">Ring 1 &amp; Ring 2: 准核心态/驱动层（Rarely Used）
+</h3><ul>
+<li>
+<p><strong>权限：介于内核态和用户态之间</strong>。它们拥有比Ring3更高的权限（例如可以访问更多的 I/O 端口），但又不像Ring0那样拥有对系统的完全控制权</p>
+</li>
+<li>
+<p><strong>运行实体</strong>: 在理论设计上，Ring1可以用于运行一些准系统级的服务，而Ring2可以用于运行设备驱动程序，从而将驱动与最核心的内核隔离开，增加系统的稳定性（即驱动崩溃不至于让整个内核崩溃）</p>
+</li>
+<li>
+<p><strong>它几乎从未被主流消费级和服务器级操作系统（如 Windows, Linux, macOS）所使用</strong></p>
+<p>这些操作系统普遍采用了更简单的两级模型，即只使用Ring0和Ring3</p>
+<p>这是因为在Ring1/2和Ring0之间切换上下文的开销，以及复杂的内存管理，并没有带来足够的安全收益来抵消其复杂性</p>
+</li>
+</ul>
+<h3 id="ring-3-用户态user-mode">Ring 3: 用户态（User Mode）
+</h3><ul>
+<li>
+<p><strong>权限</strong>：<strong>最低</strong>。运行在Ring3的代码受到硬件的严格限制，它不能直接访问硬件，也不能访问属于内核或其他进程的受保护内存空间</p>
+</li>
+<li>
+<p><strong>运行实体</strong>：<strong>所有的应用程序</strong>。例如浏览器 、记事本、游戏等，都运行在Ring3</p>
+</li>
+<li>
+<p>这是应用程序的沙箱，当一个Ring3的程序需要执行特权操作时（如读取文件），它不能直接去操作硬盘，而是必须通过一个名为系统调用的受控入口，向Ring0的内核提出请求</p>
+<p>内核会对请求进行验证，然后以Ring0的权限代为执行，再将结果返回给Ring1的程序</p>
+<p>这个过程确保了所有对关键资源的访问都在内核的掌控之下</p>
+</li>
+</ul>
+<h2 id="驱动的文件形式">驱动的文件形式
+</h2><h3 id="sys文件">.sys文件
+</h3><p><strong>这是最传统、最核心、权限最高的驱动程序形式，是真正的驱动</strong></p>
+<p>它们是专门为在操作系统内核（Ring0）中运行而编译的，可以直接与硬件和内核数据结构交互</p>
+<p>几乎所有核心的硬件驱动，如磁盘驱动<code>ntfs.sys</code>、网络驱动<code>tcpip.sys</code>等，都是<code>.sys</code>文件</p>
+<h3 id="dll文件">.dll文件
+</h3><p><strong>它们有的情况下是驱动组件，但大多数不是传统驱动</strong></p>
+<p>为了提高系统的稳定性和安全性，微软引入了用户模式驱动框架 (User-Mode Driver Framework, UMDF)</p>
+<p>一些对性能要求不是极致、但对稳定性要求很高的设备（如扫描仪、打印机、传感器等）的驱动，可以被实现为DLL文件</p>
+<p>这些驱动DLL运行在权限受限的用户模式（Ring3），并由一个系统进程（通常是<code>svchost.exe</code>）作为“宿主”来加载和运行</p>
+<h2 id="驱动程序的分类">驱动程序的分类
+</h2><h3 id="按运行模式分类">按运行模式分类
+</h3><h4 id="内核模式驱动程序">内核模式驱动程序
+</h4><p>这是最常见的类型，运行在操作系统的核心层 (Ring 0)，拥有最高权限</p>
+<p>它们可以直接与硬件通信，是系统运行的基石</p>
+<h4 id="用户模式驱动程序">用户模式驱动程序
+</h4><p>运行在权限受限的用户模式 (Ring3) 下，安全性更高</p>
+<p>如果这类驱动程序崩溃，不会导致整个系统蓝屏</p>
+<h3 id="按功能层次分类">按功能层次分类
+</h3><h4 id="总线驱动程序">总线驱动程序
+</h4><p>位于驱动栈的最底层，负责枚举挂载在总线（如 PCI, USB）上的所有设备</p>
+<h4 id="功能驱动程序">功能驱动程序
+</h4><p>驱动栈的核心，通常由硬件厂商编写，负责实现设备的具体I/O功能</p>
+<h4 id="筛选驱动程序">筛选驱动程序
+</h4><p>可以附加在功能驱动程序之上或之下，用于“过滤”或“修改”流经该设备的 I/O 请求</p>
+<p>杀毒软件的文件实时监控、磁盘加密软件等，通常就是通过它来实现的</p>
+<h2 id="常见的核心系统驱动">常见的核心系统驱动
+</h2><h3 id="内核核心模块">内核核心模块
+</h3><p><strong>不是传统驱动，但居于内核中心</strong></p>
+<h4 id="ntoskrnlexe">ntoskrnl.exe
+</h4><p><strong>它是操作系统内核本身，是所有内核活动的核心</strong></p>
+<p>可以把它理解为<strong>驱动管理器</strong>和<strong>最根本的驱动</strong>，虽然它实际上并非严格意义上的设备驱动</p>
+<p>在系统启动时，<code>ntoskrnl.exe</code>会加载一系列其它核心模块（DLL 和 SYS）：</p>
+<ul>
+<li><code>hal.dll</code>：硬件抽象层（HAL）</li>
+<li><code>kdcom.dll</code>：内核调试通信</li>
+<li><code>bootvid.dll</code>、<code>ci.dll</code>：安全校验、驱动签名</li>
+<li>各类驱动程序：<code>acpi.sys</code>、<code>tcpip.sys</code>、<code>disk.sys</code>等</li>
+</ul>
+<p>它是整个内核态模块的中枢，所有其他的驱动程序都需要在它提供的框架内运行，并由它来管理和调度</p>
+<h3 id="内核支持模块">内核支持模块
+</h3><p><strong>DLL类内核组件，没有设备对象，也不处理IRP，不是传统驱动，但运行在内核态，是 OS 的底层模块</strong></p>
+<h4 id="haldll">hal.dll
+</h4><p>硬件抽象层，屏蔽不同主板和 CPU 的差异，为内核提供统一接口</p>
+<h4 id="kdcomdll">kdcom.dll
+</h4><p>内核调试通信模块，用于系统调试时与调试器通信</p>
+<h4 id="cidll">ci.dll
+</h4><p>负责代码完整性校验与驱动签名验证</p>
+<h4 id="bootviddll">bootvid.dll
+</h4><p>开机阶段的简易显示输出，属于引导组件</p>
+<h3 id="内核设备驱动程序">内核设备驱动程序
+</h3><p><strong>是真正严格意义上的驱动</strong></p>
+<h4 id="tcpipsys">tcpip.sys
+</h4><p>负责TCP/IP协议栈的核心驱动，处理所有网络数据包的收发。属于网络类驱动的代表</p>
+<h4 id="ntfssys">ntfs.sys
+</h4><p>NTFS 文件系统的核心驱动，负责硬盘上所有文件的读写和管理</p>
+<p>它实现了文件系统层的功能，如读写文件、挂载卷等</p>
+<h4 id="acpisys">acpi.sys
+</h4><p>负责高级配置与电源管理接口（ACPI），处理系统电源管理事件，如休眠、唤醒、电源按钮等</p>
+<p>它属于系统级别的 ACPI 驱动</p>
+<h4 id="partmgrsys">partmgr.sys
+</h4><p>管理磁盘的分区结构</p>
+<h4 id="storportsys">storport.sys
+</h4><p>提供与存储控制器（如 SATA、SCSI 控制器）之间的通信通道</p>
+<h4 id="disksys">disk.sys
+</h4><p>硬盘设备驱动，处理底层磁盘I/O请求</p>
+<p>它与<code>partmgr.sys</code>、<code>storport.sys</code>等共同构建块设备访问层</p>
+<h3 id="输入与图形类驱动">输入与图形类驱动
+</h3><h4 id="kbdclasssysmouclasssys">kbdclass.sys/mouclass.sys
+</h4><p>键盘和鼠标的类驱动程序，负责处理来自这些输入设备的通用请求</p>
+<p>它不直接与硬件通信，而是接收底层端口驱动（如<code>i8042prt.sys</code>）上传的输入数据</p>
+<h4 id="dxgkrnlsys">dxgkrnl.sys
+</h4><p>DirectX图形内核驱动，是Windows显示驱动模型（WDDM）的核心，负责与GPU交互、调度图形任务</p>
+<h3 id="驱动开发支持框架模块">驱动开发支持框架模块
+</h3><h4 id="wdf01000sys">Wdf01000.sys
+</h4><p>Windows驱动程序框架（WDF）的一部分，是KMDF驱动的运行时组件，为许多现代驱动提供了统一的驱动模型支持</p>
+<h4 id="wdfldrsys">WdfLdr.sys
+</h4><p>WDF加载器，负责驱动初始化</p>
+<h4 id="winusbsys">WinUsb.sys
+</h4><p>WDF提供的USB驱动支持</p>
+<h2 id="驱动栈">驱动栈
+</h2><h3 id="什么是驱动栈">什么是驱动栈
+</h3><p>当用户在用户层发出一个文件读写请求时，比如<code>ReadFile(&quot;D:\\example.txt&quot;)</code>，这个请求并不是直接送到硬盘，而是要经过多个驱动程序处理，每个驱动做自己的那一部分</p>
+<p>这种结构就叫驱动栈</p>
+<h3 id="驱动栈的结构">驱动栈的结构
+</h3><p><strong>下面是一个典型的Windows 存储驱动栈：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ntfs.sys（文件系统驱动）         ← 顶层（用户文件访问）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>volmgr.sys（卷管理器驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>partmgr.sys（分区管理器驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>disk.sys（磁盘驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>storport.sys（存储端口驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>Miniport Driver（存储控制器驱动） ← 底层（控制硬件）
+</span></span></code></pre></div><h3 id="驱动栈工作过程">驱动栈工作过程
+</h3><ol>
+<li><strong>应用程序发起 I/O 请求</strong>
+用户程序调用<code>ReadFile()</code>或<code>WriteFile()</code>等API，也就是进行了涉及请求访问硬件或设备的系统调用</li>
+<li><strong>文件系统驱动处理</strong>
+<code>ntfs.sys</code>解析文件路径、权限等，将文件操作转换为卷层面的块设备请求</li>
+<li><strong>卷管理器驱动处理</strong>
+<code>volmgr.sys</code>管理逻辑卷，确定具体的物理磁盘分区</li>
+<li><strong>分区管理器驱动处理</strong>
+<code>partmgr.sys</code>负责管理磁盘分区表，转发请求到正确的物理分区</li>
+<li><strong>磁盘驱动处理</strong>
+<code>disk.sys</code>负责和物理磁盘设备交互，生成适合硬件的请求</li>
+<li><strong>存储端口驱动处理</strong>
+<code>storport.sys</code>是与存储控制器通信的中间层，负责协议和请求队列管理</li>
+<li><strong>迷你端口驱动处理</strong>
+由硬件厂商编写，具体实现与存储控制器硬件的交互</li>
+<li><strong>硬件执行请求</strong>
+最终请求被硬件执行，数据被读写</li>
+</ol>
+<p>这个过程中，每一层都可以<strong>处理请求、修改请求、拦截请求</strong>，层层检查</p>
+<h3 id="其它类型的驱动栈">其它类型的驱动栈
+</h3><p>除了存储，还有很多其他的驱动栈：</p>
+<h4 id="usb-驱动栈简化">USB 驱动栈（简化）：
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>usbhub.sys（USB集线器驱动）      ← 顶层（最高层）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>usbccgp.sys（通用USB类驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>winusb.sys（用户模式USB驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>usbport.sys（USB端口驱动）
+</span></span><span style="display:flex;"><span>  ↑  
+</span></span><span style="display:flex;"><span>Miniport Driver（控制器驱动）   ← 底层（最接近硬件）
+</span></span></code></pre></div><h4 id="网络驱动栈ndis">网络驱动栈（NDIS）：
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>tcpip.sys（TCP/IP 协议驱动）      ← 顶层（协议层）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>ndis.sys（NDIS 中间层驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>Miniport Driver（网卡驱动）        ← 底层（硬件驱动）
+</span></span></code></pre></div><h4 id="显示设备驱动栈windows显示驱动模型wddm">显示设备驱动栈（Windows显示驱动模型WDDM）
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>dxgkrnl.sys（DirectX 图形内核驱动）  ← 顶层（图形API接口）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>display.sys（显示驱动核心）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>Miniport Driver（显卡硬件驱动）        ← 底层（显卡硬件控制）
+</span></span></code></pre></div><h4 id="音频设备驱动栈">音频设备驱动栈
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>audiosrv（音频服务）                 ← 顶层（用户模式服务）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>sysaudio.sys（系统音频驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>HDAudio.sys（高定义音频驱动）
+</span></span><span style="display:flex;"><span>  ↑
+</span></span><span style="display:flex;"><span>Miniport Driver（声卡厂商驱动）        ← 底层（硬件控制）
+</span></span></code></pre></div><h1 id="irp">IRP
+</h1><h2 id="irp-是什么">IRP 是什么
+</h2><p><strong>IRP的全称是I/O Request Packet，即I/O 请求包</strong>，是内核中用于描述和传递所有I/O请求的核心数据结构</p>
+<p>当一个I/O请求产生时，I/O管理器会创建一个IRP对象，这个IRP就像一张填写好的快递单，上面包含了所有与本次请求相关的信息，如操作类型、数据缓冲区地址、目标设备等</p>
+<p>之后，I/O管理器会将这张快递单发送给目标设备对应的驱动程序栈，驱动程序通过处理这些 IRP 来完成工作</p>
+<p>恶意软件经常通过IRP挂钩的技术来劫持系统功能，它会找到一个正常驱动的IRP处理函数地址，并将其替换为指向自己恶意代码的地址。这样，所有发往正常驱动的IRP都会先被恶意软件截胡，从而实现键盘记录、文件隐藏等功能</p>
+<h2 id="irp在驱动栈中的传递">IRP在驱动栈中的传递
+</h2><h3 id="irp创建">IRP创建
+</h3><p>应用程序调用如<code>ReadFile()</code>，系统调用相关内核服务，内核根据请求生成一个IRP</p>
+<p>IRP包含请求类型、缓冲区地址、请求参数等信息</p>
+<h3 id="irp发送到驱动栈顶层驱动">IRP发送到驱动栈顶层驱动
+</h3><p>例如，磁盘驱动栈中，顶层可能是文件系统驱动（<code>ntfs.sys</code>）</p>
+<p>内核将IRP传递给顶层驱动的<code>Dispatch</code>函数</p>
+<h3 id="驱动处理irp">驱动处理IRP
+</h3><p>驱动检查IRP内容，执行相应操作（如文件系统解析、数据缓存等）</p>
+<p>驱动可以完成请求，或者决定将IRP向下传递</p>
+<h3 id="irp向下传递给下一个驱动">IRP向下传递给下一个驱动
+</h3><p>驱动调用<code>IoSkipCurrentIrpStackLocation</code>，跳过当前驱动的IRP堆栈位置</p>
+<p>然后调用<code>IoCallDriver</code>把IRP传给下一个驱动，通常是更底层的驱动</p>
+<h3 id="依次传递直到最底层驱动">依次传递直到最底层驱动
+</h3><p>IRP会层层传递，直到最底层的硬件驱动处理它</p>
+<p>底层驱动发起对硬件的实际操作，比如读写磁盘、发送网络包</p>
+<h3 id="irp完成">IRP完成
+</h3><p>硬件操作完成后，底层驱动调用<code>IoCompleteRequest</code>标记 IRP 完成</p>
+<p>IRP 结果逐层向上传递回去，每层驱动可以执行清理或后处理，最终结果反馈给系统和应用程序</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>应用程序请求
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>IRP创建
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>ntfs.sys（文件系统驱动）        ← 顶层
+</span></span><span style="display:flex;"><span>     ↓ 传递IRP
+</span></span><span style="display:flex;"><span>volmgr.sys（卷管理器驱动）
+</span></span><span style="display:flex;"><span>     ↓ 传递IRP
+</span></span><span style="display:flex;"><span>partmgr.sys（分区管理驱动）
+</span></span><span style="display:flex;"><span>     ↓ 传递IRP
+</span></span><span style="display:flex;"><span>disk.sys（磁盘驱动）
+</span></span><span style="display:flex;"><span>     ↓ 传递IRP
+</span></span><span style="display:flex;"><span>storport.sys（存储端口驱动）
+</span></span><span style="display:flex;"><span>     ↓ 传递IRP
+</span></span><span style="display:flex;"><span>Miniport Driver（硬件控制驱动）  ← 底层
+</span></span><span style="display:flex;"><span>     ↓ 硬件操作
+</span></span><span style="display:flex;"><span>硬件设备完成请求
+</span></span><span style="display:flex;"><span>     ↓ 结果返回
+</span></span><span style="display:flex;"><span>Miniport Driver
+</span></span><span style="display:flex;"><span>     ↓ 返回
+</span></span><span style="display:flex;"><span>storport.sys
+</span></span><span style="display:flex;"><span>     ↓ 返回
+</span></span><span style="display:flex;"><span>disk.sys
+</span></span><span style="display:flex;"><span>     ↓ 返回
+</span></span><span style="display:flex;"><span>partmgr.sys
+</span></span><span style="display:flex;"><span>     ↓ 返回
+</span></span><span style="display:flex;"><span>volmgr.sys
+</span></span><span style="display:flex;"><span>     ↓ 返回
+</span></span><span style="display:flex;"><span>ntfs.sys
+</span></span><span style="display:flex;"><span>     ↓ 返回
+</span></span><span style="display:flex;"><span>操作系统
+</span></span></code></pre></div><h2 id="常见irp主要功能码">常见IRP主要功能码
+</h2><p>每个IRP都包含一个主要功能码，用于定义本次请求的核心操作类型</p>
+<h3 id="文件与设备管理">文件与设备管理
+</h3><h4 id="irp_mj_create">IRP_MJ_CREATE
+</h4><p>打开或创建文件、设备句柄</p>
+<h4 id="irp_mj_close">IRP_MJ_CLOSE
+</h4><p>关闭文件或设备句柄</p>
+<h4 id="irp_mj_read">IRP_MJ_READ
+</h4><p>从文件或设备读取数据</p>
+<h4 id="irp_mj_write">IRP_MJ_WRITE
+</h4><p>向文件或设备写入数据</p>
+<h4 id="irp_mj_query_information">IRP_MJ_QUERY_INFORMATION
+</h4><p>查询文件或设备信息（大小、属性等）</p>
+<h4 id="irp_mj_set_information">IRP_MJ_SET_INFORMATION
+</h4><p>设置文件或设备信息（修改属性等）</p>
+<h3 id="设备控制">设备控制
+</h3><h4 id="irp_mj_device_control">IRP_MJ_DEVICE_CONTROL
+</h4><p>向驱动发送自定义控制命令（用户模式到驱动的常用命令）</p>
+<h4 id="irp_mj_internal_device_control">IRP_MJ_INTERNAL_DEVICE_CONTROL
+</h4><p>驱动间内部控制命令，供驱动程序之间通信使用</p>
+<h3 id="即插即用pnp">即插即用（PnP）
+</h3><h4 id="irp_mj_pnp">IRP_MJ_PNP
+</h4><p>即插即用事件通知，如设备启动、停止、移除、资源分配等</p>
+<h3 id="电源管理">电源管理
+</h3><h4 id="irp_mj_power">IRP_MJ_POWER
+</h4><p>电源状态管理请求，如休眠、唤醒、电源状态改变等</p>
+<h3 id="文件系统控制">文件系统控制
+</h3><h4 id="irp_mj_file_system_control">IRP_MJ_FILE_SYSTEM_CONTROL
+</h4><p>文件系统特定控制请求，如卷挂载、卸载等</p>
+<h3 id="系统管理">系统管理
+</h3><h4 id="irp_mj_shutdown">IRP_MJ_SHUTDOWN
+</h4><p>系统关机或重启时通知驱动准备关闭</p>
+<h4 id="irp_mj_create_mailslot">IRP_MJ_CREATE_MAILSLOT
+</h4><p>创建邮件槽（用于进程间通信）</p>
+<h4 id="irp_mj_query_security">IRP_MJ_QUERY_SECURITY
+</h4><p>查询安全描述符</p>
+<h4 id="irp_mj_set_security">IRP_MJ_SET_SECURITY
+</h4><p>设置安全描述符</p>
+<h3 id="其他常见功能码">其他常见功能码
+</h3><h4 id="irp_mj_query_volume_information">IRP_MJ_QUERY_VOLUME_INFORMATION
+</h4><p>查询卷信息</p>
+<h4 id="irp_mj_set_volume_information">IRP_MJ_SET_VOLUME_INFORMATION
+</h4><p>设置卷信息</p>
+<h4 id="irp_mj_cleanup">IRP_MJ_CLEANUP
+</h4><p>清理（关闭时，释放资源等）</p>
+<h1 id="内核回调">内核回调
+</h1><h2 id="什么是内核回调">什么是内核回调
+</h2><p>内核回调（Kernel Callbacks） 是一种事件驱动的机制</p>
+<p>它允许内核模式的驱动程序向操作系统内核注册特定的系统级事件，当这些被注册的事件发生时，内核会暂停其正常操作流程，并逐一回调所有已注册的驱动程序提供的函数，即回调例程</p>
+<p>这是内核提供的一个事件通知系统，驱动程序不再需要通过不断轮询的方式来检查某个状态是否改变，而是可以被动地、在事件发生时才被内核精准地唤醒和调用</p>
+<p><strong>示例（用户态）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">OnButtonClick</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">printf</span>(<span style="color:#98c379">&#34;按钮被点击！</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">RegisterButtonCallback</span>(<span style="color:#e06c75">OnButtonClick</span>); <span style="color:#7f848e">// 注册回调
+</span></span></span></code></pre></div><p>系统中，“按钮被点击”事件发生后，会自动调用注册的<code>OnButtonClick()</code>函数</p>
+<h2 id="内核回调工作过程">内核回调工作过程
+</h2><h3 id="注册">注册
+</h3><p>在驱动程序的初始化阶段（通常是在<code>DriverEntry</code>函数中），驱动程序会调用一个由内核导出的、特定于事件类型的注册函数。例如，要监控进程创建，驱动程序会调用<code>PsSetCreateProcessNotifyRoutine</code></p>
+<p>在调用时，驱动程序会将一个指向自己内部实现的回调函数的地址，作为一个参数传递给内核</p>
+<p>内核接收到这个请求后，会将这个函数地址添加到一个与该事件类型相关联的、内部维护的回调函数指针链表中</p>
+<h3 id="触发">触发
+</h3><p>当一个被订阅的系统事件发生时（例如<code>NtCreateUserProcess</code>系统调用被执行以创建一个新进程），内核在完成其核心操作的某个特定阶段，会暂停下来</p>
+<h3 id="调用">调用
+</h3><p>内核会找到与该事件对应的回调函数指针链表，然后，它会依次遍历这个链表，并同步地调用每一个已注册的回调函数</p>
+<p>内核会将与事件相关的上下文信息（例如，对于进程创建事件，会传递新进程的PID、创建者信息等）作为参数传递给回调函数</p>
+<h3 id="处理">处理
+</h3><p>驱动程序的回调函数被调用后，便可以在其函数体内执行自定义的逻辑</p>
+<p>它可以仅仅记录该事件，也可以进行干预，例如阻止该事件的完成（如果回调类型允许的话）</p>
+<h2 id="常见内核回调">常见内核回调
+</h2><h3 id="进程与线程相关回调">进程与线程相关回调
+</h3><h4 id="pssetcreateprocessnotifyroutine">PsSetCreateProcessNotifyRoutine
+</h4><ul>
+<li>功能：当进程创建或退出时触发</li>
+<li>用途：监控进程行为（如杀毒软件、行为分析等）</li>
+</ul>
+<h4 id="pssetcreatethreadnotifyroutine">PsSetCreateThreadNotifyRoutine
+</h4><ul>
+<li>功能：当线程被创建或销毁时触发</li>
+<li>用途：检测线程注入、远程线程创建</li>
+</ul>
+<h3 id="映像加载相关回调">映像加载相关回调
+</h3><h4 id="pssetloadimagenotifyroutine">PsSetLoadImageNotifyRoutine
+</h4><ul>
+<li>功能：当模块（如EXE、DLL）被加载到进程时触发</li>
+<li>用途：监视DLL是否注入或加载非法模块</li>
+</ul>
+<h3 id="注册表操作回调">注册表操作回调
+</h3><h4 id="cmregistercallbackcmregistercallbackex">CmRegisterCallback/CmRegisterCallbackEx
+</h4><ul>
+<li>功能：在注册表被访问（读写、删除等）时触发</li>
+<li>用途：拦截修改注册表、保护启动项</li>
+</ul>
+<h3 id="文件系统监控回调">文件系统监控回调
+</h3><h4 id="fsrtlregisterfilesystemfiltercallbacks">FsRtlRegisterFileSystemFilterCallbacks
+</h4><ul>
+<li>功能：文件系统过滤驱动使用的回调注册接口</li>
+<li>用途：监视文件访问、隐藏或加密文件等（如勒索软件防护、杀毒软件）</li>
+</ul>
+<h3 id="电源管理与关机回调">电源管理与关机回调
+</h3><h4 id="ioregistershutdownnotification">IoRegisterShutdownNotification
+</h4><ul>
+<li>功能：注册系统关机前通知</li>
+<li>用途：清理资源、保存数据、记录日志</li>
+</ul>
+<h4 id="poregisterpowersettingcallback">PoRegisterPowerSettingCallback
+</h4><ul>
+<li>功能：注册电源策略变化回调（如睡眠、唤醒）</li>
+<li>用途：管理节能策略或唤醒唤醒设备</li>
+</ul>
+<h3 id="蓝屏-bugcheck-回调">蓝屏 (BugCheck) 回调
+</h3><h4 id="keregisterbugcheckcallback">KeRegisterBugCheckCallback
+</h4><ul>
+<li>功能：系统蓝屏前调用，允许驱动记录崩溃状态</li>
+<li>用途：记录调试信息、保存崩溃快照</li>
+</ul>
+<h3 id="windows事件通知类回调">Windows事件通知类回调
+</h3><h4 id="exregistercallback">ExRegisterCallback
+</h4><ul>
+<li>功能：内核模块之间广播通知</li>
+<li>用途：驱动之间共享事件信息（如热插拔、电池状态）</li>
+</ul>
+<h3 id="网络相关回调">网络相关回调
+</h3><h4 id="fwpscalloutregister">FwpsCalloutRegister
+</h4><ul>
+<li>功能：用于网络过滤和处理框架Windows Filtering Platform注册网络流量过滤回调</li>
+<li>用途：监控/拦截网络通信（如防火墙、DLP系统）</li>
+</ul>
+<h4 id="ndisregisterprotocoldriver">NdisRegisterProtocolDriver
+</h4><ul>
+<li>功能：注册协议驱动的接收/发送回调函数</li>
+<li>用途：网络监控、抓包、VPN实现等</li>
+</ul>
+<h3 id="安全与对象管理回调">安全与对象管理回调
+</h3><h4 id="obregistercallbacks">ObRegisterCallbacks
+</h4><ul>
+<li>功能：监控对象句柄操作，如进程句柄、线程句柄</li>
+<li>用途：防止进程被调试、注入、终止（常用于反作弊或病毒保护）</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/windows/">Windows</a>
+        
+            <a href="/tags/forensics/">Forensics</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-07-21
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">windows相关知识总结（上）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SQL注入：从入门到入土</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速入门SQL</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>

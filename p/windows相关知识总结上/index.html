@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="NTFS文件系统 • 注册表 • windows安全机制">
+<title>windows相关知识总结（上）</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="windows相关知识总结（上）">
+<meta property='og:description' content="NTFS文件系统 • 注册表 • windows安全机制">
+<meta property='og:url' content='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-07-21T12:17:22&#43;08:00'/><meta property='article:modified_time' content='2025-07-21T13:15:36&#43;08:00'/>
+<meta name="twitter:title" content="windows相关知识总结（上）">
+<meta name="twitter:description" content="NTFS文件系统 • 注册表 • windows安全机制">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#ntfs文件系统">NTFS文件系统</a>
+      <ol>
+        <li><a href="#什么是ntfs">什么是NTFS</a></li>
+        <li><a href="#核心元文件">核心元文件</a>
+          <ol>
+            <li><a href="#mft">$Mft</a></li>
+            <li><a href="#mftmirr">$MftMirr</a></li>
+            <li><a href="#logfile">$LogFile</a></li>
+            <li><a href="#volume">$Volume</a></li>
+            <li><a href="#bitmap">$Bitmap</a></li>
+            <li><a href="#badclus">$BadClus</a></li>
+            <li><a href="#attrdef">$AttrDef</a></li>
+            <li><a href="#secure">$Secure</a></li>
+            <li><a href="#extend">$Extend</a>
+              <ol>
+                <li><a href="#quota">$Quota</a></li>
+                <li><a href="#objid">$ObjId</a></li>
+                <li><a href="#reparse">$Reparse</a></li>
+                <li><a href="#usnjrnl">$UsnJrnl</a></li>
+              </ol>
+            </li>
+            <li><a href="#boot">$Boot</a></li>
+            <li><a href="#upcase">$UpCase</a></li>
+            <li><a href="#recyclebin">$Recycle.Bin</a></li>
+          </ol>
+        </li>
+        <li><a href="#ntfs的关键结构--主文件表mft">NTFS的关键结构 —— 主文件表MFT</a>
+          <ol>
+            <li><a href="#什么是mft">什么是MFT</a></li>
+            <li><a href="#mft-的结构">MFT 的结构</a>
+              <ol>
+                <li><a href="#文件记录">文件记录</a></li>
+                <li><a href="#核心属性">核心属性</a></li>
+                <li><a href="#mft与文件恢复">MFT与文件恢复</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#注册表">注册表</a>
+      <ol>
+        <li><a href="#什么是注册表">什么是注册表</a></li>
+        <li><a href="#如何打开注册表">如何打开注册表</a></li>
+        <li><a href="#注册表的结构">注册表的结构</a>
+          <ol>
+            <li><a href="#注册表的配置单元物理层---hive">注册表的配置单元（物理层 - HIVE）</a>
+              <ol>
+                <li><a href="#system">SYSTEM</a></li>
+                <li><a href="#software">SOFTWARE</a></li>
+                <li><a href="#sam">SAM</a></li>
+                <li><a href="#security">SECURITY</a></li>
+                <li><a href="#ntuserdat">NTUSER.DAT</a></li>
+                <li><a href="#usrclassdat">UsrClass.dat</a></li>
+                <li><a href="#amcachehve">Amcache.hve</a></li>
+                <li><a href="#bcd">BCD</a></li>
+              </ol>
+            </li>
+            <li><a href="#注册表的根键逻辑层---hkey">注册表的根键（逻辑层 - HKEY）</a>
+              <ol>
+                <li><a href="#1-hkey_classes_roothkcr">1. HKEY_CLASSES_ROOT（HKCR）</a></li>
+                <li><a href="#2-hkey_current_userhkcu">2. HKEY_CURRENT_USER（HKCU）</a></li>
+                <li><a href="#3-hkey_local_machinehklm">3. HKEY_LOCAL_MACHINE（HKLM）</a></li>
+                <li><a href="#4-hkey_usershku">4. HKEY_USERS（HKU）</a></li>
+                <li><a href="#5-hkey_current_confighkcc">5. HKEY_CURRENT_CONFIG（HKCC）</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#常用注册表项">常用注册表项</a>
+          <ol>
+            <li><a href="#持久化机制">持久化机制</a>
+              <ol>
+                <li><a href="#开机自启runrunonce">开机自启（Run/RunOnce）</a></li>
+                <li><a href="#系统服务services">系统服务（Services）</a></li>
+                <li><a href="#登录辅助程序winlogon">登录辅助程序（Winlogon）</a></li>
+                <li><a href="#调试器image-file-execution-optionsifeo">调试器（Image File Execution Options，IFEO）</a></li>
+                <li><a href="#图像环境dllappinit_dll">图像环境DLL（AppInit_DLL）</a></li>
+                <li><a href="#com组件clsid">COM组件（CLSID）</a></li>
+              </ol>
+            </li>
+            <li><a href="#用户账户与凭证">用户账户与凭证</a>
+              <ol>
+                <li><a href="#本地用户信息sam">本地用户信息（SAM）</a></li>
+                <li><a href="#用户配置文件列表profilelist">用户配置文件列表（ProfileList）</a></li>
+              </ol>
+            </li>
+            <li><a href="#用户活动痕迹">用户活动痕迹</a>
+              <ol>
+                <li><a href="#程序执行历史userassist">程序执行历史（UserAssist）</a></li>
+                <li><a href="#最近打开的文档recentdocs">最近打开的文档（RecentDocs）</a></li>
+                <li><a href="#文件夹打开记录bagmru">文件夹打开记录（BagMRU）</a></li>
+                <li><a href="#usb设备使用历史usbstor">USB设备使用历史（USBSTOR）</a></li>
+              </ol>
+            </li>
+            <li><a href="#系统与网络信息">系统与网络信息</a>
+              <ol>
+                <li><a href="#网络接口与历史ip-interfaces">网络接口与历史IP (Interfaces)</a></li>
+                <li><a href="#最后关机时间-shutdowntime">最后关机时间 (ShutdownTime)</a></li>
+                <li><a href="#时区信息-timezoneinformation">时区信息 (TimeZoneInformation)</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#使用命令行编辑注册表">使用命令行编辑注册表</a>
+          <ol>
+            <li><a href="#reg命令的基本结构">reg命令的基本结构</a></li>
+            <li><a href="#增改add">增/改(add)</a></li>
+            <li><a href="#删-delete">删 (delete)</a></li>
+            <li><a href="#查-query">查 (query)</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#windows安全机制">Windows安全机制</a>
+      <ol>
+        <li><a href="#安全主体与身份验证">安全主体与身份验证</a>
+          <ol>
+            <li><a href="#安全主体">安全主体</a>
+              <ol>
+                <li><a href="#完整性级别">完整性级别</a></li>
+              </ol>
+            </li>
+            <li><a href="#身份验证">身份验证</a></li>
+          </ol>
+        </li>
+        <li><a href="#sid">SID</a>
+          <ol>
+            <li><a href="#什么是sid">什么是SID</a></li>
+            <li><a href="#sid如何工作">SID如何工作</a></li>
+            <li><a href="#sid的结构">SID的结构</a></li>
+            <li><a href="#众所周知的sid">众所周知的SID</a></li>
+          </ol>
+        </li>
+        <li><a href="#lsa">LSA</a>
+          <ol>
+            <li><a href="#什么是lsa">什么是LSA</a></li>
+            <li><a href="#访问令牌">访问令牌</a>
+              <ol>
+                <li><a href="#包含的内容">包含的内容</a></li>
+                <li><a href="#工作流程">工作流程</a></li>
+                <li><a href="#用户账户控制">用户账户控制</a></li>
+              </ol>
+            </li>
+            <li><a href="#lsa的功能">LSA的功能</a>
+              <ol>
+                <li><a href="#用户认证">用户认证</a></li>
+                <li><a href="#访问令牌生成">访问令牌生成</a></li>
+                <li><a href="#安全策略管理">安全策略管理</a></li>
+                <li><a href="#凭证缓存与管理">凭证缓存与管理</a></li>
+                <li><a href="#安全审计">安全审计</a></li>
+              </ol>
+            </li>
+            <li><a href="#lsa认证流程">LSA认证流程</a></li>
+            <li><a href="#lsa的protection机制">LSA的Protection机制</a></li>
+          </ol>
+        </li>
+        <li><a href="#授权机制">授权机制</a>
+          <ol>
+            <li><a href="#访问控制列表--acl">访问控制列表 —— ACL</a>
+              <ol>
+                <li><a href="#dacl">DACL</a></li>
+                <li><a href="#sacl">SACL</a></li>
+              </ol>
+            </li>
+            <li><a href="#访问控制条目--ace">访问控制条目 —— ACE</a>
+              <ol>
+                <li><a href="#主要组成字段">主要组成字段</a></li>
+                <li><a href="#常见类型">常见类型</a></li>
+              </ol>
+            </li>
+            <li><a href="#ace-匹配与权限判断流程">ACE 匹配与权限判断流程</a></li>
+            <li><a href="#继承机制与显式权限">继承机制与显式权限</a></li>
+            <li><a href="#权限掩码常见值">权限掩码常见值</a></li>
+            <li><a href="#对象安全描述符">对象安全描述符</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
+                技术学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/">windows相关知识总结（上）</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            NTFS文件系统 • 注册表 • windows安全机制
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-07-21</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-07-21
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行</p>
+<p>现在只是大概的了解，如果后续有时间，会把每一个板块都单独拿出来学习的</p>
+<p>嗯，如果有时间的话</p>
+<p><strong>windows相关知识总结（下）：</strong></p>
+<p><a class="link" href="http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/"  target="_blank" rel="noopener"
+    >http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<h1 id="ntfs文件系统">NTFS文件系统
+</h1><h2 id="什么是ntfs">什么是NTFS
+</h2><p>NTFS，全称New Technology File System，是自WindowsNT以来微软所有现代操作系统的标准文件系统</p>
+<p><strong>在NTFS卷上，一切皆文件</strong></p>
+<p>这不仅包括我们日常所见的普通文件和目录，用于描述和管理文件系统自身的元数据也同样被组织成一系列特殊的文件，这种设计极大地增强了文件系统的灵活性和可恢复性</p>
+<h2 id="核心元文件">核心元文件
+</h2><p><strong>这是NTFS文件系统内部使用的一组以<code>$</code>开头的特殊隐藏文件，用于维护整个文件系统的结构、状态和完整性</strong></p>
+<p>它们不像普通用户文件那样可见或可操作，而是被NTFS在后台自动创建和管理，保存着关于文件、目录、磁盘空间、日志、安全信息等的元数据</p>
+<p>大致结构如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>NTFS Root
+</span></span><span style="display:flex;"><span>├── $Mft
+</span></span><span style="display:flex;"><span>├── $MftMirr
+</span></span><span style="display:flex;"><span>├── $LogFile
+</span></span><span style="display:flex;"><span>├── $Volume
+</span></span><span style="display:flex;"><span>├── $Bitmap
+</span></span><span style="display:flex;"><span>├── $BadClus
+</span></span><span style="display:flex;"><span>├── $AttrDef
+</span></span><span style="display:flex;"><span>├── $Secure
+</span></span><span style="display:flex;"><span>├── $Extend
+</span></span><span style="display:flex;"><span>│   ├── $Quota
+</span></span><span style="display:flex;"><span>│   ├── $ObjId
+</span></span><span style="display:flex;"><span>│   ├── $Reparse
+</span></span><span style="display:flex;"><span>│   └── $UsnJrnl
+</span></span><span style="display:flex;"><span>├── $UpCase
+</span></span><span style="display:flex;"><span>├── $Boot
+</span></span><span style="display:flex;"><span>└── ...
+</span></span></code></pre></div><h3 id="mft">$Mft
+</h3><p><strong>MFT，即主文件表，是NTFS文件系统的核心数据库</strong></p>
+<p>它本身是一个特殊文件，由一系列固定大小的文件记录（通常为1024字节）组成</p>
+<p>卷上的每一个文件和目录都至少对应MFT中的一个文件记录，该记录包含一个头部和一系列描述文件所有信息的属性</p>
+<p><strong>它的主要用途是作为整个卷的索引目录</strong></p>
+<p>操作系统进行任何文件操作（如查找、读取、写入、权限检查）时，都必须首先查询$Mft以获取文件的元数据，包括时间戳、大小、权限以及数据在磁盘上的物理位置</p>
+<p>我们后面会详细说明它：[MFT](#NTFS的关键结构 —— 主文件表MFT)</p>
+<h3 id="mftmirr">$MftMirr
+</h3><p><strong>MftMirr是主文件表的一个部分备份或镜像</strong></p>
+<p>它通常只包含Mft最开头的几个关键文件记录（例如描述Mft自身、LogFile等元文件的记录）</p>
+<p>为了提高容灾能力，它在物理磁盘上的存储位置通常远离Mft</p>
+<p><strong>其唯一的用途是文件系统恢复</strong></p>
+<p>当Mft文件的起始部分发生损坏导致文件系统无法挂载时，操作系统可以利用MftMirr来定位关键的元文件，从而为修复工具提供恢复文件系统的可能性</p>
+<h3 id="logfile">$LogFile
+</h3><p><strong>该文件是NTFS日志记录功能的物理载体</strong></p>
+<p>它遵循预写式日志模型，即在对文件系统元数据进行任何实际更改之前，都会先将描述该操作的事务日志记录写入LogFile</p>
+<p><strong>它的核心用途是保证文件系统的一致性和可恢复性</strong></p>
+<p>在系统意外崩溃或断电后，NTFS驱动程序可以通过检查LogFile，回滚未完成的事务或完成已记录但未写入的事务，从而防止文件系统结构损坏，也可以用来恢复最近的文件操作历史</p>
+<h3 id="volume">$Volume
+</h3><p><strong>这是一个存储卷级别信息的元文件</strong></p>
+<p>它的主要属性中包含了整个卷的元数据，例如卷标、NTFS版本号以及卷的状态标志位</p>
+<p><strong>操作系统使用此文件来识别卷的属性</strong></p>
+<p>其中脏位(Dirty Bit)尤为重要，表示某个数据结构或内存页是否已经被修改过但尚未写回到磁盘或永久存储中，系统在启动时会检查这个标志，如果发现上次关机是“非正常”的，就会触发chkdsk等磁盘检查工具来确保卷的一致性</p>
+<h3 id="bitmap">$Bitmap
+</h3><p><strong>Bitmap是一个位图文件</strong>，它的每一个比特位都精确地对应着卷上的一个物理簇</p>
+<p>比特位的值（0或1）用于标记其对应的簇是空闲的还是已被占用</p>
+<p><strong>它被文件系统用于高效地管理磁盘空间分配</strong></p>
+<p>当需要为新文件写入数据时，系统会查询Bitmap来快速找到连续的空闲簇</p>
+<p>当文件被删除时，其占用的簇对应的比特位会被重置为0（空闲）</p>
+<h3 id="badclus">$BadClus
+</h3><p><strong>该文件标记了卷上所有已被检测为物理损坏或不可靠的坏簇</strong></p>
+<p>它以一个稀疏文件的形式存在，其$DATA属性中包含了所有坏簇的位置列表</p>
+<p><strong>它的作用是防止数据丢失</strong></p>
+<p>文件系统在分配磁盘空间时，会避开BadClus文件中标记的所有簇，以确保用户数据不会被写入到这些已知的物理损坏区域</p>
+<h3 id="attrdef">$AttrDef
+</h3><p><strong>AttrDef是属性定义表，相当于MFT文件记录的模式或模板定义文件</strong></p>
+<p>它以结构化的形式，列出了NTFS文件系统支持的所有属性类型及其元数据，包括它们的名称、数字ID以及默认特性（如是否可以非常驻）</p>
+<p>此文件由NTFS驱动程序在内部使用，用于在解析任何MFT文件记录时，都能正确地识别和解释其中的各种属性结构，保证了MFT的结构完整性和可扩展性</p>
+<h3 id="secure">$Secure
+</h3><p><strong>这是一个集中存储卷上所有文件和目录的安全描述符的数据库</strong></p>
+<p>NTFS为了节省空间，并不会在每个MFT记录中都存一份完整的安全描述符（包含用户SID、权限ACL等），而是将唯一的描述符存储在Secure文件中，并赋予其一个ID</p>
+<p>其他MFT记录只需引用这个ID即可</p>
+<p><strong>主要用途是提高权限验证效率和降低安全信息的存储冗余</strong></p>
+<p>通过共享安全描述符，可以显著减小MFT的体积，并允许系统更高效地缓存和查询权限信息</p>
+<h3 id="extend">$Extend
+</h3><p>Extend本身是一个目录，它作为NTFS高级功能模块的扩展容器，其下包含了多个用于支持特定功能的元文件</p>
+<p>它为磁盘配额、对象ID、重解析点和变更日志等高级功能提供结构化的存储位置</p>
+<p><strong>它包含以下重要子文件：</strong></p>
+<h4 id="quota">$Quota
+</h4><p>用于记录和管理每个用户在该卷上的磁盘空间使用限制</p>
+<p>它以包含用户SID、空间使用量、警告阈值和硬限制等信息的结构化记录进行存储</p>
+<p>实现Windows的磁盘配额功能，允许管理员为不同用户设置不同的磁盘空间上限</p>
+<h4 id="objid">$ObjId
+</h4><p>为一个卷上的每个文件分配一个全局唯一的对象标识符（GUID），以便快速查找</p>
+<p>主要被分布式链接跟踪等系统服务使用，确保即使用户将文件移动或重命名，依赖该文件的快捷方式等依然能找到它</p>
+<h4 id="reparse">$Reparse
+</h4><p>记录了卷上所有设置了重解析点的文件或目录</p>
+<p>重解析点允许一个文件或目录的访问被一个特定的驱动程序拦截并进行特殊处理</p>
+<p>它是实现多种高级文件系统功能的基础，例如符号链接、目录联接、卷挂载点以及OneDrive的占位符文件等</p>
+<h4 id="usnjrnl">$UsnJrnl
+</h4><p>其全称为Update Sequence Number Journal，即更新序列号日志</p>
+<p>它是一个高效率的日志，记录了卷上所有文件的所有变更事件，如创建、删除、写入、重命名、权限修改等</p>
+<p>它的主要用户是需要监控文件系统变化的应用程序，如增量备份软件、文件同步服务、以及安全审计工具。在取证分析中，它是还原文件详细活动历史的最重要数据源之一</p>
+<h3 id="boot">$Boot
+</h3><p><strong>该文件是卷的引导扇区的一个精确副本</strong></p>
+<p>它包含了BIOS参数块，详细描述了该分区的物理布局，以及用于启动操作系统的初始引导代码</p>
+<p>其核心用途是在计算机启动时，由BIOS/UEFI读取并执行，以<strong>加载操作系统的引导加载程序</strong></p>
+<p>同时，NTFS驱动程序也需要读取它来理解卷的几何结构</p>
+<h3 id="upcase">$UpCase
+</h3><p>该文件包含了一个完整的、将所有Unicode字符映射到其对应大写形式的转换表，<strong>用于实现NTFS文件名大小写不敏感但大小写保留的特性</strong></p>
+<p>当进行文件名比较或查找时，文件系统会调用这个映射表来确保<code>file.txt</code>和<code>FILE.TXT</code>这样的大小写被视为同一个文件</p>
+<h3 id="recyclebin">$Recycle.Bin
+</h3><p><strong>这虽然不是一个元数据文件，但它是一个与文件系统紧密相关的、重要的系统隐藏目录</strong></p>
+<p>当用户通过图形界面删除文件时，文件并不会被物理删除，而是其MFT记录被修改，使其被移动到Recycle.Bin目录下某个以用户SID命名的子目录中，并被重命名，同时一个索引文件会记录下原始的文件名和路径</p>
+<p><strong>它为用户提供回收站功能，允许恢复被误删除的文件</strong></p>
+<h2 id="ntfs的关键结构--主文件表mft">NTFS的关键结构 —— 主文件表MFT
+</h2><h3 id="什么是mft">什么是MFT
+</h3><p><strong>MFT的全称是MasterFileTable ，即主文件表，它是NTFS文件系统的核心</strong></p>
+<p>如果NTFS格式的硬盘分区是图书馆，那么MFT就是这个图书馆的总目录卡片索引柜</p>
+<p>这个索引柜本身也是一个特殊的文件，名为<code>$MFT</code>，里面存放着一张张的卡片，每一张卡片都详细记录了图书馆里某一本书（即硬盘上的一个文件或文件夹）的所有信息</p>
+<p>没有这个总目录，操作系统就无法找到、访问或管理分区上的任何文件</p>
+<h3 id="mft-的结构">MFT 的结构
+</h3><h4 id="文件记录">文件记录
+</h4><p>MFT 由一系列固定大小的文件记录构成，每个记录都有一个唯一的编号，从 0 开始</p>
+<p>记录的前部是固定的头结构<code>FILE_RECORD_SEGMENT_HEADER</code>，用于描述该记录的状态（如是否在使用中）</p>
+<p>其余部分则由多个可变长度的属性组成</p>
+<h4 id="核心属性">核心属性
+</h4><p>每个文件记录内部，由多个不同类型的属性来完整描述一个文件，下面介绍几个关键属性：</p>
+<ul>
+<li>
+<p><strong><code>$STANDARD_INFORMATION (0x10)</code></strong></p>
+<p><strong>这是存储文件的核心元数据，包括安全描述符、所有者ID，以及一组MACE时间戳</strong></p>
+<p>这组时间戳与文件内容的改变紧密相关，被认为是最稳定的时间戳，其创建时间通常反映了文件数据首次被写入的时间，是构建原始时间线的基准，常被称为MAC(B)时间</p>
+<p><span style="color:orange"><strong>1. M - Modified (修改时间) —— 文件内容最后一次被修改的时间</strong></span></p>
+<p>当打开一个文件，编辑其内容并保存后，这个时间戳就会更新</p>
+<p>创建新文件时，它的修改时间与创建时间相同</p>
+<p><span style="color:orange"><strong>2. A - Accessed (访问时间) —— 文件内容最后一次被访问读取的时间</strong></span></p>
+<p>理论上，只要一个程序打开并读取了文件内容（即使没有修改），这个时间戳就应该更新。</p>
+<p>但是在现代Windows系统中（Vista及之后），为了提高性能，默认情况下访问时间的更新是禁用的，因此这个时间戳的参考价值有限，除非管理员手动开启了该功能</p>
+<p><span style="color:orange"><strong>3. C - Created (创建时间) —— 文件被创建在这个文件系统上的时间</strong></span></p>
+<p>当一个文件从一个地方<strong>复制</strong>到另一个地方时，新文件的“创建时间”是复制操作发生的时间，而不是原始文件的创建时间</p>
+<p>但当文件被<strong>移动到同一卷</strong>（例如从C盘的一个文件夹移动到另一个文件夹）时，创建时间通常不会改变</p>
+<p><span style="color:orange"><strong>4. E - Entry Modified (MFT记录变更时间) —— 该文件在MFT中的记录本身最后一次被修改的时间</strong></span></p>
+<p>任何导致文件元数据发生变化的操作都会更新这个时间戳，例如文件重命名、文件大小改变、权限修改等。当然，修改文件内容（更新Modified时间）也同样会更新这个时间戳</p>
+</li>
+<li>
+<p><strong><code>$FILE_NAME (0x30)</code></strong></p>
+<p>包括存储文件名、父目录的文件记录号、文件大小，以及<strong>另一组独立的MACE时间戳</strong></p>
+<p><strong>这组时间戳反映的是文件名属性本身的状态</strong>，当文件被创建、移动或重命名时，这组时间戳会被更新</p>
+<p>通过对比<code>$STANDARD_INFORMATION</code>和<code>$FILE_NAME</code>两组时间戳的差异，可以用来判断文件是原地创建还是从别处复制而来</p>
+<p>一个文件记录可以有多个<code>$FILE_NAME</code>属性，以支持长文件名、MS-DOS兼容的8.3短文件名与硬链接</p>
+<p><span style="color:red"><strong>这两组时间具体变化情况如下表(访问时间在现代Windows系统中默认禁用更新，因此假设其始终不变)：</strong></span></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>操作</th>
+          <th>属性</th>
+          <th>创建时间  (C)</th>
+          <th>修改时间 (M)</th>
+          <th>访问时间 (A)</th>
+          <th>MFT变更时间 (E)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>原地创建文件</strong></td>
+          <td><code>$STANDARD_INFORMATION</code></td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>$FILE_NAME</code></td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td><strong>修改文件内容</strong></td>
+          <td><code>$STANDARD_INFORMATION</code></td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>$FILE_NAME</code></td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td><strong>复制文件</strong></td>
+          <td><code>$STANDARD_INFORMATION</code></td>
+          <td>❌ (继承)</td>
+          <td>❌ (继承)</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>$FILE_NAME</code></td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td><strong>移动文件 (同一分区)</strong></td>
+          <td><code>$STANDARD_INFORMATION</code></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>$FILE_NAME</code></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td><strong>重命名文件</strong></td>
+          <td><code>$STANDARD_INFORMATION</code></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>$FILE_NAME</code></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td><strong>读取文件</strong></td>
+          <td><code>$STANDARD_INFORMATION</code></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>$FILE_NAME</code></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong><code>$DATA</code></strong></p>
+<p>其中存储着文件的实际数据，其存储方式有两种：</p>
+<ol>
+<li><strong>常驻数据（存内容）</strong>：如果文件非常小（通常小于约700字节），其全部数据会直接存储在 MFT 记录内部的<code>$DATA</code>属性中，无需到磁盘的其他地方去寻找</li>
+<li><strong>非常驻数据（存指针）</strong>：如果文件较大，<code>$DATA</code>属性中存储的则是数据运行/簇列表，这是一系列指针，详细描述了该文件的数据流在磁盘上占用了哪些不连续的簇</li>
+</ol>
+</li>
+<li>
+<p><strong><code>$ATTRIBUTE_LIST</code></strong></p>
+<p><strong>它包含一个指针列表，指向存储该文件其他属性的额外MFT记录</strong></p>
+<p>当一个文件的所有属性无法在一个MFT记录中存下时（例如，文件有极多的硬链接或高度碎片化），系统会创建这个属性</p>
+</li>
+</ul>
+<h4 id="mft与文件恢复">MFT与文件恢复
+</h4><p>当一个文件被删除时，NTFS的操作是：</p>
+<ol>
+<li>在 MFT 中找到该文件对应的记录，并将其头部的<code>in-use</code>标志位置为0（未使用），记录本身的内容并不会被立即清除</li>
+<li>在<code>$Bitmap</code>文件中（跟踪卷上所有簇使用情况的元文件），将该文件数据所占用的磁盘簇标记为未分配</li>
+</ol>
+<p>这种标记删除机制使得数据恢复成为可能，恢复的成功率取决于MFT记录和原始数据簇是否被后续写入的新文件所覆盖</p>
+<p>这就导致下面几种情况：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>恢复场景</th>
+          <th>MFT记录状态</th>
+          <th>文件数据状态</th>
+          <th>可恢复性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>最佳情况</strong></td>
+          <td><strong>完好</strong></td>
+          <td><strong>完好</strong></td>
+          <td><strong>完美恢复</strong>：文件名、元数据和文件内容全部可以恢复</td>
+      </tr>
+      <tr>
+          <td><strong>一般情况</strong></td>
+          <td><strong>完好</strong></td>
+          <td><strong>部分被覆盖</strong></td>
+          <td><strong>部分恢复</strong>：文件名和元数据可恢复，但文件内容不完整或已损坏</td>
+      </tr>
+      <tr>
+          <td><strong>情况三</strong></td>
+          <td><strong>完好</strong></td>
+          <td><strong>完全被覆盖</strong></td>
+          <td><strong>仅元数据恢复</strong>：只能恢复文件名、大小、时间戳等“档案”信息，文件内容永久丢失</td>
+      </tr>
+      <tr>
+          <td><strong>最差情况</strong></td>
+          <td><strong>被覆盖</strong></td>
+          <td><strong>完好或部分完好</strong></td>
+          <td><strong>部分恢复</strong>：文件名和元数据永久丢失，但文件内容本身可以从磁盘的“未分配空间”中被恢复出来</td>
+      </tr>
+      <tr>
+          <td><strong>常驻数据</strong></td>
+          <td><strong>完好</strong></td>
+          <td><strong>数据在MFT记录中</strong></td>
+          <td><strong>完美恢复</strong>：由于文件数据本身就存储在MFT记录中，只要MFT记录未被覆盖，即使磁盘数据区被重写，文件内容依然可以被完整恢复</td>
+      </tr>
+  </tbody>
+</table></div>
+<h1 id="注册表">注册表
+</h1><h2 id="什么是注册表">什么是注册表
+</h2><p>Windows注册表是整个操作系统的核心数据库，是一个庞大、复杂的层级式数据库</p>
+<p>它存储了操作系统和几乎所有应用程序运行所需的全部配置信息，从硬件驱动的设置、软件的安装路径，到桌面壁纸的图片位置，所有的一切都记录在其中</p>
+<h2 id="如何打开注册表">如何打开注册表
+</h2><p>我们可以使用注册表编辑器：</p>
+<p><strong>win+R打开运行窗口，输入regedit，Shift+Ctrl+Enter以管理员模式打开</strong></p>
+<p>除了直接看注册表，它还有一个简单易用的用户界面——本地组策略，只不过家庭版通常是没有的：</p>
+<p><strong>win+R打开运行窗口，输入gpedit.msc打开</strong></p>
+<h2 id="注册表的结构">注册表的结构
+</h2><p><strong>要分析注册表，我们必须理解它的双层结构：物理层和逻辑层</strong></p>
+<h3 id="注册表的配置单元物理层---hive">注册表的配置单元（物理层 - HIVE）
+</h3><p>在Windows9x中，注册表文件的数据信息保存在system.dat（系统）和user.dat（用户）中</p>
+<p>但到了WindowsNT，注册表并不是一个单一的大文件，而是由一组名为配置单元 (Hive)的独立文件组成的</p>
+<p>这些是存储在硬盘上的真实文件，在系统运行时被加载到内存中，下面是几个常见的：</p>
+<h4 id="system">SYSTEM
+</h4><p>存储核心的系统硬件配置、服务列表、启动设置</p>
+<p><strong>路径</strong>：<code>C:\Windows\System32\config\SYSTEM</code></p>
+<h4 id="software">SOFTWARE
+</h4><p>存储操作系统和已安装软件的全局配置信息</p>
+<p><strong>路径</strong>：<code>C:\Windows\System32\config\SOFTWARE</code></p>
+<h4 id="sam">SAM
+</h4><p>安全帐户管理器(Security Account Manager)，存储本地用户的账户信息和密码哈希</p>
+<p><strong>路径</strong>：<code>C:\Windows\System32\config\SAM</code></p>
+<h4 id="security">SECURITY
+</h4><p>存储系统范围内的安全策略和用户权限分配</p>
+<p><strong>路径</strong>：<code>C:\Windows\System32\config\SECURITY</code></p>
+<h4 id="ntuserdat">NTUSER.DAT
+</h4><p>每个用户都有一个独立的，存储该用户的个性化设置，如桌面背景、程序历史记录等</p>
+<p><strong>路径</strong>：<code>C:\Users\&lt;用户名&gt;\NTUSER.DAT</code></p>
+<h4 id="usrclassdat">UsrClass.dat
+</h4><p>同样是每个用户一个，存储文件关联和COM类注册信息</p>
+<p><strong>路径</strong>：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Microsoft\Windows\UsrClass.dat</code></p>
+<h4 id="amcachehve">Amcache.hve
+</h4><p>记录了近期在该系统上运行过的应用程序及其路径、安装时间等信息</p>
+<p><strong>路径</strong>：<code>C:\Windows\appcompat\Programs\Amcache.hve</code></p>
+<h4 id="bcd">BCD
+</h4><p>存储了系统的启动菜单和配置信息，决定了计算机如何启动操作系统</p>
+<p>没有扩展名，文件名就是BCD，即Boot Configuration Data</p>
+<p><strong>路径</strong>：通常位于系统启动分区，例如 \Boot\BCD</p>
+<h3 id="注册表的根键逻辑层---hkey">注册表的根键（逻辑层 - HKEY）
+</h3><p><code>regedit.exe</code>的<code>HKEY_...</code>开头的顶级文件夹，是操作系统为了方便管理而创建的逻辑视图，被称为根键</p>
+<p>这些根键将不同的Hive文件组合在一起，形成树状结构</p>
+<p><strong>每一个根键都是一个项（文件夹），下面有着各种项，项里又定义着各种键值对（内容）</strong></p>
+<p><strong>注册表包括以下五个根键，其中只有HKLM和HKU是真实映射Hive的，其余都是它们的视图：</strong></p>
+<h4 id="1-hkey_classes_roothkcr">1. HKEY_CLASSES_ROOT（HKCR）
+</h4><p>它负责管理文件的类型关联（决定双击文件用什么程序打开）和 COM 组件的注册信息</p>
+<p>它是<strong>虚拟的、合并而成的视图</strong>，由<code>HKLM\SOFTWARE\Classes</code>和<code>HKCU\Software\Classes</code>这两个键合并而成</p>
+<h4 id="2-hkey_current_userhkcu">2. HKEY_CURRENT_USER（HKCU）
+</h4><p>该根键包括当前登录用户的配置信息，包括环境变量，个人程序以及桌面设置等</p>
+<p>它实际上是指向<code>HKEY_USERS</code>下当前用户SID的一个<strong>快捷方式</strong>，其内容来自当前用户的<code>NTUSER.DAT</code>文件</p>
+<h4 id="3-hkey_local_machinehklm">3. HKEY_LOCAL_MACHINE（HKLM）
+</h4><p>该根键包括本地计算机的系统信息，包括硬件和操作系统信息，安全数据和计算机专用的各类软件设置信息</p>
+<p>它主要映射了<code>SYSTEM</code>，<code>SOFTWARE</code>，<code>SAM</code>，<code>SECURITY</code>等Hive</p>
+<h4 id="4-hkey_usershku">4. HKEY_USERS（HKU）
+</h4><p>该根键包括计算机的所有用户使用的配置数据，这些数据只有在用户登录系统时才能访问，告诉系统当前用户使用的图标，激活的程序组，开始菜单的内容以及颜色，字体</p>
+<p>它的每个子项是一个用户的SID，此外还有.DEFAULT子项，是系统为新用户创建账户时的配置模板</p>
+<h4 id="5-hkey_current_confighkcc">5. HKEY_CURRENT_CONFIG（HKCC）
+</h4><p>该根键包括当前硬件的配置信息，其内容**完全指向（或映射自）**以下这个更深的注册表路径：</p>
+<p><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Hardware Profiles\Current</code></p>
+<h2 id="常用注册表项">常用注册表项
+</h2><h3 id="持久化机制">持久化机制
+</h3><p><strong>这是恶意软件实现开机自启、确保自身不被清除最常用的位置</strong></p>
+<h4 id="开机自启runrunonce">开机自启（Run/RunOnce）
+</h4><ul>
+<li><strong>路径</strong>：
+<ul>
+<li><code>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code> (<strong>对所有用户生效</strong>)</li>
+<li><code>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce</code></li>
+<li><code>HKCU\Software\Microsoft\Windows\CurrentVersion\Run</code> (<strong>只对当前用户生效</strong>)</li>
+<li><code>HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce</code></li>
+<li><code>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run</code> (<strong>策略控制的启动项</strong>)</li>
+<li><code>HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run</code></li>
+</ul>
+</li>
+<li><strong>功能</strong>：最经典、最直接的自启动位置写入这里的程序会在用户登录或系统启动时自动执行。</li>
+<li><strong>关注点</strong>：检查所有这些<code>Run</code>键下是否有指向非标准目录（如<code>Temp</code>、<code>AppData</code>）的可执行文件，或者是否有名字可疑的启动项</li>
+</ul>
+<h4 id="系统服务services">系统服务（Services）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SYSTEM\CurrentControlSet\Services\</code></li>
+<li><strong>功能</strong>：将程序注册为系统服务，可以在后台运行，权限高，更隐蔽</li>
+<li><strong>关注点</strong>：
+<ul>
+<li><strong>可疑服务名</strong>：是否有随机、无意义或拼写错误的服务名称</li>
+<li><strong><code>ImagePath</code></strong>：正常服务（如<code>svchost</code>）的<code>ImagePath</code>是否被篡改为指向恶意程序</li>
+<li><strong><code>FailureCommand</code></strong>：检查服务失败后执行的命令是否被设置为恶意程序</li>
+</ul>
+</li>
+</ul>
+<h4 id="登录辅助程序winlogon">登录辅助程序（Winlogon）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</code></li>
+<li><strong>功能</strong>：<code>Winlogon.exe</code>是负责用户登录的核心进程</li>
+<li><strong>关注点</strong>:
+<ul>
+<li><strong><code>Userinit</code></strong>：默认值应为<code>C:\Windows\system32\userinit.exe,</code>。<strong>检查末尾是否有逗号</strong>，以及后面是否跟了其他恶意程序的路径（用逗号分隔）</li>
+<li><strong><code>Shell</code></strong>：默认值应为<code>explorer.exe</code>，如果被修改，意味着用户的整个桌面环境都被替换了</li>
+</ul>
+</li>
+</ul>
+<h4 id="调试器image-file-execution-optionsifeo">调试器（Image File Execution Options，IFEO）
+</h4><ul>
+<li>
+<p><strong>路径</strong>：<code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\</code></p>
+</li>
+<li>
+<p><strong>功能</strong>：用于在程序启动时附加调试器</p>
+</li>
+<li>
+<p><strong>关注点</strong>：攻击者会创建一个以正常程序命名（如<code>notepad.exe</code>）的子项，然后在其中添加一个名为<code>Debugger</code>的键值，指向自己的恶意程序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#56b6c2">[</span>HKEY_LOCAL_MACHINE<span style="color:#98c379">\S</span>OFTWARE<span style="color:#98c379">\M</span>icrosoft<span style="color:#98c379">\W</span>indows NT<span style="color:#98c379">\C</span>urrentVersion<span style="color:#98c379">\I</span>mage File Execution Options<span style="color:#98c379">\n</span>otepad.exe<span style="color:#56b6c2">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">&#34;Debugger&#34;</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;C:\\Path\\To\\EvilDebugger.exe&#34;</span>
+</span></span></code></pre></div><p>这样，每当用户尝试运行记事本时，系统会优先运行那个恶意的调试器，而真正的记事本根本不会启动</p>
+<p>也可以用于阻止程序运行，如果调试器不存在，系统找不到指定的.exe，程序就无法启动</p>
+</li>
+</ul>
+<h4 id="图像环境dllappinit_dll">图像环境DLL（AppInit_DLL）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows</code></li>
+<li><strong>功能</strong>：允许将一个或多个DLL注入到几乎所有加载了<code>user32.dll</code>的进程中</li>
+<li><strong>关注点</strong>：检查**<code>AppInit_DLLs</code>**这个键值是否为空，任何被列在这里的DLL都会被广泛注入，是恶意软件实现全局监控的常用手段</li>
+</ul>
+<h4 id="com组件clsid">COM组件（CLSID）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKCR\CLSID\</code></li>
+<li><strong>功能</strong>：存储系统中所有COM组件类ID（CLSID）的信息</li>
+<li><strong>关注点</strong>：检查<code>InprocServer32</code>等子项的默认值，看其指向的 DLL 路径是否可疑</li>
+</ul>
+<h3 id="用户账户与凭证">用户账户与凭证
+</h3><h4 id="本地用户信息sam">本地用户信息（SAM）
+</h4><ul>
+<li>
+<p><strong>路径</strong>：<code>HKLM\SAM\SAM\Domains\Account\Users</code></p>
+</li>
+<li>
+<p><strong>功能</strong>：存储本地用户的账户名、SID、以及最重要的密码哈希</p>
+</li>
+<li>
+<p><strong>关注点</strong>：<code>SAM</code>受到严格保护，无法直接读取，但可以通过内存取证工具（如 <code>hashdump</code>）或离线分析<code>SAM</code>和<code>SYSTEM</code>文件来提取密码哈希</p>
+<p><strong>检查<code>Names</code>子键可以发现所有本地账户，包括可能被隐藏的账户</strong></p>
+</li>
+</ul>
+<h4 id="用户配置文件列表profilelist">用户配置文件列表（ProfileList）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList</code></li>
+<li><strong>功能</strong>：记录了本机上所有用户账户的 SID 以及其个人文件夹（Profile）的路径。</li>
+<li><strong>关注点</strong>：这是将SID和用户名对应起来的关键，可以发现系统上曾经存在过但已被删除的用户账户痕迹</li>
+</ul>
+<h3 id="用户活动痕迹">用户活动痕迹
+</h3><h4 id="程序执行历史userassist">程序执行历史（UserAssist）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist</code></li>
+<li><strong>功能</strong>：记录用户通过图形界面（点击图标）运行程序的历史，包括运行次数和最后运行时间</li>
+<li><strong>取证关注点</strong>：还原用户操作的关键，可以清晰地看到用户在特定时间点运行了哪些程序</li>
+</ul>
+<h4 id="最近打开的文档recentdocs">最近打开的文档（RecentDocs）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs</code></li>
+<li><strong>功能</strong>：记录用户最近打开过的文档和访问过的文件夹</li>
+<li><strong>关注点</strong>：了解用户最近处理了哪些文件，可能会发现恶意文档（如带宏的Word）或攻击者留下的工具</li>
+</ul>
+<h4 id="文件夹打开记录bagmru">文件夹打开记录（BagMRU）
+</h4><ul>
+<li><strong>路径</strong>：
+<ul>
+<li><code>HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU</code>（<strong>新版本，主要使用</strong>）</li>
+<li><code>HKCU\Software\Microsoft\Windows\Shell\BagMRU</code> （<strong>旧版本，不太使用</strong>）</li>
+</ul>
+</li>
+<li><strong>功能</strong>：记录用户曾经打开过的所有文件夹，每一项代表一个用户访问过的文件夹，每个键的值（如 <code>REG_BINARY</code>数据）是一个内部结构（MRU记录+路径+配置引用），其中包含路径信息，但不是直接可见的字符串</li>
+<li><strong>关注点</strong>：它可以揭示出用户曾经访问过但现在可能已不存在的文件夹，包括网络共享、移动设备上的文件夹，同级目录下的Bags会记录文件夹的具体视图设置</li>
+</ul>
+<h4 id="usb设备使用历史usbstor">USB设备使用历史（USBSTOR）
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR</code></li>
+<li><strong>功能</strong>：记录所有曾接入本机的U盘、移动硬盘等USB存储设备的厂商、型号和唯一的序列号</li>
+<li><strong>关注点</strong>：可以确定是否有未经授权的U盘接入，并可将特定U盘与数据泄露或恶意软件植入事件关联起来</li>
+</ul>
+<h3 id="系统与网络信息">系统与网络信息
+</h3><h4 id="网络接口与历史ip-interfaces">网络接口与历史IP (Interfaces)
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\</code></li>
+<li><strong>功能</strong>：记录本机所有网络接口（有线网卡、无线网卡）的配置信息，包括历史上曾经获取过的IP地址、子网掩码、网关和DNS服务器</li>
+<li><strong>关注点</strong>：可以确定机器在不同时间点的网络环境，对于追踪内网漫游或确认C2连接时的源IP地址至关重要</li>
+</ul>
+<h4 id="最后关机时间-shutdowntime">最后关机时间 (ShutdownTime)
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SYSTEM\CurrentControlSet\Control\Windows\ShutdownTime</code></li>
+<li><strong>功能</strong>：记录了系统最后一次正常关机的时间</li>
+<li><strong>关注点</strong>：帮助确定系统事件发生的时间窗口</li>
+</ul>
+<h4 id="时区信息-timezoneinformation">时区信息 (TimeZoneInformation)
+</h4><ul>
+<li><strong>路径</strong>：<code>HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</code></li>
+<li><strong>功能</strong>：记录本机配置的时区</li>
+<li><strong>关注点</strong>：时间线分析的基准，所有从日志和文件系统中提取的时间戳都必须根据这个时区进行校正，才能得到准确的绝对时间</li>
+</ul>
+<h2 id="使用命令行编辑注册表">使用命令行编辑注册表
+</h2><h3 id="reg命令的基本结构">reg命令的基本结构
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> reg &lt;操作&gt; &lt;注册表项路径&gt; <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span>
+</span></span></code></pre></div><h3 id="增改add">增/改(add)
+</h3><ul>
+<li>
+<p><strong>添加新项（文件夹）</strong></p>
+<p><strong>在<code>Run</code>键下创建一个名为<code>MyApp</code>的新项：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>reg add <span style="color:#98c379">&#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MyApp&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>添加/设置键值（内容）</strong></p>
+<ul>
+<li>
+<p><code>/v</code>：指定键值名</p>
+</li>
+<li>
+<p><code>/t</code>：指定类型</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>全称</th>
+          <th>存储内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>REG_SZ</strong></td>
+          <td>字符串值</td>
+          <td>人类可读的文本，如路径、名称、描述</td>
+      </tr>
+      <tr>
+          <td><strong>REG_DWORD</strong></td>
+          <td>32位数值</td>
+          <td>一个整数，通常用作是/否的标志或简单数字配置</td>
+      </tr>
+      <tr>
+          <td><strong>REG_BINARY</strong></td>
+          <td>二进制值</td>
+          <td>任意的、非结构化的原始字节数据</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><code>/d</code>：指定数据</p>
+</li>
+<li>
+<p><code>/f</code>：如果键值已存在，强制覆盖而不提示</p>
+</li>
+</ul>
+<p><strong>在<code>Run</code>键下创建一个名为<code>Pentestlab</code>的自启动程序：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>reg add <span style="color:#98c379">&#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run&#34;</span> /v Pentestlab /t REG_SZ /d <span style="color:#98c379">&#34;C:\tools\pentestlab.exe&#34;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="删-delete">删 (delete)
+</h3><ul>
+<li>
+<p><strong>删除键值</strong></p>
+<ul>
+<li><code>/v</code>：指定要删除的键值名</li>
+<li><code>/f</code>：强制删除，不进行确认提示</li>
+</ul>
+<p><strong>删除刚才创建的<code>Pentestlab</code>启动项：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>reg delete <span style="color:#98c379">&#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run&#34;</span> /v Pentestlab /f
+</span></span></code></pre></div></li>
+<li>
+<p><strong>删除整个项（及其所有子项和键值）</strong></p>
+<p><strong>删除刚才创建的MyApp项：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>reg delete <span style="color:#98c379">&#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MyApp&#34;</span> /f
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="查-query">查 (query)
+</h3><ul>
+<li>
+<p><strong>查询项下的所有内容</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>reg query <span style="color:#98c379">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&#34;</span>
+</span></span></code></pre></div><p>这条命令会列出<code>Winlogon</code>这个项下所有的子项和键值</p>
+</li>
+<li>
+<p><strong>查询一个具体的键值</strong></p>
+<ul>
+<li><code>/v</code>：指定要查询的键值名</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>reg query <span style="color:#98c379">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&#34;</span> /v Userinit
+</span></span></code></pre></div></li>
+<li>
+<p><strong>递归查询所有子项和键值</strong></p>
+<ul>
+<li><code>/s</code>：递归查询所有子项和键值</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>reg query <span style="color:#98c379">&#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist&#34;</span> /s
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="windows安全机制">Windows安全机制
+</h1><h2 id="安全主体与身份验证">安全主体与身份验证
+</h2><p><strong>在介绍Windows安全机制之前，我们必须先理解两个基本概念：安全主体和身份验证</strong></p>
+<h3 id="安全主体">安全主体
+</h3><p><strong>安全主体是指在Windows操作系统中能够被识别和进行身份验证的任何实体</strong></p>
+<p>它不仅包括人类用户，还包括以下内容：</p>
+<ul>
+<li>用户账户：包括本地用户（如<code>Administrator</code>）和域用户（如<code>CONTOSO\jdoe</code>）</li>
+<li>计算机账户：加入域的计算机，如<code>WORKSTATION-01$</code></li>
+<li>安全组：如<code>Administrators</code>组、<code>Everyone</code>组等</li>
+<li>系统内置账户：例如<code>SYSTEM</code>、<code>Local Service</code>、<code>Network Service</code></li>
+<li>进程或线程：在特定安全上下文中运行的进程或线程</li>
+</ul>
+<p><strong>简单来说，任何需要被系统识别以授予权限的对象，都是一个安全主体</strong></p>
+<h4 id="完整性级别">完整性级别
+</h4><p>完整性级别是安全主体的一个属性，用于防止低权限程序访问高权限资源</p>
+<p>主要级别有：</p>
+<ul>
+<li>低完整性级别（如Internet Explorer保护模式）</li>
+<li>中等完整性级别（普通用户程序）</li>
+<li>高完整性级别（管理员权限进程）</li>
+<li>系统完整性级别（操作系统核心进程）</li>
+</ul>
+<p>完整性级别形成了额外的访问限制层</p>
+<h3 id="身份验证">身份验证
+</h3><p>身份验证是核实安全主体是否确实是其所声称身份的过程，主要回答“你是谁？”这个问题</p>
+<p>身份验证确保访问者不是冒名顶替者，常见方式包括密码核对、智能卡认证、生物识别等</p>
+<p>需要注意的是，身份验证与授权是不同的概念，身份验证是授权的前提，但本身不等同于授权</p>
+<h2 id="sid">SID
+</h2><h3 id="什么是sid">什么是SID
+</h3><p>SID全称Security Identifier，即安全标识符，就是操作系统为每一个安全主体分配的、一个全局唯一且不可变的号码</p>
+<ul>
+<li><strong>唯一性</strong>：一个 SID 只会分配给一个安全主体，即使这个账户被删除，它的 SID 也不会被重新分配给新账户</li>
+<li><strong>不变性</strong>：账户可以改名，但它的 SID 永远不变</li>
+<li><strong>内部标识</strong>：用户习惯使用用户名来识别账户，但Windows内核只认SID</li>
+</ul>
+<h3 id="sid如何工作">SID如何工作
+</h3><p>SID是Windows安全模型的核心</p>
+<p><strong>创建与存储</strong>：当一个账户或组被创建时，本地安全机构（LSA）或域控制器会为其生成一个唯一的 SID，并将其存储在安全数据库中（本地账户存在注册表的SAMHive中，域账户存在活动目录中）</p>
+<p><strong>生成访问令牌</strong>：当一个用户成功登录时，系统会为其创建一个访问令牌 (Access Token)，这个令牌就像一张临时通行证，里面包含了该用户的SID、该用户所属所有组的SID、以及该用户拥有的所有特权</p>
+<p><strong>访问控制</strong>：当该用户尝试访问一个资源（如文件或文件夹）时，系统会拿出用户的访问令牌，将其中的SID列表与资源的访问控制列表（ACL）进行比对，以决定是否授予访问权限</p>
+<h3 id="sid的结构">SID的结构
+</h3><p>一个典型的、完整的 SID 结构如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>S  -  修订级别  -  颁发机构  -  域标识符 -  相对ID(RID)
+</span></span></code></pre></div><p>我们以一个例子来分解： <strong><code>S-1-5-21-2127521184-1604012920-1887927527-500</code></strong></p>
+<ul>
+<li>
+<p><strong><code>S</code></strong>：<strong>固定前缀</strong></p>
+<p>表明这是一个SID</p>
+</li>
+<li>
+<p><strong><code>1</code></strong>：<strong>修订级别</strong></p>
+</li>
+<li>
+<p>目前所有SID的版本都是1</p>
+</li>
+<li>
+<p><strong><code>5</code></strong>：<strong>标识符颁发机构</strong></p>
+<p>这里的<code>5</code>代表 <code>NT Authority</code>，即由WindowsNT系统安全机构颁发，这是最常见的一种</p>
+</li>
+<li>
+<p><strong><code>21-2127521184-1604012920-1887927527</code></strong>：<strong>域或本地计算机标识符</strong></p>
+<p>这是一串唯一的数字，代表创建这个SID的计算机或域，同一台电脑上的所有本地账户都会共享这一串数字</p>
+</li>
+<li>
+<p><strong><code>500</code></strong>：<strong>相对ID (RID)</strong></p>
+<p>这是 SID 的最后一部分，它在上述域标识符范围内是唯一的，真正用来区分不同的账户</p>
+<p>Windows 为一些内置账户预留了固定的 RID：</p>
+<ul>
+<li><strong>500</strong>：<code>Administrator</code>（内置管理员账户）</li>
+<li><strong>501</strong>：<code>Guest</code>（来宾账户）</li>
+<li>普通用户通常从 <strong>1000</strong> 或 <strong>1001</strong> 开始递增</li>
+</ul>
+</li>
+</ul>
+<h3 id="众所周知的sid">众所周知的SID
+</h3><p>除了上述每个账户独有的SID，Windows还预定义了一些特殊的、固定的 SID</p>
+<p>它们在所有Windows系统上都具有相同的值和含义，代表了一些内置的身份或通用组</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>SID</th>
+          <th>通用名称</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>S-1-5-18</code></td>
+          <td><code>Local System</code></td>
+          <td>本地系统账户，Windows系统中的最高权限</td>
+      </tr>
+      <tr>
+          <td><code>S-1-5-32-544</code></td>
+          <td><code>Administrators</code></td>
+          <td>本地管理员组，属于这个组的成员都拥有管理员权限</td>
+      </tr>
+      <tr>
+          <td><code>S-1-1-0</code></td>
+          <td><code>Everyone</code></td>
+          <td>所有用户组，范围最广，包括已登录的用户和匿名用户</td>
+      </tr>
+      <tr>
+          <td><code>S-1-5-11</code></td>
+          <td><code>Authenticated Users</code></td>
+          <td>已认证用户组，代表所有通过了身份验证的账户</td>
+      </tr>
+      <tr>
+          <td><code>S-1-5-2</code></td>
+          <td><code>Network</code></td>
+          <td>任何通过网络登录的用户</td>
+      </tr>
+      <tr>
+          <td><code>S-1-5-6</code></td>
+          <td><code>Service</code></td>
+          <td>任何以服务身份登录的实体</td>
+      </tr>
+      <tr>
+          <td><code>S-1-5-7</code></td>
+          <td><code>Interactive</code></td>
+          <td>任何通过直接在本地登录的用户</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="lsa">LSA
+</h2><h3 id="什么是lsa">什么是LSA
+</h3><p><strong>LSA，全称本地安全机构 (Local Security Authority)</strong></p>
+<p>它是一个受保护的Windows子系统，核心职责是在单台计算机上强制执行系统的安全策略</p>
+<p>它是Windows 安全模型的中心，负责验证用户身份、管理用户权限并生成安全审计日志</p>
+<p>LSA的用户模式组件体现在一个名为<code>lsass.exe</code>的关键系统进程中，是维持操作系统安全运行的必要进程，任何对<code>lsass.exe</code>的终止都会导致系统在短时间内强制关机并提示安全错误</p>
+<h3 id="访问令牌">访问令牌
+</h3><p>访问令牌Access Token是由LSA创建的内核管理对象，描述进程或线程的安全上下文</p>
+<h4 id="包含的内容">包含的内容
+</h4><p><strong>用户SID</strong>：标明主体身份</p>
+<p><strong>组SID列表</strong>：确定主体所属的所有安全组</p>
+<p><strong>特权列表</strong>：决定主体可执行的系统级特殊操作，如SeDebugPrivilege</p>
+<h4 id="工作流程">工作流程
+</h4><p>当用户登录后，启动的每个进程都会继承该用户访问令牌的副本</p>
+<p>当进程尝试访问受保护资源时，内核的安全引用监视器（Security Reference Monitor，SRM）会取出进程访问令牌中的SID列表，与资源的访问控制列表（Access Control List，ACL）比较，决定是否允许或拒绝访问</p>
+<h4 id="用户账户控制">用户账户控制
+</h4><p>用户账户控制（User Account Control，UAC）是基于访问令牌的“双令牌”机制</p>
+<p>传统的Windows系统中，用户经常以管理员权限登录，这导致所有程序默认拥有高权限，增加了系统被攻击和破坏的风险</p>
+<p>而UAC通过限制默认权限，减少系统受攻击面</p>
+<p>当管理员账户登录系统时，系统为其创建两个访问令牌：</p>
+<ul>
+<li><strong>标准访问令牌（受限令牌）</strong>：用于默认运行的应用程序，权限受限，防止程序执行高风险操作</li>
+<li><strong>完整访问令牌（管理员令牌）</strong>：包含完整管理员权限，但只在用户明确授权时使用</li>
+</ul>
+<p>普通用户账户只拥有标准令牌，无法提升权限</p>
+<p>当用户启动需要管理员权限的程序或操作（比如安装软件）时，系统会弹出UAC提示，要求用户确认操作：</p>
+<ul>
+<li><strong>管理员账户</strong>：弹出提示框，用户确认后程序使用完整访问令牌运行</li>
+<li><strong>标准账户</strong>：需要输入管理员账户的用户名和密码以获得权限提升</li>
+</ul>
+<p><strong>这保证了系统操作必须经过用户授权，避免恶意软件自动提升权限</strong></p>
+<h3 id="lsa的功能">LSA的功能
+</h3><h4 id="用户认证">用户认证
+</h4><p>LSA是所有用户登录请求的最终处理者</p>
+<p>无论是本地登录还是通过网络的域登录，凭证信息最终都会被传递给LSA进行验证</p>
+<h4 id="访问令牌生成">访问令牌生成
+</h4><p>在用户身份验证成功后，LSA负责创建该用户的访问令牌 (<code>_TOKEN</code>结构)</p>
+<p>该令牌是一个内核对象，它详细描述了用户的安全上下文，包括用户SID、所属组的SID列表、特权列表以及会话信息</p>
+<h4 id="安全策略管理">安全策略管理
+</h4><p>LSA强制执行在本地安全策略 (<code>secpol.msc</code>) 中定义的规则</p>
+<p>例如密码复杂度策略、账户锁定策略以及用户权限分配</p>
+<h4 id="凭证缓存与管理">凭证缓存与管理
+</h4><p>为了支持网络认证（如NTLM）和单点登录（SSO），<code>lsass.exe</code>进程的内存中会缓存多种形式的凭证数据</p>
+<p>包括 NTLM 哈希、Kerberos 票据，以及在某些配置下（如开启WDigest认证）的可逆加密或明文形式的密码</p>
+<h4 id="安全审计">安全审计
+</h4><p>根据系统中配置的审计策略，LSA会生成安全事件日志（如登录成功/失败、对象访问等）</p>
+<p>它会将这些日志发送给事件日志服务（Event Log service）进行记录</p>
+<h3 id="lsa认证流程">LSA认证流程
+</h3><p>以一个典型的本地交互式登录为例，LSA 在其中的工作流程如下：</p>
+<ol>
+<li>
+<p>用户在登录界面（由<code>winlogon.exe</code>管理）输入用户名和密码</p>
+</li>
+<li>
+<p><code>winlogon.exe</code> 将这些凭证安全地传递给<code>lsass.exe</code>进程</p>
+</li>
+<li>
+<p><code>lsass.exe</code>接收到凭证后，调用相应的认证包，对于本地登录，通常是<code>msv1_0.dll</code></p>
+</li>
+<li>
+<p><code>msv1_0.dll</code>与安全帐户管理器(Security Account Manager, SAM)服务通信，请求验证密码</p>
+<p>SAM服务会比对提交的密码哈希与存储在SAM注册表配置单元中的哈希是否一致</p>
+</li>
+<li>
+<p>验证成功后，LSA会创建一个包含该用户所有安全信息的访问令牌</p>
+</li>
+<li>
+<p>LSA 将此令牌返回给<code>winlogon.exe</code>，<code>winlogon.exe</code>再使用该令牌来启动用户的初始进程（<code>userinit.exe</code>），进而创建桌面环境（<code>explorer.exe</code>）</p>
+</li>
+</ol>
+<h3 id="lsa的protection机制">LSA的Protection机制
+</h3><p>由于<code>lsass.exe</code>内存的敏感性，微软在Windows8.1/Server2012R2及之后版本中引入了LSA Protection机制，其技术名称为<strong>受保护的进程之光 (Protected Process Light, PPL)</strong><del>什么鬼名字</del></p>
+<ul>
+<li>
+<p>通过在注册表中设置一个特定的键值：<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa</code>下的<code>RunAsPPL</code>，让<code>lsass.exe</code>进程可以在启动时被标记为一个受保护的进程</p>
+<p>Windows 内核的内存管理器会阻止任何非受保护的进程（即使是拥有管理员权限的进程）打开<code>lsass.exe</code> 的句柄并请求读取其内存或注入代码</p>
+<p>只有拥有微软特定签名的、同样是受保护的进程（如杀毒软件）才能对其进行访问</p>
+</li>
+<li>
+<p>此保护机制<strong>仅对活动的操作系统有效</strong>，对于通过物理采集或虚拟机快照获得的离线内存镜像进行分析时LSA Protection无效，仍然可以使用Volatility等工具解析<code>lsass.exe</code>的内存</p>
+</li>
+</ul>
+<h2 id="授权机制">授权机制
+</h2><p>在Windows安全机制中，<strong>ACL（Access Control List，访问控制列表）</strong> 和 <strong>ACE（Access Control Entry，访问控制条目）</strong> 是实现授权控制的基础结构，用于定义和限制安全主体对系统对象的访问权限</p>
+<h3 id="访问控制列表--acl">访问控制列表 —— ACL
+</h3><p>ACL 是附加在受保护对象（如文件、进程、注册表键、线程等）上的权限集合，用于控制哪些用户或组能够对该对象执行哪些操作</p>
+<p>ACL 分为两种类型：</p>
+<h4 id="dacl">DACL
+</h4><p>全称Discretionary ACL，自由访问控制列表</p>
+<p>用于指定允许或拒绝某个主体访问对象的权限，是授权控制的核心部分</p>
+<h4 id="sacl">SACL
+</h4><p>全称System ACL，系统访问控制列表</p>
+<p>用于指定系统是否应审计某个主体对对象的访问（例如记录成功或失败的访问尝试），用于安全审计</p>
+<h3 id="访问控制条目--ace">访问控制条目 —— ACE
+</h3><p>ACL 由一个或多个 ACE 组成，每条 ACE 定义一个安全主体对对象的某种访问规则。ACE 是描述“谁能做什么”的最小授权单元。</p>
+<h4 id="主要组成字段">主要组成字段
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SID（Security Identifier）</td>
+          <td>指定该条权限适用的安全主体（用户或用户组）</td>
+      </tr>
+      <tr>
+          <td>Type（类型）</td>
+          <td>标识是“允许访问”还是“拒绝访问”</td>
+      </tr>
+      <tr>
+          <td>Access Mask（访问掩码）</td>
+          <td>描述具体的权限（如读取、写入、执行、删除等）</td>
+      </tr>
+      <tr>
+          <td>Flags（标志）</td>
+          <td>控制是否可继承、是否用于审计等附加属性</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="常见类型">常见类型
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>ACE 类型</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ACCESS_ALLOWED_ACE_TYPE</code></td>
+          <td>允许某个 SID 执行指定操作</td>
+      </tr>
+      <tr>
+          <td><code>ACCESS_DENIED_ACE_TYPE</code></td>
+          <td>拒绝某个 SID 执行指定操作</td>
+      </tr>
+      <tr>
+          <td><code>SYSTEM_AUDIT_ACE_TYPE</code></td>
+          <td>审计某个 SID 的访问行为（记录日志）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="ace-匹配与权限判断流程">ACE 匹配与权限判断流程
+</h3><p>当一个用户（或进程）尝试访问某个对象时，系统会进行如下判断流程：</p>
+<ol>
+<li>获取该用户的访问令牌（包含 SID 和所属组列表）</li>
+<li>读取目标对象的 DACL，依序遍历其中的 ACE</li>
+<li>将访问令牌中的 SID 与每条 ACE 的 SID 进行比对</li>
+<li>遇到匹配的 Deny 类型 ACE → 立即拒绝访问</li>
+<li>遇到匹配的 Allow 类型 ACE → 记录允许的操作权限</li>
+<li>继续匹配，直到所有 ACE 遍历完成或提前拒绝</li>
+<li>如果请求的权限未被任何 ACE 显式允许 → 拒绝访问</li>
+</ol>
+<blockquote>
+<p>注意：ACE 在 DACL 中的顺序非常重要，Deny ACE 一般优先于 Allow ACE</p></blockquote>
+<h3 id="继承机制与显式权限">继承机制与显式权限
+</h3><p>ACE 还可以具有继承性：</p>
+<ul>
+<li><strong>显式ACE</strong>：直接定义在对象上的权限</li>
+<li><strong>继承ACE</strong>：从上层容器（如文件夹）继承而来，可自动应用到子对象</li>
+<li>继承标志包括：
+<ul>
+<li><code>OBJECT_INHERIT_ACE</code>：继承给子对象</li>
+<li><code>CONTAINER_INHERIT_ACE</code>：继承给子容器</li>
+<li><code>INHERIT_ONLY_ACE</code>：仅供继承使用，不适用于当前对象；</li>
+<li><code>NO_PROPAGATE_INHERIT_ACE</code>：仅继承一级，不再向下传递</li>
+</ul>
+</li>
+</ul>
+<p>这些继承规则支持管理员一次性配置整个目录或注册表项的权限，提升安全管理效率</p>
+<h3 id="权限掩码常见值">权限掩码常见值
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>权限</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>READ</code></td>
+          <td>读取对象数据（如文件内容、注册表值）</td>
+      </tr>
+      <tr>
+          <td><code>WRITE</code></td>
+          <td>修改对象数据</td>
+      </tr>
+      <tr>
+          <td><code>EXECUTE</code></td>
+          <td>执行对象</td>
+      </tr>
+      <tr>
+          <td><code>DELETE</code></td>
+          <td>删除对象</td>
+      </tr>
+      <tr>
+          <td><code>READ_CONTROL</code></td>
+          <td>读取对象的安全描述符（但不包含 DACL）</td>
+      </tr>
+      <tr>
+          <td><code>WRITE_DAC</code></td>
+          <td>修改对象的 DACL</td>
+      </tr>
+      <tr>
+          <td><code>WRITE_OWNER</code></td>
+          <td>修改对象的所有者</td>
+      </tr>
+      <tr>
+          <td><code>FULL_CONTROL</code></td>
+          <td>拥有全部权限（等价于管理员完全控制）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="对象安全描述符">对象安全描述符
+</h3><p>对象的安全信息不仅包括ACL，还包括以下结构，一起被称为安全描述符：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>所有者</td>
+          <td>对象的拥有者，默认有修改权限</td>
+      </tr>
+      <tr>
+          <td>主组</td>
+          <td>通常在POSIX/UNIX环境兼容性使用</td>
+      </tr>
+      <tr>
+          <td>DACL</td>
+          <td>授权控制</td>
+      </tr>
+      <tr>
+          <td>SACL</td>
+          <td>审计控制</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>通过<code>GetSecurityInfo</code>、<code>SetSecurityInfo</code>等 API，可以查询或修改对象的安全描述符</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/windows/">Windows</a>
+        
+            <a href="/tags/forensics/">Forensics</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-07-21
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">windows相关知识总结（下）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SQL注入：从入门到入土</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速入门SQL</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>

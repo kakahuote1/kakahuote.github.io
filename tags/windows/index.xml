@@ -1,0 +1,1655 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Windows on kakahuote</title>
+        <link>https://blog.928330.xyz/tags/windows/</link>
+        <description>Recent content in Windows on kakahuote</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Example Person</copyright>
+        <lastBuildDate>Mon, 21 Jul 2025 13:15:36 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/windows/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>windows相关知识总结（下）</title>
+        <link>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/</link>
+        <pubDate>Mon, 21 Jul 2025 12:18:54 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;windows相关知识总结（上）：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;进程&#34;&gt;进程
+&lt;/h1&gt;&lt;h2 id=&#34;常见进程&#34;&gt;常见进程
+&lt;/h2&gt;&lt;h3 id=&#34;初始化进程&#34;&gt;初始化进程
+&lt;/h3&gt;&lt;h4 id=&#34;system&#34;&gt;System
+&lt;/h4&gt;&lt;p&gt;进程ID通常为4，是内核级线程的宿主，是运行&lt;code&gt;ntoskrnl.exe&lt;/code&gt;的容器&lt;/p&gt;
+&lt;p&gt;（&lt;code&gt;ntoskrnl.exe&lt;/code&gt;负责内存管理、进程/线程调度、硬件抽象、系统调用处理等功能）&lt;/p&gt;
+&lt;p&gt;它是进程树的根，没有父进程，如果看到有用户模式的进程成为它的子进程，需要高度警惕&lt;/p&gt;
+&lt;h4 id=&#34;smssexe&#34;&gt;smss.exe
+&lt;/h4&gt;&lt;p&gt;会话管理器子系统，负责创建新的用户会话，是系统中的第一个真实进程&lt;/p&gt;
+&lt;p&gt;它会启动&lt;code&gt;csrss.exe&lt;/code&gt;和&lt;code&gt;winlogon.exe&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;csrssexe&#34;&gt;csrss.exe
+&lt;/h4&gt;&lt;p&gt;客户端/服务器运行时子系统，负责管理窗口、线程和控制台等，每个会话中都会有一个实例&lt;/p&gt;
+&lt;p&gt;其父进程必须是&lt;code&gt;smss.exe&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;wininitexe&#34;&gt;wininit.exe
+&lt;/h4&gt;&lt;p&gt;Windows初始化进程，在系统引导时启动，会一直保留在后台运行&lt;/p&gt;
+&lt;p&gt;它的核心任务是启动三个关键进程：&lt;code&gt;services.exe&lt;/code&gt;、&lt;code&gt;lsass.exe&lt;/code&gt;和&lt;code&gt;lsm.exe&lt;/code&gt;，任何其他进程都值得审查&lt;/p&gt;
+&lt;p&gt;其父进程应为空&lt;/p&gt;
+&lt;h4 id=&#34;winlogonexe&#34;&gt;winlogon.exe
+&lt;/h4&gt;&lt;p&gt;Windows 登录管理器，负责处理用户的交互式登录与注销过程，并加载用户配置文件&lt;/p&gt;
+&lt;p&gt;在用户成功登录后，它会负责启动&lt;code&gt;userinit.exe&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其父进程必须是&lt;code&gt;smss.exe&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;userinitexe&#34;&gt;userinit.exe
+&lt;/h4&gt;&lt;p&gt;用户初始化进程，负责在用户登录后执行登录脚本、恢复网络连接，并启动用户外壳程序（Shell）&lt;/p&gt;
+&lt;p&gt;它在启动了用户的桌面环境（默认为 &lt;code&gt;explorer.exe&lt;/code&gt;）后会立刻退出，&lt;strong&gt;因此在正常的进程列表中几乎看不到它&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其父进程必须是&lt;code&gt;winlogon.exe&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;explorerexe&#34;&gt;explorer.exe
+&lt;/h4&gt;&lt;p&gt;Windows资源管理器，也是用户登录后启动的第一个进程，是所有用户图形化操作的起点&lt;/p&gt;
+&lt;p&gt;在一个标准的 Windows 会话中，它有四个功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;文件管理器&lt;/strong&gt;：打开“我的电脑”时看到的那些文件和文件夹窗口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;任务栏与开始菜单&lt;/strong&gt;：屏幕底部的任务栏、开始按钮、系统托盘区&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;桌面图标管理器&lt;/strong&gt;：桌面图标，以及对它们的点击、拖拽等交互&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;桌面背景绘制&lt;/strong&gt;：桌面壁纸等&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;恶意软件经常向其注入DLL，以获取用户权限并保持持久化&lt;/p&gt;
+&lt;h3 id=&#34;核心服务进程&#34;&gt;核心服务进程
+&lt;/h3&gt;&lt;h4 id=&#34;servicesexe&#34;&gt;services.exe
+&lt;/h4&gt;&lt;p&gt;服务控制管理器，负责启动和管理所有系统服务，是所有通过正常方式启动的&lt;code&gt;svchost.exe&lt;/code&gt;的父进程&lt;/p&gt;
+&lt;p&gt;其父进程必须是&lt;code&gt;wininit.exe&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;lsassexe&#34;&gt;lsass.exe
+&lt;/h4&gt;&lt;p&gt;本地安全机构子系统服务，内存中存放着用户的密码哈希等敏感凭证，系统中必须有且只有一个实例&lt;/p&gt;
+&lt;p&gt;其父进程必须是&lt;code&gt;wininit.exe&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;lsmexe&#34;&gt;lsm.exe
+&lt;/h4&gt;&lt;p&gt;本地会话管理器服务，处理与用户登录、注销、远程桌面连接和快速用户切换相关的终端服务&lt;/p&gt;
+&lt;p&gt;其父进程必须是&lt;code&gt;wininit.exe&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;svchostexe&#34;&gt;svchost.exe
+&lt;/h4&gt;&lt;p&gt;服务宿主进程，是 Windows 系统中的一个核心进程，专门用作运行各种系统服务的“容器”或“宿主”&lt;/p&gt;
+&lt;p&gt;它也是最常见的伪装和注入目标：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;父进程&lt;/strong&gt;：必须是&lt;code&gt;services.exe&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件路径&lt;/strong&gt;：必须位于&lt;code&gt;C:\Windows\System32\&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络连接&lt;/strong&gt;：它承载的系统服务中，哪些建立了网络连接，连接到哪里&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;脚本执行进程&#34;&gt;脚本执行进程
+&lt;/h3&gt;&lt;h4 id=&#34;rundll32exe&#34;&gt;rundll32.exe
+&lt;/h4&gt;&lt;p&gt;用于执行DLL文件中的函数，攻击者常用它来加载恶意DLL，从而绕过基于程序名的检测&lt;/p&gt;
+&lt;p&gt;分析时应关注其父进程是谁，以及它加载了哪个DLL&lt;/p&gt;
+&lt;h4 id=&#34;powershellexe&#34;&gt;powershell.exe
+&lt;/h4&gt;&lt;p&gt;是命令行和脚本引擎，现代无文件攻击的首选工具&lt;/p&gt;
+&lt;p&gt;任何&lt;code&gt;powershell.exe&lt;/code&gt;的出现都值得审查，特别是其命令行参数中是否包含编码（&lt;code&gt;-e&lt;/code&gt;）、混淆或下载链接&lt;/p&gt;
+&lt;h4 id=&#34;conhostexe&#34;&gt;conhost.exe
+&lt;/h4&gt;&lt;p&gt;控制台窗口主机，为&lt;code&gt;cmd.exe&lt;/code&gt;等命令行程序提供交互界面&lt;/p&gt;
+&lt;p&gt;它的内存中存储了该命令行窗口中所有输入过的命令和输出过的结果&lt;/p&gt;
+&lt;h2 id=&#34;进程权限&#34;&gt;进程权限
+&lt;/h2&gt;&lt;h3 id=&#34;系统级核心特权&#34;&gt;系统级核心特权
+&lt;/h3&gt;&lt;h4 id=&#34;setcbprivilege&#34;&gt;SeTcbPrivilege
+&lt;/h4&gt;&lt;p&gt;**这是Windows中权限最高、最强大的特权之一。**全称是作为操作系统的一部分(Act as part of the operating system)，通常被称为可信计算基（Trusted Computer Base, TCB）特权&lt;/p&gt;
+&lt;p&gt;拥有此特权的进程被视为系统核心信任的一部分，可以执行几乎任何操作，包括创建安全令牌来冒充任何用户，除了极少数核心系统进程，任何程序都不应拥有它&lt;/p&gt;
+&lt;h4 id=&#34;sedebugprivilege&#34;&gt;SeDebugPrivilege
+&lt;/h4&gt;&lt;p&gt;**调试程序特权。**它授予一个进程附加到其他任意进程并检查、修改其内存的能力&lt;/p&gt;
+&lt;p&gt;攻击者常利用它来从&lt;code&gt;lsass.exe&lt;/code&gt;中窃取密码，除了调试器和核心安全软件，任何普通程序（如记事本、浏览器）拥有它都极度可疑&lt;/p&gt;
+&lt;h4 id=&#34;seloaddriverprivilege&#34;&gt;SeLoadDriverPrivilege
+&lt;/h4&gt;&lt;p&gt;**加载和卸载设备驱动程序特权。**它授予一个进程将内核模式驱动程序（&lt;code&gt;.sys&lt;/code&gt;文件）加载到Windows内核中或从内核中卸载的能力&lt;/p&gt;
+&lt;p&gt;这是通往内核模式的入口，恶意软件一旦获得此特权，就可以加载自己的恶意驱动，从而隐藏文件、进程、网络连接，并完全绕过用户态的安全软件&lt;/p&gt;
+&lt;h3 id=&#34;安全与审计特权&#34;&gt;安全与审计特权
+&lt;/h3&gt;&lt;h4 id=&#34;setakeownershipprivilege&#34;&gt;SeTakeOwnershipPrivilege
+&lt;/h4&gt;&lt;p&gt;**获取对象所有权特权。**它授予进程获取系统上任何安全对象（如文件、文件夹、注册表项）的所有权的能力，即使该进程原本没有访问该对象的权限&lt;/p&gt;
+&lt;p&gt;攻击者获得它之后，就可以强行霸占受系统保护的文件或注册表键，然后赋予自己读写权限，进而篡改系统配置或替换核心文件&lt;/p&gt;
+&lt;h4 id=&#34;sebackupprivilege&#34;&gt;SeBackupPrivilege
+&lt;/h4&gt;&lt;p&gt;**备份文件和目录特权，可以做到读取一切。**它允许进程在读取文件时，绕过所有常规的文件和目录权限检查（ACL），其初衷是让备份软件可以备份系统上的所有文件&lt;/p&gt;
+&lt;p&gt;数据窃取类木马和勒索软件经常利用此特权来读取它们本无权访问的敏感用户文档、数据库文件或配置文件，以便进行窃取或加密&lt;/p&gt;
+&lt;h4 id=&#34;serestoreprivilege&#34;&gt;SeRestorePrivilege
+&lt;/h4&gt;&lt;p&gt;**还原文件和目录特权，可以做到写入一切。**与&lt;code&gt;SeBackupPrivilege&lt;/code&gt;对应，它允许进程在写入文件时，绕过所有权限检查&lt;/p&gt;
+&lt;p&gt;恶意软件可以利用它来覆盖受保护的系统文件、在系统目录中释放恶意程序，或修改锁定的配置文件以实现持久化&lt;/p&gt;
+&lt;h4 id=&#34;sesecurityprivilege&#34;&gt;SeSecurityPrivilege
+&lt;/h4&gt;&lt;p&gt;**管理审核和安全日志特权，可以做到删除痕迹。**主要允许进程查看和清空 Windows 安全事件日志&lt;/p&gt;
+&lt;p&gt;攻击者在完成入侵后，会利用这个特权来清空安全日志，从而抹去自己的登录尝试、账户创建、权限使用等痕迹&lt;/p&gt;
+&lt;h3 id=&#34;常规特权&#34;&gt;常规特权
+&lt;/h3&gt;&lt;h4 id=&#34;seshutdownprivilege&#34;&gt;SeShutdownPrivilege
+&lt;/h4&gt;&lt;p&gt;**关闭系统特权。**授予进程关闭本地计算机的权力&lt;/p&gt;
+&lt;h4 id=&#34;seimpersonateprivilege&#34;&gt;SeImpersonatePrivilege
+&lt;/h4&gt;&lt;p&gt;**身份验证后模拟客户端特权。**通常授予服务类账户，允许一个服务进程模拟连接到它的客户端的安全上下文&lt;/p&gt;
+&lt;p&gt;攻击者可以诱使一个高权限进程（如SYSTEM）来连接自己，然后利用此特权“模拟”这个高权限进程，从而将自己从一个低权限的服务账户提升到&lt;code&gt;SYSTEM&lt;/code&gt;权限&lt;/p&gt;
+&lt;h4 id=&#34;sechangenotifyprivilege&#34;&gt;SeChangeNotifyPrivilege
+&lt;/h4&gt;&lt;p&gt;**绕过遍历检查特权。**它允许进程在访问一个对象时，无需检查路径中所有上级目录的权限&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是一个正常无害的特权，Windows 默认会将其授予所有用户，包括最低权限的用户&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;dll&#34;&gt;DLL
+&lt;/h1&gt;&lt;h2 id=&#34;什么是dll&#34;&gt;什么是DLL
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;DLL(Dynamic Link Library)文件为动态链接库文件，又称“应用程序拓展”&lt;/strong&gt;，是软件文件类型&lt;/p&gt;
+&lt;p&gt;在Windows中，许多应用程序并不是一个完整的可执行文件，它们被分割成一些相对独立的动态链接库，即DLL文件，放置于系统中，当我们执行某一个程序时，相应的DLL文件就会被调用&lt;/p&gt;
+&lt;p&gt;一个应用程序可使用多个DLL文件，一个DLL文件也可能被不同的应用程序使用，这样的DLL文件被称为共享DLL文件&lt;/p&gt;
+&lt;p&gt;DLL文件中存放的是各类程序的函数(子过程)实现过程，当程序需要调用函数时需要先载入DLL，然后取得函数的地址，最后进行调用&lt;/p&gt;
+&lt;p&gt;使用DLL文件的好处是程序不需要在运行之初加载所有代码，只有在程序需要某个函数的时候才从DLL中取出&lt;/p&gt;
+&lt;h2 id=&#34;dll的调用方式&#34;&gt;DLL的调用方式
+&lt;/h2&gt;&lt;h3 id=&#34;1-静态调用--隐式链接&#34;&gt;1. 静态调用 / 隐式链接
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在运行程序前，必须先把所有的DLL都准备好，少一个都不行&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在编译程序的时候，开发者就已经在代码中明确声明了需要用到哪些DLL里的哪些函数&lt;/li&gt;
+&lt;li&gt;这些依赖关系被记录在最终生成的可执行文件（&lt;code&gt;.exe&lt;/code&gt;）的头部，一个叫做“导入表“（Import Table）的地方&lt;/li&gt;
+&lt;li&gt;当运行这个.exe文件时，Windows加载器会首先读取这个表&lt;/li&gt;
+&lt;li&gt;加载器会根据导入表的信息，在硬盘上找到所有必需的DLL文件，并将它们加载到该进程的内存空间中&lt;/li&gt;
+&lt;li&gt;所有函数地址都链接好之后，程序的主代码才开始执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-动态调用--显式链接&#34;&gt;2. 动态调用 / 显式链接
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在运行程序前，不需要把所有的DLL都准备好，少了哪个就引入哪个&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;程序在编译时，并不知道自己会用到哪些DLL&lt;/li&gt;
+&lt;li&gt;程序在运行过程中，根据当时的逻辑判断，临时决定需要某个DLL的功能&lt;/li&gt;
+&lt;li&gt;程序会调用特定的WindowsAPI函数来手动加载这个DLL
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;LoadLibrary()&lt;/code&gt;：这个函数用来将指定的DLL文件加载到内存中&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GetProcAddress()&lt;/code&gt;：加载成功后，用这个函数从DLL中获取特定函数的地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;拿到函数地址后，程序就可以像调用自己的函数一样调用它了&lt;/li&gt;
+&lt;li&gt;当不再需要时，可以调用&lt;code&gt;FreeLibrary()&lt;/code&gt;将其从内存中卸载&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;常见dll&#34;&gt;常见DLL
+&lt;/h2&gt;&lt;h3 id=&#34;核心系统库-几乎所有进程都会加载&#34;&gt;核心系统库 (几乎所有进程都会加载)
+&lt;/h3&gt;&lt;h4 id=&#34;ntdlldll&#34;&gt;ntdll.dll
+&lt;/h4&gt;&lt;p&gt;WindowsNT核心库，是用户态程序与系统内核之间最底层的接口，封装了大量的系统调用，例如进程和线程的创建、内存管理、文件I/O以及与内核对象的交互&lt;/p&gt;
+&lt;p&gt;其他更高层的核心库（如&lt;code&gt;kernel32.dll&lt;/code&gt;）最终也需要调用&lt;code&gt;ntdll.dll&lt;/code&gt;中的函数来完成实际的工作&lt;/p&gt;
+&lt;h4 id=&#34;kernel32dll--kernelbasedll&#34;&gt;kernel32.dll / kernelbase.dll
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;kernel32.dll&lt;/code&gt;是Windows中最核心的用户模式库之一，为应用程序提供了访问操作系统的基础功能，如内存管理、文件I/O和进程线程管理&lt;/p&gt;
+&lt;p&gt;从Windows7开始，许多&lt;code&gt;kernel32.dll&lt;/code&gt;的核心功能被重构并移入了&lt;code&gt;kernelbase.dll&lt;/code&gt;，而&lt;code&gt;kernel32.dll&lt;/code&gt;本身则更多地作为调用这些新功能的一个“转发层”&lt;/p&gt;
+&lt;h4 id=&#34;user32dll&#34;&gt;user32.dll
+&lt;/h4&gt;&lt;p&gt;负责所有用户图形界面（GUI）的功能设计，如窗口、菜单、按钮、鼠标和键盘输入等，即&lt;strong&gt;结构和交互&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在早期32-bit 版本的Windows中，用户控件是在&lt;code&gt;ComCtl32&lt;/code&gt;中实现的，但是一些控件的显示功能是在&lt;code&gt;User32.dll&lt;/code&gt;中实现的，例如在一个窗口中非客户区域（边框和菜单）的绘制就是由&lt;code&gt;User32.dll&lt;/code&gt;来完成的&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;User32.dll&lt;/code&gt;是操作系统的一个核心控件，它和操作系统是紧密联系在一起的，不同版本的Windows中&lt;code&gt;User32.dll&lt;/code&gt;是不同，因此，应用程序在不同版本的Windows中运行的时候，由于&lt;code&gt;User32.dll&lt;/code&gt;的不同，会导致应用程序的界面通常会有微小的不同&lt;/p&gt;
+&lt;h4 id=&#34;gdi32dll&#34;&gt;gdi32.dll
+&lt;/h4&gt;&lt;p&gt;负责图形化窗口的图形绘制与内容输出，包括像素、线条、字体、位图、画刷等，即&lt;strong&gt;内容和外观&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;comdlg32dll&#34;&gt;comdlg32.dll
+&lt;/h4&gt;&lt;p&gt;通用对话框库（Common Dialog Box Library），这个库为应用程序提供了标准的、预制好的对话框，比如常见的“打开文件”、“保存文件”和“打印”等窗口&lt;/p&gt;
+&lt;p&gt;当&lt;code&gt;user32.dll&lt;/code&gt;需要一个“打开文件”对话框时，它不去自己一点点造，而是直接从&lt;code&gt;comdlg32.dll&lt;/code&gt;这里拿一个现成的、标准化的来用&lt;/p&gt;
+&lt;h4 id=&#34;advapi32dll&#34;&gt;advapi32.dll
+&lt;/h4&gt;&lt;p&gt;高级Windows32位应用程序接口，负责处理注册表操作、系统服务管理、账户和安全相关的函数&lt;/p&gt;
+&lt;h3 id=&#34;网络通信库-判断网络行为的关键&#34;&gt;网络通信库 (判断网络行为的关键)
+&lt;/h3&gt;&lt;h4 id=&#34;ws2_32dll--wsock32dll&#34;&gt;ws2_32.dll / wsock32.dll
+&lt;/h4&gt;&lt;p&gt;Windows Sockets（套接字）库，是所有 TCP/IP 网络编程的基础&lt;/p&gt;
+&lt;p&gt;这是一个最重要的网络行为指标&lt;/p&gt;
+&lt;h4 id=&#34;wininetdll&#34;&gt;wininet.dll
+&lt;/h4&gt;&lt;p&gt;更高层的互联网协议库，封装了 HTTP、HTTPS 和 FTP 等协议，让程序能更方便地访问网页和传输文件。&lt;/p&gt;
+&lt;h4 id=&#34;dnsapidll&#34;&gt;dnsapi.dll
+&lt;/h4&gt;&lt;p&gt;负责进行 DNS 域名解析，即将网址（如 &lt;code&gt;www.google.com&lt;/code&gt;）转换为 IP 地址&lt;/p&gt;
+&lt;h3 id=&#34;脚本与执行相关库&#34;&gt;脚本与执行相关库
+&lt;/h3&gt;&lt;h4 id=&#34;shell32dll&#34;&gt;shell32.dll
+&lt;/h4&gt;&lt;p&gt;提供了核心的 Windows Shell（外壳）功能，如打开文件、显示属性、处理快捷方式等&lt;/p&gt;
+&lt;h4 id=&#34;ole32dll--oleaut32dll&#34;&gt;ole32.dll / oleaut32.dll
+&lt;/h4&gt;&lt;p&gt;负责处理 OLE（对象链接与嵌入）和 COM（组件对象模型）技术&lt;/p&gt;
+&lt;p&gt;Office 宏病毒和许多漏洞利用（如利用文档中嵌入的恶意对象）都严重依赖这两个库的功能&lt;/p&gt;
+&lt;h4 id=&#34;jscriptdll--vbscriptdll&#34;&gt;jscript.dll / vbscript.dll
+&lt;/h4&gt;&lt;p&gt;分别用于解析和执行 JScript 和 VBScript 脚本的引擎&lt;/p&gt;
+&lt;p&gt;当&lt;code&gt;wscript.exe&lt;/code&gt;或&lt;code&gt;mshta.exe&lt;/code&gt;等脚本执行进程加载它们时，表明有相应的脚本正在运行&lt;/p&gt;
+&lt;h1 id=&#34;系统调用&#34;&gt;系统调用
+&lt;/h1&gt;&lt;h2 id=&#34;什么是系统调用&#34;&gt;什么是系统调用
+&lt;/h2&gt;&lt;p&gt;系统调用是运行在用户模式 (UserMode/Ring3) 的应用程序，向操作系统内核 (KernelMode / Ring0) 请求服务或资源的唯一、规范化的接口&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是操作系统为了保护自身稳定性和安全性而设定的核心机制&lt;/strong&gt;，应用程序不能随心所欲地直接访问硬件或关键内存，所有这些敏感操作都必须通过系统调用，以一种受控的方式“委托”给内核来完成&lt;/p&gt;
+&lt;h2 id=&#34;系统调用工作过程&#34;&gt;系统调用工作过程
+&lt;/h2&gt;&lt;h3 id=&#34;准备阶段&#34;&gt;准备阶段
+&lt;/h3&gt;&lt;p&gt;用户模式的应用程序（例如&lt;code&gt;notepad.exe&lt;/code&gt;）准备调用一个Win32API函数，比如 &lt;code&gt;WriteFile&lt;/code&gt;，&lt;code&gt;WriteFile&lt;/code&gt; 函数本身位于&lt;code&gt;kernel32.dll&lt;/code&gt;中&lt;/p&gt;
+&lt;h3 id=&#34;中介阶段&#34;&gt;中介阶段
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;kernel32.dll&lt;/code&gt;中的&lt;code&gt;WriteFile&lt;/code&gt;函数并不会直接执行写文件操作，它是一个包装函数&lt;/p&gt;
+&lt;p&gt;它会把真正的写文件操作对应的系统调用编号（比如写文件的&lt;code&gt;NtWriteFile&lt;/code&gt; 的编号）放入CPU的&lt;code&gt;EAX&lt;/code&gt;寄存器中，并将其他参数（如文件句柄、数据缓冲区等）放入其他指定的寄存器&lt;/p&gt;
+&lt;h3 id=&#34;切换阶段&#34;&gt;切换阶段
+&lt;/h3&gt;&lt;p&gt;准备好之后，&lt;code&gt;ntdll.dll&lt;/code&gt;中的代码会执行一条特殊的CPU指令，例如&lt;code&gt;SYSCALL&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;特权级转换&#34;&gt;特权级转换
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;SYSCALL&lt;/code&gt;指令会使CPU立即从用户模式切换到内核模式，并将控制权交给内核中一个预设好的系统调用总处理程序&lt;/p&gt;
+&lt;h3 id=&#34;派阶段&#34;&gt;派阶段
+&lt;/h3&gt;&lt;p&gt;内核的总处理程序接管控制权后，会查看&lt;code&gt;EAX&lt;/code&gt;寄存器中的系统调用编号，然后利用这个编号去&lt;strong&gt;SSDT&lt;/strong&gt;中查找对应的内核函数地址&lt;/p&gt;
+&lt;h3 id=&#34;执行阶段&#34;&gt;执行阶段
+&lt;/h3&gt;&lt;p&gt;找到地址后，内核会跳转到该地址（例如内核中的&lt;code&gt;NtWriteFile&lt;/code&gt;函数）去执行真正的文件写入操作&lt;/p&gt;
+&lt;h3 id=&#34;返回阶段&#34;&gt;返回阶段
+&lt;/h3&gt;&lt;p&gt;内核函数执行完毕后，会将结果返回，CPU 再从内核模式切换回用户模式，应用程序继续执行&lt;/p&gt;
+&lt;h2 id=&#34;ssdt&#34;&gt;SSDT
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;SSDT 的全称是System Service Dispatch Table（系统服务分派表）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它就是我们在上面流程中提到的那个函数地址查询表，它是一个存放在内核内存中的数组，数组的每一个元素都是一个函数指针，指向了实现具体系统调用的内核函数的内存地址&lt;/p&gt;
+&lt;p&gt;当系统调用发生时，内核就是通过&lt;code&gt;系统调用编号&lt;/code&gt;作为索引，在这个 SSDT 数组中找到并调用正确的内核函数&lt;/p&gt;
+&lt;h2 id=&#34;ssdthook&#34;&gt;SSDThook
+&lt;/h2&gt;&lt;p&gt;由于 SSDT 是所有关键操作的必经之路，它成为了内核级 Rootkit 的首要攻击目标&lt;/p&gt;
+&lt;p&gt;Rootkit（通常是一个恶意的&lt;code&gt;.sys&lt;/code&gt;驱动）会获取到 SSDT 在内存中的地址，然后用自己的恶意函数地址，去覆盖表中某个正常系统函数的地址&lt;/p&gt;
+&lt;p&gt;比如一个文件隐藏Rootkit，可能会用自己的&lt;code&gt;HookedNtQueryDirectoryFile&lt;/code&gt;函数地址，替换掉SSDT中原始的 &lt;code&gt;NtQueryDirectoryFile&lt;/code&gt;（用于列出目录内容）的地址&lt;/p&gt;
+&lt;p&gt;此后，当任何程序（包括 &lt;code&gt;explorer.exe&lt;/code&gt;）尝试列出目录内容时，系统调用都会被重定向到这个恶意的 &lt;code&gt;HookedNtQueryDirectoryFile&lt;/code&gt;函数这个恶意函数会先获取原始的目录列表，然后将其中所有与Rootkit自身相关的恶意文件名都过滤掉，最后再将一个“干净”的列表返回给应用程序，这样，用户就永远无法看到这些恶意文件了&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果一个函数的地址指向的不是官方的 &lt;code&gt;ntoskrnl.exe&lt;/code&gt; (或 &lt;code&gt;win32k.sys&lt;/code&gt;)，而是指向了一个第三方的、可疑的驱动文件，那么就意味着SSDT已被劫持&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;系统用的分类&#34;&gt;系统用的分类
+&lt;/h2&gt;&lt;h3 id=&#34;进程与线程管理&#34;&gt;进程与线程管理
+&lt;/h3&gt;&lt;h4 id=&#34;ntcreateprocess&#34;&gt;NtCreateProcess
+&lt;/h4&gt;&lt;p&gt;创建一个新进程&lt;/p&gt;
+&lt;h4 id=&#34;ntterminateprocess&#34;&gt;NtTerminateProcess
+&lt;/h4&gt;&lt;p&gt;终止一个进程&lt;/p&gt;
+&lt;h4 id=&#34;ntcreatethread&#34;&gt;NtCreateThread
+&lt;/h4&gt;&lt;p&gt;创建一个新线程&lt;/p&gt;
+&lt;h4 id=&#34;ntopenprocess&#34;&gt;NtOpenProcess
+&lt;/h4&gt;&lt;p&gt;打开一个已存在进程的句柄&lt;/p&gt;
+&lt;h3 id=&#34;文件与-io-操作&#34;&gt;文件与 I/O 操作
+&lt;/h3&gt;&lt;h4 id=&#34;ntcreatefile&#34;&gt;NtCreateFile
+&lt;/h4&gt;&lt;p&gt;创建或打开一个文件&lt;/p&gt;
+&lt;h4 id=&#34;ntreadfile&#34;&gt;NtReadFile
+&lt;/h4&gt;&lt;p&gt;从文件中读取数据&lt;/p&gt;
+&lt;h4 id=&#34;ntwritefile&#34;&gt;NtWriteFile
+&lt;/h4&gt;&lt;p&gt;向文件中写入数据&lt;/p&gt;
+&lt;h4 id=&#34;ntdeviceiocontrolfile&#34;&gt;NtDeviceIoControlFile
+&lt;/h4&gt;&lt;p&gt;向设备驱动发送控制命令&lt;/p&gt;
+&lt;h3 id=&#34;注册表操作&#34;&gt;注册表操作
+&lt;/h3&gt;&lt;h4 id=&#34;ntopenkey&#34;&gt;NtOpenKey
+&lt;/h4&gt;&lt;p&gt;打开一个注册表项&lt;/p&gt;
+&lt;h4 id=&#34;ntqueryvaluekey&#34;&gt;NtQueryValueKey
+&lt;/h4&gt;&lt;p&gt;查询一个注册表键值的数据&lt;/p&gt;
+&lt;h4 id=&#34;ntsetvaluekey&#34;&gt;NtSetValueKey
+&lt;/h4&gt;&lt;p&gt;设置一个注册表键值的数据&lt;/p&gt;
+&lt;h3 id=&#34;内存管理&#34;&gt;内存管理
+&lt;/h3&gt;&lt;h4 id=&#34;ntallocatevirtualmemory&#34;&gt;NtAllocateVirtualMemory
+&lt;/h4&gt;&lt;p&gt;在进程的虚拟地址空间中分配内存&lt;/p&gt;
+&lt;h4 id=&#34;ntprotectvirtualmemory&#34;&gt;NtProtectVirtualMemory
+&lt;/h4&gt;&lt;p&gt;修改内存页的保护属性（如可读、可写、可执行）&lt;/p&gt;
+&lt;h1 id=&#34;驱动&#34;&gt;驱动
+&lt;/h1&gt;&lt;h2 id=&#34;什么是驱动&#34;&gt;什么是驱动
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;驱动程序（Driver）是一个软件组件，它充当了操作系统内核与物理硬件或虚拟设备之间的通信桥梁&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当应用程序需要与硬件（如打印机、网卡、磁盘）交互时，它会向操作系统发出一个通用请求&lt;/p&gt;
+&lt;p&gt;操作系统内核的I/O管理器接收到这个请求后，不会直接与硬件对话，而是将请求打包成&lt;strong&gt;IRP请求&lt;/strong&gt;转发给相应的驱动程序&lt;/p&gt;
+&lt;p&gt;驱动程序负责将这个标准化的请求翻译成硬件能够理解的特定指令，并与硬件通信&lt;/p&gt;
+&lt;h2 id=&#34;cpu的特权级别&#34;&gt;CPU的特权级别
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;在了解驱动文件之前，我们得先知道x86架构CPU的四个特权级别&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;特权级别在x86架构中也被称为保护环（Protection Rings），是CPU硬件层面实现的一种访问控制机制&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;x86架构定义了四个特权级别，从Ring0到Ring3，数字越小，代表权限越高&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ring-0-内核态kernel-mode&#34;&gt;Ring 0: 内核态（Kernel Mode）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限：最高&lt;/strong&gt;。运行在Ring0的代码可以执行 CPU 的所有指令集，并能直接访问任何内存地址、I/O端口和硬件设备&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;运行实体: 操作系统内核本身&lt;/strong&gt;。例如&lt;code&gt;ntoskrnl.exe&lt;/code&gt;和绝大多数设备驱动程序(&lt;code&gt;.sys&lt;/code&gt; 文件)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;这是操作系统的核心，负责管理系统所有资源，包括进程调度、内存管理、I/O 控制等&lt;/p&gt;
+&lt;p&gt;如果Ring0的代码崩溃，整个系统将立即蓝屏（BSOD）或宕机（Kernel Panic）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ring-1--ring-2-准核心态驱动层rarely-used&#34;&gt;Ring 1 &amp;amp; Ring 2: 准核心态/驱动层（Rarely Used）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限：介于内核态和用户态之间&lt;/strong&gt;。它们拥有比Ring3更高的权限（例如可以访问更多的 I/O 端口），但又不像Ring0那样拥有对系统的完全控制权&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;运行实体&lt;/strong&gt;: 在理论设计上，Ring1可以用于运行一些准系统级的服务，而Ring2可以用于运行设备驱动程序，从而将驱动与最核心的内核隔离开，增加系统的稳定性（即驱动崩溃不至于让整个内核崩溃）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;它几乎从未被主流消费级和服务器级操作系统（如 Windows, Linux, macOS）所使用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这些操作系统普遍采用了更简单的两级模型，即只使用Ring0和Ring3&lt;/p&gt;
+&lt;p&gt;这是因为在Ring1/2和Ring0之间切换上下文的开销，以及复杂的内存管理，并没有带来足够的安全收益来抵消其复杂性&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ring-3-用户态user-mode&#34;&gt;Ring 3: 用户态（User Mode）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限&lt;/strong&gt;：&lt;strong&gt;最低&lt;/strong&gt;。运行在Ring3的代码受到硬件的严格限制，它不能直接访问硬件，也不能访问属于内核或其他进程的受保护内存空间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;运行实体&lt;/strong&gt;：&lt;strong&gt;所有的应用程序&lt;/strong&gt;。例如浏览器 、记事本、游戏等，都运行在Ring3&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;这是应用程序的沙箱，当一个Ring3的程序需要执行特权操作时（如读取文件），它不能直接去操作硬盘，而是必须通过一个名为系统调用的受控入口，向Ring0的内核提出请求&lt;/p&gt;
+&lt;p&gt;内核会对请求进行验证，然后以Ring0的权限代为执行，再将结果返回给Ring1的程序&lt;/p&gt;
+&lt;p&gt;这个过程确保了所有对关键资源的访问都在内核的掌控之下&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;驱动的文件形式&#34;&gt;驱动的文件形式
+&lt;/h2&gt;&lt;h3 id=&#34;sys文件&#34;&gt;.sys文件
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是最传统、最核心、权限最高的驱动程序形式，是真正的驱动&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它们是专门为在操作系统内核（Ring0）中运行而编译的，可以直接与硬件和内核数据结构交互&lt;/p&gt;
+&lt;p&gt;几乎所有核心的硬件驱动，如磁盘驱动&lt;code&gt;ntfs.sys&lt;/code&gt;、网络驱动&lt;code&gt;tcpip.sys&lt;/code&gt;等，都是&lt;code&gt;.sys&lt;/code&gt;文件&lt;/p&gt;
+&lt;h3 id=&#34;dll文件&#34;&gt;.dll文件
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;它们有的情况下是驱动组件，但大多数不是传统驱动&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为了提高系统的稳定性和安全性，微软引入了用户模式驱动框架 (User-Mode Driver Framework, UMDF)&lt;/p&gt;
+&lt;p&gt;一些对性能要求不是极致、但对稳定性要求很高的设备（如扫描仪、打印机、传感器等）的驱动，可以被实现为DLL文件&lt;/p&gt;
+&lt;p&gt;这些驱动DLL运行在权限受限的用户模式（Ring3），并由一个系统进程（通常是&lt;code&gt;svchost.exe&lt;/code&gt;）作为“宿主”来加载和运行&lt;/p&gt;
+&lt;h2 id=&#34;驱动程序的分类&#34;&gt;驱动程序的分类
+&lt;/h2&gt;&lt;h3 id=&#34;按运行模式分类&#34;&gt;按运行模式分类
+&lt;/h3&gt;&lt;h4 id=&#34;内核模式驱动程序&#34;&gt;内核模式驱动程序
+&lt;/h4&gt;&lt;p&gt;这是最常见的类型，运行在操作系统的核心层 (Ring 0)，拥有最高权限&lt;/p&gt;
+&lt;p&gt;它们可以直接与硬件通信，是系统运行的基石&lt;/p&gt;
+&lt;h4 id=&#34;用户模式驱动程序&#34;&gt;用户模式驱动程序
+&lt;/h4&gt;&lt;p&gt;运行在权限受限的用户模式 (Ring3) 下，安全性更高&lt;/p&gt;
+&lt;p&gt;如果这类驱动程序崩溃，不会导致整个系统蓝屏&lt;/p&gt;
+&lt;h3 id=&#34;按功能层次分类&#34;&gt;按功能层次分类
+&lt;/h3&gt;&lt;h4 id=&#34;总线驱动程序&#34;&gt;总线驱动程序
+&lt;/h4&gt;&lt;p&gt;位于驱动栈的最底层，负责枚举挂载在总线（如 PCI, USB）上的所有设备&lt;/p&gt;
+&lt;h4 id=&#34;功能驱动程序&#34;&gt;功能驱动程序
+&lt;/h4&gt;&lt;p&gt;驱动栈的核心，通常由硬件厂商编写，负责实现设备的具体I/O功能&lt;/p&gt;
+&lt;h4 id=&#34;筛选驱动程序&#34;&gt;筛选驱动程序
+&lt;/h4&gt;&lt;p&gt;可以附加在功能驱动程序之上或之下，用于“过滤”或“修改”流经该设备的 I/O 请求&lt;/p&gt;
+&lt;p&gt;杀毒软件的文件实时监控、磁盘加密软件等，通常就是通过它来实现的&lt;/p&gt;
+&lt;h2 id=&#34;常见的核心系统驱动&#34;&gt;常见的核心系统驱动
+&lt;/h2&gt;&lt;h3 id=&#34;内核核心模块&#34;&gt;内核核心模块
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;不是传统驱动，但居于内核中心&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ntoskrnlexe&#34;&gt;ntoskrnl.exe
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;它是操作系统内核本身，是所有内核活动的核心&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可以把它理解为&lt;strong&gt;驱动管理器&lt;/strong&gt;和&lt;strong&gt;最根本的驱动&lt;/strong&gt;，虽然它实际上并非严格意义上的设备驱动&lt;/p&gt;
+&lt;p&gt;在系统启动时，&lt;code&gt;ntoskrnl.exe&lt;/code&gt;会加载一系列其它核心模块（DLL 和 SYS）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hal.dll&lt;/code&gt;：硬件抽象层（HAL）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kdcom.dll&lt;/code&gt;：内核调试通信&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bootvid.dll&lt;/code&gt;、&lt;code&gt;ci.dll&lt;/code&gt;：安全校验、驱动签名&lt;/li&gt;
+&lt;li&gt;各类驱动程序：&lt;code&gt;acpi.sys&lt;/code&gt;、&lt;code&gt;tcpip.sys&lt;/code&gt;、&lt;code&gt;disk.sys&lt;/code&gt;等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;它是整个内核态模块的中枢，所有其他的驱动程序都需要在它提供的框架内运行，并由它来管理和调度&lt;/p&gt;
+&lt;h3 id=&#34;内核支持模块&#34;&gt;内核支持模块
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;DLL类内核组件，没有设备对象，也不处理IRP，不是传统驱动，但运行在内核态，是 OS 的底层模块&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;haldll&#34;&gt;hal.dll
+&lt;/h4&gt;&lt;p&gt;硬件抽象层，屏蔽不同主板和 CPU 的差异，为内核提供统一接口&lt;/p&gt;
+&lt;h4 id=&#34;kdcomdll&#34;&gt;kdcom.dll
+&lt;/h4&gt;&lt;p&gt;内核调试通信模块，用于系统调试时与调试器通信&lt;/p&gt;
+&lt;h4 id=&#34;cidll&#34;&gt;ci.dll
+&lt;/h4&gt;&lt;p&gt;负责代码完整性校验与驱动签名验证&lt;/p&gt;
+&lt;h4 id=&#34;bootviddll&#34;&gt;bootvid.dll
+&lt;/h4&gt;&lt;p&gt;开机阶段的简易显示输出，属于引导组件&lt;/p&gt;
+&lt;h3 id=&#34;内核设备驱动程序&#34;&gt;内核设备驱动程序
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;是真正严格意义上的驱动&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;tcpipsys&#34;&gt;tcpip.sys
+&lt;/h4&gt;&lt;p&gt;负责TCP/IP协议栈的核心驱动，处理所有网络数据包的收发。属于网络类驱动的代表&lt;/p&gt;
+&lt;h4 id=&#34;ntfssys&#34;&gt;ntfs.sys
+&lt;/h4&gt;&lt;p&gt;NTFS 文件系统的核心驱动，负责硬盘上所有文件的读写和管理&lt;/p&gt;
+&lt;p&gt;它实现了文件系统层的功能，如读写文件、挂载卷等&lt;/p&gt;
+&lt;h4 id=&#34;acpisys&#34;&gt;acpi.sys
+&lt;/h4&gt;&lt;p&gt;负责高级配置与电源管理接口（ACPI），处理系统电源管理事件，如休眠、唤醒、电源按钮等&lt;/p&gt;
+&lt;p&gt;它属于系统级别的 ACPI 驱动&lt;/p&gt;
+&lt;h4 id=&#34;partmgrsys&#34;&gt;partmgr.sys
+&lt;/h4&gt;&lt;p&gt;管理磁盘的分区结构&lt;/p&gt;
+&lt;h4 id=&#34;storportsys&#34;&gt;storport.sys
+&lt;/h4&gt;&lt;p&gt;提供与存储控制器（如 SATA、SCSI 控制器）之间的通信通道&lt;/p&gt;
+&lt;h4 id=&#34;disksys&#34;&gt;disk.sys
+&lt;/h4&gt;&lt;p&gt;硬盘设备驱动，处理底层磁盘I/O请求&lt;/p&gt;
+&lt;p&gt;它与&lt;code&gt;partmgr.sys&lt;/code&gt;、&lt;code&gt;storport.sys&lt;/code&gt;等共同构建块设备访问层&lt;/p&gt;
+&lt;h3 id=&#34;输入与图形类驱动&#34;&gt;输入与图形类驱动
+&lt;/h3&gt;&lt;h4 id=&#34;kbdclasssysmouclasssys&#34;&gt;kbdclass.sys/mouclass.sys
+&lt;/h4&gt;&lt;p&gt;键盘和鼠标的类驱动程序，负责处理来自这些输入设备的通用请求&lt;/p&gt;
+&lt;p&gt;它不直接与硬件通信，而是接收底层端口驱动（如&lt;code&gt;i8042prt.sys&lt;/code&gt;）上传的输入数据&lt;/p&gt;
+&lt;h4 id=&#34;dxgkrnlsys&#34;&gt;dxgkrnl.sys
+&lt;/h4&gt;&lt;p&gt;DirectX图形内核驱动，是Windows显示驱动模型（WDDM）的核心，负责与GPU交互、调度图形任务&lt;/p&gt;
+&lt;h3 id=&#34;驱动开发支持框架模块&#34;&gt;驱动开发支持框架模块
+&lt;/h3&gt;&lt;h4 id=&#34;wdf01000sys&#34;&gt;Wdf01000.sys
+&lt;/h4&gt;&lt;p&gt;Windows驱动程序框架（WDF）的一部分，是KMDF驱动的运行时组件，为许多现代驱动提供了统一的驱动模型支持&lt;/p&gt;
+&lt;h4 id=&#34;wdfldrsys&#34;&gt;WdfLdr.sys
+&lt;/h4&gt;&lt;p&gt;WDF加载器，负责驱动初始化&lt;/p&gt;
+&lt;h4 id=&#34;winusbsys&#34;&gt;WinUsb.sys
+&lt;/h4&gt;&lt;p&gt;WDF提供的USB驱动支持&lt;/p&gt;
+&lt;h2 id=&#34;驱动栈&#34;&gt;驱动栈
+&lt;/h2&gt;&lt;h3 id=&#34;什么是驱动栈&#34;&gt;什么是驱动栈
+&lt;/h3&gt;&lt;p&gt;当用户在用户层发出一个文件读写请求时，比如&lt;code&gt;ReadFile(&amp;quot;D:\\example.txt&amp;quot;)&lt;/code&gt;，这个请求并不是直接送到硬盘，而是要经过多个驱动程序处理，每个驱动做自己的那一部分&lt;/p&gt;
+&lt;p&gt;这种结构就叫驱动栈&lt;/p&gt;
+&lt;h3 id=&#34;驱动栈的结构&#34;&gt;驱动栈的结构
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;下面是一个典型的Windows 存储驱动栈：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ntfs.sys（文件系统驱动）         ← 顶层（用户文件访问）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;volmgr.sys（卷管理器驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;partmgr.sys（分区管理器驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;disk.sys（磁盘驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;storport.sys（存储端口驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Miniport Driver（存储控制器驱动） ← 底层（控制硬件）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;驱动栈工作过程&#34;&gt;驱动栈工作过程
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;应用程序发起 I/O 请求&lt;/strong&gt;
+用户程序调用&lt;code&gt;ReadFile()&lt;/code&gt;或&lt;code&gt;WriteFile()&lt;/code&gt;等API，也就是进行了涉及请求访问硬件或设备的系统调用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件系统驱动处理&lt;/strong&gt;
+&lt;code&gt;ntfs.sys&lt;/code&gt;解析文件路径、权限等，将文件操作转换为卷层面的块设备请求&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;卷管理器驱动处理&lt;/strong&gt;
+&lt;code&gt;volmgr.sys&lt;/code&gt;管理逻辑卷，确定具体的物理磁盘分区&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分区管理器驱动处理&lt;/strong&gt;
+&lt;code&gt;partmgr.sys&lt;/code&gt;负责管理磁盘分区表，转发请求到正确的物理分区&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;磁盘驱动处理&lt;/strong&gt;
+&lt;code&gt;disk.sys&lt;/code&gt;负责和物理磁盘设备交互，生成适合硬件的请求&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储端口驱动处理&lt;/strong&gt;
+&lt;code&gt;storport.sys&lt;/code&gt;是与存储控制器通信的中间层，负责协议和请求队列管理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;迷你端口驱动处理&lt;/strong&gt;
+由硬件厂商编写，具体实现与存储控制器硬件的交互&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;硬件执行请求&lt;/strong&gt;
+最终请求被硬件执行，数据被读写&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这个过程中，每一层都可以&lt;strong&gt;处理请求、修改请求、拦截请求&lt;/strong&gt;，层层检查&lt;/p&gt;
+&lt;h3 id=&#34;其它类型的驱动栈&#34;&gt;其它类型的驱动栈
+&lt;/h3&gt;&lt;p&gt;除了存储，还有很多其他的驱动栈：&lt;/p&gt;
+&lt;h4 id=&#34;usb-驱动栈简化&#34;&gt;USB 驱动栈（简化）：
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;usbhub.sys（USB集线器驱动）      ← 顶层（最高层）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;usbccgp.sys（通用USB类驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;winusb.sys（用户模式USB驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;usbport.sys（USB端口驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Miniport Driver（控制器驱动）   ← 底层（最接近硬件）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;网络驱动栈ndis&#34;&gt;网络驱动栈（NDIS）：
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpip.sys（TCP/IP 协议驱动）      ← 顶层（协议层）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ndis.sys（NDIS 中间层驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Miniport Driver（网卡驱动）        ← 底层（硬件驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;显示设备驱动栈windows显示驱动模型wddm&#34;&gt;显示设备驱动栈（Windows显示驱动模型WDDM）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dxgkrnl.sys（DirectX 图形内核驱动）  ← 顶层（图形API接口）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;display.sys（显示驱动核心）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Miniport Driver（显卡硬件驱动）        ← 底层（显卡硬件控制）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;音频设备驱动栈&#34;&gt;音频设备驱动栈
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;audiosrv（音频服务）                 ← 顶层（用户模式服务）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sysaudio.sys（系统音频驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;HDAudio.sys（高定义音频驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Miniport Driver（声卡厂商驱动）        ← 底层（硬件控制）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;irp&#34;&gt;IRP
+&lt;/h1&gt;&lt;h2 id=&#34;irp-是什么&#34;&gt;IRP 是什么
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;IRP的全称是I/O Request Packet，即I/O 请求包&lt;/strong&gt;，是内核中用于描述和传递所有I/O请求的核心数据结构&lt;/p&gt;
+&lt;p&gt;当一个I/O请求产生时，I/O管理器会创建一个IRP对象，这个IRP就像一张填写好的快递单，上面包含了所有与本次请求相关的信息，如操作类型、数据缓冲区地址、目标设备等&lt;/p&gt;
+&lt;p&gt;之后，I/O管理器会将这张快递单发送给目标设备对应的驱动程序栈，驱动程序通过处理这些 IRP 来完成工作&lt;/p&gt;
+&lt;p&gt;恶意软件经常通过IRP挂钩的技术来劫持系统功能，它会找到一个正常驱动的IRP处理函数地址，并将其替换为指向自己恶意代码的地址。这样，所有发往正常驱动的IRP都会先被恶意软件截胡，从而实现键盘记录、文件隐藏等功能&lt;/p&gt;
+&lt;h2 id=&#34;irp在驱动栈中的传递&#34;&gt;IRP在驱动栈中的传递
+&lt;/h2&gt;&lt;h3 id=&#34;irp创建&#34;&gt;IRP创建
+&lt;/h3&gt;&lt;p&gt;应用程序调用如&lt;code&gt;ReadFile()&lt;/code&gt;，系统调用相关内核服务，内核根据请求生成一个IRP&lt;/p&gt;
+&lt;p&gt;IRP包含请求类型、缓冲区地址、请求参数等信息&lt;/p&gt;
+&lt;h3 id=&#34;irp发送到驱动栈顶层驱动&#34;&gt;IRP发送到驱动栈顶层驱动
+&lt;/h3&gt;&lt;p&gt;例如，磁盘驱动栈中，顶层可能是文件系统驱动（&lt;code&gt;ntfs.sys&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;内核将IRP传递给顶层驱动的&lt;code&gt;Dispatch&lt;/code&gt;函数&lt;/p&gt;
+&lt;h3 id=&#34;驱动处理irp&#34;&gt;驱动处理IRP
+&lt;/h3&gt;&lt;p&gt;驱动检查IRP内容，执行相应操作（如文件系统解析、数据缓存等）&lt;/p&gt;
+&lt;p&gt;驱动可以完成请求，或者决定将IRP向下传递&lt;/p&gt;
+&lt;h3 id=&#34;irp向下传递给下一个驱动&#34;&gt;IRP向下传递给下一个驱动
+&lt;/h3&gt;&lt;p&gt;驱动调用&lt;code&gt;IoSkipCurrentIrpStackLocation&lt;/code&gt;，跳过当前驱动的IRP堆栈位置&lt;/p&gt;
+&lt;p&gt;然后调用&lt;code&gt;IoCallDriver&lt;/code&gt;把IRP传给下一个驱动，通常是更底层的驱动&lt;/p&gt;
+&lt;h3 id=&#34;依次传递直到最底层驱动&#34;&gt;依次传递直到最底层驱动
+&lt;/h3&gt;&lt;p&gt;IRP会层层传递，直到最底层的硬件驱动处理它&lt;/p&gt;
+&lt;p&gt;底层驱动发起对硬件的实际操作，比如读写磁盘、发送网络包&lt;/p&gt;
+&lt;h3 id=&#34;irp完成&#34;&gt;IRP完成
+&lt;/h3&gt;&lt;p&gt;硬件操作完成后，底层驱动调用&lt;code&gt;IoCompleteRequest&lt;/code&gt;标记 IRP 完成&lt;/p&gt;
+&lt;p&gt;IRP 结果逐层向上传递回去，每层驱动可以执行清理或后处理，最终结果反馈给系统和应用程序&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;应用程序请求
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IRP创建
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ntfs.sys（文件系统驱动）        ← 顶层
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 传递IRP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;volmgr.sys（卷管理器驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 传递IRP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;partmgr.sys（分区管理驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 传递IRP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;disk.sys（磁盘驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 传递IRP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;storport.sys（存储端口驱动）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 传递IRP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Miniport Driver（硬件控制驱动）  ← 底层
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 硬件操作
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;硬件设备完成请求
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 结果返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Miniport Driver
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;storport.sys
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;disk.sys
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;partmgr.sys
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;volmgr.sys
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ntfs.sys
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ↓ 返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;操作系统
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;常见irp主要功能码&#34;&gt;常见IRP主要功能码
+&lt;/h2&gt;&lt;p&gt;每个IRP都包含一个主要功能码，用于定义本次请求的核心操作类型&lt;/p&gt;
+&lt;h3 id=&#34;文件与设备管理&#34;&gt;文件与设备管理
+&lt;/h3&gt;&lt;h4 id=&#34;irp_mj_create&#34;&gt;IRP_MJ_CREATE
+&lt;/h4&gt;&lt;p&gt;打开或创建文件、设备句柄&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_close&#34;&gt;IRP_MJ_CLOSE
+&lt;/h4&gt;&lt;p&gt;关闭文件或设备句柄&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_read&#34;&gt;IRP_MJ_READ
+&lt;/h4&gt;&lt;p&gt;从文件或设备读取数据&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_write&#34;&gt;IRP_MJ_WRITE
+&lt;/h4&gt;&lt;p&gt;向文件或设备写入数据&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_query_information&#34;&gt;IRP_MJ_QUERY_INFORMATION
+&lt;/h4&gt;&lt;p&gt;查询文件或设备信息（大小、属性等）&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_set_information&#34;&gt;IRP_MJ_SET_INFORMATION
+&lt;/h4&gt;&lt;p&gt;设置文件或设备信息（修改属性等）&lt;/p&gt;
+&lt;h3 id=&#34;设备控制&#34;&gt;设备控制
+&lt;/h3&gt;&lt;h4 id=&#34;irp_mj_device_control&#34;&gt;IRP_MJ_DEVICE_CONTROL
+&lt;/h4&gt;&lt;p&gt;向驱动发送自定义控制命令（用户模式到驱动的常用命令）&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_internal_device_control&#34;&gt;IRP_MJ_INTERNAL_DEVICE_CONTROL
+&lt;/h4&gt;&lt;p&gt;驱动间内部控制命令，供驱动程序之间通信使用&lt;/p&gt;
+&lt;h3 id=&#34;即插即用pnp&#34;&gt;即插即用（PnP）
+&lt;/h3&gt;&lt;h4 id=&#34;irp_mj_pnp&#34;&gt;IRP_MJ_PNP
+&lt;/h4&gt;&lt;p&gt;即插即用事件通知，如设备启动、停止、移除、资源分配等&lt;/p&gt;
+&lt;h3 id=&#34;电源管理&#34;&gt;电源管理
+&lt;/h3&gt;&lt;h4 id=&#34;irp_mj_power&#34;&gt;IRP_MJ_POWER
+&lt;/h4&gt;&lt;p&gt;电源状态管理请求，如休眠、唤醒、电源状态改变等&lt;/p&gt;
+&lt;h3 id=&#34;文件系统控制&#34;&gt;文件系统控制
+&lt;/h3&gt;&lt;h4 id=&#34;irp_mj_file_system_control&#34;&gt;IRP_MJ_FILE_SYSTEM_CONTROL
+&lt;/h4&gt;&lt;p&gt;文件系统特定控制请求，如卷挂载、卸载等&lt;/p&gt;
+&lt;h3 id=&#34;系统管理&#34;&gt;系统管理
+&lt;/h3&gt;&lt;h4 id=&#34;irp_mj_shutdown&#34;&gt;IRP_MJ_SHUTDOWN
+&lt;/h4&gt;&lt;p&gt;系统关机或重启时通知驱动准备关闭&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_create_mailslot&#34;&gt;IRP_MJ_CREATE_MAILSLOT
+&lt;/h4&gt;&lt;p&gt;创建邮件槽（用于进程间通信）&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_query_security&#34;&gt;IRP_MJ_QUERY_SECURITY
+&lt;/h4&gt;&lt;p&gt;查询安全描述符&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_set_security&#34;&gt;IRP_MJ_SET_SECURITY
+&lt;/h4&gt;&lt;p&gt;设置安全描述符&lt;/p&gt;
+&lt;h3 id=&#34;其他常见功能码&#34;&gt;其他常见功能码
+&lt;/h3&gt;&lt;h4 id=&#34;irp_mj_query_volume_information&#34;&gt;IRP_MJ_QUERY_VOLUME_INFORMATION
+&lt;/h4&gt;&lt;p&gt;查询卷信息&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_set_volume_information&#34;&gt;IRP_MJ_SET_VOLUME_INFORMATION
+&lt;/h4&gt;&lt;p&gt;设置卷信息&lt;/p&gt;
+&lt;h4 id=&#34;irp_mj_cleanup&#34;&gt;IRP_MJ_CLEANUP
+&lt;/h4&gt;&lt;p&gt;清理（关闭时，释放资源等）&lt;/p&gt;
+&lt;h1 id=&#34;内核回调&#34;&gt;内核回调
+&lt;/h1&gt;&lt;h2 id=&#34;什么是内核回调&#34;&gt;什么是内核回调
+&lt;/h2&gt;&lt;p&gt;内核回调（Kernel Callbacks） 是一种事件驱动的机制&lt;/p&gt;
+&lt;p&gt;它允许内核模式的驱动程序向操作系统内核注册特定的系统级事件，当这些被注册的事件发生时，内核会暂停其正常操作流程，并逐一回调所有已注册的驱动程序提供的函数，即回调例程&lt;/p&gt;
+&lt;p&gt;这是内核提供的一个事件通知系统，驱动程序不再需要通过不断轮询的方式来检查某个状态是否改变，而是可以被动地、在事件发生时才被内核精准地唤醒和调用&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例（用户态）：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;OnButtonClick&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;按钮被点击！&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;RegisterButtonCallback&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;OnButtonClick&lt;/span&gt;); &lt;span style=&#34;color:#7f848e&#34;&gt;// 注册回调
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;系统中，“按钮被点击”事件发生后，会自动调用注册的&lt;code&gt;OnButtonClick()&lt;/code&gt;函数&lt;/p&gt;
+&lt;h2 id=&#34;内核回调工作过程&#34;&gt;内核回调工作过程
+&lt;/h2&gt;&lt;h3 id=&#34;注册&#34;&gt;注册
+&lt;/h3&gt;&lt;p&gt;在驱动程序的初始化阶段（通常是在&lt;code&gt;DriverEntry&lt;/code&gt;函数中），驱动程序会调用一个由内核导出的、特定于事件类型的注册函数。例如，要监控进程创建，驱动程序会调用&lt;code&gt;PsSetCreateProcessNotifyRoutine&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在调用时，驱动程序会将一个指向自己内部实现的回调函数的地址，作为一个参数传递给内核&lt;/p&gt;
+&lt;p&gt;内核接收到这个请求后，会将这个函数地址添加到一个与该事件类型相关联的、内部维护的回调函数指针链表中&lt;/p&gt;
+&lt;h3 id=&#34;触发&#34;&gt;触发
+&lt;/h3&gt;&lt;p&gt;当一个被订阅的系统事件发生时（例如&lt;code&gt;NtCreateUserProcess&lt;/code&gt;系统调用被执行以创建一个新进程），内核在完成其核心操作的某个特定阶段，会暂停下来&lt;/p&gt;
+&lt;h3 id=&#34;调用&#34;&gt;调用
+&lt;/h3&gt;&lt;p&gt;内核会找到与该事件对应的回调函数指针链表，然后，它会依次遍历这个链表，并同步地调用每一个已注册的回调函数&lt;/p&gt;
+&lt;p&gt;内核会将与事件相关的上下文信息（例如，对于进程创建事件，会传递新进程的PID、创建者信息等）作为参数传递给回调函数&lt;/p&gt;
+&lt;h3 id=&#34;处理&#34;&gt;处理
+&lt;/h3&gt;&lt;p&gt;驱动程序的回调函数被调用后，便可以在其函数体内执行自定义的逻辑&lt;/p&gt;
+&lt;p&gt;它可以仅仅记录该事件，也可以进行干预，例如阻止该事件的完成（如果回调类型允许的话）&lt;/p&gt;
+&lt;h2 id=&#34;常见内核回调&#34;&gt;常见内核回调
+&lt;/h2&gt;&lt;h3 id=&#34;进程与线程相关回调&#34;&gt;进程与线程相关回调
+&lt;/h3&gt;&lt;h4 id=&#34;pssetcreateprocessnotifyroutine&#34;&gt;PsSetCreateProcessNotifyRoutine
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：当进程创建或退出时触发&lt;/li&gt;
+&lt;li&gt;用途：监控进程行为（如杀毒软件、行为分析等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;pssetcreatethreadnotifyroutine&#34;&gt;PsSetCreateThreadNotifyRoutine
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：当线程被创建或销毁时触发&lt;/li&gt;
+&lt;li&gt;用途：检测线程注入、远程线程创建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;映像加载相关回调&#34;&gt;映像加载相关回调
+&lt;/h3&gt;&lt;h4 id=&#34;pssetloadimagenotifyroutine&#34;&gt;PsSetLoadImageNotifyRoutine
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：当模块（如EXE、DLL）被加载到进程时触发&lt;/li&gt;
+&lt;li&gt;用途：监视DLL是否注入或加载非法模块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;注册表操作回调&#34;&gt;注册表操作回调
+&lt;/h3&gt;&lt;h4 id=&#34;cmregistercallbackcmregistercallbackex&#34;&gt;CmRegisterCallback/CmRegisterCallbackEx
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：在注册表被访问（读写、删除等）时触发&lt;/li&gt;
+&lt;li&gt;用途：拦截修改注册表、保护启动项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;文件系统监控回调&#34;&gt;文件系统监控回调
+&lt;/h3&gt;&lt;h4 id=&#34;fsrtlregisterfilesystemfiltercallbacks&#34;&gt;FsRtlRegisterFileSystemFilterCallbacks
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：文件系统过滤驱动使用的回调注册接口&lt;/li&gt;
+&lt;li&gt;用途：监视文件访问、隐藏或加密文件等（如勒索软件防护、杀毒软件）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;电源管理与关机回调&#34;&gt;电源管理与关机回调
+&lt;/h3&gt;&lt;h4 id=&#34;ioregistershutdownnotification&#34;&gt;IoRegisterShutdownNotification
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：注册系统关机前通知&lt;/li&gt;
+&lt;li&gt;用途：清理资源、保存数据、记录日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;poregisterpowersettingcallback&#34;&gt;PoRegisterPowerSettingCallback
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：注册电源策略变化回调（如睡眠、唤醒）&lt;/li&gt;
+&lt;li&gt;用途：管理节能策略或唤醒唤醒设备&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;蓝屏-bugcheck-回调&#34;&gt;蓝屏 (BugCheck) 回调
+&lt;/h3&gt;&lt;h4 id=&#34;keregisterbugcheckcallback&#34;&gt;KeRegisterBugCheckCallback
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：系统蓝屏前调用，允许驱动记录崩溃状态&lt;/li&gt;
+&lt;li&gt;用途：记录调试信息、保存崩溃快照&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;windows事件通知类回调&#34;&gt;Windows事件通知类回调
+&lt;/h3&gt;&lt;h4 id=&#34;exregistercallback&#34;&gt;ExRegisterCallback
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：内核模块之间广播通知&lt;/li&gt;
+&lt;li&gt;用途：驱动之间共享事件信息（如热插拔、电池状态）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;网络相关回调&#34;&gt;网络相关回调
+&lt;/h3&gt;&lt;h4 id=&#34;fwpscalloutregister&#34;&gt;FwpsCalloutRegister
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：用于网络过滤和处理框架Windows Filtering Platform注册网络流量过滤回调&lt;/li&gt;
+&lt;li&gt;用途：监控/拦截网络通信（如防火墙、DLP系统）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ndisregisterprotocoldriver&#34;&gt;NdisRegisterProtocolDriver
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：注册协议驱动的接收/发送回调函数&lt;/li&gt;
+&lt;li&gt;用途：网络监控、抓包、VPN实现等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安全与对象管理回调&#34;&gt;安全与对象管理回调
+&lt;/h3&gt;&lt;h4 id=&#34;obregistercallbacks&#34;&gt;ObRegisterCallbacks
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;功能：监控对象句柄操作，如进程句柄、线程句柄&lt;/li&gt;
+&lt;li&gt;用途：防止进程被调试、注入、终止（常用于反作弊或病毒保护）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>windows相关知识总结（上）</title>
+        <link>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/</link>
+        <pubDate>Mon, 21 Jul 2025 12:17:22 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/</guid>
+        <description>&lt;p&gt;写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行&lt;/p&gt;
+&lt;p&gt;现在只是大概的了解，如果后续有时间，会把每一个板块都单独拿出来学习的&lt;/p&gt;
+&lt;p&gt;嗯，如果有时间的话&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;windows相关知识总结（下）：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ntfs文件系统&#34;&gt;NTFS文件系统
+&lt;/h1&gt;&lt;h2 id=&#34;什么是ntfs&#34;&gt;什么是NTFS
+&lt;/h2&gt;&lt;p&gt;NTFS，全称New Technology File System，是自WindowsNT以来微软所有现代操作系统的标准文件系统&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在NTFS卷上，一切皆文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这不仅包括我们日常所见的普通文件和目录，用于描述和管理文件系统自身的元数据也同样被组织成一系列特殊的文件，这种设计极大地增强了文件系统的灵活性和可恢复性&lt;/p&gt;
+&lt;h2 id=&#34;核心元文件&#34;&gt;核心元文件
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;这是NTFS文件系统内部使用的一组以&lt;code&gt;$&lt;/code&gt;开头的特殊隐藏文件，用于维护整个文件系统的结构、状态和完整性&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它们不像普通用户文件那样可见或可操作，而是被NTFS在后台自动创建和管理，保存着关于文件、目录、磁盘空间、日志、安全信息等的元数据&lt;/p&gt;
+&lt;p&gt;大致结构如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NTFS Root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $Mft
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $MftMirr
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $LogFile
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $Volume
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $Bitmap
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $BadClus
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $AttrDef
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $Secure
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $Extend
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   ├── $Quota
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   ├── $ObjId
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   ├── $Reparse
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   └── $UsnJrnl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $UpCase
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── $Boot
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└── ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;mft&#34;&gt;$Mft
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;MFT，即主文件表，是NTFS文件系统的核心数据库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它本身是一个特殊文件，由一系列固定大小的文件记录（通常为1024字节）组成&lt;/p&gt;
+&lt;p&gt;卷上的每一个文件和目录都至少对应MFT中的一个文件记录，该记录包含一个头部和一系列描述文件所有信息的属性&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它的主要用途是作为整个卷的索引目录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;操作系统进行任何文件操作（如查找、读取、写入、权限检查）时，都必须首先查询$Mft以获取文件的元数据，包括时间戳、大小、权限以及数据在磁盘上的物理位置&lt;/p&gt;
+&lt;p&gt;我们后面会详细说明它：[MFT](#NTFS的关键结构 —— 主文件表MFT)&lt;/p&gt;
+&lt;h3 id=&#34;mftmirr&#34;&gt;$MftMirr
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;MftMirr是主文件表的一个部分备份或镜像&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它通常只包含Mft最开头的几个关键文件记录（例如描述Mft自身、LogFile等元文件的记录）&lt;/p&gt;
+&lt;p&gt;为了提高容灾能力，它在物理磁盘上的存储位置通常远离Mft&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;其唯一的用途是文件系统恢复&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当Mft文件的起始部分发生损坏导致文件系统无法挂载时，操作系统可以利用MftMirr来定位关键的元文件，从而为修复工具提供恢复文件系统的可能性&lt;/p&gt;
+&lt;h3 id=&#34;logfile&#34;&gt;$LogFile
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;该文件是NTFS日志记录功能的物理载体&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它遵循预写式日志模型，即在对文件系统元数据进行任何实际更改之前，都会先将描述该操作的事务日志记录写入LogFile&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它的核心用途是保证文件系统的一致性和可恢复性&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在系统意外崩溃或断电后，NTFS驱动程序可以通过检查LogFile，回滚未完成的事务或完成已记录但未写入的事务，从而防止文件系统结构损坏，也可以用来恢复最近的文件操作历史&lt;/p&gt;
+&lt;h3 id=&#34;volume&#34;&gt;$Volume
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是一个存储卷级别信息的元文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它的主要属性中包含了整个卷的元数据，例如卷标、NTFS版本号以及卷的状态标志位&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;操作系统使用此文件来识别卷的属性&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其中脏位(Dirty Bit)尤为重要，表示某个数据结构或内存页是否已经被修改过但尚未写回到磁盘或永久存储中，系统在启动时会检查这个标志，如果发现上次关机是“非正常”的，就会触发chkdsk等磁盘检查工具来确保卷的一致性&lt;/p&gt;
+&lt;h3 id=&#34;bitmap&#34;&gt;$Bitmap
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Bitmap是一个位图文件&lt;/strong&gt;，它的每一个比特位都精确地对应着卷上的一个物理簇&lt;/p&gt;
+&lt;p&gt;比特位的值（0或1）用于标记其对应的簇是空闲的还是已被占用&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它被文件系统用于高效地管理磁盘空间分配&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当需要为新文件写入数据时，系统会查询Bitmap来快速找到连续的空闲簇&lt;/p&gt;
+&lt;p&gt;当文件被删除时，其占用的簇对应的比特位会被重置为0（空闲）&lt;/p&gt;
+&lt;h3 id=&#34;badclus&#34;&gt;$BadClus
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;该文件标记了卷上所有已被检测为物理损坏或不可靠的坏簇&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它以一个稀疏文件的形式存在，其$DATA属性中包含了所有坏簇的位置列表&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它的作用是防止数据丢失&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;文件系统在分配磁盘空间时，会避开BadClus文件中标记的所有簇，以确保用户数据不会被写入到这些已知的物理损坏区域&lt;/p&gt;
+&lt;h3 id=&#34;attrdef&#34;&gt;$AttrDef
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;AttrDef是属性定义表，相当于MFT文件记录的模式或模板定义文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它以结构化的形式，列出了NTFS文件系统支持的所有属性类型及其元数据，包括它们的名称、数字ID以及默认特性（如是否可以非常驻）&lt;/p&gt;
+&lt;p&gt;此文件由NTFS驱动程序在内部使用，用于在解析任何MFT文件记录时，都能正确地识别和解释其中的各种属性结构，保证了MFT的结构完整性和可扩展性&lt;/p&gt;
+&lt;h3 id=&#34;secure&#34;&gt;$Secure
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是一个集中存储卷上所有文件和目录的安全描述符的数据库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;NTFS为了节省空间，并不会在每个MFT记录中都存一份完整的安全描述符（包含用户SID、权限ACL等），而是将唯一的描述符存储在Secure文件中，并赋予其一个ID&lt;/p&gt;
+&lt;p&gt;其他MFT记录只需引用这个ID即可&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主要用途是提高权限验证效率和降低安全信息的存储冗余&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通过共享安全描述符，可以显著减小MFT的体积，并允许系统更高效地缓存和查询权限信息&lt;/p&gt;
+&lt;h3 id=&#34;extend&#34;&gt;$Extend
+&lt;/h3&gt;&lt;p&gt;Extend本身是一个目录，它作为NTFS高级功能模块的扩展容器，其下包含了多个用于支持特定功能的元文件&lt;/p&gt;
+&lt;p&gt;它为磁盘配额、对象ID、重解析点和变更日志等高级功能提供结构化的存储位置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它包含以下重要子文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;quota&#34;&gt;$Quota
+&lt;/h4&gt;&lt;p&gt;用于记录和管理每个用户在该卷上的磁盘空间使用限制&lt;/p&gt;
+&lt;p&gt;它以包含用户SID、空间使用量、警告阈值和硬限制等信息的结构化记录进行存储&lt;/p&gt;
+&lt;p&gt;实现Windows的磁盘配额功能，允许管理员为不同用户设置不同的磁盘空间上限&lt;/p&gt;
+&lt;h4 id=&#34;objid&#34;&gt;$ObjId
+&lt;/h4&gt;&lt;p&gt;为一个卷上的每个文件分配一个全局唯一的对象标识符（GUID），以便快速查找&lt;/p&gt;
+&lt;p&gt;主要被分布式链接跟踪等系统服务使用，确保即使用户将文件移动或重命名，依赖该文件的快捷方式等依然能找到它&lt;/p&gt;
+&lt;h4 id=&#34;reparse&#34;&gt;$Reparse
+&lt;/h4&gt;&lt;p&gt;记录了卷上所有设置了重解析点的文件或目录&lt;/p&gt;
+&lt;p&gt;重解析点允许一个文件或目录的访问被一个特定的驱动程序拦截并进行特殊处理&lt;/p&gt;
+&lt;p&gt;它是实现多种高级文件系统功能的基础，例如符号链接、目录联接、卷挂载点以及OneDrive的占位符文件等&lt;/p&gt;
+&lt;h4 id=&#34;usnjrnl&#34;&gt;$UsnJrnl
+&lt;/h4&gt;&lt;p&gt;其全称为Update Sequence Number Journal，即更新序列号日志&lt;/p&gt;
+&lt;p&gt;它是一个高效率的日志，记录了卷上所有文件的所有变更事件，如创建、删除、写入、重命名、权限修改等&lt;/p&gt;
+&lt;p&gt;它的主要用户是需要监控文件系统变化的应用程序，如增量备份软件、文件同步服务、以及安全审计工具。在取证分析中，它是还原文件详细活动历史的最重要数据源之一&lt;/p&gt;
+&lt;h3 id=&#34;boot&#34;&gt;$Boot
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;该文件是卷的引导扇区的一个精确副本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它包含了BIOS参数块，详细描述了该分区的物理布局，以及用于启动操作系统的初始引导代码&lt;/p&gt;
+&lt;p&gt;其核心用途是在计算机启动时，由BIOS/UEFI读取并执行，以&lt;strong&gt;加载操作系统的引导加载程序&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;同时，NTFS驱动程序也需要读取它来理解卷的几何结构&lt;/p&gt;
+&lt;h3 id=&#34;upcase&#34;&gt;$UpCase
+&lt;/h3&gt;&lt;p&gt;该文件包含了一个完整的、将所有Unicode字符映射到其对应大写形式的转换表，&lt;strong&gt;用于实现NTFS文件名大小写不敏感但大小写保留的特性&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当进行文件名比较或查找时，文件系统会调用这个映射表来确保&lt;code&gt;file.txt&lt;/code&gt;和&lt;code&gt;FILE.TXT&lt;/code&gt;这样的大小写被视为同一个文件&lt;/p&gt;
+&lt;h3 id=&#34;recyclebin&#34;&gt;$Recycle.Bin
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这虽然不是一个元数据文件，但它是一个与文件系统紧密相关的、重要的系统隐藏目录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当用户通过图形界面删除文件时，文件并不会被物理删除，而是其MFT记录被修改，使其被移动到Recycle.Bin目录下某个以用户SID命名的子目录中，并被重命名，同时一个索引文件会记录下原始的文件名和路径&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它为用户提供回收站功能，允许恢复被误删除的文件&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ntfs的关键结构--主文件表mft&#34;&gt;NTFS的关键结构 —— 主文件表MFT
+&lt;/h2&gt;&lt;h3 id=&#34;什么是mft&#34;&gt;什么是MFT
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;MFT的全称是MasterFileTable ，即主文件表，它是NTFS文件系统的核心&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果NTFS格式的硬盘分区是图书馆，那么MFT就是这个图书馆的总目录卡片索引柜&lt;/p&gt;
+&lt;p&gt;这个索引柜本身也是一个特殊的文件，名为&lt;code&gt;$MFT&lt;/code&gt;，里面存放着一张张的卡片，每一张卡片都详细记录了图书馆里某一本书（即硬盘上的一个文件或文件夹）的所有信息&lt;/p&gt;
+&lt;p&gt;没有这个总目录，操作系统就无法找到、访问或管理分区上的任何文件&lt;/p&gt;
+&lt;h3 id=&#34;mft-的结构&#34;&gt;MFT 的结构
+&lt;/h3&gt;&lt;h4 id=&#34;文件记录&#34;&gt;文件记录
+&lt;/h4&gt;&lt;p&gt;MFT 由一系列固定大小的文件记录构成，每个记录都有一个唯一的编号，从 0 开始&lt;/p&gt;
+&lt;p&gt;记录的前部是固定的头结构&lt;code&gt;FILE_RECORD_SEGMENT_HEADER&lt;/code&gt;，用于描述该记录的状态（如是否在使用中）&lt;/p&gt;
+&lt;p&gt;其余部分则由多个可变长度的属性组成&lt;/p&gt;
+&lt;h4 id=&#34;核心属性&#34;&gt;核心属性
+&lt;/h4&gt;&lt;p&gt;每个文件记录内部，由多个不同类型的属性来完整描述一个文件，下面介绍几个关键属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$STANDARD_INFORMATION (0x10)&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是存储文件的核心元数据，包括安全描述符、所有者ID，以及一组MACE时间戳&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这组时间戳与文件内容的改变紧密相关，被认为是最稳定的时间戳，其创建时间通常反映了文件数据首次被写入的时间，是构建原始时间线的基准，常被称为MAC(B)时间&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;1. M - Modified (修改时间) —— 文件内容最后一次被修改的时间&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;当打开一个文件，编辑其内容并保存后，这个时间戳就会更新&lt;/p&gt;
+&lt;p&gt;创建新文件时，它的修改时间与创建时间相同&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;2. A - Accessed (访问时间) —— 文件内容最后一次被访问读取的时间&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;理论上，只要一个程序打开并读取了文件内容（即使没有修改），这个时间戳就应该更新。&lt;/p&gt;
+&lt;p&gt;但是在现代Windows系统中（Vista及之后），为了提高性能，默认情况下访问时间的更新是禁用的，因此这个时间戳的参考价值有限，除非管理员手动开启了该功能&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;3. C - Created (创建时间) —— 文件被创建在这个文件系统上的时间&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;当一个文件从一个地方&lt;strong&gt;复制&lt;/strong&gt;到另一个地方时，新文件的“创建时间”是复制操作发生的时间，而不是原始文件的创建时间&lt;/p&gt;
+&lt;p&gt;但当文件被&lt;strong&gt;移动到同一卷&lt;/strong&gt;（例如从C盘的一个文件夹移动到另一个文件夹）时，创建时间通常不会改变&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:orange&#34;&gt;&lt;strong&gt;4. E - Entry Modified (MFT记录变更时间) —— 该文件在MFT中的记录本身最后一次被修改的时间&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;任何导致文件元数据发生变化的操作都会更新这个时间戳，例如文件重命名、文件大小改变、权限修改等。当然，修改文件内容（更新Modified时间）也同样会更新这个时间戳&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$FILE_NAME (0x30)&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;包括存储文件名、父目录的文件记录号、文件大小，以及&lt;strong&gt;另一组独立的MACE时间戳&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这组时间戳反映的是文件名属性本身的状态&lt;/strong&gt;，当文件被创建、移动或重命名时，这组时间戳会被更新&lt;/p&gt;
+&lt;p&gt;通过对比&lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt;和&lt;code&gt;$FILE_NAME&lt;/code&gt;两组时间戳的差异，可以用来判断文件是原地创建还是从别处复制而来&lt;/p&gt;
+&lt;p&gt;一个文件记录可以有多个&lt;code&gt;$FILE_NAME&lt;/code&gt;属性，以支持长文件名、MS-DOS兼容的8.3短文件名与硬链接&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;这两组时间具体变化情况如下表(访问时间在现代Windows系统中默认禁用更新，因此假设其始终不变)：&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;操作&lt;/th&gt;
+          &lt;th&gt;属性&lt;/th&gt;
+          &lt;th&gt;创建时间  (C)&lt;/th&gt;
+          &lt;th&gt;修改时间 (M)&lt;/th&gt;
+          &lt;th&gt;访问时间 (A)&lt;/th&gt;
+          &lt;th&gt;MFT变更时间 (E)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;原地创建文件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$FILE_NAME&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;修改文件内容&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$FILE_NAME&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;复制文件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌ (继承)&lt;/td&gt;
+          &lt;td&gt;❌ (继承)&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$FILE_NAME&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;移动文件 (同一分区)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$FILE_NAME&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;重命名文件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$FILE_NAME&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;读取文件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;$FILE_NAME&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$DATA&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其中存储着文件的实际数据，其存储方式有两种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;常驻数据（存内容）&lt;/strong&gt;：如果文件非常小（通常小于约700字节），其全部数据会直接存储在 MFT 记录内部的&lt;code&gt;$DATA&lt;/code&gt;属性中，无需到磁盘的其他地方去寻找&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非常驻数据（存指针）&lt;/strong&gt;：如果文件较大，&lt;code&gt;$DATA&lt;/code&gt;属性中存储的则是数据运行/簇列表，这是一系列指针，详细描述了该文件的数据流在磁盘上占用了哪些不连续的簇&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$ATTRIBUTE_LIST&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它包含一个指针列表，指向存储该文件其他属性的额外MFT记录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当一个文件的所有属性无法在一个MFT记录中存下时（例如，文件有极多的硬链接或高度碎片化），系统会创建这个属性&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;mft与文件恢复&#34;&gt;MFT与文件恢复
+&lt;/h4&gt;&lt;p&gt;当一个文件被删除时，NTFS的操作是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 MFT 中找到该文件对应的记录，并将其头部的&lt;code&gt;in-use&lt;/code&gt;标志位置为0（未使用），记录本身的内容并不会被立即清除&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;$Bitmap&lt;/code&gt;文件中（跟踪卷上所有簇使用情况的元文件），将该文件数据所占用的磁盘簇标记为未分配&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这种标记删除机制使得数据恢复成为可能，恢复的成功率取决于MFT记录和原始数据簇是否被后续写入的新文件所覆盖&lt;/p&gt;
+&lt;p&gt;这就导致下面几种情况：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;恢复场景&lt;/th&gt;
+          &lt;th&gt;MFT记录状态&lt;/th&gt;
+          &lt;th&gt;文件数据状态&lt;/th&gt;
+          &lt;th&gt;可恢复性&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;最佳情况&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完好&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完好&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完美恢复&lt;/strong&gt;：文件名、元数据和文件内容全部可以恢复&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一般情况&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完好&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;部分被覆盖&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;部分恢复&lt;/strong&gt;：文件名和元数据可恢复，但文件内容不完整或已损坏&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;情况三&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完好&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完全被覆盖&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;仅元数据恢复&lt;/strong&gt;：只能恢复文件名、大小、时间戳等“档案”信息，文件内容永久丢失&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;最差情况&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;被覆盖&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完好或部分完好&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;部分恢复&lt;/strong&gt;：文件名和元数据永久丢失，但文件内容本身可以从磁盘的“未分配空间”中被恢复出来&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;常驻数据&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完好&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;数据在MFT记录中&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完美恢复&lt;/strong&gt;：由于文件数据本身就存储在MFT记录中，只要MFT记录未被覆盖，即使磁盘数据区被重写，文件内容依然可以被完整恢复&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;注册表&#34;&gt;注册表
+&lt;/h1&gt;&lt;h2 id=&#34;什么是注册表&#34;&gt;什么是注册表
+&lt;/h2&gt;&lt;p&gt;Windows注册表是整个操作系统的核心数据库，是一个庞大、复杂的层级式数据库&lt;/p&gt;
+&lt;p&gt;它存储了操作系统和几乎所有应用程序运行所需的全部配置信息，从硬件驱动的设置、软件的安装路径，到桌面壁纸的图片位置，所有的一切都记录在其中&lt;/p&gt;
+&lt;h2 id=&#34;如何打开注册表&#34;&gt;如何打开注册表
+&lt;/h2&gt;&lt;p&gt;我们可以使用注册表编辑器：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;win+R打开运行窗口，输入regedit，Shift+Ctrl+Enter以管理员模式打开&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;除了直接看注册表，它还有一个简单易用的用户界面——本地组策略，只不过家庭版通常是没有的：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;win+R打开运行窗口，输入gpedit.msc打开&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;注册表的结构&#34;&gt;注册表的结构
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;要分析注册表，我们必须理解它的双层结构：物理层和逻辑层&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;注册表的配置单元物理层---hive&#34;&gt;注册表的配置单元（物理层 - HIVE）
+&lt;/h3&gt;&lt;p&gt;在Windows9x中，注册表文件的数据信息保存在system.dat（系统）和user.dat（用户）中&lt;/p&gt;
+&lt;p&gt;但到了WindowsNT，注册表并不是一个单一的大文件，而是由一组名为配置单元 (Hive)的独立文件组成的&lt;/p&gt;
+&lt;p&gt;这些是存储在硬盘上的真实文件，在系统运行时被加载到内存中，下面是几个常见的：&lt;/p&gt;
+&lt;h4 id=&#34;system&#34;&gt;SYSTEM
+&lt;/h4&gt;&lt;p&gt;存储核心的系统硬件配置、服务列表、启动设置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;C:\Windows\System32\config\SYSTEM&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;software&#34;&gt;SOFTWARE
+&lt;/h4&gt;&lt;p&gt;存储操作系统和已安装软件的全局配置信息&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;C:\Windows\System32\config\SOFTWARE&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;sam&#34;&gt;SAM
+&lt;/h4&gt;&lt;p&gt;安全帐户管理器(Security Account Manager)，存储本地用户的账户信息和密码哈希&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;C:\Windows\System32\config\SAM&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;security&#34;&gt;SECURITY
+&lt;/h4&gt;&lt;p&gt;存储系统范围内的安全策略和用户权限分配&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;C:\Windows\System32\config\SECURITY&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ntuserdat&#34;&gt;NTUSER.DAT
+&lt;/h4&gt;&lt;p&gt;每个用户都有一个独立的，存储该用户的个性化设置，如桌面背景、程序历史记录等&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;C:\Users\&amp;lt;用户名&amp;gt;\NTUSER.DAT&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;usrclassdat&#34;&gt;UsrClass.dat
+&lt;/h4&gt;&lt;p&gt;同样是每个用户一个，存储文件关联和COM类注册信息&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;C:\Users\&amp;lt;用户名&amp;gt;\AppData\Local\Microsoft\Windows\UsrClass.dat&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;amcachehve&#34;&gt;Amcache.hve
+&lt;/h4&gt;&lt;p&gt;记录了近期在该系统上运行过的应用程序及其路径、安装时间等信息&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;C:\Windows\appcompat\Programs\Amcache.hve&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;bcd&#34;&gt;BCD
+&lt;/h4&gt;&lt;p&gt;存储了系统的启动菜单和配置信息，决定了计算机如何启动操作系统&lt;/p&gt;
+&lt;p&gt;没有扩展名，文件名就是BCD，即Boot Configuration Data&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：通常位于系统启动分区，例如 \Boot\BCD&lt;/p&gt;
+&lt;h3 id=&#34;注册表的根键逻辑层---hkey&#34;&gt;注册表的根键（逻辑层 - HKEY）
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;regedit.exe&lt;/code&gt;的&lt;code&gt;HKEY_...&lt;/code&gt;开头的顶级文件夹，是操作系统为了方便管理而创建的逻辑视图，被称为根键&lt;/p&gt;
+&lt;p&gt;这些根键将不同的Hive文件组合在一起，形成树状结构&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;每一个根键都是一个项（文件夹），下面有着各种项，项里又定义着各种键值对（内容）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注册表包括以下五个根键，其中只有HKLM和HKU是真实映射Hive的，其余都是它们的视图：&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;1-hkey_classes_roothkcr&#34;&gt;1. HKEY_CLASSES_ROOT（HKCR）
+&lt;/h4&gt;&lt;p&gt;它负责管理文件的类型关联（决定双击文件用什么程序打开）和 COM 组件的注册信息&lt;/p&gt;
+&lt;p&gt;它是&lt;strong&gt;虚拟的、合并而成的视图&lt;/strong&gt;，由&lt;code&gt;HKLM\SOFTWARE\Classes&lt;/code&gt;和&lt;code&gt;HKCU\Software\Classes&lt;/code&gt;这两个键合并而成&lt;/p&gt;
+&lt;h4 id=&#34;2-hkey_current_userhkcu&#34;&gt;2. HKEY_CURRENT_USER（HKCU）
+&lt;/h4&gt;&lt;p&gt;该根键包括当前登录用户的配置信息，包括环境变量，个人程序以及桌面设置等&lt;/p&gt;
+&lt;p&gt;它实际上是指向&lt;code&gt;HKEY_USERS&lt;/code&gt;下当前用户SID的一个&lt;strong&gt;快捷方式&lt;/strong&gt;，其内容来自当前用户的&lt;code&gt;NTUSER.DAT&lt;/code&gt;文件&lt;/p&gt;
+&lt;h4 id=&#34;3-hkey_local_machinehklm&#34;&gt;3. HKEY_LOCAL_MACHINE（HKLM）
+&lt;/h4&gt;&lt;p&gt;该根键包括本地计算机的系统信息，包括硬件和操作系统信息，安全数据和计算机专用的各类软件设置信息&lt;/p&gt;
+&lt;p&gt;它主要映射了&lt;code&gt;SYSTEM&lt;/code&gt;，&lt;code&gt;SOFTWARE&lt;/code&gt;，&lt;code&gt;SAM&lt;/code&gt;，&lt;code&gt;SECURITY&lt;/code&gt;等Hive&lt;/p&gt;
+&lt;h4 id=&#34;4-hkey_usershku&#34;&gt;4. HKEY_USERS（HKU）
+&lt;/h4&gt;&lt;p&gt;该根键包括计算机的所有用户使用的配置数据，这些数据只有在用户登录系统时才能访问，告诉系统当前用户使用的图标，激活的程序组，开始菜单的内容以及颜色，字体&lt;/p&gt;
+&lt;p&gt;它的每个子项是一个用户的SID，此外还有.DEFAULT子项，是系统为新用户创建账户时的配置模板&lt;/p&gt;
+&lt;h4 id=&#34;5-hkey_current_confighkcc&#34;&gt;5. HKEY_CURRENT_CONFIG（HKCC）
+&lt;/h4&gt;&lt;p&gt;该根键包括当前硬件的配置信息，其内容**完全指向（或映射自）**以下这个更深的注册表路径：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Hardware Profiles\Current&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用注册表项&#34;&gt;常用注册表项
+&lt;/h2&gt;&lt;h3 id=&#34;持久化机制&#34;&gt;持久化机制
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是恶意软件实现开机自启、确保自身不被清除最常用的位置&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;开机自启runrunonce&#34;&gt;开机自启（Run/RunOnce）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run&lt;/code&gt; (&lt;strong&gt;对所有用户生效&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\Run&lt;/code&gt; (&lt;strong&gt;只对当前用户生效&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run&lt;/code&gt; (&lt;strong&gt;策略控制的启动项&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最经典、最直接的自启动位置写入这里的程序会在用户登录或系统启动时自动执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：检查所有这些&lt;code&gt;Run&lt;/code&gt;键下是否有指向非标准目录（如&lt;code&gt;Temp&lt;/code&gt;、&lt;code&gt;AppData&lt;/code&gt;）的可执行文件，或者是否有名字可疑的启动项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;系统服务services&#34;&gt;系统服务（Services）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SYSTEM\CurrentControlSet\Services\&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：将程序注册为系统服务，可以在后台运行，权限高，更隐蔽&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;可疑服务名&lt;/strong&gt;：是否有随机、无意义或拼写错误的服务名称&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;ImagePath&lt;/code&gt;&lt;/strong&gt;：正常服务（如&lt;code&gt;svchost&lt;/code&gt;）的&lt;code&gt;ImagePath&lt;/code&gt;是否被篡改为指向恶意程序&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;FailureCommand&lt;/code&gt;&lt;/strong&gt;：检查服务失败后执行的命令是否被设置为恶意程序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;登录辅助程序winlogon&#34;&gt;登录辅助程序（Winlogon）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：&lt;code&gt;Winlogon.exe&lt;/code&gt;是负责用户登录的核心进程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;Userinit&lt;/code&gt;&lt;/strong&gt;：默认值应为&lt;code&gt;C:\Windows\system32\userinit.exe,&lt;/code&gt;。&lt;strong&gt;检查末尾是否有逗号&lt;/strong&gt;，以及后面是否跟了其他恶意程序的路径（用逗号分隔）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;Shell&lt;/code&gt;&lt;/strong&gt;：默认值应为&lt;code&gt;explorer.exe&lt;/code&gt;，如果被修改，意味着用户的整个桌面环境都被替换了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;调试器image-file-execution-optionsifeo&#34;&gt;调试器（Image File Execution Options，IFEO）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：用于在程序启动时附加调试器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;关注点&lt;/strong&gt;：攻击者会创建一个以正常程序命名（如&lt;code&gt;notepad.exe&lt;/code&gt;）的子项，然后在其中添加一个名为&lt;code&gt;Debugger&lt;/code&gt;的键值，指向自己的恶意程序：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;HKEY_LOCAL_MACHINE&lt;span style=&#34;color:#98c379&#34;&gt;\S&lt;/span&gt;OFTWARE&lt;span style=&#34;color:#98c379&#34;&gt;\M&lt;/span&gt;icrosoft&lt;span style=&#34;color:#98c379&#34;&gt;\W&lt;/span&gt;indows NT&lt;span style=&#34;color:#98c379&#34;&gt;\C&lt;/span&gt;urrentVersion&lt;span style=&#34;color:#98c379&#34;&gt;\I&lt;/span&gt;mage File Execution Options&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;otepad.exe&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Debugger&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;C:\\Path\\To\\EvilDebugger.exe&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样，每当用户尝试运行记事本时，系统会优先运行那个恶意的调试器，而真正的记事本根本不会启动&lt;/p&gt;
+&lt;p&gt;也可以用于阻止程序运行，如果调试器不存在，系统找不到指定的.exe，程序就无法启动&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;图像环境dllappinit_dll&#34;&gt;图像环境DLL（AppInit_DLL）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：允许将一个或多个DLL注入到几乎所有加载了&lt;code&gt;user32.dll&lt;/code&gt;的进程中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：检查**&lt;code&gt;AppInit_DLLs&lt;/code&gt;**这个键值是否为空，任何被列在这里的DLL都会被广泛注入，是恶意软件实现全局监控的常用手段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;com组件clsid&#34;&gt;COM组件（CLSID）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKCR\CLSID\&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：存储系统中所有COM组件类ID（CLSID）的信息&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：检查&lt;code&gt;InprocServer32&lt;/code&gt;等子项的默认值，看其指向的 DLL 路径是否可疑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;用户账户与凭证&#34;&gt;用户账户与凭证
+&lt;/h3&gt;&lt;h4 id=&#34;本地用户信息sam&#34;&gt;本地用户信息（SAM）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SAM\SAM\Domains\Account\Users&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：存储本地用户的账户名、SID、以及最重要的密码哈希&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;关注点&lt;/strong&gt;：&lt;code&gt;SAM&lt;/code&gt;受到严格保护，无法直接读取，但可以通过内存取证工具（如 &lt;code&gt;hashdump&lt;/code&gt;）或离线分析&lt;code&gt;SAM&lt;/code&gt;和&lt;code&gt;SYSTEM&lt;/code&gt;文件来提取密码哈希&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;检查&lt;code&gt;Names&lt;/code&gt;子键可以发现所有本地账户，包括可能被隐藏的账户&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;用户配置文件列表profilelist&#34;&gt;用户配置文件列表（ProfileList）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录了本机上所有用户账户的 SID 以及其个人文件夹（Profile）的路径。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：这是将SID和用户名对应起来的关键，可以发现系统上曾经存在过但已被删除的用户账户痕迹&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;用户活动痕迹&#34;&gt;用户活动痕迹
+&lt;/h3&gt;&lt;h4 id=&#34;程序执行历史userassist&#34;&gt;程序执行历史（UserAssist）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录用户通过图形界面（点击图标）运行程序的历史，包括运行次数和最后运行时间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;取证关注点&lt;/strong&gt;：还原用户操作的关键，可以清晰地看到用户在特定时间点运行了哪些程序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;最近打开的文档recentdocs&#34;&gt;最近打开的文档（RecentDocs）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录用户最近打开过的文档和访问过的文件夹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：了解用户最近处理了哪些文件，可能会发现恶意文档（如带宏的Word）或攻击者留下的工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;文件夹打开记录bagmru&#34;&gt;文件夹打开记录（BagMRU）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU&lt;/code&gt;（&lt;strong&gt;新版本，主要使用&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HKCU\Software\Microsoft\Windows\Shell\BagMRU&lt;/code&gt; （&lt;strong&gt;旧版本，不太使用&lt;/strong&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录用户曾经打开过的所有文件夹，每一项代表一个用户访问过的文件夹，每个键的值（如 &lt;code&gt;REG_BINARY&lt;/code&gt;数据）是一个内部结构（MRU记录+路径+配置引用），其中包含路径信息，但不是直接可见的字符串&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：它可以揭示出用户曾经访问过但现在可能已不存在的文件夹，包括网络共享、移动设备上的文件夹，同级目录下的Bags会记录文件夹的具体视图设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;usb设备使用历史usbstor&#34;&gt;USB设备使用历史（USBSTOR）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录所有曾接入本机的U盘、移动硬盘等USB存储设备的厂商、型号和唯一的序列号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：可以确定是否有未经授权的U盘接入，并可将特定U盘与数据泄露或恶意软件植入事件关联起来&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;系统与网络信息&#34;&gt;系统与网络信息
+&lt;/h3&gt;&lt;h4 id=&#34;网络接口与历史ip-interfaces&#34;&gt;网络接口与历史IP (Interfaces)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录本机所有网络接口（有线网卡、无线网卡）的配置信息，包括历史上曾经获取过的IP地址、子网掩码、网关和DNS服务器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：可以确定机器在不同时间点的网络环境，对于追踪内网漫游或确认C2连接时的源IP地址至关重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;最后关机时间-shutdowntime&#34;&gt;最后关机时间 (ShutdownTime)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SYSTEM\CurrentControlSet\Control\Windows\ShutdownTime&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录了系统最后一次正常关机的时间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：帮助确定系统事件发生的时间窗口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;时区信息-timezoneinformation&#34;&gt;时区信息 (TimeZoneInformation)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路径&lt;/strong&gt;：&lt;code&gt;HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：记录本机配置的时区&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注点&lt;/strong&gt;：时间线分析的基准，所有从日志和文件系统中提取的时间戳都必须根据这个时区进行校正，才能得到准确的绝对时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用命令行编辑注册表&#34;&gt;使用命令行编辑注册表
+&lt;/h2&gt;&lt;h3 id=&#34;reg命令的基本结构&#34;&gt;reg命令的基本结构
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; reg &amp;lt;操作&amp;gt; &amp;lt;注册表项路径&amp;gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;增改add&#34;&gt;增/改(add)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;添加新项（文件夹）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在&lt;code&gt;Run&lt;/code&gt;键下创建一个名为&lt;code&gt;MyApp&lt;/code&gt;的新项：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reg add &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MyApp&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;添加/设置键值（内容）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;/v&lt;/code&gt;：指定键值名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;/t&lt;/code&gt;：指定类型&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类型&lt;/th&gt;
+          &lt;th&gt;全称&lt;/th&gt;
+          &lt;th&gt;存储内容&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;REG_SZ&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;字符串值&lt;/td&gt;
+          &lt;td&gt;人类可读的文本，如路径、名称、描述&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;REG_DWORD&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;32位数值&lt;/td&gt;
+          &lt;td&gt;一个整数，通常用作是/否的标志或简单数字配置&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;REG_BINARY&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;二进制值&lt;/td&gt;
+          &lt;td&gt;任意的、非结构化的原始字节数据&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;/d&lt;/code&gt;：指定数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;/f&lt;/code&gt;：如果键值已存在，强制覆盖而不提示&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;在&lt;code&gt;Run&lt;/code&gt;键下创建一个名为&lt;code&gt;Pentestlab&lt;/code&gt;的自启动程序：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reg add &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run&amp;#34;&lt;/span&gt; /v Pentestlab /t REG_SZ /d &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;C:\tools\pentestlab.exe&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;删-delete&#34;&gt;删 (delete)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除键值&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/v&lt;/code&gt;：指定要删除的键值名&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/f&lt;/code&gt;：强制删除，不进行确认提示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;删除刚才创建的&lt;code&gt;Pentestlab&lt;/code&gt;启动项：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reg delete &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run&amp;#34;&lt;/span&gt; /v Pentestlab /f
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除整个项（及其所有子项和键值）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;删除刚才创建的MyApp项：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reg delete &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MyApp&amp;#34;&lt;/span&gt; /f
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;查-query&#34;&gt;查 (query)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;查询项下的所有内容&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reg query &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这条命令会列出&lt;code&gt;Winlogon&lt;/code&gt;这个项下所有的子项和键值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;查询一个具体的键值&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/v&lt;/code&gt;：指定要查询的键值名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reg query &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&amp;#34;&lt;/span&gt; /v Userinit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;递归查询所有子项和键值&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/s&lt;/code&gt;：递归查询所有子项和键值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reg query &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist&amp;#34;&lt;/span&gt; /s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;windows安全机制&#34;&gt;Windows安全机制
+&lt;/h1&gt;&lt;h2 id=&#34;安全主体与身份验证&#34;&gt;安全主体与身份验证
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;在介绍Windows安全机制之前，我们必须先理解两个基本概念：安全主体和身份验证&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安全主体&#34;&gt;安全主体
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;安全主体是指在Windows操作系统中能够被识别和进行身份验证的任何实体&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它不仅包括人类用户，还包括以下内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户账户：包括本地用户（如&lt;code&gt;Administrator&lt;/code&gt;）和域用户（如&lt;code&gt;CONTOSO\jdoe&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;计算机账户：加入域的计算机，如&lt;code&gt;WORKSTATION-01$&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安全组：如&lt;code&gt;Administrators&lt;/code&gt;组、&lt;code&gt;Everyone&lt;/code&gt;组等&lt;/li&gt;
+&lt;li&gt;系统内置账户：例如&lt;code&gt;SYSTEM&lt;/code&gt;、&lt;code&gt;Local Service&lt;/code&gt;、&lt;code&gt;Network Service&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;进程或线程：在特定安全上下文中运行的进程或线程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;简单来说，任何需要被系统识别以授予权限的对象，都是一个安全主体&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;完整性级别&#34;&gt;完整性级别
+&lt;/h4&gt;&lt;p&gt;完整性级别是安全主体的一个属性，用于防止低权限程序访问高权限资源&lt;/p&gt;
+&lt;p&gt;主要级别有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;低完整性级别（如Internet Explorer保护模式）&lt;/li&gt;
+&lt;li&gt;中等完整性级别（普通用户程序）&lt;/li&gt;
+&lt;li&gt;高完整性级别（管理员权限进程）&lt;/li&gt;
+&lt;li&gt;系统完整性级别（操作系统核心进程）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整性级别形成了额外的访问限制层&lt;/p&gt;
+&lt;h3 id=&#34;身份验证&#34;&gt;身份验证
+&lt;/h3&gt;&lt;p&gt;身份验证是核实安全主体是否确实是其所声称身份的过程，主要回答“你是谁？”这个问题&lt;/p&gt;
+&lt;p&gt;身份验证确保访问者不是冒名顶替者，常见方式包括密码核对、智能卡认证、生物识别等&lt;/p&gt;
+&lt;p&gt;需要注意的是，身份验证与授权是不同的概念，身份验证是授权的前提，但本身不等同于授权&lt;/p&gt;
+&lt;h2 id=&#34;sid&#34;&gt;SID
+&lt;/h2&gt;&lt;h3 id=&#34;什么是sid&#34;&gt;什么是SID
+&lt;/h3&gt;&lt;p&gt;SID全称Security Identifier，即安全标识符，就是操作系统为每一个安全主体分配的、一个全局唯一且不可变的号码&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;唯一性&lt;/strong&gt;：一个 SID 只会分配给一个安全主体，即使这个账户被删除，它的 SID 也不会被重新分配给新账户&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不变性&lt;/strong&gt;：账户可以改名，但它的 SID 永远不变&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内部标识&lt;/strong&gt;：用户习惯使用用户名来识别账户，但Windows内核只认SID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sid如何工作&#34;&gt;SID如何工作
+&lt;/h3&gt;&lt;p&gt;SID是Windows安全模型的核心&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;创建与存储&lt;/strong&gt;：当一个账户或组被创建时，本地安全机构（LSA）或域控制器会为其生成一个唯一的 SID，并将其存储在安全数据库中（本地账户存在注册表的SAMHive中，域账户存在活动目录中）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;生成访问令牌&lt;/strong&gt;：当一个用户成功登录时，系统会为其创建一个访问令牌 (Access Token)，这个令牌就像一张临时通行证，里面包含了该用户的SID、该用户所属所有组的SID、以及该用户拥有的所有特权&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;访问控制&lt;/strong&gt;：当该用户尝试访问一个资源（如文件或文件夹）时，系统会拿出用户的访问令牌，将其中的SID列表与资源的访问控制列表（ACL）进行比对，以决定是否授予访问权限&lt;/p&gt;
+&lt;h3 id=&#34;sid的结构&#34;&gt;SID的结构
+&lt;/h3&gt;&lt;p&gt;一个典型的、完整的 SID 结构如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;S  -  修订级别  -  颁发机构  -  域标识符 -  相对ID(RID)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们以一个例子来分解： &lt;strong&gt;&lt;code&gt;S-1-5-21-2127521184-1604012920-1887927527-500&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;S&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;固定前缀&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;表明这是一个SID&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;1&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;修订级别&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目前所有SID的版本都是1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;5&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;标识符颁发机构&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这里的&lt;code&gt;5&lt;/code&gt;代表 &lt;code&gt;NT Authority&lt;/code&gt;，即由WindowsNT系统安全机构颁发，这是最常见的一种&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;21-2127521184-1604012920-1887927527&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;域或本地计算机标识符&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是一串唯一的数字，代表创建这个SID的计算机或域，同一台电脑上的所有本地账户都会共享这一串数字&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;500&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;相对ID (RID)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是 SID 的最后一部分，它在上述域标识符范围内是唯一的，真正用来区分不同的账户&lt;/p&gt;
+&lt;p&gt;Windows 为一些内置账户预留了固定的 RID：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;500&lt;/strong&gt;：&lt;code&gt;Administrator&lt;/code&gt;（内置管理员账户）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;501&lt;/strong&gt;：&lt;code&gt;Guest&lt;/code&gt;（来宾账户）&lt;/li&gt;
+&lt;li&gt;普通用户通常从 &lt;strong&gt;1000&lt;/strong&gt; 或 &lt;strong&gt;1001&lt;/strong&gt; 开始递增&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;众所周知的sid&#34;&gt;众所周知的SID
+&lt;/h3&gt;&lt;p&gt;除了上述每个账户独有的SID，Windows还预定义了一些特殊的、固定的 SID&lt;/p&gt;
+&lt;p&gt;它们在所有Windows系统上都具有相同的值和含义，代表了一些内置的身份或通用组&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;SID&lt;/th&gt;
+          &lt;th&gt;通用名称&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;S-1-5-18&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Local System&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;本地系统账户，Windows系统中的最高权限&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;S-1-5-32-544&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Administrators&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;本地管理员组，属于这个组的成员都拥有管理员权限&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;S-1-1-0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Everyone&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;所有用户组，范围最广，包括已登录的用户和匿名用户&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;S-1-5-11&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Authenticated Users&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;已认证用户组，代表所有通过了身份验证的账户&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;S-1-5-2&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Network&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;任何通过网络登录的用户&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;S-1-5-6&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Service&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;任何以服务身份登录的实体&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;S-1-5-7&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Interactive&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;任何通过直接在本地登录的用户&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;lsa&#34;&gt;LSA
+&lt;/h2&gt;&lt;h3 id=&#34;什么是lsa&#34;&gt;什么是LSA
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;LSA，全称本地安全机构 (Local Security Authority)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它是一个受保护的Windows子系统，核心职责是在单台计算机上强制执行系统的安全策略&lt;/p&gt;
+&lt;p&gt;它是Windows 安全模型的中心，负责验证用户身份、管理用户权限并生成安全审计日志&lt;/p&gt;
+&lt;p&gt;LSA的用户模式组件体现在一个名为&lt;code&gt;lsass.exe&lt;/code&gt;的关键系统进程中，是维持操作系统安全运行的必要进程，任何对&lt;code&gt;lsass.exe&lt;/code&gt;的终止都会导致系统在短时间内强制关机并提示安全错误&lt;/p&gt;
+&lt;h3 id=&#34;访问令牌&#34;&gt;访问令牌
+&lt;/h3&gt;&lt;p&gt;访问令牌Access Token是由LSA创建的内核管理对象，描述进程或线程的安全上下文&lt;/p&gt;
+&lt;h4 id=&#34;包含的内容&#34;&gt;包含的内容
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;用户SID&lt;/strong&gt;：标明主体身份&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;组SID列表&lt;/strong&gt;：确定主体所属的所有安全组&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;特权列表&lt;/strong&gt;：决定主体可执行的系统级特殊操作，如SeDebugPrivilege&lt;/p&gt;
+&lt;h4 id=&#34;工作流程&#34;&gt;工作流程
+&lt;/h4&gt;&lt;p&gt;当用户登录后，启动的每个进程都会继承该用户访问令牌的副本&lt;/p&gt;
+&lt;p&gt;当进程尝试访问受保护资源时，内核的安全引用监视器（Security Reference Monitor，SRM）会取出进程访问令牌中的SID列表，与资源的访问控制列表（Access Control List，ACL）比较，决定是否允许或拒绝访问&lt;/p&gt;
+&lt;h4 id=&#34;用户账户控制&#34;&gt;用户账户控制
+&lt;/h4&gt;&lt;p&gt;用户账户控制（User Account Control，UAC）是基于访问令牌的“双令牌”机制&lt;/p&gt;
+&lt;p&gt;传统的Windows系统中，用户经常以管理员权限登录，这导致所有程序默认拥有高权限，增加了系统被攻击和破坏的风险&lt;/p&gt;
+&lt;p&gt;而UAC通过限制默认权限，减少系统受攻击面&lt;/p&gt;
+&lt;p&gt;当管理员账户登录系统时，系统为其创建两个访问令牌：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;标准访问令牌（受限令牌）&lt;/strong&gt;：用于默认运行的应用程序，权限受限，防止程序执行高风险操作&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完整访问令牌（管理员令牌）&lt;/strong&gt;：包含完整管理员权限，但只在用户明确授权时使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;普通用户账户只拥有标准令牌，无法提升权限&lt;/p&gt;
+&lt;p&gt;当用户启动需要管理员权限的程序或操作（比如安装软件）时，系统会弹出UAC提示，要求用户确认操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;管理员账户&lt;/strong&gt;：弹出提示框，用户确认后程序使用完整访问令牌运行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;标准账户&lt;/strong&gt;：需要输入管理员账户的用户名和密码以获得权限提升&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;这保证了系统操作必须经过用户授权，避免恶意软件自动提升权限&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;lsa的功能&#34;&gt;LSA的功能
+&lt;/h3&gt;&lt;h4 id=&#34;用户认证&#34;&gt;用户认证
+&lt;/h4&gt;&lt;p&gt;LSA是所有用户登录请求的最终处理者&lt;/p&gt;
+&lt;p&gt;无论是本地登录还是通过网络的域登录，凭证信息最终都会被传递给LSA进行验证&lt;/p&gt;
+&lt;h4 id=&#34;访问令牌生成&#34;&gt;访问令牌生成
+&lt;/h4&gt;&lt;p&gt;在用户身份验证成功后，LSA负责创建该用户的访问令牌 (&lt;code&gt;_TOKEN&lt;/code&gt;结构)&lt;/p&gt;
+&lt;p&gt;该令牌是一个内核对象，它详细描述了用户的安全上下文，包括用户SID、所属组的SID列表、特权列表以及会话信息&lt;/p&gt;
+&lt;h4 id=&#34;安全策略管理&#34;&gt;安全策略管理
+&lt;/h4&gt;&lt;p&gt;LSA强制执行在本地安全策略 (&lt;code&gt;secpol.msc&lt;/code&gt;) 中定义的规则&lt;/p&gt;
+&lt;p&gt;例如密码复杂度策略、账户锁定策略以及用户权限分配&lt;/p&gt;
+&lt;h4 id=&#34;凭证缓存与管理&#34;&gt;凭证缓存与管理
+&lt;/h4&gt;&lt;p&gt;为了支持网络认证（如NTLM）和单点登录（SSO），&lt;code&gt;lsass.exe&lt;/code&gt;进程的内存中会缓存多种形式的凭证数据&lt;/p&gt;
+&lt;p&gt;包括 NTLM 哈希、Kerberos 票据，以及在某些配置下（如开启WDigest认证）的可逆加密或明文形式的密码&lt;/p&gt;
+&lt;h4 id=&#34;安全审计&#34;&gt;安全审计
+&lt;/h4&gt;&lt;p&gt;根据系统中配置的审计策略，LSA会生成安全事件日志（如登录成功/失败、对象访问等）&lt;/p&gt;
+&lt;p&gt;它会将这些日志发送给事件日志服务（Event Log service）进行记录&lt;/p&gt;
+&lt;h3 id=&#34;lsa认证流程&#34;&gt;LSA认证流程
+&lt;/h3&gt;&lt;p&gt;以一个典型的本地交互式登录为例，LSA 在其中的工作流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;用户在登录界面（由&lt;code&gt;winlogon.exe&lt;/code&gt;管理）输入用户名和密码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;winlogon.exe&lt;/code&gt; 将这些凭证安全地传递给&lt;code&gt;lsass.exe&lt;/code&gt;进程&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;lsass.exe&lt;/code&gt;接收到凭证后，调用相应的认证包，对于本地登录，通常是&lt;code&gt;msv1_0.dll&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;msv1_0.dll&lt;/code&gt;与安全帐户管理器(Security Account Manager, SAM)服务通信，请求验证密码&lt;/p&gt;
+&lt;p&gt;SAM服务会比对提交的密码哈希与存储在SAM注册表配置单元中的哈希是否一致&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;验证成功后，LSA会创建一个包含该用户所有安全信息的访问令牌&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;LSA 将此令牌返回给&lt;code&gt;winlogon.exe&lt;/code&gt;，&lt;code&gt;winlogon.exe&lt;/code&gt;再使用该令牌来启动用户的初始进程（&lt;code&gt;userinit.exe&lt;/code&gt;），进而创建桌面环境（&lt;code&gt;explorer.exe&lt;/code&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;lsa的protection机制&#34;&gt;LSA的Protection机制
+&lt;/h3&gt;&lt;p&gt;由于&lt;code&gt;lsass.exe&lt;/code&gt;内存的敏感性，微软在Windows8.1/Server2012R2及之后版本中引入了LSA Protection机制，其技术名称为&lt;strong&gt;受保护的进程之光 (Protected Process Light, PPL)&lt;/strong&gt;&lt;del&gt;什么鬼名字&lt;/del&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;通过在注册表中设置一个特定的键值：&lt;code&gt;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa&lt;/code&gt;下的&lt;code&gt;RunAsPPL&lt;/code&gt;，让&lt;code&gt;lsass.exe&lt;/code&gt;进程可以在启动时被标记为一个受保护的进程&lt;/p&gt;
+&lt;p&gt;Windows 内核的内存管理器会阻止任何非受保护的进程（即使是拥有管理员权限的进程）打开&lt;code&gt;lsass.exe&lt;/code&gt; 的句柄并请求读取其内存或注入代码&lt;/p&gt;
+&lt;p&gt;只有拥有微软特定签名的、同样是受保护的进程（如杀毒软件）才能对其进行访问&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;此保护机制&lt;strong&gt;仅对活动的操作系统有效&lt;/strong&gt;，对于通过物理采集或虚拟机快照获得的离线内存镜像进行分析时LSA Protection无效，仍然可以使用Volatility等工具解析&lt;code&gt;lsass.exe&lt;/code&gt;的内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;授权机制&#34;&gt;授权机制
+&lt;/h2&gt;&lt;p&gt;在Windows安全机制中，&lt;strong&gt;ACL（Access Control List，访问控制列表）&lt;/strong&gt; 和 &lt;strong&gt;ACE（Access Control Entry，访问控制条目）&lt;/strong&gt; 是实现授权控制的基础结构，用于定义和限制安全主体对系统对象的访问权限&lt;/p&gt;
+&lt;h3 id=&#34;访问控制列表--acl&#34;&gt;访问控制列表 —— ACL
+&lt;/h3&gt;&lt;p&gt;ACL 是附加在受保护对象（如文件、进程、注册表键、线程等）上的权限集合，用于控制哪些用户或组能够对该对象执行哪些操作&lt;/p&gt;
+&lt;p&gt;ACL 分为两种类型：&lt;/p&gt;
+&lt;h4 id=&#34;dacl&#34;&gt;DACL
+&lt;/h4&gt;&lt;p&gt;全称Discretionary ACL，自由访问控制列表&lt;/p&gt;
+&lt;p&gt;用于指定允许或拒绝某个主体访问对象的权限，是授权控制的核心部分&lt;/p&gt;
+&lt;h4 id=&#34;sacl&#34;&gt;SACL
+&lt;/h4&gt;&lt;p&gt;全称System ACL，系统访问控制列表&lt;/p&gt;
+&lt;p&gt;用于指定系统是否应审计某个主体对对象的访问（例如记录成功或失败的访问尝试），用于安全审计&lt;/p&gt;
+&lt;h3 id=&#34;访问控制条目--ace&#34;&gt;访问控制条目 —— ACE
+&lt;/h3&gt;&lt;p&gt;ACL 由一个或多个 ACE 组成，每条 ACE 定义一个安全主体对对象的某种访问规则。ACE 是描述“谁能做什么”的最小授权单元。&lt;/p&gt;
+&lt;h4 id=&#34;主要组成字段&#34;&gt;主要组成字段
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SID（Security Identifier）&lt;/td&gt;
+          &lt;td&gt;指定该条权限适用的安全主体（用户或用户组）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Type（类型）&lt;/td&gt;
+          &lt;td&gt;标识是“允许访问”还是“拒绝访问”&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Access Mask（访问掩码）&lt;/td&gt;
+          &lt;td&gt;描述具体的权限（如读取、写入、执行、删除等）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Flags（标志）&lt;/td&gt;
+          &lt;td&gt;控制是否可继承、是否用于审计等附加属性&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;常见类型&#34;&gt;常见类型
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;ACE 类型&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ACCESS_ALLOWED_ACE_TYPE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;允许某个 SID 执行指定操作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ACCESS_DENIED_ACE_TYPE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;拒绝某个 SID 执行指定操作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;SYSTEM_AUDIT_ACE_TYPE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;审计某个 SID 的访问行为（记录日志）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;ace-匹配与权限判断流程&#34;&gt;ACE 匹配与权限判断流程
+&lt;/h3&gt;&lt;p&gt;当一个用户（或进程）尝试访问某个对象时，系统会进行如下判断流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;获取该用户的访问令牌（包含 SID 和所属组列表）&lt;/li&gt;
+&lt;li&gt;读取目标对象的 DACL，依序遍历其中的 ACE&lt;/li&gt;
+&lt;li&gt;将访问令牌中的 SID 与每条 ACE 的 SID 进行比对&lt;/li&gt;
+&lt;li&gt;遇到匹配的 Deny 类型 ACE → 立即拒绝访问&lt;/li&gt;
+&lt;li&gt;遇到匹配的 Allow 类型 ACE → 记录允许的操作权限&lt;/li&gt;
+&lt;li&gt;继续匹配，直到所有 ACE 遍历完成或提前拒绝&lt;/li&gt;
+&lt;li&gt;如果请求的权限未被任何 ACE 显式允许 → 拒绝访问&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：ACE 在 DACL 中的顺序非常重要，Deny ACE 一般优先于 Allow ACE&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;继承机制与显式权限&#34;&gt;继承机制与显式权限
+&lt;/h3&gt;&lt;p&gt;ACE 还可以具有继承性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;显式ACE&lt;/strong&gt;：直接定义在对象上的权限&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;继承ACE&lt;/strong&gt;：从上层容器（如文件夹）继承而来，可自动应用到子对象&lt;/li&gt;
+&lt;li&gt;继承标志包括：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;OBJECT_INHERIT_ACE&lt;/code&gt;：继承给子对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CONTAINER_INHERIT_ACE&lt;/code&gt;：继承给子容器&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;INHERIT_ONLY_ACE&lt;/code&gt;：仅供继承使用，不适用于当前对象；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NO_PROPAGATE_INHERIT_ACE&lt;/code&gt;：仅继承一级，不再向下传递&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些继承规则支持管理员一次性配置整个目录或注册表项的权限，提升安全管理效率&lt;/p&gt;
+&lt;h3 id=&#34;权限掩码常见值&#34;&gt;权限掩码常见值
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;权限&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;READ&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;读取对象数据（如文件内容、注册表值）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;WRITE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;修改对象数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;EXECUTE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;执行对象&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;DELETE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;删除对象&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;READ_CONTROL&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;读取对象的安全描述符（但不包含 DACL）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;WRITE_DAC&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;修改对象的 DACL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;WRITE_OWNER&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;修改对象的所有者&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;FULL_CONTROL&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;拥有全部权限（等价于管理员完全控制）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;对象安全描述符&#34;&gt;对象安全描述符
+&lt;/h3&gt;&lt;p&gt;对象的安全信息不仅包括ACL，还包括以下结构，一起被称为安全描述符：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;所有者&lt;/td&gt;
+          &lt;td&gt;对象的拥有者，默认有修改权限&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;主组&lt;/td&gt;
+          &lt;td&gt;通常在POSIX/UNIX环境兼容性使用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DACL&lt;/td&gt;
+          &lt;td&gt;授权控制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SACL&lt;/td&gt;
+          &lt;td&gt;审计控制&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;通过&lt;code&gt;GetSecurityInfo&lt;/code&gt;、&lt;code&gt;SetSecurityInfo&lt;/code&gt;等 API，可以查询或修改对象的安全描述符&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

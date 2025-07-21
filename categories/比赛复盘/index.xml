@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 10 Jul 2025 14:21:55 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 21 Jul 2025 13:15:36 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>中科实数杯2023取证总结</title>
         <link>https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Wed, 09 Jul 2025 21:17:30 +0800</pubDate>
@@ -505,8 +505,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;de.schildbach.wallet、com.bitcoin.mwallet、 piuk.blockchain.android、im.token.app、com.paxful.wallet、pro.huobi
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么&#34;&gt;35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;de.schildbach.wallet、com.bitcoin.mwallet、 piuk.blockchain.android、im.token.app、com.paxful.wallet、pro.huobi
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么&#34;&gt;35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?
 &lt;/h2&gt;&lt;p&gt;在下面路径中找到并导出日志文件：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Bitcoin Wallet(de.schildbach.wallet).bak/apps/de.schildbach.wallet/f/log/wallet.log
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709200125980.png&#34;
@@ -648,23 +648,45 @@
 &lt;/h2&gt;&lt;p&gt;在38题中得到的database数据库里进行查询：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;count&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;users&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; (&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;2023&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;substr&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;IDCARD&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;)) &lt;span style=&#34;color:#c678dd&#34;&gt;between&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;18&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;30&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; (&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;20231231&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;substr&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;IDCARD&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;)) &lt;span style=&#34;color:#c678dd&#34;&gt;between&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;180000&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;300000&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;得到结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250710130337805.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250712112610915.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;image-20250710130337805&#34;
+		alt=&#34;image-20250712112610915&#34;
 	
 	
 &gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1717
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1572
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;41受害人小浩的手机号码是多少&#34;&gt;41.受害人小浩的手机号码是多少
 &lt;/h2&gt;&lt;p&gt;在上面的数据库中没有找到叫小浩的人，微信和短信也没有小浩的联系方式&lt;/p&gt;
 &lt;p&gt;结果是之前找到的11月.txt是受害者名单，怎么发现的呢？&lt;/p&gt;
-&lt;p&gt;在检材1的20231212.E01/分区6/Users/rd/Documents下有一个新建文本文档.txt，有80+MB&lt;/p&gt;
+&lt;p&gt;案件 -&amp;gt; 快速分析 -&amp;gt; 耗时任务 -&amp;gt; 特征分析：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250712105749212.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250712105749212&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;分析任务完成后，在文件 -&amp;gt; 检材 -&amp;gt; 加密文件中找到TrueCrypt容器&lt;/p&gt;
+&lt;p&gt;在检材1的20231212.E01/分区6/Users/rd/Documents下有一个新建文本文档.txt是加密容器，有88MB：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250712105717926.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250712105717926&#34;
+	
+	
+&gt;&lt;/p&gt;
 &lt;p&gt;之前备忘录发现的内容Vcpswd:edgewallet，在检材一edge密码中找到对应内容：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250709205612210.png&#34;
 	

