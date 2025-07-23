@@ -7,7 +7,832 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Mon, 21 Jul 2025 13:15:36 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 23 Jul 2025 19:32:49 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>快速上手docker</title>
+        <link>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/</link>
+        <pubDate>Wed, 23 Jul 2025 19:24:02 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/</guid>
+        <description>&lt;p&gt;&lt;span style=&#34;color:aqua;font-size:20px&#34;&gt;本教程针对的是linux环境下的docker&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;docker简介&#34;&gt;Docker简介
+&lt;/h1&gt;&lt;h2 id=&#34;什么是docker&#34;&gt;什么是Docker
+&lt;/h2&gt;&lt;p&gt;Docker是一个开源的容器化平台，旨在简化应用程序的开发、交付和运行&lt;/p&gt;
+&lt;p&gt;它允许开发者将应用程序及其所有依赖项打包到一个轻量级的、可移植的容器中，从而确保在不同环境中都能一致地运行&lt;/p&gt;
+&lt;p&gt;容器之间是隔离的，像一个个小型的沙箱&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一句话&lt;/strong&gt;：Docker就像一个轻量级虚拟机，可以在不同的环境中快速部署运行同样的应用程序&lt;/p&gt;
+&lt;h2 id=&#34;docker的主要概念&#34;&gt;Docker的主要概念
+&lt;/h2&gt;&lt;h3 id=&#34;容器container&#34;&gt;容器（Container）
+&lt;/h3&gt;&lt;p&gt;容器是Docker的核心，&lt;strong&gt;它就像是一个隔离的小程序环境，打包了应用运行所需的一切&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;与传统虚拟机相比，容器不需要包含整个操作系统，只共享宿主机内核，因此占用资源小、启动速度快&lt;/p&gt;
+&lt;p&gt;无论在本地、测试环境，还是部署到服务器，运行结果都一致&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;每个容器互相隔离，修改不会影响宿主机或其他容器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;比如，运行一个Python应用的容器，就像在一个只包含Python的迷你Linux系统里运行它&lt;/p&gt;
+&lt;h3 id=&#34;镜像image&#34;&gt;镜像（Image）
+&lt;/h3&gt;&lt;p&gt;镜像是构建容器的模板或快照，可以理解为包含了&lt;strong&gt;系统环境+应用程序代码+配置&lt;/strong&gt;的“包”&lt;/p&gt;
+&lt;p&gt;镜像一经创建就不变，部署更可靠&lt;/p&gt;
+&lt;p&gt;比如我们下载&lt;code&gt;nginx&lt;/code&gt;这个镜像，然后就能启动一个&lt;code&gt;nginx&lt;/code&gt;容器，&lt;strong&gt;就像虚拟机的快照和启动运行&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;即使我们更改了容器，镜像也不会改变，我们也可以把改动的容器制作为新的镜像，类似拍摄快照&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个镜像可以启动成多个容器，就像一个类能被实例化成多个对象&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dockerfile&#34;&gt;Dockerfile
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;它是用来构建镜像的配置脚本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;里面写入了构建命令，如基于哪个镜像、复制哪些文件、安装哪些软件等&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;docker build&lt;/code&gt;命令可以将&lt;code&gt;Dockerfile&lt;/code&gt;构建成镜像，然后启动对应的容器&lt;/p&gt;
+&lt;h3 id=&#34;仓库registry&#34;&gt;仓库（Registry）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;存储和分发镜像的平台&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;比如DockerHub，就是Docker官方提供的镜像仓库平台（类似GitHub），有很多官方镜像可以免费下载&lt;/p&gt;
+&lt;h1 id=&#34;systemctl命令使用&#34;&gt;systemctl命令使用
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;systemctl&lt;/code&gt;是现代Linux发行版中核心的系统和服务管理器&lt;/p&gt;
+&lt;p&gt;它负责启动、停止、检查和管理系统上的各种后台服务（也称为守护进程）&lt;/p&gt;
+&lt;p&gt;在使用任何Docker命令之前，必须确保Docker的后台服务正在运行&lt;/p&gt;
+&lt;p&gt;接下来我们将以Docker服务为例结合介绍它的各种命令&lt;/p&gt;
+&lt;h2 id=&#34;服务的生命周期管理&#34;&gt;服务的生命周期管理
+&lt;/h2&gt;&lt;p&gt;这是 &lt;code&gt;systemctl&lt;/code&gt;最核心的功能，用于控制一个服务的运行、停止和重启等&lt;/p&gt;
+&lt;h3 id=&#34;启动服务&#34;&gt;启动服务
+&lt;/h3&gt;&lt;p&gt;当一个服务处于停止状态时，使用&lt;code&gt;start&lt;/code&gt;命令来启动它&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl start 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl start docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令会启动Docker服务，Docker守护进程会在后台开始运行，准备接收和处理Docker相关的命令&lt;/p&gt;
+&lt;p&gt;通常执行此类操作需要管理员权限&lt;/p&gt;
+&lt;h3 id=&#34;停止服务&#34;&gt;停止服务
+&lt;/h3&gt;&lt;p&gt;停止一个正在运行的服务&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl stop 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl stop docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令会向Docker服务发送停止信号，使其安全地终止&lt;/p&gt;
+&lt;p&gt;对于Docker来说，这意味着Docker守护进程会关闭，所有通过该守护进程运行的容器也会停止&lt;/p&gt;
+&lt;h3 id=&#34;重启服务&#34;&gt;重启服务
+&lt;/h3&gt;&lt;p&gt;这是一个便捷的组合命令，相当于先停止服务再立即启动它&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这在修改了服务的配置文件后，需要让新配置生效时非常有用&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl restart 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl restart docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果修改了Docker的配置文件（例如 &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;），执行此命令会重启 Docker 服务，使其加载并应用新的配置&lt;/p&gt;
+&lt;h3 id=&#34;重新加载服务配置&#34;&gt;重新加载服务配置
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在不中断服务的情况下，重新加载其配置文件&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl reload 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl reload docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个命令比&lt;code&gt;restart&lt;/code&gt;更为温和，它会请求服务重新读取其配置文件，而不会终止正在运行的主进程&lt;/p&gt;
+&lt;p&gt;但是，并非所有服务都支持&lt;code&gt;reload&lt;/code&gt;操作，如果服务不支持此操作，&lt;code&gt;systemctl&lt;/code&gt;可能会转而执行&lt;code&gt;restart&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Docker服务通常建议使用&lt;code&gt;restart&lt;/code&gt;而不是&lt;code&gt;reload&lt;/code&gt;来应用配置更改&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;服务的状态与信息查看&#34;&gt;服务的状态与信息查看
+&lt;/h2&gt;&lt;h3 id=&#34;查看服务详细状态&#34;&gt;查看服务详细状态
+&lt;/h3&gt;&lt;p&gt;获取一个服务的全面信息，包括它是否正在运行、最近的日志、进程ID (PID) 等&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl status 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl status docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是排查服务问题的首选&lt;/p&gt;
+&lt;p&gt;它会清晰地显示服务的&lt;code&gt;active&lt;/code&gt;状态，如 &lt;code&gt;active (running)&lt;/code&gt; 或 &lt;code&gt;inactive (dead)&lt;/code&gt;），并附带最近几条相关的日志记录&lt;/p&gt;
+&lt;h3 id=&#34;检查服务是否正在运行&#34;&gt;检查服务是否正在运行
+&lt;/h3&gt;&lt;p&gt;快速检查一个服务当前是否处于活动状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl is-active 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl is-active docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令的返回值非常简洁：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果服务正在运行，它会输出&lt;code&gt;active&lt;/code&gt;并返回状态码 0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果服务未运行，它会输出&lt;code&gt;inactive&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这在编写自动化脚本时很有用，可以根据返回值来判断是否需要执行某些操作&lt;/p&gt;
+&lt;h2 id=&#34;服务的开机自启动管理&#34;&gt;服务的开机自启动管理
+&lt;/h2&gt;&lt;h3 id=&#34;设置开机自启动&#34;&gt;设置开机自启动
+&lt;/h3&gt;&lt;p&gt;将一个服务设置为在系统启动时自动运行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl &lt;span style=&#34;color:#e5c07b&#34;&gt;enable&lt;/span&gt; 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl &lt;span style=&#34;color:#e5c07b&#34;&gt;enable&lt;/span&gt; docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行此命令后，&lt;code&gt;systemd&lt;/code&gt;会创建必要的符号链接，确保下次系统启动时，Docker服务会自动启动&lt;/p&gt;
+&lt;p&gt;这是一个一次性的设置，之后无需再手动启动&lt;/p&gt;
+&lt;h3 id=&#34;禁止开机自启动&#34;&gt;禁止开机自启动
+&lt;/h3&gt;&lt;p&gt;取消一个服务的开机自启动设置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl disable 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl disable docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令会移除&lt;code&gt;enable&lt;/code&gt;命令创建的符号链接，下次系统重启后，Docker服务将不会自动运行&lt;/p&gt;
+&lt;p&gt;这并不会影响当前正在运行的服务状态&lt;/p&gt;
+&lt;h3 id=&#34;检查服务是否开机自启动&#34;&gt;检查服务是否开机自启动
+&lt;/h3&gt;&lt;p&gt;查看一个服务当前是否被设置为开机自启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl is-enabled 服务名称
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl is-enabled docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令会返回 &lt;code&gt;enabled&lt;/code&gt; (已设置) 或 &lt;code&gt;disabled&lt;/code&gt; (未设置)&lt;/p&gt;
+&lt;h1 id=&#34;docker更改源&#34;&gt;Docker更改源
+&lt;/h1&gt;&lt;p&gt;不知道为什么国内忽然无法访问官方的镜像仓库了，为了加快Docker镜像的下载速度，我们通常需要将 Docker的默认源&lt;code&gt;registry.docker.io&lt;/code&gt;更换为国内的镜像加速源&lt;/p&gt;
+&lt;h2 id=&#34;检查安装状态&#34;&gt;检查安装状态
+&lt;/h2&gt;&lt;p&gt;首先要确认你的系统已正确安装了Docker，可以执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;返回的是docker版本，确认无误后继续&lt;/p&gt;
+&lt;h2 id=&#34;编辑配置文件&#34;&gt;编辑配置文件
+&lt;/h2&gt;&lt;p&gt;Docker 的镜像源配置文件通常位于&lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;，如果文件不存在，可以手动创建&lt;/p&gt;
+&lt;p&gt;使用任意文本编辑器打开，例如使用vim（不知道怎么使用vim的可以看一眼：&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;vim使用教程
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vim /etc/docker/daemon.json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后将内容修改为以下格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;registry-mirrors&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    	&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;https://&amp;lt;加速地址1&amp;gt;&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;https://&amp;lt;加速地址2&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当然你还能添加更多加速地址，但是注意最后一个加速地址后面就不能有逗号了&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;b站up:大海资源&lt;/strong&gt;整理的当前可用的国内镜像源：https://www.dhzy.fun/archives/6852.html&lt;/p&gt;
+&lt;h2 id=&#34;重启服务-1&#34;&gt;重启服务
+&lt;/h2&gt;&lt;p&gt;修改完配置后，需要重启 Docker 服务以使配置生效：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl restart docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;验证是否生效&#34;&gt;验证是否生效
+&lt;/h2&gt;&lt;p&gt;可以执行如下命令查看当前镜像加速器配置是否生效：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker info | grep -A &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Registry Mirrors&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从输出中查找包含&lt;code&gt;Registry Mirrors&lt;/code&gt;的那一行，并显示它后面10行&lt;/p&gt;
+&lt;p&gt;如果是下面这样的输出，说明配置成功了：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722202433203.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250722202433203&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;p&gt;修改配置文件时要确保JSON格式正确，例如逗号不能多不能少&lt;/p&gt;
+&lt;p&gt;有些加速源如阿里云需要登录账号并绑定使用，获取专属地址&lt;/p&gt;
+&lt;p&gt;如果使用的是非systemd系统，要使用service命令重启Docker&lt;/p&gt;
+&lt;h1 id=&#34;docker使用&#34;&gt;Docker使用
+&lt;/h1&gt;&lt;h2 id=&#34;镜像管理&#34;&gt;镜像管理
+&lt;/h2&gt;&lt;h3 id=&#34;查找镜像&#34;&gt;查找镜像
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker search &amp;lt;镜像名称&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;docker search&lt;/code&gt;使用的是DockerHub的HTTP API，没有镜像源概念，无法走国内加速&lt;/p&gt;
+&lt;p&gt;如果无法访问，必须使用代理，或者通过别的方式访问官网：https://hub.docker.com/&lt;/p&gt;
+&lt;h3 id=&#34;拉取镜像&#34;&gt;拉取镜像
+&lt;/h3&gt;&lt;p&gt;从仓库中下载一个镜像到你的本地机器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker pull &amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;镜像名称&lt;/strong&gt;：想要下载的软件，例如&lt;code&gt;nginx&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt; ：通常用来表示软件的版本，例如&lt;code&gt;latest&lt;/code&gt;表示最新版，&lt;code&gt;1.21&lt;/code&gt;表示特定版本&lt;/p&gt;
+&lt;p&gt;​           如果省略标签，Docker 会默认使用&lt;code&gt;latest&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker pull nginx:latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令会从镜像源下载最新版本的Nginx镜像&lt;/p&gt;
+&lt;h3 id=&#34;查看本地镜像&#34;&gt;查看本地镜像
+&lt;/h3&gt;&lt;p&gt;列出所有已经下载到本地计算机上的镜像&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker images
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722204915819.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250722204915819&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;REPOSITORY&lt;/strong&gt;：仓库名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;TAG&lt;/strong&gt; ：标签&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;IMAGE ID&lt;/strong&gt;：镜像的唯一ID&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CREATED&lt;/strong&gt;：创建时间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SIZE&lt;/strong&gt;：镜像大小&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;保存更改的镜像&#34;&gt;保存更改的镜像
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker commit &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;容器ID&amp;gt;/&amp;lt;容器名称&amp;gt; &amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-m &amp;quot;提交信息&amp;quot;&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;为此次操作添加描述性说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;类似于 Git 的 commit message，便于记录修改内容&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-a &amp;quot;作者&amp;quot;&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;指定作者信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;方便追踪是谁进行了修改或创建操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker commit -m&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;update&amp;#34;&lt;/span&gt; -a&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;kakahuote&amp;#34;&lt;/span&gt; 8950b5741b30 mynginx:mod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个命令会执行以下操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;把名为&lt;code&gt;8950b5741b30&lt;/code&gt;的容器保存为一个新的镜像&lt;/li&gt;
+&lt;li&gt;添加说明信息&lt;code&gt;&amp;quot;update&amp;quot;&lt;/code&gt;，记录镜像的更改内容&lt;/li&gt;
+&lt;li&gt;指定作者为&lt;code&gt;kakahuote&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;创建一个名为&lt;code&gt;mynginx&lt;/code&gt;、标签为&lt;code&gt;mod&lt;/code&gt;的新镜像&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723135839721.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723135839721&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;删除镜像&#34;&gt;删除镜像
+&lt;/h3&gt;&lt;p&gt;当某个镜像不再需要时，可以将其从本地删除以释放磁盘空间&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker rmi &amp;lt;镜像ID&amp;gt;/&amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只能删除没有被任何容器（包括已停止的容器）使用的镜像&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果需要删除一个被使用的镜像，必须先删除所有依赖它的容器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;也可以使用&lt;code&gt;-f&lt;/code&gt;选项强制删除，但这可能会导致依赖该镜像的容器无法再次启动或者其他未知错误，慎用！&lt;/p&gt;
+&lt;p&gt;如果不指定标签，默认删除的会是&lt;code&gt;latest&lt;/code&gt;标签，如果没有&lt;code&gt;latest&lt;/code&gt;则会报错，所以&lt;strong&gt;建议指定标签删除&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker rmi mynginx:mod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723140153114.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723140153114&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;容器管理&#34;&gt;容器管理
+&lt;/h2&gt;&lt;h3 id=&#34;创建并运行容器&#34;&gt;创建并运行容器
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;--name&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;为容器指定一个自定义的名称&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果省略，Docker会自动生成一个随机名称&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-d&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;以分离模式在后台运行容器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这对于运行像Web服务器这样的长期服务很重要，否则容器会占据你的终端进行输出和报错等行为&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-P&lt;/code&gt;(大写)&lt;/strong&gt;：将容器内部所有暴露的端口&lt;strong&gt;随机映射&lt;/strong&gt;到主机的空闲端口上&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-p&lt;/code&gt;(小写)&lt;/strong&gt;：&lt;strong&gt;指定端口映射&lt;/strong&gt;，其常用格式如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;主机端口:容器端口&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;docker run -d -p 8080:80 nginx&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+此命令将主机的`8080`端口映射到容器的`80`端口
+
+- **`&amp;lt;IP地址&amp;gt;:主机端口:容器端口`**
+
+指定只将主机的特定IP地址的端口映射到容器
+
+```shell
+docker run -d -p 127.0.0.1:8081:80 nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此命令将主机&lt;code&gt;127.0.0.1&lt;/code&gt;这个回环地址的&lt;code&gt;8081&lt;/code&gt;端口映射到容器的&lt;code&gt;80&lt;/code&gt;端口&lt;/p&gt;
+&lt;p&gt;这样，只有在本机才能通过&lt;code&gt;127.0.0.1:8081&lt;/code&gt;访问，来自外部网络的访问会被拒绝&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;主机端口:&amp;lt;容器端口/协议&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;默认情况下，端口映射使用的是TCP协议，也可以显式指定UDP协议&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Pdocker run -d -p 8082:53/udp nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令将主机的&lt;code&gt;8082&lt;/code&gt;端口映射到nginx容器的&lt;code&gt;53&lt;/code&gt;UDP端口&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;--rm&lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;使容器在停止后被自动删除&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;适合用于测试和运行一次性任务&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run --name my-nginx -d -p 8080:80 nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个命令会执行以下操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;检查本地是否存在&lt;code&gt;nginx:latest&lt;/code&gt;镜像，如果不存在，会自动拉取&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基于此镜像创建一个名为 &lt;code&gt;my-nginx&lt;/code&gt; 的容器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt;：让这个容器在后台持续运行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-p 8080:80&lt;/code&gt;：将你本机的8080端口的流量转发到容器内部的80端口（Nginx默认在80端口监听）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;命令执行后，在浏览器中访问&lt;code&gt;http://你的主机IP地址:8080&lt;/code&gt;或&lt;code&gt;http://localhost:8080&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果看到Nginx的欢迎页面，则表示容器已成功运行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250722140517678&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;查看正在运行的容器&#34;&gt;查看正在运行的容器
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker ps
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723112548978.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723112548978&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CONTAINER ID&lt;/strong&gt;：容器的唯一标识，&lt;strong&gt;可以用全部或者前几位操作该容器，只要能唯一识别&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;IMAGE&lt;/strong&gt;：使用的镜像&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;COMMAND&lt;/strong&gt;：容器启动时运行的命令&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CREATED&lt;/strong&gt;：容器创建的时间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;STATUS&lt;/strong&gt;：容器状态，这里的字段值是&lt;code&gt;UP&lt;/code&gt;，说明是一个正在运行的容器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PORTS&lt;/strong&gt;：端口映射&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;0.0.0.0:8080-&amp;gt;80/tcp&lt;/code&gt;：主机所有IPv4地址的8080端口被映射到容器内部的80端口（TCP 协议）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;:::8080-&amp;gt;80/tcp&lt;/code&gt;：主机所有IPv6地址的8080端口也映射到容器内部的80端口（TCP 协议）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NAMES&lt;/strong&gt;：自定义的容器的名字&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;查看所有容器&#34;&gt;查看所有容器
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker ps -a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;-a&lt;/code&gt;是&lt;code&gt;all&lt;/code&gt;的缩写，代表列出所有容器，包括那些已经停止运行的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个命令可以找到旧的、已停止的容器，以便重新启动它们或将它们删除以进行清理&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113333889.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723113333889&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里的&lt;code&gt;STATUS&lt;/code&gt;字段是&lt;code&gt;exited&lt;/code&gt;，说明这是一个退出的、不在运行的容器&lt;/p&gt;
+&lt;h3 id=&#34;停止容器&#34;&gt;停止容器
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker stop &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明: 此命令会向容器内的主进程发送一个 &lt;code&gt;SIGTERM&lt;/code&gt; 信号，请求其正常关闭。应用程序会接收到这个信号并执行关闭前的清理工作。&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker stop nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113823707.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723113823707&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;停止后，容器不在运行列表之中&lt;/p&gt;
+&lt;h3 id=&#34;启动一个已停止的容器&#34;&gt;启动一个已停止的容器
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker start &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个命令会使一个处于Exited状态的容器恢复到Up状态，容器会保留其上次停止时的所有配置和数据。&lt;/p&gt;
+&lt;p&gt;示例: docker start my-nginx&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113946571.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723113946571&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;删除容器&#34;&gt;删除容器
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker rm &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;默认情况下，不能删除一个正在运行的容器，必须先使用&lt;code&gt;docker stop&lt;/code&gt;将其停止&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果确定要删除一个运行中的容器，可以添加&lt;code&gt;-f&lt;/code&gt;参数来强制执行&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;容器信息查看与交互&#34;&gt;容器信息查看与交互
+&lt;/h2&gt;&lt;h3 id=&#34;查看端口映射&#34;&gt;查看端口映射
+&lt;/h3&gt;&lt;p&gt;此命令可以快捷地查看一个容器的端口映射情况&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker port &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker port nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723173634143.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723173634143&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;容器内部的80端口被映射到了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0.0.0.0:8080&lt;/code&gt;：表示主机的所有&lt;strong&gt;IPv4&lt;/strong&gt;地址上的8080端口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[::]:8080&lt;/code&gt;：表示主机的所有&lt;strong&gt;IPv6&lt;/strong&gt;地址上的8080端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也就是说，我们可以使用以下任意方式访问这个容器内的Nginx服务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;http://localhost:8080&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://127.0.0.1:8080&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://&amp;lt;主机的IP&amp;gt;:8080&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果启用了IPv6网络，还可以使用IPv6地址访问，如&lt;code&gt;http://[::1]:8080&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;查看容器日志&#34;&gt;查看容器日志
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-f&lt;/code&gt;&lt;/strong&gt;：持续跟踪并输出日志&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;--tail&lt;/code&gt;&lt;/strong&gt;：仅显示日志的最后N行&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250723115500967.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723115500967&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;在容器内部执行命令&#34;&gt;在容器内部执行命令
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;可以在一个运行中的容器内执行命令，而不进入其交互式Shell&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt; &amp;lt;命令&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; nginx ls -l
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115709524.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723115709524&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;此命令会在名为&lt;code&gt;nginx&lt;/code&gt;的容器内部执行&lt;code&gt;ls -l&lt;/code&gt; 命令，并返回结果，而我们的终端仍然停留在主机上&lt;/p&gt;
+&lt;h3 id=&#34;进入容器的交互式终端&#34;&gt;进入容器的交互式终端
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;对于更复杂的调试，我们就需要一个完整的Shell环境来在容器内部进行操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; -it &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt; /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;-it&lt;/code&gt;是两个选项的组合：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-i&lt;/code&gt;保持标准输入开启，&lt;code&gt;-t&lt;/code&gt;分配一个伪终端，这共同创建了一个可以交互的命令行界面&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;/bin/bash&lt;/code&gt;是一个常见的Shell程序，有些镜像可能提供的是&lt;code&gt;/bin/sh&lt;/code&gt;，比较不好用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;也可以在创建容器的时候就进入其交互式终端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -it &amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt; /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; -it nginx /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723121248325.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723121248325&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;执行后命令提示符改变，表示已经进入了容器，可以像在普通Linux环境中一样运行命令&lt;/p&gt;
+&lt;p&gt;如果想要退出，可以使用&lt;code&gt;Ctrl+D&lt;/code&gt;，或者输入&lt;code&gt;exit&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;容器网络与连接&#34;&gt;容器网络与连接
+&lt;/h2&gt;&lt;p&gt;除了端口映射，Docker还提供了强大的网络功能，允许容器之间方便、安全地互相通信&lt;/p&gt;
+&lt;p&gt;在开始之前，我们需要知道docker的网络类型有哪些&lt;/p&gt;
+&lt;h3 id=&#34;网络类型&#34;&gt;网络类型
+&lt;/h3&gt;&lt;h4 id=&#34;bridge&#34;&gt;bridge
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;bridge&lt;/code&gt;是Docker默认的网络类型，适用于单个主机上容器之间的通信&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个容器会获得一个虚拟网卡和私有IP地址&lt;/li&gt;
+&lt;li&gt;容器之间可以通过容器名通信&lt;/li&gt;
+&lt;li&gt;可以使用&lt;code&gt;-p&lt;/code&gt;参数将容器端口映射到宿主机端口，实现外部访问&lt;/li&gt;
+&lt;li&gt;默认的&lt;code&gt;bridge&lt;/code&gt;网络名称就是&lt;code&gt;bridge&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于需要隔离、但仍允许访问外部网络的容器场景&lt;/p&gt;
+&lt;h4 id=&#34;host&#34;&gt;host
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;容器与宿主机共享网络栈，不做任何隔离&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器没有自己的IP地址&lt;/li&gt;
+&lt;li&gt;使用宿主机的IP和端口&lt;/li&gt;
+&lt;li&gt;性能更好，网络开销低&lt;/li&gt;
+&lt;li&gt;容器中暴露的端口不需要通过&lt;code&gt;-p&lt;/code&gt;映射&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于对网络性能要求极高的场景&lt;/p&gt;
+&lt;h4 id=&#34;none&#34;&gt;none
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;容器没有网络连接&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;没有分配IP地址&lt;/li&gt;
+&lt;li&gt;不能访问外部网络，也不能与其他容器通信&lt;/li&gt;
+&lt;li&gt;除非手动配置网络，否则容器完全断网&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于需要自定义网络配置或完全隔离网络的场景&lt;/p&gt;
+&lt;h4 id=&#34;overlay&#34;&gt;overlay
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;用于Docker Swarm集群环境中，支持多主机容器通信&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可跨宿主机连接容器&lt;/li&gt;
+&lt;li&gt;基于VXLAN技术封装&lt;/li&gt;
+&lt;li&gt;需要Swarm模式支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于需要将多个 Docker 主机上的容器连接成一个网络的分布式应用&lt;/p&gt;
+&lt;h4 id=&#34;macvlan&#34;&gt;macvlan
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;让容器像宿主机一样，直接拥有局域网内的独立IP&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器像物理主机一样直接连接到物理网络&lt;/li&gt;
+&lt;li&gt;容器具有独立MAC和IP地址&lt;/li&gt;
+&lt;li&gt;可被局域网中的其他设备直接访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于容器需要与局域网设备完全对等通信的场景，例如作为局域网服务节点&lt;/p&gt;
+&lt;h4 id=&#34;container&#34;&gt;container
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;多个容器共享同一个网络命名空间，通过&lt;code&gt;--network container:&amp;lt;容器名&amp;gt;&lt;/code&gt;实现&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用另一个容器的网络配置&lt;/li&gt;
+&lt;li&gt;容器之间通过进程间通信&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于容器需要共享网络堆栈（如日志、监控）的情况&lt;/p&gt;
+&lt;h3 id=&#34;查看当前已创建的网络&#34;&gt;查看当前已创建的网络
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185658135.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723185658135&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NETWORK ID&lt;/strong&gt;：网络的唯一标识&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NAME&lt;/strong&gt;：网络名称&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;DRIVER&lt;/strong&gt;：网络类型&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SCOPE&lt;/strong&gt;：作用范围，通常是local(本地网络)或swarm(集群网络)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;创建自定义网络&#34;&gt;创建自定义网络
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network create -d bridge &amp;lt;网络名称&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;-d&lt;/code&gt;&lt;/strong&gt;：指定网络类型。对于单机环境，&lt;code&gt;bridge&lt;/code&gt;是最常用的类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network create -d bridge my-net
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185004431.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723185004431&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;删除已定义的网络&#34;&gt;删除已定义的网络
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network rm &amp;lt;网络名&amp;gt;/&amp;lt;网络ID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network rm my-net
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185631213.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723185631213&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;连接容器到网络&#34;&gt;连接容器到网络
+&lt;/h3&gt;&lt;p&gt;我们可以在启动容器时使用&lt;code&gt;--network&lt;/code&gt;选项将其连接到指定的网络&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name &amp;lt;容器名称&amp;gt; --network &amp;lt;网络名称&amp;gt; &amp;lt;镜像名称&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;p&gt;我们创建两个容器并都连接到&lt;code&gt;my-net&lt;/code&gt;网络&lt;/p&gt;
+&lt;p&gt;首先创建第一个容器 &lt;code&gt;nginx-1&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name nginx-1 --network my-net nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后创建第二个容器 &lt;code&gt;nginx-2&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name nginx-2 --network my-net nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190434746.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723190434746&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;容器间通信&#34;&gt;容器间通信
+&lt;/h3&gt;&lt;p&gt;当多个容器连接到同一个自定义网络时，它们可以通过&lt;strong&gt;容器名称&lt;/strong&gt;作为主机名直接互相访问&lt;/p&gt;
+&lt;p&gt;我们可以进入一个容器来测试与另一个容器的连通性&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;p&gt;进入&lt;code&gt;nginx-1&lt;/code&gt;容器，然后&lt;code&gt;ping nginx-2&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; -it nginx-1 /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;进入容器后，由于nginx镜像默认没有 &lt;code&gt;ping&lt;/code&gt; 工具，我们需要先安装它：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get update &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get install -y iputils-ping
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装完成后，执行&lt;code&gt;ping&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ping nginx-2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190515708.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723190515708&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到，&lt;code&gt;nginx-1&lt;/code&gt; 能够成功解析 &lt;code&gt;nginx-2&lt;/code&gt; 的名称并与之通信，这证明了容器间的互联已经建立shell&lt;/p&gt;
+&lt;h3 id=&#34;查看容器网络信息&#34;&gt;查看容器网络信息
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker inspect &amp;lt;对象ID或名称&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;docker inspect&lt;/code&gt;是一个非常强大的命令，用于查看&lt;strong&gt;容器、镜像、网络、卷等对象的详细底层信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它会返回一段JSON 格式的数据，包含几乎所有属性，比如网络配置、挂载卷、环境变量、启动命令等&lt;/p&gt;
+&lt;p&gt;这里我们查看容器的信息，并过滤网络部分：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker inspect &amp;lt;容器ID&amp;gt;/&amp;lt;名称&amp;gt; | grep -A &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;NetworkSettings&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723191822266.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250723191822266&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dns配置&#34;&gt;DNS配置
+&lt;/h3&gt;&lt;h4 id=&#34;全局配置&#34;&gt;全局配置
+&lt;/h4&gt;&lt;p&gt;我们可以为所有Docker容器配置默认的DNS服务器&lt;/p&gt;
+&lt;p&gt;这需要在Docker的守护进程配置文件&lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;中添加&lt;code&gt;dns&lt;/code&gt;字段&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-JSON&#34; data-lang=&#34;JSON&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;dns&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;114.114.114.114&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;8.8.8.8&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;修改此文件后，必须重启 Docker 服务才能生效&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;容器独立配置&#34;&gt;容器独立配置
+&lt;/h4&gt;&lt;p&gt;如果只想为某个特定的容器指定 DNS，可以在&lt;code&gt;docker run&lt;/code&gt;时使用相关选项&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;DNS选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;镜像名称&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用DNS选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--dns=&amp;lt;IP地址&amp;gt;&lt;/code&gt;&lt;/strong&gt;：指定容器使用的DNS服务器地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--dns-search=&amp;lt;域名&amp;gt;&lt;/code&gt;&lt;/strong&gt;：指定DNS搜索域。当查找一个短主机名时，会自动追加这个域名进行尝试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--hostname=&amp;lt;主机名&amp;gt;&lt;/code&gt;&lt;/strong&gt;：设置容器内部的主机名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -it --rm --hostname&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;myhost --dns&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;114.114.114.114  nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个命令会启动一个临时的&lt;code&gt;nginx&lt;/code&gt;容器，其主机名为&lt;code&gt;myhost&lt;/code&gt;，使用&lt;code&gt;114.114.114.114&lt;/code&gt;作为DNS服务器&lt;/p&gt;
+&lt;h4 id=&#34;常用dns服务器&#34;&gt;常用DNS服务器
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;阿里云公共 DNS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;223.5.5.5
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;223.6.6.6
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;114 DNS&lt;/strong&gt;（国内知名公共 DNS）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;114.114.114.114
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;114.114.115.115
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Google 公共 DNS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8.8.8.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8.8.4.4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Cloudflare DNS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.1.1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;OpenDNS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;208.67.222.222
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;208.67.220.220
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;docker实例安装&#34;&gt;Docker实例安装
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;各种镜像安装过程都大差不差，这里以nginx为例，其他的也能作参考&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;查看可用版本&#34;&gt;查看可用版本
+&lt;/h2&gt;&lt;h3 id=&#34;访问nginx镜像库地址&#34;&gt;访问Nginx镜像库地址
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://hub.docker.com/_/nginx?tab=tags&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://hub.docker.com/_/nginx?tab=tags
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722123536066.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250722123536066&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以copy的字段是拉取当前版本镜像的命令，下面是一些介绍：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Digest&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;每个平台构建出的镜像唯一标识符&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;OS/ARCH&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;表示支持的操作系统和架构&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Vulnerabilities&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;镜像中检测出的安全漏洞数量&lt;br /&gt;分等级：严重（红）、高（橙）、中（黄）、低（灰）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Compressed size&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;镜像下载时的压缩大小&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;使用命令查看&#34;&gt;使用命令查看
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker search nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;我们一般都使用最新的，也就是latest&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;拉取最新镜像&#34;&gt;拉取最新镜像
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker pull nginx:latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140134826.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250722140134826&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;查看是否拉取成功&#34;&gt;查看是否拉取成功
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker images
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140111160.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250722140111160&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;运行容器&#34;&gt;运行容器
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run --name nginx -p 8080:80 -d nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;name nginx&lt;/strong&gt;：容器名称改成nginx&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-p 8080:80&lt;/strong&gt;： 端口进行映射，将本地8080端口映射到容器内部的80端口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-d&lt;/strong&gt;：设置容器在在后台一直运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;测试访问&#34;&gt;测试访问
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://localhost:8080
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250722140517678&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>volatility使用说明</title>
         <link>https://blog.928330.xyz/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
         <pubDate>Mon, 21 Jul 2025 12:51:01 +0800</pubDate>
@@ -2210,7 +3035,7 @@
         <description>&lt;p&gt;写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行&lt;/p&gt;
 &lt;p&gt;现在只是大概的了解，如果后续有时间，会把每一个板块都单独拿出来学习的&lt;/p&gt;
 &lt;p&gt;嗯，如果有时间的话&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;windows相关知识总结（下）：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;windows相关知识总结（下）&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/
     

@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="如此伟大的发明，真是太好用啦">
+<title>快速上手docker</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="快速上手docker">
+<meta property='og:description' content="如此伟大的发明，真是太好用啦">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='docker' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-07-23T19:24:02&#43;08:00'/><meta property='article:modified_time' content='2025-07-23T19:32:49&#43;08:00'/>
+<meta name="twitter:title" content="快速上手docker">
+<meta name="twitter:description" content="如此伟大的发明，真是太好用啦">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#docker简介">Docker简介</a>
+      <ol>
+        <li><a href="#什么是docker">什么是Docker</a></li>
+        <li><a href="#docker的主要概念">Docker的主要概念</a>
+          <ol>
+            <li><a href="#容器container">容器（Container）</a></li>
+            <li><a href="#镜像image">镜像（Image）</a></li>
+            <li><a href="#dockerfile">Dockerfile</a></li>
+            <li><a href="#仓库registry">仓库（Registry）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#systemctl命令使用">systemctl命令使用</a>
+      <ol>
+        <li><a href="#服务的生命周期管理">服务的生命周期管理</a>
+          <ol>
+            <li><a href="#启动服务">启动服务</a></li>
+            <li><a href="#停止服务">停止服务</a></li>
+            <li><a href="#重启服务">重启服务</a></li>
+            <li><a href="#重新加载服务配置">重新加载服务配置</a></li>
+          </ol>
+        </li>
+        <li><a href="#服务的状态与信息查看">服务的状态与信息查看</a>
+          <ol>
+            <li><a href="#查看服务详细状态">查看服务详细状态</a></li>
+            <li><a href="#检查服务是否正在运行">检查服务是否正在运行</a></li>
+          </ol>
+        </li>
+        <li><a href="#服务的开机自启动管理">服务的开机自启动管理</a>
+          <ol>
+            <li><a href="#设置开机自启动">设置开机自启动</a></li>
+            <li><a href="#禁止开机自启动">禁止开机自启动</a></li>
+            <li><a href="#检查服务是否开机自启动">检查服务是否开机自启动</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#docker更改源">Docker更改源</a>
+      <ol>
+        <li><a href="#检查安装状态">检查安装状态</a></li>
+        <li><a href="#编辑配置文件">编辑配置文件</a></li>
+        <li><a href="#重启服务-1">重启服务</a></li>
+        <li><a href="#验证是否生效">验证是否生效</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+      </ol>
+    </li>
+    <li><a href="#docker使用">Docker使用</a>
+      <ol>
+        <li><a href="#镜像管理">镜像管理</a>
+          <ol>
+            <li><a href="#查找镜像">查找镜像</a></li>
+            <li><a href="#拉取镜像">拉取镜像</a></li>
+            <li><a href="#查看本地镜像">查看本地镜像</a></li>
+            <li><a href="#保存更改的镜像">保存更改的镜像</a></li>
+            <li><a href="#删除镜像">删除镜像</a></li>
+          </ol>
+        </li>
+        <li><a href="#容器管理">容器管理</a>
+          <ol>
+            <li><a href="#创建并运行容器">创建并运行容器</a></li>
+            <li><a href="#查看正在运行的容器">查看正在运行的容器</a></li>
+            <li><a href="#查看所有容器">查看所有容器</a></li>
+            <li><a href="#停止容器">停止容器</a></li>
+            <li><a href="#启动一个已停止的容器">启动一个已停止的容器</a></li>
+            <li><a href="#删除容器">删除容器</a></li>
+          </ol>
+        </li>
+        <li><a href="#容器信息查看与交互">容器信息查看与交互</a>
+          <ol>
+            <li><a href="#查看端口映射">查看端口映射</a></li>
+            <li><a href="#查看容器日志">查看容器日志</a></li>
+            <li><a href="#在容器内部执行命令">在容器内部执行命令</a></li>
+            <li><a href="#进入容器的交互式终端">进入容器的交互式终端</a></li>
+          </ol>
+        </li>
+        <li><a href="#容器网络与连接">容器网络与连接</a>
+          <ol>
+            <li><a href="#网络类型">网络类型</a>
+              <ol>
+                <li><a href="#bridge">bridge</a></li>
+                <li><a href="#host">host</a></li>
+                <li><a href="#none">none</a></li>
+                <li><a href="#overlay">overlay</a></li>
+                <li><a href="#macvlan">macvlan</a></li>
+                <li><a href="#container">container</a></li>
+              </ol>
+            </li>
+            <li><a href="#查看当前已创建的网络">查看当前已创建的网络</a></li>
+            <li><a href="#创建自定义网络">创建自定义网络</a></li>
+            <li><a href="#删除已定义的网络">删除已定义的网络</a></li>
+            <li><a href="#连接容器到网络">连接容器到网络</a></li>
+            <li><a href="#容器间通信">容器间通信</a></li>
+            <li><a href="#查看容器网络信息">查看容器网络信息</a></li>
+            <li><a href="#dns配置">DNS配置</a>
+              <ol>
+                <li><a href="#全局配置">全局配置</a></li>
+                <li><a href="#容器独立配置">容器独立配置</a></li>
+                <li><a href="#常用dns服务器">常用DNS服务器</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#docker实例安装">Docker实例安装</a>
+      <ol>
+        <li><a href="#查看可用版本">查看可用版本</a>
+          <ol>
+            <li><a href="#访问nginx镜像库地址">访问Nginx镜像库地址</a></li>
+            <li><a href="#使用命令查看">使用命令查看</a></li>
+          </ol>
+        </li>
+        <li><a href="#拉取最新镜像">拉取最新镜像</a></li>
+        <li><a href="#查看是否拉取成功">查看是否拉取成功</a></li>
+        <li><a href="#运行容器">运行容器</a>
+          <ol>
+            <li><a href="#测试访问">测试访问</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" >
+                工具使用
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/">快速上手docker</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            如此伟大的发明，真是太好用啦
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-07-23</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-07-23
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><span style="color:aqua;font-size:20px">本教程针对的是linux环境下的docker</span></p>
+<h1 id="docker简介">Docker简介
+</h1><h2 id="什么是docker">什么是Docker
+</h2><p>Docker是一个开源的容器化平台，旨在简化应用程序的开发、交付和运行</p>
+<p>它允许开发者将应用程序及其所有依赖项打包到一个轻量级的、可移植的容器中，从而确保在不同环境中都能一致地运行</p>
+<p>容器之间是隔离的，像一个个小型的沙箱</p>
+<p><strong>一句话</strong>：Docker就像一个轻量级虚拟机，可以在不同的环境中快速部署运行同样的应用程序</p>
+<h2 id="docker的主要概念">Docker的主要概念
+</h2><h3 id="容器container">容器（Container）
+</h3><p>容器是Docker的核心，<strong>它就像是一个隔离的小程序环境，打包了应用运行所需的一切</strong></p>
+<p>与传统虚拟机相比，容器不需要包含整个操作系统，只共享宿主机内核，因此占用资源小、启动速度快</p>
+<p>无论在本地、测试环境，还是部署到服务器，运行结果都一致</p>
+<p><strong>每个容器互相隔离，修改不会影响宿主机或其他容器</strong></p>
+<p>比如，运行一个Python应用的容器，就像在一个只包含Python的迷你Linux系统里运行它</p>
+<h3 id="镜像image">镜像（Image）
+</h3><p>镜像是构建容器的模板或快照，可以理解为包含了<strong>系统环境+应用程序代码+配置</strong>的“包”</p>
+<p>镜像一经创建就不变，部署更可靠</p>
+<p>比如我们下载<code>nginx</code>这个镜像，然后就能启动一个<code>nginx</code>容器，<strong>就像虚拟机的快照和启动运行</strong></p>
+<p><strong>即使我们更改了容器，镜像也不会改变，我们也可以把改动的容器制作为新的镜像，类似拍摄快照</strong></p>
+<p><strong>一个镜像可以启动成多个容器，就像一个类能被实例化成多个对象</strong></p>
+<h3 id="dockerfile">Dockerfile
+</h3><p><strong>它是用来构建镜像的配置脚本</strong></p>
+<p>里面写入了构建命令，如基于哪个镜像、复制哪些文件、安装哪些软件等</p>
+<p>使用<code>docker build</code>命令可以将<code>Dockerfile</code>构建成镜像，然后启动对应的容器</p>
+<h3 id="仓库registry">仓库（Registry）
+</h3><p><strong>存储和分发镜像的平台</strong></p>
+<p>比如DockerHub，就是Docker官方提供的镜像仓库平台（类似GitHub），有很多官方镜像可以免费下载</p>
+<h1 id="systemctl命令使用">systemctl命令使用
+</h1><p><code>systemctl</code>是现代Linux发行版中核心的系统和服务管理器</p>
+<p>它负责启动、停止、检查和管理系统上的各种后台服务（也称为守护进程）</p>
+<p>在使用任何Docker命令之前，必须确保Docker的后台服务正在运行</p>
+<p>接下来我们将以Docker服务为例结合介绍它的各种命令</p>
+<h2 id="服务的生命周期管理">服务的生命周期管理
+</h2><p>这是 <code>systemctl</code>最核心的功能，用于控制一个服务的运行、停止和重启等</p>
+<h3 id="启动服务">启动服务
+</h3><p>当一个服务处于停止状态时，使用<code>start</code>命令来启动它</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl start 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl start docker
+</span></span></code></pre></div><p>此命令会启动Docker服务，Docker守护进程会在后台开始运行，准备接收和处理Docker相关的命令</p>
+<p>通常执行此类操作需要管理员权限</p>
+<h3 id="停止服务">停止服务
+</h3><p>停止一个正在运行的服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl stop 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl stop docker
+</span></span></code></pre></div><p>此命令会向Docker服务发送停止信号，使其安全地终止</p>
+<p>对于Docker来说，这意味着Docker守护进程会关闭，所有通过该守护进程运行的容器也会停止</p>
+<h3 id="重启服务">重启服务
+</h3><p>这是一个便捷的组合命令，相当于先停止服务再立即启动它</p>
+<p><strong>这在修改了服务的配置文件后，需要让新配置生效时非常有用</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart docker
+</span></span></code></pre></div><p>如果修改了Docker的配置文件（例如 <code>/etc/docker/daemon.json</code>），执行此命令会重启 Docker 服务，使其加载并应用新的配置</p>
+<h3 id="重新加载服务配置">重新加载服务配置
+</h3><p><strong>在不中断服务的情况下，重新加载其配置文件</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl reload 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl reload docker
+</span></span></code></pre></div><p>这个命令比<code>restart</code>更为温和，它会请求服务重新读取其配置文件，而不会终止正在运行的主进程</p>
+<p>但是，并非所有服务都支持<code>reload</code>操作，如果服务不支持此操作，<code>systemctl</code>可能会转而执行<code>restart</code></p>
+<p><strong>Docker服务通常建议使用<code>restart</code>而不是<code>reload</code>来应用配置更改</strong></p>
+<h2 id="服务的状态与信息查看">服务的状态与信息查看
+</h2><h3 id="查看服务详细状态">查看服务详细状态
+</h3><p>获取一个服务的全面信息，包括它是否正在运行、最近的日志、进程ID (PID) 等</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl status 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl status docker
+</span></span></code></pre></div><p>这是排查服务问题的首选</p>
+<p>它会清晰地显示服务的<code>active</code>状态，如 <code>active (running)</code> 或 <code>inactive (dead)</code>），并附带最近几条相关的日志记录</p>
+<h3 id="检查服务是否正在运行">检查服务是否正在运行
+</h3><p>快速检查一个服务当前是否处于活动状态</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl is-active 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl is-active docker
+</span></span></code></pre></div><p>此命令的返回值非常简洁：</p>
+<p><strong>如果服务正在运行，它会输出<code>active</code>并返回状态码 0</strong></p>
+<p><strong>如果服务未运行，它会输出<code>inactive</code></strong></p>
+<p>这在编写自动化脚本时很有用，可以根据返回值来判断是否需要执行某些操作</p>
+<h2 id="服务的开机自启动管理">服务的开机自启动管理
+</h2><h3 id="设置开机自启动">设置开机自启动
+</h3><p>将一个服务设置为在系统启动时自动运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl <span style="color:#e5c07b">enable</span> 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl <span style="color:#e5c07b">enable</span> docker
+</span></span></code></pre></div><p>执行此命令后，<code>systemd</code>会创建必要的符号链接，确保下次系统启动时，Docker服务会自动启动</p>
+<p>这是一个一次性的设置，之后无需再手动启动</p>
+<h3 id="禁止开机自启动">禁止开机自启动
+</h3><p>取消一个服务的开机自启动设置</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl disable 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl disable docker
+</span></span></code></pre></div><p>此命令会移除<code>enable</code>命令创建的符号链接，下次系统重启后，Docker服务将不会自动运行</p>
+<p>这并不会影响当前正在运行的服务状态</p>
+<h3 id="检查服务是否开机自启动">检查服务是否开机自启动
+</h3><p>查看一个服务当前是否被设置为开机自启动</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl is-enabled 服务名称
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl is-enabled docker
+</span></span></code></pre></div><p>此命令会返回 <code>enabled</code> (已设置) 或 <code>disabled</code> (未设置)</p>
+<h1 id="docker更改源">Docker更改源
+</h1><p>不知道为什么国内忽然无法访问官方的镜像仓库了，为了加快Docker镜像的下载速度，我们通常需要将 Docker的默认源<code>registry.docker.io</code>更换为国内的镜像加速源</p>
+<h2 id="检查安装状态">检查安装状态
+</h2><p>首先要确认你的系统已正确安装了Docker，可以执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker --version
+</span></span></code></pre></div><p>返回的是docker版本，确认无误后继续</p>
+<h2 id="编辑配置文件">编辑配置文件
+</h2><p>Docker 的镜像源配置文件通常位于<code>/etc/docker/daemon.json</code>，如果文件不存在，可以手动创建</p>
+<p>使用任意文本编辑器打开，例如使用vim（不知道怎么使用vim的可以看一眼：<a class="link" href="http://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"  target="_blank" rel="noopener"
+    >vim使用教程
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vim /etc/docker/daemon.json
+</span></span></code></pre></div><p>然后将内容修改为以下格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">&#34;registry-mirrors&#34;</span>: [
+</span></span><span style="display:flex;"><span>    	<span style="color:#98c379">&#34;https://&lt;加速地址1&gt;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#98c379">&#34;https://&lt;加速地址2&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>	]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>当然你还能添加更多加速地址，但是注意最后一个加速地址后面就不能有逗号了</p>
+<p><strong>b站up:大海资源</strong>整理的当前可用的国内镜像源：https://www.dhzy.fun/archives/6852.html</p>
+<h2 id="重启服务-1">重启服务
+</h2><p>修改完配置后，需要重启 Docker 服务以使配置生效：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart docker
+</span></span></code></pre></div><h2 id="验证是否生效">验证是否生效
+</h2><p>可以执行如下命令查看当前镜像加速器配置是否生效：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker info | grep -A <span style="color:#d19a66">10</span> <span style="color:#98c379">&#34;Registry Mirrors&#34;</span>
+</span></span></code></pre></div><p>从输出中查找包含<code>Registry Mirrors</code>的那一行，并显示它后面10行</p>
+<p>如果是下面这样的输出，说明配置成功了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250722202433203.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250722202433203"
+	
+	
+></p>
+<h2 id="注意事项">注意事项
+</h2><p>修改配置文件时要确保JSON格式正确，例如逗号不能多不能少</p>
+<p>有些加速源如阿里云需要登录账号并绑定使用，获取专属地址</p>
+<p>如果使用的是非systemd系统，要使用service命令重启Docker</p>
+<h1 id="docker使用">Docker使用
+</h1><h2 id="镜像管理">镜像管理
+</h2><h3 id="查找镜像">查找镜像
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker search &lt;镜像名称&gt;
+</span></span></code></pre></div><p><code>docker search</code>使用的是DockerHub的HTTP API，没有镜像源概念，无法走国内加速</p>
+<p>如果无法访问，必须使用代理，或者通过别的方式访问官网：https://hub.docker.com/</p>
+<h3 id="拉取镜像">拉取镜像
+</h3><p>从仓库中下载一个镜像到你的本地机器</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull &lt;镜像名称&gt;:&lt;标签&gt;
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>镜像名称</strong>：想要下载的软件，例如<code>nginx</code></p>
+</li>
+<li>
+<p><strong>标签</strong> ：通常用来表示软件的版本，例如<code>latest</code>表示最新版，<code>1.21</code>表示特定版本</p>
+<p>​           如果省略标签，Docker 会默认使用<code>latest</code></p>
+</li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull nginx:latest
+</span></span></code></pre></div><p>此命令会从镜像源下载最新版本的Nginx镜像</p>
+<h3 id="查看本地镜像">查看本地镜像
+</h3><p>列出所有已经下载到本地计算机上的镜像</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker images
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250722204915819.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250722204915819"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>REPOSITORY</strong>：仓库名</p>
+</li>
+<li>
+<p><strong>TAG</strong> ：标签</p>
+</li>
+<li>
+<p><strong>IMAGE ID</strong>：镜像的唯一ID</p>
+</li>
+<li>
+<p><strong>CREATED</strong>：创建时间</p>
+</li>
+<li>
+<p><strong>SIZE</strong>：镜像大小</p>
+</li>
+</ul>
+<h3 id="保存更改的镜像">保存更改的镜像
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker commit <span style="color:#56b6c2">[</span>选项<span style="color:#56b6c2">]</span> &lt;容器ID&gt;/&lt;容器名称&gt; &lt;镜像名称&gt;:&lt;标签&gt;
+</span></span></code></pre></div><p>常用选项：</p>
+<ul>
+<li>
+<p><strong><code>-m &quot;提交信息&quot;</code></strong>：<strong>为此次操作添加描述性说明</strong></p>
+<p>类似于 Git 的 commit message，便于记录修改内容</p>
+</li>
+<li>
+<p><strong><code>-a &quot;作者&quot;</code></strong>：<strong>指定作者信息</strong></p>
+<p>方便追踪是谁进行了修改或创建操作</p>
+</li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker commit -m<span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;update&#34;</span> -a<span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;kakahuote&#34;</span> 8950b5741b30 mynginx:mod
+</span></span></code></pre></div><p>这个命令会执行以下操作：</p>
+<ol>
+<li>把名为<code>8950b5741b30</code>的容器保存为一个新的镜像</li>
+<li>添加说明信息<code>&quot;update&quot;</code>，记录镜像的更改内容</li>
+<li>指定作者为<code>kakahuote</code></li>
+<li>创建一个名为<code>mynginx</code>、标签为<code>mod</code>的新镜像</li>
+</ol>
+<p><img src="http://picture.928330.xyz/typora/image-20250723135839721.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723135839721"
+	
+	
+></p>
+<h3 id="删除镜像">删除镜像
+</h3><p>当某个镜像不再需要时，可以将其从本地删除以释放磁盘空间</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker rmi &lt;镜像ID&gt;/&lt;镜像名称&gt;:&lt;标签&gt;
+</span></span></code></pre></div><p>只能删除没有被任何容器（包括已停止的容器）使用的镜像</p>
+<p><strong>如果需要删除一个被使用的镜像，必须先删除所有依赖它的容器</strong></p>
+<p>也可以使用<code>-f</code>选项强制删除，但这可能会导致依赖该镜像的容器无法再次启动或者其他未知错误，慎用！</p>
+<p>如果不指定标签，默认删除的会是<code>latest</code>标签，如果没有<code>latest</code>则会报错，所以<strong>建议指定标签删除</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker rmi mynginx:mod
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723140153114.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723140153114"
+	
+	
+></p>
+<h2 id="容器管理">容器管理
+</h2><h3 id="创建并运行容器">创建并运行容器
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run <span style="color:#56b6c2">[</span>选项<span style="color:#56b6c2">]</span> &lt;镜像名称&gt;:&lt;标签&gt;
+</span></span></code></pre></div><p>常用选项：</p>
+<ul>
+<li>
+<p><strong><code>--name</code></strong>：<strong>为容器指定一个自定义的名称</strong></p>
+<p>如果省略，Docker会自动生成一个随机名称</p>
+</li>
+<li>
+<p><strong><code>-d</code></strong>：<strong>以分离模式在后台运行容器</strong></p>
+<p>这对于运行像Web服务器这样的长期服务很重要，否则容器会占据你的终端进行输出和报错等行为</p>
+</li>
+<li>
+<p><strong><code>-P</code>(大写)</strong>：将容器内部所有暴露的端口<strong>随机映射</strong>到主机的空闲端口上</p>
+</li>
+<li>
+<p><strong><code>-p</code>(小写)</strong>：<strong>指定端口映射</strong>，其常用格式如下：</p>
+<ul>
+<li>
+<p><strong><code>主机端口:容器端口</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"></code></pre></div></li>
+</ul>
+<p>docker run -d -p 8080:80 nginx</p>
+<pre tabindex="0"><code>
+此命令将主机的`8080`端口映射到容器的`80`端口
+
+- **`&lt;IP地址&gt;:主机端口:容器端口`**
+
+指定只将主机的特定IP地址的端口映射到容器
+
+```shell
+docker run -d -p 127.0.0.1:8081:80 nginx
+</code></pre><p>此命令将主机<code>127.0.0.1</code>这个回环地址的<code>8081</code>端口映射到容器的<code>80</code>端口</p>
+<p>这样，只有在本机才能通过<code>127.0.0.1:8081</code>访问，来自外部网络的访问会被拒绝</p>
+<ul>
+<li>
+<p><strong><code>主机端口:&lt;容器端口/协议</code></strong></p>
+<p>默认情况下，端口映射使用的是TCP协议，也可以显式指定UDP协议</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Pdocker run -d -p 8082:53/udp nginx
+</span></span></code></pre></div><p>此命令将主机的<code>8082</code>端口映射到nginx容器的<code>53</code>UDP端口</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>--rm</code></strong>：<strong>使容器在停止后被自动删除</strong></p>
+<p>适合用于测试和运行一次性任务</p>
+</li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --name my-nginx -d -p 8080:80 nginx
+</span></span></code></pre></div><p>这个命令会执行以下操作：</p>
+<ol>
+<li>
+<p>检查本地是否存在<code>nginx:latest</code>镜像，如果不存在，会自动拉取</p>
+</li>
+<li>
+<p>基于此镜像创建一个名为 <code>my-nginx</code> 的容器</p>
+</li>
+<li>
+<p><code>-d</code>：让这个容器在后台持续运行</p>
+</li>
+<li>
+<p><code>-p 8080:80</code>：将你本机的8080端口的流量转发到容器内部的80端口（Nginx默认在80端口监听）</p>
+</li>
+</ol>
+<p>命令执行后，在浏览器中访问<code>http://你的主机IP地址:8080</code>或<code>http://localhost:8080</code></p>
+<p>如果看到Nginx的欢迎页面，则表示容器已成功运行</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250722140517678.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250722140517678"
+	
+	
+></p>
+<h3 id="查看正在运行的容器">查看正在运行的容器
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker ps
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723112548978.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723112548978"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>CONTAINER ID</strong>：容器的唯一标识，<strong>可以用全部或者前几位操作该容器，只要能唯一识别</strong></p>
+</li>
+<li>
+<p><strong>IMAGE</strong>：使用的镜像</p>
+</li>
+<li>
+<p><strong>COMMAND</strong>：容器启动时运行的命令</p>
+</li>
+<li>
+<p><strong>CREATED</strong>：容器创建的时间</p>
+</li>
+<li>
+<p><strong>STATUS</strong>：容器状态，这里的字段值是<code>UP</code>，说明是一个正在运行的容器</p>
+</li>
+<li>
+<p><strong>PORTS</strong>：端口映射</p>
+<ul>
+<li>
+<p><code>0.0.0.0:8080-&gt;80/tcp</code>：主机所有IPv4地址的8080端口被映射到容器内部的80端口（TCP 协议）</p>
+</li>
+<li>
+<p><code>:::8080-&gt;80/tcp</code>：主机所有IPv6地址的8080端口也映射到容器内部的80端口（TCP 协议）</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>NAMES</strong>：自定义的容器的名字</p>
+</li>
+</ul>
+<h3 id="查看所有容器">查看所有容器
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker ps -a
+</span></span></code></pre></div><p><strong><code>-a</code>是<code>all</code>的缩写，代表列出所有容器，包括那些已经停止运行的</strong></p>
+<p>这个命令可以找到旧的、已停止的容器，以便重新启动它们或将它们删除以进行清理</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250723113333889.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723113333889"
+	
+	
+></p>
+<p>这里的<code>STATUS</code>字段是<code>exited</code>，说明这是一个退出的、不在运行的容器</p>
+<h3 id="停止容器">停止容器
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker stop &lt;容器名称&gt;/&lt;容器ID&gt;
+</span></span></code></pre></div><p>说明: 此命令会向容器内的主进程发送一个 <code>SIGTERM</code> 信号，请求其正常关闭。应用程序会接收到这个信号并执行关闭前的清理工作。</p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker stop nginx
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723113823707.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723113823707"
+	
+	
+></p>
+<p>停止后，容器不在运行列表之中</p>
+<h3 id="启动一个已停止的容器">启动一个已停止的容器
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker start &lt;容器名称&gt;/&lt;容器ID&gt;
+</span></span></code></pre></div><p>这个命令会使一个处于Exited状态的容器恢复到Up状态，容器会保留其上次停止时的所有配置和数据。</p>
+<p>示例: docker start my-nginx</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250723113946571.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723113946571"
+	
+	
+></p>
+<h3 id="删除容器">删除容器
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker rm &lt;容器名称&gt;/&lt;容器ID&gt;
+</span></span></code></pre></div><p><strong>默认情况下，不能删除一个正在运行的容器，必须先使用<code>docker stop</code>将其停止</strong></p>
+<p><strong>如果确定要删除一个运行中的容器，可以添加<code>-f</code>参数来强制执行</strong></p>
+<h2 id="容器信息查看与交互">容器信息查看与交互
+</h2><h3 id="查看端口映射">查看端口映射
+</h3><p>此命令可以快捷地查看一个容器的端口映射情况</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker port &lt;容器名称&gt;/&lt;容器ID&gt;
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker port nginx
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723173634143.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723173634143"
+	
+	
+></p>
+<p>容器内部的80端口被映射到了：</p>
+<ul>
+<li><code>0.0.0.0:8080</code>：表示主机的所有<strong>IPv4</strong>地址上的8080端口</li>
+<li><code>[::]:8080</code>：表示主机的所有<strong>IPv6</strong>地址上的8080端口</li>
+</ul>
+<p>也就是说，我们可以使用以下任意方式访问这个容器内的Nginx服务：</p>
+<ul>
+<li><code>http://localhost:8080</code></li>
+<li><code>http://127.0.0.1:8080</code></li>
+<li><code>http://&lt;主机的IP&gt;:8080</code></li>
+<li>如果启用了IPv6网络，还可以使用IPv6地址访问，如<code>http://[::1]:8080</code></li>
+</ul>
+<h3 id="查看容器日志">查看容器日志
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker logs <span style="color:#56b6c2">[</span>选项<span style="color:#56b6c2">]</span> &lt;容器名称&gt;/&lt;容器ID&gt;
+</span></span></code></pre></div><p>常用选项：</p>
+<ul>
+<li>
+<p><strong><code>-f</code></strong>：持续跟踪并输出日志</p>
+</li>
+<li>
+<p><strong><code>--tail</code></strong>：仅显示日志的最后N行</p>
+</li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker logs nginx
+</span></span></code></pre></div><p><img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250723115500967.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723115500967"
+	
+	
+></p>
+<h3 id="在容器内部执行命令">在容器内部执行命令
+</h3><p><strong>可以在一个运行中的容器内执行命令，而不进入其交互式Shell</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker <span style="color:#e5c07b">exec</span> &lt;容器名称&gt;/&lt;容器ID&gt; &lt;命令&gt;
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker <span style="color:#e5c07b">exec</span> nginx ls -l
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723115709524.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723115709524"
+	
+	
+></p>
+<p>此命令会在名为<code>nginx</code>的容器内部执行<code>ls -l</code> 命令，并返回结果，而我们的终端仍然停留在主机上</p>
+<h3 id="进入容器的交互式终端">进入容器的交互式终端
+</h3><p><strong>对于更复杂的调试，我们就需要一个完整的Shell环境来在容器内部进行操作</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker <span style="color:#e5c07b">exec</span> -it &lt;容器名称&gt;/&lt;容器ID&gt; /bin/bash
+</span></span></code></pre></div><p><strong><code>-it</code>是两个选项的组合：</strong></p>
+<p><strong><code>-i</code>保持标准输入开启，<code>-t</code>分配一个伪终端，这共同创建了一个可以交互的命令行界面</strong></p>
+<p><strong><code>/bin/bash</code>是一个常见的Shell程序，有些镜像可能提供的是<code>/bin/sh</code>，比较不好用</strong></p>
+<p>也可以在创建容器的时候就进入其交互式终端：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -it &lt;镜像名称&gt;:&lt;标签&gt; /bin/bash
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker <span style="color:#e5c07b">exec</span> -it nginx /bin/bash
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723121248325.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723121248325"
+	
+	
+></p>
+<p>执行后命令提示符改变，表示已经进入了容器，可以像在普通Linux环境中一样运行命令</p>
+<p>如果想要退出，可以使用<code>Ctrl+D</code>，或者输入<code>exit</code></p>
+<h2 id="容器网络与连接">容器网络与连接
+</h2><p>除了端口映射，Docker还提供了强大的网络功能，允许容器之间方便、安全地互相通信</p>
+<p>在开始之前，我们需要知道docker的网络类型有哪些</p>
+<h3 id="网络类型">网络类型
+</h3><h4 id="bridge">bridge
+</h4><p><strong><code>bridge</code>是Docker默认的网络类型，适用于单个主机上容器之间的通信</strong></p>
+<ul>
+<li>每个容器会获得一个虚拟网卡和私有IP地址</li>
+<li>容器之间可以通过容器名通信</li>
+<li>可以使用<code>-p</code>参数将容器端口映射到宿主机端口，实现外部访问</li>
+<li>默认的<code>bridge</code>网络名称就是<code>bridge</code></li>
+</ul>
+<p>适用于需要隔离、但仍允许访问外部网络的容器场景</p>
+<h4 id="host">host
+</h4><p><strong>容器与宿主机共享网络栈，不做任何隔离</strong></p>
+<ul>
+<li>容器没有自己的IP地址</li>
+<li>使用宿主机的IP和端口</li>
+<li>性能更好，网络开销低</li>
+<li>容器中暴露的端口不需要通过<code>-p</code>映射</li>
+</ul>
+<p>适用于对网络性能要求极高的场景</p>
+<h4 id="none">none
+</h4><p><strong>容器没有网络连接</strong></p>
+<ul>
+<li>没有分配IP地址</li>
+<li>不能访问外部网络，也不能与其他容器通信</li>
+<li>除非手动配置网络，否则容器完全断网</li>
+</ul>
+<p>适用于需要自定义网络配置或完全隔离网络的场景</p>
+<h4 id="overlay">overlay
+</h4><p><strong>用于Docker Swarm集群环境中，支持多主机容器通信</strong></p>
+<ul>
+<li>可跨宿主机连接容器</li>
+<li>基于VXLAN技术封装</li>
+<li>需要Swarm模式支持</li>
+</ul>
+<p>适用于需要将多个 Docker 主机上的容器连接成一个网络的分布式应用</p>
+<h4 id="macvlan">macvlan
+</h4><p><strong>让容器像宿主机一样，直接拥有局域网内的独立IP</strong></p>
+<ul>
+<li>容器像物理主机一样直接连接到物理网络</li>
+<li>容器具有独立MAC和IP地址</li>
+<li>可被局域网中的其他设备直接访问</li>
+</ul>
+<p>适用于容器需要与局域网设备完全对等通信的场景，例如作为局域网服务节点</p>
+<h4 id="container">container
+</h4><p><strong>多个容器共享同一个网络命名空间，通过<code>--network container:&lt;容器名&gt;</code>实现</strong></p>
+<ul>
+<li>使用另一个容器的网络配置</li>
+<li>容器之间通过进程间通信</li>
+</ul>
+<p>适用于容器需要共享网络堆栈（如日志、监控）的情况</p>
+<h3 id="查看当前已创建的网络">查看当前已创建的网络
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker network ls
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723185658135.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723185658135"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>NETWORK ID</strong>：网络的唯一标识</p>
+</li>
+<li>
+<p><strong>NAME</strong>：网络名称</p>
+</li>
+<li>
+<p><strong>DRIVER</strong>：网络类型</p>
+</li>
+<li>
+<p><strong>SCOPE</strong>：作用范围，通常是local(本地网络)或swarm(集群网络)</p>
+</li>
+</ul>
+<h3 id="创建自定义网络">创建自定义网络
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker network create -d bridge &lt;网络名称&gt;
+</span></span></code></pre></div><ul>
+<li><strong><code>-d</code></strong>：指定网络类型。对于单机环境，<code>bridge</code>是最常用的类型</li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker network create -d bridge my-net
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723185004431.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723185004431"
+	
+	
+></p>
+<h3 id="删除已定义的网络">删除已定义的网络
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker network rm &lt;网络名&gt;/&lt;网络ID&gt;
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker network rm my-net
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723185631213.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723185631213"
+	
+	
+></p>
+<h3 id="连接容器到网络">连接容器到网络
+</h3><p>我们可以在启动容器时使用<code>--network</code>选项将其连接到指定的网络</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d --name &lt;容器名称&gt; --network &lt;网络名称&gt; &lt;镜像名称&gt;
+</span></span></code></pre></div><p>eg：</p>
+<p>我们创建两个容器并都连接到<code>my-net</code>网络</p>
+<p>首先创建第一个容器 <code>nginx-1</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d --name nginx-1 --network my-net nginx
+</span></span></code></pre></div><p>然后创建第二个容器 <code>nginx-2</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -d --name nginx-2 --network my-net nginx
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723190434746.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723190434746"
+	
+	
+></p>
+<h3 id="容器间通信">容器间通信
+</h3><p>当多个容器连接到同一个自定义网络时，它们可以通过<strong>容器名称</strong>作为主机名直接互相访问</p>
+<p>我们可以进入一个容器来测试与另一个容器的连通性</p>
+<p>eg：</p>
+<p>进入<code>nginx-1</code>容器，然后<code>ping nginx-2</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker <span style="color:#e5c07b">exec</span> -it nginx-1 /bin/bash
+</span></span></code></pre></div><p>进入容器后，由于nginx镜像默认没有 <code>ping</code> 工具，我们需要先安装它：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apt-get update <span style="color:#56b6c2">&amp;&amp;</span> apt-get install -y iputils-ping
+</span></span></code></pre></div><p>安装完成后，执行<code>ping</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ping nginx-2
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723190515708.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723190515708"
+	
+	
+></p>
+<p>可以看到，<code>nginx-1</code> 能够成功解析 <code>nginx-2</code> 的名称并与之通信，这证明了容器间的互联已经建立shell</p>
+<h3 id="查看容器网络信息">查看容器网络信息
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker inspect &lt;对象ID或名称&gt;
+</span></span></code></pre></div><p><code>docker inspect</code>是一个非常强大的命令，用于查看<strong>容器、镜像、网络、卷等对象的详细底层信息</strong></p>
+<p>它会返回一段JSON 格式的数据，包含几乎所有属性，比如网络配置、挂载卷、环境变量、启动命令等</p>
+<p>这里我们查看容器的信息，并过滤网络部分：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker inspect &lt;容器ID&gt;/&lt;名称&gt; | grep -A <span style="color:#d19a66">10</span> <span style="color:#98c379">&#34;NetworkSettings&#34;</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250723191822266.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250723191822266"
+	
+	
+></p>
+<h3 id="dns配置">DNS配置
+</h3><h4 id="全局配置">全局配置
+</h4><p>我们可以为所有Docker容器配置默认的DNS服务器</p>
+<p>这需要在Docker的守护进程配置文件<code>/etc/docker/daemon.json</code>中添加<code>dns</code>字段</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">&#34;dns&#34;</span>: [
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#34;114.114.114.114&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#34;8.8.8.8&#34;</span>
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>修改此文件后，必须重启 Docker 服务才能生效</strong></p>
+<h4 id="容器独立配置">容器独立配置
+</h4><p>如果只想为某个特定的容器指定 DNS，可以在<code>docker run</code>时使用相关选项</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run <span style="color:#56b6c2">[</span>DNS选项<span style="color:#56b6c2">]</span> &lt;镜像名称&gt;
+</span></span></code></pre></div><p>常用DNS选项：</p>
+<ul>
+<li><strong><code>--dns=&lt;IP地址&gt;</code></strong>：指定容器使用的DNS服务器地址</li>
+<li><strong><code>--dns-search=&lt;域名&gt;</code></strong>：指定DNS搜索域。当查找一个短主机名时，会自动追加这个域名进行尝试</li>
+<li><strong><code>--hostname=&lt;主机名&gt;</code></strong>：设置容器内部的主机名</li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -it --rm --hostname<span style="color:#56b6c2">=</span>myhost --dns<span style="color:#56b6c2">=</span>114.114.114.114  nginx
+</span></span></code></pre></div><p>这个命令会启动一个临时的<code>nginx</code>容器，其主机名为<code>myhost</code>，使用<code>114.114.114.114</code>作为DNS服务器</p>
+<h4 id="常用dns服务器">常用DNS服务器
+</h4><p><strong>阿里云公共 DNS</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>223.5.5.5
+</span></span><span style="display:flex;"><span>223.6.6.6
+</span></span></code></pre></div><p><strong>114 DNS</strong>（国内知名公共 DNS）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>114.114.114.114
+</span></span><span style="display:flex;"><span>114.114.115.115
+</span></span></code></pre></div><p><strong>Google 公共 DNS</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>8.8.8.8
+</span></span><span style="display:flex;"><span>8.8.4.4
+</span></span></code></pre></div><p><strong>Cloudflare DNS</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1.1.1.1
+</span></span><span style="display:flex;"><span>1.0.0.1
+</span></span></code></pre></div><p><strong>OpenDNS</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>208.67.222.222
+</span></span><span style="display:flex;"><span>208.67.220.220
+</span></span></code></pre></div><h1 id="docker实例安装">Docker实例安装
+</h1><p><strong>各种镜像安装过程都大差不差，这里以nginx为例，其他的也能作参考</strong></p>
+<h2 id="查看可用版本">查看可用版本
+</h2><h3 id="访问nginx镜像库地址">访问Nginx镜像库地址
+</h3><p><a class="link" href="https://hub.docker.com/_/nginx?tab=tags"  target="_blank" rel="noopener"
+    >https://hub.docker.com/_/nginx?tab=tags
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250722123536066.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250722123536066"
+	
+	
+></p>
+<p>可以copy的字段是拉取当前版本镜像的命令，下面是一些介绍：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Digest</strong></td>
+          <td>每个平台构建出的镜像唯一标识符</td>
+      </tr>
+      <tr>
+          <td><strong>OS/ARCH</strong></td>
+          <td>表示支持的操作系统和架构</td>
+      </tr>
+      <tr>
+          <td><strong>Vulnerabilities</strong></td>
+          <td>镜像中检测出的安全漏洞数量<br />分等级：严重（红）、高（橙）、中（黄）、低（灰）</td>
+      </tr>
+      <tr>
+          <td><strong>Compressed size</strong></td>
+          <td>镜像下载时的压缩大小</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="使用命令查看">使用命令查看
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker search nginx
+</span></span></code></pre></div><p><strong>我们一般都使用最新的，也就是latest</strong></p>
+<h2 id="拉取最新镜像">拉取最新镜像
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull nginx:latest
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250722140134826.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250722140134826"
+	
+	
+></p>
+<h2 id="查看是否拉取成功">查看是否拉取成功
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker images
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250722140111160.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250722140111160"
+	
+	
+></p>
+<h2 id="运行容器">运行容器
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run --name nginx -p 8080:80 -d nginx
+</span></span></code></pre></div><p>参数说明：</p>
+<ul>
+<li><strong>&ndash;name nginx</strong>：容器名称改成nginx</li>
+<li><strong>-p 8080:80</strong>： 端口进行映射，将本地8080端口映射到容器内部的80端口</li>
+<li><strong>-d</strong>：设置容器在在后台一直运行</li>
+</ul>
+<h3 id="测试访问">测试访问
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>http://localhost:8080
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250722140517678.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250722140517678"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/docker/">Docker</a>
+        
+            <a href="/tags/linux/">Linux</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-07-23
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">volatility使用说明</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wireshark&amp;tshark简易指北</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>
