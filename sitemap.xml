@@ -3,21 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.928330.xyz/categories/</loc>
-    <lastmod>2025-07-23T19:32:49+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.928330.xyz/tags/docker/</loc>
-    <lastmod>2025-07-23T19:32:49+08:00</lastmod>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/tags/linux/</loc>
-    <lastmod>2025-07-23T19:32:49+08:00</lastmod>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/post/</loc>
-    <lastmod>2025-07-23T19:32:49+08:00</lastmod>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/tags/</loc>
-    <lastmod>2025-07-23T19:32:49+08:00</lastmod>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.928330.xyz/tags/web/</loc>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.928330.xyz/tags/docker/</loc>
     <lastmod>2025-07-23T19:32:49+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/</loc>
@@ -42,7 +48,7 @@
     <lastmod>2025-07-23T19:32:49+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/tags/misc/</loc>
-    <lastmod>2025-07-21T13:15:36+08:00</lastmod>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/</loc>
     <lastmod>2025-07-21T13:15:36+08:00</lastmod>
@@ -59,11 +65,8 @@
     <loc>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/</loc>
     <lastmod>2025-07-02T01:28:30+08:00</lastmod>
   </url><url>
-    <loc>https://blog.928330.xyz/tags/web/</loc>
-    <lastmod>2025-07-21T13:15:36+08:00</lastmod>
-  </url><url>
     <loc>https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/</loc>
-    <lastmod>2025-07-21T13:15:36+08:00</lastmod>
+    <lastmod>2025-07-24T22:41:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.928330.xyz/tags/vim/</loc>
     <lastmod>2025-07-21T13:15:36+08:00</lastmod>
