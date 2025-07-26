@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 26 Jul 2025 18:10:14 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 26 Jul 2025 19:17:22 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Nginx入门</title>
         <link>https://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/</link>
         <pubDate>Thu, 24 Jul 2025 22:15:30 +0800</pubDate>
@@ -418,11 +418,30 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;try_files $uri $uri/ =404&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;这是一个非常强大的指令，常用于处理单页应用（SPA）的路由，它的工作原理是：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;$uri&lt;/code&gt;：尝试将URI直接作为文件名进行查找&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$uri/&lt;/code&gt;：如果上一步失败，则尝试将URI作为一个目录名，并在该目录下查找由&lt;code&gt;index&lt;/code&gt;指令定义的文件&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;=404&lt;/code&gt;：如果前两步都失败，则返回一个404 Not Found错误&lt;/li&gt;
+&lt;p&gt;这是一个非常强大的指令，常用于处理单页应用（SPA）的路由，它的语法是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;try_files&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;file1&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;file2&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;final_action&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;file1, file2, ...&lt;/code&gt;：依次判断路径（支持变量），是否存在有效文件或目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;final_action&lt;/code&gt;：如果前面都没找到，则执行的动作，常用的有：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;=404&lt;/code&gt;：返回404错误&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@named_location&lt;/code&gt;：跳转到命名的location块&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;uri&lt;/code&gt;：重定向到指定URI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在我们看看示例里面的是什么意思：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;try_files&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$uri&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$uri/&lt;/span&gt; =&lt;span style=&#34;color:#d19a66&#34;&gt;404&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;$uri&lt;/code&gt;：尝试将URI直接作为文件名进行查找&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;$uri/&lt;/code&gt;：如果上一步失败，则尝试将URI作为一个目录名，并在该目录下查找由&lt;code&gt;index&lt;/code&gt;指令定义的文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;=404&lt;/code&gt;：如果前两步都失败，则返回一个404 Not Found错误&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -435,7 +454,97 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;p&gt;告诉客户端浏览器可以将这些静态资源缓存30天，从而减少不必要的请求，提升后续访问速度&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;配置https服务&#34;&gt;配置HTTPS服务
+&lt;h2 id=&#34;url重写与跳转&#34;&gt;URL重写与跳转
+&lt;/h2&gt;&lt;p&gt;Nginx支持在&lt;code&gt;location&lt;/code&gt;块内实现URL重写和跳转，常用于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;伪静态（SEO优化）&lt;/li&gt;
+&lt;li&gt;页面重定向&lt;/li&gt;
+&lt;li&gt;接口调整兼容&lt;/li&gt;
+&lt;li&gt;HTTPS 强制跳转等场景&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rewrite&#34;&gt;rewrite
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;rewrite&lt;/code&gt;是Nginx实现伪静态、内部跳转的主要方式&lt;/p&gt;
+&lt;p&gt;它的本质是把用户请求的路径改写成另一个内部路径，再由Nginx重新处理&lt;/p&gt;
+&lt;h4 id=&#34;基本语法&#34;&gt;基本语法
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rewrite &amp;lt;正则匹配&amp;gt; &amp;lt;重写路径&amp;gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;flag&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;正则匹配&lt;/strong&gt;：对当前请求URI进行匹配（不包含域名）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;重写路径&lt;/strong&gt;：替换匹配url的新URI，可引用正则中的子表达式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;flag 可选标志&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;重写方式&lt;/th&gt;
+          &lt;th&gt;用法&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;last&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;使用新URI，从头开始匹配&lt;code&gt;location&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;用于常规重写，不会改变浏览器地址栏&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;break&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;使用新URI，但不再重新匹配&lt;code&gt;location&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;跳出&lt;code&gt;rewrite&lt;/code&gt;，在当前&lt;code&gt;location&lt;/code&gt;内继续执行&lt;br /&gt;不会改变浏览器地址栏&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;permanent&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;返回301，永久重定向&lt;/td&gt;
+          &lt;td&gt;会改变浏览器地址栏&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;redirect&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;返回302，临时重定向&lt;/td&gt;
+          &lt;td&gt;会改变浏览器地址栏&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;伪静态处理&#34;&gt;伪静态处理
+&lt;/h4&gt;&lt;p&gt;将 &lt;code&gt;/product/123.html&lt;/code&gt; 重写为 &lt;code&gt;/product.php?id=123&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;rewrite&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;^/product/([0-9]+)\.html&lt;/span&gt;$ &lt;span style=&#34;color:#98c379&#34;&gt;/product.php?id=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$1&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;last&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;隐藏真实路径&#34;&gt;隐藏真实路径
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;/user/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;rewrite&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;^/user/([a-z]+)&lt;/span&gt;$ &lt;span style=&#34;color:#98c379&#34;&gt;/profile.php?name=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$1&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;last&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;return&#34;&gt;return
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;return&lt;/code&gt;用于向客户端返回一个特定的状态码和内容，它不会再走&lt;code&gt;rewrite&lt;/code&gt;的内部处理流程&lt;/p&gt;
+&lt;p&gt;比起&lt;code&gt;rewrite&lt;/code&gt;，它更适合用于明确的重定向、报错处理等&lt;/p&gt;
+&lt;h4 id=&#34;基本语法-1&#34;&gt;基本语法
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &amp;lt;状态码&amp;gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;文本|URL&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;状态码&lt;/strong&gt;：如301（永久重定向）、302（临时重定向）、403（禁止访问）、404（页面不存在）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文本或URL&lt;/strong&gt;：可返回跳转地址，也可直接返回文本内容（仅在状态码为200时有效）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;http强制跳转https&#34;&gt;HTTP强制跳转HTTPS
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;listen&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server_name&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example.com&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;301&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;https://&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$server_name$request_uri&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这一点我们下面会详细说明&lt;/p&gt;
+&lt;h4 id=&#34;禁止访问某个目录&#34;&gt;禁止访问某个目录
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;/private/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;403&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;简洁跳转到首页&#34;&gt;简洁跳转到首页
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;location&lt;/span&gt; = &lt;span style=&#34;color:#98c379&#34;&gt;/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;301&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;/home/index.html&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;纯文本响应&#34;&gt;纯文本响应
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;location&lt;/span&gt; = &lt;span style=&#34;color:#98c379&#34;&gt;/test&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;Hello.&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;配置https服务&#34;&gt;配置HTTPS服务
 &lt;/h2&gt;&lt;p&gt;为网站启用HTTPS可以对客户端和服务器之间的传输数据进行加密，确保数据安全&lt;/p&gt;
 &lt;p&gt;配置前，我们需要从证书颁发机构（CA）获取SSL/TLS证书文件和私钥文件&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; {
@@ -509,7 +618,7 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;return 301 https://$server_name$request_uri&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;return 301&lt;/code&gt;表示发送一个永久重定向的HTTP状态码&lt;/p&gt;
+&lt;p&gt;发送一个永久重定向的HTTP状态码&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;$server_name&lt;/code&gt;和&lt;code&gt;$request_uri&lt;/code&gt;是Nginx变量，分别代表当前请求的域名和完整的 URI（包含参数）&lt;/p&gt;
 &lt;p&gt;这能确保用户访问任何HTTP页面时都能被准确地重定向到对应的HTTPS版本&lt;/p&gt;
 &lt;/li&gt;
