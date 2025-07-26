@@ -1596,30 +1596,73 @@
         <pubDate>Thu, 24 Jul 2025 22:15:30 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/</guid>
-        <description>&lt;p&gt;&lt;span style=&#34;color:aqua;font-size:20px&#34;&gt;本教程暂时只针对Docker容器的nginx，切勿看错&lt;/span&gt;&lt;/p&gt;
-&lt;h1 id=&#34;nginxdocker使用教程&#34;&gt;Nginx（docker）使用教程
-&lt;/h1&gt;&lt;h2 id=&#34;什么是nginx&#34;&gt;什么是Nginx
-&lt;/h2&gt;&lt;p&gt;Nginx（发音为 &amp;ldquo;engine-X&amp;rdquo;）是一款开源的、高性能的HTTP和反向代理服务器&lt;/p&gt;
+        <description>&lt;h1 id=&#34;什么是nginx&#34;&gt;什么是Nginx
+&lt;/h1&gt;&lt;p&gt;Nginx（发音为 &amp;ldquo;engine-X&amp;rdquo;）是一款开源的、高性能的HTTP和反向代理服务器&lt;/p&gt;
 &lt;p&gt;它的设计哲学是提供极致的性能、稳定性、丰富的功能、简单的配置和低资源消耗，看上去就很厉害&lt;/p&gt;
-&lt;h3 id=&#34;高性能的工作进程模型&#34;&gt;高性能的工作进程模型
-&lt;/h3&gt;&lt;p&gt;Nginx采用事件驱动的异步非阻塞架构&lt;/p&gt;
+&lt;p&gt;Nginx采用事件驱动的异步非阻塞架构&lt;/p&gt;
 &lt;p&gt;与传统的Apache等服务器为每个请求创建一个新进程或线程不同，Nginx使用一个主进程和少数几个工作进程&lt;/p&gt;
 &lt;p&gt;主进程负责读取配置、管理工作进程，而真正处理网络请求的是工作进程&lt;/p&gt;
 &lt;p&gt;每个工作进程都是单线程的，异步地处理成千上万个并发连接&lt;/p&gt;
 &lt;p&gt;这种模型避免了创建和销毁进程/线程的开销以及上下文切换的成本，因此能以极低的内存占用应对高并发场景&lt;/p&gt;
-&lt;h3 id=&#34;主要用法&#34;&gt;主要用法
-&lt;/h3&gt;&lt;h4 id=&#34;web服务器&#34;&gt;Web服务器
-&lt;/h4&gt;&lt;p&gt;直接向客户端提供静态资源（如HTML、CSS、图片）的服务&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;接下来我们会介绍直接安装的Nginx，也会顺带介绍通过Docker容器启动的Nginx&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;二者在活动状态控制和日志方面有些区别，配置基本一致&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;主要用法&#34;&gt;主要用法
+&lt;/h1&gt;&lt;h2 id=&#34;web服务器&#34;&gt;Web服务器
+&lt;/h2&gt;&lt;p&gt;直接向客户端提供静态资源（如HTML、CSS、图片）的服务&lt;/p&gt;
 &lt;p&gt;由于其高效的文件读取和网络传输能力，Nginx在处理静态内容方面表现极其出色,&lt;del&gt;适合搭建博客&lt;/del&gt;&lt;/p&gt;
-&lt;h4 id=&#34;反向代理服务器&#34;&gt;反向代理服务器
-&lt;/h4&gt;&lt;p&gt;它是是客户端和后端真实服务器之间的中间人&lt;/p&gt;
+&lt;h2 id=&#34;反向代理服务器&#34;&gt;反向代理服务器
+&lt;/h2&gt;&lt;p&gt;它是是客户端和后端真实服务器之间的中间人&lt;/p&gt;
 &lt;p&gt;它可以将客户端请求转发到后端的应用服务器（如Node.js、Java、Python应用），并将后端响应返回给客户端，从而实现请求分发、负载均衡，并能隐藏后端服务的真实IP和端口，提升安全性&lt;/p&gt;
-&lt;h4 id=&#34;负载均衡器&#34;&gt;负载均衡器
-&lt;/h4&gt;&lt;p&gt;当后端有多台服务器时，Nginx可以根据预设的策略将请求分发到这些服务器上，从而分担单一服务器的压力&lt;/p&gt;
-&lt;h4 id=&#34;api网关&#34;&gt;API网关
-&lt;/h4&gt;&lt;p&gt;在微服务架构中，Nginx可以作为所有API请求的统一入口，执行如身份验证、速率限制、日志记录、服务发现等通用功能&lt;/p&gt;
-&lt;h2 id=&#34;目录结构&#34;&gt;目录结构
-&lt;/h2&gt;&lt;p&gt;以国内Docker镜像源的&lt;code&gt;nginx:latest&lt;/code&gt;为例（没用过看这里：&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;负载均衡器&#34;&gt;负载均衡器
+&lt;/h2&gt;&lt;p&gt;当后端有多台服务器时，Nginx可以根据预设的策略将请求分发到这些服务器上，从而分担单一服务器的压力&lt;/p&gt;
+&lt;h2 id=&#34;api网关&#34;&gt;API网关
+&lt;/h2&gt;&lt;p&gt;在微服务架构中，Nginx可以作为所有API请求的统一入口，执行如身份验证、速率限制、日志记录、服务发现等通用功能&lt;/p&gt;
+&lt;h1 id=&#34;目录结构&#34;&gt;目录结构
+&lt;/h1&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件（Nginx 的核心配置）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 子配置目录（用于虚拟主机）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default.conf&lt;/span&gt;           &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;share/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;      &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认的 Web 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;        &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;           &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面（如 500、502）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sbin/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                         &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;var/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;log/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录（部分精简镜像无日志输出）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;             &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志（默认可能未启用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志（默认可能未启用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;要注意以下几点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;Docker镜像的Nginx日志默认输出到标准输出/错误，而不是文件中&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在编译安装（&lt;code&gt;make install&lt;/code&gt;）的传统方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在系统包安装（&lt;code&gt;apt/yum&lt;/code&gt;）的方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;而在Docker官方镜像中，日志默认不写入上面的文件，而是输出到标准输出和标准错误&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查看日志的方式&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs &amp;lt;容器ID&amp;gt;/&amp;lt;名称&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;是主配置目录，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;是主配置文件&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Nginx的主配置文件是&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;，在这个文件中有这样一行代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;include&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;/etc/nginx/conf.d/*.conf&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;include&lt;/code&gt;是Nginx配置语言中的指令，用于包含其他配置文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;也就是说，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;默认会包含&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;这个子目录中的所有配置（.conf）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;常用命令&#34;&gt;常用命令
+&lt;/h1&gt;&lt;p&gt;Nginx直接安装在本机时，使用&lt;code&gt;systemctl&lt;/code&gt;或者&lt;code&gt;service&lt;/code&gt;命令控制&lt;/p&gt;
+&lt;p&gt;通过Docker容器使用时，就按照Docker容器的使用方法（没用过看这里：&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;快速上手Docker
     
     &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
@@ -1629,63 +1672,17 @@
             fill=&#34;currentColor&#34;&gt;
     &lt;/svg&gt;&lt;/span&gt;
     
-&lt;/a&gt;），容器内的目录结构通常如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件（Nginx 的核心配置）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 子配置目录（用于虚拟主机）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default.conf&lt;/span&gt;           &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;share/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认的 Web 根目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;               &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;         &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;               &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;            &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面（如 500、502）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;var/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;log/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录（部分精简镜像无日志输出）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;             &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志（默认可能未启用）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志（默认可能未启用）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sbin/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                          &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;要注意以下几点：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;日志默认输出到标准输出/错误（stdout/stderr），而不是文件中&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;在编译安装的传统方式中，Nginx日志会记录在：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;而在Docker官方镜像中，日志默认不写入文件，而是输出到标准输出（stdout）和标准错误（stderr）&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;查看日志的方式&lt;/strong&gt;：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs &amp;lt;容器ID&amp;gt;/&amp;lt;名称&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;是主配置目录，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;是主配置文件&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;在Docker镜像中，Nginx的主配置文件仍然是&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;但在这个文件中有这样一行代码：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;include&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;/etc/nginx/conf.d/*.conf&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;include&lt;/code&gt;是Nginx配置语言中的指令，用于包含其他配置文件&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;也就是说，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;默认会包含&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;这个子目录中的所有配置（.conf）&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;常用命令&#34;&gt;常用命令
-&lt;/h2&gt;&lt;h3 id=&#34;查看版本&#34;&gt;查看版本
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -v
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出当前安装的 Nginx 版本号，用于确认是否正确安装Nginx及其版本信息&lt;/p&gt;
-&lt;h3 id=&#34;检查配置文件语法&#34;&gt;检查配置文件语法
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -t
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是极其重要的安全步骤。在每次修改配置文件后&lt;strong&gt;必须执行&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;主进程会 fork 一个临时子进程&lt;/li&gt;
-&lt;li&gt;子进程尝试解析所有配置文件，但不会绑定端口或真正启动服务&lt;/li&gt;
-&lt;li&gt;若语法无误，会提示&lt;code&gt;syntax is ok&lt;/code&gt;和 &lt;code&gt;test is successful&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;若有错误，会明确指出是哪一行、哪个文件配置有误&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;下面介绍一些Nginx本身的命令：&lt;/p&gt;
+&lt;h2 id=&#34;查看版本&#34;&gt;查看版本
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -v
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出当前安装的Nginx版本号，用于确认是否正确安装Nginx及其版本信息&lt;/p&gt;
+&lt;h2 id=&#34;检查配置文件语法&#34;&gt;检查配置文件语法
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -t
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在每次修改配置文件后必须执行&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用后，主进程会fork一个临时子进程，子进程尝试解析所有配置文件，但不会绑定端口或真正启动服务&lt;/p&gt;
+&lt;p&gt;若语法无误，会提示&lt;code&gt;syntax is ok&lt;/code&gt;和 &lt;code&gt;test is successful&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;若有错误，会明确指出是哪一行、哪个文件配置有误&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250724132842292.png&#34;
 	
 	
@@ -1696,12 +1693,12 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h3 id=&#34;重新加载配置文件&#34;&gt;重新加载配置文件
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -s reload
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;强制停止&#34;&gt;强制停止
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -s stop
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;配置文件&#34;&gt;配置文件
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Nginx的所有功能都是通过配置文件&lt;code&gt;nginx.conf&lt;/code&gt;来驱动的&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;重新加载配置文件&#34;&gt;重新加载配置文件
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -s reload
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;强制停止&#34;&gt;强制停止
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -s stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;配置文件&#34;&gt;配置文件
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Nginx的所有功能都是通过配置文件&lt;code&gt;nginx.conf&lt;/code&gt;来驱动的&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;该文件主要由多个配置块组成，这些块由花括号&lt;code&gt;{}&lt;/code&gt;界定，可以嵌套，形成了层级分明的结构&lt;/p&gt;
 &lt;p&gt;一个典型的&lt;code&gt;nginx.conf&lt;/code&gt;结构如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;nginx.conf&lt;/span&gt;
@@ -1741,8 +1738,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;全局块&#34;&gt;全局块
-&lt;/h3&gt;&lt;p&gt;位于配置文件顶部，未嵌套于任何块中&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;全局块&#34;&gt;全局块
+&lt;/h2&gt;&lt;p&gt;位于配置文件顶部，未嵌套于任何块中&lt;/p&gt;
 &lt;p&gt;用于配置Nginx整体运行环境，影响所有子模块&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;user&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;worker_processes&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;auto&lt;/span&gt;;
@@ -1806,8 +1803,8 @@
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;pid&lt;/code&gt;：指定记录主进程PID的文件路径&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;events块&#34;&gt;events块
-&lt;/h3&gt;&lt;p&gt;紧随全局块之后，一级块&lt;/p&gt;
+&lt;h2 id=&#34;events块&#34;&gt;events块
+&lt;/h2&gt;&lt;p&gt;紧随全局块之后，一级块&lt;/p&gt;
 &lt;p&gt;用于配置与网络连接处理相关的指令，影响工作进程的并发性能&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;events&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;worker_connections&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1024&lt;/span&gt;;
@@ -1818,8 +1815,8 @@
 &lt;p&gt;总并发连接数约为&lt;code&gt;worker_processes * worker_connections&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;http块&#34;&gt;http块
-&lt;/h3&gt;&lt;p&gt;紧随events块之后，一级块&lt;/p&gt;
+&lt;h2 id=&#34;http块&#34;&gt;http块
+&lt;/h2&gt;&lt;p&gt;紧随events块之后，一级块&lt;/p&gt;
 &lt;p&gt;用于配置HTTP协议相关的指令，是配置Web服务的核心部分&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;http&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;include&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;/etc/nginx/mime.types&lt;/span&gt;;
@@ -1863,8 +1860,8 @@
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;keepalive_timeout&lt;/code&gt;：设置长连接超时时间&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;server块&#34;&gt;server块
-&lt;/h3&gt;&lt;p&gt;嵌套于http块内部，二级块，可存在多个，用于配置多个虚拟主机&lt;/p&gt;
+&lt;h2 id=&#34;server块&#34;&gt;server块
+&lt;/h2&gt;&lt;p&gt;嵌套于http块内部，二级块，可存在多个，用于配置多个虚拟主机&lt;/p&gt;
 &lt;p&gt;用于定义单个虚拟主机的配置，通过监听端口和服务器名称对请求进行分发&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;listen&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt;;
@@ -1878,6 +1875,7 @@
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;listen&lt;/code&gt;：设置监听的端口&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;只有访问主机该端口的请求才会被接受&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不过得注意，如果使用docker，docker容器一般会把这个端口转发到主机的某个端口上&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;基本用法：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;listen&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;lt;地址&amp;gt;:&amp;lt;端口&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;[参数]&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;地址&lt;/code&gt;&lt;/strong&gt;（可选）：指定绑定的 IP（默认是所有IP）&lt;/p&gt;
@@ -1897,8 +1895,8 @@
 &lt;p&gt;如果不写这个字段，http块又有多个server，那么这个server块会作为默认server，处理未匹配的请求&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;location块&#34;&gt;location块
-&lt;/h3&gt;&lt;p&gt;嵌套于server块内部，三级块&lt;/p&gt;
+&lt;h2 id=&#34;location块&#34;&gt;location块
+&lt;/h2&gt;&lt;p&gt;嵌套于server块内部，三级块&lt;/p&gt;
 &lt;p&gt;用于对URI（注意不是URL）进行匹配，制定请求的处理方式，如资源路径、代理规则等&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;/&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;root&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;/usr/share/nginx/html&lt;/span&gt;;
@@ -1980,11 +1978,11 @@ Host是localhost，找哪个server_name匹配上了，进入该server块&lt;/p&g
 URI是/images/logo.png，在这个server中找哪个location匹配得最好，执行该location的规则&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;核心功能--web服务&#34;&gt;核心功能 —— Web服务
-&lt;/h2&gt;&lt;p&gt;Web 服务是 Nginx 最基础，也是最核心的功能，它能够高效地处理客户端对静态资源的请求&lt;/p&gt;
+&lt;h1 id=&#34;核心功能--web服务&#34;&gt;核心功能 —— Web服务
+&lt;/h1&gt;&lt;p&gt;Web 服务是 Nginx 最基础，也是最核心的功能，它能够高效地处理客户端对静态资源的请求&lt;/p&gt;
 &lt;p&gt;这主要通过&lt;code&gt;server&lt;/code&gt;块中的&lt;code&gt;root&lt;/code&gt;、&lt;code&gt;index&lt;/code&gt;、&lt;code&gt;location&lt;/code&gt;来协同完成&lt;/p&gt;
-&lt;h3 id=&#34;部署静态资源&#34;&gt;部署静态资源
-&lt;/h3&gt;&lt;p&gt;可以把Nginx作为静态资源服务器，当用户请求时，Nginx从服务器的指定文件路径中查找并返回对应的文件：&lt;/p&gt;
+&lt;h2 id=&#34;部署静态资源&#34;&gt;部署静态资源
+&lt;/h2&gt;&lt;p&gt;可以把Nginx作为静态资源服务器，当用户请求时，Nginx从服务器的指定文件路径中查找并返回对应的文件：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;listen&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server_name&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example.com&lt;/span&gt;;
@@ -2020,8 +2018,8 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;p&gt;告诉客户端浏览器可以将这些静态资源缓存30天，从而减少不必要的请求，提升后续访问速度&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;配置https服务&#34;&gt;配置HTTPS服务
-&lt;/h3&gt;&lt;p&gt;为网站启用HTTPS可以对客户端和服务器之间的传输数据进行加密，确保数据安全&lt;/p&gt;
+&lt;h2 id=&#34;配置https服务&#34;&gt;配置HTTPS服务
+&lt;/h2&gt;&lt;p&gt;为网站启用HTTPS可以对客户端和服务器之间的传输数据进行加密，确保数据安全&lt;/p&gt;
 &lt;p&gt;配置前，我们需要从证书颁发机构（CA）获取SSL/TLS证书文件和私钥文件&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;listen&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;443&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;ssl&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;http2&lt;/span&gt;;
@@ -2099,8 +2097,8 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;p&gt;这能确保用户访问任何HTTP页面时都能被准确地重定向到对应的HTTPS版本&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;核心功能--反向代理&#34;&gt;核心功能 —— 反向代理
-&lt;/h2&gt;&lt;p&gt;反向代理是Nginx的一个核心功能&lt;/p&gt;
+&lt;h1 id=&#34;核心功能--反向代理&#34;&gt;核心功能 —— 反向代理
+&lt;/h1&gt;&lt;p&gt;反向代理是Nginx的一个核心功能&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Nginx作为一个中间层，接收客户端的请求，再将请求转发给后端服务器处理，然后将响应返回给客户端&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这种方式的好处包括：&lt;/p&gt;
 &lt;ul&gt;
@@ -2166,11 +2164,11 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在，我们只需要在&lt;code&gt;proxy_pass&lt;/code&gt;中写 &lt;code&gt;http://backend&lt;/code&gt;即可&lt;/p&gt;
 &lt;p&gt;具体的地址都集中写在&lt;code&gt;upstream backend&lt;/code&gt;块中，方便管理和负载均衡&lt;/p&gt;
-&lt;h2 id=&#34;核心功能--负载均衡&#34;&gt;核心功能 —— 负载均衡
-&lt;/h2&gt;&lt;p&gt;当&lt;code&gt;upstream&lt;/code&gt;块中定义了多台&lt;code&gt;server&lt;/code&gt;时，Nginx就自然地成为了一个负载均衡器&lt;/p&gt;
+&lt;h1 id=&#34;核心功能--负载均衡&#34;&gt;核心功能 —— 负载均衡
+&lt;/h1&gt;&lt;p&gt;当&lt;code&gt;upstream&lt;/code&gt;块中定义了多台&lt;code&gt;server&lt;/code&gt;时，Nginx就自然地成为了一个负载均衡器&lt;/p&gt;
 &lt;p&gt;它会根据指定的策略将请求分发到不同的服务器，以分担流量压力&lt;/p&gt;
-&lt;h3 id=&#34;http负载均衡配置&#34;&gt;HTTP负载均衡配置
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;upstream&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend_cluster&lt;/span&gt; {
+&lt;h2 id=&#34;http负载均衡配置&#34;&gt;HTTP负载均衡配置
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;upstream&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend_cluster&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend1.example.com&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;weight=5&lt;/span&gt;; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend2.example.com&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend3.example.com&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backup&lt;/span&gt;; 
@@ -2208,35 +2206,35 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;负载均衡策略&#34;&gt;负载均衡策略
-&lt;/h3&gt;&lt;h4 id=&#34;轮询&#34;&gt;轮询
-&lt;/h4&gt;&lt;p&gt;默认策略，无需任何指令&lt;/p&gt;
+&lt;/h3&gt;&lt;h3 id=&#34;轮询&#34;&gt;轮询
+&lt;/h3&gt;&lt;p&gt;默认策略，无需任何指令&lt;/p&gt;
 &lt;p&gt;请求被按顺序、轮流分发到每台服务器，并考虑权重&lt;/p&gt;
-&lt;h4 id=&#34;权重weight&#34;&gt;权重（weight）
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;就像我们之前提到过的例子，&lt;code&gt;weight&lt;/code&gt;越高，分配的请求越多&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;权重weight&#34;&gt;权重（weight）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;就像我们之前提到过的例子，&lt;code&gt;weight&lt;/code&gt;越高，分配的请求越多&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;此策略适合后端性能不一致的情况（强机多干活）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;upstream&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend_cluster&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;192.168.0.1&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;weight=3&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;192.168.0.2&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;weight=1&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上例中，第一个服务器将获得大约75%的请求，第二个约25%&lt;/p&gt;
-&lt;h4 id=&#34;ip哈希ip_hash&#34;&gt;IP哈希（ip_hash）
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;根据客户端IP地址的哈希值来选择服务器&lt;/strong&gt;，这能确保来自同一个客户端的请求始终被定向到同一台后端服务器&lt;/p&gt;
+&lt;h3 id=&#34;ip哈希ip_hash&#34;&gt;IP哈希（ip_hash）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;根据客户端IP地址的哈希值来选择服务器&lt;/strong&gt;，这能确保来自同一个客户端的请求始终被定向到同一台后端服务器&lt;/p&gt;
 &lt;p&gt;此策略对于需要保持用户会话状态的应用非常重要&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;upstream&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend_cluster&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;ip_hash&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend1.example.com&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend2.example.com&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;最少连接-least_conn&#34;&gt;最少连接 (least_conn)
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;将新请求发送到当前活动连接数最少的服务器&lt;/strong&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;最少连接-least_conn&#34;&gt;最少连接 (least_conn)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;将新请求发送到当前活动连接数最少的服务器&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;此策略在处理耗时不同或长连接较多的请求时，能使负载分布得更加均匀&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;upstream&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend_cluster&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;least_conn&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend1.example.com&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;backend2.example.com&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;核心功能--tcpudp代理&#34;&gt;核心功能 —— TCP/UDP代理
-&lt;/h2&gt;&lt;p&gt;Nginx不仅能代理HTTP，还能通过&lt;code&gt;stream&lt;/code&gt;模块在更底层的传输层（TCP/UDP）进行代理&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;核心功能--tcpudp代理&#34;&gt;核心功能 —— TCP/UDP代理
+&lt;/h1&gt;&lt;p&gt;Nginx不仅能代理HTTP，还能通过&lt;code&gt;stream&lt;/code&gt;模块在更底层的传输层（TCP/UDP）进行代理&lt;/p&gt;
 &lt;p&gt;例如代理数据库连接、游戏服务器、DNS 查询等&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;stream&lt;/code&gt;块必须配置在&lt;code&gt;http&lt;/code&gt;块之外，位于主配置文件的顶层，和&lt;code&gt;http&lt;/code&gt;是平级的&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;stream&lt;/span&gt; {
