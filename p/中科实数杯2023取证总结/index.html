@@ -10,7 +10,7 @@
 <meta property='og:description' content="\"第一次接触\"">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-07-26T13:22:12&#43;08:00'/><meta property='article:modified_time' content='2025-07-26T13:27:16&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-07-09T21:17:30&#43;08:00'/><meta property='article:modified_time' content='2025-07-21T13:15:36&#43;08:00'/>
 <meta name="twitter:title" content="中科实数杯2023取证总结">
 <meta name="twitter:description" content="\"第一次接触\"">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -375,71 +375,68 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#火眼仿真创建虚拟机">火眼仿真创建虚拟机</a></li>
-    <li><a href="#part1">part1</a>
+    <li><a href="#火眼证据分析">火眼证据分析</a></li>
+    <li><a href="#检材1计算机磁盘镜像">检材1(计算机磁盘镜像)</a>
       <ol>
-        <li><a href="#1检材1的操作系统版本是">1.检材1的操作系统版本是</a></li>
-        <li><a href="#2检材1中操作系统的内核版本是">2.检材1中，操作系统的内核版本是</a></li>
-        <li><a href="#3检材1磁盘包含一个lvm逻辑卷该lvm开始的逻辑区块地址lba是">3.检材1磁盘包含一个LVM逻辑卷，该LVM开始的逻辑区块地址（LBA）是</a></li>
-        <li><a href="#4检材1中网站wwwkkzjccom对应的web服务对外开放的端口是">4.检材1中网站&quot;www.kkzjc.com&quot;对应的Web服务对外开放的端口是</a></li>
-        <li><a href="#5检材1所在的服务器共绑定了几个对外开放的域名">5.检材1所在的服务器共绑定了几个对外开放的域名</a></li>
-        <li><a href="#6检材1所在的服务器的原始ip地址是">6.检材1所在的服务器的原始IP地址是</a></li>
-        <li><a href="#7嫌疑人曾经远程登录过检材1所在的服务器分析并找出其登录使用的ip地址是-并使用该地址解压检材2">7.嫌疑人曾经远程登录过检材1所在的服务器，分析并找出其登录使用的IP地址是 (并使用该地址解压检材2)</a></li>
-        <li><a href="#8检材1所在的服务器其主要功能之一为反向代理找出wwwkkzjccom转发的后台网站所使用的ip地址是">8.检材1所在的服务器，其主要功能之一为反向代理。找出&quot;www.kkzjc.com&quot;转发的后台网站所使用的IP地址是</a></li>
-        <li><a href="#9嫌疑人曾经从题7的ip地址通过web方式远程访问过网站统计出检材1中该ip出现的次数为">9.嫌疑人曾经从题7的IP地址，通过WEB方式远程访问过网站，统计出检材1中该IP出现的次数为</a></li>
+        <li><a href="#1检材一硬盘的-md5-值为多少">1.检材一硬盘的 MD5 值为多少</a></li>
+        <li><a href="#2检材一-bitlocker-的恢复密钥是多少">2.检材一 BitLocker 的恢复密钥是多少</a></li>
+        <li><a href="#3检材一镜像中用户最近一次打开的文件名是什么">3.检材一镜像中用户最近一次打开的文件名是什么</a></li>
+        <li><a href="#4检材一硬盘系统分区的起始位置">4.检材一硬盘系统分区的起始位置</a></li>
+        <li><a href="#5检材一系统的版本号是多少格式xxxx">5.检材一系统的版本号是多少(格式:x.x.x.x)</a></li>
+        <li><a href="#6检材一回收站中的文件被删除前的路径">6.检材一回收站中的文件被删除前的路径</a></li>
+        <li><a href="#7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss">7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss">8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）</a></li>
+        <li><a href="#9检材一-chrome-浏览器最后一次搜索过的关键词是什么">9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么</a></li>
+        <li><a href="#10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码">10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码</a></li>
+        <li><a href="#11检材一-edge-浏览器最早一次下载过的文件文件名是">11.检材一 Edge 浏览器最早一次下载过的文件文件名是</a></li>
+        <li><a href="#12嫌疑人访问的微博的密码的-md5-值">12.嫌疑人访问的微博的密码的 MD5 值</a></li>
       </ol>
     </li>
-    <li><a href="#part2">part2</a>
+    <li><a href="#检材二iphone-备份数据">检材二(iPhone 备份数据)</a>
       <ol>
-        <li><a href="#10检材-2-的原始磁盘-sha256-值为">10.检材 2 的原始磁盘 SHA256 值为</a></li>
-        <li><a href="#11检材2-所在计算机的os内部版本号是">11.检材2 所在计算机的OS内部版本号是</a></li>
-        <li><a href="#12检材2所在计算机最后一次正常关机的时间为精确到秒">12.检材2所在计算机最后一次正常关机的时间为（精确到秒）</a></li>
-        <li><a href="#13-检材2中vmware-程序的安装时间为精确到分钟">13. 检材2中，VMware 程序的安装时间为（精确到分钟）</a></li>
-        <li><a href="#14检材2中vmwareexe程序总计启动过几次">14.检材2中，Vmware.exe程序总计启动过几次</a></li>
-        <li><a href="#15嫌疑人通过-web-方式从检材2访问检材1所在的服务器上的网站时连接的目标端口是">15.嫌疑人通过 Web 方式，从检材2访问检材1所在的服务器上的网站时，连接的目标端口是</a></li>
-        <li><a href="#16接15题该端口上运行的进程的程序名称program-name为">16.接15题，该端口上运行的进程的程序名称（Program name）为</a></li>
-        <li><a href="#17嫌疑人从检材2上访问该网站时所使用的域名为">17.嫌疑人从检材2上访问该网站时，所使用的域名为</a></li>
-        <li><a href="#18检材2-中嫌疑人所使用的微信id是">18.检材2 中，嫌疑人所使用的微信ID是</a></li>
-        <li><a href="#19分析检材2嫌疑人为推广其网站与广告位供应商沟通时使用的通联工具的名称为">19.分析检材2，嫌疑人为推广其网站，与广告位供应商沟通时使用的通联工具的名称为</a></li>
-        <li><a href="#20分析检材2嫌疑人使用虚拟货币与供应商进行交易该虚拟货币的名称是">20.分析检材2，嫌疑人使用虚拟货币与供应商进行交易，该虚拟货币的名称是</a></li>
-        <li><a href="#21上述交易中对方的收款地址是">21.上述交易中，对方的收款地址是</a></li>
-        <li><a href="#22上述交易中嫌疑人和供应商的交易时间是">22.上述交易中，嫌疑人和供应商的交易时间是</a></li>
-        <li><a href="#23上述交易中嫌疑人支付货币的数量为">23.上述交易中，嫌疑人支付货币的数量为</a></li>
-        <li><a href="#24检材2中嫌疑人使用的虚拟机的虚拟磁盘被加密其密码为">24.检材2中，嫌疑人使用的虚拟机的虚拟磁盘被加密，其密码为</a></li>
-        <li><a href="#25检材2中嫌疑人发送给广告商的邮件中的图片附件的-sha256值为忽略邮件状态">25.检材2中，嫌疑人发送给广告商的邮件中的图片附件的 SHA256值为(忽略邮件状态)</a></li>
-        <li><a href="#26检材2中嫌疑人给广告商发送广告图片邮件的发送时间是忽略邮件状态">26.检材2中，嫌疑人给广告商发送广告图片邮件的发送时间是(忽略邮件状态)</a></li>
-        <li><a href="#27检材2中嫌疑人的邮箱密码是">27.检材2中，嫌疑人的邮箱密码是</a></li>
-        <li><a href="#28检材2中嫌疑人使用了什么远程管理工具登录了检材1所在的服务器">28.检材2中，嫌疑人使用了什么远程管理工具，登录了检材1所在的服务器？</a></li>
-        <li><a href="#29检材2中嫌疑人使用上述工具连接服务器时使用的登录密码为">29.检材2中，嫌疑人使用上述工具连接服务器时，使用的登录密码为</a></li>
+        <li><a href="#13检材二备份的设备名称是什么">13.检材二备份的设备名称是什么</a></li>
+        <li><a href="#14检材二手机的-ios-系统版本是多少">14.检材二手机的 iOS 系统版本是多少</a></li>
+        <li><a href="#15检材二备份的时间是多少格式-yyyy-mm-dd-hhmmss">15.检材二备份的时间是多少?(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss">16嫌疑人 iPhone 手机给号码&quot;13502409024&quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#17检材二使用过的号码-iccid-是多少">17.检材二使用过的号码 ICCID 是多少</a></li>
+        <li><a href="#18检材二手机中高德地图最后搜索的地址">18.检材二手机中高德地图最后搜索的地址</a></li>
+        <li><a href="#19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss">19.检材二手机最后一次登陆/注册&quot;HotsCoin&quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)</a></li>
+        <li><a href="#20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss">20.检材二手机中照片&quot;IMG_0002&quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#21检材二中小西米语音-app-的bundle-id是什么">21.检材二中&quot;小西米语音&quot; app 的Bundle ID是什么</a></li>
+        <li><a href="#22检材二中浏览器最后一次搜索的关键词是什么">22.检材二中浏览器最后一次搜索的关键词是什么</a></li>
+        <li><a href="#23嫌疑人和洗钱人员约定电子钱包的品牌是什么-如有多个用顿号分隔">23.嫌疑人和洗钱人员约定电子钱包的品牌是什么, 如有多个用顿号分隔</a></li>
+        <li><a href="#24嫌疑人和洗钱人员约定电子钱包的金额比例是什么">24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么</a></li>
       </ol>
     </li>
-    <li><a href="#part3">part3</a>
+    <li><a href="#检材三计算机内存镜像">检材三(计算机内存镜像)</a>
       <ol>
-        <li><a href="#30检材3-的原始磁盘-sha256-值为">30.检材3 的原始磁盘 SHA256 值为</a></li>
-        <li><a href="#31检材3-所在的计算机的操作系统版本是">31.检材3 所在的计算机的操作系统版本是</a></li>
-        <li><a href="#32检材3中部署的网站名称是">32.检材3中，部署的网站名称是</a></li>
-        <li><a href="#33检材3中部署的网站对应的网站根目录是">33.检材3中，部署的网站对应的网站根目录是</a></li>
-        <li><a href="#34检材3中部署的网站绑定的端口是">34.检材3中，部署的网站绑定的端口是</a></li>
-        <li><a href="#35检材3中具备登陆功能的代码页对应的文件名为">35.检材3中，具备登陆功能的代码页，对应的文件名为</a></li>
-        <li><a href="#36检材3中请对网站代码进行分析网站登录过程中代码中对输入的明文密码作了追加什么字符串处理">36.检材3中，请对网站代码进行分析，网站登录过程中，代码中对输入的明文密码作了追加什么字符串处理</a></li>
-        <li><a href="#37检材3中请对网站代码进行分析">37.检材3中，请对网站代码进行分析，</a></li>
-        <li><a href="#38检材3中网站登录过程中后台接收到明文密码后进行加密处理首先使用的算法是-encryption-中的什么函数">38.检材3中，网站登录过程中，后台接收到明文密码后进行加密处理，首先使用的算法是 Encryption 中的什么函数</a></li>
-        <li><a href="#39检材3中分析该网站连接的数据库地址为并使用该地址解压检材4">39.检材3中，分析该网站连接的数据库地址为（并使用该地址解压检材4）</a></li>
-        <li><a href="#40检材3中网站连接数据库使用的密码为">40.检材3中，网站连接数据库使用的密码为</a></li>
-        <li><a href="#41检材3中网站连接数据库服务器的端口是">41.检材3中，网站连接数据库服务器的端口是</a></li>
+        <li><a href="#25检材三中进程ftk-imagerexe的-pid-是多少">25.检材三中进程&quot;FTK Imager.exe&quot;的 PID 是多少</a></li>
+        <li><a href="#26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss">26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)</a></li>
+        <li><a href="#27检材三中记录的当前系统ip是多少">27.检材三中记录的当前系统ip是多少?</a></li>
       </ol>
     </li>
-    <li><a href="#part4">part4</a>
+    <li><a href="#检材四-红米手机备份数据">检材四 (红米手机备份数据)</a>
       <ol>
-        <li><a href="#42检材-4-的原始磁盘sha256-值为">42.检材 4 的原始磁盘SHA256 值为</a></li>
-        <li><a href="#43重构该网站分析嫌疑用户的推广链接中参数里包含的-id-是">43.重构该网站，分析嫌疑用户的推广链接中参数里包含的 ID 是</a></li>
-        <li><a href="#44重构该网站该网站后台的代理用户数量为">44.重构该网站，该网站后台的代理用户数量为</a></li>
-        <li><a href="#45重构该网站该网站注册用户中共有过几个代理包含删除的数据">45.重构该网站，该网站注册用户中共有过几个代理(包含删除的数据)</a></li>
-        <li><a href="#46重构该网站对补发记录进行统计统计-2019-年10-月1日后补发成功的金额总值">46.重构该网站，对补发记录进行统计，统计 2019 年10 月1日后补发成功的金额总值</a></li>
-        <li><a href="#47检材-4-中对tx_iplog表进行分析所有在武汉市登录的次数为">47.检材 4 中，对&quot;TX_IpLog&quot;表进行分析，所有在&quot;武汉市&quot;登录的次数为</a></li>
-        <li><a href="#48重构该网站该嫌疑人下属代理liyun10账户下的余额有多少元">48.重构该网站，该嫌疑人下属代理&quot;liyun10&quot;账户下的余额有多少元</a></li>
-        <li><a href="#49接上一题该用户的推广id是">49.接上一题，该用户的推广ID是</a></li>
-        <li><a href="#50接上一题该代理商户的最后一次登陆时间是">50.接上一题，该代理商户的最后一次登陆时间是</a></li>
+        <li><a href="#28检材四中迅雷下载过的文件名是什么">28.检材四中迅雷下载过的文件名是什么?</a></li>
+        <li><a href="#29检材四中安装了哪些可是实现翻墙vpn功能的-app">29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?</a></li>
+        <li><a href="#30检材四备份的设备系统版本是多少">30.检材四备份的设备系统版本是多少?</a></li>
+        <li><a href="#31检材四备份的时间是多少答案以-13-位时间戳表示">31.检材四备份的时间是多少(答案以 13 位时间戳表示)</a></li>
+        <li><a href="#32检材四中-filecompress-app-包名是什么">32.检材四中 FileCompress app 包名是什么?</a></li>
+        <li><a href="#33检材四中备忘录记录的内容是什么">33.检材四中备忘录记录的内容是什么?</a></li>
+        <li><a href="#34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔">34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔</a></li>
+        <li><a href="#35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么">35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?</a></li>
+        <li><a href="#36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置">36.MD5 值为&quot;FF3DABD0A610230C2486BFFBE15E5DFF&quot;的文件在检材四中的位置</a></li>
+      </ol>
+    </li>
+    <li><a href="#综合题目">综合题目</a>
+      <ol>
+        <li><a href="#37检材中受害人的微信号是多少">37.检材中受害人的微信号是多少?</a></li>
+        <li><a href="#38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是">38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是</a></li>
+        <li><a href="#39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码">39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码</a></li>
+        <li><a href="#40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量">40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量</a></li>
+        <li><a href="#41受害人小浩的手机号码是多少">41.受害人小浩的手机号码是多少</a></li>
+        <li><a href="#42完整的受害人名单是几个人">42.完整的受害人名单是几个人</a></li>
+        <li><a href="#43受害人转账的总金额是多少">43.受害人转账的总金额是多少</a></li>
       </ol>
     </li>
   </ol>
@@ -475,7 +472,7 @@
         </h2>
         
         <h3 class="article-subtitle">
-            &#34;第二次冲击&#34;
+            &#34;第一次接触&#34;
         </h3>
         
 
@@ -498,7 +495,7 @@
   <path d="M18 16.496v1.504l1 1" />
 </svg>
                 <time class="article-time--published">
-                    发布时间：2025-07-26</time>
+                    发布时间：2025-07-09</time>
             </div>
         
 
@@ -514,7 +511,7 @@
 
 
                <time>
-                   更新时间：2025-07-26
+                   更新时间：2025-07-21
                </time>
            </div>
         <div>
@@ -534,1583 +531,746 @@
     <section class="article-content">
     
     
-    <p>题目：https://ks.wjx.top/vj/rX5h1WB.aspx</p>
-<p>难难难，不多说了，直接开始</p>
-<h1 id="火眼仿真创建虚拟机">火眼仿真创建虚拟机
-</h1><p><strong>要创建虚拟机，必须要有VMware环境</strong></p>
-<p>创建虚拟机 -&gt; 添加镜像 -&gt; 选择镜像文件之后在上面勾选对应镜像 -&gt; 点击确定</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250718183524621.png"
+    <h1 id="火眼证据分析">火眼证据分析
+</h1><p>火眼证据分析中新建案件，选择镜像文件检材一，打开就会自动创建分析任务进行分析：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709132752466.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718183524621"
+		alt="image-20250709132752466"
 	
 	
 ></p>
-<p>选择生成位置（虚拟机位置） -&gt; 开始创建</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250718184121267.png"
+<p>也可以点击快速分析，选择任务进行分析：
+<img src="http://picture.928330.xyz/typora/image-20250709133222223.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718184121267"
+		alt="image-20250709133222223"
 	
 	
 ></p>
-<p><strong>创建完成之后会给出账号密码，可以记忆一下，或者重置为空（推荐）</strong></p>
-<h1 id="part1">part1
-</h1><h2 id="1检材1的操作系统版本是">1.检材1的操作系统版本是
-</h2><p>创建完虚拟机后，就会自动识别出系统版本：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250718184504405.png"
+<h1 id="检材1计算机磁盘镜像">检材1(计算机磁盘镜像)
+</h1><h2 id="1检材一硬盘的-md5-值为多少">1.检材一硬盘的 MD5 值为多少
+</h2><p>计算哈希，选择md5</p>
+<p>计算过程需要对加密卷解密（文件 -&gt; 右键加密分区 -&gt; 解密），因此最好先把下一问做完再进行计算：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709144006846.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718184504405"
+		alt="image-20250709144006846"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CentOS Linux release 7.6.1810(Core)
-</span></span></code></pre></div><h2 id="2检材1中操作系统的内核版本是">2.检材1中，操作系统的内核版本是
-</h2><p>找半天不知道检材1怎么登录的root账号，结果最后试出来了密码&hellip;&hellip;：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>root/123456
-</span></span></code></pre></div><p>后面才知道这是火眼帮我改的，这&hellip;&hellip;</p>
-<p>纯图形化界面还是太难操作了，使用Xterminal连接一下</p>
-<p><code>systemctl start sshd</code>打开服务，看一下监听端口，是7001：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250718200048433.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>80518BC0DBF3315F806E9EDF7EE13C12
+</span></span></code></pre></div><h2 id="2检材一-bitlocker-的恢复密钥是多少">2.检材一 BitLocker 的恢复密钥是多少
+</h2><p>使用EFDD，配合检材三给出的的内存镜像爆破：</p>
+<img src="http://picture.928330.xyz/typora/image-20250709131041349.png" alt="image-20250709131041349" style="zoom:67%;" />
+<img src="http://picture.928330.xyz/typora/image-20250709131000961.png" alt="image-20250709131000961" style="zoom:67%;" />
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>585805-292292-462539-352495-691284-509212-527219-095942
+</span></span></code></pre></div><h2 id="3检材一镜像中用户最近一次打开的文件名是什么">3.检材一镜像中用户最近一次打开的文件名是什么
+</h2><p>依次点击：分析 -&gt; 经典视图 -&gt; 查看最后访问时间</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709134325642.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718200048433"
+		alt="image-20250709134325642"
 	
 	
 ></p>
-<p>在Xterminal连接后，查看内核版本：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>uname -r
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718200436726.png"
+<p>最后一个文件名称为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>列表.xlsx
+</span></span></code></pre></div><h2 id="4检材一硬盘系统分区的起始位置">4.检材一硬盘系统分区的起始位置
+</h2><p>查看系统分区：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709134940238.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718200436726"
+		alt="image-20250709134940238"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>3.10.0-957.el7.x86_64
-</span></span></code></pre></div><h2 id="3检材1磁盘包含一个lvm逻辑卷该lvm开始的逻辑区块地址lba是">3.检材1磁盘包含一个LVM逻辑卷，该LVM开始的逻辑区块地址（LBA）是
-</h2><p>查看磁盘分区：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>fdisk -l
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718200859043.png"
+<p>分区4是引导加载程序位置，之后的分区六应该才是主系统分区（硬盘分区），起始位置为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>649216
+</span></span></code></pre></div><h2 id="5检材一系统的版本号是多少格式xxxx">5.检材一系统的版本号是多少(格式:x.x.x.x)
+</h2><p>分析 -&gt; 基本信息 -&gt; 系统信息：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709140134139.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718200859043"
+		alt="image-20250709140134139"
 	
 	
 ></p>
-<p>根据System字段类型里的LVM判断/dev/sda2是我们要找的分区</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2099200
-</span></span></code></pre></div><h2 id="4检材1中网站wwwkkzjccom对应的web服务对外开放的端口是">4.检材1中网站&quot;www.kkzjc.com&quot;对应的Web服务对外开放的端口是
-</h2><p>尝试使用nmap扫描服务器端口，但没有给出什么有用的信息</p>
-<p>使用grep命令直接在服务器上搜索&quot;www.kkzjc.com&quot;</p>
-<p>因为是网站的配置文件通常在 /etc目录下，现在/etc下搜索更快一点：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250718201857226.png"
+<p>这里有两个版本号，组合在一起才是题目要求的格式</p>
+<p>在win10和win11中，第二位数字（次要版本号）固定为0：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>10.0.19042.508
+</span></span></code></pre></div><h2 id="6检材一回收站中的文件被删除前的路径">6.检材一回收站中的文件被删除前的路径
+</h2><p>分析 -&gt; 基本信息 -&gt; 回收站记录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709141748631.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718201857226"
+		alt="image-20250709141748631"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>32000
-</span></span></code></pre></div><h2 id="5检材1所在的服务器共绑定了几个对外开放的域名">5.检材1所在的服务器共绑定了几个对外开放的域名
-</h2><p>既然/etc下有配置文件，就把nginx和apache的都搜一遍：
-<img src="http://picture.928330.xyz/typora/image-20250718202418703.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C:/Users/rd/Desktop/iTunes(12.13.0.9).exe
+</span></span></code></pre></div><h2 id="7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss">7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>分析 -&gt; 基本信息 -&gt; 系统时间变更 -&gt; 时间变更记录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142136256.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250718202418703"
+		alt="image-20250709142136256"
 	
 	
 ></p>
-<p>看来只有nginx，一共开放了三个域名</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>3
-</span></span></code></pre></div><h2 id="6检材1所在的服务器的原始ip地址是">6.检材1所在的服务器的原始IP地址是
-</h2><p>看不明白这一题问的是什么，跟着wp做一遍</p>
-<p>见第九题</p>
-<h2 id="7嫌疑人曾经远程登录过检材1所在的服务器分析并找出其登录使用的ip地址是-并使用该地址解压检材2">7.嫌疑人曾经远程登录过检材1所在的服务器，分析并找出其登录使用的IP地址是 (并使用该地址解压检材2)
-</h2><p>使用last命令查看，发现有两个ip登陆过该服务器（192.168.204.1是我使用Xterminal连接的）：
-<img src="http://picture.928330.xyz/typora/image-20250719091934927.png"
+<p>比对各个更改时间的记录的操作时间，找出最晚操作的时间的原系统时间：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-12 16:37:12
+</span></span></code></pre></div><h2 id="8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss">8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）
+</h2><p>分析 -&gt; 远程桌面 -&gt; 远程连接过本机的记录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142426055.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250719091934927"
+		alt="image-20250709142426055"
 	
 	
 ></p>
-<p>正确的ip可以解压检材2，检材2是分卷压缩，使用winrar解压缩</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>192.168.99.222
-</span></span></code></pre></div><h2 id="8检材1所在的服务器其主要功能之一为反向代理找出wwwkkzjccom转发的后台网站所使用的ip地址是">8.检材1所在的服务器，其主要功能之一为反向代理。找出&quot;www.kkzjc.com&quot;转发的后台网站所使用的IP地址是
-</h2><p>首先查看命令行history，发现该服务器有docker镜像：
-<img src="http://picture.928330.xyz/typora/image-20250719085251683.png"
+<p>查看连接成功记录，比对最晚的连接时间：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-11 15:57:02
+</span></span></code></pre></div><h2 id="9检材一-chrome-浏览器最后一次搜索过的关键词是什么">9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么
+</h2><p>分析 -&gt; Chrome浏览器 -&gt; 历史记录 -&gt; 最后访问时间 ：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142606570.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250719085251683"
+		alt="image-20250709142606570"
 	
 	
 ></p>
-<p>开启docker服务，看一眼镜像和容器都有哪些</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl start docker
-</span></span><span style="display:flex;"><span>systemctl status docker
-</span></span><span style="display:flex;"><span>docker images
-</span></span><span style="display:flex;"><span>docker ps
-</span></span></code></pre></div><p>这里发现一个正在运行的nginx服务器，而且他的映射到本机的端口号是8091，和第四题配置文件中的一样：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250719085438222.png"
+<p>从url里面看出搜索内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>常见的诈骗话术2023
+</span></span></code></pre></div><h2 id="10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码">10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码
+</h2><p>分析 -&gt; 基本信息 -&gt; USB最近使用记录 -&gt; 操作时间：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709142917357.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250719085438222"
+		alt="image-20250709142917357"
 	
 	
 ></p>
-<p>进入docker的交互式终端，查看该终端里运行过的命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker <span style="color:#e5c07b">exec</span> -it 08f64376a2e3 /bin/bash
-</span></span><span style="display:flex;"><span><span style="color:#e5c07b">history</span>
-</span></span></code></pre></div><p>可以看到曾经多次查看过配置文件/etc/nginx/conf.d/hl.conf：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250719085752115.png"
+<p>查看接入过的最后一个设备：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>FC2005927F271
+</span></span></code></pre></div><h2 id="11检材一-edge-浏览器最早一次下载过的文件文件名是">11.检材一 Edge 浏览器最早一次下载过的文件文件名是
+</h2><p>分析 -&gt; Edge浏览器 -&gt; 下载记录 -&gt; 结束时间倒序：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709143212778.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250719085752115"
+		alt="image-20250709143212778"
 	
 	
 ></p>
-<p>我们也打开这个配置文件看看，发现了反向代理的ip：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250719090911712.png"
+<p>第一个i4tools8不知道为什么没有时间，但详细条目显示时间晚于winrar：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> winrar-x64-624scp.exe
+</span></span></code></pre></div><h2 id="12嫌疑人访问的微博的密码的-md5-值">12.嫌疑人访问的微博的密码的 MD5 值
+</h2><p>分析 -&gt; Chrome浏览器 -&gt; 保存的密码：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709143425660.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250719090911712"
+		alt="image-20250709143425660"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>192.168.1.176
-</span></span></code></pre></div><h2 id="9嫌疑人曾经从题7的ip地址通过web方式远程访问过网站统计出检材1中该ip出现的次数为">9.嫌疑人曾经从题7的IP地址，通过WEB方式远程访问过网站，统计出检材1中该IP出现的次数为
-</h2><p>查看docker容器日志，统计其中的ip出现次数，<code>-c</code>参数可输出统计总数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker logs 08f6437 | grep -c <span style="color:#98c379">&#34;192.168.99.222&#34;</span>
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250719092642267.png"
+<p>微博密码是<code>!dfrDj*&amp;j98_jUe8</code>，计算MD5值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>5cb42860b3b61ef6dd361ad556f48e05
+</span></span></code></pre></div><h1 id="检材二iphone-备份数据">检材二(iPhone 备份数据)
+</h1><h2 id="13检材二备份的设备名称是什么">13.检材二备份的设备名称是什么
+</h2><p>分析 -&gt; 基本信息 -&gt; 设备信息：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709162101944.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250719092642267"
+		alt="image-20250709162101944"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>18
-</span></span></code></pre></div><p>同时在日志还能发现这个ip在访问服务器的时候是由ip<code>192.168.99.3</code>接受的，且端口号就是之前的8091：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250719092746380.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;User&#34;的iPhone
+</span></span></code></pre></div><h2 id="14检材二手机的-ios-系统版本是多少">14.检材二手机的 iOS 系统版本是多少
+</h2><p>同13题图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>17.0
+</span></span></code></pre></div><h2 id="15检材二备份的时间是多少格式-yyyy-mm-dd-hhmmss">15.检材二备份的时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>同13题图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-09 15:02:28
+</span></span></code></pre></div><h2 id="16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss">16嫌疑人 iPhone 手机给号码&quot;13502409024&quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>当前的备份文件中没有通话记录，其实这个藏在检材一中</p>
+<p>分析 -&gt; 嵌套证据识别 -&gt; IOS备份：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709171132291.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250719092746380"
+		alt="image-20250709171132291"
 	
 	
 ></p>
-<p>这样就发现了题6的答案：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>192.168.99.3
-</span></span></code></pre></div><h1 id="part2">part2
-</h1><h2 id="10检材-2-的原始磁盘-sha256-值为">10.检材 2 的原始磁盘 SHA256 值为
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721164754428.png"
+<p>给出了一个info.plist文件的地址，但他只是配置文件，我们需要回到上层目录，导出完整备份文件：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709171433124.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721164754428"
+		alt="image-20250709171433124"
 	
 	
 ></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721164815812.png"
+<p>同时，我们也能把它添加为新检材，扫描过程中会发现这是加密后的文件，需要密码</p>
+<p>使用Passware Kit Forensic爆破，这里需要爆破的文件是Manifest.plist，从后文（22题）知道是五位数密码</p>
+<p>选择Customize Settings高级设置：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173210769.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721164815812"
+		alt="image-20250709173210769"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2D926D5E1CFE27553AE59B6152E038560D64E7837ECCAD30F2FBAD5052FABF37
-</span></span></code></pre></div><h2 id="11检材2-所在计算机的os内部版本号是">11.检材2 所在计算机的OS内部版本号是
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721132044713.png"
+<p>只保留brute-force，修改成五位数字：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173334793.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721132044713"
+		alt="image-20250709173334793"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>18363.1082
-</span></span></code></pre></div><h2 id="12检材2所在计算机最后一次正常关机的时间为精确到秒">12.检材2所在计算机最后一次正常关机的时间为（精确到秒）
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721132229362.png"
+<p>爆破：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173141338.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721132229362"
+		alt="image-20250709173141338"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2020-09-22 13:15:34
-</span></span></code></pre></div><h2 id="13-检材2中vmware-程序的安装时间为精确到分钟">13. 检材2中，VMware 程序的安装时间为（精确到分钟）
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721132346299.png"
+<p>输入密码后继续分析，分析完成后刷新一下，就会多出新的检材分析结果了</p>
+<p>分析 -&gt; 基本信息 -&gt; 通话记录 -&gt; 时间：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709172024138.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721132346299"
+		alt="image-20250709172024138"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2020-09-18 17:57
-</span></span></code></pre></div><h2 id="14检材2中vmwareexe程序总计启动过几次">14.检材2中，Vmware.exe程序总计启动过几次
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721172714596.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> 2023-12-04 13:18:50
+</span></span></code></pre></div><h2 id="17检材二使用过的号码-iccid-是多少">17.检材二使用过的号码 ICCID 是多少
+</h2><p>同13题图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>89860000191997734908
+</span></span></code></pre></div><h2 id="18检材二手机中高德地图最后搜索的地址">18.检材二手机中高德地图最后搜索的地址
+</h2><p>分析 -&gt; 高德地图 -&gt; 搜索点：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709170611265.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721172714596"
+		alt="image-20250709170611265"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>8
-</span></span></code></pre></div><h2 id="15嫌疑人通过-web-方式从检材2访问检材1所在的服务器上的网站时连接的目标端口是">15.嫌疑人通过 Web 方式，从检材2访问检材1所在的服务器上的网站时，连接的目标端口是
-</h2><p>在chrome浏览器中发现代理登录的记录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721173144057.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> 双山大道3号
+</span></span></code></pre></div><h2 id="19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss">19.检材二手机最后一次登陆/注册&quot;HotsCoin&quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)
+</h2><p>HotsCoin是数字交易平台，从短信中能得到登录时间</p>
+<p>分析 -&gt; 基本信息 -&gt; 短信：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709172344826.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721173144057"
+		alt="image-20250709172344826"
 	
 	
 ></p>
-<p>登录的端口和之前看到的代理端口一致</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>8091
-</span></span></code></pre></div><h2 id="16接15题该端口上运行的进程的程序名称program-name为">16.接15题，该端口上运行的进程的程序名称（Program name）为
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721174150761.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-04 13:28:14
+</span></span></code></pre></div><h2 id="20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss">20.检材二手机中照片&quot;IMG_0002&quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)
+</h2><p>分析 -&gt; 基本信息 -&gt; 图片 -&gt; IMG_0002：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709172828523.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721174150761"
+		alt="image-20250709172828523"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>docker-proxy
-</span></span></code></pre></div><h2 id="17嫌疑人从检材2上访问该网站时所使用的域名为">17.嫌疑人从检材2上访问该网站时，所使用的域名为
-</h2><p>下面就是对应域名（同样是代理登录8091端口）：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721174349012.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-06 11:08:30
+</span></span></code></pre></div><h2 id="21检材二中小西米语音-app-的bundle-id是什么">21.检材二中&quot;小西米语音&quot; app 的Bundle ID是什么
+</h2><p>Bundle ID是iOS应用唯一标识符，也就是包名</p>
+<p>分析 -&gt; 基本信息 -&gt; 应用列表 -&gt; 搜索小西米语音：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173624166.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721174349012"
+		alt="image-20250709173624166"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> www.sdhj.com
-</span></span></code></pre></div><h2 id="18检材2-中嫌疑人所使用的微信id是">18.检材2 中，嫌疑人所使用的微信ID是
-</h2><p>检材二的电脑里面并没有安装微信</p>
-<p>但在检材二嵌套证据识别部分能看见一个ios手机备份，查看路径能发现是在分区三下</p>
-<p>把当前文件夹下的所有文件导出作为文件集合作为新检材分析，发现里面有微信号：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721174735568.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>com.titashow.tangliao
+</span></span></code></pre></div><h2 id="22检材二中浏览器最后一次搜索的关键词是什么">22.检材二中浏览器最后一次搜索的关键词是什么
+</h2><p>浏览器不是uc浏览器，指的是safari</p>
+<p>分析 -&gt; Safari -&gt; 搜索历史：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709173822647.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721174735568"
+		alt="image-20250709173822647"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>sstt119999
-</span></span></code></pre></div><h2 id="19分析检材2嫌疑人为推广其网站与广告位供应商沟通时使用的通联工具的名称为">19.分析检材2，嫌疑人为推广其网站，与广告位供应商沟通时使用的通联工具的名称为
-</h2><p>接上一步，创建出来的ios镜像不完整，找不到题目要求的信息</p>
-<p>真正的做法是使用同样位于分区三下的另一个镜像：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721181840122.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ios备份密码忘了怎么办 五位纯数字
+</span></span></code></pre></div><p>这里也就是在提示前面的加密备份文件的密码</p>
+<h2 id="23嫌疑人和洗钱人员约定电子钱包的品牌是什么-如有多个用顿号分隔">23.嫌疑人和洗钱人员约定电子钱包的品牌是什么, 如有多个用顿号分隔
+</h2><p>微信聊天记录和信息里都没有相关信息，其他应用里面只有小西米语音有可能了</p>
+<p>分析 -&gt; 其他应用 -&gt; 小西米语音 -&gt; 在线连麦平台 -&gt; 文件分类 -&gt; SQLite 文件</p>
+<p>其他应用是耗时分析，火眼不会自动分析，需要手动进行选择分析</p>
+<blockquote>
+<p>本来应该是有im5db这个数据库的，我的分析结果里面没有，其他六个都有，也许是因为后缀的原因？</p>
+<p>所以直接沿着下面这个路径找了：</p>
+<p>/Documents/IM5_CN/9031bc3c805ac5e55ecaa151092c2c4b/IM5_storage/1399634813467579522/im5db</p></blockquote>
+<p>查看message表的content字段：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709180909839.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721181840122"
+		alt="image-20250709180909839"
 	
 	
 ></p>
-<p>这样就能发现沟通工具：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721182359181.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>imToken、Bitcoin
+</span></span></code></pre></div><h2 id="24嫌疑人和洗钱人员约定电子钱包的金额比例是什么">24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么
+</h2><p>同上题图：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>0.2
+</span></span></code></pre></div><h1 id="检材三计算机内存镜像">检材三(计算机内存镜像)
+</h1><h2 id="25检材三中进程ftk-imagerexe的-pid-是多少">25.检材三中进程&quot;FTK Imager.exe&quot;的 PID 是多少
+</h2><p>不知道为什么我的volatility2不能分析出win10的结果，只好使用volatility3：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>python3 vol.py -f ../memdump2023.raw windows.pslist.PsList | grep FTK
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709195208579.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721182359181"
+		alt="image-20250709195208579"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>telegram
-</span></span></code></pre></div><h2 id="20分析检材2嫌疑人使用虚拟货币与供应商进行交易该虚拟货币的名称是">20.分析检材2，嫌疑人使用虚拟货币与供应商进行交易，该虚拟货币的名称是
-</h2><p>在上题聊天记录中找到一张收款码图片，用的是狗狗币DOGE</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721202916041.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>11328
+</span></span></code></pre></div><h2 id="26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss">26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>python3 vol.py -f ../memdump2023.raw windows.info.Info  
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709211018795.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721202916041"
+		alt="image-20250709211018795"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>DOGE
-</span></span></code></pre></div><h2 id="21上述交易中对方的收款地址是">21.上述交易中，对方的收款地址是
-</h2><p>见上图</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>DPBEgbwap7VW5HbNdGi9TyKJbqTLWYYkvf
-</span></span></code></pre></div><h2 id="22上述交易中嫌疑人和供应商的交易时间是">22.上述交易中，嫌疑人和供应商的交易时间是
-</h2><p>这里不知道怎么写，wp说可以通过Dogecoin浏览器使用交易地址搜索到交易：
-<a class="link" href="https://explorer.coinex.com/doge"  target="_blank" rel="noopener"
-    >https://explorer.coinex.com/doge
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721203900017.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> 2023-12-12 04:06:25
+</span></span></code></pre></div><h2 id="27检材三中记录的当前系统ip是多少">27.检材三中记录的当前系统ip是多少?
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>python3 vol.py -f ../memdump2023.raw windows.netscan.NetScan
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709200824096.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721203900017"
+		alt="image-20250709200824096"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2020-09-20 12:19:46
-</span></span></code></pre></div><h2 id="23上述交易中嫌疑人支付货币的数量为">23.上述交易中，嫌疑人支付货币的数量为
-</h2><p>见上题图</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4000
-</span></span></code></pre></div><h2 id="24检材2中嫌疑人使用的虚拟机的虚拟磁盘被加密其密码为">24.检材2中，嫌疑人使用的虚拟机的虚拟磁盘被加密，其密码为
-</h2><p>虚拟机在嵌套证据识别中就已经见过，导出备用，这里以防万一我导出了整个存放虚拟机的文件夹：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721204531657.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>172.18.7.229
+</span></span></code></pre></div><h1 id="检材四-红米手机备份数据">检材四 (红米手机备份数据)
+</h1><h2 id="28检材四中迅雷下载过的文件名是什么">28.检材四中迅雷下载过的文件名是什么?
+</h2><p>分析 -&gt; 迅雷 -&gt; 云盘 -&gt; 离线下载目录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709193648459.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721204531657"
+		alt="image-20250709193648459"
 	
 	
 ></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721204542772.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>《向银河靠近》.txt
+</span></span></code></pre></div><h2 id="29检材四中安装了哪些可是实现翻墙vpn功能的-app">29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?
+</h2><p>没啥说的：
+<img src="http://picture.928330.xyz/typora/image-20250709193825301.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721204542772"
+		alt="image-20250709193825301"
 	
 	
 ></p>
-<p>微信聊天记录里说他忘记了密码，要去github上找办法：
-<img src="http://picture.928330.xyz/typora/image-20250721204217267.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>clash
+</span></span></code></pre></div><h2 id="30检材四备份的设备系统版本是多少">30.检材四备份的设备系统版本是多少?
+</h2><p>分析 -&gt; 基本信息-&gt; 设备信息 -&gt; 厂商版本：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709193935053.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721204217267"
+		alt="image-20250709193935053"
 	
 	
 ></p>
-<p>之前翻看浏览器的时候就看见了github网页，我们也看看那个破解工具网站：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721204314206.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> V14.0.2.0.TKSCNXM
+</span></span></code></pre></div><h2 id="31检材四备份的时间是多少答案以-13-位时间戳表示">31.检材四备份的时间是多少(答案以 13 位时间戳表示)
+</h2><p>同上题图，转换时间戳（2023-12-13 17:20:32）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1702459232429
+</span></span></code></pre></div><h2 id="32检材四中-filecompress-app-包名是什么">32.检材四中 FileCompress app 包名是什么?
+</h2><p>包名就在检材里面列出，复制黏贴就行：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709195000907.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721204314206"
+		alt="image-20250709195000907"
 	
 	
 ></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721204359596.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>com.zs.filecompress
+</span></span></code></pre></div><h2 id="33检材四中备忘录记录的内容是什么">33.检材四中备忘录记录的内容是什么?
+</h2><p>分析 -&gt; 基本信息-&gt; 便签：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709194341673.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721204359596"
+		alt="image-20250709194341673"
 	
 	
 ></p>
-<p><code>-v</code>指定虚拟机，-<code>d</code>指定字典，就使用它演示使用的这条命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 pyvmx-cracker.py -v Windows10x64.vmx -d wordlist.txt
-</span></span></code></pre></div><p>得到密码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>zzzxxx
-</span></span></code></pre></div><h2 id="25检材2中嫌疑人发送给广告商的邮件中的图片附件的-sha256值为忽略邮件状态">25.检材2中，嫌疑人发送给广告商的邮件中的图片附件的 SHA256值为(忽略邮件状态)
-</h2><p><strong>下面的步骤建议直接导入火眼证据分析，使用虚拟机反而徒增麻烦</strong></p>
-<p>打开虚拟机，发现有密码：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721211503013.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Vcpswd:edgewallet
+</span></span></code></pre></div><h2 id="34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔">34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔
+</h2><p>直接搜索检材里的app，一共六个：
+<img src="http://picture.928330.xyz/typora/image-20250709195051880.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721211503013"
+		alt="image-20250709195051880"
 	
 	
 ></p>
-<p>办法是使用火眼仿真，仿真完毕就会给出密码</p>
-<p>不过在此之前，我们要先给虚拟机的加密给取消：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721210943728.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>de.schildbach.wallet、com.bitcoin.mwallet、 piuk.blockchain.android、im.token.app、com.paxful.wallet、pro.huobi
+</span></span></code></pre></div><h2 id="35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么">35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?
+</h2><p>在下面路径中找到并导出日志文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Bitcoin Wallet(de.schildbach.wallet).bak/apps/de.schildbach.wallet/f/log/wallet.log
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709200125980.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721210943728"
+		alt="image-20250709200125980"
 	
 	
 ></p>
-<p>再次使用火眼仿真就能得到密码：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721211734059.png"
+<p>搜索<code>walletaddress</code>：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709200547089.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721211734059"
+		alt="image-20250709200547089"
 	
 	
 ></p>
-<p>之前聊天记录提到广告使用邮件发送，在桌面的邮箱软件的草稿箱找到广告图片：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721212136090.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>bc1q4ru3a8r0vzymwwcmawvtdyf6hkvt2x9477hjkt
+</span></span></code></pre></div><h2 id="36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置">36.MD5 值为&quot;FF3DABD0A610230C2486BFFBE15E5DFF&quot;的文件在检材四中的位置
+</h2><p>这一题据说是结合前面提到的FileCompress一路找下去就能发现，不过太电波了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709202128966.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721212136090"
+		alt="image-20250709202128966"
 	
 	
 ></p>
-<p>保存到桌面，使用<code>certutil</code>计算sha256（这个版本的powershell没有<code>getfilehash</code>）：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721212946356.png"
+<p>这里更好的办法是用HashMyFiles，全部算一遍再搜索</p>
+<p>然而我不知道怎么使用这个工具，好在火眼有类似的功能</p>
+<p>文件 -&gt; 检材四 -&gt; 文件系统 -&gt; 勾选所有文件 -&gt; 右键新建哈希集 -&gt; 勾选项：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250710124643356.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721212946356"
+		alt="image-20250710124643356"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cc7ea3ab90ab6b28417e08c715c243ce58ea76d71fd141b93f055a58e9ba561a
-</span></span></code></pre></div><h2 id="26检材2中嫌疑人给广告商发送广告图片邮件的发送时间是忽略邮件状态">26.检材2中，嫌疑人给广告商发送广告图片邮件的发送时间是(忽略邮件状态)
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721213202654.png"
+<p>创建的新建哈希集任务完成后，选择高级，在文件哈希处输入MD5，过滤范围选择子目录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250710124613331.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721213202654"
+		alt="image-20250710124613331"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2020-09-20 12:53
-</span></span></code></pre></div><h2 id="27检材2中嫌疑人的邮箱密码是">27.检材2中，嫌疑人的邮箱密码是
-</h2><p>把.vmdk文件作为镜像文件导入成新检材（早知道能导入我就不那么别扭使用虚拟机了气死我了）：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721214556696.png"
+<p>成功找到目标文件：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250710125044835.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721214556696"
+		alt="image-20250710125044835"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>honglian7001
-</span></span></code></pre></div><h2 id="28检材2中嫌疑人使用了什么远程管理工具登录了检材1所在的服务器">28.检材2中，嫌疑人使用了什么远程管理工具，登录了检材1所在的服务器？
-</h2><p>Xshell不是全称，具体名称在安装软件中看，或者虚拟机里面也能看见：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250721215345779.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>20231213_172032.tar/FileCompress(com.zs.filecompress).bak/FileCompress/11月.txt
+</span></span></code></pre></div><h1 id="综合题目">综合题目
+</h1><h2 id="37检材中受害人的微信号是多少">37.检材中受害人的微信号是多少?
+</h2><p>检材二 -&gt; 微信 -&gt; 好友消息，根据聊天记录能判断出受害者就是小浩：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709202302479.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721215345779"
+		alt="image-20250709202302479"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Xshell6
-</span></span></code></pre></div><h2 id="29检材2中嫌疑人使用上述工具连接服务器时使用的登录密码为">29.检材2中，嫌疑人使用上述工具连接服务器时，使用的登录密码为
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721214738761.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B-I-N-A-R-Y
+</span></span></code></pre></div><h2 id="38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是">38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是
+</h2><p>从另一个微信好友里面能发现购买数据库的名称为database.sqlite：
+<img src="http://picture.928330.xyz/typora/image-20250709202654797.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721214738761"
+		alt="image-20250709202654797"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>qwer1234!@#$
-</span></span></code></pre></div><h1 id="part3">part3
-</h1><h2 id="30检材3-的原始磁盘-sha256-值为">30.检材3 的原始磁盘 SHA256 值为
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721221147933.png"
+<p>这个数据库手机看不了，在电脑里能看：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709202742412.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721221147933"
+		alt="image-20250709202742412"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>FF593FCCB3770B8845A3334631F8E80807638EE722C5AA7B34E877589857C3BA
-</span></span></code></pre></div><h2 id="31检材3-所在的计算机的操作系统版本是">31.检材3 所在的计算机的操作系统版本是
-</h2><p><img src="http://picture.928330.xyz/typora/image-20250721221243364.png"
+<p>链接数据库后查找：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">name</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">users</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">phone</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;%8686&#39;</span>;
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250710130255431.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250721221243364"
+		alt="image-20250710130255431"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Windows Server 2008 HPC Edition x64
-</span></span></code></pre></div><h2 id="32检材3中部署的网站名称是">32.检材3中，部署的网站名称是
-</h2><p>火眼仿真检材三（一定记得把密码重置成空！！！）</p>
-<p>登录server账号，打开服务器管理器：角色 -&gt; web服务器 -&gt; internet信息服务 -&gt; win -&gt; 网站</p>
-<p>可以看到有一个托管的网站：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250724230707575.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>章敏
+</span></span></code></pre></div><h2 id="39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码">39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码
+</h2><p>加密iOS备份 -&gt; 钥匙串 -&gt; 网站与应用密码，我们已经知道小西米的包名<code>com.titashow.tangliao</code>：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709203150613.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250724230707575"
+		alt="image-20250709203150613"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>card
-</span></span></code></pre></div><h2 id="33检材3中部署的网站对应的网站根目录是">33.检材3中，部署的网站对应的网站根目录是
-</h2><p>高级设置：
-<img src="http://picture.928330.xyz/typora/image-20250724231932289.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250724231932289"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C:\inetpub\wwwroot\v7w
-</span></span></code></pre></div><h2 id="34检材3中部署的网站绑定的端口是">34.检材3中，部署的网站绑定的端口是
-</h2><p>同上图：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>80
-</span></span></code></pre></div><h2 id="35检材3中具备登陆功能的代码页对应的文件名为">35.检材3中，具备登陆功能的代码页，对应的文件名为
-</h2><p>右侧导航栏浏览，发现一个名为web的配置文件：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725103519074.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725103519074"
-	
-	
-></p>
-<p>使用记事本打开，可以看见里面有两条疑似与login相关的配置：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725103655367.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725103655367"
-	
-	
-></p>
-<p>分别查看两个文件，发现都跟登录有关：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725112751376.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725112751376"
-	
-	
-></p>
-<p>本地访问一下，发现竟然都是登录界面：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725112707145.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725112707145"
-	
-	
-></p>
-<p>分不清，真的分不清啊，都写上去吧：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>glogin.aspx
-</span></span><span style="display:flex;"><span>dllogin.aspx
-</span></span></code></pre></div><p>不过其实是有办法分开的，具体看下面一题</p>
-<h2 id="36检材3中请对网站代码进行分析网站登录过程中代码中对输入的明文密码作了追加什么字符串处理">36.检材3中，请对网站代码进行分析，网站登录过程中，代码中对输入的明文密码作了追加什么字符串处理
-</h2><p>再次检索前面两个文件，发现只有<code>dllogin.aspx</code>涉及到了对密码字符串的处理：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725113053969.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725113053969"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>OvO
-</span></span></code></pre></div><p>同时也知道了35题的正确答案：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>dllogin.aspx
-</span></span></code></pre></div><h2 id="37检材3中请对网站代码进行分析">37.检材3中，请对网站代码进行分析，
-</h2><p>既然是找动态链接库，那么在<code>dllogin.aspx</code>里面搜索一下dll：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725113845738.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725113845738"
-	
-	
-></p>
-<p>虽然没有找到，不过也给了点启发，问问ai：
-<img src="http://picture.928330.xyz/typora/image-20250725114005122.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725114005122"
-	
-	
-></p>
-<p>为了保险起见，我们直接去检材三里面搜索一下是否有这个文件：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725114124407.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725114124407"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> App_Web_dllogin.aspx.7d7c2f33.dll
-</span></span></code></pre></div><h2 id="38检材3中网站登录过程中后台接收到明文密码后进行加密处理首先使用的算法是-encryption-中的什么函数">38.检材3中，网站登录过程中，后台接收到明文密码后进行加密处理，首先使用的算法是 Encryption 中的什么函数
-</h2><p>dll文件编译后无法查看，没有头绪，原来是需要逆向dll</p>
-<p>下载net反编译工具dnspy：https://github.com/dnSpy/dnSpy/releases</p>
-<p>导出上题找到的dll文件，拖入dnspy寻找：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725115507966.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725115507966"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>AESEncrypt
-</span></span></code></pre></div><h2 id="39检材3中分析该网站连接的数据库地址为并使用该地址解压检材4">39.检材3中，分析该网站连接的数据库地址为（并使用该地址解压检材4）
-</h2><p>多少沾点玄学在这里了</p>
-<p>在逆向出来的.net中发现引用了一个数据库有关的库<code>DBManager</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725120726108.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725120726108"
-	
-	
-></p>
-<p>搜索发现这个库也在检材三中：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725120449397.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725120449397"
-	
-	
-></p>
-<p>导出分析，在最底部看见数据库地址：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725121158979.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725121158979"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>192.168.1.174
-</span></span></code></pre></div><h2 id="40检材3中网站连接数据库使用的密码为">40.检材3中，网站连接数据库使用的密码为
-</h2><p>在<code>DBManager</code>里面找到下面这一段：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725122038106.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725122038106"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">private</span> <span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">Open</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">this</span>.<span style="color:#e06c75">Conn</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">null</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">this</span>.<span style="color:#e06c75">Conn</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">new</span> <span style="color:#61afef;font-weight:bold">SqlConnection</span>(<span style="color:#e06c75">this</span>.<span style="color:#e06c75">ConnStr</span>);  
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>只在this.Conn为null时使用ConnStr，也就是上一题得到的密码</p>
-<p>如果不为空，那么优先使用的是AESDecrypt解密出来的连接串，所以我们要想法解密：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">Mcyj19i</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">VubvqSM21YPjWnnGzk8G</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">GG6x9</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">qwdcOJd9bTEyprEOxs8TD9Ma1Lz1Ct72xlK</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">g8DDRAQ</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">X0GtJ8w</span><span style="color:#56b6c2">==</span>
-</span></span></code></pre></div><p>因为这是Encryption类下面的方法，并且都是windows系统，我们也可以在本机调用解密：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#e5c07b">Add-Type</span> <span style="color:#e06c75">-Path</span> &lt;<span style="color:#e06c75">Path</span>/<span style="color:#e06c75">to</span>/<span style="color:#e06c75">DBManager</span>.<span style="color:#e06c75">dll</span>&gt;
-</span></span><span style="display:flex;"><span>[<span style="color:#e06c75">DBManager.Encryption</span>]::<span style="color:#e06c75">AESDecrypt</span>( <span style="color:#98c379">&#34;Mcyj19i/VubvqSM21YPjWnnGzk8G/GG6x9+qwdcOJd9bTEyprEOxs8TD9Ma1Lz1Ct72xlK/g8DDRAQ+X0GtJ8w==&#34;</span>,  <span style="color:#98c379">&#34;HL&#34;</span>,  <span style="color:#98c379">&#34;forensix&#34;</span> )
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250725123859306.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725123859306"
-	
-	
-></p>
-<p>再次印证了39题答案是正确的，并且给出了真正的密码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>c4f2737e88
-</span></span></code></pre></div><h2 id="41检材3中网站连接数据库服务器的端口是">41.检材3中，网站连接数据库服务器的端口是
-</h2><p>见上题，ip后就是端口：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1433
-</span></span></code></pre></div><h1 id="part4">part4
-</h1><p><strong>做好准备，接下来的路不是一般的难走</strong></p>
-<h2 id="42检材-4-的原始磁盘sha256-值为">42.检材 4 的原始磁盘SHA256 值为
-</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>E5E548CCAECD02608A0E053A5C7DCDBFBDD4BE5B0E743EB9DC8E318C369BEBC8
-</span></span></code></pre></div><h2 id="43重构该网站分析嫌疑用户的推广链接中参数里包含的-id-是">43.重构该网站，分析嫌疑用户的推广链接中参数里包含的 ID 是
-</h2><p>现在的目标是连接检材3（服务器）和检材4（数据库）</p>
-<p>登录检材4，看一眼history：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725132920533.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725132920533"
-	
-	
-></p>
-<p>看来是先尝试了在本机安装数据库，后面还是选择使用docker了</p>
-<p>启动docker，查看现在的docker容器，启动sql1：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725133157326.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725133157326"
-	
-	
-></p>
-<p>检材3能知道连接数据库的地址是192.168.1.174，所以要修改检材4的ip</p>
-<p>先在编辑 -&gt; 虚拟网络编辑器中关闭DHCP，防止使用DHCP分配的地址</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725192915366.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725192915366"
-	
-	
-></p>
-<p>应用并确定后，进入检材4，修改网卡配置文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vi /etc/sysconfig/network-scripts/ifcfg-ens33
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250725135358018.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725135358018"
-	
-	
-></p>
-<p>改成下面这样：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725135731013.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725135731013"
-	
-	
-></p>
-<p>重启网络，用<code>ip a</code>命令查看配置是否成功：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725140143154.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725140143154"
-	
-	
-></p>
-<p>再次登录检材3，ping一下检材4，看看是否能通：
-<img src="http://picture.928330.xyz/typora/image-20250725140832093.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725140832093"
-	
-	
-></p>
-<p>说明他们在同一个网段了，我们之前的配置是成功的</p>
-<p>由于检材三没有数据库应用，接下来我们要在本机连接数据库，那就要让本机和他们也在同一网段</p>
-<p>打开vmware -&gt; 编辑 -&gt; 虚拟网络编辑器，把使用的，然后更改子网IP和NAT网关为192.168.1.0/24网段：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725170151858.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725170151858"
-	
-	
-></p>
-<p>点击应用和确定，在本机ipconfig一下</p>
-<p>可以看见net8，也就是nat模式，ipv4地址是192.168.1.1，配置成功：
-<img src="http://picture.928330.xyz/typora/image-20250725192727677.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725192727677"
-	
-	
-></p>
-<p>使用40题的解密结果测试连接，结果报错了：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725191816588.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725191816588"
-	
-	
-></p>
-<p>需要下载SQL SERVER驱动程序：</p>
-<p><a class="link" href="https://learn.microsoft.com/zh-cn/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16"  target="_blank" rel="noopener"
-    >https://learn.microsoft.com/zh-cn/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p>安装后再次测试连接，成功！</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725191736544.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725191736544"
-	
-	
-></p>
-<p>接下来回到<code>App_Web_dllogin.aspx.7d7c2f33.dll</code>中</p>
-<p>在登录部分我们可以看到调用了<code>DUserLogin</code>函数，而这个函数又是来自<code>WDUser</code>类：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725195037000.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725195037000"
-	
-	
-></p>
-<p>这个类来自哪里呢？看不出来，问一下ai吧</p>
-<p>不嫌麻烦保险起见也可以全部导出using了的dll，这个操作其实是最正确的，后面也会用上</p>
-<p>不过这里就取个巧先：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725200413977.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725200413977"
-	
-	
-></p>
-<p>既然不是系统库，那么我们照样能在检材3里面找到这个dll，老样子导出用dnspy分析</p>
-<p>dnspy很方便，如果有对应函数，点击即可跳转至对应位置，果然是在<code>WBus</code>里面：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725200733223.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725200733223"
-	
-	
-></p>
-<p>在<code>DUserLogin</code>函数里使用了<code>PD_UserLogin</code>这个数据库函数，我们在数据库里面找到它：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725200902174.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725200902174"
-	
-	
-></p>
-<p>函数说明<strong>登录方式分两种</strong>，由<code>TD_Webs</code>表的<code>DW_Type</code>决定：</p>
-<ul>
-<li><code>DW_Type = 0</code>：只允许指定的<code>DW_DU_Id</code>用户登录</li>
-<li><code>DW_Type = 1</code>：允许任意用户登录（只验证用户名和密码）</li>
-</ul>
-<p><img src="http://picture.928330.xyz/typora/image-20250725201534688.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725201534688"
-	
-	
-></p>
-<p>并且在之前反编译出来的dll登录逻辑中，我们知道了用户名密码是经过加密的，存放在表里的是加密过的值：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">text2</span> = <span style="color:#e06c75">Encryption</span>.<span style="color:#e06c75">AESEncrypt</span>(<span style="color:#e06c75">text2</span>, <span style="color:#98c379">&#34;forensix&#34;</span>, <span style="color:#98c379">&#34;HL&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">text2</span> = <span style="color:#e06c75">FormsAuthentication</span>.<span style="color:#e06c75">HashPasswordForStoringInConfigFile</span>(<span style="color:#e06c75">text2</span>, <span style="color:#98c379">&#34;MD5&#34;</span>);
-</span></span></code></pre></div><p>二者结合，如果要让某个用户能登录，就要确保他的<code>DU_Id </code>=<code>TD_Webs.DW_DU_Id</code>，并且将他的密码改为指定值加密后的结果写入<code>DU_Pwd</code></p>
-<p>我们先找到用户表：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725201937047.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725201937047"
-	
-	
-></p>
-<p>在检材二中的chrome浏览器的表单记录中，我们能找到<code>liwente1314520</code>的登录记录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725202001107.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725202001107"
-	
-	
-></p>
-<p><code>liwente1314520</code>对应的<code>DU_Id</code> 是1001，也对应<code>TD_Webs</code>表里面的aaaa.bbbb，相应<code>DW_Type</code>是0</p>
-<p>在检材3的登录页面逻辑中我们知道，登录方式是&quot;密码&quot;+&ldquo;OvO&rdquo;</p>
-<p>我们用这种方式制作一个密码，先<code>AESEncrypt</code>加密，再<code>MD5</code>加密：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Add</span>-<span style="color:#e06c75">Type</span> -<span style="color:#e06c75">Path</span> &lt;<span style="color:#e06c75">Path</span>/<span style="color:#e06c75">to</span>/<span style="color:#e06c75">DBManager</span>.<span style="color:#e06c75">dll</span>&gt;
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">[DBManager.Encryption]</span>::<span style="color:#e06c75">AESEncrypt</span>( <span style="color:#98c379">&#34;111OvO&#34;</span>,  <span style="color:#98c379">&#34;HL&#34;</span>,  <span style="color:#98c379">&#34;forensix&#34;</span>)
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250725202857015.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725202857015"
-	
-	
-></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726104821352.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726104821352"
-	
-	
-></p>
-<p>把1001对应的<code>TD_Webs.DW_DU_Id</code>改成<code>192.168.1.176</code>，也就是检材3的ip，让我们能访问：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725204033149.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725204033149"
-	
-	
-></p>
-<p><code>TD_User.DW_Pwd</code>改成加密的密码：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725203546714.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725203546714"
-	
-	
-></p>
-<p>保存之后，在检材4重启sql1容器，在检材3中开启ASP.NET State Service服务：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725203703493.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725203703493"
-	
-	
-></p>
-<p>之后可以在本机访问<code>http://192.168.1.176/dl</code>进行登录操作：</p>
-<p>可是到这一步，我登录竟然不成功！</p>
-<p>我以为是之前的md5没有大写的原因，可是就算我改成了大写，仍旧是不成功</p>
-<p>走流程自己计算密码这一步显然是走不太通了，那我们就得换一个思路：直接让它为我们输出密码</p>
-<p>进入控制登录的<code>App_Web_dllogin.aspx.7d7c2f33.dll</code>，在<code>oCmd</code>函数部分右键，编辑：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726105115927.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726105115927"
-	
-	
-></p>
-<p>加入和修改这三处，目的是登录失败的时候弹窗弹出当前使用密码加密后的md5值：
-<img src="http://picture.928330.xyz/typora/image-20250726105355723.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726105355723"
-	
-	
-></p>
-<p>点击编译，注意一定要把上面的非系统引用库也导出并拖进dnspy，否则编译会失败：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726110256769.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726110256769"
-	
-	
-></p>
-<p>编译完成之后点击保存（名称不能变），复制并替换检材三<code>C:\inetpub\wwwroot\v7w\bin</code>下的同名dll：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726110912188.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726110912188"
-	
-	
-></p>
-<p>之后重启网站：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726111008848.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726111008848"
-	
-	
-></p>
-<p>再次访问<code>http://192.168.1.176/dl</code>，使用账号<code>liwente1314520</code>，密码随便（但是一定要记住）登录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250725210243987.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250725210243987"
-	
-	
-></p>
-<p>果然报错，不过也带出了加密后的密码！</p>
-<p>复制这个md5值作为密码，再次更改数据库内容，保存，重启sql1服务</p>
-<p>我们就能使用上一次登录的密码登录了（所以加密过程果然是有问题的吗）：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726111255320.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726111255320"
-	
-	
-></p>
-<p>总算是搭建并登录了，也不能忘了我们的目标：嫌疑用户的推广链接中参数里包含的ID</p>
-<p>一同翻找，在代理信息栏里发现了推广链接：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726111732090.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726111732090"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>abe6d2ee630379c3
-</span></span></code></pre></div><h2 id="44重构该网站该网站后台的代理用户数量为">44.重构该网站，该网站后台的代理用户数量为
-</h2><p>用户列表里面数一下，一共三页：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726111901950.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726111901950"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>26
-</span></span></code></pre></div><h2 id="45重构该网站该网站注册用户中共有过几个代理包含删除的数据">45.重构该网站，该网站注册用户中共有过几个代理(包含删除的数据)
-</h2><p>上一题是代理用户数量，这一题问的是包括删除的数据，我们就需要找到对应的表</p>
-<p>鼠标移动到用户列表按钮，左下角会显示对应的aspx文件：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726112903759.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726112903759"
-	
-	
-></p>
-<p>在检材3里面搜索该文件（火眼也行）：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726113233951.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726113233951"
-	
-	
-></p>
-<p>在文件开头找到使用的库，其实也就是上图我们搜出来的第二个文件：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726113318959.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726113318959"
-	
-	
-></p>
-<p>导入dnspy分析，同样找到和数据库交互的函数：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726113710556.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726113710556"
-	
-	
-></p>
-<p>它同样是在<code>WBus</code>的<code>WUUser</code>里面，使用的表名是<code>TU_User</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726113910829.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726113910829"
-	
-	
-></p>
-<p>数据库里面找到该表，统计一下总数：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726112707319.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726112707319"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>32
-</span></span></code></pre></div><h2 id="46重构该网站对补发记录进行统计统计-2019-年10-月1日后补发成功的金额总值">46.重构该网站，对补发记录进行统计，统计 2019 年10 月1日后补发成功的金额总值
-</h2><p>分析方法和上一题一模一样，就是网站配置文件 -&gt; dll -&gt; 逆向找数据库表</p>
-<p>同样的，我们找到补发测试的文件：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726114230203.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726114230203"
-	
-	
-></p>
-<p>中间寻找的过程就跳过，直接上逆向结果：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726114726692.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726114726692"
-	
-	
-></p>
-<p>这里找到的<code>VY_TestLog</code>不是表，是一个视图：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726114808846.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726114808846"
-	
-	
-></p>
-<p>在dll里面我们还能知道补发成功的逻辑：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726115007774.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726115007774"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">dataTable</span>.<span style="color:#e06c75">Rows</span>[<span style="color:#e06c75">i</span>][<span style="color:#98c379">&#34;YY1T_Type&#34;</span>].<span style="color:#e06c75">ToString</span>() == <span style="color:#98c379">&#34;3&#34;</span>)
-</span></span></code></pre></div><p>也就是说，如果<code>YY1T_CState == &quot;100&quot;</code>，则认为是成功的</p>
-<p>我们只需要查询视图中<code>YY1T_CState</code>字段为<code>100</code>，且<code>YY1T_CDate</code>在2019.10.1后的补发金额（<code>YY1T_Money</code>）总值：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#c678dd">sum</span>(<span style="color:#e06c75">YY1T_Money</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">VY_TestLog</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> <span style="color:#e06c75">YY1T_CState</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">100</span> <span style="color:#c678dd">and</span> <span style="color:#e06c75">YY1T_CDate</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#98c379">&#39;2019-10-01 00:00:00&#39;</span>
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250726115817343.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726115817343"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#d19a66">138408</span>.<span style="color:#d19a66">0000</span>
-</span></span></code></pre></div><h2 id="47检材-4-中对tx_iplog表进行分析所有在武汉市登录的次数为">47.检材 4 中，对&quot;TX_IpLog&quot;表进行分析，所有在&quot;武汉市&quot;登录的次数为
-</h2><p>找到该表：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726115952288.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726115952288"
-	
-	
-></p>
-<p>没什么弯绕，就是sql查询：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> jamvU1@wiwgug$bo
+</span></span></code></pre></div><h2 id="40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量">40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量
+</h2><p>在38题中得到的database数据库里进行查询：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#c678dd">count</span>(<span style="color:#56b6c2">*</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">TX_IpLog</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> <span style="color:#e06c75">XIL_Info</span> <span style="color:#c678dd">like</span> <span style="color:#98c379">&#39;&#39;</span><span style="color:#56b6c2">%</span>武汉<span style="color:#56b6c2">%</span><span style="color:#98c379">&#39;&#39;</span>
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250726120127294.png"
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">users</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> (<span style="color:#98c379">&#39;20231231&#39;</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">substr</span>(<span style="color:#e06c75">IDCARD</span>, <span style="color:#d19a66">7</span>, <span style="color:#d19a66">8</span>)) <span style="color:#c678dd">between</span> <span style="color:#d19a66">180000</span> <span style="color:#c678dd">and</span> <span style="color:#d19a66">300000</span>;
+</span></span></code></pre></div><p>得到结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250712112610915.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726120127294"
+		alt="image-20250712112610915"
 	
 	
 ></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2829
-</span></span></code></pre></div><h2 id="48重构该网站该嫌疑人下属代理liyun10账户下的余额有多少元">48.重构该网站，该嫌疑人下属代理&quot;liyun10&quot;账户下的余额有多少元
-</h2><p>点击结算管理，显示出了余额，说明我们页面没有找错：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726124953712.png"
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1572
+</span></span></code></pre></div><h2 id="41受害人小浩的手机号码是多少">41.受害人小浩的手机号码是多少
+</h2><p>在上面的数据库中没有找到叫小浩的人，微信和短信也没有小浩的联系方式</p>
+<p>结果是之前找到的11月.txt是受害者名单，怎么发现的呢？</p>
+<p>案件 -&gt; 快速分析 -&gt; 耗时任务 -&gt; 特征分析：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250712105749212.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726124953712"
+		alt="image-20250712105749212"
 	
 	
 ></p>
-<p>找到对应aspx文件，找dll，逆向：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726125132344.png"
+<p>分析任务完成后，在文件 -&gt; 检材 -&gt; 加密文件中找到TrueCrypt容器</p>
+<p>在检材1的20231212.E01/分区6/Users/rd/Documents下有一个新建文本文档.txt是加密容器，有88MB：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250712105717926.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726125132344"
+		alt="image-20250712105717926"
 	
 	
 ></p>
-<p>很奇怪，这里竟然什么逻辑也没有，猜测是继承的父类<code>Page_zhye</code></p>
-<p>这里唯一一个非系统库就是<code>RootDPage</code>，同样在检材3里面找到导出逆向</p>
-<p>果然，里面写出了完整的余额查询逻辑，而所有数据来源都是<code>MInfo</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726125423117.png"
+<p>之前备忘录发现的内容Vcpswd:edgewallet，在检材一edge密码中找到对应内容：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709205612210.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726125423117"
+		alt="image-20250709205612210"
 	
 	
 ></p>
-<p>这个函数也来自<code>WBus</code>，里面调用的是数据库中间处理函数<code>PD_MInfo</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726125600012.png"
+<p>从字面猜测这个密码应该就是vc加密的密码<code>pR7)nZ5&amp;yQ2-oR0&lt;</code>，而加密卷应该就是那个很大的txt文件</p>
+<p>挂载：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709205220440.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726125600012"
+		alt="image-20250709205220440"
 	
 	
 ></p>
-<p>在数据库找到<code>PD_MInfo</code>这个函数：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726125717692.png"
+<p>发现里面存在9月和10月两个名单：
+<img src="http://picture.928330.xyz/typora/image-20250709205824323.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726125717692"
+		alt="image-20250709205824323"
 	
 	
-></p>
-<p>这个查询里面涉及了很多张表，一一查看</p>
-<p>最终，在<code>TD_MJiFen</code>里面能找到一条数据，id就是我们登录的账号<code>liwente1314520</code>的，余额也对应：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726125848165.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726125848165"
-	
-	
-></p>
-<p>可是除此之外再也找不到其他的用户了，这是怎么回事？</p>
-<p>之前我们有使用到过用户表，是<code>TU</code>开头，而这个表是<code>TD</code>开头，那么用户是否也有一张一样的表呢？</p>
-<p>果然，我们找到了<code>TU_MJiFen</code>表！</p>
-<p>这个里面记录的就是所有用户的余额等信息，根据<code>TD_MJiFen</code>表，<code>_JiFen</code>字段就是真正的余额：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726130418048.png"
+>九月是未加密的txt文件，十月却不是txt文件，而是一个pk开头的压缩包，应该是和11月一样的加密方式</p>
+<p>压缩包密码藏在了FileCompress软件中，找出软件安装包（apk）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>FileCompress(com.zs.filecompress).bak/apps/com.zs.filecompress/a
+</span></span></code></pre></div><p>导出后，使用jadx逆向：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250710121649367.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726130418048"
+		alt="image-20250710121649367"
 	
 	
 ></p>
-<p>同样的，我们还能找到对应的<code>PU_MInfo</code>函数：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726131348136.png"
+<p>com下找到主函数，代码逻辑中得到密码<code>1!8Da9Re5it2b3a.</code>，解密10月和11月：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250709210608385.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250726131348136"
+		alt="image-20250709210608385"
 	
 	
 ></p>
-<p>在<code>TU_User</code>表里面，我们能找到<code>liyun10</code>对应的id是<code>1049</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726130533004.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726130533004"
-	
-	
-></p>
-<p>根据之前的<code>PU_MInfo</code>函数，它比对的是<code>UMJF_UU_ID</code>，也就是说在这个字段找<code>1049</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726130744630.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726130744630"
-	
-	
-></p>
-<p>或者直接使用sql语句查询：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#e06c75">UMJF_JiFen</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">TU_MJiFen</span> <span style="color:#c678dd">join</span> <span style="color:#e06c75">TU_User</span> <span style="color:#c678dd">on</span> <span style="color:#e06c75">UMJF_UU_Id</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">UU_Id</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> <span style="color:#e06c75">UU_Ln</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;liyun10&#39;</span>
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250726131737149.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726131737149"
-	
-	
-></p>
-<p>这就得到了<code>liyun10</code>的余额</p>
-<p><strong>不过这种方法太过麻烦，而且有一定的运气因素，万一猜错了表名什么的就完蛋了</strong></p>
-<p>换一种方式，在用户列表里面直接找到<code>liyun10</code>，进入后台：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726123147074.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726123147074"
-	
-	
-></p>
-<p>直接访问是失败的：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726123255986.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726123255986"
-	
-	
-></p>
-<p>在前面加上服务器ip，就能自动跳转到用户后台管理了：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>192.168.1.176/res/aspx/uin.aspx?user=liyun10&amp;pwd=F58249F4A628AE7B35753EA8416BA943&amp;t=fqgl
-</span></span></code></pre></div><p>在结算管理里面找到余额：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726123420385.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726123420385"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1066449
-</span></span></code></pre></div><p>其实做到这里也就知道为什么之前的方法不能直接找到用户余额表了，因为之前登录的管理员账号使用的结算管理页面.aspx文件和用户使用的不一样，我直接找只能找到管理（？的余额，总之不是liyun10的</p>
-<p>另外，直接看数据库余额是有小数部分的，但是答案格式只说是&quot;123456&quot;这样的纯数字，不知道会不会有冲突</p>
-<h2 id="49接上一题该用户的推广id是">49.接上一题，该用户的推广ID是
-</h2><p>链接代码中能看见：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726123946116.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726123946116"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>d0fdd7a9a010d37e
-</span></span></code></pre></div><h2 id="50接上一题该代理商户的最后一次登陆时间是">50.接上一题，该代理商户的最后一次登陆时间是
-</h2><p>登录日志里面啥也没有，注册信息里面倒是有：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250726124102502.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250726124102502"
-	
-	
-></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2016/9/5 17:09:13
-</span></span></code></pre></div><p>总算是做完了，part4真的是异常的艰难啊</p>
-
+<p>小浩的手机号：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>13533333333
+</span></span></code></pre></div><h2 id="42完整的受害人名单是几个人">42.完整的受害人名单是几个人
+</h2><p>上题得知，一共6人</p>
+<h2 id="43受害人转账的总金额是多少">43.受害人转账的总金额是多少
+</h2><p>检材二中有一次付款，加密备份中有两次付款，每次都是200，通过上下文语境能知道三次付款没有重叠</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>600
+</span></span></code></pre></div>
 </section>
 
 
@@ -2135,7 +1295,7 @@
 
 
         <span>
-            最后更新于 2025-07-26
+            最后更新于 2025-07-21
         </span>
     </section></footer>
 
@@ -2154,12 +1314,12 @@
             
                 
 <article class="">
-    <a href="/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
+    <a href="/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">中科实数杯2023取证总结</h2>
+            <h2 class="article-title">长安杯2020取证总结</h2>
         </div>
     </a>
 </article>
