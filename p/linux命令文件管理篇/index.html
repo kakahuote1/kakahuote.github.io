@@ -1,0 +1,3301 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Linux中与文件管理有关的命令及基本知识">
+<title>Linux命令（文件管理篇）</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="Linux命令（文件管理篇）">
+<meta property='og:description' content="Linux中与文件管理有关的命令及基本知识">
+<meta property='og:url' content='https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-08-06T13:08:02&#43;08:00'/><meta property='article:modified_time' content='2025-08-06T14:22:27&#43;08:00'/>
+<meta name="twitter:title" content="Linux命令（文件管理篇）">
+<meta name="twitter:description" content="Linux中与文件管理有关的命令及基本知识">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#pwd--显示当前工作目录的完整路径">pwd —— 显示当前工作目录的完整路径</a>
+      <ol>
+        <li><a href="#语法格式">语法格式</a></li>
+        <li><a href="#linux工作目录">Linux工作目录</a></li>
+        <li><a href="#常用参数">常用参数</a></li>
+        <li><a href="#使用示例">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#cd--切换当前工作目录">cd —— 切换当前工作目录</a>
+      <ol>
+        <li><a href="#语法格式-1">语法格式</a></li>
+        <li><a href="#linux路径与特殊目录">Linux路径与特殊目录</a></li>
+        <li><a href="#常用参数-1">常用参数</a></li>
+        <li><a href="#使用示例-1">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#ls--显示目录中的文件及其属性信息">ls —— 显示目录中的文件及其属性信息</a>
+      <ol>
+        <li><a href="#语法格式-2">语法格式</a></li>
+        <li><a href="#linux的目录特点">Linux的目录特点</a></li>
+        <li><a href="#linux匹配技法">Linux匹配技法</a>
+          <ol>
+            <li><a href="#通配符与pattern">通配符与PATTERN</a>
+              <ol>
+                <li><a href="#星号">星号：*</a></li>
+                <li><a href="#问号">问号：?</a></li>
+                <li><a href="#中括号">中括号：[]</a></li>
+              </ol>
+            </li>
+            <li><a href="#大括号扩展">大括号扩展</a>
+              <ol>
+                <li><a href="#简单列举">简单列举</a></li>
+                <li><a href="#数字序列">数字序列</a></li>
+                <li><a href="#字符序列">字符序列</a></li>
+                <li><a href="#带步进的序列">带步进的序列</a></li>
+                <li><a href="#嵌套大括号">嵌套大括号</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#常用参数-2">常用参数</a>
+          <ol>
+            <li><a href="#内容显示">内容显示</a></li>
+            <li><a href="#格式控制">格式控制</a></li>
+            <li><a href="#排序方式">排序方式</a></li>
+            <li><a href="#排序方式--sort">排序方式 —— sort</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-2">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#tree--以树状图格式显示目录内容">tree —— 以树状图格式显示目录内容</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#语法格式-3">语法格式</a></li>
+            <li><a href="#常用参数-3">常用参数</a>
+              <ol>
+                <li><a href="#核心功能">核心功能</a></li>
+                <li><a href="#格式控制-1">格式控制</a></li>
+                <li><a href="#内容筛选">内容筛选</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-3">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#chmod--更改文件或目录的访问权限">chmod —— 更改文件或目录的访问权限</a>
+      <ol>
+        <li><a href="#语法格式-4">语法格式</a>
+          <ol>
+            <li><a href="#数字模式">数字模式</a></li>
+            <li><a href="#符号模式">符号模式</a></li>
+          </ol>
+        </li>
+        <li><a href="#linux文件权限模型">Linux文件权限模型</a></li>
+        <li><a href="#符号模式-1">符号模式</a></li>
+        <li><a href="#常用参数-4">常用参数</a>
+          <ol>
+            <li><a href="#命令行选项">命令行选项</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-4">使用示例</a>
+          <ol>
+            <li><a href="#数字模式-1">数字模式</a></li>
+            <li><a href="#符号模式-2">符号模式</a></li>
+            <li><a href="#其他">其他</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#chgrp--chown--更改文件或目录的所有者和所属组">chgrp &amp; chown —— 更改文件或目录的所有者和所属组</a>
+      <ol>
+        <li><a href="#语法格式-5">语法格式</a>
+          <ol>
+            <li><a href="#chown">chown</a></li>
+            <li><a href="#chgrp">chgrp</a></li>
+          </ol>
+        </li>
+        <li><a href="#linux所有者与所属组">Linux所有者与所属组</a></li>
+        <li><a href="#常用参数-5">常用参数</a></li>
+        <li><a href="#使用示例-5">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#mkdir--创建目录文件">mkdir —— 创建目录文件</a>
+      <ol>
+        <li><a href="#语法格式-6">语法格式</a></li>
+        <li><a href="#linux的umask权限控制">Linux的umask权限控制</a></li>
+        <li><a href="#常用参数-6">常用参数</a>
+          <ol>
+            <li><a href="#核心功能-1">核心功能</a></li>
+            <li><a href="#权限控制">权限控制</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-6">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#touch--创建空文件更新文件的时间戳">touch —— 创建空文件/更新文件的时间戳</a>
+      <ol>
+        <li><a href="#语法格式-7">语法格式</a></li>
+        <li><a href="#linux文件时间戳">Linux文件时间戳</a></li>
+        <li><a href="#常用参数-7">常用参数</a></li>
+        <li><a href="#使用示例-7">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#find--在目录中搜索文件">find —— 在目录中搜索文件</a>
+      <ol>
+        <li><a href="#语法格式-8">语法格式</a></li>
+        <li><a href="#find命令的核心表达式引擎">find命令的核心：表达式引擎</a></li>
+        <li><a href="#常用参数-8">常用参数</a>
+          <ol>
+            <li><a href="#按名称路径测试">按名称/路径测试</a></li>
+            <li><a href="#按类型大小时间测试">按类型/大小/时间测试</a></li>
+            <li><a href="#对结果执行的动作">对结果执行的动作</a></li>
+            <li><a href="#逻辑操作符">逻辑操作符</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-8">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#cp--复制文件目录">cp —— 复制文件/目录</a>
+      <ol>
+        <li><a href="#语法格式-9">语法格式</a></li>
+        <li><a href="#linux文件属性">Linux文件属性</a></li>
+        <li><a href="#常用参数-9">常用参数</a>
+          <ol>
+            <li><a href="#核心功能-2">核心功能</a></li>
+            <li><a href="#链接">链接</a></li>
+            <li><a href="#强制">强制</a></li>
+            <li><a href="#备份">备份</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-9">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#mv--移动重命名文件">mv —— 移动/重命名文件</a>
+      <ol>
+        <li><a href="#语法格式-10">语法格式</a></li>
+        <li><a href="#mv的工作原理">mv的工作原理</a>
+          <ol>
+            <li><a href="#在同一个文件系统内移动">在同一个文件系统内移动</a></li>
+            <li><a href="#在不同的文件系统间移动">在不同的文件系统间移动</a></li>
+          </ol>
+        </li>
+        <li><a href="#常用参数-10">常用参数</a>
+          <ol>
+            <li><a href="#核心功能-3">核心功能</a></li>
+            <li><a href="#强制-1">强制</a></li>
+            <li><a href="#备份-1">备份</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-10">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#rm--删除文件或目录">rm —— 删除文件或目录</a>
+      <ol>
+        <li><a href="#语法格式-11">语法格式</a></li>
+        <li><a href="#linux文件删除的重要特性">Linux文件删除的重要特性</a></li>
+        <li><a href="#常用参数-11">常用参数</a></li>
+        <li><a href="#使用示例-11">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#rmdir--删除空目录">rmdir —— 删除空目录</a>
+      <ol>
+        <li><a href="#语法格式-12">语法格式</a></li>
+        <li><a href="#rmdir-与-rm--r">rmdir 与 rm -r</a></li>
+        <li><a href="#常用参数-12">常用参数</a></li>
+        <li><a href="#使用示例-12">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#tar--文件归档与压缩工具">tar —— 文件归档与压缩工具</a>
+      <ol>
+        <li><a href="#语法格式-13">语法格式</a>
+          <ol>
+            <li><a href="#创建归档">创建归档</a></li>
+            <li><a href="#查看归档内容">查看归档内容</a></li>
+            <li><a href="#提取归档内容">提取归档内容</a></li>
+          </ol>
+        </li>
+        <li><a href="#归档与压缩">归档与压缩</a>
+          <ol>
+            <li><a href="#归档">归档</a></li>
+            <li><a href="#压缩">压缩</a></li>
+          </ol>
+        </li>
+        <li><a href="#常用参数-13">常用参数</a>
+          <ol>
+            <li><a href="#主选项必须选择其一">主选项（必须选择其一）</a></li>
+            <li><a href="#辅助选项常用">辅助选项（常用）</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-13">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#ln--创建文件或目录的链接">ln —— 创建文件或目录的链接</a>
+      <ol>
+        <li><a href="#语法格式-14">语法格式</a></li>
+        <li><a href="#硬链接-hard-link-vs-符号链接-symbolic-link">硬链接 (Hard Link) vs. 符号链接 (Symbolic Link)</a></li>
+        <li><a href="#常用参数-14">常用参数</a></li>
+        <li><a href="#使用示例-14">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#file--辨别文件类型">file —— 辨别文件类型</a>
+      <ol>
+        <li><a href="#语法格式-15">语法格式</a></li>
+        <li><a href="#linux文件类型与魔数">Linux文件类型与“魔数”</a></li>
+        <li><a href="#常用参数-15">常用参数</a>
+          <ol>
+            <li><a href="#核心功能-4">核心功能</a></li>
+            <li><a href="#文件列表控制">文件列表控制</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例-15">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#file拓展--mime类型">file拓展 —— MIME类型</a>
+      <ol>
+        <li><a href="#什么是mime类型">什么是MIME类型</a></li>
+        <li><a href="#mime类型的格式">MIME类型的格式</a></li>
+        <li><a href="#常见mime类型">常见MIME类型</a>
+          <ol>
+            <li><a href="#text">text</a></li>
+            <li><a href="#image">image</a></li>
+            <li><a href="#audio">audio</a></li>
+            <li><a href="#video">video</a></li>
+            <li><a href="#application">application</a></li>
+            <li><a href="#multipart">multipart</a></li>
+            <li><a href="#message">message</a></li>
+            <li><a href="#font">font</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
+                技术学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/">Linux命令（文件管理篇）</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            Linux中与文件管理有关的命令及基本知识
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-08-06</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-08-06
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>linux命令解析 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间</p>
+<p>现在终于得闲了，嘻嘻</p>
+<p>我个人人为，与其单独地学习linux的知识点，不如从常见的命令开始，跟着命令一起学习</p>
+<p>依照知识点和命令，循序渐进，应该也比较容易接受</p>
+<p>于是就有了这篇文章。</p>
+<p>希望被我引流进来的你，能完整地看完！</p>
+<h1 id="pwd--显示当前工作目录的完整路径">pwd —— 显示当前工作目录的完整路径
+</h1><p><code>pwd</code>全称是 <strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory，用于显示当前终端所在的工作目录的完整路径</p>
+<h2 id="语法格式">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">pwd</span> <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span>
+</span></span></code></pre></div><p><code>pwd</code>命令通常不与路径参数一起使用，因为它总是显示当前所在的位置</p>
+<h2 id="linux工作目录">Linux工作目录
+</h2><ul>
+<li>在Linux中，每个进程（包括正在使用的shell终端）都有一个当前工作目录，我们执行的所有相对路径命令都是基于这个目录的</li>
+<li>路径分为物理路径和逻辑路径，物理路径是文件系统上不包含任何符                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             号链接的真实路径，逻辑路径则可能包含符号链接，<code>pwd</code>命令可以在这两种路径之间进行切换</li>
+</ul>
+<h2 id="常用参数">常用参数
+</h2><p><code>pwd</code>的参数非常少，主要就是以下两个，用于处理符号链接的情况：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-L</td>
+          <td><strong>逻辑路径</strong><br />显示包含符号链接的路径，这是大多数shell中的默认行为。</td>
+      </tr>
+      <tr>
+          <td>-P</td>
+          <td><strong>物理路径</strong><br />显示解析所有符号链接后的真实物理路径，不包含<code>.</code>或<code>..</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例">使用示例
+</h2><p>没有示例，这个很简单，自己用去吧</p>
+<h1 id="cd--切换当前工作目录">cd —— 切换当前工作目录
+</h1><p><code>cd</code>全名<strong>c</strong>hange <strong>d</strong>irectory(改变目录)，其功能是切换用户当前所在工作目录</p>
+<h2 id="语法格式-1">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span> <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;目标路径&gt;
+</span></span></code></pre></div><h2 id="linux路径与特殊目录">Linux路径与特殊目录
+</h2><ul>
+<li><strong>绝对路径</strong>：从根目录<code>/</code>开始的完整路径，例如<code>/home/user/documents</code></li>
+<li><strong>相对路径</strong>：从当前工作目录开始的路径，不以<code>/</code>开头，例如<code>../pictures</code></li>
+<li><strong>特殊目录快捷方式</strong>：
+<ul>
+<li><code>~</code>：当前用户的<strong>主目录</strong></li>
+<li><code>-</code>：<strong>上一次</strong>所在的目录</li>
+<li><code>.</code>：<strong>当前</strong>目录</li>
+<li><code>..</code>：<strong>上一级</strong>目录</li>
+</ul>
+</li>
+</ul>
+<h2 id="常用参数-1">常用参数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-L</td>
+          <td><strong>遵循逻辑路径</strong><br />如果要切换到的目录是一个符号链接，则进入该符号链接本身。这是默认行为</td>
+      </tr>
+      <tr>
+          <td>-P</td>
+          <td><strong>遵循物理路径</strong><br />在切换目录前，解析所有的符号链接，直接进入其指向的真实物理目录</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-1">使用示例
+</h2><ul>
+<li>
+<p>使用绝对路径切换到系统日志目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span> /var/log
+</span></span></code></pre></div></li>
+<li>
+<p>使用相对路径进入当前目录下的子目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span> dir
+</span></span></code></pre></div></li>
+<li>
+<p>返回主目录，有两种方式</p>
+<p><strong>不带任何参数：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span>
+</span></span></code></pre></div><p><strong>或者使用<code>~</code>快捷方式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span> ~
+</span></span></code></pre></div></li>
+<li>
+<p>切换到上一级目录 —— 这是日常操作中使用频率非常高的命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span> ..
+</span></span></code></pre></div></li>
+<li>
+<p>在当前目录和上一个目录之间切换</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span> -
+</span></span></code></pre></div></li>
+<li>
+<p>切换到包含特殊字符的目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#e5c07b">cd</span> <span style="color:#98c379">&#34;My Documents&#34;</span>
+</span></span></code></pre></div><p><strong>如果目录名包含空格或其它特殊字符，需要用引号将其包裹起来</strong></p>
+</li>
+</ul>
+<h1 id="ls--显示目录中的文件及其属性信息">ls —— 显示目录中的文件及其属性信息
+</h1><h2 id="语法格式-2">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;文件目录名&gt;
+</span></span></code></pre></div><h2 id="linux的目录特点">Linux的目录特点
+</h2><ul>
+<li>
+<p>linux文件或者目录名称最长可达256个字符</p>
+</li>
+<li>
+<p>以<code>.</code>开头的文件是隐藏文件，需要用<code>-a</code>参数才能显示</p>
+</li>
+<li>
+<p><code>.</code>代表当前目录</p>
+</li>
+<li>
+<p><code>..</code>代表上一级目录</p>
+</li>
+</ul>
+<h2 id="linux匹配技法">Linux匹配技法
+</h2><p>使用命令对文件进行操作的时候，如果有很多文件需要处理，我们一个个去寻找、执行，那就太过耗时</p>
+<p>为了减少时间，我们可以使用正则，也能使用shell自带的匹配方式，下面就来介绍两种</p>
+<h3 id="通配符与pattern">通配符与PATTERN
+</h3><p><strong>Linux通配符是shell提供的一种字符模式匹配机制（PATTERN），常用于文件名匹配与路径匹配</strong></p>
+<p><strong>它属于通配符扩展机制，不是正则表达式，但语法上有些相似</strong></p>
+<h4 id="星号">星号：*
+</h4><p><strong><code>*</code>可以匹配任意数量的任意字符（包括 0 个字符）</strong></p>
+<p>匹配所有以 <code>.txt</code> 结尾的文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls *.txt
+</span></span></code></pre></div><p>匹配所有以 <code>file</code> 开头的文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls file*
+</span></span></code></pre></div><h4 id="问号">问号：?
+</h4><p><strong><code>?</code>可以匹配任意一个字符</strong></p>
+<p>匹配<code>file1.txt</code>、<code>fileA.txt</code>，但不匹配<code>file10.txt</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls file?.txt
+</span></span></code></pre></div><h4 id="中括号">中括号：[]
+</h4><p><strong>匹配<code>[]</code>内的任意一个字符或字符范围</strong></p>
+<p>匹配 <code>file1.txt</code>、<code>file2.txt</code>、<code>file3.txt</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls file<span style="color:#56b6c2">[</span>123<span style="color:#56b6c2">]</span>.txt
+</span></span></code></pre></div><p><strong>在<code>[]</code>中使用连字符<code>-</code>表示字符范围</strong></p>
+<p>匹配 <code>filea.txt</code> 到 <code>filez.txt</code> 的所有单个字母文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls file<span style="color:#56b6c2">[</span>a-z<span style="color:#56b6c2">]</span>.txt
+</span></span></code></pre></div><p><strong>可加 <code>^</code> 或 <code>!</code> 表示取反（排除匹配）</strong></p>
+<p>匹配不包含小写字母的文件名：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls file<span style="color:#56b6c2">[</span>!a-z<span style="color:#56b6c2">]</span>.txt
+</span></span></code></pre></div><h3 id="大括号扩展">大括号扩展
+</h3><p><strong>大括号扩展用于生成字符串序列，执行前由shell展开，并不会匹配文件名</strong></p>
+<h4 id="简单列举">简单列举
+</h4><p>格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&lt;前缀&gt;<span style="color:#56b6c2">{</span>值1,值2,...<span style="color:#56b6c2">}</span>&lt;后缀&gt;
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">echo</span> file<span style="color:#56b6c2">{</span>A,B,C<span style="color:#56b6c2">}</span>.txt
+</span></span></code></pre></div><p>展开为<code>fileA.txt fileB.txt fileC.txt</code></p>
+<h4 id="数字序列">数字序列
+</h4><p>格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#56b6c2">{</span>起始..结束<span style="color:#56b6c2">}</span>
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">echo</span> file<span style="color:#56b6c2">{</span>1..5<span style="color:#56b6c2">}</span>.txt
+</span></span></code></pre></div><p>展开为<code>file1.txt file2.txt file3.txt file4.txt file5.txt</code></p>
+<h4 id="字符序列">字符序列
+</h4><p>格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#56b6c2">{</span>a..z<span style="color:#56b6c2">}</span>
+</span></span></code></pre></div><p>eg：</p>
+<pre tabindex="0"><code>echo {a..d}
+</code></pre><p>展开为<code>a b c d</code></p>
+<h4 id="带步进的序列">带步进的序列
+</h4><p>格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#56b6c2">{</span>起始..结束..步长<span style="color:#56b6c2">}</span>
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">echo</span> <span style="color:#56b6c2">{</span>1..10..2<span style="color:#56b6c2">}</span>
+</span></span></code></pre></div><p>展开为<code>1 3 5 7 9</code></p>
+<h4 id="嵌套大括号">嵌套大括号
+</h4><p>多个括号组合使用，会展开所有组合方式</p>
+<p>eg：</p>
+<pre tabindex="0"><code>echo {A,B}{1,2}
+</code></pre><p>展开为 <code>A1 A2 B1 B2</code></p>
+<h2 id="常用参数-2">常用参数
+</h2><h3 id="内容显示">内容显示
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-a</td>
+          <td><strong>显示所有文件及目录，包括<code>.</code>开头的隐藏目录</strong></td>
+      </tr>
+      <tr>
+          <td>-A</td>
+          <td><strong>不显示当前目录(<code>.</code>)和父目录(<code>..</code>)</strong></td>
+      </tr>
+      <tr>
+          <td>-R</td>
+          <td><strong>递归显示所有子文件</strong></td>
+      </tr>
+      <tr>
+          <td>-d</td>
+          <td><strong>只显示目录本身，不列出目录内容</strong></td>
+      </tr>
+      <tr>
+          <td>-i</td>
+          <td><strong>显示文件的 inode 号码</strong></td>
+      </tr>
+      <tr>
+          <td>-l</td>
+          <td><strong>显示文件的详细信息，包含权限、所有者、大小、修改时间等</strong></td>
+      </tr>
+      <tr>
+          <td>-h</td>
+          <td><strong>与<code>-l</code>一起使用，以更易读的单位（如<code>K</code>, <code>M</code>, <code>G</code>）来显示文件大小</strong></td>
+      </tr>
+      <tr>
+          <td>-s</td>
+          <td><strong>显示文件占用的磁盘块数</strong></td>
+      </tr>
+      <tr>
+          <td>-L</td>
+          <td><strong>显示符号链接指向文件的详细信息</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;full-time</td>
+          <td><strong>显示完整时间戳（精确到秒）</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="格式控制">格式控制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-m</td>
+          <td><strong>水平显示文件信息</strong><br />间隔符是逗号</td>
+      </tr>
+      <tr>
+          <td>-F</td>
+          <td><strong>在文件名后附加一个字符以表示文件类型：<br /><code>/</code>代表目录，<code>*</code>代表可执行文件，<code>@</code>代表符号链接</strong></td>
+      </tr>
+      <tr>
+          <td>-p</td>
+          <td><strong>在目录名的末尾加上一个斜杠<code>/</code></strong><br />与<code>-F</code>类似但更简洁</td>
+      </tr>
+      <tr>
+          <td>-1</td>
+          <td><strong>强制每行只显示一个文件</strong><br />没有-2，-3..</td>
+      </tr>
+      <tr>
+          <td>&ndash;color=never/auto/always</td>
+          <td><strong>为输出内容添加颜色以区分不同文件类型</strong><br /><code>never</code>不显示，<code>auto</code>自动显示（默认），<code>always</code>强制使用</td>
+      </tr>
+      <tr>
+          <td>-C</td>
+          <td><strong>按列显示</strong><br />默认行为，当输出不是终端时生效</td>
+      </tr>
+      <tr>
+          <td>-x</td>
+          <td><strong>横向显示文件名</strong><br />按行排列</td>
+      </tr>
+      <tr>
+          <td>-N</td>
+          <td><strong>显示文件名时不对特殊字符转义（显示原始文件名）</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;group-directories-first</td>
+          <td><strong>让目录显示在前，文件显示在后</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;time=WORD</td>
+          <td><strong>指定使用哪种时间</strong><br /><code>mtime</code>/<code>modification</code>修改时间（默认）<br /><code>atime</code>/<code>access</code>/<code>use</code>访问时间<br /><code>ctime</code>/<code>change</code>状态改变时间<br /><code>birth</code>创建时间</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="排序方式">排序方式
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-t</td>
+          <td>按<strong>修改时间</strong>排序，最新的文件排在最前面</td>
+      </tr>
+      <tr>
+          <td>-S</td>
+          <td>按<strong>文件大小</strong>排序，最大的文件排在最前面</td>
+      </tr>
+      <tr>
+          <td>-r</td>
+          <td>将当前的排序结果<strong>反向</strong>排列</td>
+      </tr>
+      <tr>
+          <td>-X</td>
+          <td>按文件<strong>扩展名</strong>的字母顺序排序</td>
+      </tr>
+      <tr>
+          <td>-c</td>
+          <td>按<strong>文件状态改变时间</strong>排序（如权限变更时间）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="排序方式--sort">排序方式 —— sort
+</h3><p><strong><code>--sort=WORD</code>可以指定排序方式</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>WORD</th>
+          <th>排序方式说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>none</td>
+          <td>不排序，按目录项原始顺序显示（通常是创建顺序）</td>
+      </tr>
+      <tr>
+          <td>name</td>
+          <td>按名称（文件名）排序（默认行为）</td>
+      </tr>
+      <tr>
+          <td>extension 或 version</td>
+          <td>按文件扩展名排序</td>
+      </tr>
+      <tr>
+          <td>size</td>
+          <td>按文件大小排序（大文件在前）</td>
+      </tr>
+      <tr>
+          <td>time</td>
+          <td>按默认时间（即<code>--time=modification</code>）排序</td>
+      </tr>
+      <tr>
+          <td>atime 或 access 或 use</td>
+          <td>按访问时间排序</td>
+      </tr>
+      <tr>
+          <td>ctime 或 status</td>
+          <td>按状态更改时间排序（如权限改变）</td>
+      </tr>
+      <tr>
+          <td>birth</td>
+          <td>按创建时间排序（如果系统支持）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-2">使用示例
+</h2><ul>
+<li>
+<p>显示<code>/dev</code>目录下所有以<code>sd</code>开头的文件列表（<strong>结合通配符</strong>）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls /dev/sd*
+</span></span></code></pre></div></li>
+<li>
+<p>依据文件内容大小进行排序，显示指定目录里的文件名以及详细信息（<strong>组合使用参数</strong>）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -Sl /etc
+</span></span></code></pre></div><p><strong>从这里也能看出，linux命令参数是不需要使用多个<code>-</code>的（<code>-S</code> <code>-l</code>），写在一起即可（<code>-Sl</code>）</strong></p>
+</li>
+</ul>
+<h1 id="tree--以树状图格式显示目录内容">tree —— 以树状图格式显示目录内容
+</h1><p><code>tree</code>会以图形化的树状结构来显示文件和目录，比<code>ls</code>命令更直观、更清晰地展示目录的层次关系</p>
+<p>并非所有Linux发行版的最小化安装都自带此命令</p>
+<h3 id="语法格式-3">语法格式
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tree <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> <span style="color:#56b6c2">[</span>目录路径<span style="color:#56b6c2">]</span>
+</span></span></code></pre></div><h3 id="常用参数-3">常用参数
+</h3><h4 id="核心功能">核心功能
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-d</td>
+          <td><strong>只显示目录</strong>，不显示文件</td>
+      </tr>
+      <tr>
+          <td>-L &lt;层级&gt;</td>
+          <td><strong>指定要显示的目录层级深度</strong><br />例如，<code>-L 2</code>表示最多显示到第二层目录</td>
+      </tr>
+      <tr>
+          <td>-f</td>
+          <td><strong>显示每个文件或目录的完整路径前缀</strong></td>
+      </tr>
+      <tr>
+          <td>-a</td>
+          <td><strong>显示所有文件，包括以<code>.</code>开头的隐藏文件</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="格式控制-1">格式控制
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-h</td>
+          <td><strong>以人类可读的格式（如 K, M, G）显示文件大小</strong></td>
+      </tr>
+      <tr>
+          <td>-p</td>
+          <td><strong>显示文件和目录的权限</strong></td>
+      </tr>
+      <tr>
+          <td>-u</td>
+          <td><strong>显示文件或目录的所有者</strong></td>
+      </tr>
+      <tr>
+          <td>-g</td>
+          <td><strong>显示文件或目录的所属组</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;du</td>
+          <td><strong>显示每个目录包含内容的总大小</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="内容筛选">内容筛选
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-P PATTERN</td>
+          <td><strong>只显示</strong>匹配<code>PATTERN</code>通配符模式的文件和目录</td>
+      </tr>
+      <tr>
+          <td>-I PATTERN</td>
+          <td><strong>不显示</strong>匹配<code>PATTERN</code>通-符模式的文件和目录</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-3">使用示例
+</h2><ul>
+<li>
+<p>展示/etc目录下两层内的目录结构</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>tree -d -L <span style="color:#d19a66">2</span> /etc
+</span></span></code></pre></div></li>
+<li>
+<p>只显示当前目录结构中所有以.c或.h结尾的文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>tree -P <span style="color:#98c379">&#34;*.c|*.h&#34;</span>
+</span></span></code></pre></div><p><strong>目录本身还是会显示出来，只是不再显示具体的文件，以便维持树状结构</strong></p>
+</li>
+<li>
+<p>显示当前目录的结构，但排除bak和none这两个目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>tree -I <span style="color:#98c379">&#34;bak|none&#34;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="chmod--更改文件或目录的访问权限">chmod —— 更改文件或目录的访问权限
+</h1><p><code>chmod</code>全称是<strong>ch</strong>ange <strong>mod</strong>e(改变模式)，其功能是更改文件或目录的访问权限，决定了哪些用户可以对它们进行读、写、执行等操作</p>
+<h2 id="语法格式-4">语法格式
+</h2><h3 id="数字模式">数字模式
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;八进制权限码&gt; &lt;文件名&gt;/&lt;目录名&gt;
+</span></span></code></pre></div><h3 id="符号模式">符号模式
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> <span style="color:#56b6c2">[</span>who<span style="color:#56b6c2">][</span>operator<span style="color:#56b6c2">][</span>permission<span style="color:#56b6c2">]</span> &lt;文件名&gt;/&lt;目录名&gt;
+</span></span></code></pre></div><h2 id="linux文件权限模型">Linux文件权限模型
+</h2><p>Linux中的文件和目录权限使用三种基本权限 (Permission)：</p>
+<ul>
+<li><strong><code>r</code>: read (读权限)</strong></li>
+<li><strong><code>w</code>: write (写权限)</strong></li>
+<li><strong><code>x</code>: execute (执行权限)</strong>
+<ul>
+<li><strong>对文件而言</strong>： 是否能运行这个文件</li>
+<li><strong>对目录而言</strong>：是否可以进入该目录（cd）或使用该路径（ln）</li>
+</ul>
+</li>
+</ul>
+<p>而这三个权限分别对应着八进制数值：</p>
+<ul>
+<li><strong>读（r） = 4</strong></li>
+<li><strong>写（w） = 2</strong></li>
+<li><strong>执行（x） = 1</strong></li>
+</ul>
+<p>通过将这些权限数值相加，可以组合出不同的权限（<code>-</code>表示没有对应权限），比如：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>数字</th>
+          <th>权限组合</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>7</td>
+          <td>4+2+1 = rwx</td>
+          <td>可读、可写、可执行</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>4+2 = rw-</td>
+          <td>可读、可写</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>4+1 = r-x</td>
+          <td>可读、可执行</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>4 = r&ndash;</td>
+          <td>只读</td>
+      </tr>
+      <tr>
+          <td>0</td>
+          <td>0 = &mdash;</td>
+          <td>没有权限</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>Linux中权限分配给三类用户 (Who)：</p>
+<ul>
+<li><strong><code>u</code>: user (文件所有者)</strong></li>
+<li><strong><code>g</code>: group (文件所属组)</strong></li>
+<li><strong><code>o</code>: others (其他人)</strong></li>
+</ul>
+<p>除此之外还有一个表示三类用户集合的标志：</p>
+<ul>
+<li><strong><code>a</code>: all (所有人, <code>u</code>, <code>g</code>, <code>o</code>的合集)</strong></li>
+</ul>
+<p><code>u</code>、<code>g</code>、<code>o</code>分别对应三个八进制权限码数值，利用三位数字组合我们就能表示出三类用户的权限，例如权限值 755 就表示：</p>
+<ul>
+<li><strong>用户权限：7（rwx）</strong></li>
+<li><strong>组权限：5（r-x）</strong></li>
+<li><strong>其他权限：5（r-x）</strong></li>
+</ul>
+<p>常见权限对应关系如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>权限值</th>
+          <th>符号形式</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>777</td>
+          <td>rwxrwxrwx</td>
+          <td>所有人可读写执行（不安全）</td>
+      </tr>
+      <tr>
+          <td>755</td>
+          <td>rwxr-xr-x</td>
+          <td>用户有全部权限，其他用户只能读执行</td>
+      </tr>
+      <tr>
+          <td>700</td>
+          <td>rwx&mdash;&mdash;</td>
+          <td>仅用户本人拥有权限</td>
+      </tr>
+      <tr>
+          <td>644</td>
+          <td>rw-r&ndash;r&ndash;</td>
+          <td>用户可读写，其他用户只读</td>
+      </tr>
+      <tr>
+          <td>600</td>
+          <td>rw&mdash;&mdash;-</td>
+          <td>仅用户本人可读写（常用于私密文件）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>可以使用之前学过的<code>ls -l</code>命令查看权限，例如：</p>
+<pre tabindex="0"><code>drwxr-xr-x  2 user group 4096 Jul 29 10:00 mydir
+</code></pre><p>其中的<code>rwxr-xr-x</code>就是755</p>
+<h2 id="符号模式-1">符号模式
+</h2><p>这是<code>chmod</code>最直观易读的用法，它通过明确的符号来增、删或设定权限</p>
+<p>符号模式的命令由三部分构成（各部分之间没有空格，下面加空格是为了方便观看）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#56b6c2">[</span>who<span style="color:#56b6c2">]</span>  <span style="color:#56b6c2">[</span>operator<span style="color:#56b6c2">]</span>  <span style="color:#56b6c2">[</span>permission<span style="color:#56b6c2">]</span>
+</span></span></code></pre></div><ul>
+<li><strong><code>who</code> (作用对象)</strong>：指定要为哪类用户更改权限
+<ul>
+<li><code>u</code>: user/所有者</li>
+<li><code>g</code>: group/所属组</li>
+<li><code>o</code>: others/其他人</li>
+<li><code>a</code>: all/所有人（如果省略who，则默认为a）</li>
+</ul>
+</li>
+<li><strong><code>operator</code> (操作符)</strong>：指定要执行的操作
+<ul>
+<li><code>+</code>: <strong>添加</strong>指定的权限</li>
+<li><code>-</code>: <strong>移除</strong>指定的权限</li>
+<li><code>=</code>: <strong>覆盖</strong>原有的权限，只给予指定的权限</li>
+</ul>
+</li>
+<li><strong><code>permission</code> (权限)</strong>：指定<code>r</code>, <code>w</code>, <code>x</code>中的一种或多种</li>
+</ul>
+<p>将这三部分组合起来，就可以精确地调整权限</p>
+<p><strong>可以同时进行多个组合，用逗号<code>,</code>隔开</strong></p>
+<h2 id="常用参数-4">常用参数
+</h2><h3 id="命令行选项">命令行选项
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-R</td>
+          <td><strong>递归地更改目录及其下所有文件和子目录的权限</strong></td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程</strong>，显示每个文件权限的更改情况</td>
+      </tr>
+      <tr>
+          <td>-c</td>
+          <td><strong>只在权限确实发生更改时才显示报告</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;reference=&lt;参考文件&gt;</td>
+          <td><strong>将权限设置成参考文件的权限</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-4">使用示例
+</h2><h3 id="数字模式-1">数字模式
+</h3><p>这是最常用的设置权限的方法，但是需要一些记忆</p>
+<ul>
+<li>
+<p>为脚本添加执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod <span style="color:#d19a66">755</span> my_script.sh
+</span></span></code></pre></div><p><strong>这是常见用法之一，<code>755</code>权限(<code>rwxr-xr-x</code>)意味着：所有者可以读、写、执行；所属组和其他人可以读和执行，这使得脚本可以被所有者修改，被所有人执行</strong></p>
+</li>
+<li>
+<p>设置一个私密文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod <span style="color:#d19a66">600</span> private_key.pem
+</span></span></code></pre></div><p><strong><code>600</code>权限(<code>rw-------</code>)意味着只有文件所有者可以读写该文件，其他人没有任何权限</strong></p>
+</li>
+<li>
+<p>将/var/www/html目录以及其下所有文件和子目录的权限都设置为755（目录）或644（文件）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod -R <span style="color:#d19a66">755</span> /var/www/html
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="符号模式-2">符号模式
+</h3><p>这种模式在不希望重新计算整个三位数字，只想微调某个权限时非常有用，很方便</p>
+<ul>
+<li>
+<p>为所有用户添加执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod a+x file
+</span></span></code></pre></div><p><strong>与<code>chmod 755</code>一样，常见于设置脚本权限</strong></p>
+</li>
+<li>
+<p>为所属组和其他人移除写权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod go-w file
+</span></span></code></pre></div></li>
+<li>
+<p>为文件所有者设置固定的读写权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod <span style="color:#e06c75">u</span><span style="color:#56b6c2">=</span>rw file
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="其他">其他
+</h3><ul>
+<li>
+<p>把new.txt文件权限修改成和old.txt一样</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod --reference<span style="color:#56b6c2">=</span>old.txt new.txt
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="chgrp--chown--更改文件或目录的所有者和所属组">chgrp &amp; chown —— 更改文件或目录的所有者和所属组
+</h1><p><strong><code>chgrp</code><strong>名称来源于 “<strong>ch</strong>ange <strong>gr</strong>ou</strong>p</strong>”，专门用于更改文件或目录的<strong>所属组</strong></p>
+<p><strong><code>chown</code><strong>名称来源于 “<strong>ch</strong>ange <strong>own</strong>er”，它更加强大，也更加常用，因为它既可以更改文件或目录的</strong>所有者</strong>，也可以同时更改<strong>所属组</strong></p>
+<h2 id="语法格式-5">语法格式
+</h2><h3 id="chown">chown
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>chown <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;新所有者&gt;<span style="color:#56b6c2">[</span>:&lt;新所属组&gt;<span style="color:#56b6c2">]</span> &lt;文件&gt;/&lt;目录&gt;
+</span></span></code></pre></div><h3 id="chgrp">chgrp
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chgrp <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;新所属组&gt; &lt;文件&gt;/&lt;目录&gt;
+</span></span></code></pre></div><h2 id="linux所有者与所属组">Linux所有者与所属组
+</h2><ul>
+<li>
+<p>在Linux中，每个文件和目录都有一个<strong>所有者（Owner）和一个所属组（Group）</strong>，所有者通常是创建该文件的用户，而所属组允许多个用户共享对文件的访问权限，一个用户可以属于多个组</p>
+</li>
+<li>
+<p>更改所有权通常需要管理员权限（<code>sudo</code>）</p>
+</li>
+<li>
+<p>用户名称和组名称在系统里是分开的：</p>
+<ul>
+<li>
+<p>用户名存储在<code>/etc/passwd</code>文件</p>
+</li>
+<li>
+<p>组名存储在<code>/etc/group</code>文件</p>
+</li>
+</ul>
+<p>因此，我们可以创建一个用户名叫<code>alice</code>，也可以有一个组名叫<code>alice</code>，它们是不同的实体，不冲突</p>
+</li>
+</ul>
+<h2 id="常用参数-5">常用参数
+</h2><p><strong>这两个命令的大部分核心参数是通用的，只有<code>--from</code>例外，是<code>chown</code>独有</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-R</td>
+          <td><strong>递归地更改目录及其子目录下所有文件和目录的所有权</strong></td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程</strong>，为每个被处理的文件打印一条所有权变更的消息</td>
+      </tr>
+      <tr>
+          <td>-c</td>
+          <td><strong>只在所有权确实发生改变时才显示详细过程</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;from=&lt;当前归属&gt;</td>
+          <td><strong>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-(chown独有)&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</strong> <br /> <strong>仅当文件的当前所有者和/或组匹配指定值时，才更改其所有权</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;reference=&lt;参考文件&gt;</td>
+          <td><strong>使用参考文件的所有者和所属组来设置目标文件</strong>，而不是自己指定</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-5">使用示例
+</h2><ul>
+<li>
+<p>将file.txt的所有者更改为用户alice</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo chown alice file.txt
+</span></span></code></pre></div></li>
+<li>
+<p>更改文件的所属组</p>
+<p><strong>使用chgrp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sudo chgrp newgroup file.txt
+</span></span></code></pre></div><p><strong>使用chmod：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo chown :newgroup file.txt
+</span></span></code></pre></div></li>
+<li>
+<p>将file.txt的所有者设置为newuser，所属组设置为newgroup</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sudo chown newuser:newgroup file.txt
+</span></span></code></pre></div></li>
+<li>
+<p>将目录<code>/var/www/html</code>及其下所有文件和子目录的所有者和所属组都设置为名为<code>www-data</code>的用户和组</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sudo chown -R www-data:www-data /var/www/html
+</span></span></code></pre></div><p><strong><code>www-data</code>是Linux中常用的Web服务器（比如 Apache、Nginx）运行的用户和组</strong></p>
+</li>
+</ul>
+<h1 id="mkdir--创建目录文件">mkdir —— 创建目录文件
+</h1><h2 id="语法格式-6">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;目录名1&gt; &lt;目录名2&gt;...
+</span></span></code></pre></div><h2 id="linux的umask权限控制">Linux的umask权限控制
+</h2><p>在Linux中，每个新创建的目录或文件都会根据当前的<code>umask</code>值决定其默认权限</p>
+<p><code>umask</code>是权限掩码，它会从默认的最大权限中&quot;减去&quot;（实际不是减法）指定的值，结果就是新建文件或目录的默认权限：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e06c75">默认权限</span> <span style="color:#56b6c2">=</span> 最大权限 - <span style="color:#e5c07b">umask</span>
+</span></span></code></pre></div><p><code>umask</code>有四位，通常我们设置<code>umask</code>只关注后三位（用户、组、其他），第一位用于以下特殊权限控制：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>权限位</th>
+          <th>名称</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>4</td>
+          <td>setuid</td>
+          <td>文件以创建者身份运行（对文件）</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>setgid</td>
+          <td>组权限继承（对目录）</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>sticky</td>
+          <td>只有文件所有者可删除（对目录）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>但在大多数实际中，<strong><code>umask</code>的第一位几乎都是 0</strong></p>
+<p>因为我们通常不通过<code>umask</code>控制特殊权限，而是用<code>chmod +s</code>、<code>+t</code>显式设置</p>
+<p><strong>对于目录，最大默认权限是 777；对于文件，最大默认权限是 666（因为默认不为新文件设置执行权限）</strong></p>
+<p>例如：</p>
+<ul>
+<li>umask 为 0022</li>
+<li>新建目录的权限为 777 - 022 = 755</li>
+<li>新建文件的权限为 666 - 022 = 644</li>
+</ul>
+<p><strong>可以使用<code>umask</code>命令查看当前掩码，也可以使用<code>umask</code>新值来设置，例如：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">umask</span> <span style="color:#d19a66">0027</span>
+</span></span></code></pre></div><p>这将修改新建目录权限为750（777-027），文件权限为640（666-027）</p>
+<p>这里需要解释一个误区：<strong>umask其实不是减法，而是按位操作，先对<code>umask</code>取反后与运算</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e06c75">默认权限</span> <span style="color:#56b6c2">=</span> 最大权限 &amp; <span style="color:#56b6c2">(</span>~umask<span style="color:#56b6c2">)</span>
+</span></span></code></pre></div><p>比如上面的<code>umask 0027</code>，文件权限为 640（666-027），你会发现6-7不等于0，但按位计算就是对的</p>
+<p>我们使用二进制表示，分别计算每一位：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类别</th>
+          <th>默认权限 (666)</th>
+          <th>umask (0027)</th>
+          <th>~umask (按位取反)</th>
+          <th>实际权限（按位与）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>所有者</td>
+          <td>110</td>
+          <td>000</td>
+          <td>111</td>
+          <td>110 （rw-）</td>
+      </tr>
+      <tr>
+          <td>所属组</td>
+          <td>110</td>
+          <td>010</td>
+          <td>101</td>
+          <td>100 （r&ndash;）</td>
+      </tr>
+      <tr>
+          <td>其他人</td>
+          <td>110</td>
+          <td>111</td>
+          <td>000</td>
+          <td>000 （&mdash;）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>合起来就是<code>640</code>，即<code>rw-r-----</code></p>
+<h2 id="常用参数-6">常用参数
+</h2><h3 id="核心功能-1">核心功能
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-p</td>
+          <td><strong>递归创建</strong><br />当需要创建的目录，其父目录尚不存在时，这个参数会自动创建所有不存在的父目录&lt;br /</td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程</strong><br />每创建一个新目录，都会打印一条消息。</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="权限控制">权限控制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-m</td>
+          <td><strong>设置权限</strong><br />在创建目录的同时，直接为其设定权限（例如<code>-m 755</code>），忽略系统的<code>umask</code>默认值</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-6">使用示例
+</h2><ul>
+<li>
+<p>在当前位置一次性创建多个目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir docs images scripts
+</span></span></code></pre></div></li>
+<li>
+<p>创建多级目录，并显示创建过程</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -pv dir1/dir2/dir3/
+</span></span></code></pre></div></li>
+<li>
+<p>创建一个权限为<code>777</code>的目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -m <span style="color:#d19a66">777</span> dir
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="touch--创建空文件更新文件的时间戳">touch —— 创建空文件/更新文件的时间戳
+</h1><p><code>touch</code>有两个主要功能：</p>
+<ul>
+<li>
+<p><strong>如果文件不存在，则创建一个新的空文件</strong></p>
+</li>
+<li>
+<p><strong>如果文件已存在，则更新该文件的访问和修改时间戳为当前时间</strong></p>
+</li>
+</ul>
+<h2 id="语法格式-7">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>touch <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;文件名&gt;
+</span></span></code></pre></div><h2 id="linux文件时间戳">Linux文件时间戳
+</h2><p>Linux系统为每个文件维护的三个主要时间戳：</p>
+<ul>
+<li><strong>访问时间 (atime)</strong>: 最后一次访问（读取）文件内容的时间。</li>
+<li><strong>修改时间 (mtime)</strong>: 最后一次修改文件内容的时间。这是我们用<code>ls -l</code>默认看到的时间</li>
+<li><strong>更改时间 (ctime)</strong>: 最后一次更改文件元数据（metadata，如权限、所有者）或内容的时间</li>
+</ul>
+<p><code>touch</code>命令的主要作用就是更新这些时间戳，特别是<code>atime</code>和<code>mtime</code></p>
+<h2 id="常用参数-7">常用参数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-a</td>
+          <td>只更改文件的访问时间（atime）</td>
+      </tr>
+      <tr>
+          <td>-m</td>
+          <td>只更改文件的修改时间（mtime）</td>
+      </tr>
+      <tr>
+          <td>-c</td>
+          <td>如果文件不存在，不创建新文件</td>
+      </tr>
+      <tr>
+          <td>-r &lt;文件&gt;</td>
+          <td>使用另一个文件的时间戳来更新目标文件，而不是使用当前时间</td>
+      </tr>
+      <tr>
+          <td>-d &lt;日期字符串&gt;</td>
+          <td>使用指定的日期字符串<code>&quot;YYYY-MM-DD HH:MM:SS&quot;</code>来更新时间戳</td>
+      </tr>
+      <tr>
+          <td>-t &lt;时间戳&gt;</td>
+          <td>使用指定的<code>[CC]YYMMDDhhmm[.ss]</code>格式的时间戳来更新</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-7">使用示例
+</h2><ul>
+<li>
+<p>创建多个空文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>touch read.md file.txt note.log
+</span></span></code></pre></div></li>
+<li>
+<p>更新一个已存在文件的时间戳</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>touch file.txt
+</span></span></code></pre></div></li>
+<li>
+<p>将new.txt的时间戳设置得和old.txt完全一样</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>touch -r old.txt new.txt
+</span></span></code></pre></div><p><strong>如果<code>new.txt</code>不存在，<code>touch</code>会创建<code>new.txt</code>文件，并将其时间戳设置为<code>old.txt</code>的时间戳</strong></p>
+</li>
+<li>
+<p>创建一个指定日期的文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>touch -d <span style="color:#98c379">&#34;2023-01-01 12:30:00&#34;</span> time.txt
+</span></span></code></pre></div></li>
+<li>
+<p>创建一个指定时间戳的文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>touch -t 202508011030.45 time.txt
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="find--在目录中搜索文件">find —— 在目录中搜索文件
+</h1><p><code>find</code>会<strong>递归地</strong>遍历指定的目录树，根据用户设定的条件来查找文件，并能对查找到的文件执行指定的操作</p>
+<h2 id="语法格式-8">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>find &lt;起始路径&gt; &lt;表达式&gt;
+</span></span><span style="display:flex;"><span>                           /      |      <span style="color:#98c379">\
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379"></span>                 &lt;选项&gt; &lt;测试&gt; &lt;动作&gt;
+</span></span></code></pre></div><h2 id="find命令的核心表达式引擎">find命令的核心：表达式引擎
+</h2><p>与其他命令使用简单参数不同，<code>find</code>命令的核心是一系列<strong>可以组合的表达式</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&lt;选项&gt; &lt;条件&gt; &lt;动作&gt;
+</span></span></code></pre></div><ul>
+<li><strong>测试（选项+条件）</strong>：用来判断文件是否符合某个条件，例如按名称或大小匹配，如果符合，测试返回真</li>
+<li><strong>动作</strong>：指定对找到的文件执行什么操作，最常见的动作是打印路径、执行命令</li>
+<li><strong>操作符</strong>：用于组合多个测试，例如<code>-and</code>(与),<code>-or</code>(或),<code>-not</code>(非)</li>
+</ul>
+<p><strong>整个<code>find</code>命令就是构建一个逻辑表达式，<code>find</code>会用这个表达式去测试路径下的每一个文件</strong></p>
+<h2 id="常用参数-8">常用参数
+</h2><h3 id="按名称路径测试">按名称/路径测试
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-name /PATTERN/</td>
+          <td>按文件名匹配（区分大小写），支持通配符<code>*</code>和<code>?</code></td>
+      </tr>
+      <tr>
+          <td>-iname /PATTERN/</td>
+          <td>按文件名匹配（不区分大小写）</td>
+      </tr>
+      <tr>
+          <td>-path /PATTERN/</td>
+          <td>按完整路径（包含目录名和文件名）进行匹配</td>
+      </tr>
+      <tr>
+          <td>-regex /PATTERN/</td>
+          <td>使用正则表达式匹配完整路径</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="按类型大小时间测试">按类型/大小/时间测试
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-type TYPE</td>
+          <td><strong>按文件类型查找</strong><br /><code>f</code>代表普通文件，<code>d</code>代表目录，<code>l</code>代表符号链接</td>
+      </tr>
+      <tr>
+          <td>-size N[cwbkMG]</td>
+          <td><strong>按文件大小查找</strong><br /><strong><code>N</code>是数字</strong>，<code>+N</code>表示大于N，<code>-N</code>表示小于N，<code>N</code>表示等于N<br /><strong><code>N</code>的单位</strong>：<code>c</code>(字节)，<code>w</code>(字,2字节)，<code>b</code>(块,512字节)，<code>k</code>(KB)，<code>M</code>(MB)，<code>G</code>(GB)</td>
+      </tr>
+      <tr>
+          <td>-mtime N</td>
+          <td><strong>按修改时间查找</strong><br /><code>N</code>代表天数<code>+N</code>表示超过N天前修改，<code>-N</code>表示N天内修改，<code>N</code>表示正好第N天前修改</td>
+      </tr>
+      <tr>
+          <td>-ctime N</td>
+          <td><strong>按状态改变时间查找</strong><br />类似<code>-mtime</code>，针对权限、所有者等属性变化时间</td>
+      </tr>
+      <tr>
+          <td>-atime N</td>
+          <td><strong>按访问时间查找</strong><br />类似<code>-mtime</code>，针对最后访问时间</td>
+      </tr>
+      <tr>
+          <td>-user NAME</td>
+          <td><strong>按文件所有者查找</strong></td>
+      </tr>
+      <tr>
+          <td>-group NAME</td>
+          <td><strong>按文件所属组查找</strong></td>
+      </tr>
+      <tr>
+          <td>-perm MODE</td>
+          <td><strong>按文件权限查找</strong><br />支持数字（如<code>0755</code>）或符号模式（如<code>u=rwx,g=rx,o=rx</code>）<br /><code>MODE</code>表示权限正好等于，<code>-MODE</code>表示完全包含，<code>/MODE</code>表示任意一位包含</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="对结果执行的动作">对结果执行的动作
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-print</td>
+          <td><strong>打印出匹配文件的完整路径</strong><br />这是<code>find</code>的默认动作，通常可以省略</td>
+      </tr>
+      <tr>
+          <td>-ls</td>
+          <td><strong>对匹配的文件执行<code>ls -lids</code>命令，显示详细信息</strong></td>
+      </tr>
+      <tr>
+          <td>-delete</td>
+          <td><strong>删除找到的文件</strong></td>
+      </tr>
+      <tr>
+          <td>-exec COMMAND {} ;</td>
+          <td><strong>对每个找到的文件执行指定的<code>COMMAND</code>命令<br /><code>{}</code>会被替换为当前文件名，<code>\;</code>表示命令结束，必须转义！</strong></td>
+      </tr>
+      <tr>
+          <td>-ok COMMAND {} ;</td>
+          <td><strong>与-exec类似，但在执行每个命令前会进行交互式确认</strong></td>
+      </tr>
+      <tr>
+          <td>-prune</td>
+          <td><strong>跳过指定目录，不进入递归查找<br />常用：<code>find &lt;起始目录&gt; -path &quot;&lt;要排除的路径&gt;&quot; -prune -o &lt;其他查找条件&gt; &lt;动作&gt;</code></strong><br />如果要排除多个目录，可以写多个 <code>-path ... -prune</code> 条件组合</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="逻辑操作符">逻辑操作符
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>操作符</th>
+          <th>完整形式</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-a</td>
+          <td>-and</td>
+          <td><strong>逻辑与</strong>（默认行为，可省略）表示两个条件都满足</td>
+      </tr>
+      <tr>
+          <td>-o</td>
+          <td>-or</td>
+          <td><strong>逻辑或</strong>，表示只要满足任一条件即可</td>
+      </tr>
+      <tr>
+          <td>!</td>
+          <td>-not</td>
+          <td><strong>逻辑非</strong>，取反，表示不满足某个条件</td>
+      </tr>
+      <tr>
+          <td>()</td>
+          <td>无</td>
+          <td><strong>组合多个条件表达式</strong>，用于改变默认的优先级，<strong>括号需加转义：<code>\(</code> 和 <code>\)</code></strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-8">使用示例
+</h2><ul>
+<li>
+<p>在/log目录下，查找所有类型为普通文件且大小超过10MB的文件，并列出详细信息</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>find /log -type f -size +10MB -ls
+</span></span></code></pre></div></li>
+<li>
+<p>查找/etc目录下，最近7天内被修改过的所有文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>find /etc -mtime -7
+</span></span></code></pre></div></li>
+<li>
+<p>查找/home下所有所有属于用户alice的，且权限为777的文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>find /home -type f -user alice -perm <span style="color:#d19a66">777</span>
+</span></span></code></pre></div></li>
+<li>
+<p>在当前目录及其所有子目录下，查找所有以.log结尾的文件，并移动到/log中</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>find . -name <span style="color:#98c379">&#34;*.log&#34;</span> -exec mv -n <span style="color:#56b6c2">{}</span> /log/ <span style="color:#98c379">\;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>找出所有包含了“main”这个词的C语言源文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>find . -type f -name <span style="color:#98c379">&#34;*.c&#34;</span> -exec grep -l <span style="color:#98c379">&#34;main&#34;</span> <span style="color:#56b6c2">{}</span> <span style="color:#98c379">\;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>在/home下查找所有.txt和.png文件，但跳过其中的/log和/mod子目录，并打印出完整路径</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>find /home <span style="color:#98c379">\(</span> -path <span style="color:#98c379">&#34;./log&#34;</span> -o -path <span style="color:#98c379">&#34;./mod&#34;</span> <span style="color:#98c379">\)</span> -prune -o <span style="color:#98c379">\(</span> -name <span style="color:#98c379">&#34;*.txt&#34;</span> -o -name <span style="color:#98c379">&#34;*.png&#34;</span> <span style="color:#98c379">\)</span> -print
+</span></span></code></pre></div><ul>
+<li><code>\( -path &quot;./log&quot; -o -path &quot;./mod&quot; \) -prune</code>：<strong>排除这两个目录</strong></li>
+<li><code>-o</code>：如果不是被剪枝的目录，则继续执行下一部分</li>
+<li><code>\( -name &quot;*.txt&quot; -o -name &quot;*.png&quot; \)</code>：查找 txt 或 png 文件</li>
+<li><code>-print</code>：打印完整路径</li>
+</ul>
+<p><strong>最好使用括号包裹过滤和查找的条件，否则无法保证结果</strong></p>
+</li>
+</ul>
+<h1 id="cp--复制文件目录">cp —— 复制文件/目录
+</h1><h2 id="语法格式-9">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;源文件1&gt; &lt;源文件2&gt;... &lt;目标文件名&gt;
+</span></span></code></pre></div><h2 id="linux文件属性">Linux文件属性
+</h2><p><code>cp</code>命令的很多参数都与文件属性相关，这些我们在上文大多都提到过：</p>
+<ul>
+<li>每个文件和目录都有其所有者和所属组</li>
+<li>每个文件都有读（r）、写（w）、执行（x）的权限
+这些权限分别针对&quot;所有者&quot;、&ldquo;所属组&rdquo;、&ldquo;其他人&rdquo;</li>
+<li>每个文件都有多个时间戳，最常用的是最后修改时间</li>
+</ul>
+<h2 id="常用参数-9">常用参数
+</h2><h3 id="核心功能-2">核心功能
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-r, -R</td>
+          <td><strong>递归复制</strong><br />这是复制目录时必须使用的参数，它会复制该目录下所有的文件和子目录<br />最好使用<code>-R</code>，它是更标准化的写法</td>
+      </tr>
+      <tr>
+          <td>-i</td>
+          <td><strong>交互模式</strong><br />在覆盖一个已存在的文件前，会先进行提示并要求用户确认</td>
+      </tr>
+      <tr>
+          <td>-n</td>
+          <td><strong>不覆盖已存在的文件</strong><br />如果在目标位置有同名文件，则跳过该文件的复制</td>
+      </tr>
+      <tr>
+          <td>-u</td>
+          <td><strong>更新复制</strong><br />仅当源文件比目标文件新，或者目标文件不存在时，才执行复制操作</td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程</strong><br />列出每个正在被复制的文件名</td>
+      </tr>
+      <tr>
+          <td>-p</td>
+          <td><strong>保留文件属性</strong><br />复制时，使新文件保留源文件的权限、所有者、时间戳等属性</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="链接">链接
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-d</td>
+          <td><strong>保留符号链接</strong><br />当复制一个符号链接（软链接）时，直接复制链接本身，而不是它所指向的文件</td>
+      </tr>
+      <tr>
+          <td>-l</td>
+          <td><strong>创建硬链接</strong>，而不是复制文件内容</td>
+      </tr>
+      <tr>
+          <td>-s</td>
+          <td><strong>创建符号链接</strong>，而不是复制文件内容</td>
+      </tr>
+      <tr>
+          <td>-a</td>
+          <td><strong>归档模式</strong><br />这是一个强大的组合参数，通常等效于<code>-dR --preserve=all</code> (在某些系统中是<code>-pPR</code>)<br />它表示递归复制、保留链接、并保留所有文件属性，常用于备份</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="强制">强制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-f</td>
+          <td><strong>强制</strong><br />如果目标文件已存在且无法打开进行写入，cp会先尝试将其删除，然后再复制</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="备份">备份
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--backup[=CONTROL]</code><br />或<code>-b[=CONTROL]</code></td>
+          <td>为每个已存在的目标文件创建一个备份</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>这个和<code>-a</code>参数不同，是用来备份目标位置同名文件的，防止误覆盖</strong></p>
+<p><strong>CONTROL可选值：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>值</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>none</td>
+          <td>不进行备份（与不加<code>--backup</code>等效）</td>
+      </tr>
+      <tr>
+          <td>numbered</td>
+          <td>使用编号方式备份文件，如：<code>file~</code>, <code>file.~1~</code>, <code>file.~2~</code> 等</td>
+      </tr>
+      <tr>
+          <td>existing</td>
+          <td>如果之前使用的是<code>numbered</code>，则继续编号；否则使用 <code>simple</code>（见下）</td>
+      </tr>
+      <tr>
+          <td>simple</td>
+          <td>简单备份，文件名加一个 <code>~</code> 号，如：<code>file~</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>如果省略<code>=CONTROL</code>，则使用默认的备份方式，通常是<code>existing</code></p>
+<h2 id="使用示例-9">使用示例
+</h2><ul>
+<li>
+<p>递归复制整个文件夹到指定目录下，如果目标已存在则提示是否覆盖</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp -Ri dir1/ dir2/
+</span></span></code></pre></div></li>
+<li>
+<p>复制文件到<code>/etc</code>目录下，覆盖已有文件不再询问</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp -f file /etc
+</span></span></code></pre></div></li>
+<li>
+<p>递归复制文件夹的内容到指定目录下，保留所有属性，只更新变动过的文件，并显示过程</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp -auv dir1/. dir2/
+</span></span></code></pre></div><p><strong>注意这里使用的是<code>dir1/.</code>而不是<code>dir1/</code>，区别在于前者不包括目录<code>dir1</code>本身，只包括其中内容</strong></p>
+</li>
+<li>
+<p>结合{}，把file1复制为file1.bak</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp file1<span style="color:#56b6c2">{</span>,.bak<span style="color:#56b6c2">}</span>
+</span></span></code></pre></div><p><strong>这里的命令展开就是<code>cp file1 file1.bak</code>，是一个非常巧妙的缩写方法</strong></p>
+</li>
+</ul>
+<h1 id="mv--移动重命名文件">mv —— 移动/重命名文件
+</h1><h2 id="语法格式-10">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>mv <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;源文件或目录&gt;
+</span></span></code></pre></div><h2 id="mv的工作原理">mv的工作原理
+</h2><p><code>mv</code>行为根据操作是否在同一个文件系统内而有所不同</p>
+<h3 id="在同一个文件系统内移动">在同一个文件系统内移动
+</h3><p><strong>此操作几乎是瞬时完成的</strong></p>
+<p><code>mv</code>并不会真的移动磁盘上的数据，它只是修改了文件的路径记录（inode中的指针），所以速度极快</p>
+<h3 id="在不同的文件系统间移动">在不同的文件系统间移动
+</h3><p><strong>这个过程的速度取决于文件的大小</strong></p>
+<p>例如从本地硬盘移动到U盘，此时<code>mv</code>无法只修改路径记录，它会执行一个完整的复制操作，将文件内容从源位置复制到目标位置，然后在确认复制成功后删除原始文件，实际上相当于先执行<code>cp</code>再执行<code>rm</code></p>
+<p>其实类似windows在不同盘符之间移动文件</p>
+<h2 id="常用参数-10">常用参数
+</h2><h3 id="核心功能-3">核心功能
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-i</td>
+          <td><strong>交互模式</strong><br />在覆盖一个已存在的文件前，会先进行提示并要求用户确认，可以有效防止误操作</td>
+      </tr>
+      <tr>
+          <td>-n</td>
+          <td><strong>不覆盖已存在的文件</strong><br />如果在目标位置有同名文件，则跳过该操作</td>
+      </tr>
+      <tr>
+          <td>-u</td>
+          <td><strong>更新</strong><br />仅当源文件比目标文件新，或者目标文件不存在时，才执行移动操作</td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程</strong><br />列出每个文件在移动前后的路径</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="强制-1">强制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-f</td>
+          <td><strong>强制</strong><br />不经任何提示，直接覆盖已存在的目标文件，通常是默认行为，与<code>-i</code>相反</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="备份-1">备份
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-b[=CONTROL]</code></td>
+          <td>**备份<br />**在覆盖已存在的目标文件时，会为原目标文件创建一个备份</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>具体使用方法和<code>cp</code>命令该参数一致：<a class="link" href="#%e5%a4%87%e4%bb%bd-1" >cp备份
+    
+</a></p>
+<h2 id="使用示例-10">使用示例
+</h2><ul>
+<li>
+<p>重命名txt文件为jpg</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv file.txt file.jpg
+</span></span></code></pre></div><p><strong>也可以使用<code>{}</code>一步到位：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv file.<span style="color:#56b6c2">{</span>txt,jpg<span style="color:#56b6c2">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>将当前目录下所有以.log结尾的文件，一次性全部移动到logs目录中（<strong>结合通配符</strong>）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv *.log logs/
+</span></span></code></pre></div></li>
+<li>
+<p>移动文件，显示过程，并进行确认</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv -iv file dir/
+</span></span></code></pre></div><p><strong>目录名称最好加上<code>/</code>表示为目录，否则可能进行重命名操作（如果没有该目录的话）</strong></p>
+</li>
+<li>
+<p>将目录移动到tmp目录下</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv dir/ /tmp/
+</span></span></code></pre></div><p><strong>与<code>cp</code>不同，<code>mv</code>在移动目录时不需要<code>-r</code>参数</strong></p>
+</li>
+</ul>
+<h1 id="rm--删除文件或目录">rm —— 删除文件或目录
+</h1><h2 id="语法格式-11">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>rm <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;文件或目录&gt;
+</span></span></code></pre></div><h2 id="linux文件删除的重要特性">Linux文件删除的重要特性
+</h2><ul>
+<li>与Windows等图形界面的“移动到回收站”不同，<code>rm</code>命令默认是永久性删除</li>
+<li>一旦文件被<code>rm</code>删除，通常情况下无法轻易恢复，使用时谨慎再谨慎！</li>
+</ul>
+<h2 id="常用参数-11">常用参数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-r, -R</td>
+          <td><strong>递归删除</strong><br />这是删除目录时必须使用的参数，它会删除该目录下所有的文件和子目录</td>
+      </tr>
+      <tr>
+          <td>-f</td>
+          <td><strong>强制删除</strong><br />忽略不存在的文件，并且从不提示用户进行确认，即使文件是只读的，也会直接删除。</td>
+      </tr>
+      <tr>
+          <td>-i</td>
+          <td>**交互模式<br />**在删除每个文件前都会进行提示并要求用户确认，可以有效防止误删</td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程，列出每个正在被删除的文件名</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-11">使用示例
+</h2><ul>
+<li>
+<p>删除目录下多个文件，每个文件删除之前询问**（结合通配符）**</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -i *.tmp
+</span></span></code></pre></div></li>
+<li>
+<p>递归删除整个目录及其内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -r old_project/
+</span></span></code></pre></div></li>
+<li>
+<p>强制递归删除整个目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -rf dir/
+</span></span></code></pre></div><p><strong>这个命令组合会强制、无提示地删除一个目录及其全部内容！</strong></p>
+<p><strong>这是一个极其危险的命令组合，常被戏称为“删库跑路”，一定要慎用！</strong></p>
+</li>
+</ul>
+<h1 id="rmdir--删除空目录">rmdir —— 删除空目录
+</h1><h2 id="语法格式-12">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rmdir <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;目录名&gt;
+</span></span></code></pre></div><h2 id="rmdir-与-rm--r">rmdir 与 rm -r
+</h2><ul>
+<li><code>rmdir</code>是一个专门用来删除空目录的命令，如果目录中含有任何文件或子目录，<code>rmdir</code>命令都会执行失败并报错</li>
+<li>由于它只能删除空目录，所以它比<code>rm -r</code>要安全得多</li>
+</ul>
+<h2 id="常用参数-12">常用参数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-p</td>
+          <td>**递归删除目录<br />**当子目录被删除后，如果其父目录也因此变成了空目录，则一并删除<br />依此类推，直到遇到非空目录为止</td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-12">使用示例
+</h2><ul>
+<li>
+<p>删除一个空的目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rmdir empty_dir
+</span></span></code></pre></div></li>
+<li>
+<p>递归删除空的嵌套目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rmdir -p dir1/dir2/dir3
+</span></span></code></pre></div><ol>
+<li><strong>首先删除<code>dir3 </code>目录</strong></li>
+<li><strong>然后发现<code>dir2</code>目录变空了，于是也删除<code>dir2</code>目录</strong></li>
+<li><strong>最后发现<code>dir1</code>目录也变空了，于是也删除<code>dir1</code>目录</strong></li>
+</ol>
+<p><strong>通过一条命令，就可以清理掉一整条空的目录路径</strong></p>
+</li>
+<li>
+<p>同时删除多个空目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rmdir empty_dir1 empty_dir2/xxx/xxx 
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="tar--文件归档与压缩工具">tar —— 文件归档与压缩工具
+</h1><p><code>tar</code>命令是Linux中用于打包归档和压缩/解压文件的核心工具</p>
+<p>它的名称是 tape archive（磁带归档）的缩写，最初被设计用于将文件备份到磁带上，现在广泛用于将多个文件和目录打包成一个单独的文件</p>
+<h2 id="语法格式-13">语法格式
+</h2><p><code>tar</code>命令的参数风格比较独特，其主选项通常不需要在前面加<code>-</code>，但为了统一和清晰，加上<code>-</code>也是完全兼容的</p>
+<h3 id="创建归档">创建归档
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar <span style="color:#56b6c2">[</span>主选项<span style="color:#56b6c2">][</span>辅助选项<span style="color:#56b6c2">]</span> &lt;归档文件名&gt; &lt;要归档的文件或目录...&gt;
+</span></span></code></pre></div><h3 id="查看归档内容">查看归档内容
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar <span style="color:#56b6c2">[</span>主选项<span style="color:#56b6c2">][</span>辅助选项<span style="color:#56b6c2">]</span> &lt;归档文件名&gt;
+</span></span></code></pre></div><h3 id="提取归档内容">提取归档内容
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar <span style="color:#56b6c2">[</span>主选项<span style="color:#56b6c2">][</span>辅助选项<span style="color:#56b6c2">]</span> &lt;归档文件名&gt; <span style="color:#56b6c2">[</span>要提取的文件...<span style="color:#56b6c2">]</span>
+</span></span></code></pre></div><h2 id="归档与压缩">归档与压缩
+</h2><p>理解<code>tar</code>，需要先区分这两个概念</p>
+<h3 id="归档">归档
+</h3><p>这是<code>tar</code>的本职工作，它将许多文件和目录打包成一个单独的大文件（通常称为<code>tarball</code>，以<code>.tar</code>结尾）</p>
+<p><strong>这个过程不减小文件总体积</strong>，就像把很多零散物品放进一个大箱子里</p>
+<h3 id="压缩">压缩
+</h3><p><strong>这是减小文件体积的过程，由<code>gzip</code>, <code>bzip2</code>, <code>xz</code>等专门的压缩工具完成</strong></p>
+<p>通常，我们先用<code>tar</code>将文件归档成一个<code>.tar</code>文件，然后再用<code>gzip</code>等工具将其压缩成<code>.tar.gz</code></p>
+<p><code>tar</code>命令提供了便捷的参数（<code>-z</code>, <code>-j</code>, <code>-J</code>），可以在一条命令内连续完成“归档”和“压缩”两个步骤</p>
+<h2 id="常用参数-13">常用参数
+</h2><h3 id="主选项必须选择其一">主选项（必须选择其一）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-c</td>
+          <td>创建一个新的归档文件</td>
+      </tr>
+      <tr>
+          <td>-x</td>
+          <td>从归档文件中提取文件</td>
+      </tr>
+      <tr>
+          <td>-t</td>
+          <td>列出归档文件中的内容，但不提取</td>
+      </tr>
+      <tr>
+          <td>-r</td>
+          <td>向已存在的归档文件末尾追加文件</td>
+      </tr>
+      <tr>
+          <td>-u</td>
+          <td><strong>更新</strong>。仅当文件比归档中的同名文件新时，才将其追加到归档中</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="辅助选项常用">辅助选项（常用）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-f</td>
+          <td>指定归档文件的名称<br />这个参数几乎总是必需的，并且通常放在参数组合的最后</td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td>显示详细过程。在处理文件时，将其名称打印在屏幕上</td>
+      </tr>
+      <tr>
+          <td>-z</td>
+          <td>通过<code>gzip</code>进行压缩或解压，生成的文件通常以<code>.tar.gz</code>或<code>.tgz</code>结尾</td>
+      </tr>
+      <tr>
+          <td>-j</td>
+          <td>通过<code>bzip2</code>进行压缩或解压，生成的文件通常以<code>.tar.bz2</code>或<code>.tbz2</code>结尾</td>
+      </tr>
+      <tr>
+          <td>-J</td>
+          <td>通过<code>xz</code>进行压缩或解压，生成的文件通常以<code>.tar.xz</code>结尾</td>
+      </tr>
+      <tr>
+          <td>-C</td>
+          <td>指定一个目录，在解压时，<code>tar</code>会先切换到这个目录，再开始提取文件</td>
+      </tr>
+      <tr>
+          <td>&ndash;exclude=PATTERN</td>
+          <td>在归档时，排除掉匹配<code>PATTERN</code>模式的文件</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-13">使用示例
+</h2><ul>
+<li>
+<p>将file文件和dir1目录打包成一个名为archive.tar的归档文件，并显示过程</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>tar -cvf archive.tar file1.txt directory1/
+</span></span></code></pre></div><p><strong>先写打包后的名称（<code>-f</code>），再列举打包的文件</strong></p>
+</li>
+<li>
+<p>将两个目录打包并使用gzip压缩，生成archive.tar.gz</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>tar -czf archive.tar.gz dir1/ dir2/
+</span></span></code></pre></div></li>
+<li>
+<p>不解压文件，只列出archive.tar.gz压缩包里包含哪些文件和目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>tar -tzf archive.tar.gz
+</span></span></code></pre></div><p><strong>解压定要选择<code>-x</code>，不选择就不会解压，只是预览</strong></p>
+</li>
+<li>
+<p>将archive.tar.gz解压到当前tmp/目录，并显示解压过程</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>tar -xzvf archive.tar.gz -C /tmp
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="ln--创建文件或目录的链接">ln —— 创建文件或目录的链接
+</h1><p><code>ln</code>的名称是 <strong>l</strong>i<strong>n</strong>k 的缩写，用于为文件或目录创建链接</p>
+<h2 id="语法格式-14">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ln <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;源文件&gt;/&lt;目录&gt; &lt;链接名&gt;
+</span></span></code></pre></div><h2 id="硬链接-hard-link-vs-符号链接-symbolic-link">硬链接 (Hard Link) vs. 符号链接 (Symbolic Link)
+</h2><p>链接是Linux文件系统的一个重要特性，它允许一个文件拥有多个可访问的路径</p>
+<p><code>ln</code>命令能创建的两种不同的链接类型：硬链接和符号链接（也称软链接）</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>硬链接 (Hard Link)</th>
+          <th>符号链接 (Symbolic Link / Soft Link)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>本质</strong></td>
+          <td>是<strong>同一个文件的多个别名</strong>，它们共享同一个inode号和数据块，除了路径不同外都共享</td>
+          <td>是一个<strong>独立的文件</strong>，其内容是另一个文件的路径，类似Windows的快捷方式</td>
+      </tr>
+      <tr>
+          <td><strong>inode号</strong></td>
+          <td>与源文件<strong>相同</strong></td>
+          <td>拥有<strong>自己独立</strong>的inode号</td>
+      </tr>
+      <tr>
+          <td><strong>权限和访问控制</strong></td>
+          <td><strong>继承</strong>原文件权限</td>
+          <td>链接权限由链接自身决定（但一般是777），访问成功与否由目标文件的权限决定，同时也要考量是否能进入目标文件所在的目录（对该目录的执行权限）</td>
+      </tr>
+      <tr>
+          <td><strong>是否能识别为链接</strong></td>
+          <td>❌用<code>ls -l</code><strong>看不出</strong>是否为硬链接（除非看 inode）</td>
+          <td>✅用<code>ls -l</code><strong>明确显示为链接</strong>，如 <code>link -&gt; target</code></td>
+      </tr>
+      <tr>
+          <td><strong>跨文件系统</strong></td>
+          <td>❌<strong>不能</strong>跨越不同的文件系统创建</td>
+          <td>✅<strong>可以</strong>跨越不同的文件系统创建</td>
+      </tr>
+      <tr>
+          <td><strong>对目录操作</strong></td>
+          <td>❌<strong>不能</strong>对目录创建硬链接</td>
+          <td>✅<strong>可以</strong>对目录创建符号链接</td>
+      </tr>
+      <tr>
+          <td><strong>删除源文件后</strong></td>
+          <td>链接文件<strong>依然有效</strong>，可以正常访问数据（直到所有硬链接都被删除）</td>
+          <td>链接文件会<strong>失效</strong>，因为其指向的路径不再存在</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="常用参数-14">常用参数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-s</td>
+          <td><strong>创建符号链接（软链接），不加此参数则默认创建硬链接</strong></td>
+      </tr>
+      <tr>
+          <td>-f</td>
+          <td><strong>强制</strong><br />如果目标位置已存在同名文件或链接，则先将其删除再创建</td>
+      </tr>
+      <tr>
+          <td>-i</td>
+          <td><strong>交互模式</strong><br />在覆盖（删除）已存在的目标文件前进行提示</td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>显示详细过程</strong><br />显示每个成功创建的链接</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-14">使用示例
+</h2><ul>
+<li>
+<p>为file.txt创建一个名为hard_link.txt的硬链接</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ln file.txt hard_link.txt
+</span></span></code></pre></div><p><strong>可以使用<code>ls -i</code>命令查看，会发现它们的inode号完全相同</strong></p>
+</li>
+<li>
+<p>在用户主目录下强制创建一个名为nginx_access.log的符号链接，指向Nginx的访问日志文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ln -sf /var/log/nginx/access.log ~/nginx_access.log
+</span></span></code></pre></div></li>
+<li>
+<p>为/mnt/disk1这个目录创建一个符号链接</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ln -s /mnt/disk1 ~/disk1_link
+</span></span></code></pre></div><p><strong>执行<code>cd ~/disk1_link</code>就等同于执行<code>cd /mnt/disk1</code>，和快捷方式是一个用法</strong></p>
+</li>
+</ul>
+<h1 id="file--辨别文件类型">file —— 辨别文件类型
+</h1><p><code>file</code>命令是Linux中一个用于探测并显示文件类型的工具</p>
+<p>它不依赖于文件的扩展名，而是通过一系列的测试来确定文件的真实类型</p>
+<h2 id="语法格式-15">语法格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>file <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> &lt;文件名&gt;
+</span></span></code></pre></div><h2 id="linux文件类型与魔数">Linux文件类型与“魔数”
+</h2><p>在Windows系统中，文件类型通常由其扩展名（如<code>.txt</code>, <code>.exe</code>）决定</p>
+<p>然而，在Linux中，文件扩展名主要是为了方便用户识别，<strong>系统本身并不依赖扩展名来判断文件类型</strong></p>
+<p>一个可执行文件可以没有任何扩展名！</p>
+<p><code>file</code>命令主要通过三种测试来判断文件类型：</p>
+<ol>
+<li><strong>文件系统测试</strong>：首先检查文件是否是目录、符号链接、Socket等内核已知的特殊文件</li>
+<li><strong>魔数测试</strong>：接下来，它会检查文件开头的几个字节，这部分字节被称为**“魔数”（Magic Number）**，几乎所有标准文件类型（如JPEG, PNG, ELF可执行文件）都有一个独特的、像“指纹”一样的魔数</li>
+<li><strong>语言测试</strong>：如果文件看起来像是一个文本文档，<code>file</code>会尝试分析其内容，判断它可能是哪种编程语言的源码（如C, Shell, Python）或配置文件</li>
+</ol>
+<h2 id="常用参数-15">常用参数
+</h2><h3 id="核心功能-4">核心功能
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-b</td>
+          <td><strong>简介模式</strong><br />不输出文件名，只输出文件类型描述</td>
+      </tr>
+      <tr>
+          <td>-i</td>
+          <td><strong>以MIME类型格式输出，而不是人类可读的描述</strong><br />例如输出<code>image/jpeg</code>而不是<code>JPEG image data...</code></td>
+      </tr>
+      <tr>
+          <td>-L</td>
+          <td><strong>跟随符号链接</strong><br />默认情况下，<code>file</code>会报告这是一个符号链接；使用此参数，它会去分析链接指向的那个原始文件。</td>
+      </tr>
+      <tr>
+          <td>-z</td>
+          <td><strong>尝试查看压缩文件内部的内容类型</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="文件列表控制">文件列表控制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-f &lt;列表文件&gt;</td>
+          <td><strong>从指定的列表文件中读取要检查的文件名列表</strong>，而不是在命令行上指定</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-15">使用示例
+</h2><ul>
+<li>
+<p>识别一个未知文件的类型</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>file unknown_file
+</span></span></code></pre></div><p><strong>输出示例</strong>： <code>unknown_file: PNG image data, 1024 x 768, 8-bit/color RGB, non-interlaced</code></p>
+</li>
+<li>
+<p><code>file</code>可以清晰地区分可执行的二进制文件和可读的文本文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#7f848e"># 查看bash程序的文件类型</span>
+</span></span><span style="display:flex;"><span>file /bin/bash
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 查看一个shell脚本的类型</span>
+</span></span><span style="display:flex;"><span>file ~/.bashrc
+</span></span></code></pre></div><p><strong>输出示例</strong>： <code>/bin/bash: ELF 64-bit LSB pie executable, x86-64...</code> <code>~/.bashrc: UTF-8 Unicode text</code></p>
+</li>
+<li>
+<p>查看符号链接及其指向的原始文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#7f848e"># 先创建一个符号链接</span>
+</span></span><span style="display:flex;"><span>ln -s /bin/bash ./my_bash_link
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 默认行为：识别链接本身</span>
+</span></span><span style="display:flex;"><span>file my_bash_link
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 使用-L参数：识别链接指向的文件</span>
+</span></span><span style="display:flex;"><span>file -L my_bash_link
+</span></span></code></pre></div><p><strong>输出示例</strong>： <code>my_bash_link: symbolic link to /bin/bash</code> <code>my_bash_link: ELF 64-bit LSB pie executable, x86-64...</code></p>
+</li>
+<li>
+<p>批量识别文件类型</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>file *
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="file拓展--mime类型">file拓展 —— MIME类型
+</h1><h2 id="什么是mime类型">什么是MIME类型
+</h2><p><strong>MIME（Multipurpose Internet Mail Extensions）类型</strong>，又称为<strong>媒体类型（Media Type）</strong>，用于标识文件或数据的格式和性质</p>
+<p>它最初为电子邮件附件设计，但现在广泛应用于HTTP协议、浏览器内容协商等</p>
+<h2 id="mime类型的格式">MIME类型的格式
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">type</span>/<span style="color:#e06c75">subtype</span>
+</span></span></code></pre></div><ul>
+<li><code>type</code>是主类型（比如 <code>text</code>, <code>image</code>, <code>application</code> 等）</li>
+<li><code>subtype</code>是具体的格式（比如 <code>jpeg</code>, <code>png</code>, <code>json</code>）</li>
+</ul>
+<h2 id="常见mime类型">常见MIME类型
+</h2><h3 id="text">text
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>plain</td>
+          <td><strong>纯文本内容</strong>，无格式修饰（如<code>.txt</code>文件）</td>
+      </tr>
+      <tr>
+          <td>html</td>
+          <td>HTML超文本标记语言（网页源代码）</td>
+      </tr>
+      <tr>
+          <td>css</td>
+          <td>层叠样式表（网页样式）</td>
+      </tr>
+      <tr>
+          <td>csv</td>
+          <td>逗号分隔值文本，常用于表格或数据库导出</td>
+      </tr>
+      <tr>
+          <td>javascript / js</td>
+          <td>JavaScript脚本代码</td>
+      </tr>
+      <tr>
+          <td>xml</td>
+          <td>可被人类和机器读取的标签化数据格式</td>
+      </tr>
+      <tr>
+          <td>markdown / md</td>
+          <td>Markdown标记语言，常用于文档编写</td>
+      </tr>
+      <tr>
+          <td>yaml / yml</td>
+          <td>简洁的配置文件格式，常用于开发与部署</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="image">image
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>jpeg / jpg</td>
+          <td>有损压缩的位图图像格式</td>
+      </tr>
+      <tr>
+          <td>png</td>
+          <td>无损压缩的位图图像格式，支持透明</td>
+      </tr>
+      <tr>
+          <td>gif</td>
+          <td>支持动画和透明的图像格式</td>
+      </tr>
+      <tr>
+          <td>bmp</td>
+          <td>Windows位图图像格式，不压缩</td>
+      </tr>
+      <tr>
+          <td>svg+xml</td>
+          <td>可缩放的矢量图像，基于XML</td>
+      </tr>
+      <tr>
+          <td>webp</td>
+          <td>Google开发的高效图像格式，兼顾压缩率和质量</td>
+      </tr>
+      <tr>
+          <td>ico</td>
+          <td>Windows图标格式</td>
+      </tr>
+      <tr>
+          <td>tiff / tif</td>
+          <td>高质量图像格式，常用于扫描、印刷</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="audio">audio
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mpeg / mp3</td>
+          <td>有损压缩音频格式</td>
+      </tr>
+      <tr>
+          <td>wav</td>
+          <td>无损音频格式，体积大</td>
+      </tr>
+      <tr>
+          <td>ogg</td>
+          <td>开放格式音频容器</td>
+      </tr>
+      <tr>
+          <td>aac</td>
+          <td>高压缩率音频格式，常用于流媒体</td>
+      </tr>
+      <tr>
+          <td>flac</td>
+          <td>无损压缩音频格式</td>
+      </tr>
+      <tr>
+          <td>opus</td>
+          <td>适用于语音和流媒体的高效音频格式</td>
+      </tr>
+      <tr>
+          <td>quicktime / mov</td>
+          <td>Apple开发的视频格式，兼容性强</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="video">video
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mp4</td>
+          <td>最常见的视频格式，压缩效率高</td>
+      </tr>
+      <tr>
+          <td>mpeg</td>
+          <td>老的视频格式，兼容性好</td>
+      </tr>
+      <tr>
+          <td>ogg</td>
+          <td>支持视频的OGG容器格式（如<code>.ogv</code>）</td>
+      </tr>
+      <tr>
+          <td>webm</td>
+          <td>Google开发的为网页优化的视频格式</td>
+      </tr>
+      <tr>
+          <td>avi</td>
+          <td>微软开发的老视频格式</td>
+      </tr>
+      <tr>
+          <td>x-matroska / mkv</td>
+          <td>多媒体容器格式，支持多轨音视频</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="application">application
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>json</td>
+          <td>结构化数据交换格式，广泛用于 API</td>
+      </tr>
+      <tr>
+          <td>xml</td>
+          <td>结构化文档或数据</td>
+      </tr>
+      <tr>
+          <td>pdf</td>
+          <td>Adobe的便携文档格式</td>
+      </tr>
+      <tr>
+          <td>zip</td>
+          <td>常见的压缩文件格式</td>
+      </tr>
+      <tr>
+          <td>x-www-form-urlencoded</td>
+          <td>HTML表单默认提交格式（键值对编码）</td>
+      </tr>
+      <tr>
+          <td>octet-stream</td>
+          <td>二进制数据流，常用作通用下载类型（未知二进制数据）</td>
+      </tr>
+      <tr>
+          <td>msword</td>
+          <td>旧版Microsoft Word 文档（<code>.doc</code>）</td>
+      </tr>
+      <tr>
+          <td>vnd.ms-excel</td>
+          <td>旧版Microsoft Excel 表格（<code>.xls</code>）</td>
+      </tr>
+      <tr>
+          <td>vnd.openxmlformats-officedocument.wordprocessingml.document</td>
+          <td>新版Office Word（<code>.docx</code>）</td>
+      </tr>
+      <tr>
+          <td>vnd.openxmlformats-officedocument.spreadsheetml.sheet</td>
+          <td>新版Office Excel（<code>.xlsx</code>）</td>
+      </tr>
+      <tr>
+          <td>x-tar</td>
+          <td><code>.tar</code>归档文件格式，用于打包多个文件</td>
+      </tr>
+      <tr>
+          <td>x-7z-compressed</td>
+          <td>7-Zip压缩格式（<code>.7z</code>）</td>
+      </tr>
+      <tr>
+          <td>x-rar-compressed</td>
+          <td>RAR压缩格式（<code>.rar</code>）</td>
+      </tr>
+      <tr>
+          <td>x-debian-package</td>
+          <td>Debian软件包格式（<code>.deb</code>）</td>
+      </tr>
+      <tr>
+          <td>x-executable</td>
+          <td>Linux/Unix可执行文件（无拓展名时也可用此类型）</td>
+      </tr>
+      <tr>
+          <td>x-shockwave-flash</td>
+          <td>Flash动画格式（已淘汰）</td>
+      </tr>
+      <tr>
+          <td>javascript</td>
+          <td>JavaScript代码**（部分浏览器仍使用application而非text）**</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="multipart">multipart
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>form-data</td>
+          <td>用于上传文件的表单数据</td>
+      </tr>
+      <tr>
+          <td>mixed</td>
+          <td>多部分邮件体，每部分可以是不同类型</td>
+      </tr>
+      <tr>
+          <td>alternative</td>
+          <td>同一内容的多种表示（如 HTML 和纯文本版本的邮件）</td>
+      </tr>
+      <tr>
+          <td>byteranges</td>
+          <td>用于分块下载/断点续传</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="message">message
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rfc822</td>
+          <td>标准电子邮件消息格式</td>
+      </tr>
+      <tr>
+          <td>partial</td>
+          <td>邮件的部分片段</td>
+      </tr>
+      <tr>
+          <td>external-body</td>
+          <td>邮件外部引用内容</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="font">font
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子类型（常见格式）</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>woff, woff2</td>
+          <td>Web优化字体格式</td>
+      </tr>
+      <tr>
+          <td>truetype / ttf</td>
+          <td>常见字体格式</td>
+      </tr>
+      <tr>
+          <td>opentype / otf</td>
+          <td>TTF的扩展格式，功能更丰富</td>
+      </tr>
+      <tr>
+          <td>embedded-opentype</td>
+          <td>EOT字体，IE专用的Web字体格式</td>
+      </tr>
+  </tbody>
+</table></div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">Linux</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-08-06
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">windows相关知识总结（下）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">windows相关知识总结（上）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SQL注入：从入门到入土</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速入门SQL</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>

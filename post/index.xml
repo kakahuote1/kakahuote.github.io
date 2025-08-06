@@ -7,7 +7,2156 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 26 Jul 2025 19:17:22 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 14:22:27 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux命令（文件管理篇）</title>
+        <link>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/</link>
+        <pubDate>Wed, 06 Aug 2025 13:08:02 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/</guid>
+        <description>&lt;p&gt;linux命令解析 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间&lt;/p&gt;
+&lt;p&gt;现在终于得闲了，嘻嘻&lt;/p&gt;
+&lt;p&gt;我个人人为，与其单独地学习linux的知识点，不如从常见的命令开始，跟着命令一起学习&lt;/p&gt;
+&lt;p&gt;依照知识点和命令，循序渐进，应该也比较容易接受&lt;/p&gt;
+&lt;p&gt;于是就有了这篇文章。&lt;/p&gt;
+&lt;p&gt;希望被我引流进来的你，能完整地看完！&lt;/p&gt;
+&lt;h1 id=&#34;pwd--显示当前工作目录的完整路径&#34;&gt;pwd —— 显示当前工作目录的完整路径
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;pwd&lt;/code&gt;全称是 &lt;strong&gt;p&lt;/strong&gt;rint &lt;strong&gt;w&lt;/strong&gt;orking &lt;strong&gt;d&lt;/strong&gt;irectory，用于显示当前终端所在的工作目录的完整路径&lt;/p&gt;
+&lt;h2 id=&#34;语法格式&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;pwd&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;pwd&lt;/code&gt;命令通常不与路径参数一起使用，因为它总是显示当前所在的位置&lt;/p&gt;
+&lt;h2 id=&#34;linux工作目录&#34;&gt;Linux工作目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在Linux中，每个进程（包括正在使用的shell终端）都有一个当前工作目录，我们执行的所有相对路径命令都是基于这个目录的&lt;/li&gt;
+&lt;li&gt;路径分为物理路径和逻辑路径，物理路径是文件系统上不包含任何符                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             号链接的真实路径，逻辑路径则可能包含符号链接，&lt;code&gt;pwd&lt;/code&gt;命令可以在这两种路径之间进行切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;常用参数&#34;&gt;常用参数
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;pwd&lt;/code&gt;的参数非常少，主要就是以下两个，用于处理符号链接的情况：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-L&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑路径&lt;/strong&gt;&lt;br /&gt;显示包含符号链接的路径，这是大多数shell中的默认行为。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-P&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;物理路径&lt;/strong&gt;&lt;br /&gt;显示解析所有符号链接后的真实物理路径，不包含&lt;code&gt;.&lt;/code&gt;或&lt;code&gt;..&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例&#34;&gt;使用示例
+&lt;/h2&gt;&lt;p&gt;没有示例，这个很简单，自己用去吧&lt;/p&gt;
+&lt;h1 id=&#34;cd--切换当前工作目录&#34;&gt;cd —— 切换当前工作目录
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;cd&lt;/code&gt;全名&lt;strong&gt;c&lt;/strong&gt;hange &lt;strong&gt;d&lt;/strong&gt;irectory(改变目录)，其功能是切换用户当前所在工作目录&lt;/p&gt;
+&lt;h2 id=&#34;语法格式-1&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;目标路径&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux路径与特殊目录&#34;&gt;Linux路径与特殊目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;绝对路径&lt;/strong&gt;：从根目录&lt;code&gt;/&lt;/code&gt;开始的完整路径，例如&lt;code&gt;/home/user/documents&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相对路径&lt;/strong&gt;：从当前工作目录开始的路径，不以&lt;code&gt;/&lt;/code&gt;开头，例如&lt;code&gt;../pictures&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特殊目录快捷方式&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~&lt;/code&gt;：当前用户的&lt;strong&gt;主目录&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&lt;/code&gt;：&lt;strong&gt;上一次&lt;/strong&gt;所在的目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt;：&lt;strong&gt;当前&lt;/strong&gt;目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;..&lt;/code&gt;：&lt;strong&gt;上一级&lt;/strong&gt;目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;常用参数-1&#34;&gt;常用参数
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-L&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;遵循逻辑路径&lt;/strong&gt;&lt;br /&gt;如果要切换到的目录是一个符号链接，则进入该符号链接本身。这是默认行为&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-P&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;遵循物理路径&lt;/strong&gt;&lt;br /&gt;在切换目录前，解析所有的符号链接，直接进入其指向的真实物理目录&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-1&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用绝对路径切换到系统日志目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; /var/log
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用相对路径进入当前目录下的子目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; dir
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;返回主目录，有两种方式&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不带任何参数：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;或者使用&lt;code&gt;~&lt;/code&gt;快捷方式：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; ~
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换到上一级目录 —— 这是日常操作中使用频率非常高的命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; ..
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在当前目录和上一个目录之间切换&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换到包含特殊字符的目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;My Documents&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果目录名包含空格或其它特殊字符，需要用引号将其包裹起来&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;ls--显示目录中的文件及其属性信息&#34;&gt;ls —— 显示目录中的文件及其属性信息
+&lt;/h1&gt;&lt;h2 id=&#34;语法格式-2&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;文件目录名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux的目录特点&#34;&gt;Linux的目录特点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;linux文件或者目录名称最长可达256个字符&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以&lt;code&gt;.&lt;/code&gt;开头的文件是隐藏文件，需要用&lt;code&gt;-a&lt;/code&gt;参数才能显示&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.&lt;/code&gt;代表当前目录&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;..&lt;/code&gt;代表上一级目录&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux匹配技法&#34;&gt;Linux匹配技法
+&lt;/h2&gt;&lt;p&gt;使用命令对文件进行操作的时候，如果有很多文件需要处理，我们一个个去寻找、执行，那就太过耗时&lt;/p&gt;
+&lt;p&gt;为了减少时间，我们可以使用正则，也能使用shell自带的匹配方式，下面就来介绍两种&lt;/p&gt;
+&lt;h3 id=&#34;通配符与pattern&#34;&gt;通配符与PATTERN
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Linux通配符是shell提供的一种字符模式匹配机制（PATTERN），常用于文件名匹配与路径匹配&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它属于通配符扩展机制，不是正则表达式，但语法上有些相似&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;星号&#34;&gt;星号：*
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;*&lt;/code&gt;可以匹配任意数量的任意字符（包括 0 个字符）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;匹配所有以 &lt;code&gt;.txt&lt;/code&gt; 结尾的文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls *.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;匹配所有以 &lt;code&gt;file&lt;/code&gt; 开头的文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls file*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;问号&#34;&gt;问号：?
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;?&lt;/code&gt;可以匹配任意一个字符&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;匹配&lt;code&gt;file1.txt&lt;/code&gt;、&lt;code&gt;fileA.txt&lt;/code&gt;，但不匹配&lt;code&gt;file10.txt&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls file?.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;中括号&#34;&gt;中括号：[]
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;匹配&lt;code&gt;[]&lt;/code&gt;内的任意一个字符或字符范围&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;匹配 &lt;code&gt;file1.txt&lt;/code&gt;、&lt;code&gt;file2.txt&lt;/code&gt;、&lt;code&gt;file3.txt&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls file&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;123&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在&lt;code&gt;[]&lt;/code&gt;中使用连字符&lt;code&gt;-&lt;/code&gt;表示字符范围&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;匹配 &lt;code&gt;filea.txt&lt;/code&gt; 到 &lt;code&gt;filez.txt&lt;/code&gt; 的所有单个字母文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls file&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;a-z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可加 &lt;code&gt;^&lt;/code&gt; 或 &lt;code&gt;!&lt;/code&gt; 表示取反（排除匹配）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;匹配不包含小写字母的文件名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls file&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;!a-z&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;大括号扩展&#34;&gt;大括号扩展
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;大括号扩展用于生成字符串序列，执行前由shell展开，并不会匹配文件名&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;简单列举&#34;&gt;简单列举
+&lt;/h4&gt;&lt;p&gt;格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;前缀&amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;值1,值2,...&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;&amp;lt;后缀&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;echo&lt;/span&gt; file&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;A,B,C&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;展开为&lt;code&gt;fileA.txt fileB.txt fileC.txt&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;数字序列&#34;&gt;数字序列
+&lt;/h4&gt;&lt;p&gt;格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;起始..结束&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;echo&lt;/span&gt; file&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;1..5&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;展开为&lt;code&gt;file1.txt file2.txt file3.txt file4.txt file5.txt&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;字符序列&#34;&gt;字符序列
+&lt;/h4&gt;&lt;p&gt;格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;a..z&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo {a..d}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;展开为&lt;code&gt;a b c d&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;带步进的序列&#34;&gt;带步进的序列
+&lt;/h4&gt;&lt;p&gt;格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;起始..结束..步长&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;1..10..2&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;展开为&lt;code&gt;1 3 5 7 9&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;嵌套大括号&#34;&gt;嵌套大括号
+&lt;/h4&gt;&lt;p&gt;多个括号组合使用，会展开所有组合方式&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo {A,B}{1,2}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;展开为 &lt;code&gt;A1 A2 B1 B2&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用参数-2&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;内容显示&#34;&gt;内容显示
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-a&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示所有文件及目录，包括&lt;code&gt;.&lt;/code&gt;开头的隐藏目录&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-A&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;不显示当前目录(&lt;code&gt;.&lt;/code&gt;)和父目录(&lt;code&gt;..&lt;/code&gt;)&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-R&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;递归显示所有子文件&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-d&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;只显示目录本身，不列出目录内容&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-i&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示文件的 inode 号码&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-l&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示文件的详细信息，包含权限、所有者、大小、修改时间等&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-h&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;与&lt;code&gt;-l&lt;/code&gt;一起使用，以更易读的单位（如&lt;code&gt;K&lt;/code&gt;, &lt;code&gt;M&lt;/code&gt;, &lt;code&gt;G&lt;/code&gt;）来显示文件大小&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-s&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示文件占用的磁盘块数&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-L&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示符号链接指向文件的详细信息&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;full-time&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示完整时间戳（精确到秒）&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;格式控制&#34;&gt;格式控制
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-m&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;水平显示文件信息&lt;/strong&gt;&lt;br /&gt;间隔符是逗号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-F&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;在文件名后附加一个字符以表示文件类型：&lt;br /&gt;&lt;code&gt;/&lt;/code&gt;代表目录，&lt;code&gt;*&lt;/code&gt;代表可执行文件，&lt;code&gt;@&lt;/code&gt;代表符号链接&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-p&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;在目录名的末尾加上一个斜杠&lt;code&gt;/&lt;/code&gt;&lt;/strong&gt;&lt;br /&gt;与&lt;code&gt;-F&lt;/code&gt;类似但更简洁&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-1&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;强制每行只显示一个文件&lt;/strong&gt;&lt;br /&gt;没有-2，-3..&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;color=never/auto/always&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;为输出内容添加颜色以区分不同文件类型&lt;/strong&gt;&lt;br /&gt;&lt;code&gt;never&lt;/code&gt;不显示，&lt;code&gt;auto&lt;/code&gt;自动显示（默认），&lt;code&gt;always&lt;/code&gt;强制使用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-C&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按列显示&lt;/strong&gt;&lt;br /&gt;默认行为，当输出不是终端时生效&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-x&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;横向显示文件名&lt;/strong&gt;&lt;br /&gt;按行排列&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-N&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示文件名时不对特殊字符转义（显示原始文件名）&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;group-directories-first&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;让目录显示在前，文件显示在后&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;time=WORD&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;指定使用哪种时间&lt;/strong&gt;&lt;br /&gt;&lt;code&gt;mtime&lt;/code&gt;/&lt;code&gt;modification&lt;/code&gt;修改时间（默认）&lt;br /&gt;&lt;code&gt;atime&lt;/code&gt;/&lt;code&gt;access&lt;/code&gt;/&lt;code&gt;use&lt;/code&gt;访问时间&lt;br /&gt;&lt;code&gt;ctime&lt;/code&gt;/&lt;code&gt;change&lt;/code&gt;状态改变时间&lt;br /&gt;&lt;code&gt;birth&lt;/code&gt;创建时间&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;排序方式&#34;&gt;排序方式
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-t&lt;/td&gt;
+          &lt;td&gt;按&lt;strong&gt;修改时间&lt;/strong&gt;排序，最新的文件排在最前面&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-S&lt;/td&gt;
+          &lt;td&gt;按&lt;strong&gt;文件大小&lt;/strong&gt;排序，最大的文件排在最前面&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-r&lt;/td&gt;
+          &lt;td&gt;将当前的排序结果&lt;strong&gt;反向&lt;/strong&gt;排列&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-X&lt;/td&gt;
+          &lt;td&gt;按文件&lt;strong&gt;扩展名&lt;/strong&gt;的字母顺序排序&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-c&lt;/td&gt;
+          &lt;td&gt;按&lt;strong&gt;文件状态改变时间&lt;/strong&gt;排序（如权限变更时间）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;排序方式--sort&#34;&gt;排序方式 —— sort
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;--sort=WORD&lt;/code&gt;可以指定排序方式&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;WORD&lt;/th&gt;
+          &lt;th&gt;排序方式说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;none&lt;/td&gt;
+          &lt;td&gt;不排序，按目录项原始顺序显示（通常是创建顺序）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;name&lt;/td&gt;
+          &lt;td&gt;按名称（文件名）排序（默认行为）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;extension 或 version&lt;/td&gt;
+          &lt;td&gt;按文件扩展名排序&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;size&lt;/td&gt;
+          &lt;td&gt;按文件大小排序（大文件在前）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;time&lt;/td&gt;
+          &lt;td&gt;按默认时间（即&lt;code&gt;--time=modification&lt;/code&gt;）排序&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;atime 或 access 或 use&lt;/td&gt;
+          &lt;td&gt;按访问时间排序&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ctime 或 status&lt;/td&gt;
+          &lt;td&gt;按状态更改时间排序（如权限改变）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;birth&lt;/td&gt;
+          &lt;td&gt;按创建时间排序（如果系统支持）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-2&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;显示&lt;code&gt;/dev&lt;/code&gt;目录下所有以&lt;code&gt;sd&lt;/code&gt;开头的文件列表（&lt;strong&gt;结合通配符&lt;/strong&gt;）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls /dev/sd*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;依据文件内容大小进行排序，显示指定目录里的文件名以及详细信息（&lt;strong&gt;组合使用参数&lt;/strong&gt;）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls -Sl /etc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;从这里也能看出，linux命令参数是不需要使用多个&lt;code&gt;-&lt;/code&gt;的（&lt;code&gt;-S&lt;/code&gt; &lt;code&gt;-l&lt;/code&gt;），写在一起即可（&lt;code&gt;-Sl&lt;/code&gt;）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;tree--以树状图格式显示目录内容&#34;&gt;tree —— 以树状图格式显示目录内容
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;tree&lt;/code&gt;会以图形化的树状结构来显示文件和目录，比&lt;code&gt;ls&lt;/code&gt;命令更直观、更清晰地展示目录的层次关系&lt;/p&gt;
+&lt;p&gt;并非所有Linux发行版的最小化安装都自带此命令&lt;/p&gt;
+&lt;h3 id=&#34;语法格式-3&#34;&gt;语法格式
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tree &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;目录路径&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;常用参数-3&#34;&gt;常用参数
+&lt;/h3&gt;&lt;h4 id=&#34;核心功能&#34;&gt;核心功能
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-d&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;只显示目录&lt;/strong&gt;，不显示文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-L &amp;lt;层级&amp;gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;指定要显示的目录层级深度&lt;/strong&gt;&lt;br /&gt;例如，&lt;code&gt;-L 2&lt;/code&gt;表示最多显示到第二层目录&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-f&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示每个文件或目录的完整路径前缀&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-a&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示所有文件，包括以&lt;code&gt;.&lt;/code&gt;开头的隐藏文件&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;格式控制-1&#34;&gt;格式控制
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-h&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;以人类可读的格式（如 K, M, G）显示文件大小&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-p&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示文件和目录的权限&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-u&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示文件或目录的所有者&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-g&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示文件或目录的所属组&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;du&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示每个目录包含内容的总大小&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;内容筛选&#34;&gt;内容筛选
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-P PATTERN&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;只显示&lt;/strong&gt;匹配&lt;code&gt;PATTERN&lt;/code&gt;通配符模式的文件和目录&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-I PATTERN&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;不显示&lt;/strong&gt;匹配&lt;code&gt;PATTERN&lt;/code&gt;通-符模式的文件和目录&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-3&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;展示/etc目录下两层内的目录结构&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tree -d -L &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; /etc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;只显示当前目录结构中所有以.c或.h结尾的文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tree -P &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;*.c|*.h&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;目录本身还是会显示出来，只是不再显示具体的文件，以便维持树状结构&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显示当前目录的结构，但排除bak和none这两个目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tree -I &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;bak|none&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;chmod--更改文件或目录的访问权限&#34;&gt;chmod —— 更改文件或目录的访问权限
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt;全称是&lt;strong&gt;ch&lt;/strong&gt;ange &lt;strong&gt;mod&lt;/strong&gt;e(改变模式)，其功能是更改文件或目录的访问权限，决定了哪些用户可以对它们进行读、写、执行等操作&lt;/p&gt;
+&lt;h2 id=&#34;语法格式-4&#34;&gt;语法格式
+&lt;/h2&gt;&lt;h3 id=&#34;数字模式&#34;&gt;数字模式
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;八进制权限码&amp;gt; &amp;lt;文件名&amp;gt;/&amp;lt;目录名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;符号模式&#34;&gt;符号模式
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;who&lt;span style=&#34;color:#56b6c2&#34;&gt;][&lt;/span&gt;operator&lt;span style=&#34;color:#56b6c2&#34;&gt;][&lt;/span&gt;permission&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;文件名&amp;gt;/&amp;lt;目录名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux文件权限模型&#34;&gt;Linux文件权限模型
+&lt;/h2&gt;&lt;p&gt;Linux中的文件和目录权限使用三种基本权限 (Permission)：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;r&lt;/code&gt;: read (读权限)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;w&lt;/code&gt;: write (写权限)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;x&lt;/code&gt;: execute (执行权限)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;对文件而言&lt;/strong&gt;： 是否能运行这个文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对目录而言&lt;/strong&gt;：是否可以进入该目录（cd）或使用该路径（ln）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;而这三个权限分别对应着八进制数值：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;读（r） = 4&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;写（w） = 2&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行（x） = 1&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过将这些权限数值相加，可以组合出不同的权限（&lt;code&gt;-&lt;/code&gt;表示没有对应权限），比如：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;数字&lt;/th&gt;
+          &lt;th&gt;权限组合&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;7&lt;/td&gt;
+          &lt;td&gt;4+2+1 = rwx&lt;/td&gt;
+          &lt;td&gt;可读、可写、可执行&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;4+2 = rw-&lt;/td&gt;
+          &lt;td&gt;可读、可写&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;4+1 = r-x&lt;/td&gt;
+          &lt;td&gt;可读、可执行&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;4 = r&amp;ndash;&lt;/td&gt;
+          &lt;td&gt;只读&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;0 = &amp;mdash;&lt;/td&gt;
+          &lt;td&gt;没有权限&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Linux中权限分配给三类用户 (Who)：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;u&lt;/code&gt;: user (文件所有者)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;g&lt;/code&gt;: group (文件所属组)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;o&lt;/code&gt;: others (其他人)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;除此之外还有一个表示三类用户集合的标志：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;a&lt;/code&gt;: all (所有人, &lt;code&gt;u&lt;/code&gt;, &lt;code&gt;g&lt;/code&gt;, &lt;code&gt;o&lt;/code&gt;的合集)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;u&lt;/code&gt;、&lt;code&gt;g&lt;/code&gt;、&lt;code&gt;o&lt;/code&gt;分别对应三个八进制权限码数值，利用三位数字组合我们就能表示出三类用户的权限，例如权限值 755 就表示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;用户权限：7（rwx）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组权限：5（r-x）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;其他权限：5（r-x）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;常见权限对应关系如下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;权限值&lt;/th&gt;
+          &lt;th&gt;符号形式&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;777&lt;/td&gt;
+          &lt;td&gt;rwxrwxrwx&lt;/td&gt;
+          &lt;td&gt;所有人可读写执行（不安全）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;755&lt;/td&gt;
+          &lt;td&gt;rwxr-xr-x&lt;/td&gt;
+          &lt;td&gt;用户有全部权限，其他用户只能读执行&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;700&lt;/td&gt;
+          &lt;td&gt;rwx&amp;mdash;&amp;mdash;&lt;/td&gt;
+          &lt;td&gt;仅用户本人拥有权限&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;644&lt;/td&gt;
+          &lt;td&gt;rw-r&amp;ndash;r&amp;ndash;&lt;/td&gt;
+          &lt;td&gt;用户可读写，其他用户只读&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;600&lt;/td&gt;
+          &lt;td&gt;rw&amp;mdash;&amp;mdash;-&lt;/td&gt;
+          &lt;td&gt;仅用户本人可读写（常用于私密文件）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;可以使用之前学过的&lt;code&gt;ls -l&lt;/code&gt;命令查看权限，例如：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;drwxr-xr-x  2 user group 4096 Jul 29 10:00 mydir
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中的&lt;code&gt;rwxr-xr-x&lt;/code&gt;就是755&lt;/p&gt;
+&lt;h2 id=&#34;符号模式-1&#34;&gt;符号模式
+&lt;/h2&gt;&lt;p&gt;这是&lt;code&gt;chmod&lt;/code&gt;最直观易读的用法，它通过明确的符号来增、删或设定权限&lt;/p&gt;
+&lt;p&gt;符号模式的命令由三部分构成（各部分之间没有空格，下面加空格是为了方便观看）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;who&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;  &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;operator&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;  &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;permission&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;who&lt;/code&gt; (作用对象)&lt;/strong&gt;：指定要为哪类用户更改权限
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;u&lt;/code&gt;: user/所有者&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;g&lt;/code&gt;: group/所属组&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;o&lt;/code&gt;: others/其他人&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;a&lt;/code&gt;: all/所有人（如果省略who，则默认为a）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;operator&lt;/code&gt; (操作符)&lt;/strong&gt;：指定要执行的操作
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;+&lt;/code&gt;: &lt;strong&gt;添加&lt;/strong&gt;指定的权限&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&lt;/code&gt;: &lt;strong&gt;移除&lt;/strong&gt;指定的权限&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;=&lt;/code&gt;: &lt;strong&gt;覆盖&lt;/strong&gt;原有的权限，只给予指定的权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;permission&lt;/code&gt; (权限)&lt;/strong&gt;：指定&lt;code&gt;r&lt;/code&gt;, &lt;code&gt;w&lt;/code&gt;, &lt;code&gt;x&lt;/code&gt;中的一种或多种&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;将这三部分组合起来，就可以精确地调整权限&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;可以同时进行多个组合，用逗号&lt;code&gt;,&lt;/code&gt;隔开&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用参数-4&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;命令行选项&#34;&gt;命令行选项
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-R&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;递归地更改目录及其下所有文件和子目录的权限&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程&lt;/strong&gt;，显示每个文件权限的更改情况&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-c&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;只在权限确实发生更改时才显示报告&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;reference=&amp;lt;参考文件&amp;gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;将权限设置成参考文件的权限&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-4&#34;&gt;使用示例
+&lt;/h2&gt;&lt;h3 id=&#34;数字模式-1&#34;&gt;数字模式
+&lt;/h3&gt;&lt;p&gt;这是最常用的设置权限的方法，但是需要一些记忆&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;为脚本添加执行权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod &lt;span style=&#34;color:#d19a66&#34;&gt;755&lt;/span&gt; my_script.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这是常见用法之一，&lt;code&gt;755&lt;/code&gt;权限(&lt;code&gt;rwxr-xr-x&lt;/code&gt;)意味着：所有者可以读、写、执行；所属组和其他人可以读和执行，这使得脚本可以被所有者修改，被所有人执行&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置一个私密文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod &lt;span style=&#34;color:#d19a66&#34;&gt;600&lt;/span&gt; private_key.pem
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;600&lt;/code&gt;权限(&lt;code&gt;rw-------&lt;/code&gt;)意味着只有文件所有者可以读写该文件，其他人没有任何权限&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将/var/www/html目录以及其下所有文件和子目录的权限都设置为755（目录）或644（文件）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod -R &lt;span style=&#34;color:#d19a66&#34;&gt;755&lt;/span&gt; /var/www/html
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;符号模式-2&#34;&gt;符号模式
+&lt;/h3&gt;&lt;p&gt;这种模式在不希望重新计算整个三位数字，只想微调某个权限时非常有用，很方便&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;为所有用户添加执行权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod a+x file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;与&lt;code&gt;chmod 755&lt;/code&gt;一样，常见于设置脚本权限&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为所属组和其他人移除写权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod go-w file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为文件所有者设置固定的读写权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod &lt;span style=&#34;color:#e06c75&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;rw file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他&#34;&gt;其他
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;把new.txt文件权限修改成和old.txt一样&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod --reference&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;old.txt new.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;chgrp--chown--更改文件或目录的所有者和所属组&#34;&gt;chgrp &amp;amp; chown —— 更改文件或目录的所有者和所属组
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;chgrp&lt;/code&gt;&lt;strong&gt;名称来源于 “&lt;strong&gt;ch&lt;/strong&gt;ange &lt;strong&gt;gr&lt;/strong&gt;ou&lt;/strong&gt;p&lt;/strong&gt;”，专门用于更改文件或目录的&lt;strong&gt;所属组&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;chown&lt;/code&gt;&lt;strong&gt;名称来源于 “&lt;strong&gt;ch&lt;/strong&gt;ange &lt;strong&gt;own&lt;/strong&gt;er”，它更加强大，也更加常用，因为它既可以更改文件或目录的&lt;/strong&gt;所有者&lt;/strong&gt;，也可以同时更改&lt;strong&gt;所属组&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;语法格式-5&#34;&gt;语法格式
+&lt;/h2&gt;&lt;h3 id=&#34;chown&#34;&gt;chown
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chown &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;新所有者&amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;:&amp;lt;新所属组&amp;gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;文件&amp;gt;/&amp;lt;目录&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;chgrp&#34;&gt;chgrp
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chgrp &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;新所属组&amp;gt; &amp;lt;文件&amp;gt;/&amp;lt;目录&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux所有者与所属组&#34;&gt;Linux所有者与所属组
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在Linux中，每个文件和目录都有一个&lt;strong&gt;所有者（Owner）和一个所属组（Group）&lt;/strong&gt;，所有者通常是创建该文件的用户，而所属组允许多个用户共享对文件的访问权限，一个用户可以属于多个组&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更改所有权通常需要管理员权限（&lt;code&gt;sudo&lt;/code&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用户名称和组名称在系统里是分开的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;用户名存储在&lt;code&gt;/etc/passwd&lt;/code&gt;文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;组名存储在&lt;code&gt;/etc/group&lt;/code&gt;文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因此，我们可以创建一个用户名叫&lt;code&gt;alice&lt;/code&gt;，也可以有一个组名叫&lt;code&gt;alice&lt;/code&gt;，它们是不同的实体，不冲突&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;常用参数-5&#34;&gt;常用参数
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;这两个命令的大部分核心参数是通用的，只有&lt;code&gt;--from&lt;/code&gt;例外，是&lt;code&gt;chown&lt;/code&gt;独有&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-R&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;递归地更改目录及其子目录下所有文件和目录的所有权&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程&lt;/strong&gt;，为每个被处理的文件打印一条所有权变更的消息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-c&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;只在所有权确实发生改变时才显示详细过程&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;from=&amp;lt;当前归属&amp;gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-(chown独有)&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;&lt;/strong&gt; &lt;br /&gt; &lt;strong&gt;仅当文件的当前所有者和/或组匹配指定值时，才更改其所有权&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;reference=&amp;lt;参考文件&amp;gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;使用参考文件的所有者和所属组来设置目标文件&lt;/strong&gt;，而不是自己指定&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-5&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将file.txt的所有者更改为用户alice&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chown alice file.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更改文件的所属组&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用chgrp：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chgrp newgroup file.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;使用chmod：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chown :newgroup file.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将file.txt的所有者设置为newuser，所属组设置为newgroup&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chown newuser:newgroup file.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将目录&lt;code&gt;/var/www/html&lt;/code&gt;及其下所有文件和子目录的所有者和所属组都设置为名为&lt;code&gt;www-data&lt;/code&gt;的用户和组&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chown -R www-data:www-data /var/www/html
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;www-data&lt;/code&gt;是Linux中常用的Web服务器（比如 Apache、Nginx）运行的用户和组&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;mkdir--创建目录文件&#34;&gt;mkdir —— 创建目录文件
+&lt;/h1&gt;&lt;h2 id=&#34;语法格式-6&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;目录名1&amp;gt; &amp;lt;目录名2&amp;gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux的umask权限控制&#34;&gt;Linux的umask权限控制
+&lt;/h2&gt;&lt;p&gt;在Linux中，每个新创建的目录或文件都会根据当前的&lt;code&gt;umask&lt;/code&gt;值决定其默认权限&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;umask&lt;/code&gt;是权限掩码，它会从默认的最大权限中&amp;quot;减去&amp;quot;（实际不是减法）指定的值，结果就是新建文件或目录的默认权限：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;默认权限&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; 最大权限 - &lt;span style=&#34;color:#e5c07b&#34;&gt;umask&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;umask&lt;/code&gt;有四位，通常我们设置&lt;code&gt;umask&lt;/code&gt;只关注后三位（用户、组、其他），第一位用于以下特殊权限控制：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;权限位&lt;/th&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;setuid&lt;/td&gt;
+          &lt;td&gt;文件以创建者身份运行（对文件）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;setgid&lt;/td&gt;
+          &lt;td&gt;组权限继承（对目录）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;sticky&lt;/td&gt;
+          &lt;td&gt;只有文件所有者可删除（对目录）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;但在大多数实际中，&lt;strong&gt;&lt;code&gt;umask&lt;/code&gt;的第一位几乎都是 0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;因为我们通常不通过&lt;code&gt;umask&lt;/code&gt;控制特殊权限，而是用&lt;code&gt;chmod +s&lt;/code&gt;、&lt;code&gt;+t&lt;/code&gt;显式设置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;对于目录，最大默认权限是 777；对于文件，最大默认权限是 666（因为默认不为新文件设置执行权限）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;umask 为 0022&lt;/li&gt;
+&lt;li&gt;新建目录的权限为 777 - 022 = 755&lt;/li&gt;
+&lt;li&gt;新建文件的权限为 666 - 022 = 644&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;可以使用&lt;code&gt;umask&lt;/code&gt;命令查看当前掩码，也可以使用&lt;code&gt;umask&lt;/code&gt;新值来设置，例如：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;umask&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0027&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这将修改新建目录权限为750（777-027），文件权限为640（666-027）&lt;/p&gt;
+&lt;p&gt;这里需要解释一个误区：&lt;strong&gt;umask其实不是减法，而是按位操作，先对&lt;code&gt;umask&lt;/code&gt;取反后与运算&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;默认权限&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; 最大权限 &amp;amp; &lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt;~umask&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;比如上面的&lt;code&gt;umask 0027&lt;/code&gt;，文件权限为 640（666-027），你会发现6-7不等于0，但按位计算就是对的&lt;/p&gt;
+&lt;p&gt;我们使用二进制表示，分别计算每一位：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类别&lt;/th&gt;
+          &lt;th&gt;默认权限 (666)&lt;/th&gt;
+          &lt;th&gt;umask (0027)&lt;/th&gt;
+          &lt;th&gt;~umask (按位取反)&lt;/th&gt;
+          &lt;th&gt;实际权限（按位与）&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;所有者&lt;/td&gt;
+          &lt;td&gt;110&lt;/td&gt;
+          &lt;td&gt;000&lt;/td&gt;
+          &lt;td&gt;111&lt;/td&gt;
+          &lt;td&gt;110 （rw-）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;所属组&lt;/td&gt;
+          &lt;td&gt;110&lt;/td&gt;
+          &lt;td&gt;010&lt;/td&gt;
+          &lt;td&gt;101&lt;/td&gt;
+          &lt;td&gt;100 （r&amp;ndash;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;其他人&lt;/td&gt;
+          &lt;td&gt;110&lt;/td&gt;
+          &lt;td&gt;111&lt;/td&gt;
+          &lt;td&gt;000&lt;/td&gt;
+          &lt;td&gt;000 （&amp;mdash;）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;合起来就是&lt;code&gt;640&lt;/code&gt;，即&lt;code&gt;rw-r-----&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用参数-6&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;核心功能-1&#34;&gt;核心功能
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-p&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;递归创建&lt;/strong&gt;&lt;br /&gt;当需要创建的目录，其父目录尚不存在时，这个参数会自动创建所有不存在的父目录&amp;lt;br /&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程&lt;/strong&gt;&lt;br /&gt;每创建一个新目录，都会打印一条消息。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;权限控制&#34;&gt;权限控制
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-m&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;设置权限&lt;/strong&gt;&lt;br /&gt;在创建目录的同时，直接为其设定权限（例如&lt;code&gt;-m 755&lt;/code&gt;），忽略系统的&lt;code&gt;umask&lt;/code&gt;默认值&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-6&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在当前位置一次性创建多个目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir docs images scripts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建多级目录，并显示创建过程&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -pv dir1/dir2/dir3/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建一个权限为&lt;code&gt;777&lt;/code&gt;的目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -m &lt;span style=&#34;color:#d19a66&#34;&gt;777&lt;/span&gt; dir
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;touch--创建空文件更新文件的时间戳&#34;&gt;touch —— 创建空文件/更新文件的时间戳
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;touch&lt;/code&gt;有两个主要功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;如果文件不存在，则创建一个新的空文件&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;如果文件已存在，则更新该文件的访问和修改时间戳为当前时间&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;语法格式-7&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;文件名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux文件时间戳&#34;&gt;Linux文件时间戳
+&lt;/h2&gt;&lt;p&gt;Linux系统为每个文件维护的三个主要时间戳：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;访问时间 (atime)&lt;/strong&gt;: 最后一次访问（读取）文件内容的时间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修改时间 (mtime)&lt;/strong&gt;: 最后一次修改文件内容的时间。这是我们用&lt;code&gt;ls -l&lt;/code&gt;默认看到的时间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;更改时间 (ctime)&lt;/strong&gt;: 最后一次更改文件元数据（metadata，如权限、所有者）或内容的时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;touch&lt;/code&gt;命令的主要作用就是更新这些时间戳，特别是&lt;code&gt;atime&lt;/code&gt;和&lt;code&gt;mtime&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用参数-7&#34;&gt;常用参数
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-a&lt;/td&gt;
+          &lt;td&gt;只更改文件的访问时间（atime）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-m&lt;/td&gt;
+          &lt;td&gt;只更改文件的修改时间（mtime）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-c&lt;/td&gt;
+          &lt;td&gt;如果文件不存在，不创建新文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-r &amp;lt;文件&amp;gt;&lt;/td&gt;
+          &lt;td&gt;使用另一个文件的时间戳来更新目标文件，而不是使用当前时间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-d &amp;lt;日期字符串&amp;gt;&lt;/td&gt;
+          &lt;td&gt;使用指定的日期字符串&lt;code&gt;&amp;quot;YYYY-MM-DD HH:MM:SS&amp;quot;&lt;/code&gt;来更新时间戳&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-t &amp;lt;时间戳&amp;gt;&lt;/td&gt;
+          &lt;td&gt;使用指定的&lt;code&gt;[CC]YYMMDDhhmm[.ss]&lt;/code&gt;格式的时间戳来更新&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-7&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;创建多个空文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch read.md file.txt note.log
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更新一个已存在文件的时间戳&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch file.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将new.txt的时间戳设置得和old.txt完全一样&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch -r old.txt new.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果&lt;code&gt;new.txt&lt;/code&gt;不存在，&lt;code&gt;touch&lt;/code&gt;会创建&lt;code&gt;new.txt&lt;/code&gt;文件，并将其时间戳设置为&lt;code&gt;old.txt&lt;/code&gt;的时间戳&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建一个指定日期的文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch -d &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;2023-01-01 12:30:00&amp;#34;&lt;/span&gt; time.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建一个指定时间戳的文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch -t 202508011030.45 time.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;find--在目录中搜索文件&#34;&gt;find —— 在目录中搜索文件
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;find&lt;/code&gt;会&lt;strong&gt;递归地&lt;/strong&gt;遍历指定的目录树，根据用户设定的条件来查找文件，并能对查找到的文件执行指定的操作&lt;/p&gt;
+&lt;h2 id=&#34;语法格式-8&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find &amp;lt;起始路径&amp;gt; &amp;lt;表达式&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                           /      |      &lt;span style=&#34;color:#98c379&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&lt;/span&gt;                 &amp;lt;选项&amp;gt; &amp;lt;测试&amp;gt; &amp;lt;动作&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;find命令的核心表达式引擎&#34;&gt;find命令的核心：表达式引擎
+&lt;/h2&gt;&lt;p&gt;与其他命令使用简单参数不同，&lt;code&gt;find&lt;/code&gt;命令的核心是一系列&lt;strong&gt;可以组合的表达式&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;选项&amp;gt; &amp;lt;条件&amp;gt; &amp;lt;动作&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;测试（选项+条件）&lt;/strong&gt;：用来判断文件是否符合某个条件，例如按名称或大小匹配，如果符合，测试返回真&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动作&lt;/strong&gt;：指定对找到的文件执行什么操作，最常见的动作是打印路径、执行命令&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作符&lt;/strong&gt;：用于组合多个测试，例如&lt;code&gt;-and&lt;/code&gt;(与),&lt;code&gt;-or&lt;/code&gt;(或),&lt;code&gt;-not&lt;/code&gt;(非)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;整个&lt;code&gt;find&lt;/code&gt;命令就是构建一个逻辑表达式，&lt;code&gt;find&lt;/code&gt;会用这个表达式去测试路径下的每一个文件&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用参数-8&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;按名称路径测试&#34;&gt;按名称/路径测试
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-name /PATTERN/&lt;/td&gt;
+          &lt;td&gt;按文件名匹配（区分大小写），支持通配符&lt;code&gt;*&lt;/code&gt;和&lt;code&gt;?&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-iname /PATTERN/&lt;/td&gt;
+          &lt;td&gt;按文件名匹配（不区分大小写）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-path /PATTERN/&lt;/td&gt;
+          &lt;td&gt;按完整路径（包含目录名和文件名）进行匹配&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-regex /PATTERN/&lt;/td&gt;
+          &lt;td&gt;使用正则表达式匹配完整路径&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;按类型大小时间测试&#34;&gt;按类型/大小/时间测试
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-type TYPE&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按文件类型查找&lt;/strong&gt;&lt;br /&gt;&lt;code&gt;f&lt;/code&gt;代表普通文件，&lt;code&gt;d&lt;/code&gt;代表目录，&lt;code&gt;l&lt;/code&gt;代表符号链接&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-size N[cwbkMG]&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按文件大小查找&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;&lt;code&gt;N&lt;/code&gt;是数字&lt;/strong&gt;，&lt;code&gt;+N&lt;/code&gt;表示大于N，&lt;code&gt;-N&lt;/code&gt;表示小于N，&lt;code&gt;N&lt;/code&gt;表示等于N&lt;br /&gt;&lt;strong&gt;&lt;code&gt;N&lt;/code&gt;的单位&lt;/strong&gt;：&lt;code&gt;c&lt;/code&gt;(字节)，&lt;code&gt;w&lt;/code&gt;(字,2字节)，&lt;code&gt;b&lt;/code&gt;(块,512字节)，&lt;code&gt;k&lt;/code&gt;(KB)，&lt;code&gt;M&lt;/code&gt;(MB)，&lt;code&gt;G&lt;/code&gt;(GB)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-mtime N&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按修改时间查找&lt;/strong&gt;&lt;br /&gt;&lt;code&gt;N&lt;/code&gt;代表天数&lt;code&gt;+N&lt;/code&gt;表示超过N天前修改，&lt;code&gt;-N&lt;/code&gt;表示N天内修改，&lt;code&gt;N&lt;/code&gt;表示正好第N天前修改&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-ctime N&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按状态改变时间查找&lt;/strong&gt;&lt;br /&gt;类似&lt;code&gt;-mtime&lt;/code&gt;，针对权限、所有者等属性变化时间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-atime N&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按访问时间查找&lt;/strong&gt;&lt;br /&gt;类似&lt;code&gt;-mtime&lt;/code&gt;，针对最后访问时间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-user NAME&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按文件所有者查找&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-group NAME&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按文件所属组查找&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-perm MODE&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按文件权限查找&lt;/strong&gt;&lt;br /&gt;支持数字（如&lt;code&gt;0755&lt;/code&gt;）或符号模式（如&lt;code&gt;u=rwx,g=rx,o=rx&lt;/code&gt;）&lt;br /&gt;&lt;code&gt;MODE&lt;/code&gt;表示权限正好等于，&lt;code&gt;-MODE&lt;/code&gt;表示完全包含，&lt;code&gt;/MODE&lt;/code&gt;表示任意一位包含&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;对结果执行的动作&#34;&gt;对结果执行的动作
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-print&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;打印出匹配文件的完整路径&lt;/strong&gt;&lt;br /&gt;这是&lt;code&gt;find&lt;/code&gt;的默认动作，通常可以省略&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-ls&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;对匹配的文件执行&lt;code&gt;ls -lids&lt;/code&gt;命令，显示详细信息&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-delete&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;删除找到的文件&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-exec COMMAND {} ;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;对每个找到的文件执行指定的&lt;code&gt;COMMAND&lt;/code&gt;命令&lt;br /&gt;&lt;code&gt;{}&lt;/code&gt;会被替换为当前文件名，&lt;code&gt;\;&lt;/code&gt;表示命令结束，必须转义！&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-ok COMMAND {} ;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;与-exec类似，但在执行每个命令前会进行交互式确认&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-prune&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;跳过指定目录，不进入递归查找&lt;br /&gt;常用：&lt;code&gt;find &amp;lt;起始目录&amp;gt; -path &amp;quot;&amp;lt;要排除的路径&amp;gt;&amp;quot; -prune -o &amp;lt;其他查找条件&amp;gt; &amp;lt;动作&amp;gt;&lt;/code&gt;&lt;/strong&gt;&lt;br /&gt;如果要排除多个目录，可以写多个 &lt;code&gt;-path ... -prune&lt;/code&gt; 条件组合&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;逻辑操作符&#34;&gt;逻辑操作符
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;操作符&lt;/th&gt;
+          &lt;th&gt;完整形式&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-a&lt;/td&gt;
+          &lt;td&gt;-and&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑与&lt;/strong&gt;（默认行为，可省略）表示两个条件都满足&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-o&lt;/td&gt;
+          &lt;td&gt;-or&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑或&lt;/strong&gt;，表示只要满足任一条件即可&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;!&lt;/td&gt;
+          &lt;td&gt;-not&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑非&lt;/strong&gt;，取反，表示不满足某个条件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;()&lt;/td&gt;
+          &lt;td&gt;无&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;组合多个条件表达式&lt;/strong&gt;，用于改变默认的优先级，&lt;strong&gt;括号需加转义：&lt;code&gt;\(&lt;/code&gt; 和 &lt;code&gt;\)&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-8&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在/log目录下，查找所有类型为普通文件且大小超过10MB的文件，并列出详细信息&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find /log -type f -size +10MB -ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查找/etc目录下，最近7天内被修改过的所有文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find /etc -mtime -7
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查找/home下所有所有属于用户alice的，且权限为777的文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find /home -type f -user alice -perm &lt;span style=&#34;color:#d19a66&#34;&gt;777&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在当前目录及其所有子目录下，查找所有以.log结尾的文件，并移动到/log中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find . -name &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;*.log&amp;#34;&lt;/span&gt; -exec mv -n &lt;span style=&#34;color:#56b6c2&#34;&gt;{}&lt;/span&gt; /log/ &lt;span style=&#34;color:#98c379&#34;&gt;\;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;找出所有包含了“main”这个词的C语言源文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find . -type f -name &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;*.c&amp;#34;&lt;/span&gt; -exec grep -l &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;main&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;{}&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;\;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在/home下查找所有.txt和.png文件，但跳过其中的/log和/mod子目录，并打印出完整路径&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find /home &lt;span style=&#34;color:#98c379&#34;&gt;\(&lt;/span&gt; -path &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;./log&amp;#34;&lt;/span&gt; -o -path &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;./mod&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;\)&lt;/span&gt; -prune -o &lt;span style=&#34;color:#98c379&#34;&gt;\(&lt;/span&gt; -name &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;*.txt&amp;#34;&lt;/span&gt; -o -name &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;*.png&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;\)&lt;/span&gt; -print
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\( -path &amp;quot;./log&amp;quot; -o -path &amp;quot;./mod&amp;quot; \) -prune&lt;/code&gt;：&lt;strong&gt;排除这两个目录&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-o&lt;/code&gt;：如果不是被剪枝的目录，则继续执行下一部分&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\( -name &amp;quot;*.txt&amp;quot; -o -name &amp;quot;*.png&amp;quot; \)&lt;/code&gt;：查找 txt 或 png 文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-print&lt;/code&gt;：打印完整路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;最好使用括号包裹过滤和查找的条件，否则无法保证结果&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;cp--复制文件目录&#34;&gt;cp —— 复制文件/目录
+&lt;/h1&gt;&lt;h2 id=&#34;语法格式-9&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;源文件1&amp;gt; &amp;lt;源文件2&amp;gt;... &amp;lt;目标文件名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux文件属性&#34;&gt;Linux文件属性
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;cp&lt;/code&gt;命令的很多参数都与文件属性相关，这些我们在上文大多都提到过：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个文件和目录都有其所有者和所属组&lt;/li&gt;
+&lt;li&gt;每个文件都有读（r）、写（w）、执行（x）的权限
+这些权限分别针对&amp;quot;所有者&amp;quot;、&amp;ldquo;所属组&amp;rdquo;、&amp;ldquo;其他人&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;每个文件都有多个时间戳，最常用的是最后修改时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;常用参数-9&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;核心功能-2&#34;&gt;核心功能
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-r, -R&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;递归复制&lt;/strong&gt;&lt;br /&gt;这是复制目录时必须使用的参数，它会复制该目录下所有的文件和子目录&lt;br /&gt;最好使用&lt;code&gt;-R&lt;/code&gt;，它是更标准化的写法&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-i&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;交互模式&lt;/strong&gt;&lt;br /&gt;在覆盖一个已存在的文件前，会先进行提示并要求用户确认&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-n&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;不覆盖已存在的文件&lt;/strong&gt;&lt;br /&gt;如果在目标位置有同名文件，则跳过该文件的复制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-u&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;更新复制&lt;/strong&gt;&lt;br /&gt;仅当源文件比目标文件新，或者目标文件不存在时，才执行复制操作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程&lt;/strong&gt;&lt;br /&gt;列出每个正在被复制的文件名&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-p&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;保留文件属性&lt;/strong&gt;&lt;br /&gt;复制时，使新文件保留源文件的权限、所有者、时间戳等属性&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;链接&#34;&gt;链接
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-d&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;保留符号链接&lt;/strong&gt;&lt;br /&gt;当复制一个符号链接（软链接）时，直接复制链接本身，而不是它所指向的文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-l&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;创建硬链接&lt;/strong&gt;，而不是复制文件内容&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-s&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;创建符号链接&lt;/strong&gt;，而不是复制文件内容&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-a&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;归档模式&lt;/strong&gt;&lt;br /&gt;这是一个强大的组合参数，通常等效于&lt;code&gt;-dR --preserve=all&lt;/code&gt; (在某些系统中是&lt;code&gt;-pPR&lt;/code&gt;)&lt;br /&gt;它表示递归复制、保留链接、并保留所有文件属性，常用于备份&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;强制&#34;&gt;强制
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-f&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;强制&lt;/strong&gt;&lt;br /&gt;如果目标文件已存在且无法打开进行写入，cp会先尝试将其删除，然后再复制&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;备份&#34;&gt;备份
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;--backup[=CONTROL]&lt;/code&gt;&lt;br /&gt;或&lt;code&gt;-b[=CONTROL]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;为每个已存在的目标文件创建一个备份&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;这个和&lt;code&gt;-a&lt;/code&gt;参数不同，是用来备份目标位置同名文件的，防止误覆盖&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CONTROL可选值：&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;值&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;none&lt;/td&gt;
+          &lt;td&gt;不进行备份（与不加&lt;code&gt;--backup&lt;/code&gt;等效）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;numbered&lt;/td&gt;
+          &lt;td&gt;使用编号方式备份文件，如：&lt;code&gt;file~&lt;/code&gt;, &lt;code&gt;file.~1~&lt;/code&gt;, &lt;code&gt;file.~2~&lt;/code&gt; 等&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;existing&lt;/td&gt;
+          &lt;td&gt;如果之前使用的是&lt;code&gt;numbered&lt;/code&gt;，则继续编号；否则使用 &lt;code&gt;simple&lt;/code&gt;（见下）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;simple&lt;/td&gt;
+          &lt;td&gt;简单备份，文件名加一个 &lt;code&gt;~&lt;/code&gt; 号，如：&lt;code&gt;file~&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如果省略&lt;code&gt;=CONTROL&lt;/code&gt;，则使用默认的备份方式，通常是&lt;code&gt;existing&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用示例-9&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;递归复制整个文件夹到指定目录下，如果目标已存在则提示是否覆盖&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp -Ri dir1/ dir2/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复制文件到&lt;code&gt;/etc&lt;/code&gt;目录下，覆盖已有文件不再询问&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp -f file /etc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;递归复制文件夹的内容到指定目录下，保留所有属性，只更新变动过的文件，并显示过程&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp -auv dir1/. dir2/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意这里使用的是&lt;code&gt;dir1/.&lt;/code&gt;而不是&lt;code&gt;dir1/&lt;/code&gt;，区别在于前者不包括目录&lt;code&gt;dir1&lt;/code&gt;本身，只包括其中内容&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结合{}，把file1复制为file1.bak&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp file1&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;,.bak&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这里的命令展开就是&lt;code&gt;cp file1 file1.bak&lt;/code&gt;，是一个非常巧妙的缩写方法&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;mv--移动重命名文件&#34;&gt;mv —— 移动/重命名文件
+&lt;/h1&gt;&lt;h2 id=&#34;语法格式-10&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;源文件或目录&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;mv的工作原理&#34;&gt;mv的工作原理
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;mv&lt;/code&gt;行为根据操作是否在同一个文件系统内而有所不同&lt;/p&gt;
+&lt;h3 id=&#34;在同一个文件系统内移动&#34;&gt;在同一个文件系统内移动
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;此操作几乎是瞬时完成的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mv&lt;/code&gt;并不会真的移动磁盘上的数据，它只是修改了文件的路径记录（inode中的指针），所以速度极快&lt;/p&gt;
+&lt;h3 id=&#34;在不同的文件系统间移动&#34;&gt;在不同的文件系统间移动
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这个过程的速度取决于文件的大小&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;例如从本地硬盘移动到U盘，此时&lt;code&gt;mv&lt;/code&gt;无法只修改路径记录，它会执行一个完整的复制操作，将文件内容从源位置复制到目标位置，然后在确认复制成功后删除原始文件，实际上相当于先执行&lt;code&gt;cp&lt;/code&gt;再执行&lt;code&gt;rm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其实类似windows在不同盘符之间移动文件&lt;/p&gt;
+&lt;h2 id=&#34;常用参数-10&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;核心功能-3&#34;&gt;核心功能
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-i&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;交互模式&lt;/strong&gt;&lt;br /&gt;在覆盖一个已存在的文件前，会先进行提示并要求用户确认，可以有效防止误操作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-n&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;不覆盖已存在的文件&lt;/strong&gt;&lt;br /&gt;如果在目标位置有同名文件，则跳过该操作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-u&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;更新&lt;/strong&gt;&lt;br /&gt;仅当源文件比目标文件新，或者目标文件不存在时，才执行移动操作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程&lt;/strong&gt;&lt;br /&gt;列出每个文件在移动前后的路径&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;强制-1&#34;&gt;强制
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-f&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;强制&lt;/strong&gt;&lt;br /&gt;不经任何提示，直接覆盖已存在的目标文件，通常是默认行为，与&lt;code&gt;-i&lt;/code&gt;相反&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;备份-1&#34;&gt;备份
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-b[=CONTROL]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;**备份&lt;br /&gt;**在覆盖已存在的目标文件时，会为原目标文件创建一个备份&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;具体使用方法和&lt;code&gt;cp&lt;/code&gt;命令该参数一致：&lt;a class=&#34;link&#34; href=&#34;#%e5%a4%87%e4%bb%bd-1&#34; &gt;cp备份
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用示例-10&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;重命名txt文件为jpg&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv file.txt file.jpg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;也可以使用&lt;code&gt;{}&lt;/code&gt;一步到位：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv file.&lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;txt,jpg&lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将当前目录下所有以.log结尾的文件，一次性全部移动到logs目录中（&lt;strong&gt;结合通配符&lt;/strong&gt;）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv *.log logs/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;移动文件，显示过程，并进行确认&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv -iv file dir/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;目录名称最好加上&lt;code&gt;/&lt;/code&gt;表示为目录，否则可能进行重命名操作（如果没有该目录的话）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将目录移动到tmp目录下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv dir/ /tmp/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;与&lt;code&gt;cp&lt;/code&gt;不同，&lt;code&gt;mv&lt;/code&gt;在移动目录时不需要&lt;code&gt;-r&lt;/code&gt;参数&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;rm--删除文件或目录&#34;&gt;rm —— 删除文件或目录
+&lt;/h1&gt;&lt;h2 id=&#34;语法格式-11&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;文件或目录&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux文件删除的重要特性&#34;&gt;Linux文件删除的重要特性
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;与Windows等图形界面的“移动到回收站”不同，&lt;code&gt;rm&lt;/code&gt;命令默认是永久性删除&lt;/li&gt;
+&lt;li&gt;一旦文件被&lt;code&gt;rm&lt;/code&gt;删除，通常情况下无法轻易恢复，使用时谨慎再谨慎！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;常用参数-11&#34;&gt;常用参数
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-r, -R&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;递归删除&lt;/strong&gt;&lt;br /&gt;这是删除目录时必须使用的参数，它会删除该目录下所有的文件和子目录&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-f&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;强制删除&lt;/strong&gt;&lt;br /&gt;忽略不存在的文件，并且从不提示用户进行确认，即使文件是只读的，也会直接删除。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-i&lt;/td&gt;
+          &lt;td&gt;**交互模式&lt;br /&gt;**在删除每个文件前都会进行提示并要求用户确认，可以有效防止误删&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程，列出每个正在被删除的文件名&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-11&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;删除目录下多个文件，每个文件删除之前询问**（结合通配符）**&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm -i *.tmp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;递归删除整个目录及其内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm -r old_project/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;强制递归删除整个目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm -rf dir/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这个命令组合会强制、无提示地删除一个目录及其全部内容！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是一个极其危险的命令组合，常被戏称为“删库跑路”，一定要慎用！&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;rmdir--删除空目录&#34;&gt;rmdir —— 删除空目录
+&lt;/h1&gt;&lt;h2 id=&#34;语法格式-12&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rmdir &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;目录名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;rmdir-与-rm--r&#34;&gt;rmdir 与 rm -r
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;rmdir&lt;/code&gt;是一个专门用来删除空目录的命令，如果目录中含有任何文件或子目录，&lt;code&gt;rmdir&lt;/code&gt;命令都会执行失败并报错&lt;/li&gt;
+&lt;li&gt;由于它只能删除空目录，所以它比&lt;code&gt;rm -r&lt;/code&gt;要安全得多&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;常用参数-12&#34;&gt;常用参数
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-p&lt;/td&gt;
+          &lt;td&gt;**递归删除目录&lt;br /&gt;**当子目录被删除后，如果其父目录也因此变成了空目录，则一并删除&lt;br /&gt;依此类推，直到遇到非空目录为止&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-12&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;删除一个空的目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rmdir empty_dir
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;递归删除空的嵌套目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rmdir -p dir1/dir2/dir3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;首先删除&lt;code&gt;dir3 &lt;/code&gt;目录&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;然后发现&lt;code&gt;dir2&lt;/code&gt;目录变空了，于是也删除&lt;code&gt;dir2&lt;/code&gt;目录&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最后发现&lt;code&gt;dir1&lt;/code&gt;目录也变空了，于是也删除&lt;code&gt;dir1&lt;/code&gt;目录&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;通过一条命令，就可以清理掉一整条空的目录路径&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;同时删除多个空目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rmdir empty_dir1 empty_dir2/xxx/xxx 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;tar--文件归档与压缩工具&#34;&gt;tar —— 文件归档与压缩工具
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;tar&lt;/code&gt;命令是Linux中用于打包归档和压缩/解压文件的核心工具&lt;/p&gt;
+&lt;p&gt;它的名称是 tape archive（磁带归档）的缩写，最初被设计用于将文件备份到磁带上，现在广泛用于将多个文件和目录打包成一个单独的文件&lt;/p&gt;
+&lt;h2 id=&#34;语法格式-13&#34;&gt;语法格式
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;tar&lt;/code&gt;命令的参数风格比较独特，其主选项通常不需要在前面加&lt;code&gt;-&lt;/code&gt;，但为了统一和清晰，加上&lt;code&gt;-&lt;/code&gt;也是完全兼容的&lt;/p&gt;
+&lt;h3 id=&#34;创建归档&#34;&gt;创建归档
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;主选项&lt;span style=&#34;color:#56b6c2&#34;&gt;][&lt;/span&gt;辅助选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;归档文件名&amp;gt; &amp;lt;要归档的文件或目录...&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;查看归档内容&#34;&gt;查看归档内容
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;主选项&lt;span style=&#34;color:#56b6c2&#34;&gt;][&lt;/span&gt;辅助选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;归档文件名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;提取归档内容&#34;&gt;提取归档内容
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;主选项&lt;span style=&#34;color:#56b6c2&#34;&gt;][&lt;/span&gt;辅助选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;归档文件名&amp;gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;要提取的文件...&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;归档与压缩&#34;&gt;归档与压缩
+&lt;/h2&gt;&lt;p&gt;理解&lt;code&gt;tar&lt;/code&gt;，需要先区分这两个概念&lt;/p&gt;
+&lt;h3 id=&#34;归档&#34;&gt;归档
+&lt;/h3&gt;&lt;p&gt;这是&lt;code&gt;tar&lt;/code&gt;的本职工作，它将许多文件和目录打包成一个单独的大文件（通常称为&lt;code&gt;tarball&lt;/code&gt;，以&lt;code&gt;.tar&lt;/code&gt;结尾）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这个过程不减小文件总体积&lt;/strong&gt;，就像把很多零散物品放进一个大箱子里&lt;/p&gt;
+&lt;h3 id=&#34;压缩&#34;&gt;压缩
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是减小文件体积的过程，由&lt;code&gt;gzip&lt;/code&gt;, &lt;code&gt;bzip2&lt;/code&gt;, &lt;code&gt;xz&lt;/code&gt;等专门的压缩工具完成&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通常，我们先用&lt;code&gt;tar&lt;/code&gt;将文件归档成一个&lt;code&gt;.tar&lt;/code&gt;文件，然后再用&lt;code&gt;gzip&lt;/code&gt;等工具将其压缩成&lt;code&gt;.tar.gz&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;tar&lt;/code&gt;命令提供了便捷的参数（&lt;code&gt;-z&lt;/code&gt;, &lt;code&gt;-j&lt;/code&gt;, &lt;code&gt;-J&lt;/code&gt;），可以在一条命令内连续完成“归档”和“压缩”两个步骤&lt;/p&gt;
+&lt;h2 id=&#34;常用参数-13&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;主选项必须选择其一&#34;&gt;主选项（必须选择其一）
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-c&lt;/td&gt;
+          &lt;td&gt;创建一个新的归档文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-x&lt;/td&gt;
+          &lt;td&gt;从归档文件中提取文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-t&lt;/td&gt;
+          &lt;td&gt;列出归档文件中的内容，但不提取&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-r&lt;/td&gt;
+          &lt;td&gt;向已存在的归档文件末尾追加文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-u&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;更新&lt;/strong&gt;。仅当文件比归档中的同名文件新时，才将其追加到归档中&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;辅助选项常用&#34;&gt;辅助选项（常用）
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-f&lt;/td&gt;
+          &lt;td&gt;指定归档文件的名称&lt;br /&gt;这个参数几乎总是必需的，并且通常放在参数组合的最后&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;显示详细过程。在处理文件时，将其名称打印在屏幕上&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-z&lt;/td&gt;
+          &lt;td&gt;通过&lt;code&gt;gzip&lt;/code&gt;进行压缩或解压，生成的文件通常以&lt;code&gt;.tar.gz&lt;/code&gt;或&lt;code&gt;.tgz&lt;/code&gt;结尾&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-j&lt;/td&gt;
+          &lt;td&gt;通过&lt;code&gt;bzip2&lt;/code&gt;进行压缩或解压，生成的文件通常以&lt;code&gt;.tar.bz2&lt;/code&gt;或&lt;code&gt;.tbz2&lt;/code&gt;结尾&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-J&lt;/td&gt;
+          &lt;td&gt;通过&lt;code&gt;xz&lt;/code&gt;进行压缩或解压，生成的文件通常以&lt;code&gt;.tar.xz&lt;/code&gt;结尾&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-C&lt;/td&gt;
+          &lt;td&gt;指定一个目录，在解压时，&lt;code&gt;tar&lt;/code&gt;会先切换到这个目录，再开始提取文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ndash;exclude=PATTERN&lt;/td&gt;
+          &lt;td&gt;在归档时，排除掉匹配&lt;code&gt;PATTERN&lt;/code&gt;模式的文件&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-13&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将file文件和dir1目录打包成一个名为archive.tar的归档文件，并显示过程&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -cvf archive.tar file1.txt directory1/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;先写打包后的名称（&lt;code&gt;-f&lt;/code&gt;），再列举打包的文件&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将两个目录打包并使用gzip压缩，生成archive.tar.gz&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -czf archive.tar.gz dir1/ dir2/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不解压文件，只列出archive.tar.gz压缩包里包含哪些文件和目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -tzf archive.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解压定要选择&lt;code&gt;-x&lt;/code&gt;，不选择就不会解压，只是预览&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将archive.tar.gz解压到当前tmp/目录，并显示解压过程&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xzvf archive.tar.gz -C /tmp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;ln--创建文件或目录的链接&#34;&gt;ln —— 创建文件或目录的链接
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;ln&lt;/code&gt;的名称是 &lt;strong&gt;l&lt;/strong&gt;i&lt;strong&gt;n&lt;/strong&gt;k 的缩写，用于为文件或目录创建链接&lt;/p&gt;
+&lt;h2 id=&#34;语法格式-14&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ln &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;源文件&amp;gt;/&amp;lt;目录&amp;gt; &amp;lt;链接名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;硬链接-hard-link-vs-符号链接-symbolic-link&#34;&gt;硬链接 (Hard Link) vs. 符号链接 (Symbolic Link)
+&lt;/h2&gt;&lt;p&gt;链接是Linux文件系统的一个重要特性，它允许一个文件拥有多个可访问的路径&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ln&lt;/code&gt;命令能创建的两种不同的链接类型：硬链接和符号链接（也称软链接）&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;硬链接 (Hard Link)&lt;/th&gt;
+          &lt;th&gt;符号链接 (Symbolic Link / Soft Link)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;本质&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;是&lt;strong&gt;同一个文件的多个别名&lt;/strong&gt;，它们共享同一个inode号和数据块，除了路径不同外都共享&lt;/td&gt;
+          &lt;td&gt;是一个&lt;strong&gt;独立的文件&lt;/strong&gt;，其内容是另一个文件的路径，类似Windows的快捷方式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;inode号&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;与源文件&lt;strong&gt;相同&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;拥有&lt;strong&gt;自己独立&lt;/strong&gt;的inode号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;权限和访问控制&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;继承&lt;/strong&gt;原文件权限&lt;/td&gt;
+          &lt;td&gt;链接权限由链接自身决定（但一般是777），访问成功与否由目标文件的权限决定，同时也要考量是否能进入目标文件所在的目录（对该目录的执行权限）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;是否能识别为链接&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;❌用&lt;code&gt;ls -l&lt;/code&gt;&lt;strong&gt;看不出&lt;/strong&gt;是否为硬链接（除非看 inode）&lt;/td&gt;
+          &lt;td&gt;✅用&lt;code&gt;ls -l&lt;/code&gt;&lt;strong&gt;明确显示为链接&lt;/strong&gt;，如 &lt;code&gt;link -&amp;gt; target&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;跨文件系统&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;strong&gt;不能&lt;/strong&gt;跨越不同的文件系统创建&lt;/td&gt;
+          &lt;td&gt;✅&lt;strong&gt;可以&lt;/strong&gt;跨越不同的文件系统创建&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;对目录操作&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;strong&gt;不能&lt;/strong&gt;对目录创建硬链接&lt;/td&gt;
+          &lt;td&gt;✅&lt;strong&gt;可以&lt;/strong&gt;对目录创建符号链接&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;删除源文件后&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;链接文件&lt;strong&gt;依然有效&lt;/strong&gt;，可以正常访问数据（直到所有硬链接都被删除）&lt;/td&gt;
+          &lt;td&gt;链接文件会&lt;strong&gt;失效&lt;/strong&gt;，因为其指向的路径不再存在&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;常用参数-14&#34;&gt;常用参数
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-s&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;创建符号链接（软链接），不加此参数则默认创建硬链接&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-f&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;强制&lt;/strong&gt;&lt;br /&gt;如果目标位置已存在同名文件或链接，则先将其删除再创建&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-i&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;交互模式&lt;/strong&gt;&lt;br /&gt;在覆盖（删除）已存在的目标文件前进行提示&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-v&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;显示详细过程&lt;/strong&gt;&lt;br /&gt;显示每个成功创建的链接&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-14&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;为file.txt创建一个名为hard_link.txt的硬链接&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ln file.txt hard_link.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可以使用&lt;code&gt;ls -i&lt;/code&gt;命令查看，会发现它们的inode号完全相同&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在用户主目录下强制创建一个名为nginx_access.log的符号链接，指向Nginx的访问日志文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ln -sf /var/log/nginx/access.log ~/nginx_access.log
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为/mnt/disk1这个目录创建一个符号链接&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ln -s /mnt/disk1 ~/disk1_link
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;执行&lt;code&gt;cd ~/disk1_link&lt;/code&gt;就等同于执行&lt;code&gt;cd /mnt/disk1&lt;/code&gt;，和快捷方式是一个用法&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;file--辨别文件类型&#34;&gt;file —— 辨别文件类型
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;file&lt;/code&gt;命令是Linux中一个用于探测并显示文件类型的工具&lt;/p&gt;
+&lt;p&gt;它不依赖于文件的扩展名，而是通过一系列的测试来确定文件的真实类型&lt;/p&gt;
+&lt;h2 id=&#34;语法格式-15&#34;&gt;语法格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;参数&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;文件名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;linux文件类型与魔数&#34;&gt;Linux文件类型与“魔数”
+&lt;/h2&gt;&lt;p&gt;在Windows系统中，文件类型通常由其扩展名（如&lt;code&gt;.txt&lt;/code&gt;, &lt;code&gt;.exe&lt;/code&gt;）决定&lt;/p&gt;
+&lt;p&gt;然而，在Linux中，文件扩展名主要是为了方便用户识别，&lt;strong&gt;系统本身并不依赖扩展名来判断文件类型&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个可执行文件可以没有任何扩展名！&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;file&lt;/code&gt;命令主要通过三种测试来判断文件类型：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;文件系统测试&lt;/strong&gt;：首先检查文件是否是目录、符号链接、Socket等内核已知的特殊文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;魔数测试&lt;/strong&gt;：接下来，它会检查文件开头的几个字节，这部分字节被称为**“魔数”（Magic Number）**，几乎所有标准文件类型（如JPEG, PNG, ELF可执行文件）都有一个独特的、像“指纹”一样的魔数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;语言测试&lt;/strong&gt;：如果文件看起来像是一个文本文档，&lt;code&gt;file&lt;/code&gt;会尝试分析其内容，判断它可能是哪种编程语言的源码（如C, Shell, Python）或配置文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;常用参数-15&#34;&gt;常用参数
+&lt;/h2&gt;&lt;h3 id=&#34;核心功能-4&#34;&gt;核心功能
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-b&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;简介模式&lt;/strong&gt;&lt;br /&gt;不输出文件名，只输出文件类型描述&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-i&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;以MIME类型格式输出，而不是人类可读的描述&lt;/strong&gt;&lt;br /&gt;例如输出&lt;code&gt;image/jpeg&lt;/code&gt;而不是&lt;code&gt;JPEG image data...&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-L&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;跟随符号链接&lt;/strong&gt;&lt;br /&gt;默认情况下，&lt;code&gt;file&lt;/code&gt;会报告这是一个符号链接；使用此参数，它会去分析链接指向的那个原始文件。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-z&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;尝试查看压缩文件内部的内容类型&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;文件列表控制&#34;&gt;文件列表控制
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-f &amp;lt;列表文件&amp;gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;从指定的列表文件中读取要检查的文件名列表&lt;/strong&gt;，而不是在命令行上指定&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用示例-15&#34;&gt;使用示例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;识别一个未知文件的类型&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file unknown_file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出示例&lt;/strong&gt;： &lt;code&gt;unknown_file: PNG image data, 1024 x 768, 8-bit/color RGB, non-interlaced&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;file&lt;/code&gt;可以清晰地区分可执行的二进制文件和可读的文本文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 查看bash程序的文件类型&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 查看一个shell脚本的类型&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file ~/.bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出示例&lt;/strong&gt;： &lt;code&gt;/bin/bash: ELF 64-bit LSB pie executable, x86-64...&lt;/code&gt; &lt;code&gt;~/.bashrc: UTF-8 Unicode text&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看符号链接及其指向的原始文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 先创建一个符号链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ln -s /bin/bash ./my_bash_link
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 默认行为：识别链接本身&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file my_bash_link
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 使用-L参数：识别链接指向的文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file -L my_bash_link
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出示例&lt;/strong&gt;： &lt;code&gt;my_bash_link: symbolic link to /bin/bash&lt;/code&gt; &lt;code&gt;my_bash_link: ELF 64-bit LSB pie executable, x86-64...&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;批量识别文件类型&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file *
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;file拓展--mime类型&#34;&gt;file拓展 —— MIME类型
+&lt;/h1&gt;&lt;h2 id=&#34;什么是mime类型&#34;&gt;什么是MIME类型
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;MIME（Multipurpose Internet Mail Extensions）类型&lt;/strong&gt;，又称为&lt;strong&gt;媒体类型（Media Type）&lt;/strong&gt;，用于标识文件或数据的格式和性质&lt;/p&gt;
+&lt;p&gt;它最初为电子邮件附件设计，但现在广泛应用于HTTP协议、浏览器内容协商等&lt;/p&gt;
+&lt;h2 id=&#34;mime类型的格式&#34;&gt;MIME类型的格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;type&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;subtype&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;type&lt;/code&gt;是主类型（比如 &lt;code&gt;text&lt;/code&gt;, &lt;code&gt;image&lt;/code&gt;, &lt;code&gt;application&lt;/code&gt; 等）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;subtype&lt;/code&gt;是具体的格式（比如 &lt;code&gt;jpeg&lt;/code&gt;, &lt;code&gt;png&lt;/code&gt;, &lt;code&gt;json&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;常见mime类型&#34;&gt;常见MIME类型
+&lt;/h2&gt;&lt;h3 id=&#34;text&#34;&gt;text
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;plain&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;纯文本内容&lt;/strong&gt;，无格式修饰（如&lt;code&gt;.txt&lt;/code&gt;文件）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;html&lt;/td&gt;
+          &lt;td&gt;HTML超文本标记语言（网页源代码）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;css&lt;/td&gt;
+          &lt;td&gt;层叠样式表（网页样式）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;csv&lt;/td&gt;
+          &lt;td&gt;逗号分隔值文本，常用于表格或数据库导出&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;javascript / js&lt;/td&gt;
+          &lt;td&gt;JavaScript脚本代码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;xml&lt;/td&gt;
+          &lt;td&gt;可被人类和机器读取的标签化数据格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;markdown / md&lt;/td&gt;
+          &lt;td&gt;Markdown标记语言，常用于文档编写&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;yaml / yml&lt;/td&gt;
+          &lt;td&gt;简洁的配置文件格式，常用于开发与部署&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;image&#34;&gt;image
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;jpeg / jpg&lt;/td&gt;
+          &lt;td&gt;有损压缩的位图图像格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;png&lt;/td&gt;
+          &lt;td&gt;无损压缩的位图图像格式，支持透明&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;gif&lt;/td&gt;
+          &lt;td&gt;支持动画和透明的图像格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;bmp&lt;/td&gt;
+          &lt;td&gt;Windows位图图像格式，不压缩&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;svg+xml&lt;/td&gt;
+          &lt;td&gt;可缩放的矢量图像，基于XML&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;webp&lt;/td&gt;
+          &lt;td&gt;Google开发的高效图像格式，兼顾压缩率和质量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ico&lt;/td&gt;
+          &lt;td&gt;Windows图标格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;tiff / tif&lt;/td&gt;
+          &lt;td&gt;高质量图像格式，常用于扫描、印刷&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;audio&#34;&gt;audio
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;mpeg / mp3&lt;/td&gt;
+          &lt;td&gt;有损压缩音频格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;wav&lt;/td&gt;
+          &lt;td&gt;无损音频格式，体积大&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ogg&lt;/td&gt;
+          &lt;td&gt;开放格式音频容器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;aac&lt;/td&gt;
+          &lt;td&gt;高压缩率音频格式，常用于流媒体&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;flac&lt;/td&gt;
+          &lt;td&gt;无损压缩音频格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;opus&lt;/td&gt;
+          &lt;td&gt;适用于语音和流媒体的高效音频格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;quicktime / mov&lt;/td&gt;
+          &lt;td&gt;Apple开发的视频格式，兼容性强&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;video&#34;&gt;video
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;mp4&lt;/td&gt;
+          &lt;td&gt;最常见的视频格式，压缩效率高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;mpeg&lt;/td&gt;
+          &lt;td&gt;老的视频格式，兼容性好&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ogg&lt;/td&gt;
+          &lt;td&gt;支持视频的OGG容器格式（如&lt;code&gt;.ogv&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;webm&lt;/td&gt;
+          &lt;td&gt;Google开发的为网页优化的视频格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;avi&lt;/td&gt;
+          &lt;td&gt;微软开发的老视频格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-matroska / mkv&lt;/td&gt;
+          &lt;td&gt;多媒体容器格式，支持多轨音视频&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;application&#34;&gt;application
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;json&lt;/td&gt;
+          &lt;td&gt;结构化数据交换格式，广泛用于 API&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;xml&lt;/td&gt;
+          &lt;td&gt;结构化文档或数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;pdf&lt;/td&gt;
+          &lt;td&gt;Adobe的便携文档格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;zip&lt;/td&gt;
+          &lt;td&gt;常见的压缩文件格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-www-form-urlencoded&lt;/td&gt;
+          &lt;td&gt;HTML表单默认提交格式（键值对编码）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;octet-stream&lt;/td&gt;
+          &lt;td&gt;二进制数据流，常用作通用下载类型（未知二进制数据）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;msword&lt;/td&gt;
+          &lt;td&gt;旧版Microsoft Word 文档（&lt;code&gt;.doc&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vnd.ms-excel&lt;/td&gt;
+          &lt;td&gt;旧版Microsoft Excel 表格（&lt;code&gt;.xls&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vnd.openxmlformats-officedocument.wordprocessingml.document&lt;/td&gt;
+          &lt;td&gt;新版Office Word（&lt;code&gt;.docx&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vnd.openxmlformats-officedocument.spreadsheetml.sheet&lt;/td&gt;
+          &lt;td&gt;新版Office Excel（&lt;code&gt;.xlsx&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-tar&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;.tar&lt;/code&gt;归档文件格式，用于打包多个文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-7z-compressed&lt;/td&gt;
+          &lt;td&gt;7-Zip压缩格式（&lt;code&gt;.7z&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-rar-compressed&lt;/td&gt;
+          &lt;td&gt;RAR压缩格式（&lt;code&gt;.rar&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-debian-package&lt;/td&gt;
+          &lt;td&gt;Debian软件包格式（&lt;code&gt;.deb&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-executable&lt;/td&gt;
+          &lt;td&gt;Linux/Unix可执行文件（无拓展名时也可用此类型）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;x-shockwave-flash&lt;/td&gt;
+          &lt;td&gt;Flash动画格式（已淘汰）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;javascript&lt;/td&gt;
+          &lt;td&gt;JavaScript代码**（部分浏览器仍使用application而非text）**&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;multipart&#34;&gt;multipart
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;form-data&lt;/td&gt;
+          &lt;td&gt;用于上传文件的表单数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;mixed&lt;/td&gt;
+          &lt;td&gt;多部分邮件体，每部分可以是不同类型&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;alternative&lt;/td&gt;
+          &lt;td&gt;同一内容的多种表示（如 HTML 和纯文本版本的邮件）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;byteranges&lt;/td&gt;
+          &lt;td&gt;用于分块下载/断点续传&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;message&#34;&gt;message
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;rfc822&lt;/td&gt;
+          &lt;td&gt;标准电子邮件消息格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;partial&lt;/td&gt;
+          &lt;td&gt;邮件的部分片段&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;external-body&lt;/td&gt;
+          &lt;td&gt;邮件外部引用内容&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;font&#34;&gt;font
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;子类型（常见格式）&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;woff, woff2&lt;/td&gt;
+          &lt;td&gt;Web优化字体格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;truetype / ttf&lt;/td&gt;
+          &lt;td&gt;常见字体格式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;opentype / otf&lt;/td&gt;
+          &lt;td&gt;TTF的扩展格式，功能更丰富&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;embedded-opentype&lt;/td&gt;
+          &lt;td&gt;EOT字体，IE专用的Web字体格式&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
         <title>长安杯2020取证总结</title>
         <link>https://blog.928330.xyz/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Sat, 26 Jul 2025 13:22:12 +0800</pubDate>
