@@ -1,0 +1,2382 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="[toc]\n正则表达式 正则表达式（Regular Expression），常缩写为regex、regexp或RE，是一种强大的文本处理工具\n它使用一个单独的字符串来描述、匹配一系列符合某个句法规则的字符串\n">
+<title></title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="">
+<meta property='og:description' content="[toc]\n正则表达式 正则表达式（Regular Expression），常缩写为regex、regexp或RE，是一种强大的文本处理工具\n它使用一个单独的字符串来描述、匹配一系列符合某个句法规则的字符串\n">
+<meta property='og:url' content='https://blog.928330.xyz/p/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:modified_time' content='2025-08-13T17:12:41&#43;08:00'/>
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="[toc]\n正则表达式 正则表达式（Regular Expression），常缩写为regex、regexp或RE，是一种强大的文本处理工具\n它使用一个单独的字符串来描述、匹配一系列符合某个句法规则的字符串\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#正则表达式">正则表达式</a>
+      <ol>
+        <li><a href="#基本正则表达式bre">基本正则表达式（BRE）</a></li>
+        <li><a href="#扩展正则表达式ere">扩展正则表达式（ERE）</a></li>
+        <li><a href="#perl兼容正则表达式pcre">Perl兼容正则表达式（PCRE）</a></li>
+        <li><a href="#简写字符集与posix字符类">简写字符集与POSIX字符类</a></li>
+      </ol>
+    </li>
+    <li><a href="#grep--在文件中搜索匹配的行">grep —— 在文件中搜索匹配的行</a>
+      <ol>
+        <li><a href="#语法格式">语法格式</a></li>
+        <li><a href="#管道过滤器">管道过滤器</a></li>
+        <li><a href="#常用参数">常用参数</a>
+          <ol>
+            <li><a href="#核心匹配控制">核心匹配控制</a></li>
+            <li><a href="#输出格式控制">输出格式控制</a></li>
+            <li><a href="#上下文控制">上下文控制</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用示例">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#sed--文本过滤和转换">sed —— 文本过滤和转换</a>
+      <ol>
+        <li><a href="#语法格式-1">语法格式</a>
+          <ol>
+            <li><a href="#直接在命令行中使用脚本">直接在命令行中使用脚本</a></li>
+            <li><a href="#将脚本写入文件后执行">将脚本写入文件后执行</a></li>
+            <li><a href="#结合管道使用">结合管道使用</a></li>
+          </ol>
+        </li>
+        <li><a href="#模式空间">模式空间</a></li>
+        <li><a href="#脚本写法">脚本写法</a>
+          <ol>
+            <li><a href="#一般格式">一般格式</a></li>
+            <li><a href="#地址部分">地址部分</a>
+              <ol>
+                <li><a href="#单行">单行</a></li>
+                <li><a href="#行范围">行范围</a></li>
+                <li><a href="#从某行到末尾">从某行到末尾</a></li>
+                <li><a href="#单模式">单模式</a></li>
+                <li><a href="#模式指定范围">模式指定范围</a></li>
+                <li><a href="#地址取反">地址取反</a></li>
+                <li><a href="#多个地址组合多个脚本">多个地址组合（多个脚本）</a></li>
+              </ol>
+            </li>
+            <li><a href="#命令部分">命令部分</a>
+              <ol>
+                <li><a href="#s替换-substitute">s：替换 (substitute)</a></li>
+                <li><a href="#d删除-delete">d：删除 (delete)</a></li>
+                <li><a href="#p打印-print">p：打印 (print)</a></li>
+                <li><a href="#a追加-append">a：追加 (append)</a></li>
+                <li><a href="#r读取read">r：读取（read）</a></li>
+                <li><a href="#i插入-insert">i：插入 (insert)</a></li>
+                <li><a href="#c更改-change">c：更改 (change)</a></li>
+                <li><a href="#q退出quit">q：退出（quit）</a></li>
+                <li><a href="#n读入下一行并替换当前行next">n：读入下一行并替换当前行（next）</a></li>
+                <li><a href="#n合并下一行">N：合并下一行</a></li>
+                <li><a href="#d删除第一行并重新开始">D：删除第一行并重新开始</a></li>
+                <li><a href="#h用模式空间的内容覆盖保持空间hold">h：用模式空间的内容覆盖保持空间（hold）</a></li>
+                <li><a href="#h将模式空间的内容追加到保持空间">H：将模式空间的内容追加到保持空间</a></li>
+                <li><a href="#g用保持空间的内容覆盖模式空间get">g：用保持空间的内容覆盖模式空间（get）</a></li>
+                <li><a href="#g将保持空间的内容追加到模式空间">G：将保持空间的内容追加到模式空间</a></li>
+                <li><a href="#x交换模式空间和保持空间内容exchange">x：交换模式空间和保持空间内容（exchange）</a></li>
+                <li><a href="#b分支branch">b：分支（branch）</a></li>
+                <li><a href="#t测试替换是否发生test">t：测试替换是否发生（test）</a></li>
+                <li><a href="#t测试失败并分支">T：测试失败并分支</a></li>
+                <li><a href="#在同一个地址使用多个命令">在同一个地址使用多个命令</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#常用参数-1">常用参数</a></li>
+        <li><a href="#使用示例-1">使用示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#awk--文本处理与报告生成">awk —— 文本处理与报告生成</a>
+      <ol>
+        <li><a href="#语法格式-2">语法格式</a>
+          <ol>
+            <li><a href="#直接在命令行中使用脚本-1">直接在命令行中使用脚本</a></li>
+            <li><a href="#对标准输入使用脚本">对标准输入使用脚本</a></li>
+            <li><a href="#将脚本写入文件后执行-1">将脚本写入文件后执行</a></li>
+          </ol>
+        </li>
+        <li><a href="#awk工作流程">awk工作流程</a></li>
+        <li><a href="#awk脚本的写法">awk脚本的写法</a>
+          <ol>
+            <li><a href="#字段与变量">字段与变量</a>
+              <ol>
+                <li><a href="#自动维护变量">自动维护变量</a></li>
+                <li><a href="#用户可设置变量">用户可设置变量</a></li>
+                <li><a href="#自定义变量">自定义变量</a></li>
+              </ol>
+            </li>
+            <li><a href="#模式">模式</a>
+              <ol>
+                <li><a href="#关系表达式模式">关系表达式模式</a></li>
+                <li><a href="#正则表达式模式">正则表达式模式</a></li>
+                <li><a href="#范围模式">范围模式</a></li>
+                <li><a href="#特殊模式begin-与-end">特殊模式：BEGIN 与 END</a></li>
+                <li><a href="#组合模式">组合模式</a></li>
+              </ol>
+            </li>
+            <li><a href="#动作">动作</a>
+              <ol>
+                <li><a href="#print">print</a></li>
+                <li><a href="#printf">printf</a></li>
+                <li><a href="#if-语句">if 语句</a></li>
+                <li><a href="#for-循环">for 循环</a></li>
+                <li><a href="#while-循环">while 循环</a></li>
+                <li><a href="#length-函数">length 函数</a></li>
+                <li><a href="#substr-函数">substr 函数</a></li>
+                <li><a href="#gsub-函数">gsub 函数</a></li>
+                <li><a href="#split-函数">split 函数</a></li>
+                <li><a href="#index-函数">index 函数</a></li>
+                <li><a href="#数学函数">数学函数</a></li>
+                <li><a href="#关联数组">关联数组</a></li>
+                <li><a href="#多语句组合">多语句组合</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#常用参数-2">常用参数</a></li>
+        <li><a href="#使用示例-2">使用示例</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/"></a>
+        </h2>
+        
+
+    </div>
+
+    
+    
+    
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>[toc]</p>
+<h1 id="正则表达式">正则表达式
+</h1><p><strong>正则表达式（<code>Regular Expression</code>），常缩写为<code>regex</code>、<code>regexp</code>或<code>RE</code></strong>，是一种强大的文本处理工具</p>
+<p>它使用一个单独的字符串来描述、匹配一系列符合某个句法规则的字符串</p>
+<p>正则表达式有多种标准，最核心的三种是：</p>
+<ul>
+<li>
+<p><strong>基本正则表达式（BRE）</strong></p>
+</li>
+<li>
+<p><strong>扩展正则表达式（ERE）</strong></p>
+</li>
+<li>
+<p><strong>Perl兼容正则表达式（PCRE） &lt;—— 目前被广泛使用</strong></p>
+</li>
+</ul>
+<p>理解它们的区别对于高效使用<code>grep</code>、<code>sed</code>、<code>awk</code>等工具以及在程序中编写正则是至关重要的</p>
+<p>接下来我将逐一介绍他们</p>
+<h2 id="基本正则表达式bre">基本正则表达式（BRE）
+</h2><p>基本正则表达式（Basic Regular Expressions, BRE）是正则表达式的早期标准</p>
+<p><strong>像<code>grep</code>（不带参数）、<code>sed</code>（不带<code>-E</code>参数）和<code>vi</code>这样的经典Unix工具默认使用的就是这个标准</strong></p>
+<p><strong>在BRE中，部分具有特殊意义的元字符（如 <code>?</code>, <code>+</code>, <code>|</code>, <code>{</code>, <code>(</code>, <code>)</code>）需要使用反斜杠 <code>\</code>进行转义后才能发挥功能</strong></p>
+<p><strong>如果不转义，这些字符会被当作普通字符匹配</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>含义</th>
+          <th>示例</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>.</code></td>
+          <td>匹配任意单个字符</td>
+          <td><code>a.c</code></td>
+          <td>可匹配<code>abc</code>, <code>acc</code>, <code>a9c</code>等</td>
+      </tr>
+      <tr>
+          <td><code>^</code></td>
+          <td>匹配行首</td>
+          <td><code>^hello</code></td>
+          <td>匹配以hello开头的行</td>
+      </tr>
+      <tr>
+          <td><code>$</code></td>
+          <td>匹配行尾</td>
+          <td><code>world$</code></td>
+          <td>匹配以world结尾的行</td>
+      </tr>
+      <tr>
+          <td><code>[]</code></td>
+          <td>字符类匹配</td>
+          <td><code>[0-9]</code></td>
+          <td>匹配任意数字字符</td>
+      </tr>
+      <tr>
+          <td><code>[^]</code></td>
+          <td>否定字符类匹配</td>
+          <td><code>[^a-z]</code></td>
+          <td>匹配非小写字母字符</td>
+      </tr>
+      <tr>
+          <td><code>*</code></td>
+          <td>匹配前一个字符0次或多次</td>
+          <td><code>lo*l</code></td>
+          <td>匹配<code>ll</code>, <code>lol</code>, <code>lool</code>等</td>
+      </tr>
+      <tr>
+          <td><code>\{n\}</code></td>
+          <td>精确重复n次<br /><strong>（需转义）</strong></td>
+          <td><code>o\{3\}</code></td>
+          <td>匹配<code>ooo</code></td>
+      </tr>
+      <tr>
+          <td><code>\{n,m\}</code></td>
+          <td>匹配n到m次<br /><strong>（需转义）</strong></td>
+          <td><code>o\{1,3\}</code></td>
+          <td>匹配<code>o</code>, <code>oo</code>, <code>ooo</code></td>
+      </tr>
+      <tr>
+          <td><code>\(</code> <code>\)</code></td>
+          <td>分组<br /><strong>（需转义）</strong></td>
+          <td><code>\([0-9]\)</code></td>
+          <td>标识一个子表达式组</td>
+      </tr>
+      <tr>
+          <td><code>\n</code></td>
+          <td>引用第n个分组匹配<br /><strong>（不是转义！）</strong></td>
+          <td><code>\([a-z]\)\1</code></td>
+          <td>匹配两个连续相同的小写字母</td>
+      </tr>
+      <tr>
+          <td><code>|</code></td>
+          <td>或操作<br /><strong>（需转义）</strong></td>
+          <td><code>cat|dog</code></td>
+          <td>匹配<code>cat</code>或<code>dog</code></td>
+      </tr>
+      <tr>
+          <td><code>\+</code></td>
+          <td>匹配前一个字符1次或多次<br /><strong>（需转义）</strong></td>
+          <td><code>o\+l</code></td>
+          <td>匹配<code>ol</code>,<code>ool</code>等</td>
+      </tr>
+      <tr>
+          <td><code>\?</code></td>
+          <td>匹配前一个字符0次或1次<br /><strong>（需转义）</strong></td>
+          <td><code>colou\?r</code></td>
+          <td>匹配<code>color</code>或<code>colour</code></td>
+      </tr>
+      <tr>
+          <td><code>&amp;</code></td>
+          <td>替换匹配的整个整个文本</td>
+          <td><code>s/foo/&amp;bar/</code></td>
+          <td><code>sed</code>或<code>vi</code>替换时, <code>&amp;</code>代表匹配的<code>foo</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><span style="font-size:23px;color:orange"><strong>使用示例：</strong></span></p>
+<p><strong>假设我们有一个文件 <code>data.txt</code> 内容如下：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">hello</span> <span style="color:#e06c75">world</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">hellooooo</span> <span style="color:#e06c75">world</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">the</span> <span style="color:#e06c75">cat</span> <span style="color:#c678dd">is</span> <span style="color:#e06c75">sleeping</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">the</span> <span style="color:#e06c75">dog</span> <span style="color:#c678dd">is</span> <span style="color:#e06c75">barking</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">error</span> <span style="color:#d19a66">123</span> <span style="color:#e06c75">found</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">test</span> <span style="color:#d19a66">11</span> <span style="color:#e06c75">test</span> <span style="color:#d19a66">22</span>
+</span></span></code></pre></div><p><strong>查找包含<code>o</code>出现2到4次的行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep <span style="color:#98c379">&#39;o\{2,4\}&#39;</span> data.txt
+</span></span></code></pre></div><p><strong>查找包含<code>cat</code>或者<code>dog</code>的行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep <span style="color:#98c379">&#39;cat\|dog&#39;</span> data.txt
+</span></span></code></pre></div><p><strong>查找包含连续两个相同数字的行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep <span style="color:#98c379">&#39;\([0-9]\)\1&#39;</span> data.txt
+</span></span></code></pre></div><h2 id="扩展正则表达式ere">扩展正则表达式（ERE）
+</h2><p>扩展正则表达式（Extended Regular Expressions, ERE）是对BRE的改进</p>
+<p><strong><code>grep -E</code>（或其别名<code>egrep</code>）和<code>awk</code>等工具使用的就是ERE标准</strong></p>
+<p><strong>在ERE中，之前在BRE里需要转义的元字符 <code>?</code>, <code>+</code>, <code>|</code>, <code>{</code>, <code>(</code>, <code>)</code> 等，现在无需转义即可直接使用</strong></p>
+<p><strong>如果想要把这些字符当做普通字符匹配，就要对他们进行反斜杠<code>\</code>转义（和BRE的默认解析行为相反）</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>含义</th>
+          <th>示例</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>.</code></td>
+          <td>匹配任意单个字符</td>
+          <td><code>a.c</code></td>
+          <td>同 BRE</td>
+      </tr>
+      <tr>
+          <td><code>^</code></td>
+          <td>匹配行首</td>
+          <td><code>^hello</code></td>
+          <td>同 BRE</td>
+      </tr>
+      <tr>
+          <td><code>$</code></td>
+          <td>匹配行尾</td>
+          <td><code>world$</code></td>
+          <td>同 BRE</td>
+      </tr>
+      <tr>
+          <td><code>[]</code></td>
+          <td>字符类匹配</td>
+          <td><code>[A-Za-z]</code></td>
+          <td>同 BRE</td>
+      </tr>
+      <tr>
+          <td><code>[^]</code></td>
+          <td>否定字符类匹配</td>
+          <td><code>[^0-9]</code></td>
+          <td>同 BRE</td>
+      </tr>
+      <tr>
+          <td><code>*</code></td>
+          <td>匹配前一个字符0次或多次</td>
+          <td><code>lo*l</code></td>
+          <td>同 BRE</td>
+      </tr>
+      <tr>
+          <td><code>{n}</code></td>
+          <td>精确重复 n 次</td>
+          <td><code>o{3}</code></td>
+          <td>不需转义</td>
+      </tr>
+      <tr>
+          <td><code>{n,m}</code></td>
+          <td>匹配 n 到 m 次</td>
+          <td><code>o{1,3}</code></td>
+          <td>不需转义</td>
+      </tr>
+      <tr>
+          <td><code>()</code></td>
+          <td>分组</td>
+          <td><code>([0-9])</code></td>
+          <td>不需转义</td>
+      </tr>
+      <tr>
+          <td><code>\1</code>、<code>\2</code>…</td>
+          <td>引用第 n 个分组匹配</td>
+          <td><code>([a-z])\1</code></td>
+          <td>同 BRE</td>
+      </tr>
+      <tr>
+          <td><code>+</code></td>
+          <td>匹配前一个字符一次或多次</td>
+          <td><code>o+l</code></td>
+          <td>不需转义</td>
+      </tr>
+      <tr>
+          <td><code>?</code></td>
+          <td>匹配前一个字符零次或一次</td>
+          <td><code>colou?r</code></td>
+          <td>不需转义</td>
+      </tr>
+      <tr>
+          <td><code>&amp;</code></td>
+          <td>替换字符串中匹配的整个文本</td>
+          <td><code>s/foo/&amp;bar/</code></td>
+          <td>同 BRE, <code>sed</code>或<code>vi</code>中可用</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><span style="font-size:23px;color:orange"><strong>使用示例：</strong></span></p>
+<p>同样使用上面的 <code>data.txt</code> 文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">hello</span> <span style="color:#e06c75">world</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">hellooooo</span> <span style="color:#e06c75">world</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">the</span> <span style="color:#e06c75">cat</span> <span style="color:#c678dd">is</span> <span style="color:#e06c75">sleeping</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">the</span> <span style="color:#e06c75">dog</span> <span style="color:#c678dd">is</span> <span style="color:#e06c75">barking</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">error</span> <span style="color:#d19a66">123</span> <span style="color:#e06c75">found</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">test</span> <span style="color:#d19a66">11</span> <span style="color:#e06c75">test</span> <span style="color:#d19a66">22</span>
+</span></span></code></pre></div><p><strong>查找包含 <code>o</code> 出现2到4次的行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep -E <span style="color:#98c379">&#39;o{2,4}&#39;</span> data.txt
+</span></span></code></pre></div><p><strong>查找包含 <code>cat</code> 或者 <code>dog</code> 的行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep -E <span style="color:#98c379">&#39;cat|dog&#39;</span> data.txt
+</span></span></code></pre></div><p><strong>查找包含一个或多个数字的行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep -E <span style="color:#98c379">&#39;[0-9]+&#39;</span> data.txt
+</span></span></code></pre></div><p>对比BRE的示例可以看出，由于不用转义，ERE的语法更加易读</p>
+<h2 id="perl兼容正则表达式pcre">Perl兼容正则表达式（PCRE）
+</h2><p>Perl兼容正则表达式（Perl Compatible Regular Expressions, PCRE）是一个功能极其强大的正则表达式库</p>
+<p><strong>它继承了ERE大部分语法（比如不转义就能使用特殊字符），增加了许多高级特性，被绝大多数现代编程语言使用，<code>grep -P</code>也支持PCRE</strong></p>
+<p><strong>PCRE引入了非贪婪匹配、断言（零宽断言）、命名捕获组等高级功能，极大地增强了正则表达式的表达能力</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>含义</th>
+          <th>示例</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>*?</code></td>
+          <td>非贪婪0次或多次</td>
+          <td><code>a.*?b</code></td>
+          <td><strong>尽可能少地</strong>匹配任意字符0次或多次<br />直到遇到第一个<code>b</code>停止</td>
+      </tr>
+      <tr>
+          <td><code>+?</code></td>
+          <td>非贪婪1次或多次</td>
+          <td><code>a.+?b</code></td>
+          <td><strong>尽可能少地</strong>匹配任意字符1次或多次<br />直到遇到第一个<code>b</code>停止</td>
+      </tr>
+      <tr>
+          <td><code>??</code></td>
+          <td>非贪婪0次或1次</td>
+          <td><code>a.??b</code></td>
+          <td>尽可能少地匹配任意字符0或1次<br />然后尝试匹配<code>b</code></td>
+      </tr>
+      <tr>
+          <td><code>(?=...)</code></td>
+          <td>零宽正向先行断言<br /><strong>匹配后面是<code>...</code>的字符串</strong></td>
+          <td><code>Windows(?=95)</code></td>
+          <td>匹配<code>Windows</code>，但仅当其后是<code>95</code>时</td>
+      </tr>
+      <tr>
+          <td><code>(?!...)</code></td>
+          <td>零宽负向先行断言<br /><strong>匹配后面不是<code>...</code>的字符串</strong></td>
+          <td><code>Windows(?!NT)</code></td>
+          <td>匹配<code>Windows</code>，但仅当其后不是<code>NT</code>时</td>
+      </tr>
+      <tr>
+          <td><code>(?&lt;=...)</code></td>
+          <td>零宽正向后行断言<br /><strong>匹配前面是<code>...</code>的字符串</strong></td>
+          <td><code>(?&lt;=M\.)\s\w+</code></td>
+          <td>匹配<code>M</code>后面的姓氏</td>
+      </tr>
+      <tr>
+          <td><code>(?&lt;!...)</code></td>
+          <td>零宽负向后行断言<br /><strong>匹配前面不是<code>...</code>的字符串</strong></td>
+          <td><code>(?&lt;!M\.)\s\w+</code></td>
+          <td>匹配非<code>M</code>后面的姓氏</td>
+      </tr>
+      <tr>
+          <td><code>(?&lt;name&gt;...)</code></td>
+          <td>命名捕获组</td>
+          <td><code>(?&lt;year&gt;\d{4})</code></td>
+          <td>将匹配的4位数字命名为<code>year</code>组</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><span style="font-size:23px;color:orange"><strong>使用示例：</strong></span></p>
+<p>假设有一个文件 <code>log.txt</code> 内容如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[INFO]</span> <span style="color:#e06c75">User</span> &#39;<span style="color:#e06c75">admin</span>&#39; <span style="color:#e06c75">logged</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">from</span> <span style="color:#d19a66">192.168</span>.<span style="color:#d19a66">1.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">[ERROR]</span> <span style="color:#e06c75">Failed</span> <span style="color:#e06c75">login</span> <span style="color:#e06c75">attempt</span> <span style="color:#c678dd">for</span> <span style="color:#e06c75">user</span> &#39;<span style="color:#e06c75">guest</span>&#39;
+</span></span></code></pre></div><p><strong>提取用户名（使用断言）</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grep -P -o <span style="color:#98c379">&#34;(?&lt;=User &#39;)[^&#39;]+(?=&#39;)&#34;</span> log.txt
+</span></span></code></pre></div><p>这里 <code>(?&lt;=User ')</code> 匹配了<code>User '</code>的后面位置，<code>(?=')</code> 匹配了单引号的前面位置，<code>-o</code> 只输出匹配的内容</p>
+<p><strong>提取日志级别（使用捕获组）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grep -P -o <span style="color:#98c379">&#39;\[(?&lt;level&gt;[A-Z]+)\]&#39;</span> log.txt
+</span></span></code></pre></div><p><code>(?&lt;level&gt;)</code> 给这个捕获组取名叫 <code>level</code>，方便后续引用和提取</p>
+<h2 id="简写字符集与posix字符类">简写字符集与POSIX字符类
+</h2><p><strong>POSIX字符类是一套标准定义的字符类别，目的是提供一套跨平台、跨语言环境都兼容的字符匹配规则</strong></p>
+<p>POSIX字符类写在方括号内的双中括号里，格式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#98c379">[[:class:]]</span>
+</span></span></code></pre></div><p>其中<code>class</code>是字符类别名称</p>
+<p>而在许多正则表达式教程中，我们都会看到 <code>\w</code>, <code>\d</code>, <code>\s</code>, <code>\b</code>这类简写形式</p>
+<p><strong>他们被称为简写字符集，是Perl语言引入的快捷写法，不属于POSIX的标准，需要特别注意它们的兼容性问题</strong></p>
+<p>它们的可用性不取决于正则流派（BRE/ERE），而取决于我们使用的具体工具</p>
+<p>我们常用的GNU<code>grep</code>和GNU<code>sed</code>都对POSIX标准进行了扩展，因此即使在默认的BRE模式或ERE模式下，也支持<code>\w</code>,<code>\d</code>,<code>\s</code>等</p>
+<p><strong>但在一些严格遵循POSIX标准的Unix系统（如某些商业版Unix）上，这些简写可能就无法使用</strong></p>
+<p><strong>当需要编写具有高可移植性的脚本时，推荐使用POSIX字符类来代替这些简写，虽然写法稍长，但兼容性好</strong></p>
+<p>下面整理了一些简写、POSIX语法以及含义：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>简写形式</th>
+          <th>POSIX语法</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-</td>
+          <td><code>[[:alnum:]]</code></td>
+          <td>字母和数字</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:alpha:]]</code></td>
+          <td>字母</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:blank:]]</code></td>
+          <td>水平制表符和空格</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:cntrl:]]</code></td>
+          <td>控制字符</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:digit:]]</code></td>
+          <td>数字</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:graph:]]</code></td>
+          <td>可见字符（非空白）</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:lower:]]</code></td>
+          <td>小写字母</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:print:]]</code></td>
+          <td>可打印字符（含空白）</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:punct:]]</code></td>
+          <td>标点符号</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:space:]]</code></td>
+          <td>空白字符</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:upper:]]</code></td>
+          <td>大写字母</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td><code>[[:xdigit:]]</code></td>
+          <td>十六进制数字字符</td>
+      </tr>
+      <tr>
+          <td><code>\d</code></td>
+          <td><code>[[:digit:]]</code></td>
+          <td>数字字符</td>
+      </tr>
+      <tr>
+          <td><code>\D</code></td>
+          <td><code>[^[:digit:]]</code></td>
+          <td>非数字字符</td>
+      </tr>
+      <tr>
+          <td><code>\w</code></td>
+          <td><code>[[:alnum:]_]</code></td>
+          <td>单词字符（字母、数字、下划线）</td>
+      </tr>
+      <tr>
+          <td><code>\W</code></td>
+          <td><code>[^[:alnum:]_]</code></td>
+          <td>非单词字符</td>
+      </tr>
+      <tr>
+          <td><code>\s</code></td>
+          <td><code>[[:space:]]</code></td>
+          <td>空白字符（空格、制表符、换行等）</td>
+      </tr>
+      <tr>
+          <td><code>\S</code></td>
+          <td><code>[^[:space:]]</code></td>
+          <td>非空白字符</td>
+      </tr>
+      <tr>
+          <td><code>.</code></td>
+          <td>-</td>
+          <td>任意单字符（除换行符）</td>
+      </tr>
+      <tr>
+          <td><code>\A</code></td>
+          <td>-</td>
+          <td>字符串开头</td>
+      </tr>
+      <tr>
+          <td><code>\Z</code></td>
+          <td>-</td>
+          <td>字符串结尾（允许换行符）</td>
+      </tr>
+      <tr>
+          <td><code>\z</code></td>
+          <td>-</td>
+          <td>字符串绝对结尾</td>
+      </tr>
+      <tr>
+          <td><code>\G</code></td>
+          <td>-</td>
+          <td>上一次匹配结束位置</td>
+      </tr>
+      <tr>
+          <td><code>\p{}</code><strong>（小写p）</strong></td>
+          <td>-</td>
+          <td>Unicode属性匹配</td>
+      </tr>
+      <tr>
+          <td><code>\P{}</code><strong>（大写P）</strong></td>
+          <td>-</td>
+          <td>Unicode非属性匹配</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong><code>\p{}</code>和<code>\P{}</code>支持的是Unicode所有字符，包含所有语言，而POSIX字符类以传统ASCII大写字母为主</strong></p>
+<p>常用Unicode属性有：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>属性代码</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>L</code></td>
+          <td>Letter（字母）</td>
+      </tr>
+      <tr>
+          <td><code>Lu</code></td>
+          <td>Uppercase Letter（大写字母）</td>
+      </tr>
+      <tr>
+          <td><code>Ll</code></td>
+          <td>Lowercase Letter（小写字母）</td>
+      </tr>
+      <tr>
+          <td><code>N</code></td>
+          <td>Number（数字）</td>
+      </tr>
+      <tr>
+          <td><code>Z</code></td>
+          <td>Separator（分隔符/空白）</td>
+      </tr>
+      <tr>
+          <td><code>P</code></td>
+          <td>Punctuation（标点）</td>
+      </tr>
+      <tr>
+          <td><code>S</code></td>
+          <td>Symbol（符号）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>此外，GUN还对BRE和ERE的单词边界匹配做了拓展（原本是没有的）如下，同样也是拓展的兼容性好：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>简写形式</th>
+          <th>GUN拓展</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\b</code></td>
+          <td><code>\&lt;</code>（词首）和<code>\&gt;</code>（词尾）</td>
+          <td>单词边界</td>
+      </tr>
+      <tr>
+          <td><code>\B</code></td>
+          <td>-</td>
+          <td>非单词边界</td>
+      </tr>
+  </tbody>
+</table></div>
+<h1 id="grep--在文件中搜索匹配的行">grep —— 在文件中搜索匹配的行
+</h1><p><code>grep</code>是Linux中一个强大的文本搜索工具，名称来源于&quot;<strong>g</strong>lobally search a <strong>r</strong>egular <strong>e</strong>xpression and <strong>p</strong>rint&quot;</p>
+<p>其核心功能正如名称一般，是从文件或标准输入中搜索符合指定模式（Pattern）的行，并将匹配的行打印出来</p>
+<h2 id="语法格式">语法格式
+</h2><pre tabindex="0"><code>grep [参数] &lt;要搜索的模式&gt; &lt;文件名&gt;
+</code></pre><h2 id="管道过滤器">管道过滤器
+</h2><p><strong><code>grep</code>最强大的用法之一是作为管道<code>|</code>中的过滤器：接收上一个命令的输出，从中筛选出包含特定模式的行，然后再将结果传递给下一个命令或显示在屏幕上</strong></p>
+<p>几乎所有的Linux命令都可以与<code>grep</code>结合，实现强大的文本搜索和处理功能</p>
+<p><strong>grep的工作过程是逐行读取匹配，因此不能做到跨行匹配</strong></p>
+<h2 id="常用参数">常用参数
+</h2><h3 id="核心匹配控制">核心匹配控制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-i</td>
+          <td><strong>忽略大小写进行搜索</strong></td>
+      </tr>
+      <tr>
+          <td>-v</td>
+          <td><strong>反向查找</strong><br />只显示不匹配的行</td>
+      </tr>
+      <tr>
+          <td>-w</td>
+          <td><strong>整词匹配</strong><br />只匹配独立的单词，而不是字符串的一部分（例如<code>grep -w 'is'</code>不会匹配<code>this</code>）</td>
+      </tr>
+      <tr>
+          <td>-E（egrep）</td>
+          <td><strong>使用扩展正则表达式（ERE）</strong></td>
+      </tr>
+      <tr>
+          <td>-P</td>
+          <td><strong>使用Perl兼容正则表达式（PCRE）</strong></td>
+      </tr>
+      <tr>
+          <td>-F（fgrep）</td>
+          <td><strong>将模式视为固定字符串（非正则表达式）</strong><br />搜索速度更快</td>
+      </tr>
+      <tr>
+          <td>-r, -R（rgrep）</td>
+          <td><strong>递归地在目录及其所有子目录中搜索</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="输出格式控制">输出格式控制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-c</td>
+          <td>不显示匹配的行，<strong>只显示匹配的总行数</strong></td>
+      </tr>
+      <tr>
+          <td>-l</td>
+          <td><strong>只显示包含匹配项的文件名</strong>，不显示具体行内容</td>
+      </tr>
+      <tr>
+          <td>-L</td>
+          <td><strong>只显示不包含匹配项的文件名</strong></td>
+      </tr>
+      <tr>
+          <td>-n</td>
+          <td><strong>在每行输出前加上它在文件中的行号</strong></td>
+      </tr>
+      <tr>
+          <td>&ndash;color=never/auto/always</td>
+          <td><strong>对匹配到的关键词进行颜色高亮显示</strong><br />这在很多系统中是默认行为，具体使用可以参考ls命令的这个参数</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="上下文控制">上下文控制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-A &lt;行数&gt;</td>
+          <td>显示匹配行及其<strong>之后</strong>的N行内容 (<strong>After</strong>)</td>
+      </tr>
+      <tr>
+          <td>-B &lt;行数&gt;</td>
+          <td>显示匹配行及其<strong>之前</strong>的N行内容 (<strong>Before</strong>)</td>
+      </tr>
+      <tr>
+          <td>-C &lt;行数&gt;</td>
+          <td>显示匹配行及其<strong>前后</strong>各N行内容 (<strong>Context</strong>)</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例">使用示例
+</h2><ul>
+<li>
+<p>从系统日志文件中，找出所有包含error字符串的行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>grep <span style="color:#98c379">&#34;error&#34;</span> /var/log/syslog
+</span></span></code></pre></div></li>
+<li>
+<p>找到与nginx相关的进程，必须只能出现nginx，不分大小写</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ps -ef | grep -wi <span style="color:#98c379">&#34;nginx&#34;</span>
+</span></span></code></pre></div><p><strong><code>ps -ef</code>会列出系统中所有的进程。管道<code>|</code>将结果传递给进行过滤<code>grep</code></strong></p>
+</li>
+<li>
+<p>在/etc目录及其所有子目录下，查找所有文件中包含<code>127.0.0.1</code>的内容，并显示文件名和匹配行所在的行号</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>grep -rn <span style="color:#98c379">&#34;127.0.0.1&#34;</span> /etc/
+</span></span></code></pre></div><p><strong>这里再解释一下：加上<code>/</code>只是明确它是目录，如果没有叫做<code>etc</code>的文本文件，<code>/etc</code>和<code>/etc/</code>是一样的</strong></p>
+</li>
+<li>
+<p>显示config.conf文件中所有不是注释（不以#开头）的行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>grep -vE <span style="color:#98c379">&#34;^#&#34;</span> config.conf
+</span></span></code></pre></div><p><strong>不加<code>-E</code>也行，这里只是做演示</strong></p>
+</li>
+<li>
+<p>在log中查找包含Failed的行，并同时显示该行前面2行和后面2行的内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>grep -C <span style="color:#d19a66">2</span> <span style="color:#98c379">&#34;Failed&#34;</span> log
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="sed--文本过滤和转换">sed —— 文本过滤和转换
+</h1><p><code>sed</code>是Linux中一个功能极其强大的流编辑器，它的名称就是是<strong>s</strong>tream <strong>ed</strong>itor（流编辑器）的缩写</p>
+<p>它不是一个交互式文本编辑器（如<code>vim</code>），而是以行为单位，一次处理一行内容</p>
+<p>因此，<code>sed</code>非常适合用于对文本文件进行自动化的过滤、替换、删除、插入等操作</p>
+<h2 id="语法格式-1">语法格式
+</h2><h3 id="直接在命令行中使用脚本">直接在命令行中使用脚本
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> <span style="color:#98c379">&#39;脚本&#39;</span> &lt;文件名&gt;
+</span></span><span style="display:flex;"><span>                 /     <span style="color:#98c379">\ </span>
+</span></span><span style="display:flex;"><span>           <span style="color:#56b6c2">[</span>地址<span style="color:#56b6c2">]</span>   <span style="color:#56b6c2">[</span>命令<span style="color:#56b6c2">]</span>
+</span></span></code></pre></div><h3 id="将脚本写入文件后执行">将脚本写入文件后执行
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> -f &lt;脚本文件&gt; &lt;文件名&gt;
+</span></span></code></pre></div><h3 id="结合管道使用">结合管道使用
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>&lt;其他命令&gt; | sed <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> <span style="color:#98c379">&#39;脚本&#39;</span>
+</span></span></code></pre></div><h2 id="模式空间">模式空间
+</h2><p><strong>虽然<code>sed</code>和<code>grep</code>都是逐行读取文本进行处理，但sed更加强大，这涉及一个叫做“模式空间”的概念</strong></p>
+<p><span style="color:red"><strong><code>sed</code>逐行读取输入文本，但不会直接修改原文件，除非使用<code>-i</code>参数（一定要记住！！！！）</strong></span></p>
+<ul>
+<li><code>sed</code>从第一行开始读取一行内容，然后将其放入一个称为“模式空间”的内存缓冲区</li>
+<li>然后，<code>sed</code>会将我们提供的脚本应用于这个“模式空间”中的内容</li>
+<li>处理完毕后，默认情况下<code>sed</code>会将“模式空间”的内容打印到标准输出，<strong>然后清空“模式空间”</strong>，接着读取下一行，重复此过程，<strong>也就是说，默认打印操作在最后进行</strong></li>
+</ul>
+<p><strong>因此，<code>sed</code>常常用于控制输出的内容，而不是去更改文件的内容（当然更改文本也很有用）</strong></p>
+<h2 id="脚本写法">脚本写法
+</h2><p><strong>在<code>sed</code>中，所谓“脚本”是指一系列的编辑命令，用来告诉<code>sed</code>要对哪些行（地址）执行什么操作（命令）</strong></p>
+<p>这些命令可以是替换、删除、打印、插入等操作，并可通过条件、范围等控制它们的作用范围</p>
+<h3 id="一般格式">一般格式
+</h3><p><code>sed</code>的每个脚本命令通常包括以下两个部分：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#56b6c2">[</span>地址<span style="color:#56b6c2">]</span> <span style="color:#56b6c2">[</span>命令<span style="color:#56b6c2">]</span>
+</span></span></code></pre></div><ul>
+<li>地址：指定命令适用的行</li>
+<li>命令：具体的处理动作</li>
+</ul>
+<p><strong>这两部分直接的空格在部分情况下是可有可无的，但在某些特殊命令（比如b这类的跳转）必须要</strong></p>
+<h3 id="地址部分">地址部分
+</h3><p><strong>地址部分用来指定要对哪一行或哪些行进行操作</strong></p>
+<p><strong>地址是可选的，如果省略地址，那么后面的命令将应用于所有输入的行</strong></p>
+<p>常用地址形式：</p>
+<h4 id="单行">单行
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;[n]&lt;命令&gt;&#39;</span> &lt;文件名&gt;
+</span></span></code></pre></div><p><strong>只对第<code>n</code>行进行操作</strong></p>
+<p>eg：删除文件的第3行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;3d&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="行范围">行范围
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;[x],[y]&lt;命令&gt;&#39;</span> &lt;文件名&gt;
+</span></span></code></pre></div><p><strong>对从第<code>x</code>行到第<code>y</code>行（包含<code>x</code>和<code>y</code>）的所有行进行操作，起始行为1</strong></p>
+<p>eg：删除文件的第2行到第5行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;2,5d&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="从某行到末尾">从某行到末尾
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;[n],$&lt;命令&gt;&#39;</span> &lt;文件名&gt;
+</span></span></code></pre></div><p><strong>``$`是一个特殊符号，代表文件的最后一行</strong></p>
+<p>eg：从第10行开始，一直到文件末尾，全部删除</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;10,$d&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="单模式">单模式
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/模式/&lt;命令&gt;&#39;</span> &lt;文件名&gt;
+</span></span></code></pre></div><p><strong>对所有内容匹配正则表达式<code>pattern</code>的行进行操作，注意一定要用<code>/</code>包裹匹配的模式</strong></p>
+<p>eg：删除所有包含 &ldquo;error&rdquo; 字符串的日志行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/error/d&#39;</span> error.log
+</span></span></code></pre></div><h4 id="模式指定范围">模式指定范围
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/起始模式/,/结束模式/&lt;命令&gt;&#39;</span> &lt;文件名&gt;
+</span></span></code></pre></div><p><strong>从第一次匹配到<code>start_pattern</code>的行开始，到之后第一次匹配到<code>end_pattern</code>的行结束</strong></p>
+<p>eg：打印从包含&lt;main&gt;的行开始，到包含&lt;/main&gt;的行结束之间的所有内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;/&lt;main&gt;/,/&lt;\/main&gt;/p&#39;</span> index.html
+</span></span></code></pre></div><p><strong><code>&lt;\/main&gt;</code>中的<code>/</code>要进行转义，即用 <code>\/</code>，因为<code>/</code>是<code>sed</code>的默认分隔符</strong></p>
+<h4 id="地址取反">地址取反
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;&lt;地址&gt;!&lt;命令&gt;&#39;</span> &lt;文件名&gt;
+</span></span></code></pre></div><p><strong>对不符合地址的行执行命令</strong></p>
+<p>eg：删除第1到第3行之外的内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;1,3!d&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="多个地址组合多个脚本">多个地址组合（多个脚本）
+</h4><p><strong>可以在同一个命令中使用多个地址块，使用<code>;</code>分隔</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;1,3p;5p;/hello/,$p&#39;</span> file.txt
+</span></span></code></pre></div><p>含义：</p>
+<ul>
+<li>打印第1到3行</li>
+<li>打印第5行</li>
+<li>打印从匹配<code>hello</code>的那一行到最后一行</li>
+</ul>
+<h3 id="命令部分">命令部分
+</h3><h4 id="s替换-substitute">s：替换 (substitute)
+</h4><p><strong>语法</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">s</span>/<span style="color:#e06c75">旧文本</span>/<span style="color:#e06c75">新文本</span>/<span style="color:#e06c75">标志</span>
+</span></span></code></pre></div><p><strong>在指定的地址行上，查找匹配正则表达式的文本，并将其替换为新的指定字符串</strong></p>
+<p><strong>常用标志 (flags)</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>标志位</th>
+          <th>含义说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>g</code></td>
+          <td><strong>全局替换</strong>，替换每行中所有匹配的内容（默认只替换第一个）</td>
+      </tr>
+      <tr>
+          <td><code>i</code></td>
+          <td><strong>忽略大小写匹配</strong>，<code>a</code>会匹配<code>A</code>和<code>a</code></td>
+      </tr>
+      <tr>
+          <td><code>p</code></td>
+          <td><strong>替换成功时打印该行</strong>（需要配合 <code>-n</code> 使用）</td>
+      </tr>
+      <tr>
+          <td><code>N</code>（数字）</td>
+          <td><strong>只替换第N个匹配</strong>，例如 <code>s/a/b/2</code>表示只将每行中第二个<code>a</code>替换为<code>b</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>eg1：将file.txt中所有&quot;apple&quot;替换为&quot;orange&quot;</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;s/apple/orange/g&#39;</span> file.txt
+</span></span></code></pre></div><p>eg2：只在第5行到第10行之间，将&quot;error&quot;替换为&quot;ERROR&quot;</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;5,10s/error/ERROR/g&#39;</span> log.txt
+</span></span></code></pre></div><p>eg3：忽略大小写，将所有&quot;linux&quot;替换为&quot;Linux&quot;</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;s/linux/Linux/gi&#39;</span> my_notes.txt
+</span></span></code></pre></div><h4 id="d删除-delete">d：删除 (delete)
+</h4><p><strong>语法</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">d</span>
+</span></span></code></pre></div><p><strong>如果某一行匹配了地址，则该行会从模式空间中被直接删除，后续的命令不会再对该行进行处理</strong></p>
+<p><span style="color:red"><strong>注意是删除一整行的内容，而不是删除匹配的内容</strong></span></p>
+<p>eg1：删除file.txt的第3行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;3d&#39;</span> file.txt
+</span></span></code></pre></div><p>eg2：删除所有以#开头的注释行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/^#/d&#39;</span> file.txt
+</span></span></code></pre></div><p>eg3：删除所有空行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/^$/d&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="p打印-print">p：打印 (print)
+</h4><p><strong>语法</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">p</span>
+</span></span></code></pre></div><p><strong>这个命令通常与<code>-n</code>命令行选项配合使用：</strong></p>
+<p><strong><code>-n</code>会禁止<code>sed</code>在每个处理周期结束时默认打印模式空间，这样，就只有被<code>p</code>命令显式指定的行才会被输出</strong></p>
+<p>eg1：只打印出log.txt中包含&quot;WARNING&quot;的行（效果类似grep）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;/WARNING/p&#39;</span> log.txt
+</span></span></code></pre></div><p>eg2：打印文件的第1到第5行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;1,5p&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="a追加-append">a：追加 (append)
+</h4><p><strong>语法</strong>:</p>
+<p><strong>1.换行写（末尾加<code>\</code>表示命令未结束，此时回车不会执行命令，而是切换到下一行）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">a</span>\
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">要追加的内容</span>
+</span></span></code></pre></div><p><strong>2.使用<code>-e</code>参数（注意此时<code>a</code>后面无需<code>\</code>，但要加上空格）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>-<span style="color:#e06c75">e</span> [<span style="color:#e06c75">地址</span>]<span style="color:#e06c75">a</span> <span style="color:#e06c75">要追加的内容</span>
+</span></span></code></pre></div><p><strong>当某一行匹配地址时，<code>sed</code>会在该行内容输出之后，另起一行，输出指定的要追加的内容</strong></p>
+<p><strong><code>a</code>之后不能直接接内容，必须换行写文本，除非用<code>-e</code>写在一行里</strong></p>
+<p>eg：在index.html中包含&quot;&lt;body&gt;&ldquo;的行后面，追加一行&rdquo;&lt;h1&gt;T1&lt;/h1&gt;&quot;</p>
+<p>换行写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/&lt;body&gt;/a\
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">&lt;h1&gt;T1&lt;/h1&gt;&#39;</span> index.html
+</span></span></code></pre></div><p>使用<code>-e</code>参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -e <span style="color:#98c379">&#39;/&lt;body&gt;/a &lt;h1&gt;T1&lt;/h1&gt;&#39;</span> index.html
+</span></span></code></pre></div><h4 id="r读取read">r：读取（read）
+</h4><p><strong>语法</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">r</span> <span style="color:#e06c75">文件名</span>
+</span></span></code></pre></div><p><strong>当某一行匹配地址时，<code>sed</code> 会在该行输出之后，把指定文件的内容读取并插入输出结果中</strong></p>
+<p><strong>他和<code>a</code>命令很像，只不过从指定字符串变成了指定文件</strong></p>
+<p>eg：在包含<code>&lt;body&gt;</code>的行后插入文件 <code>extra.html</code> 的内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/&lt;body&gt;/r extra.html&#39;</span> index.html
+</span></span></code></pre></div><h4 id="i插入-insert">i：插入 (insert)
+</h4><p><strong>语法</strong>:</p>
+<p><strong>1.换行写（末尾加 <code>\</code> 表示命令未结束，此时回车不会执行命令，而是切换到下一行）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">i</span>\
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">要插入的内容</span>
+</span></span></code></pre></div><p><span style="color:red"><strong>就算是写在脚本里面，也要加上<code>\</code>换行</strong></span></p>
+<p><strong>2.使用 <code>-e</code> 参数（此时 <code>i</code> 后面无需 <code>\</code>，但要加上空格）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>-<span style="color:#e06c75">e</span> [<span style="color:#e06c75">地址</span>]<span style="color:#e06c75">i</span> <span style="color:#e06c75">要插入的内容</span>
+</span></span></code></pre></div><p><strong>当某一行匹配地址时，<code>sed</code> 会在该行输出之前，插入新的一行，内容为你指定的文本</strong></p>
+<p><strong><code>i</code>之后不能直接接内容，必须换行写文本，除非用<code>-e</code>写在一行里</strong></p>
+<p>eg：在index.html中包含&quot;&lt;body&gt;&ldquo;的行前面插入&rdquo;&lt;h1&gt;Header&lt;/h1&gt;&quot;</p>
+<p>换行写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/&lt;body&gt;/i\
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">&lt;h1&gt;Header&lt;/h1&gt;&#39;</span> index.html
+</span></span></code></pre></div><p>使用<code>-e</code>参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -e <span style="color:#98c379">&#39;/&lt;body&gt;/i &lt;h1&gt;Header&lt;/h1&gt;&#39;</span> index.html
+</span></span></code></pre></div><h4 id="c更改-change">c：更改 (change)
+</h4><p><strong>语法</strong>:</p>
+<p><strong>1.换行写（末尾加<code>\</code>表示命令未结束，此时回车不会执行命令，而是切换到下一行）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">c</span>\
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">新的内容</span>
+</span></span></code></pre></div><p><strong>2.使用<code>-e</code>参数（此时<code>c</code>后面无需<code>\</code>，但要加上空格）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>-<span style="color:#e06c75">e</span> [<span style="color:#e06c75">地址</span>]<span style="color:#e06c75">c</span> <span style="color:#e06c75">新的内容</span>
+</span></span></code></pre></div><p><strong>如果某一行匹配地址，<code>sed</code>会删除该行全部内容，并替换为你指定的新文本</strong></p>
+<p><strong>替换的是整行内容，不能只替换某个词或部分字符</strong></p>
+<p>eg：将包含<code>&lt;footer&gt;</code>的整行替换为 <code>&lt;footer&gt;Updated&lt;/footer&gt;</code>：</p>
+<p>换行写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/&lt;footer&gt;/c\
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">&lt;footer&gt;Updated&lt;/footer&gt;&#39;</span> index.html
+</span></span></code></pre></div><p>使用<code>-e</code>参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -e <span style="color:#98c379">&#39;/&lt;footer&gt;/c &lt;footer&gt;Updated&lt;/footer&gt;&#39;</span> index.html
+</span></span></code></pre></div><h4 id="q退出quit">q：退出（quit）
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">q</span>
+</span></span></code></pre></div><p><strong>当匹配到指定行或模式时，<code>sed</code>会立即停止处理文件，常用于只查看文件前几行或匹配首个结果</strong></p>
+<p>eg：匹配到<code>&lt;body&gt;</code>后立即退出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/&lt;body&gt;/q&#39;</span> index.html
+</span></span></code></pre></div><h4 id="n读入下一行并替换当前行next">n：读入下一行并替换当前行（next）
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">n</span>
+</span></span></code></pre></div><p><strong><code>n</code>命令会立即打印当前行内容，然后读取下一行覆盖当前模式空间，再执行后续命令</strong></p>
+<p><strong>接着，<code>sed</code>不会再读取<code>n</code>读取过的行，而是到新的一行（也就是相对于当前的第三行）继续执行新的一轮</strong></p>
+<p>eg1：输出文件中的偶数行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;n;p&#39;</span> file.txt
+</span></span></code></pre></div><p><code>-n</code>会抑制每一行的自动输出，而<code>n</code>会跳过当前行的<code>p</code>命令，转到下一行进行<code>p</code>，因此只输出偶数行(2,4&hellip;)</p>
+<p>eg2：输出文件中的奇数行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;p;n&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="n合并下一行">N：合并下一行
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">N</span>
+</span></span></code></pre></div><p><strong>把下一行追加到当前行后面，中间用换行符 <code>\n</code> 连接，合并为一整块模式空间</strong></p>
+<p><strong>同样的，<code>sed</code>不会再读取<code>N</code>读取过的行，而是到新的一行，也就是两行组合（当前匹配行和下一行）</strong></p>
+<p>eg：找到<code>error:</code>行，将他和下一行一起打印出来</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;/^error:$/N;p&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="d删除第一行并重新开始">D：删除第一行并重新开始
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">D</span>
+</span></span></code></pre></div><p><strong><code>D</code>命令会删除当前模式空间开端至换行符<code>\n</code>的内容，放弃之后的命令，然后对剩余模式空间重新执行<code>sed</code></strong></p>
+<p><strong>通常模式空间是没有换行符的<code>\n</code>，效果和<code>d</code>命令一样，但它常常和N命令同时使用</strong></p>
+<p>eg：删除所有连续出现的空行，只保留一个空行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/^$/N;/^\n$/D&#39;</span> file.txt
+</span></span></code></pre></div><ul>
+<li><code>/^$/N</code>：如果当前行是空行，就读取下一行，形成多行处理空间；</li>
+<li><code>/^\n$/D</code>：如果这两行全是空行，就删掉第一行并再次处理 → 最终只保留一个空行</li>
+</ul>
+<h4 id="h用模式空间的内容覆盖保持空间hold">h：用模式空间的内容覆盖保持空间（hold）
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">h</span>
+</span></span></code></pre></div><p><strong>把当前正在处理模式空间中的内容保存一份副本，存入保持空间</strong></p>
+<p><strong>保持空间是独立于模式空间之外的内存缓冲区，不会影响当前行的继续处理</strong></p>
+<p>eg：保存当前行备用</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/pattern/h&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="h将模式空间的内容追加到保持空间">H：将模式空间的内容追加到保持空间
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">H</span>
+</span></span></code></pre></div><p><strong>和<code>h</code>类似，但它是将当前行追加到保持空间已有内容后面</strong></p>
+<p>eg：把每行都追加到保持空间中</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;H&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="g用保持空间的内容覆盖模式空间get">g：用保持空间的内容覆盖模式空间（get）
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">g</span>
+</span></span></code></pre></div><p><strong>说明</strong>：</p>
+<p><strong>用之前用<code>h</code>/<code>H</code>保存在保持空间的内容，替换当前的模式空间</strong></p>
+<p>eg：将之前保存的内容贴回当前行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;g&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="g将保持空间的内容追加到模式空间">G：将保持空间的内容追加到模式空间
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">G</span>
+</span></span></code></pre></div><p><strong>与<code>g</code>不同，它是将保持空间内容追加到当前行内容后面，两部分内容中间会加换行符<code>\n</code></strong></p>
+<p>eg：将缓存的内容加在当前行之后</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;G&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="x交换模式空间和保持空间内容exchange">x：交换模式空间和保持空间内容（exchange）
+</h4><p><strong>语法</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">x</span>
+</span></span></code></pre></div><p><strong>把当前模式空间和之前缓存的保持空间对调，常用于在两行内容之间反复切换</strong></p>
+<p>eg：切换当前行与上次保存行的内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;x&#39;</span> file.txt
+</span></span></code></pre></div><h4 id="b分支branch">b：分支（branch）
+</h4><p><strong>语法</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">b</span> [<span style="color:#e06c75">标签</span>]
+</span></span></code></pre></div><p><strong><code>b</code>命令类似于编程语言中的<code>goto</code>语句，可用于跳过某些处理逻辑或构建循环</strong></p>
+<p><strong>当某一行匹配地址时，<code>sed</code>会无条件跳转到指定的标签处继续执行后续命令</strong></p>
+<p><strong>如果不指定标签，则跳转到脚本的末尾（即跳过后续所有命令，直接进入下一轮循环）</strong></p>
+<p><strong>标签通过<code>:label</code>的形式声明，无需先定义后使用，<code>label</code>是用户自定义的标签名称（不能包含空白字符或斜杠）</strong></p>
+<p>eg2：把文本中所有CODE替换成code，不处理注释行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/^#/b skip; s/CODE/code/; :skip&#39;</span> file.txt
+</span></span></code></pre></div><p>如果行以<code>#</code>开头（注释），则跳转到<code>:skip</code>标签处，不执行CODE替换</p>
+<h4 id="t测试替换是否发生test">t：测试替换是否发生（test）
+</h4><p><strong>语法</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">t</span> [<span style="color:#e06c75">标签</span>]
+</span></span></code></pre></div><p><strong>它会检查从开头到现在最近的一个替换命令（<code>s///</code>）是否执行成功</strong></p>
+<p><strong>如果最近的一个替换命令成功，则跳转到指定标签（如果没指定标签就跳转到脚本末尾）</strong></p>
+<p><strong>如果没有替换成功，则继续执行后面的命令</strong></p>
+<p><span style="color:red"><strong>在<code>s</code>和<code>t</code>之间插入任何其他命令，都可能重置或清除替换成功的标志，导致跳转失败，因此他们最好紧挨着用</strong></span></p>
+<p>eg：将数字大于100的行标记为 <code>large</code>，并确保只标记一次：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;s/\([0-9]\{3,\}\)/\1 (large)/; t done; s/\([0-9][0-9]\)/\1 (medium)/; :done&#39;</span> data.txt
+</span></span></code></pre></div><p>先尝试匹配三位及以上数字（≥100），若替换成功（即数字大），则跳转到<code>:done</code>（末尾），跳过后续对两位数的处理，否则继续执行第二条替换（标记为 medium）</p>
+<p><strong>虽然<code>t</code>默认跳转到末尾，我们也最好在末尾加上一个标签，这是好习惯，有利于之后改动</strong></p>
+<h4 id="t测试失败并分支">T：测试失败并分支
+</h4><p><strong>语法</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span><span style="color:#e06c75">T</span> [<span style="color:#e06c75">标签</span>]
+</span></span></code></pre></div><p><strong><code>T</code>是<code>t</code>的反义命令，区别在于它是如果替换未发生则跳转</strong></p>
+<p><span style="color:red"><strong>同样的，<code>s</code>和<code>T</code>也最好紧挨着用</strong></span></p>
+<p>eg：如果行中不包含<code>http</code>，则在行首添加<code>https://</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;s/http.*/&amp;/; T add; b; :add; s/^/https:\/\//&#39;</span> urls.txt
+</span></span></code></pre></div><p>先尝试匹配<code>http.*</code>，如果匹配成功（替换发生），<code>T</code>不跳转，执行<code>b</code>跳过后续（<code>&amp;</code>代表匹配到的整个字符串）</p>
+<p>如果未匹配（替换未发生），跳转到<code>:add</code>标签处，执行添加<code>https://</code>的操作（<code>^</code>是定位符，不会被替换掉，这里相当于在行首插入<code>https://</code>）</p>
+<h4 id="在同一个地址使用多个命令">在同一个地址使用多个命令
+</h4><p><strong>使用<code>{}</code>包裹要执行的命令，命令之间的分隔有两种方式</strong></p>
+<p><strong>1.分号<code>;</code>分隔命令：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span>{<span style="color:#e06c75">命令1</span>;<span style="color:#e06c75">命令2</span>;<span style="color:#56b6c2">..</span>}
+</span></span></code></pre></div><p><span style="color:red"><strong>和多个地址的分隔方式不同，末尾最后一个命令后面一定要加上分号<code>;</code>！！！</strong></span></p>
+<p><strong>2.换行分隔命令：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[地址]</span>
+</span></span><span style="display:flex;"><span>{\
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">命令1</span>\
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">命令2</span>\
+</span></span><span style="display:flex;"><span>    <span style="color:#56b6c2">..</span>.
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><span style="color:red"><strong>如果写在脚本里面，就不需要使用<code>\</code>（表示换行命令继续）</strong></span></p>
+<p>eg：删除<code>log.txt</code>中所有<code>error</code>开头行的下一行内容</p>
+<p>分号<code>;</code>分隔：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;/^error/{n;d;}&#39;</span> log.txt
+</span></span></code></pre></div><p>换行分隔：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> sed <span style="color:#98c379">&#39;/^error/{\
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379"> n\
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379"> d\
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379"> }&#39;</span> log.txt
+</span></span></code></pre></div><p><strong>事实上，我们在同一个地址用动作连续处理内容的时候，最好使用<code>{}</code>包裹，否则可能出现边界情况</strong></p>
+<h2 id="常用参数-1">常用参数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-n</td>
+          <td><strong>静默模式，默认情况下<code>sed</code>会打印所有行，使用此参数后，只有经过<code>p</code>命令处理的行才会被打印</strong></td>
+      </tr>
+      <tr>
+          <td>-i</td>
+          <td><strong>直接修改文件内容</strong>，而不是输出到屏幕</td>
+      </tr>
+      <tr>
+          <td>-e</td>
+          <td><strong>允许在同一条命令中执行多个<code>sed</code>脚本/允许部分命令不换行</strong></td>
+      </tr>
+      <tr>
+          <td>-r<br />或-E</td>
+          <td><strong>使用扩展正则表达式（ERE），而不是基础正则表达式（BRE）</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>注意：在部分系统中，<code>-ie</code>选项不会被解析成<code>-i</code>和<code>-e</code>，而是会被解析成<code>-i</code>指定的备份后缀</strong></p>
+<p><strong>备份后缀机制</strong>：</p>
+<p>用<code>sed</code>直接修改文件时，它会先复制一份原文件，并给这份备份文件加上你指定的后缀，然后再修改原文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -i<span style="color:#98c379">&#39;.bak&#39;</span> <span style="color:#98c379">&#39;s/foo/bar/g&#39;</span> file.txt
+</span></span></code></pre></div><ol>
+<li><code>sed</code>复制<code>file.txt</code> → 新文件<code>file.txt.bak</code></li>
+<li>在原文件<code>file.txt</code>上执行替换操作</li>
+<li>保留<code>.bak</code>文件作为修改前的版本</li>
+</ol>
+<p><strong>也就是说，如果这时候你使用<code>-ie</code>，<code>-e</code>参数不会起作用，只会生成一个<code>.txte</code>的源文件备份文件</strong></p>
+<p><strong>为了让参数正常工作，建议分开写，即直接写成<code>-i -e</code></strong></p>
+<h2 id="使用示例-1">使用示例
+</h2><ul>
+<li>
+<p>直接修改log文件，把里面的所有的INFO替换成info，DEBUG替换成debug</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -i <span style="color:#98c379">&#39;s/INFO/ifo/g;s/DEBUG/debug/g&#39;</span> log
+</span></span></code></pre></div></li>
+<li>
+<p>将每两行合并为一行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;N;s/\n/ /&#39;</span> file.txt
+</span></span></code></pre></div></li>
+<li>
+<p>删除HTML标签</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;s/&lt;[^&gt;]*&gt;//g&#39;</span> file.txt
+</span></span></code></pre></div><p><strong>这里使用<code>s</code>命令，把html标签替换为空；不能使用<code>d</code>命令，因为它会删除一整行的内容</strong></p>
+</li>
+<li>
+<p>交换csv文件的两列内容（使用逗号分隔）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;s/\([^,]*\),\([^,]*\)/\2,\1/&#39;</span> file.txt
+</span></span></code></pre></div><p><strong><code>\([^,]*\)</code>捕获第一、二个字段，使用<code>\2,\1</code>替换为第二个字段 + 逗号 + 第一个字段</strong></p>
+</li>
+<li>
+<p>删除每行第二个出现的word</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed <span style="color:#98c379">&#39;:a; s/\(foo.*?\)foo//; ta&#39;</span> file.txt
+</span></span></code></pre></div></li>
+<li>
+<p>从<code>ip addr</code>命令的输出中取出IP地址</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ip addr | sed -n <span style="color:#98c379">&#39;/inet / s/.*inet \([0-9\.]\+\).*/\1/p&#39;</span>
+</span></span></code></pre></div><p><strong><code>sed</code>没有取出匹配部分的命令，所以需要使用<code>s</code>命令来完成这个过程</strong></p>
+<p>执行流程：</p>
+<ol>
+<li><strong><code>ip addr |</code>: <code>ip addr</code>输出网络接口信息，并通过管道传递给<code>sed</code></strong></li>
+<li><strong><code>sed -n '...'</code>: <code>-n</code>参数禁止<code>sed</code>默认打印每一行</strong></li>
+<li><strong><code>'/inet /'</code>: 这是地址部分，只处理包含<code>inet </code>的行</strong></li>
+<li><strong><code>s/.*inet \([0-9\.]\+\).*/\1/p</code>: 这是命令部分</strong>
+<ul>
+<li><strong><code>s</code>表示替换</strong></li>
+<li><strong><code>\([0-9\.]\+\)</code>是一个正则表达式捕获组，它匹配IP地址</strong></li>
+<li><strong><code>\1</code>表示将整行替换为“第一个捕获组的内容”（即IP地址），这一步最为重要！！！</strong></li>
+<li><strong><code>p</code>表示打印替换成功后的行</strong></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="awk--文本处理与报告生成">awk —— 文本处理与报告生成
+</h1><p><code>awk</code>名称来源于其三位作者<code>Aho</code>, <code>Weinberger</code>, 和<code>Kernighan</code>的姓氏首字母</p>
+<p><strong>与<code>grep</code>和<code>sed</code>相比，<code>awk</code>更像是一种语言，更擅长对文本数据进行提取、计算和生成格式化报告</strong></p>
+<h2 id="语法格式-2">语法格式
+</h2><h3 id="直接在命令行中使用脚本-1">直接在命令行中使用脚本
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> <span style="color:#98c379">&#39;脚本&#39;</span> &lt;文件名&gt;
+</span></span><span style="display:flex;"><span>                 /     <span style="color:#98c379">\ </span>
+</span></span><span style="display:flex;"><span>           <span style="color:#56b6c2">[</span>模式<span style="color:#56b6c2">]</span>   <span style="color:#56b6c2">{</span>动作<span style="color:#56b6c2">}</span>   &lt;-- 注意动作必须是由<span style="color:#56b6c2">{}</span>包裹
+</span></span></code></pre></div><h3 id="对标准输入使用脚本">对标准输入使用脚本
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#56b6c2">[</span>参数<span style="color:#56b6c2">]</span> <span style="color:#98c379">&#39;脚本&#39;</span> 
+</span></span></code></pre></div><p><strong>不指定文件，接下来的输入将会作为awk执行对象</strong></p>
+<h3 id="将脚本写入文件后执行-1">将脚本写入文件后执行
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk -f &lt;脚本文件&gt; &lt;文件名&gt;
+</span></span></code></pre></div><h2 id="awk工作流程">awk工作流程
+</h2><ol>
+<li><strong>逐行读取</strong>：<code>awk</code>从输入（文件或管道）中读取一行文本，这一行被称为一个&quot;记录&quot;，默认以换行符分割记录</li>
+<li><strong>字段分割</strong>：<code>awk</code>会根据字段分隔符将当前行分割成多个字段，默认的分隔符是一个或多个连续的空格（<code>space</code>）或制表符（<code>Tab</code>），拆出来的字段可以用<code>$1</code>,<code>$2</code>,<code>$3</code> &hellip; 来访问</li>
+<li><strong>模式匹配</strong>：<code>awk</code>会用脚本中的<code>[模式]</code>部分来测试当前行，<code>[模式]</code>可以是正则表达式（如<code>/error/</code>）或条件表达式（如<code>$3 &gt; 100</code>）</li>
+<li><strong>执行动作</strong>：如果当前行匹配了<code>[模式]</code>，那么对应的<code>{动作}</code>代码块就会被执行，如果没有写模式，则默认对所有行执行动作</li>
+<li><strong>循环往复</strong>：当前行的所有<code>[模式]{动作}对都处理完毕后，</code>awk`会清空临时变量（比如临时字段变量），接着读取下一行，重复以上过程，直到所有输入行都被处理完毕</li>
+</ol>
+<h2 id="awk脚本的写法">awk脚本的写法
+</h2><p><strong>类似<code>sed</code>命令脚本的<code>地址+命令</code>，一个<code>awk</code>脚本由一系列的<code>模式+动作</code>语句组成</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[模式]</span> {<span style="color:#e06c75">动作</span>}
+</span></span></code></pre></div><p><strong>注意两点：</strong></p>
+<ul>
+<li><strong>模式和动作之间的空格加不加不影响，但是加上可读性强，最好加一下</strong></li>
+<li><strong>模式是不需要<code>[]</code>包裹的（上面加上是为了方便理解），但是动作必须使用<code>{}</code>包裹</strong></li>
+</ul>
+<h3 id="字段与变量">字段与变量
+</h3><p>在了解模式和动作之前，我们需要知道它内置了哪些可用的变量</p>
+<h4 id="自动维护变量">自动维护变量
+</h4><p><strong>这是<code>awk</code>内部赋值的变量，用户一般不修改，直接使用</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>变量</th>
+          <th>含义</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>$0</strong></td>
+          <td><strong>当前整行内容</strong></td>
+          <td>整个当前记录（行）的文本</td>
+      </tr>
+      <tr>
+          <td><strong>$1, $2&hellip;</strong></td>
+          <td><strong>当前行第1、第2&hellip;个字段</strong></td>
+          <td>拆分后的字段，字段数由<code>NF</code>决定</td>
+      </tr>
+      <tr>
+          <td><strong>NF</strong></td>
+          <td><strong>当前行字段总数</strong></td>
+          <td>字段个数，动态变化</td>
+      </tr>
+      <tr>
+          <td><strong>NR</strong></td>
+          <td><strong>当前已处理的记录总数</strong></td>
+          <td>跨文件累计行数，不重置</td>
+      </tr>
+      <tr>
+          <td><strong>FNR</strong></td>
+          <td><strong>当前记录在文件中的行号</strong></td>
+          <td>每个文件的行号，<strong>从1开始</strong>，遇新文件重置为1</td>
+      </tr>
+      <tr>
+          <td><strong>FILENAME</strong></td>
+          <td><strong>当前处理的文件名</strong></td>
+          <td>动态变化，处理多个文件时会更新</td>
+      </tr>
+      <tr>
+          <td><strong>ARGC</strong></td>
+          <td><strong>命令行参数个数</strong></td>
+          <td>包含awk命令本身，以及额外的参数</td>
+      </tr>
+      <tr>
+          <td><strong>ARGV</strong></td>
+          <td><strong>命令行参数数组</strong></td>
+          <td><strong>下标从0开始<br /><code>ARGV[0]</code>是awk命令名，<code>ARGV[1]</code> 是第一个命令行参数</strong></td>
+      </tr>
+      <tr>
+          <td><strong>ENVIRON</strong></td>
+          <td><strong>环境变量数组</strong></td>
+          <td>访问系统环境变量，如 <code>ENVIRON[&quot;HOME&quot;]</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="用户可设置变量">用户可设置变量
+</h4><p><strong>这些是可以修改的字段，可用<code>BEGIN</code>或在运行时修改，使用<code>=</code>赋值（如<code>FS = &quot;,&quot;</code>是输入字段分隔符改成逗号）</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>变量</th>
+          <th>含义</th>
+          <th>默认值/说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>FS</strong></td>
+          <td><strong>输入字段分隔符</strong></td>
+          <td>默认空格或制表符（连续多个空白字符）</td>
+      </tr>
+      <tr>
+          <td><strong>OFS</strong></td>
+          <td><strong>输出字段分隔符</strong></td>
+          <td>默认空格</td>
+      </tr>
+      <tr>
+          <td><strong>RS</strong></td>
+          <td><strong>输入记录分隔符</strong></td>
+          <td>默认换行符\n`</td>
+      </tr>
+      <tr>
+          <td><strong>ORS</strong></td>
+          <td><strong>输出记录分隔符</strong></td>
+          <td>默认换行符<code>\n</code></td>
+      </tr>
+      <tr>
+          <td><strong>CONVFMT</strong></td>
+          <td><strong>数字转字符串格式</strong></td>
+          <td>默认<code>&quot;%.6g&quot;</code><br /><strong><code>%</code>是格式说明符，<code>.6</code>代表六位有效数字，<code>g</code>表示会根据数值大小自动选择用定点表示法（<code>f</code> ）还是科学计数法（<code>e</code> ）</strong></td>
+      </tr>
+      <tr>
+          <td><strong>OFMT</strong></td>
+          <td><strong>数字输出格式</strong></td>
+          <td>默认<code>&quot;%.6g&quot;</code></td>
+      </tr>
+      <tr>
+          <td><strong>IGNORECASE</strong></td>
+          <td><strong>是否忽略大小写匹配（GNU awk扩展）</strong></td>
+          <td><strong>默认0（区分大小写），非0时忽略大小写</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="自定义变量">自定义变量
+</h4><p><span style="color:orange"><strong>1. 命令行定义变量（-v）</strong></span></p>
+<p><strong>在脚本运行前，通过命令行给变量赋值，适合传入外部参数</strong></p>
+<p>eg：把<code>name</code>在运行前被设定为<code>&quot;Tom&quot;</code>，然后读取<code>file</code>的每一行，但只输出<code>&quot;Tom&quot;</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk -v <span style="color:#e06c75">name</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;Tom&#34;</span> <span style="color:#98c379">&#39;{print name}&#39;</span> file
+</span></span></code></pre></div><p><span style="color:orange"><strong>2.脚本中直接赋值</strong></span></p>
+<p><strong>在动作代码中直接给变量赋值，变量第一次出现时会自动初始化为<code>0</code>（数字）或空字符串（字符串）</strong></p>
+<p>eg：对每一行执行<code>count = count + 1</code>（第一次遇到<code>count</code>时它是<code>0</code>，因此从 1 开始累加）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ count = count + 1 }&#39;</span> file
+</span></span></code></pre></div><p><span style="color:orange"><strong>3. BEGIN块初始化变量</strong></span></p>
+<p><strong>在读取文件之前执行一次，用于变量初始化、设置格式等</strong></p>
+<p>eg：先把<code>sum</code>设为 0，然后每行将第一个字段<code>$1</code>累加，最后在<code>END</code>中输出总和</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;BEGIN { sum = 0 } { sum += $1 } END { print sum }&#39;</span> file
+</span></span></code></pre></div><p><span style="color:orange"><strong>4. 运行时修改内部变量</strong></span></p>
+<p><strong>在脚本运行过程中修改内置变量，例如 FS（输入字段分隔符）、OFS（输出字段分隔符）等</strong></p>
+<p>eg：把字段分隔符改为逗号，这样<code>$1</code>表示第一个逗号前的内容，即第一个字段，<code>$2</code>表示第二个字段</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;BEGIN { FS=&#34;,&#34; } { print $1, $2 }&#39;</span> file
+</span></span></code></pre></div><h3 id="模式">模式
+</h3><p><strong>类似<code>sed</code>命令的地址，模式决定了动作是否要对当前行执行，如果省略模式，则对所有行执行动作</strong></p>
+<h4 id="关系表达式模式">关系表达式模式
+</h4><p><strong>用字段、变量、运算符进行比较，条件为真时执行动作</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk  <span style="color:#98c379">&#39;$3 &gt; 500 {print $1, $3}&#39;</span> /etc/passwd
+</span></span></code></pre></div><p><code>$3 &gt; 500</code>表示第三个字段（假设是UID）大于 500 时，输出用户名（<code>$1</code>）和 UID（<code>$3</code>）</p>
+<h4 id="正则表达式模式">正则表达式模式
+</h4><p><strong>用<code>/</code>包裹一个正则表达式，如果当前行能匹配这个正则表达式，则执行对应动作</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;/bash/ {print $0}&#39;</span> /etc/passwd
+</span></span></code></pre></div><p>逐行读取<code>/etc/passwd</code>，只输出包含<code>&quot;bash&quot;</code>字符串的行，<code>$0</code>表示当前整行内容</p>
+<h4 id="范围模式">范围模式
+</h4><p><strong>用逗号分隔两个模式，匹配范围从第一个模式命中行开始，到第二个模式命中行结束（包括首尾行）</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;/start_pattern/,/end_pattern/ {print $0}&#39;</span> log.txt
+</span></span></code></pre></div><p>读到包含<code>&quot;start_pattern&quot;</code>的行时开始输出，直到遇到包含<code>&quot;end_pattern&quot;</code>的行停止输出，中间所有行都会打印</p>
+<h4 id="特殊模式begin-与-end">特殊模式：BEGIN 与 END
+</h4><p><strong>这两个模式后面能跟上独立的动作块：</strong></p>
+<ul>
+<li><strong>BEGIN：在读取任何输入行之前执行，不论有没有指定文件或输入内容，常用于初始化变量、打印表头等</strong></li>
+<li><strong>END：在读取完所有行之后执行，常用于统计、输出结果等</strong></li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;BEGIN {print &#34;=== Start ===&#34;} { print FNR } END { print &#34;Total lines:&#34;, NR }&#39;</span> /etc/hosts
+</span></span></code></pre></div><ul>
+<li><code>BEGIN</code>在处理文件前输出 <code>&quot;=== Start ===&quot;</code></li>
+<li>主动作块打印行号</li>
+<li><code>END</code>在文件处理结束后输出总行数</li>
+</ul>
+<h4 id="组合模式">组合模式
+</h4><p><strong>可以用逻辑运算符组合多个模式：</strong></p>
+<ul>
+<li><strong><code>&amp;&amp;</code>（与）</strong></li>
+<li><strong><code>||</code>（或）</strong></li>
+<li><strong><code>!</code>（非）</strong></li>
+</ul>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;$3 &gt; 500 &amp;&amp; /bash/ {print $1}&#39;</span> /etc/passwd
+</span></span></code></pre></div><p>当UID大于500且行中包含 <code>&quot;bash&quot;</code>时，输出用户名（<code>$1</code>）</p>
+<h3 id="动作">动作
+</h3><p><strong>动作是放在花括号<code>{}</code>中的一系列指令，定义了当模式匹配时对当前行需要执行的具体操作</strong></p>
+<p><strong><code>awk</code>的动作大多都类似c语言，也支持<code>function</code>自定义函数和函数调用，这里主要说明命令行使用，就不赘述</strong></p>
+<h4 id="print">print
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">print</span> <span style="color:#e06c75">arg1</span>,<span style="color:#e06c75">arg2</span>,<span style="color:#56b6c2">..</span>.
+</span></span></code></pre></div><p><strong>用于打印输出，多个参数用逗号分隔，输出时各参数之间由当前输出字段分隔符<code>OFS</code>分隔（默认是空格）</strong></p>
+<p><strong>每次<code>print</code>执行后都会自动换行（输出记录分隔符<code>ORS</code>），<code>print</code>可以打印字符串、变量、字段、表达式等</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">awk</span> -<span style="color:#e06c75">F</span>: &#39;{<span style="color:#e06c75">print</span> <span style="color:#98c379">&#34;User:&#34;</span>, $<span style="color:#d19a66">1</span>, <span style="color:#98c379">&#34;Shell:&#34;</span>, $<span style="color:#d19a66">7</span>}&#39; /<span style="color:#e06c75">etc</span>/<span style="color:#e06c75">passwd</span>
+</span></span></code></pre></div><p>这个命令针对 <code>/etc/passwd</code> 文件（字段分隔符为冒号 <code>:</code>），打印格式化的文本：</p>
+<ul>
+<li><code>&quot;User:&quot;</code>是固定字符串</li>
+<li><code>$1</code>是用户名字段</li>
+<li><code>&quot;Shell:&quot;</code>是固定字符串</li>
+<li><code>$7</code>是用户默认shell</li>
+</ul>
+<p>多个参数之间自动用空格分隔，并且每行输出结束自动换行</p>
+<h4 id="printf">printf
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">printf</span> <span style="color:#e06c75">format</span>,<span style="color:#e06c75">expr1</span>,<span style="color:#e06c75">expr2</span>,<span style="color:#56b6c2">..</span>.
+</span></span></code></pre></div><p><strong><code>printf</code>是C语言风格的格式化输出函数（C语言怎么用它就怎么用），支持对齐、宽度、数字精度等控制</strong></p>
+<p><strong>它不会自动换行，需手动在格式字符串中加入<code>\n</code></strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk -F: <span style="color:#98c379">&#39;{printf &#34;| %-20s | %-25s |\n&#34;,$1,$6}&#39;</span> /etc/passwd
+</span></span></code></pre></div><p>打印 <code>/etc/passwd</code>文件中的第1字段（用户名）和第6字段（目录），左对齐，宽度分别为20和25个字符，列之间用竖线分隔，每行以换行符结束</p>
+<h4 id="if-语句">if 语句
+</h4><p><strong>格式：</strong></p>
+<p><strong>单条语句可以不用<code>{}</code>：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">condition</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">action1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">action2</span>
+</span></span></code></pre></div><p><strong>多条语句必须使用<code>{}</code>：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">condition</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">action1_1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">action1_2</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">action2_1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">action2_2</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>也可以使用<code>;</code>分隔写在同一行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">condition</span>) <span style="color:#e06c75">action1</span>;<span style="color:#c678dd">else</span> <span style="color:#e06c75">action2</span>
+</span></span></code></pre></div><p><strong>如果一个情况下有多条语句，那么语句之间使用<code>;</code>分隔，最后一个语句不需要<code>;</code>结尾：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">condition</span>) {<span style="color:#e06c75">action1_1</span>;<span style="color:#e06c75">action1_2</span>} <span style="color:#c678dd">else</span> {<span style="color:#e06c75">action2_1</span>;<span style="color:#e06c75">action2_2</span>}
+</span></span></code></pre></div><p><strong>也类似c语言，<code>if</code>用于条件判断，根据<code>condition</code>的真假执行不同代码块</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ if ($3 &gt; 100) print $1,&#34;UID &gt; 100&#34;;else print $1,&#34;UID &lt;= 100&#34; }&#39;</span> /etc/passwd
+</span></span></code></pre></div><p>判断每行第3字段（UID）是否大于100，满足条件打印用户名及提示，否则打印另一条消息</p>
+<h4 id="for-循环">for 循环
+</h4><p><strong>格式：</strong></p>
+<p><strong>循环内单个语句：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#c678dd">init</span>;<span style="color:#e06c75">condition</span>;<span style="color:#e06c75">increment</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">statements</span>
+</span></span></code></pre></div><p><strong>循环内多个语句，必须使用<code>{}</code>：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#c678dd">init</span>;<span style="color:#e06c75">condition</span>;<span style="color:#e06c75">increment</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">statements1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">statements2</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>写在同一行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#c678dd">init</span>;<span style="color:#e06c75">condition</span>;<span style="color:#e06c75">increment</span>) <span style="color:#e06c75">statements</span>
+</span></span></code></pre></div><p><strong>多条语句写在同一行，使用<code>;</code>分隔：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#c678dd">init</span>;<span style="color:#e06c75">condition</span>;<span style="color:#e06c75">increment</span>) {<span style="color:#e06c75">statements1</span>;<span style="color:#e06c75">statements2</span>}
+</span></span></code></pre></div><p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ for (i=1;i&lt;=NF;i++) print &#34;Field&#34;,i,&#34;is&#34;,$i }&#39;</span> file.txt
+</span></span></code></pre></div><p>遍历当前行所有字段，打印字段序号和内容</p>
+<h4 id="while-循环">while 循环
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">while</span> (<span style="color:#e06c75">condition</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">statements</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>单行多行写法参考<code>if</code>和<code>for</code>语句</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ i=1;while(i&lt;=NF) { print $i;i++ } }&#39;</span> file.txt
+</span></span></code></pre></div><p>通过<code>while</code>循环打印当前行所有字段，功能和<code>for</code>示例相似，结构不同</p>
+<h4 id="length-函数">length 函数
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">length</span>(<span style="color:#e06c75">string</span>)
+</span></span></code></pre></div><p><strong>返回字符串长度。不传参数时返回当前行<code>$0</code>的长度</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ print $1, length($1) }&#39;</span> file.txt
+</span></span></code></pre></div><p>打印每行第一个字段及其长度</p>
+<h4 id="substr-函数">substr 函数
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">substr</span>(<span style="color:#e06c75">string</span>, <span style="color:#e06c75">start</span>, <span style="color:#e06c75">length</span>)
+</span></span></code></pre></div><p>返回字符串从<code>start</code>位置开始，长度为<code>length</code>的子串</p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ print substr($1, 1, 3) }&#39;</span> file.txt
+</span></span></code></pre></div><p>打印每行第一个字段的前三个字符</p>
+<h4 id="gsub-函数">gsub 函数
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">gsub</span>(<span style="color:#e06c75">regex</span>, <span style="color:#e06c75">replacement</span>, <span style="color:#e06c75">target</span>)
+</span></span></code></pre></div><p><strong>将字符串<code>target</code>中所有匹配正则表达式<code>regex</code>的部分替换为<code>replacement</code>，返回替换次数</strong></p>
+<p><strong>不指定<code>target</code>默认作用于当前行 <code>$0</code></strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ gsub(/foo/, &#34;bar&#34;); print }&#39;</span> file.txt
+</span></span></code></pre></div><p>将每行中所有的<code>foo</code>替换为<code>bar</code>，然后打印整行</p>
+<h4 id="split-函数">split 函数
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">split</span>(<span style="color:#e06c75">string</span>, <span style="color:#e06c75">array</span>, <span style="color:#e06c75">separator</span>)
+</span></span></code></pre></div><p><strong>用分隔符<code>separator</code>分割字符串<code>string</code>为字段，存入数组<code>array</code>，返回字段数</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ n = split($0, parts, &#34;,&#34;); print &#34;Fields:&#34;, n; for(i=1; i&lt;=n; i++) print parts[i] }&#39;</span> file.csv
+</span></span></code></pre></div><p>将当前行用逗号分割，存入数组 <code>parts</code>，打印字段数及所有字段</p>
+<h4 id="index-函数">index 函数
+</h4><p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">index</span>(<span style="color:#e06c75">string</span>, <span style="color:#e06c75">substring</span>)
+</span></span></code></pre></div><p><strong>返回子串<code>substring</code>在字符串<code>string</code>中首次出现的位置，找不到返回0</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ pos = index($0, &#34;error&#34;); if (pos &gt; 0) print &#34;Found error at&#34;, pos }&#39;</span> log.txt
+</span></span></code></pre></div><p>查找当前行是否包含字符串 <code>&quot;error&quot;</code>，如果包含，打印位置</p>
+<h4 id="数学函数">数学函数
+</h4><p><strong>常用函数：<code>sqrt(x)</code>,<code>sin(x)</code>,<code>cos(x)</code>,<code>log(x)</code>,<code>exp(x)</code>,<code>int(x)</code>,<code>rand()</code>,<code>srand()</code> 等</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;BEGIN { print &#34;sqrt(9) =&#34;, sqrt(9); print &#34;sin(3.14) =&#34;, sin(3.14) }&#39;</span>
+</span></span></code></pre></div><p>在<code>BEGIN</code>块中计算并打印数学函数的值</p>
+<h4 id="关联数组">关联数组
+</h4><p><strong><code>awk</code>支持关联数组（下标可以是字符串，由键值对的形式存储），适合统计和计数</strong></p>
+<p><strong>比如，<code>count[$1]++</code>表示取出关联数组<code>count</code>中键为<code>$1</code>的值（如果不存在默认是0），然后加1，再写回去</strong></p>
+<p><strong>如果用<code>++</code>对一个原本是字符串的元素操作，<code>awk</code>会把它先转换成数字（字符串转数字时，非数字部分视为0），然后再递增：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字符串</th>
+          <th>转换为数字后结果</th>
+          <th>解释</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>&quot;123&quot;</code></td>
+          <td>123</td>
+          <td>整个字符串都是数字，转为数字123</td>
+      </tr>
+      <tr>
+          <td><code>&quot;45abc&quot;</code></td>
+          <td>45</td>
+          <td>只读开头连续数字，遇字母停止</td>
+      </tr>
+      <tr>
+          <td><code>&quot;0.75xyz&quot;</code></td>
+          <td>0.75</td>
+          <td>读到小数点和数字，停止于非数字</td>
+      </tr>
+      <tr>
+          <td><code>&quot;abc123&quot;</code></td>
+          <td>0</td>
+          <td>开头不是数字，整个字符串转换为0</td>
+      </tr>
+      <tr>
+          <td><code>&quot;hello&quot;</code></td>
+          <td>0</td>
+          <td>开头无数字，转为0</td>
+      </tr>
+      <tr>
+          <td><code>&quot;&quot;</code>（空串）</td>
+          <td>0</td>
+          <td>空字符串转换为0</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ count[$1]++ } END { for (ip in count) print ip, &#34;accessed&#34;, count[ip], &#34;times&#34; }&#39;</span> access.log
+</span></span></code></pre></div><p>统计文件第一字段（如 IP 地址）出现次数，最后打印每个IP和访问次数</p>
+<h4 id="多语句组合">多语句组合
+</h4><p><strong>动作块<code>{}</code>内多个语句用分号<code>;</code>或换行分隔</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ print &#34;Line:&#34;, NR; print $0 }&#39;</span> file.txt
+</span></span></code></pre></div><p>先打印行号，再打印整行内容</p>
+<h2 id="常用参数-2">常用参数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-F fs</td>
+          <td><strong>指定输入行的字段分隔符</strong><br /><code>fs</code>可以是一个字符串或正则表达式，例如，<code>-F:</code>表示使用冒号作为分隔符</td>
+      </tr>
+      <tr>
+          <td>-f file</td>
+          <td><strong>从指定的<code>file</code>文件中读取<code>awk</code>脚本</strong>，而不是在命令行中直接写入</td>
+      </tr>
+      <tr>
+          <td>-v var=&ldquo;value&rdquo;</td>
+          <td><strong>定义一个变量<code>var</code>并赋值为<code>value</code>，这个变量可以在<code>awk</code>脚本中使用<br />如果值是单个连续字符串且没有空格或特殊字符，双引号可以省略</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用示例-2">使用示例
+</h2><ul>
+<li>
+<p>打印出文件列表的第1列（权限）和第9列（文件名）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l | awk <span style="color:#98c379">&#39;{print $1, $9}&#39;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>找出系统中的root用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk -F: <span style="color:#98c379">&#39;$3 == &#34;0&#34; {print $1}&#39;</span> /etc/passwd
+</span></span></code></pre></div><p><strong>在<code>/etc/passwd</code>文件中，查找第3个字段（UID）等于<code>0</code>的行（通常是root），并打印该行的第1个字段（用户名）</strong></p>
+</li>
+<li>
+<p>统计当前目录下所有文件（不含目录）的总大小</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l | awk <span style="color:#98c379">&#39;/^-/ { sum+=$5 } END { print &#34;Total file size:&#34;, sum/1024, &#34;KB&#34; }&#39;</span>
+</span></span></code></pre></div><p>执行流程：</p>
+<ol>
+<li><strong><code>ls -l |</code>: 将文件列表传递给<code>awk</code></strong></li>
+<li><strong><code>'/^-/'</code>: 这是一个模式，只匹配以<code>-</code>开头的行（即普通文件）</strong></li>
+<li><strong><code>{ sum+=$5 }</code>: 对于每个匹配的行，将第5个字段（文件大小，以字节为单位）累加到变量<code>sum</code>中</strong></li>
+<li><strong><code>END { print ... }</code>: 在处理完所有行之后，执行<code>END</code>块，打印出最终的统计结果，并将单位转换为KB</strong></li>
+</ol>
+</li>
+<li>
+<p>统计所有文件中每个单词出现次数</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ for (i=1; i&lt;=NF; i++) count[$i]++ } END { for (w in count) print w, count[w] }&#39;</span> file1.txt file2.txt
+</span></span></code></pre></div></li>
+<li>
+<p>统计每个IP访问次数并排序</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{ count[$1]++ } END { for (ip in count) print ip, count[ip] }&#39;</span> access.log | sort -k2nr
+</span></span></code></pre></div><p><strong>统计日志中第一字段（IP）出现次数，通过管道用<code>sort</code>按次数倒序排序</strong></p>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-08-13
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>
