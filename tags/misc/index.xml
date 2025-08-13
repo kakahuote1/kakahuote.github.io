@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Wed, 13 Aug 2025 17:12:41 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 13 Aug 2025 17:59:50 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>一文弄懂字符集与编码</title>
         <link>https://blog.928330.xyz/p/%E4%B8%80%E6%96%87%E5%BC%84%E6%87%82%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/</link>
         <pubDate>Wed, 13 Aug 2025 14:32:41 +0800</pubDate>
@@ -957,8 +957,20 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2检材1中操作系统的内核版本是&#34;&gt;2.检材1中，操作系统的内核版本是
 &lt;/h2&gt;&lt;p&gt;找半天不知道检材1怎么登录的root账号，结果最后试出来了密码&amp;hellip;&amp;hellip;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;root/123456
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;后面才知道这是火眼帮我改的，这&amp;hellip;&amp;hellip;&lt;/p&gt;
-&lt;p&gt;纯图形化界面还是太难操作了，使用Xterminal连接一下&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;后面才知道这是火眼帮我改的，我们也可以手动设置&lt;/p&gt;
+&lt;p&gt;创建虚拟机 -&amp;gt; 高级设置：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250813174601944.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250813174601944&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里就可以设置各种内容&lt;/p&gt;
+&lt;p&gt;纯命令行界面还是太难操作了，使用Xterminal连接一下&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;systemctl start sshd&lt;/code&gt;打开服务，看一下监听端口，是7001：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250718200048433.png&#34;
 	
@@ -1967,9 +1979,9 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;liwente1314520&lt;/code&gt;对应的&lt;code&gt;DU_Id&lt;/code&gt; 是1001，也对应&lt;code&gt;TD_Webs&lt;/code&gt;表里面的aaaa.bbbb，相应&lt;code&gt;DW_Type&lt;/code&gt;是0&lt;/p&gt;
 &lt;p&gt;在检材3的登录页面逻辑中我们知道，登录方式是&amp;quot;密码&amp;quot;+&amp;ldquo;OvO&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;我们用这种方式制作一个密码，先&lt;code&gt;AESEncrypt&lt;/code&gt;加密，再&lt;code&gt;MD5&lt;/code&gt;加密：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Add&lt;/span&gt;-&lt;span style=&#34;color:#e06c75&#34;&gt;Type&lt;/span&gt; -&lt;span style=&#34;color:#e06c75&#34;&gt;Path&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;Path&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;DBManager&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;dll&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[DBManager.Encryption]&lt;/span&gt;::&lt;span style=&#34;color:#e06c75&#34;&gt;AESEncrypt&lt;/span&gt;( &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;111OvO&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HL&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;forensix&amp;#34;&lt;/span&gt;)
+&lt;p&gt;我们用这种方式制作一个密码，先&lt;code&gt;AESEncrypt&lt;/code&gt;加密，再&lt;code&gt;MD5&lt;/code&gt;加密（这一步我做错了，先别急着复制，往下看）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;Add-Type&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;-Path&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;Path&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;DBManager&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;dll&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;DBManager.Encryption&lt;/span&gt;]::&lt;span style=&#34;color:#e06c75&#34;&gt;AESEncrypt&lt;/span&gt;( &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;111OvO&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HL&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;forensix&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250725202857015.png&#34;
 	
 	
@@ -2026,7 +2038,10 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;p&gt;之后可以在本机访问&lt;code&gt;http://192.168.1.176/dl&lt;/code&gt;进行登录操作：&lt;/p&gt;
 &lt;p&gt;可是到这一步，我登录竟然不成功！&lt;/p&gt;
 &lt;p&gt;我以为是之前的md5没有大写的原因，可是就算我改成了大写，仍旧是不成功&lt;/p&gt;
-&lt;p&gt;走流程自己计算密码这一步显然是走不太通了，那我们就得换一个思路：直接让它为我们输出密码&lt;/p&gt;
+&lt;p&gt;后面发现是我把加密函数参数位置写错了，正确应该是这样（太铸币了啊）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Add-Type -Path &amp;lt;Path/to/DBManager.dll&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;DBManager.Encryption&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;::AESEncrypt&lt;span style=&#34;color:#56b6c2&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;111OvO&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;HL&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;forensix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过当时我认为走流程自己计算密码这一步显然是走不太通了，那我们就得换一个思路：直接让它为我们输出密码&lt;/p&gt;
 &lt;p&gt;进入控制登录的&lt;code&gt;App_Web_dllogin.aspx.7d7c2f33.dll&lt;/code&gt;，在&lt;code&gt;oCmd&lt;/code&gt;函数部分右键，编辑：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250726105115927.png&#34;
 	
@@ -2095,7 +2110,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &gt;&lt;/p&gt;
 &lt;p&gt;果然报错，不过也带出了加密后的密码！&lt;/p&gt;
 &lt;p&gt;复制这个md5值作为密码，再次更改数据库内容，保存，重启sql1服务&lt;/p&gt;
-&lt;p&gt;我们就能使用上一次登录的密码登录了（所以加密过程果然是有问题的吗）：&lt;/p&gt;
+&lt;p&gt;我们就能使用上一次登录的密码登录了：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250726111255320.png&#34;
 	
 	

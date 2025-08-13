@@ -10,7 +10,7 @@
 <meta property='og:description' content="\"第二次冲击\"">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-07-26T13:22:12&#43;08:00'/><meta property='article:modified_time' content='2025-07-26T13:31:31&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-07-26T13:22:12&#43;08:00'/><meta property='article:modified_time' content='2025-08-13T17:59:50&#43;08:00'/>
 <meta name="twitter:title" content="长安杯2020取证总结">
 <meta name="twitter:description" content="\"第二次冲击\"">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -514,7 +514,7 @@
 
 
                <time>
-                   更新时间：2025-07-26
+                   更新时间：2025-08-13
                </time>
            </div>
         <div>
@@ -578,8 +578,20 @@
 </span></span></code></pre></div><h2 id="2检材1中操作系统的内核版本是">2.检材1中，操作系统的内核版本是
 </h2><p>找半天不知道检材1怎么登录的root账号，结果最后试出来了密码&hellip;&hellip;：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>root/123456
-</span></span></code></pre></div><p>后面才知道这是火眼帮我改的，这&hellip;&hellip;</p>
-<p>纯图形化界面还是太难操作了，使用Xterminal连接一下</p>
+</span></span></code></pre></div><p>后面才知道这是火眼帮我改的，我们也可以手动设置</p>
+<p>创建虚拟机 -&gt; 高级设置：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813174601944.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813174601944"
+	
+	
+></p>
+<p>这里就可以设置各种内容</p>
+<p>纯命令行界面还是太难操作了，使用Xterminal连接一下</p>
 <p><code>systemctl start sshd</code>打开服务，看一下监听端口，是7001：</p>
 <p><img src="http://picture.928330.xyz/typora/image-20250718200048433.png"
 	
@@ -1588,9 +1600,9 @@
 ></p>
 <p><code>liwente1314520</code>对应的<code>DU_Id</code> 是1001，也对应<code>TD_Webs</code>表里面的aaaa.bbbb，相应<code>DW_Type</code>是0</p>
 <p>在检材3的登录页面逻辑中我们知道，登录方式是&quot;密码&quot;+&ldquo;OvO&rdquo;</p>
-<p>我们用这种方式制作一个密码，先<code>AESEncrypt</code>加密，再<code>MD5</code>加密：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Add</span>-<span style="color:#e06c75">Type</span> -<span style="color:#e06c75">Path</span> &lt;<span style="color:#e06c75">Path</span>/<span style="color:#e06c75">to</span>/<span style="color:#e06c75">DBManager</span>.<span style="color:#e06c75">dll</span>&gt;
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">[DBManager.Encryption]</span>::<span style="color:#e06c75">AESEncrypt</span>( <span style="color:#98c379">&#34;111OvO&#34;</span>,  <span style="color:#98c379">&#34;HL&#34;</span>,  <span style="color:#98c379">&#34;forensix&#34;</span>)
+<p>我们用这种方式制作一个密码，先<code>AESEncrypt</code>加密，再<code>MD5</code>加密（这一步我做错了，先别急着复制，往下看）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#e5c07b">Add-Type</span> <span style="color:#e06c75">-Path</span> &lt;<span style="color:#e06c75">Path</span>/<span style="color:#e06c75">to</span>/<span style="color:#e06c75">DBManager</span>.<span style="color:#e06c75">dll</span>&gt;
+</span></span><span style="display:flex;"><span>[<span style="color:#e06c75">DBManager.Encryption</span>]::<span style="color:#e06c75">AESEncrypt</span>( <span style="color:#98c379">&#34;111OvO&#34;</span>,  <span style="color:#98c379">&#34;HL&#34;</span>,  <span style="color:#98c379">&#34;forensix&#34;</span>)
 </span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250725202857015.png"
 	
 	
@@ -1647,7 +1659,10 @@
 <p>之后可以在本机访问<code>http://192.168.1.176/dl</code>进行登录操作：</p>
 <p>可是到这一步，我登录竟然不成功！</p>
 <p>我以为是之前的md5没有大写的原因，可是就算我改成了大写，仍旧是不成功</p>
-<p>走流程自己计算密码这一步显然是走不太通了，那我们就得换一个思路：直接让它为我们输出密码</p>
+<p>后面发现是我把加密函数参数位置写错了，正确应该是这样（太铸币了啊）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Add-Type -Path &lt;Path/to/DBManager.dll&gt;
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span>DBManager.Encryption<span style="color:#56b6c2">]</span>::AESEncrypt<span style="color:#56b6c2">(</span> <span style="color:#98c379">&#34;111OvO&#34;</span>,  <span style="color:#98c379">&#34;HL&#34;</span>,  <span style="color:#98c379">&#34;forensix&#34;</span><span style="color:#56b6c2">)</span>
+</span></span></code></pre></div><p>不过当时我认为走流程自己计算密码这一步显然是走不太通了，那我们就得换一个思路：直接让它为我们输出密码</p>
 <p>进入控制登录的<code>App_Web_dllogin.aspx.7d7c2f33.dll</code>，在<code>oCmd</code>函数部分右键，编辑：</p>
 <p><img src="http://picture.928330.xyz/typora/image-20250726105115927.png"
 	
@@ -1716,7 +1731,7 @@
 ></p>
 <p>果然报错，不过也带出了加密后的密码！</p>
 <p>复制这个md5值作为密码，再次更改数据库内容，保存，重启sql1服务</p>
-<p>我们就能使用上一次登录的密码登录了（所以加密过程果然是有问题的吗）：</p>
+<p>我们就能使用上一次登录的密码登录了：</p>
 <p><img src="http://picture.928330.xyz/typora/image-20250726111255320.png"
 	
 	
@@ -2135,7 +2150,7 @@
 
 
         <span>
-            最后更新于 2025-07-26
+            最后更新于 2025-08-13
         </span>
     </section></footer>
 
