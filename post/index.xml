@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 16 Aug 2025 12:03:12 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 16 Aug 2025 20:33:43 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>美亚杯2022取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Fri, 15 Aug 2025 21:32:09 +0800</pubDate>
@@ -2811,12 +2811,11 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         <pubDate>Wed, 06 Aug 2025 13:08:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/</guid>
-        <description>&lt;p&gt;linux命令解析 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间&lt;/p&gt;
+        <description>&lt;p&gt;系统地学习linux命令 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间&lt;/p&gt;
 &lt;p&gt;现在终于得闲了，嘻嘻&lt;/p&gt;
-&lt;p&gt;我个人人为，与其单独地学习linux的知识点，不如从常见的命令开始，跟着命令一起学习&lt;/p&gt;
-&lt;p&gt;依照知识点和命令，循序渐进，应该也比较容易接受&lt;/p&gt;
-&lt;p&gt;于是就有了这篇文章。&lt;/p&gt;
-&lt;p&gt;希望被我引流进来的你，能完整地看完！&lt;/p&gt;
+&lt;p&gt;我个人认为，与其单独地学习linux的知识点，不如从常见的命令开始，跟着命令一起学习&lt;/p&gt;
+&lt;p&gt;而且依照知识点和命令循序渐进，对于初学者应该也比较容易接受&lt;/p&gt;
+&lt;p&gt;于是就有了这篇文章&lt;/p&gt;
 &lt;h1 id=&#34;pwd--显示当前工作目录的完整路径&#34;&gt;pwd —— 显示当前工作目录的完整路径
 &lt;/h1&gt;&lt;p&gt;&lt;code&gt;pwd&lt;/code&gt;全称是 &lt;strong&gt;p&lt;/strong&gt;rint &lt;strong&gt;w&lt;/strong&gt;orking &lt;strong&gt;d&lt;/strong&gt;irectory，用于显示当前终端所在的工作目录的完整路径&lt;/p&gt;
 &lt;h2 id=&#34;语法格式&#34;&gt;语法格式
@@ -6581,7 +6580,121 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;h2 id=&#34;api网关&#34;&gt;API网关
 &lt;/h2&gt;&lt;p&gt;在微服务架构中，Nginx可以作为所有API请求的统一入口，执行如身份验证、速率限制、日志记录、服务发现等通用功能&lt;/p&gt;
 &lt;h1 id=&#34;目录结构&#34;&gt;目录结构
-&lt;/h1&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
+&lt;/h1&gt;&lt;h2 id=&#34;不同来源&#34;&gt;不同来源
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;通过不同方式安装的nginx的默认目录结构都会有所差别&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;官方nginx包从-nginxorg&#34;&gt;官方Nginx包（从 nginx.org）
+&lt;/h3&gt;&lt;p&gt;从Nginx下载官方提供的&lt;code&gt;.rpm/.deb&lt;/code&gt;包安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                                 &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                           &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                                &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件（Nginx 的核心配置）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                              &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 子配置目录（用于虚拟主机）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default.conf&lt;/span&gt;                          &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sbin/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;share/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认 Web 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;               &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;               &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;                        &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面（如 500、502）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;var/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;log/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;                           &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                             &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;lib/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;systemd/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务管理相关
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;system/&lt;/span&gt;                                   &lt;span style=&#34;color:#7f848e&#34;&gt;# Nginx systemd 配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;              &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;源码编译安装&#34;&gt;源码编译安装
+&lt;/h3&gt;&lt;p&gt;从Nginx官方下载源码&lt;code&gt;.tar.gz&lt;/code&gt;，自己编译安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                               &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;local/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sbin/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                              &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                     &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 子配置目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default.conf&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认 Web 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;                          &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;logs/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;                         &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;debianubuntu官方仓库&#34;&gt;Debian/Ubuntu官方仓库
+&lt;/h3&gt;&lt;p&gt;通过&lt;code&gt;apt&lt;/code&gt;安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                                 &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                           &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                                &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                              &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 子配置目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default.conf&lt;/span&gt;                         &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sbin/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;var/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;www/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认 Web 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;                          &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;                             &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;log/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                              &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;lib/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;systemd/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务管理相关
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;system/&lt;/span&gt;                                   &lt;span style=&#34;color:#7f848e&#34;&gt;# Nginx systemd 配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;              &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;centosrhel官方仓库&#34;&gt;CentOS/RHEL官方仓库
+&lt;/h3&gt;&lt;p&gt;通过&lt;code&gt;yum&lt;/code&gt;/&lt;code&gt;dnf&lt;/code&gt;安装&lt;/p&gt;
+&lt;p&gt;路径、配置和布局就是官方Nginx提供的.rmp包规范的结构，所以和第一种很像&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                               &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                         &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                               &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                             &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# 子配置目录（用于虚拟主机）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default.conf&lt;/span&gt;                        &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sbin/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;share/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                                 &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认 Web 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;               &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;               &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;                        &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;var/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;log/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;                          &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                             &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;lib/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;systemd/&lt;/span&gt;                                 &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务管理相关
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;system/&lt;/span&gt;                               &lt;span style=&#34;color:#7f848e&#34;&gt;# Nginx systemd 配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;docker镜像官方-nginx&#34;&gt;Docker镜像（官方 Nginx）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;没有固定结构&lt;/strong&gt;，因为Docker镜像只是一个文件系统的快照，完全取决于镜像制作者，具体看上面四种&lt;/p&gt;
+&lt;p&gt;这里以官方镜像为例，也就是&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件（Nginx 的核心配置）
@@ -6603,26 +6716,57 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录（部分精简镜像无日志输出）
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;             &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志（默认可能未启用）
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志（默认可能未启用）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;要注意以下几点：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;Docker镜像的Nginx日志默认输出到标准输出/错误，而不是文件中&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;一些问题&#34;&gt;一些问题
+&lt;/h2&gt;&lt;h3 id=&#34;日志文件&#34;&gt;日志文件
+&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;Docker镜像的Nginx日志默认输出到标准输出/错误，而不是文件中&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;在编译安装（&lt;code&gt;make install&lt;/code&gt;）的传统方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在系统包安装（&lt;code&gt;apt/yum&lt;/code&gt;）的方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在&lt;code&gt;.deb&lt;/code&gt;包和系统包安装（&lt;code&gt;apt/yum&lt;/code&gt;）的方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;log&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;而在Docker官方镜像中，日志默认不写入上面的文件，而是输出到标准输出和标准错误&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;查看日志的方式&lt;/strong&gt;：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs &amp;lt;容器ID&amp;gt;/&amp;lt;名称&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;是主配置目录，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;是主配置文件&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;执行以下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls -l /var/log/nginx/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们可以看到如下输出：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lrwxrwxrwx &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; root root &lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt; Jul &lt;span style=&#34;color:#d19a66&#34;&gt;15&lt;/span&gt; 01:14 access.log -&amp;gt; /dev/stdout
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lrwxrwxrwx &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; root root &lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt; Jul &lt;span style=&#34;color:#d19a66&#34;&gt;15&lt;/span&gt; 01:14 error.log -&amp;gt; /dev/stderr
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;虽然&lt;code&gt;nginx.conf&lt;/code&gt;配置的是&lt;code&gt;/var/log/nginx/access.log&lt;/code&gt;，但由于它是个符号链接，等于就是输出到了标准输出&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这些输出会被记录到docker容器的日志里，docker中查看日志的方式&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;docker&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;容器ID&lt;/span&gt;&amp;gt;/&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;名称&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;配置文件&#34;&gt;配置文件
+&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;是主配置目录，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;是主配置文件&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Nginx的主配置文件是&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;，在这个文件中有这样一行代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;include&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;/etc/nginx/conf.d/*.conf&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;include&lt;/code&gt;是Nginx配置语言中的指令，用于包含其他配置文件&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;也就是说，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;默认会包含&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;这个子目录中的所有配置（.conf）&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3 id=&#34;web-根目录&#34;&gt;Web 根目录
+&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;不同安装方式下，Nginx的默认Web根目录不同&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在编译安装（&lt;code&gt;make install&lt;/code&gt;）的传统方式中，Web根目录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;默认包含以下文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;index&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;   # &lt;span style=&#34;color:#e06c75&#34;&gt;默认欢迎页面&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;50&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;     # &lt;span style=&#34;color:#e06c75&#34;&gt;服务器错误页面&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在Debian/Ubuntu系统包安装方式中，Web根目录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在官方包和CentOS/RHEL系统包安装方式中，Web根目录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;share&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可以通过修改Nginx配置文件中的&lt;code&gt;root&lt;/code&gt;指令来改变Web根目录：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;listen&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;server_name&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;localhost&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;root&lt;/span&gt; /&lt;span style=&#34;color:#e06c75&#34;&gt;path&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;your&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;webroot&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;index&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;关于server块我们后面会细讲&lt;/p&gt;
+&lt;h3 id=&#34;systemd的位置&#34;&gt;systemd的位置
+&lt;/h3&gt;&lt;p&gt;其实这个不是nginx的问题，而是一个历史问题 —— linux文件系统的演进&lt;/p&gt;
+&lt;p&gt;**FHS，全称Filesystem Hierarchy Standard（文件系统层次结构标准）**是 Linux 系统的一个标准，规定了 目录结构、文件存放位置及用途，让不同 Linux 发行版在文件布局上保持一致性&lt;/p&gt;
+&lt;p&gt;在早期，FHS规定&lt;code&gt;/lib/&lt;/code&gt;用于存放核心库文件和与系统启动紧密相关的可执行文件（比如init系统所需的库、二进制），而&lt;code&gt;/usr/lib/&lt;/code&gt;用于存放非核心、额外安装的软件库&lt;/p&gt;
+&lt;p&gt;但在systemd出现后，由于systemd的服务单元文件属于系统服务配置，与系统启动密切相关，但又不是二进制程序本身，于是他的位置有了一些不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Debian/Ubuntu：选择&lt;code&gt;/lib/systemd/system/&lt;/code&gt;放置核心包的单元文件（比如nginx、sshd），保证系统启动时总能找到&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CentOS/RHEL/Fedora：更倾向使用&lt;code&gt;/usr/lib/systemd/system/&lt;/code&gt;，虽然&lt;code&gt;/lib/systemd/system/&lt;/code&gt;也存在，但它通常是指向前者的符号链接&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在&lt;code&gt;/lib/&lt;/code&gt;和&lt;code&gt;/usr/lib/&lt;/code&gt;往往通过软链接或包管理器自动管理，保证旧路径和新路径都能访问到服务单元文件，所以你会看到同样的 Nginx 服务在不同发行版或者不同安装方式下，路径可能不同&lt;/p&gt;
 &lt;h1 id=&#34;常用命令&#34;&gt;常用命令
 &lt;/h1&gt;&lt;p&gt;Nginx直接安装在本机时，使用&lt;code&gt;systemctl&lt;/code&gt;或者&lt;code&gt;service&lt;/code&gt;命令控制&lt;/p&gt;
 &lt;p&gt;通过Docker容器使用时，就按照Docker容器的使用方法（没用过看这里：&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -6660,7 +6804,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -s reload
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;强制停止&#34;&gt;强制停止
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nginx -s stop
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;配置文件&#34;&gt;配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;配置文件-1&#34;&gt;配置文件
 &lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Nginx的所有功能都是通过配置文件&lt;code&gt;nginx.conf&lt;/code&gt;来驱动的&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;该文件主要由多个配置块组成，这些块由花括号&lt;code&gt;{}&lt;/code&gt;界定，可以嵌套，形成了层级分明的结构&lt;/p&gt;
 &lt;p&gt;一个典型的&lt;code&gt;nginx.conf&lt;/code&gt;结构如下：&lt;/p&gt;
@@ -6910,7 +7054,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;root&lt;/code&gt;：设置请求资源的根目录路径&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;当一个请求到达时，Nginx会将请求的 URI 拼接到这个路径后面，以确定文件的具体位置&lt;/p&gt;
-&lt;p&gt;如果客户端访问&lt;code&gt;/index.html&lt;/code&gt;，那么实际访问的是服务器上的&lt;code&gt;/var/www/html/index.html&lt;/code&gt;文件&lt;/p&gt;
+&lt;p&gt;如果客户端访问&lt;code&gt;/index.html&lt;/code&gt;，那么实际访问的是服务器上的&lt;code&gt;/usr/share/nginx/html/index.html&lt;/code&gt;文件&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;index&lt;/code&gt;：指定访问目录时的默认文件名称&lt;/strong&gt;&lt;/p&gt;
@@ -7332,6 +7476,279 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;stream&lt;/code&gt;块不解析协议内容，没有&lt;code&gt;proxy_set_header&lt;/code&gt;，只转发原始TCP/UDP数据流&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;stream&lt;/code&gt;块不支持&lt;code&gt;ip_hash&lt;/code&gt;的负载均衡策略&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1 id=&#34;日志分析&#34;&gt;日志分析
+&lt;/h1&gt;&lt;h2 id=&#34;为何要分析nginx日志&#34;&gt;为何要分析Nginx日志
+&lt;/h2&gt;&lt;p&gt;在现代 Web 架构中，Nginx 作为流量的入口，记录着大量有用的信息&lt;/p&gt;
+&lt;p&gt;虽然ELK等日志平台功能强大，但并非所有环境都配备&lt;/p&gt;
+&lt;p&gt;掌握底层的命令行分析技巧，能让我们在任何服务器上快速、灵活地定位问题&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;在处理大型日志文件（如 &amp;gt;1GB）时，应避免直接使用&lt;code&gt;cat&lt;/code&gt;读取整个文件，这会消耗大量内存&lt;/p&gt;
+&lt;p&gt;应使用&lt;code&gt;head&lt;/code&gt;,&lt;code&gt;tail&lt;/code&gt;,&lt;code&gt;grep&lt;/code&gt;,&lt;code&gt;sed&lt;/code&gt;,&lt;code&gt;awk&lt;/code&gt;等可以流式处理的工具进行查看修改，或先对日志进行切割&lt;/p&gt;
+&lt;p&gt;实在想要看全部，也应该选择使用&lt;code&gt;less&lt;/code&gt;或&lt;code&gt;more&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;日志类型与格式&#34;&gt;日志类型与格式
+&lt;/h2&gt;&lt;h3 id=&#34;访问日志accesslog&#34;&gt;访问日志（access.log）
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;access.log&lt;/code&gt;记录了每一个对Nginx服务器的HTTP请求的详细信息&lt;/p&gt;
+&lt;h4 id=&#34;默认格式combined--main&#34;&gt;默认格式：combined / main
+&lt;/h4&gt;&lt;p&gt;Nginx官方默认格式是&lt;code&gt;combined&lt;/code&gt;，不过现在常见的更多是&lt;code&gt;main&lt;/code&gt;（包括之前我们给出的docker容器的nginx）&lt;/p&gt;
+&lt;p&gt;其实&lt;code&gt;main&lt;/code&gt;只是自定义的名字，本质和&lt;code&gt;combined&lt;/code&gt;是类似的，甚至很多公司就是直接copy默认的&lt;code&gt;combined&lt;/code&gt;格式起个名叫&lt;code&gt;main&lt;/code&gt;，但更多的则是增加了一些字段（比如新增&lt;code&gt;$http_x_forwarded_for&lt;/code&gt;字段）&lt;/p&gt;
+&lt;p&gt;我们就以上文提到的配置文件示例里的&lt;code&gt;main&lt;/code&gt;格式为例，这也是最为常见的格式之一，理解了就行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Nginx&#34; data-lang=&#34;Nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;log_format&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;main&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$remote_addr&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$remote_user&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$time_local]&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$request&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$status&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$body_bytes_sent&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$http_referer&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$http_user_agent&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$http_x_forwarded_for&amp;#34;&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;access_log&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;/var/log/nginx/access.log&lt;/span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;main&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;变量名是Nginx内置的变量&lt;/strong&gt;，&lt;strong&gt;不能随意改名字&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;变量&lt;/th&gt;
+          &lt;th&gt;解释&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;$remote_addr&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;客户端IP地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;$remote_user&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;客户端用户名称（用于HTTP认证，通常为&lt;code&gt;-&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;[$time_local]&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;服务器本地的请求处理完成时间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;&amp;quot;$request&amp;quot;&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;完整的原始请求行，如 &lt;code&gt;&amp;quot;GET /index.html HTTP/1.1&amp;quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;$status&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;HTTP响应状态码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;$body_bytes_sent&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;发送给客户端的响应体大小（字节）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;&amp;quot;$http_referer&amp;quot;&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;请求的来源页面URL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;&amp;quot;$http_user_agent&amp;quot;&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;客户端的浏览器、操作系统等信息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;&amp;quot;$http_x_forwarded_for&amp;quot;&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;（重要）&lt;/strong&gt; 记录了通过代理服务器访问的客户端真实IP地址&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;来看一个实际的main格式的access.log的条目：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;111.111.111.111 - - &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;28/Apr/2021:14:44:11 +0800&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;GET /api/channel/unread.jsp HTTP/1.1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;65&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;https://www.xxxx.cn/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Mozilla/5.0...&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;123.123.123.123&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$remote_addr&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;111.111.111.111&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这是Nginx看到的客户端IP，可能是负载均衡/代理的IP，不一定是真实用户的IP&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$remote_user&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;- -&lt;/code&gt;
+如果客户端经过了HTTP认证，这里会记录认证用户名，否则为&lt;code&gt;-&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个 &lt;code&gt;-&lt;/code&gt;：远程用户名（几乎不用，常为空）&lt;/li&gt;
+&lt;li&gt;第二个 &lt;code&gt;-&lt;/code&gt;：认证用户名（如果用 Basic Auth 才会有）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$time_local&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;28/Apr/2021:14:44:11 +0800&lt;/code&gt;
+这是Nginx记录的本地时间，时区为+0800（北京时间）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$request&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;GET /api/channel/unread.jsp HTTP/1.1&lt;/code&gt;
+包含请求方法、URL路径和HTTP协议版本&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$status&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;200&lt;/code&gt;
+HTTP状态码，表示请求成功&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$body_bytes_sent&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;65&lt;/code&gt;
+响应体大小（字节数），不包含响应头&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$http_referer&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;https://www.xxxx.cn/&lt;/code&gt;
+请求来源页面，如果用户是从某个页面跳转过来的，这里会显示该页面URL，若没有则为&lt;code&gt;-&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$http_user_agent&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;Mozilla/5.0...&lt;/code&gt;
+客户端的User-Agent，表示浏览器或客户端的标识信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$http_x_forwarded_for&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;123.123.123.123&lt;/code&gt;
+代理服务器通过HTTP头传递的真实客户端IP，用来识别经过代理时的原始用户地址&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;这条日志告诉我们：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在北京时间&lt;code&gt;021-04-28 14:44:11&lt;/code&gt;，有一个客户端访问了接口&lt;code&gt;/api/channel/unread.jsp&lt;/code&gt;，使用的是&lt;code&gt;GET&lt;/code&gt;请求，HTTP版本是&lt;code&gt;1.1&lt;/code&gt;，返回状态码&lt;code&gt;200&lt;/code&gt;（成功），响应大小&lt;code&gt;65&lt;/code&gt;字节，请求来自页面&lt;code&gt;https://www.xxxx.cn/&lt;/code&gt;，使用的客户端是某个&lt;code&gt;Mozilla浏览器/模拟器&lt;/code&gt;，其真实IP是&lt;code&gt;123.123.123.123&lt;/code&gt;，但请求是经过代理，Nginx看到的源IP是&lt;code&gt;111.111.111.111&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;增强的自定义格式json&#34;&gt;增强的自定义格式：JSON
+&lt;/h4&gt;&lt;p&gt;为了便于程序（如 Logstash, Fluentd）解析，JSON格式也是目前的主流选择，属于典型的非默认格式&lt;/p&gt;
+&lt;p&gt;它的结构清晰，键值对明确，机器解析友好，避免了&lt;code&gt;awk&lt;/code&gt;和&lt;code&gt;cut&lt;/code&gt;对字段位置的强依赖&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;log_format&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;json_analytics&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;escape=json&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&lt;/span&gt;{&lt;span style=&#34;color:#c678dd&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;timestamp&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$time_iso8601&amp;#34;,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;client_ip&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$remote_addr&amp;#34;,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;request&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$request&amp;#34;,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;status&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$status,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;bytes_sent&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$body_bytes_sent,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;http_referer&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$http_referer&amp;#34;,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;http_user_agent&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$http_user_agent&amp;#34;,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;real_ip&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$http_x_forwarded_for&amp;#34;,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;request_time&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$request_time,&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;upstream_time&amp;#34;:&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$upstream_response_time&amp;#34;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&lt;/span&gt;}&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;access_log&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;/var/log/nginx/access.log&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;json_analytics&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;新增字段&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$request_time&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Nginx从接收到请求第一个字节到发送完最后一个字节的总时长（秒），性能指标&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;$upstream_response_time&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;从Nginx连接到上游后端服务到接收完响应头的时长，用于判断是 Nginx 慢还是后端服务慢&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;上面一个例子的JSON格式示例如下&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-JSON&#34; data-lang=&#34;JSON&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;timestamp&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;2025-08-16T14:30:00+09:00&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;client_ip&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;111.111.111.111&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;request&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;GET /api/users HTTP/1.1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;status&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#d19a66&#34;&gt;200&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;bytes_sent&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#d19a66&#34;&gt;1500&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;http_referer&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;http_user_agent&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;curl/7.68.0&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;real_ip&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;123.123.123.123&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;request_time&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#d19a66&#34;&gt;0.025&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;&amp;#34;upstream_time&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.024&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;JSON日志使用&lt;code&gt;jq&lt;/code&gt;工具可以轻松解析：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;统计状态码为500的请求数量:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat access.log | jq &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;select(.status == 500)&amp;#39;&lt;/span&gt; | wc -l
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;找出请求时间最长的10个请求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat access.log | jq &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;.request_time&amp;#39;&lt;/span&gt; | sort -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;docker环境下的日志&#34;&gt;Docker环境下的日志
+&lt;/h4&gt;&lt;p&gt;上文已经提到过，在Docker中，nginx日志输出到标准输出和标准错误，记录在docker的日志中&lt;/p&gt;
+&lt;p&gt;日志本身的格式不会变，但Docker的日志驱动会在每行日志前添加额外信息，如时间戳和流类型&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实际Docker日志示例（还是上面的例子）&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2025-08-16T05:45:01.123456789Z stdout F 111.111.111.111 - - &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;28/Apr/2021:14:44:11 +0800&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;GET /api/channel/unread.jsp HTTP/1.1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;65&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;https://www.xxxx.cn/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Mozilla/5.0...&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;123.123.123.123&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;2025-08-16T05:45:01.123456789Z&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Docker捕获日志的UTC时间（纳秒精度）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;stdout F&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;日志来源（stdout）和标记（F表示一行完整日志)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;此外还有P标记，示这是多行日志的一部分，被拆分了，需要和后续/前面的片段合并&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以直接通过管道分析&lt;code&gt;docker logs&lt;/code&gt;的输出，但通常会配置Docker的日志驱动将这些日志流自动转发到集中的日志管理平台进行统一分析&lt;/p&gt;
+&lt;p&gt;比如，&lt;strong&gt;统计客户端IP出现次数的前10：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs nginx | awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $4}&amp;#39;&lt;/span&gt; | sort | uniq -c | sort -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;错误日志errorlog&#34;&gt;错误日志（error.log）
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;error.log&lt;/code&gt; 记录 Nginx 启动和运行过程中的诊断信息，是排查问题的关键。&lt;/p&gt;
+&lt;h4 id=&#34;一般格式&#34;&gt;一般格式
+&lt;/h4&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;时间戳 [错误级别] pid#tid: *cid 错误描述, client: 客户端IP, server: 服务端, request: &amp;#34;请求行&amp;#34;, host: &amp;#34;Host&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;时间戳&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;错误发生时间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;[level]&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;错误级别，从低到高：&lt;code&gt;debug&lt;/code&gt; &amp;lt; &lt;code&gt;info&lt;/code&gt; &amp;lt; &lt;code&gt;notice&lt;/code&gt; &amp;lt; &lt;code&gt;warn&lt;/code&gt; &amp;lt; &lt;code&gt;error&lt;/code&gt; &amp;lt; &lt;code&gt;crit&lt;/code&gt; &amp;lt; &lt;code&gt;alert&lt;/code&gt; &amp;lt; &lt;code&gt;emerg&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;pid#tid&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Nginx工作进程ID和线程ID&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;*&lt;strong&gt;cid&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;客户端连接序列号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;错误描述&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;具体的错误信息，例如&lt;code&gt;connect() to 127.0.0.1:9000 failed (13: Permission denied)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;client&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;发生错误的客户端IP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;server&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;请求的服务端&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;request&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;请求行，如&amp;quot;GET /api HTTP/1.1&amp;quot;`&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;host&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;客户端请求的目标主机名&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;具体示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2025&lt;/span&gt;/&lt;span style=&#34;color:#d19a66&#34;&gt;08&lt;/span&gt;/&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;14&lt;/span&gt;:&lt;span style=&#34;color:#d19a66&#34;&gt;35&lt;/span&gt;:&lt;span style=&#34;color:#d19a66&#34;&gt;00&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;crit&lt;/span&gt;] &lt;span style=&#34;color:#d19a66&#34;&gt;12345&lt;/span&gt;#&lt;span style=&#34;color:#d19a66&#34;&gt;12345&lt;/span&gt;: *&lt;span style=&#34;color:#d19a66&#34;&gt;6789&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;connect&lt;/span&gt;() &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;127.0&lt;/span&gt;.&lt;span style=&#34;color:#d19a66&#34;&gt;0.1&lt;/span&gt;:&lt;span style=&#34;color:#d19a66&#34;&gt;9000&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;failed&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;13&lt;/span&gt;: &lt;span style=&#34;color:#e06c75&#34;&gt;Permission&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;denied&lt;/span&gt;) &lt;span style=&#34;color:#c678dd&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;connecting&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;upstream&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;client&lt;/span&gt;: &lt;span style=&#34;color:#d19a66&#34;&gt;192.168&lt;/span&gt;.&lt;span style=&#34;color:#d19a66&#34;&gt;1.10&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;: &lt;span style=&#34;color:#e06c75&#34;&gt;example&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;com&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;request&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;GET /api HTTP/1.1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;host&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;example.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;时间戳&lt;/strong&gt;：&lt;code&gt;2025/08/16 14:35:00&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;错误级别&lt;/strong&gt;：&lt;code&gt;crit&lt;/code&gt;（严重错误）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;pid#tid&lt;/strong&gt;：&lt;code&gt;12345#12345&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;*&lt;strong&gt;cid&lt;/strong&gt;：&lt;code&gt;*6789&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;错误描述&lt;/strong&gt;：&lt;code&gt;connect() to 127.0.0.1:9000 failed (13: Permission denied) while connecting to upstream&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;客户端&lt;/strong&gt;：&lt;code&gt;192.168.1.10&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务端&lt;/strong&gt;：&lt;code&gt;example.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;请求&lt;/strong&gt;：&lt;code&gt;&amp;quot;GET /api HTTP/1.1&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Host&lt;/strong&gt;：&lt;code&gt;example.com&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;分析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;客户端&lt;code&gt;192.168.1.10&lt;/code&gt;请求 &lt;code&gt;/api&lt;/code&gt;接口时，Nginx尝试连接上游服务&lt;code&gt;127.0.0.1:9000&lt;/code&gt;失败，原因是权限被拒绝（&lt;code&gt;Permission denied&lt;/code&gt;）。日志级别为 &lt;code&gt;crit&lt;/code&gt;，说明这是严重错误，需要检查Nginx或上游服务的权限设置&lt;/p&gt;
+&lt;h2 id=&#34;分析技巧&#34;&gt;分析技巧
+&lt;/h2&gt;&lt;h3 id=&#34;网站流量核心指标分析-pv--uv&#34;&gt;网站流量核心指标分析 (PV &amp;amp; UV)
+&lt;/h3&gt;&lt;p&gt;PV (Page View，页面浏览量) 和 UV (Unique Visitor，独立访客) 是衡量网站价值和用户行为趋势的重要指标&lt;/p&gt;
+&lt;h4 id=&#34;统计总uv-根据ip&#34;&gt;统计总UV (根据IP)
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;提取第1个字段(IP)，排序，去重，最后统计独立IP总数：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; access.log | sort | uniq | wc -l
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;统计总pv&#34;&gt;统计总PV
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;直接统计日志总行数即为PV：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wc -l access.log
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;统计某时间段的uv--pv&#34;&gt;统计某时间段的UV / PV
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;统计2021年4月28日14:00-14:59的UV：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;grep &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;28/Apr/2021:14&amp;#34;&lt;/span&gt; access.log | awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; | sort | uniq | wc -l
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;使用sed进行更精确的时间段筛选 (14点到20点)：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sed -n &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;/28\/Apr\/2021:14/,/28\/Apr\/2021:20/p&amp;#39;&lt;/span&gt; access.log | awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; | sort | uniq | wc -l
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;访问来源与异常排查-ip--url&#34;&gt;访问来源与异常排查 (IP &amp;amp; URL)
+&lt;/h3&gt;&lt;p&gt;用于判断是否被攻击、接口是否存在Bug或排查流量报警&lt;/p&gt;
+&lt;h4 id=&#34;查询访问最频繁的top-10-url&#34;&gt;查询访问最频繁的Top 10 URL
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;提取第7字段(URL)，排序，去重并计数，按计数值倒序排列:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $7}&amp;#39;&lt;/span&gt; access.log | sort | uniq -c | sort -k1 -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;查询访问最频繁的top-10-ip&#34;&gt;查询访问最频繁的Top 10 IP
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; access.log | sort | uniq -c | sort -k1 -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;查看指定ip在某天访问了哪些-url-top-10&#34;&gt;查看指定IP在某天访问了哪些 URL (Top 10)
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;grep &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;111.111.111.111&amp;#34;&lt;/span&gt; access.log | grep &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;28/Apr/2021&amp;#34;&lt;/span&gt; | awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $7}&amp;#39;&lt;/span&gt; | sort | uniq -c | sort -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;性能与爬虫分析&#34;&gt;性能与爬虫分析
+&lt;/h3&gt;&lt;h4 id=&#34;统计爬取次数&#34;&gt;统计爬取次数
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;grep -i &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;spider\|bot&amp;#39;&lt;/span&gt; access.log | wc -l
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;统计每分钟每秒的请求数-top-20&#34;&gt;统计每分钟/每秒的请求数 (Top 20)
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;每分钟: 截取时间字段($4)的第2到18位(到分钟)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $4}&amp;#39;&lt;/span&gt; access.log | cut -c 2-18 | sort | uniq -c | sort -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;每秒: 截取时间字段($4)的第2到21位(到秒)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $4}&amp;#39;&lt;/span&gt; access.log | cut -c 2-21 | sort | uniq -c | sort -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;分析请求响应时间-需自定义日志格式&#34;&gt;分析请求响应时间 (需自定义日志格式)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;前提&lt;/strong&gt;: 确保&lt;code&gt;log_format&lt;/code&gt;中包含了&lt;code&gt;$request_time&lt;/code&gt;，我们假设它在最后一个字段&lt;/p&gt;
+&lt;h4 id=&#34;列出传输时间超过3秒的top10请求&#34;&gt;列出传输时间超过3秒的Top10请求
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;$NF代表最后一个字段，此命令筛选出最后一个字段值大于3的行：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;$NF &amp;gt; 3 {print $NF, $7}&amp;#39;&lt;/span&gt; access.log | sort -k1 -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;列出最耗时的top10请求&#34;&gt;列出最耗时的Top10请求
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $NF, $7}&amp;#39;&lt;/span&gt; access.log | sort -k1 -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;暂时就先讲到这，毕竟只是入个门，详细使用就在实践里面学习吧&lt;/p&gt;
+&lt;p&gt;如果之后我需要更加深入使用，这篇文章也会更新的~&lt;/p&gt;
 </description>
         </item>
         <item>

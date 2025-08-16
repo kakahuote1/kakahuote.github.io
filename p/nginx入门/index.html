@@ -10,7 +10,7 @@
 <meta property='og:description' content="还是apache好用">
 <meta property='og:url' content='https://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-07-24T22:15:30&#43;08:00'/><meta property='article:modified_time' content='2025-07-26T19:17:22&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-07-24T22:15:30&#43;08:00'/><meta property='article:modified_time' content='2025-08-16T20:33:43&#43;08:00'/>
 <meta name="twitter:title" content="Nginx入门">
 <meta name="twitter:description" content="还是apache好用">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -384,7 +384,27 @@
         <li><a href="#api网关">API网关</a></li>
       </ol>
     </li>
-    <li><a href="#目录结构">目录结构</a></li>
+    <li><a href="#目录结构">目录结构</a>
+      <ol>
+        <li><a href="#不同来源">不同来源</a>
+          <ol>
+            <li><a href="#官方nginx包从-nginxorg">官方Nginx包（从 nginx.org）</a></li>
+            <li><a href="#源码编译安装">源码编译安装</a></li>
+            <li><a href="#debianubuntu官方仓库">Debian/Ubuntu官方仓库</a></li>
+            <li><a href="#centosrhel官方仓库">CentOS/RHEL官方仓库</a></li>
+            <li><a href="#docker镜像官方-nginx">Docker镜像（官方 Nginx）</a></li>
+          </ol>
+        </li>
+        <li><a href="#一些问题">一些问题</a>
+          <ol>
+            <li><a href="#日志文件">日志文件</a></li>
+            <li><a href="#配置文件">配置文件</a></li>
+            <li><a href="#web-根目录">Web 根目录</a></li>
+            <li><a href="#systemd的位置">systemd的位置</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
     <li><a href="#常用命令">常用命令</a>
       <ol>
         <li><a href="#查看版本">查看版本</a></li>
@@ -393,7 +413,7 @@
         <li><a href="#强制停止">强制停止</a></li>
       </ol>
     </li>
-    <li><a href="#配置文件">配置文件</a>
+    <li><a href="#配置文件-1">配置文件</a>
       <ol>
         <li><a href="#全局块">全局块</a></li>
         <li><a href="#events块">events块</a></li>
@@ -443,6 +463,57 @@
       </ol>
     </li>
     <li><a href="#核心功能--tcpudp代理">核心功能 —— TCP/UDP代理</a></li>
+    <li><a href="#日志分析">日志分析</a>
+      <ol>
+        <li><a href="#为何要分析nginx日志">为何要分析Nginx日志</a></li>
+        <li><a href="#日志类型与格式">日志类型与格式</a>
+          <ol>
+            <li><a href="#访问日志accesslog">访问日志（access.log）</a>
+              <ol>
+                <li><a href="#默认格式combined--main">默认格式：combined / main</a></li>
+                <li><a href="#增强的自定义格式json">增强的自定义格式：JSON</a></li>
+                <li><a href="#docker环境下的日志">Docker环境下的日志</a></li>
+              </ol>
+            </li>
+            <li><a href="#错误日志errorlog">错误日志（error.log）</a>
+              <ol>
+                <li><a href="#一般格式">一般格式</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#分析技巧">分析技巧</a>
+          <ol>
+            <li><a href="#网站流量核心指标分析-pv--uv">网站流量核心指标分析 (PV &amp; UV)</a>
+              <ol>
+                <li><a href="#统计总uv-根据ip">统计总UV (根据IP)</a></li>
+                <li><a href="#统计总pv">统计总PV</a></li>
+                <li><a href="#统计某时间段的uv--pv">统计某时间段的UV / PV</a></li>
+              </ol>
+            </li>
+            <li><a href="#访问来源与异常排查-ip--url">访问来源与异常排查 (IP &amp; URL)</a>
+              <ol>
+                <li><a href="#查询访问最频繁的top-10-url">查询访问最频繁的Top 10 URL</a></li>
+                <li><a href="#查询访问最频繁的top-10-ip">查询访问最频繁的Top 10 IP</a></li>
+                <li><a href="#查看指定ip在某天访问了哪些-url-top-10">查看指定IP在某天访问了哪些 URL (Top 10)</a></li>
+              </ol>
+            </li>
+            <li><a href="#性能与爬虫分析">性能与爬虫分析</a>
+              <ol>
+                <li><a href="#统计爬取次数">统计爬取次数</a></li>
+                <li><a href="#统计每分钟每秒的请求数-top-20">统计每分钟/每秒的请求数 (Top 20)</a></li>
+              </ol>
+            </li>
+            <li><a href="#分析请求响应时间-需自定义日志格式">分析请求响应时间 (需自定义日志格式)</a>
+              <ol>
+                <li><a href="#列出传输时间超过3秒的top10请求">列出传输时间超过3秒的Top10请求</a></li>
+                <li><a href="#列出最耗时的top10请求">列出最耗时的Top10请求</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -515,7 +586,7 @@
 
 
                <time>
-                   更新时间：2025-07-26
+                   更新时间：2025-08-16
                </time>
            </div>
         <div>
@@ -557,7 +628,121 @@
 <h2 id="api网关">API网关
 </h2><p>在微服务架构中，Nginx可以作为所有API请求的统一入口，执行如身份验证、速率限制、日志记录、服务发现等通用功能</p>
 <h1 id="目录结构">目录结构
-</h1><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                  <span style="color:#7f848e"># 根目录
+</h1><h2 id="不同来源">不同来源
+</h2><p><strong>通过不同方式安装的nginx的默认目录结构都会有所差别</strong></p>
+<h3 id="官方nginx包从-nginxorg">官方Nginx包（从 nginx.org）
+</h3><p>从Nginx下载官方提供的<code>.rpm/.deb</code>包安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                                 <span style="color:#7f848e"># 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                           <span style="color:#7f848e"># 配置文件目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                                <span style="color:#7f848e"># 主配置文件（Nginx 的核心配置）
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                              <span style="color:#7f848e"># MIME类型映射表
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                                     <span style="color:#7f848e"># 子配置目录（用于虚拟主机）
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                          <span style="color:#7f848e"># 默认网站配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">sbin/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                                       <span style="color:#7f848e"># 主程序二进制文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">share/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">html/</span>                                  <span style="color:#7f848e"># 默认 Web 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                      <span style="color:#7f848e"># 默认欢迎页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                        <span style="color:#7f848e"># 服务器错误页面（如 500、502）
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">var/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">log/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                    <span style="color:#7f848e"># 日志文件目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                           <span style="color:#7f848e"># 访问日志
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                             <span style="color:#7f848e"># 错误日志
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">lib/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">systemd/</span>                                    <span style="color:#7f848e"># 服务管理相关
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">system/</span>                                   <span style="color:#7f848e"># Nginx systemd 配置
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>              <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx.service</span>
+</span></span></code></pre></div><h3 id="源码编译安装">源码编译安装
+</h3><p>从Nginx官方下载源码<code>.tar.gz</code>，自己编译安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                               <span style="color:#7f848e"># 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">└──</span> <span style="color:#98c379">usr/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">local/</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#98c379">├──</span> <span style="color:#98c379">sbin/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                              <span style="color:#7f848e"># 主程序二进制文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">├──</span> <span style="color:#98c379">conf/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                       <span style="color:#7f848e"># 主配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                     <span style="color:#7f848e"># MIME类型映射表
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                            <span style="color:#7f848e"># 子配置目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                <span style="color:#7f848e"># 默认网站配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">├──</span> <span style="color:#98c379">html/</span>                                    <span style="color:#7f848e"># 默认 Web 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                       <span style="color:#7f848e"># 默认欢迎页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                          <span style="color:#7f848e"># 服务器错误页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">└──</span> <span style="color:#98c379">logs/</span>                                     <span style="color:#7f848e"># 日志文件目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>                <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                         <span style="color:#7f848e"># 访问日志
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>                <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                            <span style="color:#7f848e"># 错误日志
+</span></span></span></code></pre></div><h3 id="debianubuntu官方仓库">Debian/Ubuntu官方仓库
+</h3><p>通过<code>apt</code>安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                                 <span style="color:#7f848e"># 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                           <span style="color:#7f848e"># 配置文件目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                                <span style="color:#7f848e"># 主配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                              <span style="color:#7f848e"># MIME类型映射表
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                                     <span style="color:#7f848e"># 子配置目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                         <span style="color:#7f848e"># 默认网站配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">sbin/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                                       <span style="color:#7f848e"># 主程序二进制文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">var/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">www/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">html/</span>                                      <span style="color:#7f848e"># 默认 Web 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                          <span style="color:#7f848e"># 默认欢迎页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                             <span style="color:#7f848e"># 服务器错误页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">log/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                      <span style="color:#7f848e"># 日志文件目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                            <span style="color:#7f848e"># 访问日志
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                              <span style="color:#7f848e"># 错误日志
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">lib/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">systemd/</span>                                     <span style="color:#7f848e"># 服务管理相关
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">system/</span>                                   <span style="color:#7f848e"># Nginx systemd 配置
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>              <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx.service</span>
+</span></span></code></pre></div><h3 id="centosrhel官方仓库">CentOS/RHEL官方仓库
+</h3><p>通过<code>yum</code>/<code>dnf</code>安装</p>
+<p>路径、配置和布局就是官方Nginx提供的.rmp包规范的结构，所以和第一种很像</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                               <span style="color:#7f848e"># 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                         <span style="color:#7f848e"># 配置文件目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                               <span style="color:#7f848e"># 主配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                             <span style="color:#7f848e"># MIME类型映射表
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                                    <span style="color:#7f848e"># 子配置目录（用于虚拟主机）
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                        <span style="color:#7f848e"># 默认网站配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">sbin/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                                      <span style="color:#7f848e"># 主程序二进制文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">share/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">html/</span>                                 <span style="color:#7f848e"># 默认 Web 根目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                     <span style="color:#7f848e"># 默认欢迎页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                        <span style="color:#7f848e"># 服务器错误页面
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">var/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">log/</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                    <span style="color:#7f848e"># 日志文件目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                          <span style="color:#7f848e"># 访问日志
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                             <span style="color:#7f848e"># 错误日志
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">usr/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">lib/</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">systemd/</span>                                 <span style="color:#7f848e"># 服务管理相关
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">└──</span> <span style="color:#98c379">system/</span>                               <span style="color:#7f848e"># Nginx systemd 配置
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>                <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx.service</span>
+</span></span></code></pre></div><h3 id="docker镜像官方-nginx">Docker镜像（官方 Nginx）
+</h3><p><strong>没有固定结构</strong>，因为Docker镜像只是一个文件系统的快照，完全取决于镜像制作者，具体看上面四种</p>
+<p>这里以官方镜像为例，也就是</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                  <span style="color:#7f848e"># 根目录
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
 </span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                            <span style="color:#7f848e"># 配置文件目录
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                  <span style="color:#7f848e"># 主配置文件（Nginx 的核心配置）
@@ -579,26 +764,57 @@
 </span></span><span style="display:flex;"><span>          <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                       <span style="color:#7f848e"># 日志文件目录（部分精简镜像无日志输出）
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>             <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>             <span style="color:#7f848e"># 访问日志（默认可能未启用）
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>             <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                <span style="color:#7f848e"># 错误日志（默认可能未启用）
-</span></span></span></code></pre></div><p>要注意以下几点：</p>
-<ol>
-<li>
-<p><span style="color:red;font-size:20px"><strong>Docker镜像的Nginx日志默认输出到标准输出/错误，而不是文件中</strong></span></p>
+</span></span></span></code></pre></div><h2 id="一些问题">一些问题
+</h2><h3 id="日志文件">日志文件
+</h3><p><span style="color:red;font-size:20px"><strong>Docker镜像的Nginx日志默认输出到标准输出/错误，而不是文件中</strong></span></p>
 <p><strong>在编译安装（<code>make install</code>）的传统方式中，Nginx日志会记录在：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#56b6c2">/</span><span style="color:#e06c75">usr</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">local</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">nginx</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">logs</span><span style="color:#56b6c2">/</span>
-</span></span></code></pre></div><p><strong>在系统包安装（<code>apt/yum</code>）的方式中，Nginx日志会记录在：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#56b6c2">/</span><span style="color:#c678dd">var</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">log</span><span style="color:#56b6c2">/</span><span style="color:#e06c75">nginx</span><span style="color:#56b6c2">/</span>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">usr</span>/<span style="color:#e06c75">local</span>/<span style="color:#e06c75">nginx</span>/<span style="color:#e06c75">logs</span>/
+</span></span></code></pre></div><p><strong>在<code>.deb</code>包和系统包安装（<code>apt/yum</code>）的方式中，Nginx日志会记录在：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#c678dd">var</span>/<span style="color:#e06c75">log</span>/<span style="color:#e06c75">nginx</span>/
 </span></span></code></pre></div><p><strong>而在Docker官方镜像中，日志默认不写入上面的文件，而是输出到标准输出和标准错误</strong></p>
-<p><strong>查看日志的方式</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker logs &lt;容器ID&gt;/&lt;名称&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><span style="color:red;font-size:20px"><strong><code>/etc/nginx/conf.d/</code>是主配置目录，<code>/etc/nginx/nginx.conf</code>是主配置文件</strong></span></p>
+<p>执行以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l /var/log/nginx/
+</span></span></code></pre></div><p>我们可以看到如下输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>lrwxrwxrwx <span style="color:#d19a66">1</span> root root <span style="color:#d19a66">11</span> Jul <span style="color:#d19a66">15</span> 01:14 access.log -&gt; /dev/stdout
+</span></span><span style="display:flex;"><span>lrwxrwxrwx <span style="color:#d19a66">1</span> root root <span style="color:#d19a66">11</span> Jul <span style="color:#d19a66">15</span> 01:14 error.log -&gt; /dev/stderr
+</span></span></code></pre></div><p>虽然<code>nginx.conf</code>配置的是<code>/var/log/nginx/access.log</code>，但由于它是个符号链接，等于就是输出到了标准输出</p>
+<p><strong>这些输出会被记录到docker容器的日志里，docker中查看日志的方式</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">docker</span> <span style="color:#e06c75">logs</span> &lt;<span style="color:#e06c75">容器ID</span>&gt;/&lt;<span style="color:#e06c75">名称</span>&gt;
+</span></span></code></pre></div><h3 id="配置文件">配置文件
+</h3><p><span style="color:red;font-size:20px"><strong><code>/etc/nginx/conf.d/</code>是主配置目录，<code>/etc/nginx/nginx.conf</code>是主配置文件</strong></span></p>
 <p>Nginx的主配置文件是<code>/etc/nginx/nginx.conf</code>，在这个文件中有这样一行代码：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">include</span> <span style="color:#e06c75">/etc/nginx/conf.d/*.conf</span>;
 </span></span></code></pre></div><p><strong><code>include</code>是Nginx配置语言中的指令，用于包含其他配置文件</strong></p>
 <p><strong>也就是说，<code>/etc/nginx/nginx.conf</code>默认会包含<code>/etc/nginx/conf.d/</code>这个子目录中的所有配置（.conf）</strong></p>
-</li>
-</ol>
+<h3 id="web-根目录">Web 根目录
+</h3><p><span style="color:red;font-size:20px"><strong>不同安装方式下，Nginx的默认Web根目录不同</strong></span></p>
+<p><strong>在编译安装（<code>make install</code>）的传统方式中，Web根目录在：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">usr</span>/<span style="color:#e06c75">local</span>/<span style="color:#e06c75">nginx</span>/<span style="color:#e06c75">html</span>/
+</span></span></code></pre></div><p>默认包含以下文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">index</span>.<span style="color:#e06c75">html</span>   # <span style="color:#e06c75">默认欢迎页面</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">50</span><span style="color:#e06c75">x</span>.<span style="color:#e06c75">html</span>     # <span style="color:#e06c75">服务器错误页面</span>
+</span></span></code></pre></div><p><strong>在Debian/Ubuntu系统包安装方式中，Web根目录在：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#c678dd">var</span>/<span style="color:#e06c75">www</span>/<span style="color:#e06c75">html</span>/
+</span></span></code></pre></div><p><strong>在官方包和CentOS/RHEL系统包安装方式中，Web根目录在：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">usr</span>/<span style="color:#e06c75">share</span>/<span style="color:#e06c75">nginx</span>/<span style="color:#e06c75">html</span>/
+</span></span></code></pre></div><p><strong>可以通过修改Nginx配置文件中的<code>root</code>指令来改变Web根目录：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">listen</span> <span style="color:#d19a66">80</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">server_name</span> <span style="color:#e06c75">localhost</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">root</span> /<span style="color:#e06c75">path</span>/<span style="color:#e06c75">to</span>/<span style="color:#e06c75">your</span>/<span style="color:#e06c75">webroot</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">index</span> <span style="color:#e06c75">index</span>.<span style="color:#e06c75">html</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>关于server块我们后面会细讲</p>
+<h3 id="systemd的位置">systemd的位置
+</h3><p>其实这个不是nginx的问题，而是一个历史问题 —— linux文件系统的演进</p>
+<p>**FHS，全称Filesystem Hierarchy Standard（文件系统层次结构标准）**是 Linux 系统的一个标准，规定了 目录结构、文件存放位置及用途，让不同 Linux 发行版在文件布局上保持一致性</p>
+<p>在早期，FHS规定<code>/lib/</code>用于存放核心库文件和与系统启动紧密相关的可执行文件（比如init系统所需的库、二进制），而<code>/usr/lib/</code>用于存放非核心、额外安装的软件库</p>
+<p>但在systemd出现后，由于systemd的服务单元文件属于系统服务配置，与系统启动密切相关，但又不是二进制程序本身，于是他的位置有了一些不同：</p>
+<ul>
+<li><strong>Debian/Ubuntu：选择<code>/lib/systemd/system/</code>放置核心包的单元文件（比如nginx、sshd），保证系统启动时总能找到</strong></li>
+<li><strong>CentOS/RHEL/Fedora：更倾向使用<code>/usr/lib/systemd/system/</code>，虽然<code>/lib/systemd/system/</code>也存在，但它通常是指向前者的符号链接</strong></li>
+</ul>
+<p>现在<code>/lib/</code>和<code>/usr/lib/</code>往往通过软链接或包管理器自动管理，保证旧路径和新路径都能访问到服务单元文件，所以你会看到同样的 Nginx 服务在不同发行版或者不同安装方式下，路径可能不同</p>
 <h1 id="常用命令">常用命令
 </h1><p>Nginx直接安装在本机时，使用<code>systemctl</code>或者<code>service</code>命令控制</p>
 <p>通过Docker容器使用时，就按照Docker容器的使用方法（没用过看这里：<a class="link" href="http://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/"  target="_blank" rel="noopener"
@@ -636,7 +852,7 @@
 </h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nginx -s reload
 </span></span></code></pre></div><h2 id="强制停止">强制停止
 </h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nginx -s stop
-</span></span></code></pre></div><h1 id="配置文件">配置文件
+</span></span></code></pre></div><h1 id="配置文件-1">配置文件
 </h1><p><strong>Nginx的所有功能都是通过配置文件<code>nginx.conf</code>来驱动的</strong></p>
 <p>该文件主要由多个配置块组成，这些块由花括号<code>{}</code>界定，可以嵌套，形成了层级分明的结构</p>
 <p>一个典型的<code>nginx.conf</code>结构如下：</p>
@@ -886,7 +1102,7 @@
 <li>
 <p><strong><code>root</code>：设置请求资源的根目录路径</strong></p>
 <p>当一个请求到达时，Nginx会将请求的 URI 拼接到这个路径后面，以确定文件的具体位置</p>
-<p>如果客户端访问<code>/index.html</code>，那么实际访问的是服务器上的<code>/var/www/html/index.html</code>文件</p>
+<p>如果客户端访问<code>/index.html</code>，那么实际访问的是服务器上的<code>/usr/share/nginx/html/index.html</code>文件</p>
 </li>
 <li>
 <p><strong><code>index</code>：指定访问目录时的默认文件名称</strong></p>
@@ -1308,6 +1524,279 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 <li><strong><code>stream</code>块不解析协议内容，没有<code>proxy_set_header</code>，只转发原始TCP/UDP数据流</strong></li>
 <li><strong><code>stream</code>块不支持<code>ip_hash</code>的负载均衡策略</strong></li>
 </ul>
+<h1 id="日志分析">日志分析
+</h1><h2 id="为何要分析nginx日志">为何要分析Nginx日志
+</h2><p>在现代 Web 架构中，Nginx 作为流量的入口，记录着大量有用的信息</p>
+<p>虽然ELK等日志平台功能强大，但并非所有环境都配备</p>
+<p>掌握底层的命令行分析技巧，能让我们在任何服务器上快速、灵活地定位问题</p>
+<p><strong>注意</strong>：</p>
+<p>在处理大型日志文件（如 &gt;1GB）时，应避免直接使用<code>cat</code>读取整个文件，这会消耗大量内存</p>
+<p>应使用<code>head</code>,<code>tail</code>,<code>grep</code>,<code>sed</code>,<code>awk</code>等可以流式处理的工具进行查看修改，或先对日志进行切割</p>
+<p>实在想要看全部，也应该选择使用<code>less</code>或<code>more</code></p>
+<h2 id="日志类型与格式">日志类型与格式
+</h2><h3 id="访问日志accesslog">访问日志（access.log）
+</h3><p><code>access.log</code>记录了每一个对Nginx服务器的HTTP请求的详细信息</p>
+<h4 id="默认格式combined--main">默认格式：combined / main
+</h4><p>Nginx官方默认格式是<code>combined</code>，不过现在常见的更多是<code>main</code>（包括之前我们给出的docker容器的nginx）</p>
+<p>其实<code>main</code>只是自定义的名字，本质和<code>combined</code>是类似的，甚至很多公司就是直接copy默认的<code>combined</code>格式起个名叫<code>main</code>，但更多的则是增加了一些字段（比如新增<code>$http_x_forwarded_for</code>字段）</p>
+<p>我们就以上文提到的配置文件示例里的<code>main</code>格式为例，这也是最为常见的格式之一，理解了就行</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">log_format</span>  <span style="color:#98c379">main</span>  <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$remote_addr</span> <span style="color:#98c379">-</span> <span style="color:#e06c75">$remote_user</span> <span style="color:#98c379">[</span><span style="color:#e06c75">$time_local]</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$request&#34;</span> <span style="color:#98c379">&#39;</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$status</span> <span style="color:#e06c75">$body_bytes_sent</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_referer&#34;</span> <span style="color:#98c379">&#39;</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#98c379">&#39;&#34;</span><span style="color:#e06c75">$http_user_agent&#34;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_x_forwarded_for&#34;&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">access_log</span>  <span style="color:#98c379">/var/log/nginx/access.log</span>  <span style="color:#98c379">main</span>;
+</span></span></code></pre></div><p><strong>变量名是Nginx内置的变量</strong>，<strong>不能随意改名字</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>变量</th>
+          <th>解释</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>$remote_addr</code></strong></td>
+          <td>客户端IP地址</td>
+      </tr>
+      <tr>
+          <td><strong><code>$remote_user</code></strong></td>
+          <td>客户端用户名称（用于HTTP认证，通常为<code>-</code>）</td>
+      </tr>
+      <tr>
+          <td><strong><code>[$time_local]</code></strong></td>
+          <td>服务器本地的请求处理完成时间</td>
+      </tr>
+      <tr>
+          <td><strong><code>&quot;$request&quot;</code></strong></td>
+          <td>完整的原始请求行，如 <code>&quot;GET /index.html HTTP/1.1&quot;</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>$status</code></strong></td>
+          <td>HTTP响应状态码</td>
+      </tr>
+      <tr>
+          <td><strong><code>$body_bytes_sent</code></strong></td>
+          <td>发送给客户端的响应体大小（字节）</td>
+      </tr>
+      <tr>
+          <td><strong><code>&quot;$http_referer&quot;</code></strong></td>
+          <td>请求的来源页面URL</td>
+      </tr>
+      <tr>
+          <td><strong><code>&quot;$http_user_agent&quot;</code></strong></td>
+          <td>客户端的浏览器、操作系统等信息</td>
+      </tr>
+      <tr>
+          <td><strong><code>&quot;$http_x_forwarded_for&quot;</code></strong></td>
+          <td><strong>（重要）</strong> 记录了通过代理服务器访问的客户端真实IP地址</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>来看一个实际的main格式的access.log的条目：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>111.111.111.111 - - <span style="color:#56b6c2">[</span>28/Apr/2021:14:44:11 +0800<span style="color:#56b6c2">]</span> <span style="color:#98c379">&#34;GET /api/channel/unread.jsp HTTP/1.1&#34;</span> <span style="color:#d19a66">200</span> <span style="color:#d19a66">65</span> <span style="color:#98c379">&#34;https://www.xxxx.cn/&#34;</span> <span style="color:#98c379">&#34;Mozilla/5.0...&#34;</span> <span style="color:#98c379">&#34;123.123.123.123&#34;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>$remote_addr</code></strong>：<code>111.111.111.111</code></p>
+<p>这是Nginx看到的客户端IP，可能是负载均衡/代理的IP，不一定是真实用户的IP</p>
+</li>
+<li>
+<p><strong><code>$remote_user</code></strong>：<code>- -</code>
+如果客户端经过了HTTP认证，这里会记录认证用户名，否则为<code>-</code></p>
+<ul>
+<li>第一个 <code>-</code>：远程用户名（几乎不用，常为空）</li>
+<li>第二个 <code>-</code>：认证用户名（如果用 Basic Auth 才会有）</li>
+</ul>
+</li>
+<li>
+<p><strong><code>$time_local</code></strong>：<code>28/Apr/2021:14:44:11 +0800</code>
+这是Nginx记录的本地时间，时区为+0800（北京时间）</p>
+</li>
+<li>
+<p><strong><code>$request</code></strong>：<code>GET /api/channel/unread.jsp HTTP/1.1</code>
+包含请求方法、URL路径和HTTP协议版本</p>
+</li>
+<li>
+<p><strong><code>$status</code></strong>：<code>200</code>
+HTTP状态码，表示请求成功</p>
+</li>
+<li>
+<p><strong><code>$body_bytes_sent</code></strong>：<code>65</code>
+响应体大小（字节数），不包含响应头</p>
+</li>
+<li>
+<p><strong><code>$http_referer</code></strong>：<code>https://www.xxxx.cn/</code>
+请求来源页面，如果用户是从某个页面跳转过来的，这里会显示该页面URL，若没有则为<code>-</code></p>
+</li>
+<li>
+<p><strong><code>$http_user_agent</code></strong>：<code>Mozilla/5.0...</code>
+客户端的User-Agent，表示浏览器或客户端的标识信息</p>
+</li>
+<li>
+<p><strong><code>$http_x_forwarded_for</code></strong>：<code>123.123.123.123</code>
+代理服务器通过HTTP头传递的真实客户端IP，用来识别经过代理时的原始用户地址</p>
+</li>
+</ul>
+<p><strong>这条日志告诉我们：</strong></p>
+<p>在北京时间<code>021-04-28 14:44:11</code>，有一个客户端访问了接口<code>/api/channel/unread.jsp</code>，使用的是<code>GET</code>请求，HTTP版本是<code>1.1</code>，返回状态码<code>200</code>（成功），响应大小<code>65</code>字节，请求来自页面<code>https://www.xxxx.cn/</code>，使用的客户端是某个<code>Mozilla浏览器/模拟器</code>，其真实IP是<code>123.123.123.123</code>，但请求是经过代理，Nginx看到的源IP是<code>111.111.111.111</code></p>
+<h4 id="增强的自定义格式json">增强的自定义格式：JSON
+</h4><p>为了便于程序（如 Logstash, Fluentd）解析，JSON格式也是目前的主流选择，属于典型的非默认格式</p>
+<p>它的结构清晰，键值对明确，机器解析友好，避免了<code>awk</code>和<code>cut</code>对字段位置的强依赖</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">log_format</span> <span style="color:#98c379">json_analytics</span> <span style="color:#98c379">escape=json</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#98c379">&#39;</span>{<span style="color:#c678dd">&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;timestamp&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$time_iso8601&#34;,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;client_ip&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$remote_addr&#34;,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;request&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$request&#34;,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;status&#34;:</span> <span style="color:#e06c75">$status,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;bytes_sent&#34;:</span> <span style="color:#e06c75">$body_bytes_sent,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;http_referer&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_referer&#34;,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;http_user_agent&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_user_agent&#34;,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;real_ip&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_x_forwarded_for&#34;,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;request_time&#34;:</span> <span style="color:#e06c75">$request_time,&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;upstream_time&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$upstream_response_time&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#98c379">&#39;</span>}<span style="color:#98c379">&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">access_log</span> <span style="color:#98c379">/var/log/nginx/access.log</span> <span style="color:#98c379">json_analytics</span>;
+</span></span></code></pre></div><p><strong>新增字段</strong>:</p>
+<ul>
+<li>
+<p><strong><code>$request_time</code></strong></p>
+<p>Nginx从接收到请求第一个字节到发送完最后一个字节的总时长（秒），性能指标</p>
+</li>
+<li>
+<p><strong><code>$upstream_response_time</code></strong></p>
+<p>从Nginx连接到上游后端服务到接收完响应头的时长，用于判断是 Nginx 慢还是后端服务慢</p>
+</li>
+</ul>
+<p><strong>上面一个例子的JSON格式示例如下</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{<span style="color:#e06c75">&#34;timestamp&#34;</span>: <span style="color:#98c379">&#34;2025-08-16T14:30:00+09:00&#34;</span>, <span style="color:#e06c75">&#34;client_ip&#34;</span>: <span style="color:#98c379">&#34;111.111.111.111&#34;</span>, <span style="color:#e06c75">&#34;request&#34;</span>: <span style="color:#98c379">&#34;GET /api/users HTTP/1.1&#34;</span>, <span style="color:#e06c75">&#34;status&#34;</span>: <span style="color:#d19a66">200</span>, <span style="color:#e06c75">&#34;bytes_sent&#34;</span>: <span style="color:#d19a66">1500</span>, <span style="color:#e06c75">&#34;http_referer&#34;</span>: <span style="color:#98c379">&#34;-&#34;</span>, <span style="color:#e06c75">&#34;http_user_agent&#34;</span>: <span style="color:#98c379">&#34;curl/7.68.0&#34;</span>, <span style="color:#e06c75">&#34;real_ip&#34;</span>: <span style="color:#98c379">&#34;123.123.123.123&#34;</span>, <span style="color:#e06c75">&#34;request_time&#34;</span>: <span style="color:#d19a66">0.025</span>, <span style="color:#e06c75">&#34;upstream_time&#34;</span>: <span style="color:#98c379">&#34;0.024&#34;</span>}
+</span></span></code></pre></div><p><strong>JSON日志使用<code>jq</code>工具可以轻松解析：</strong></p>
+<p>统计状态码为500的请求数量:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat access.log | jq <span style="color:#98c379">&#39;select(.status == 500)&#39;</span> | wc -l
+</span></span></code></pre></div><p>找出请求时间最长的10个请求：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat access.log | jq <span style="color:#98c379">&#39;.request_time&#39;</span> | sort -nr | head -n <span style="color:#d19a66">10</span>
+</span></span></code></pre></div><h4 id="docker环境下的日志">Docker环境下的日志
+</h4><p>上文已经提到过，在Docker中，nginx日志输出到标准输出和标准错误，记录在docker的日志中</p>
+<p>日志本身的格式不会变，但Docker的日志驱动会在每行日志前添加额外信息，如时间戳和流类型</p>
+<p><strong>实际Docker日志示例（还是上面的例子）</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>2025-08-16T05:45:01.123456789Z stdout F 111.111.111.111 - - <span style="color:#56b6c2">[</span>28/Apr/2021:14:44:11 +0800<span style="color:#56b6c2">]</span> <span style="color:#98c379">&#34;GET /api/channel/unread.jsp HTTP/1.1&#34;</span> <span style="color:#d19a66">200</span> <span style="color:#d19a66">65</span> <span style="color:#98c379">&#34;https://www.xxxx.cn/&#34;</span> <span style="color:#98c379">&#34;Mozilla/5.0...&#34;</span> <span style="color:#98c379">&#34;123.123.123.123&#34;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>2025-08-16T05:45:01.123456789Z</code></strong></p>
+<p><strong>Docker捕获日志的UTC时间（纳秒精度）</strong></p>
+</li>
+<li>
+<p><strong><code>stdout F</code></strong></p>
+<p><strong>日志来源（stdout）和标记（F表示一行完整日志)</strong></p>
+<p><strong>此外还有P标记，示这是多行日志的一部分，被拆分了，需要和后续/前面的片段合并</strong></p>
+</li>
+</ul>
+<p>可以直接通过管道分析<code>docker logs</code>的输出，但通常会配置Docker的日志驱动将这些日志流自动转发到集中的日志管理平台进行统一分析</p>
+<p>比如，<strong>统计客户端IP出现次数的前10：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker logs nginx | awk <span style="color:#98c379">&#39;{print $4}&#39;</span> | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">10</span>
+</span></span></code></pre></div><h3 id="错误日志errorlog">错误日志（error.log）
+</h3><p><code>error.log</code> 记录 Nginx 启动和运行过程中的诊断信息，是排查问题的关键。</p>
+<h4 id="一般格式">一般格式
+</h4><pre tabindex="0"><code>时间戳 [错误级别] pid#tid: *cid 错误描述, client: 客户端IP, server: 服务端, request: &#34;请求行&#34;, host: &#34;Host&#34;
+</code></pre><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>时间戳</strong></td>
+          <td>错误发生时间</td>
+      </tr>
+      <tr>
+          <td><strong>[level]</strong></td>
+          <td>错误级别，从低到高：<code>debug</code> &lt; <code>info</code> &lt; <code>notice</code> &lt; <code>warn</code> &lt; <code>error</code> &lt; <code>crit</code> &lt; <code>alert</code> &lt; <code>emerg</code></td>
+      </tr>
+      <tr>
+          <td><strong>pid#tid</strong></td>
+          <td>Nginx工作进程ID和线程ID</td>
+      </tr>
+      <tr>
+          <td>*<strong>cid</strong></td>
+          <td>客户端连接序列号</td>
+      </tr>
+      <tr>
+          <td><strong>错误描述</strong></td>
+          <td>具体的错误信息，例如<code>connect() to 127.0.0.1:9000 failed (13: Permission denied)</code></td>
+      </tr>
+      <tr>
+          <td><strong>client</strong></td>
+          <td>发生错误的客户端IP</td>
+      </tr>
+      <tr>
+          <td><strong>server</strong></td>
+          <td>请求的服务端</td>
+      </tr>
+      <tr>
+          <td><strong>request</strong></td>
+          <td>请求行，如&quot;GET /api HTTP/1.1&quot;`</td>
+      </tr>
+      <tr>
+          <td><strong>host</strong></td>
+          <td>客户端请求的目标主机名</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>具体示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">2025</span>/<span style="color:#d19a66">08</span>/<span style="color:#d19a66">16</span> <span style="color:#d19a66">14</span>:<span style="color:#d19a66">35</span>:<span style="color:#d19a66">00</span> [<span style="color:#e06c75">crit</span>] <span style="color:#d19a66">12345</span>#<span style="color:#d19a66">12345</span>: *<span style="color:#d19a66">6789</span> <span style="color:#e06c75">connect</span>() <span style="color:#e06c75">to</span> <span style="color:#d19a66">127.0</span>.<span style="color:#d19a66">0.1</span>:<span style="color:#d19a66">9000</span> <span style="color:#e06c75">failed</span> (<span style="color:#d19a66">13</span>: <span style="color:#e06c75">Permission</span> <span style="color:#e06c75">denied</span>) <span style="color:#c678dd">while</span> <span style="color:#e06c75">connecting</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">upstream</span>, <span style="color:#e06c75">client</span>: <span style="color:#d19a66">192.168</span>.<span style="color:#d19a66">1.10</span>, <span style="color:#e06c75">server</span>: <span style="color:#e06c75">example</span>.<span style="color:#e06c75">com</span>, <span style="color:#e06c75">request</span>: <span style="color:#98c379">&#34;GET /api HTTP/1.1&#34;</span>, <span style="color:#e06c75">host</span>: <span style="color:#98c379">&#34;example.com&#34;</span>
+</span></span></code></pre></div><ul>
+<li><strong>时间戳</strong>：<code>2025/08/16 14:35:00</code></li>
+<li><strong>错误级别</strong>：<code>crit</code>（严重错误）</li>
+<li><strong>pid#tid</strong>：<code>12345#12345</code></li>
+<li>*<strong>cid</strong>：<code>*6789</code></li>
+<li><strong>错误描述</strong>：<code>connect() to 127.0.0.1:9000 failed (13: Permission denied) while connecting to upstream</code></li>
+<li><strong>客户端</strong>：<code>192.168.1.10</code></li>
+<li><strong>服务端</strong>：<code>example.com</code></li>
+<li><strong>请求</strong>：<code>&quot;GET /api HTTP/1.1&quot;</code></li>
+<li><strong>Host</strong>：<code>example.com</code></li>
+</ul>
+<p><strong>分析</strong>：</p>
+<p>客户端<code>192.168.1.10</code>请求 <code>/api</code>接口时，Nginx尝试连接上游服务<code>127.0.0.1:9000</code>失败，原因是权限被拒绝（<code>Permission denied</code>）。日志级别为 <code>crit</code>，说明这是严重错误，需要检查Nginx或上游服务的权限设置</p>
+<h2 id="分析技巧">分析技巧
+</h2><h3 id="网站流量核心指标分析-pv--uv">网站流量核心指标分析 (PV &amp; UV)
+</h3><p>PV (Page View，页面浏览量) 和 UV (Unique Visitor，独立访客) 是衡量网站价值和用户行为趋势的重要指标</p>
+<h4 id="统计总uv-根据ip">统计总UV (根据IP)
+</h4><p><strong>提取第1个字段(IP)，排序，去重，最后统计独立IP总数：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $1}&#39;</span> access.log | sort | uniq | wc -l
+</span></span></code></pre></div><h4 id="统计总pv">统计总PV
+</h4><p><strong>直接统计日志总行数即为PV：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wc -l access.log
+</span></span></code></pre></div><h4 id="统计某时间段的uv--pv">统计某时间段的UV / PV
+</h4><p><strong>统计2021年4月28日14:00-14:59的UV：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grep <span style="color:#98c379">&#34;28/Apr/2021:14&#34;</span> access.log | awk <span style="color:#98c379">&#39;{print $1}&#39;</span> | sort | uniq | wc -l
+</span></span></code></pre></div><p><strong>使用sed进行更精确的时间段筛选 (14点到20点)：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;/28\/Apr\/2021:14/,/28\/Apr\/2021:20/p&#39;</span> access.log | awk <span style="color:#98c379">&#39;{print $1}&#39;</span> | sort | uniq | wc -l
+</span></span></code></pre></div><h3 id="访问来源与异常排查-ip--url">访问来源与异常排查 (IP &amp; URL)
+</h3><p>用于判断是否被攻击、接口是否存在Bug或排查流量报警</p>
+<h4 id="查询访问最频繁的top-10-url">查询访问最频繁的Top 10 URL
+</h4><p><strong>提取第7字段(URL)，排序，去重并计数，按计数值倒序排列:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $7}&#39;</span> access.log | sort | uniq -c | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
+</span></span></code></pre></div><h4 id="查询访问最频繁的top-10-ip">查询访问最频繁的Top 10 IP
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $1}&#39;</span> access.log | sort | uniq -c | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
+</span></span></code></pre></div><h4 id="查看指定ip在某天访问了哪些-url-top-10">查看指定IP在某天访问了哪些 URL (Top 10)
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep <span style="color:#98c379">&#34;111.111.111.111&#34;</span> access.log | grep <span style="color:#98c379">&#34;28/Apr/2021&#34;</span> | awk <span style="color:#98c379">&#39;{print $7}&#39;</span> | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">10</span>
+</span></span></code></pre></div><h3 id="性能与爬虫分析">性能与爬虫分析
+</h3><h4 id="统计爬取次数">统计爬取次数
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep -i <span style="color:#98c379">&#39;spider\|bot&#39;</span> access.log | wc -l
+</span></span></code></pre></div><h4 id="统计每分钟每秒的请求数-top-20">统计每分钟/每秒的请求数 (Top 20)
+</h4><p><strong>每分钟: 截取时间字段($4)的第2到18位(到分钟)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $4}&#39;</span> access.log | cut -c 2-18 | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">20</span>
+</span></span></code></pre></div><p><strong>每秒: 截取时间字段($4)的第2到21位(到秒)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $4}&#39;</span> access.log | cut -c 2-21 | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">20</span>
+</span></span></code></pre></div><h3 id="分析请求响应时间-需自定义日志格式">分析请求响应时间 (需自定义日志格式)
+</h3><p><strong>前提</strong>: 确保<code>log_format</code>中包含了<code>$request_time</code>，我们假设它在最后一个字段</p>
+<h4 id="列出传输时间超过3秒的top10请求">列出传输时间超过3秒的Top10请求
+</h4><p><strong>$NF代表最后一个字段，此命令筛选出最后一个字段值大于3的行：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;$NF &gt; 3 {print $NF, $7}&#39;</span> access.log | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
+</span></span></code></pre></div><h4 id="列出最耗时的top10请求">列出最耗时的Top10请求
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $NF, $7}&#39;</span> access.log | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
+</span></span></code></pre></div><hr>
+<p>暂时就先讲到这，毕竟只是入个门，详细使用就在实践里面学习吧</p>
+<p>如果之后我需要更加深入使用，这篇文章也会更新的~</p>
 
 </section>
 
@@ -1333,7 +1822,7 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 
 
         <span>
-            最后更新于 2025-07-26
+            最后更新于 2025-08-16
         </span>
     </section></footer>
 
