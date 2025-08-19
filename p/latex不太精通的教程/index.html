@@ -1,0 +1,4389 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="总会用到的">
+<title>LaTeX：不太精通的教程</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.e3073096d25e5a3d746191d039ec1146fd3a3920d63ab62f3cacf37f04c37a53.css"><meta property='og:title' content="LaTeX：不太精通的教程">
+<meta property='og:description' content="总会用到的">
+<meta property='og:url' content='https://blog.928330.xyz/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='LaTeX' /><meta property='article:published_time' content='2025-08-19T21:20:24&#43;08:00'/><meta property='article:modified_time' content='2025-08-19T21:49:51&#43;08:00'/>
+<meta name="twitter:title" content="LaTeX：不太精通的教程">
+<meta name="twitter:description" content="总会用到的">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#为何选择latex">为何选择LaTeX？</a></li>
+    <li><a href="#overleaf">Overleaf</a>
+      <ol>
+        <li><a href="#何为overleaf">何为overleaf</a></li>
+        <li><a href="#如何使用">如何使用？</a></li>
+        <li><a href="#latex编译器">LaTeX编译器</a>
+          <ol>
+            <li><a href="#pdflatex">pdfLaTeX</a></li>
+            <li><a href="#xelatex">XeLaTeX</a></li>
+            <li><a href="#lualatex">LuaLaTeX</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#latex文档的基本结构">LaTeX文档的基本结构</a>
+      <ol>
+        <li><a href="#导言区">导言区</a>
+          <ol>
+            <li><a href="#文档类型-documentclass">文档类型 (\documentclass)</a>
+              <ol>
+                <li><a href="#格式">格式</a></li>
+                <li><a href="#类型名称-必填">{类型名称} (必填)</a></li>
+                <li><a href="#参数-选填">[参数] (选填)</a></li>
+                <li><a href="#示例">示例</a></li>
+              </ol>
+            </li>
+            <li><a href="#宏包-usepackage">宏包 (\usepackage)</a>
+              <ol>
+                <li><a href="#格式-1">格式</a></li>
+                <li><a href="#宏包名称-必填">{宏包名称} (必填)</a></li>
+                <li><a href="#可选参数-选填">[可选参数] (选填)</a></li>
+                <li><a href="#示例-1">示例</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#正文区">正文区</a>
+          <ol>
+            <li><a href="#正文环境document">正文环境：document</a></li>
+            <li><a href="#注释">注释</a>
+              <ol>
+                <li><a href="#单行注释">单行注释</a></li>
+                <li><a href="#多行注释">多行注释</a></li>
+              </ol>
+            </li>
+            <li><a href="#示例-2">示例</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#文档内容排版">文档内容排版</a>
+      <ol>
+        <li><a href="#段落间距与分页">段落、间距与分页</a>
+          <ol>
+            <li><a href="#命令操作">命令操作</a></li>
+            <li><a href="#示例-3">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#文本样式">文本样式</a>
+          <ol>
+            <li><a href="#命令">命令</a></li>
+            <li><a href="#示例-4">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#特殊字符">特殊字符</a>
+          <ol>
+            <li><a href="#英文引号">英文引号</a></li>
+            <li><a href="#保留字符">保留字符</a></li>
+            <li><a href="#常见货币与版权符号">常见货币与版权符号</a></li>
+            <li><a href="#破折号与连字号">破折号与连字号</a></li>
+            <li><a href="#url和文件路径">URL和文件路径</a></li>
+            <li><a href="#字母重音与变音符号">字母重音与变音符号</a></li>
+          </ol>
+        </li>
+        <li><a href="#标题作者与日期">标题、作者与日期</a>
+          <ol>
+            <li><a href="#命令详解">命令详解</a></li>
+            <li><a href="#示例-5">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#章节与目录">章节与目录</a>
+          <ol>
+            <li><a href="#命令详解-1">命令详解</a></li>
+            <li><a href="#示例-6">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#摘要与关键词">摘要与关键词</a>
+          <ol>
+            <li><a href="#环境与命令">环境与命令</a></li>
+            <li><a href="#示例-7">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#列表环境">列表环境</a>
+          <ol>
+            <li><a href="#环境详解">环境详解</a></li>
+            <li><a href="#示例-8">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#脚注">脚注</a>
+          <ol>
+            <li><a href="#命令-1">命令</a></li>
+            <li><a href="#编号规则">编号规则</a>
+              <ol>
+                <li><a href="#默认编号规则">默认编号规则</a></li>
+              </ol>
+            </li>
+            <li><a href="#手动指定编号">手动指定编号</a></li>
+            <li><a href="#多次引用同一脚注">多次引用同一脚注</a></li>
+            <li><a href="#特别注意">特别注意</a></li>
+            <li><a href="#示例1常规用法">示例1：常规用法</a></li>
+            <li><a href="#示例2在表格等特殊环境中使用">示例2：在表格等特殊环境中使用</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#插入图片">插入图片</a>
+      <ol>
+        <li><a href="#准备工作">准备工作</a>
+          <ol>
+            <li><a href="#加载宏包">加载宏包</a></li>
+            <li><a href="#上传图片">上传图片</a></li>
+          </ol>
+        </li>
+        <li><a href="#figure环境">figure环境</a>
+          <ol>
+            <li><a href="#beginfigure位置建议符">\begin{figure}[位置建议符]</a></li>
+            <li><a href="#centering">\centering</a></li>
+            <li><a href="#includegraphics">\includegraphics</a></li>
+            <li><a href="#caption图片标题">\caption{图片标题}</a></li>
+            <li><a href="#label标签名">\label{标签名}</a></li>
+            <li><a href="#endfigure">\end{figure}</a></li>
+          </ol>
+        </li>
+        <li><a href="#示例-9">示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#创建表格">创建表格</a>
+      <ol>
+        <li><a href="#环境与命令-1">环境与命令</a>
+          <ol>
+            <li><a href="#table环境">table环境</a></li>
+            <li><a href="#tabular环境">tabular环境</a>
+              <ol>
+                <li><a href="#begintabular列格式定义">\begin{tabular}{列格式定义}</a></li>
+                <li><a href="#内容和边框">内容和边框</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#示例-10">示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#数学公式">数学公式</a>
+      <ol>
+        <li><a href="#准备工作-1">准备工作</a></li>
+        <li><a href="#公式模式">公式模式</a>
+          <ol>
+            <li><a href="#模式分类">模式分类</a></li>
+            <li><a href="#示例-11">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#常用数学命令">常用数学命令</a>
+          <ol>
+            <li><a href="#上下标根号与撇求导">上下标、根号与撇（求导）</a></li>
+            <li><a href="#分数">分数</a></li>
+            <li><a href="#常见运算符">常见运算符</a></li>
+            <li><a href="#省略符">省略符</a></li>
+            <li><a href="#希腊字母">希腊字母</a></li>
+            <li><a href="#关系符">关系符</a></li>
+            <li><a href="#逻辑符号">逻辑符号</a></li>
+            <li><a href="#逻辑与集合符号">逻辑与集合符号</a></li>
+            <li><a href="#括号">括号</a></li>
+          </ol>
+        </li>
+        <li><a href="#矩阵">矩阵</a>
+          <ol>
+            <li><a href="#矩阵环境">矩阵环境</a></li>
+            <li><a href="#矩阵中的省略号">矩阵中的省略号</a></li>
+            <li><a href="#示例-12">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#多行公式对齐">多行公式对齐</a>
+          <ol>
+            <li><a href="#环境详解-1">环境详解</a></li>
+            <li><a href="#控制编号">控制编号</a></li>
+            <li><a href="#示例1aligned环境">示例1：aligned环境</a></li>
+            <li><a href="#示例2align环境">示例2：align环境</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#学术写作">学术写作</a>
+      <ol>
+        <li><a href="#定理类环境">定理类环境</a>
+          <ol>
+            <li><a href="#定义新环境newtheorem">定义新环境：\newtheorem</a></li>
+            <li><a href="#在正文中使用">在正文中使用</a></li>
+            <li><a href="#示例-13">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#交叉引用">交叉引用</a>
+          <ol>
+            <li><a href="#核心命令">核心命令</a></li>
+            <li><a href="#推荐的标签规范">推荐的标签规范</a></li>
+            <li><a href="#示例-14">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#参考文献">参考文献</a>
+          <ol>
+            <li><a href="#工作流程详解">工作流程详解</a>
+              <ol>
+                <li><a href="#创建bib数据库文件">创建.bib数据库文件</a></li>
+                <li><a href="#添加文献条目">添加文献条目</a></li>
+                <li><a href="#在主文档中设置并引用">在主文档中设置并引用</a></li>
+              </ol>
+            </li>
+            <li><a href="#示例-15">示例</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
+                技术学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/">LaTeX：不太精通的教程</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            总会用到的
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-08-19</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-08-19
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>1978年，为了解决解决当时学术出版里公式排版不美观的问题，计算机科学家Donald Knuth开发了一个排版系统，并给他命名为TeX（发音接近 &ldquo;tech&rdquo;），它的功能强大，但写起来很繁琐</p>
+<p>而我们要学的LaTeX（读作&quot;Lay-tech&quot;或 &ldquo;Lah-tech&rdquo;）是一个基于TeX的排版系统，它由Leslie Lamport在 1980年开发，目的是让普通人更容易使用TeX</p>
+<p>可以这样理解：</p>
+<ul>
+<li>TeX就像汇编语言，底层、强大，但复杂</li>
+<li>LaTeX就像高级语言，在 TeX 上加了封装，更易用</li>
+</ul>
+<p>LaTeX在现代被广泛使用，用于生成高质量的文档，尤其擅长处理包含数学公式、科学符号和复杂排版的内容</p>
+<p>所以学点吧，学点总没错</p>
+<p><span style="color:red;font-size:20px"><strong>注意：LaTeX的命令是大小写敏感的！</strong></span></p>
+<h1 id="为何选择latex">为何选择LaTeX？
+</h1><p>与我们熟知的Word这类“<strong>所见即所得”(WYSIWYG)</strong> 的编辑器不同，LaTeX 是一种**“所见即所想” (WYSIWYM)** 的排版系统</p>
+<ul>
+<li>
+<p><strong>Word (所见即所得)</strong></p>
+<p>我们的编辑界面就是最终的页面，自由度高，上手简单</p>
+<p>但缺点在于，手动调整格式容易出现细节不一致（如行距、字体混乱），且对于学术论文中的公式、图表、参考文献的自动编号和交叉引用支持不佳</p>
+</li>
+<li>
+<p><strong>LaTeX (所见即所想)</strong></p>
+<p>我们负责撰写内容并用代码写排版指令，例如<code>\section{引言}</code>就是告诉LaTeX“这里是一个一级标题，内容是引言”</p>
+<p>我们无需关心它具体用什么字体、多大字号、距离页边距多少，编译器会根据预设的规范，自动生成一篇格式精美、高度一致的文档</p>
+</li>
+</ul>
+<p>这种模式赋予了LaTeX无与伦比的优势，特别是在学术写作领域：</p>
+<ol>
+<li><strong>规范与专业</strong>：自动处理编号、格式，确保全文样式统一，版面专业</li>
+<li><strong>强大的数学公式支持</strong>：被公认为数学公式排版的行业标准</li>
+<li><strong>自动化管理</strong>：目录、图表列表、参考文献等都能自动生成和更新</li>
+<li><strong>结构化写作</strong>：强迫作者专注于内容和逻辑，而非琐碎的格式调整</li>
+</ol>
+<p>同一篇文章，虽然Word和LaTeX最终都能实现类似的效果，但LaTeX的排版更加专业好用</p>
+<p><strong>另外，关于LaTeX的读音，虽然百科上的推荐发音是&quot;拉泰赫&quot;，但读成&quot;拉泰克斯&quot;也是可以的，读音不重要</strong></p>
+<h1 id="overleaf">Overleaf
+</h1><h2 id="何为overleaf">何为overleaf
+</h2><p>对于初学者，安装和配置本地LaTeX环境可能比较繁琐，因此，本教程将以<strong>Overleaf</strong>为核心工具</p>
+<p><strong>Overleaf</strong>是一个强大的在线LaTeX编辑器：</p>
+<ul>
+<li><strong>零配置</strong>：无需在本地安装任何软件，注册账号即可使用</li>
+<li><strong>实时预览</strong>：左侧编写代码，右侧实时显示生成的PDF效果</li>
+<li><strong>模板丰富</strong>：提供大量期刊、论文、简历、幻灯片等高质量模板</li>
+<li><strong>协作方便</strong>：可以像谷歌文档一样与他人在线协作</li>
+</ul>
+<p>我们完全可以把它当成长期的LaTeX工具使用</p>
+<h2 id="如何使用">如何使用？
+</h2><ol>
+<li>
+<p>访问<a class="link" href="https://www.overleaf.com"  target="_blank" rel="noopener"
+    >Overleaf官网
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>或者<a class="link" href="https://cn.overleaf.com"  target="_blank" rel="noopener"
+    >Overleaf中文官网
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>并注册一个免费账户</p>
+</li>
+<li>
+<p>登录后，点击左上角的 &ldquo;New Project&rdquo;，我们可以选择创建一个&quot;Blank Project&quot;（空白项目）、&ldquo;Example Project&rdquo;（示例项目）或从&quot;Templates&quot;（模板）中选择一个开始</p>
+<p>如果我们已经有本地项目，也可以选择&quot;Upload project&quot;（上传项目）</p>
+</li>
+<li>
+<p>进入编辑器界面，我们会看到：</p>
+<ul>
+<li><strong>左侧</strong>：文件列表（可以上传图片、创建<code>.bib</code>文件等）</li>
+<li><strong>中间</strong>：源代码编辑区，我们将在这里编写LaTeX代码</li>
+<li><strong>右侧</strong>：点击编译，实时预览生成的PDF文档</li>
+</ul>
+<p>可以点击两个区域之间的箭头</p>
+</li>
+<li>
+<p>中间写好之后，点击右边区域上方的&quot;重新编译&quot;按钮，稍等片刻即可看见文档</p>
+<p>如果因为语法等错误编译失败，则会看见修复建议和原始错误日志</p>
+</li>
+<li>
+<p>点击左上角叶子状图标，可以进行设置，包括编译器种类、Tex版本、自动补全、主题等等</p>
+</li>
+</ol>
+<h2 id="latex编译器">LaTeX编译器
+</h2><p>overleaf支持很多不同的LaTeX编译器引擎，大部分语法在他们中都是一样的</p>
+<h3 id="pdflatex">pdfLaTeX
+</h3><p><strong>传统的LaTeX引擎，最常见，历史最久</strong></p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>稳定、兼容性最好</li>
+<li>生态最丰富，几乎所有宏包都支持</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>不支持Unicode → 中文、Emoji、现代字体用起来很麻烦</li>
+<li>字体只能用TeX内置机制，必须事先安装TeX字体集（比如fandol），否则会报错</li>
+</ul>
+<h3 id="xelatex">XeLaTeX
+</h3><p><strong>基于Unicode，专门为现代字体设计的引擎</strong></p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>原生支持Unicode → 直接输入中文没问题</li>
+<li>可以调用系统字体（比如Windows的宋体、Mac的苹方、Linux的思源黑体等），不需要fandol</li>
+<li>字体控制能力强（比如<code>\setmainfont{Times New Roman}</code>）</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>编译速度比pdfLaTeX慢一些</li>
+<li>个别宏包兼容性稍差，但大部分现在都支持了</li>
+</ul>
+<h3 id="lualatex">LuaLaTeX
+</h3><p><strong>和XeLaTeX类似，也支持Unicode，底层基于Lua脚本引擎</strong></p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>同样支持系统字体</li>
+<li>更灵活：可以用Lua脚本扩展TeX功能（比如处理复杂语言、图形、自动化排版）</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>和XeLaTeX一样，速度比pdfLaTeX慢</li>
+<li>Lua机制比较复杂，对新手不太友好</li>
+</ul>
+<h1 id="latex文档的基本结构">LaTeX文档的基本结构
+</h1><p>每一个LaTeX文档都由两部分组成：<strong>导言区</strong>和<strong>正文区</strong></p>
+<p>我们先给出一个完整的示例，看不懂没关系，先尝尝咸淡：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#7f848e">% --- 导言区开始 ---
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\documentclass</span><span style="color:#e06c75">[12pt, a4paper]</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span> <span style="color:#7f848e">% 定义文档类型和基本设置
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath<span style="color:#e5c07b">}</span> <span style="color:#7f848e">% 加载宏包，以使用更多功能
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>graphicx<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e06c75">[colorlinks, citecolor=blue]</span><span style="color:#e5c07b">{</span>hyperref<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\title</span><span style="color:#e5c07b">{</span>第一个LaTeX 文档<span style="color:#e5c07b">}</span> <span style="color:#7f848e">% 设置标题
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\author</span><span style="color:#e5c07b">{</span>作者名字<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\date</span><span style="color:#e5c07b">{</span><span style="color:#c678dd">\today</span><span style="color:#e5c07b">}</span> <span style="color:#7f848e">% 日期, \today 会自动生成当天日期
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">% --- 导言区结束 ---
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">% --- 正文区开始 ---
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\maketitle</span> <span style="color:#7f848e">% 显示标题、作者和日期
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span>正文内容
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">% --- 正文区结束 ---
+</span></span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250817101503310.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250817101503310"
+	
+	
+></p>
+<h2 id="导言区">导言区
+</h2><p><strong>这是从<code>\documentclass</code>开始到<code>\begin{document}</code>之前的部分，我们在这里进行全局设置</strong></p>
+<h3 id="文档类型-documentclass">文档类型 (\documentclass)
+</h3><p>此命令用于定义文档的全局类型，例如是文章、书籍还是幻灯片</p>
+<p><strong>它必须 <code>.tex</code>文件中的第一个命令</strong></p>
+<h4 id="格式">格式
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e06c75">[参数]</span><span style="color:#e5c07b">{</span>文档类型名称<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><h4 id="类型名称-必填">{类型名称} (必填)
+</h4><p><strong>这是文档的根本类型，决定了是否有章节、标题页的默认格式等</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>中文版本</th>
+          <th>适用场景</th>
+          <th>特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>article</code></td>
+          <td><code>ctexart</code></td>
+          <td><strong>短小文档</strong><br />如期刊文章、课程作业、报告</td>
+          <td>无<code>\chapter</code>命令，章节较简单，适合短篇文档</td>
+      </tr>
+      <tr>
+          <td><code>report</code></td>
+          <td><code>ctexrep</code></td>
+          <td><strong>中长篇文档</strong><br />如毕业论文、研究报告</td>
+          <td>有<code>\chapter</code>命令，章节层次更丰富</td>
+      </tr>
+      <tr>
+          <td><code>book</code></td>
+          <td><code>ctexbook</code></td>
+          <td><strong>书籍排版</strong></td>
+          <td>支持书籍格式，如封面、目录、章节分页</td>
+      </tr>
+      <tr>
+          <td><code>beamer</code></td>
+          <td><code>ctexbeamer</code></td>
+          <td><strong>幻灯片/演示文稿</strong></td>
+          <td>专门用于制作演示文稿，支持动画、主题切换</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="参数-选填">[参数] (选填)
+</h4><p><strong>这些参数用于对文档的基础样式进行微调，多个参数之间用逗号隔开</strong></p>
+<ul>
+<li>
+<p><strong>字体大小</strong></p>
+<p>控制正文文字大小，也会影响章节标题、页眉页脚等</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>10pt</code></td>
+          <td>正文字体 10 磅（默认）</td>
+      </tr>
+      <tr>
+          <td><code>11pt</code></td>
+          <td>正文字体 11 磅</td>
+      </tr>
+      <tr>
+          <td><code>12pt</code></td>
+          <td>正文字体 12 磅</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong>纸张大小</strong></p>
+<p>决定页面尺寸和默认页边距</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>尺寸</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>a4paper</code></td>
+          <td>210mm × 297mm</td>
+      </tr>
+      <tr>
+          <td><code>letterpaper</code></td>
+          <td>8.5in × 11in</td>
+      </tr>
+      <tr>
+          <td><code>b5paper</code></td>
+          <td>176mm × 250mm</td>
+      </tr>
+      <tr>
+          <td><code>a5paper</code></td>
+          <td>148mm × 210mm</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong>排版方式</strong></p>
+<p>决定奇偶页布局差异，主要用于打印装订</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>oneside</code></td>
+          <td>单面排版，左右页边距相同（默认<code>article</code>）</td>
+      </tr>
+      <tr>
+          <td><code>twoside</code></td>
+          <td>双面排版，奇偶页左右页边距不同（默认<code>book</code>）</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong>分栏</strong></p>
+<p>控制正文是单栏还是多栏</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>onecolumn</code></td>
+          <td>单栏正文（默认）</td>
+      </tr>
+      <tr>
+          <td><code>twocolumn</code></td>
+          <td>双栏正文，适合学术论文或期刊</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong>其他常用选项</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>openright</code></td>
+          <td>新章从奇数页开始（适合 <code>book</code>）</td>
+      </tr>
+      <tr>
+          <td><code>openany</code></td>
+          <td>新章可从任意页开始</td>
+      </tr>
+      <tr>
+          <td><code>titlepage</code></td>
+          <td>文档使用单独的标题页</td>
+      </tr>
+      <tr>
+          <td><code>draft</code></td>
+          <td>显示超长行标记，图形不渲染（调试用）</td>
+      </tr>
+      <tr>
+          <td><code>final</code></td>
+          <td>正式排版（默认）</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+</ul>
+<h4 id="示例">示例
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e06c75">[12pt, a4paper, oneside]</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>这行代码定义了整个文档的基础框架：</p>
+<ul>
+<li>
+<p><strong><code>{ctexart}</code></strong></p>
+<p>将文档类型设置为中文文章，这意味着我们可以直接输入中文，并使用<code>\section</code>、<code>\subsection</code>等命令</p>
+</li>
+<li>
+<p><strong><code>[12pt, a4paper, oneside]</code></strong></p>
+<ul>
+<li><code>12pt</code>：将文档的默认字体大小设置为12磅</li>
+<li><code>a4paper</code>：将排版的纸张设置为A4尺寸</li>
+<li><code>oneside</code>：采用单面排版模式</li>
+</ul>
+</li>
+</ul>
+<p><strong>即：该命令声明了我们要创建的是一份字体大小为12pt、在 A4 纸上进行单面排版的中文文章</strong></p>
+<h3 id="宏包-usepackage">宏包 (\usepackage)
+</h3><p>宏包（Package）可以理解为 LaTeX 的“插件”或“扩展库”</p>
+<p>通过加载宏包，我们可以使用更多强大的命令和功能，例如插入图片、设置页边距、生成带链接的目录等</p>
+<p>宏包通常在导言区（<code>\documentclass</code> 之后，<code>\begin{document}</code> 之前）加载</p>
+<h4 id="格式-1">格式
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e06c75">[可选参数]</span><span style="color:#e5c07b">{</span>宏包名称<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><h4 id="宏包名称-必填">{宏包名称} (必填)
+</h4><p><strong>这是宏包的核心标识，用于指定需要加载的宏包</strong></p>
+<p><strong>可以一次性加载多个无参数的宏包，用逗号隔开，例如<code>\usepackage{amsmath, graphicx}</code></strong></p>
+<p>常用宏包：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>宏包名称</th>
+          <th>主要功能与用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>ctex</strong></td>
+          <td>中文支持的核心宏包，<strong>当使用<code>ctexart</code>等文档类型时，该宏包会被自动加载</strong></td>
+      </tr>
+      <tr>
+          <td><strong>amsmath</strong></td>
+          <td>美国数学学会(AMS)宏包，<strong>提供更丰富的数学公式环境</strong>，如多行公式、矩阵等</td>
+      </tr>
+      <tr>
+          <td><strong>amssymb</strong></td>
+          <td>AMS宏包，<strong>提供更多数学符号</strong>，如 <code>\mathbb</code> (黑板粗体)、<code>\checkmark</code> (对勾)</td>
+      </tr>
+      <tr>
+          <td><strong>amsthm</strong></td>
+          <td>AMS宏包，<strong>用于定义专业的定理、引理、定义等环境</strong></td>
+      </tr>
+      <tr>
+          <td><strong>graphicx</strong></td>
+          <td>提供<code>\includegraphics</code> 命令，<strong>是插入图片（如 JPG, PNG, PDF）的必备宏包</strong></td>
+      </tr>
+      <tr>
+          <td><strong>geometry</strong></td>
+          <td><strong>便捷地设置页面布局</strong>，如页边距、纸张方向、页眉页脚距离等</td>
+      </tr>
+      <tr>
+          <td><strong>hyperref</strong></td>
+          <td><strong>自动为文档内的引用（目录、公式、参考文献）创建可点击的PDF超链接</strong>，极大提升电子文档的交互性</td>
+      </tr>
+      <tr>
+          <td><strong>xcolor</strong></td>
+          <td><strong>提供颜色支持</strong>，可以定义和使用颜色来修饰文本、表格背景等</td>
+      </tr>
+      <tr>
+          <td><strong>fancyhdr</strong></td>
+          <td><strong>用于自定义页眉和页脚</strong>，可以添加章节名、页码、校徽等复杂信息</td>
+      </tr>
+      <tr>
+          <td><strong>listings</strong></td>
+          <td><strong>用于插入带语法高亮的代码块</strong>，是撰写技术文档的利器</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="可选参数-选填">[可选参数] (选填)
+</h4><p><strong>用于对所加载的宏包进行配置。每个宏包都有一套独立的参数</strong></p>
+<p><span style="color:red"><strong>注意：在LaTeX中，当一个选项是布尔型（<code>true</code>/<code>false</code>）时，只写选项名就默认等价于<code>true</code></strong></span></p>
+<p>这里分别介绍几个常用宏包的参数</p>
+<ul>
+<li>
+<p><strong><code>geometry</code></strong></p>
+<p>这个宏包专门用于精细控制页面尺寸和边距</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>left=2.5cm</code>、<code>right=2.5cm</code></td>
+          <td>分别设置左、右页边距</td>
+      </tr>
+      <tr>
+          <td><code>top=3cm</code>、<code>bottom=3cm</code></td>
+          <td>分别设置上、下页边距</td>
+      </tr>
+      <tr>
+          <td><code>margin=1in</code></td>
+          <td>将上、下、左、右所有页边距统一设置为1英寸</td>
+      </tr>
+      <tr>
+          <td><code>a4paper</code>、<code>b5paper</code></td>
+          <td>设定纸张尺寸</td>
+      </tr>
+      <tr>
+          <td><code>landscape</code></td>
+          <td>设置为横向排版（默认为 <code>portrait</code> 纵向）</td>
+      </tr>
+      <tr>
+          <td><code>showframe</code></td>
+          <td>在页面上显示布局的辅助线框，方便调试页边距设置</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong><code>hyperref</code></strong></p>
+<p>这个宏包用于生成PDF的超链接和书签</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>colorlinks=true</code></td>
+          <td>使用彩色文本作为链接，而非默认的带边框样式。强烈推荐设置</td>
+      </tr>
+      <tr>
+          <td><code>linkcolor=black</code></td>
+          <td>设置内部链接（如目录、章节引用 <code>\ref</code>）的颜色</td>
+      </tr>
+      <tr>
+          <td><code>citecolor=blue</code></td>
+          <td>设置文献引用（<code>\cite</code>）的链接颜色</td>
+      </tr>
+      <tr>
+          <td><code>urlcolor=cyan</code></td>
+          <td>设置网址链接（<code>\url</code>）的颜色</td>
+      </tr>
+      <tr>
+          <td><code>bookmarks=true</code></td>
+          <td>在PDF阅读器侧边栏中生成可点击的书签</td>
+      </tr>
+      <tr>
+          <td><code>pdfstartview=FitH</code></td>
+          <td>设置PDF打开时的默认视图为“适合页宽”</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong><code>xcolor</code></strong></p>
+<p>这个宏包用于在文档中使用颜色</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>dvipsnames</code></td>
+          <td>加载dvips预定义的68种颜色名称（如<code>Goldenrod</code>）</td>
+      </tr>
+      <tr>
+          <td><code>svgnames</code></td>
+          <td>加载SVG预定义的151种颜色名称（如<code>AliceBlue</code>）</td>
+      </tr>
+      <tr>
+          <td><code>x11names</code></td>
+          <td>加载X11预定义的317种颜色名称（如<code>LightSteelBlue</code>）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>加载这些选项后，就可以直接通过名称使用颜色，例如<code>\textcolor{Goldenrod}{这是金麒麟色的文字}</code></p>
+</li>
+<li>
+<p><strong><code>ctex</code></strong></p>
+<p>当手动加载<code>\usepackage{ctex}</code>时，可以填选</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>选项</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>UTF8</code></td>
+          <td>明确指定源文件编码为UTF-8（现在通常是默认设置，无需手动指定）</td>
+      </tr>
+      <tr>
+          <td><code>fontset=adobe</code></td>
+          <td>设置中文字体集为Adobe字体（需要系统安装相应字体）</td>
+      </tr>
+      <tr>
+          <td><code>fontset=windows</code></td>
+          <td>在Windows系统下，设置中文字体集为系统自带字体（如宋体、黑体等）</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+</ul>
+<h4 id="示例-1">示例
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath, amssymb<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e06c75">[a4paper, margin=2.5cm, showframe]</span><span style="color:#e5c07b">{</span>geometry<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>graphicx<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e06c75">[colorlinks, citecolor=blue, linkcolor=black, bookmarks=true]</span><span style="color:#e5c07b">{</span>hyperref<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>这段代码在导言区加载并配置了一系列常用的宏包：</p>
+<ul>
+<li>
+<p><strong><code>\usepackage{amsmath, amssymb}</code></strong></p>
+<p>通过逗号分隔的方式，同时加载了 <code>amsmath</code> 和 <code>amssymb</code> 两个宏包</p>
+<p>他们为文档提供了强大的数学公式排版能力和丰富的数学符号支持</p>
+</li>
+<li>
+<p><strong><code>\usepackage[a4paper, margin=2.5cm, showframe]{geometry}</code></strong></p>
+<p>加载了<code>geometry</code>宏包，并传入了三个参数：</p>
+<ul>
+<li><code>a4paper</code>: 确保页面尺寸是基于 A4 纸张计算的</li>
+<li><code>margin=2.5cm</code>: 将页面的上、下、左、右所有页边距统一设置为 2.5 厘米</li>
+<li><code>showframe</code>: 在生成的PDF上绘制辅助线框，方便我们检查页边距设置是否符合预期。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>\usepackage{graphicx}</code></strong></p>
+<p>加载了<code>graphicx</code>宏包</p>
+<p>这一行代码本身不产生任何效果，但它使得我们可以在正文部分使用<code>\includegraphics</code>命令来插入图片</p>
+</li>
+<li>
+<p><strong><code>\usepackage[...]{hyperref}</code></strong></p>
+<p>加载了<code>hyperref</code>宏包，并通过一系列参数对其进行了详细配置：</p>
+<ul>
+<li><code>colorlinks</code>: 使链接以彩色文本显示</li>
+<li><code>citecolor=blue</code>: 文献引用链接为蓝色</li>
+<li><code>linkcolor=black</code>: 内部跳转链接（如目录）为黑色</li>
+<li><code>bookmarks=true</code>: 会在生成的 PDF 文件中创建书签，方便快速导航</li>
+</ul>
+</li>
+</ul>
+<h2 id="正文区">正文区
+</h2><p>在导言区完成文档的全局设置后，正文区（<code>document</code>环境）用于撰写具体内容。</p>
+<h3 id="正文环境document">正文环境：document
+</h3><p>所有希望在最终PDF中显示的内容，都必须放在<code>\begin{document}</code>和<code>\end{document}</code>之间</p>
+<p><strong><code>\begin{document}</code>和<code>\end{document}</code>中的<code>document</code> 并不是一个可选参数或用户自定义的名字，它是 LaTeX 固定的环境名称，用于标识正文的开始，不是可选的，不能改动！</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令 / 符号</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\begin{document}</code></td>
+          <td><strong>正文开始标志</strong><br />必须在导言区（包括所有<code>\usepackage</code>命令）之后使用</td>
+      </tr>
+      <tr>
+          <td><code>\end{document}</code></td>
+          <td><strong>正文结束标志</strong><br />编译器会忽略此命令之后的所有内容</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="注释">注释
+</h3><h4 id="单行注释">单行注释
+</h4><p><strong>使用符号<code>%</code>，从<code>%</code>开始到行尾的内容都会被忽略，不会出现在最终PDF里</strong></p>
+<ul>
+<li><strong>注释的一行是源代码的一行，而不是LaTeX文章的一行</strong></li>
+<li><strong>使用快捷键<code>ctrl+/</code>能快速注释选中行</strong></li>
+</ul>
+<h4 id="多行注释">多行注释
+</h4><p><strong>LaTeX没有内置的多行注释符号，如果想要多行注释，最简单的方式是连续多行都写<code>%</code></strong></p>
+<p>也可以使用下面的方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\iffalse</span>
+</span></span><span style="display:flex;"><span>这几行内容都会被忽略
+</span></span><span style="display:flex;"><span>即使有多行
+</span></span><span style="display:flex;"><span>LaTeX 也不会处理
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\fi</span>
+</span></span></code></pre></div><p><strong><code>\iffalse</code>表示“如果条件为假”，LaTeX会跳过它和<code>\fi</code> 之间的内容，相当于把里面的东西忽略掉</strong></p>
+<h3 id="示例-2">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">% 作者的所有可见内容、命令和环境都写在这里。
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">% 这一行是注释，不会显示在PDF中
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    ...
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><h1 id="文档内容排版">文档内容排版
+</h1><p>在设置好文档的框架（导言区）后，我们就可以开始在正文环境中填充实际内容了</p>
+<p>这部分将介绍如何组织文本结构、设置样式以及创建列表</p>
+<h2 id="段落间距与分页">段落、间距与分页
+</h2><p>LaTeX会自动处理文本的排版，但我们有时也需要手动控制换行和分页</p>
+<h3 id="命令操作">命令操作
+</h3><p>注意：</p>
+<ul>
+<li><strong>在行中的命令最好左右加上空格</strong></li>
+<li><strong>在行间的命令最好上下隔开空行</strong></li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>操作</th>
+          <th>实现方式</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>开始新段落</strong></td>
+          <td>在代码中留出一个或多个空行</td>
+          <td>这新段落会自动应用首行缩进</td>
+      </tr>
+      <tr>
+          <td><strong>强制换行</strong></td>
+          <td><code>\\</code> 或 <code>\newline</code></td>
+          <td>在当前位置中断该行内容<br />从下一行开始它不属于新段落，因此<strong>没有首行缩进</strong></td>
+      </tr>
+      <tr>
+          <td><strong>禁止换行</strong></td>
+          <td><code>~</code></td>
+          <td>这是非换行空格<br /><strong>放在两个词之间以确保它们不会因换行而分开</strong><br />比如<code>Dr.~Smith</code></td>
+      </tr>
+      <tr>
+          <td><strong>制造水平空格</strong></td>
+          <td><code>\quad</code></td>
+          <td>产生一个当前字号的全角宽度 (<code>1em</code>) 的空格</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>\qquad</code></td>
+          <td>产生当前字号的<strong>两倍全角宽度</strong>的空格</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>\hspace{长度}</code></td>
+          <td>产生一个指定长度的水平空格，如<code>\hspace{1cm}</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>\hfill</code></td>
+          <td>弹性空格，会自动填充所在行所有可用的水平空间<br />可用于实现左右对齐</td>
+      </tr>
+      <tr>
+          <td><strong>制造垂直空行</strong></td>
+          <td><code>\vspace{长度}</code></td>
+          <td>产生一个指定高度的垂直空白，如<code>\vspace{5mm}</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>\smallskip</code>, <code>\medskip</code>, <code>\bigskip</code></td>
+          <td>三个预设的、有弹性的垂直空白，尺寸由小到大</td>
+      </tr>
+      <tr>
+          <td><strong>强制分页</strong></td>
+          <td><code>\newpage</code></td>
+          <td>立即结束当前页面，将后续内容移至新的一页</td>
+      </tr>
+      <tr>
+          <td><strong>局部取消缩进</strong></td>
+          <td><code>\noindent</code></td>
+          <td>段落开头不缩进<br />注意要和正文之间有空格/换行符</td>
+      </tr>
+      <tr>
+          <td><strong>全局取消缩进</strong></td>
+          <td><code>\setlength{\parindent}{0pt}</code></td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td><strong>局部进行缩进</strong></td>
+          <td><code>\hspace*{2em}段落\\</code></td>
+          <td>和上一条命令结合可以做到指定行才缩进</td>
+      </tr>
+      <tr>
+          <td><strong>左对齐</strong></td>
+          <td><code>\begin{flushleft}...\end{flushleft}</code></td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td><strong>居中对齐</strong></td>
+          <td><code>\begin{center}...\end{center}</code></td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td><strong>右对齐</strong></td>
+          <td><code>\begin{flushright}...\end{flushright}</code></td>
+          <td>-</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-3">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>这是第一段的文字，一直写下去直到行尾自动换行
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>这是第二段的文字，因为它和第一段之间有一个空行，所以它会首行缩进
+</span></span><span style="display:flex;"><span>现在要强制换行了<span style="color:#c678dd">\\</span>这一句紧接着上一句，但是没有缩进
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>center<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>这是一段居中的文字
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>center<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\noindent</span> 这一行虽然换行了，却没有首行缩进
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\noindent</span> 开头 <span style="color:#c678dd">\quad</span> 我远离了前面的字 <span style="color:#c678dd">\qquad</span> 我更远离了 <span style="color:#c678dd">\hspace</span><span style="color:#e5c07b">{</span>2cm<span style="color:#e5c07b">}</span> 还是我比较远一点
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>左边内容→弹性 <span style="color:#c678dd">\hfill</span> 弹性←右边内容
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>小空行：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\smallskip</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>中空行：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\medskip</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>大空行：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\bigskip</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>自定义空行：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\vspace</span><span style="color:#e5c07b">{</span>2cm<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>到这里是两厘米空行
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>要另起一页了
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\newpage</span>
+</span></span><span style="display:flex;"><span>这是新的一页
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819190726829.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819190726829"
+	
+	
+></p>
+<h2 id="文本样式">文本样式
+</h2><p>LaTeX 提供了一系列命令来改变局部文本的字体样式</p>
+<h3 id="命令">命令
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>效果</th>
+          <th>英文说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>\textbf{...}</code></strong></td>
+          <td>加粗文本</td>
+          <td><strong>B</strong>old <strong>F</strong>ace</td>
+      </tr>
+      <tr>
+          <td><strong><code>\textit{...}</code></strong></td>
+          <td>意大利斜体</td>
+          <td><strong>It</strong>alic</td>
+      </tr>
+      <tr>
+          <td><strong><code>\textsl{...}</code></strong></td>
+          <td>倾斜文本</td>
+          <td><strong>Sl</strong>anted</td>
+      </tr>
+      <tr>
+          <td><strong><code>\textsc{...}</code></strong></td>
+          <td>小型大写字母</td>
+          <td><strong>S</strong>mall <strong>C</strong>aps</td>
+      </tr>
+      <tr>
+          <td><strong><code>\textup{...}</code></strong></td>
+          <td>直立体</td>
+          <td><strong>Up</strong>right (用于在斜体环境中恢复正常字体)</td>
+      </tr>
+      <tr>
+          <td><strong><code>\underline{...}</code></strong></td>
+          <td>下划线</td>
+          <td><strong>Underline</strong></td>
+      </tr>
+      <tr>
+          <td><strong><code>\texttt{...}</code></strong></td>
+          <td>等宽字体/打字机体</td>
+          <td><strong>typewriter</strong></td>
+      </tr>
+      <tr>
+          <td><strong><code>\textnormal{...}</code></strong></td>
+          <td>正常文本</td>
+          <td>恢复到当前文档的<strong>默认字体</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>他们之间可以互相嵌套，比如：<code>\underline{\textbf{\textit{示例文本}}}</code></strong></p>
+<h3 id="示例-4">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\noindent</span>
+</span></span><span style="display:flex;"><span>这是一段普通的文本，其中包含 <span style="color:#c678dd">\textbf</span><span style="color:#e5c07b">{</span>加粗<span style="color:#e5c07b">}</span> 和 <span style="color:#c678dd">\textit</span><span style="color:#e5c07b">{</span>斜体<span style="color:#e5c07b">}</span><span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>这是正常字母：ABC<span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>这是小型大写字母<span style="color:#c678dd">\textsc</span><span style="color:#e5c07b">{</span>abc<span style="color:#e5c07b">}</span><span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>请注意 <span style="color:#c678dd">\textsl</span><span style="color:#e5c07b">{</span>倾斜<span style="color:#e5c07b">}</span> 与 <span style="color:#c678dd">\textit</span><span style="color:#e5c07b">{</span>意大利斜体<span style="color:#e5c07b">}</span> 的细微差别<span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\underline</span><span style="color:#e5c07b">{</span><span style="color:#c678dd">\textbf</span><span style="color:#e5c07b">{</span><span style="color:#c678dd">\textit</span><span style="color:#e5c07b">{</span>既要下划线又要斜体还要加粗就这样<span style="color:#e5c07b">}}}</span><span style="color:#c678dd">\\</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250817132107426.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250817132107426"
+	
+	
+></p>
+<h2 id="特殊字符">特殊字符
+</h2><p>在 LaTeX 中，许多键盘上的符号被用作特殊命令，因此不能直接输入。这一节将介绍如何正确地输入这些特殊字符，以及其他一些常用的排版符号。</p>
+<h3 id="英文引号">英文引号
+</h3><p>英文的弯引号<code>‘ ’</code>和<code>“ ”</code>与键盘上直接打出的直引号<code>'</code>和<code>&quot;</code>是不同的</p>
+<p>在 LaTeX 中，输入正确的弯引号需要使用特定的按键</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>输入方式</th>
+          <th>渲染效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>英文单引号 (左)</strong></td>
+          <td>` (反单引号)</td>
+          <td><code>‘</code></td>
+      </tr>
+      <tr>
+          <td><strong>英文单引号 (右)</strong></td>
+          <td>&rsquo; (单引号)</td>
+          <td><code>’</code></td>
+      </tr>
+      <tr>
+          <td><strong>英文双引号 (左)</strong></td>
+          <td>`` (两个反单引号)</td>
+          <td><code>“</code></td>
+      </tr>
+      <tr>
+          <td><strong>英文双引号 (右)</strong></td>
+          <td>&rsquo;&rsquo; (两个单引号)</td>
+          <td><code>”</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="保留字符">保留字符
+</h3><p>以下字符在LaTeX中有特殊含义，因此不能直接在文本中输入
+要显示它们本身，必须在前面加上反斜杠 <code>\</code> 来进行转义</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>输入命令</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>#</strong></td>
+          <td><code>\#</code></td>
+          <td>宏定义参数符号</td>
+      </tr>
+      <tr>
+          <td><strong>$</strong></td>
+          <td><code>\$</code></td>
+          <td>数学模式切换符号</td>
+      </tr>
+      <tr>
+          <td><strong>%</strong></td>
+          <td><code>\%</code></td>
+          <td>注释符号</td>
+      </tr>
+      <tr>
+          <td><strong>&amp;</strong></td>
+          <td><code>\&amp;</code></td>
+          <td>对齐符号（用于表格、矩阵等）</td>
+      </tr>
+      <tr>
+          <td><strong>_</strong></td>
+          <td><code>\_</code></td>
+          <td>下标符号（数学模式）</td>
+      </tr>
+      <tr>
+          <td><strong>{</strong></td>
+          <td><code>\{</code></td>
+          <td>命令参数或分组的开始</td>
+      </tr>
+      <tr>
+          <td><strong>}</strong></td>
+          <td><code>\}</code></td>
+          <td>命令参数或分组的结束</td>
+      </tr>
+      <tr>
+          <td><strong>^</strong></td>
+          <td><code>\^{}</code></td>
+          <td>上标符号（数学模式）</td>
+      </tr>
+      <tr>
+          <td><strong>~</strong></td>
+          <td><code>\~{}</code></td>
+          <td>非换行空格或字母重音</td>
+      </tr>
+      <tr>
+          <td><strong>\</strong></td>
+          <td><code>\textbackslash</code></td>
+          <td>命令引导符，也就是反斜杠</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="常见货币与版权符号">常见货币与版权符号
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>输入命令</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>€</strong></td>
+          <td><code>\texteuro</code></td>
+          <td>需要 <code>textcomp</code> 宏包</td>
+      </tr>
+      <tr>
+          <td><strong>£</strong></td>
+          <td><code>\pounds</code></td>
+          <td>无需特殊宏包</td>
+      </tr>
+      <tr>
+          <td><strong>¥</strong></td>
+          <td><code>\textyen</code></td>
+          <td>需要 <code>textcomp</code> 宏包 (在 <code>ctex</code> 环境下有时可直接输入)</td>
+      </tr>
+      <tr>
+          <td><strong>©</strong></td>
+          <td><code>\copyright</code></td>
+          <td>版权符号</td>
+      </tr>
+      <tr>
+          <td><strong>®</strong></td>
+          <td><code>\textregistered</code></td>
+          <td>注册商标符号</td>
+      </tr>
+      <tr>
+          <td><strong>™</strong></td>
+          <td><code>\texttrademark</code></td>
+          <td>商标符号</td>
+      </tr>
+      <tr>
+          <td><strong>°</strong></td>
+          <td><code>\textdegree</code></td>
+          <td>度数符号 (文本模式)</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="破折号与连字号">破折号与连字号
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>输入</th>
+          <th>渲染效果</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>连字号 (Hyphen)</strong></td>
+          <td><code>-</code> (一个 <code>-</code>)</td>
+          <td>-</td>
+          <td>用于连接复合词，如<code>state-of-the-art</code>。</td>
+      </tr>
+      <tr>
+          <td><strong>En 短破折号 (En-dash)</strong></td>
+          <td><code>--</code> (两个 <code>-</code>)</td>
+          <td>–</td>
+          <td>用于表示数值、日期范围，如<code>pages 10–20</code></td>
+      </tr>
+      <tr>
+          <td><strong>Em 长破折号 (Em-dash)</strong></td>
+          <td><code>---</code> (三个 <code>-</code>)</td>
+          <td>—</td>
+          <td>用于分隔句子——功能类似中文的破折号</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="url和文件路径">URL和文件路径
+</h3><p>网址和文件路径中经常包含<code>_</code>、<code>%</code>、<code>&amp;</code>等特殊字符，直接输入会导致编译错误</p>
+<p>处理这个问题的最佳方法是使用<code>url</code>或<code>hyperref</code>宏包提供的<code>\url{}</code>命令，还可以生成可点击的链接</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>命令</th>
+          <th>示例与说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>网址/路径</strong></td>
+          <td><code>\url{...}</code></td>
+          <td><code>\url{https://www.example.com/test_path?q=query%20space}</code> <br>• 自动处理特殊字符 <br>• 允许在合适的位置断行</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="字母重音与变音符号">字母重音与变音符号
+</h3><p>在输入一些非英语单词（如法语、德语）时，需要为字母添加重音符号</p>
+<p>虽然现代的XeLaTeX编译器通常支持直接输入这些字符，但使用命令还是好一些</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>效果</th>
+          <th>命令</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>à</strong></td>
+          <td><strong>\`a</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="标题作者与日期">标题、作者与日期
+</h2><p>这些信息构成了文档的“标题块”，通常显示在文档的最开始</p>
+<p>它们在导言区被定义，然后在正文区通过一个命令显示出来</p>
+<h3 id="命令详解">命令详解
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>作用</th>
+          <th>使用区域</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>\title{文档标题}</code></strong></td>
+          <td>定义文档的主标题</td>
+          <td>导言区</td>
+      </tr>
+      <tr>
+          <td><strong><code>\author{作者姓名}</code></strong></td>
+          <td>定义文档的作者</td>
+          <td>导言区</td>
+      </tr>
+      <tr>
+          <td><strong><code>\date{日期}</code></strong></td>
+          <td>定义文档的日期<br />可留空<code>\date{}</code>不显示日期，或使用<code>\today</code>自动生成当天日期</td>
+          <td>导言区</td>
+      </tr>
+      <tr>
+          <td><strong><code>\maketitle</code></strong></td>
+          <td>将以上三个命令定义的信息生成并显示在文档中</td>
+          <td>正文区</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong><code>\title{...}</code>、<code>\author{...}</code>、<code>\date{...}</code>这三个命令在<code>\begin{document}</code>之前被调用，它们只是将内容“暂存”起来，并不会直接显示任何东西</strong></p>
+<p><strong>进入<code>\begin{document}</code>环境后，<code>\maketitle</code>命令被调用，它会读取之前暂存的标题、作者和日期信息，并按照<code>ctexart</code>文档类型预设的、规范的格式将它们排版输出</strong></p>
+<h3 id="示例-5">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e06c75">[12pt]</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\title</span><span style="color:#e5c07b">{</span>噢耶，构构的文档<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\author</span><span style="color:#e5c07b">{</span>张顺三<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\date</span><span style="color:#e5c07b">{</span><span style="color:#c678dd">\today</span><span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\maketitle</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>文档的正文
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250817125546110.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250817125546110"
+	
+	
+></p>
+<h2 id="章节与目录">章节与目录
+</h2><p>对于结构化的长文档，章节是必不可少的</p>
+<p>LaTeX通过简单的命令即可创建带自动编号的章节，并基于这些章节信息自动生成目录</p>
+<h3 id="命令详解-1">命令详解
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>层级</th>
+          <th>适用文档类型</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\chapter{章标题}</code></td>
+          <td>章</td>
+          <td><code>book</code>, <code>report</code></td>
+      </tr>
+      <tr>
+          <td><code>\section{节标题}</code></td>
+          <td>节（一级标题）</td>
+          <td><code>article</code>, <code>report</code>, <code>book</code></td>
+      </tr>
+      <tr>
+          <td><code>\subsection{小节标题}</code></td>
+          <td>小节（二级标题）</td>
+          <td><code>article</code>, <code>report</code>, <code>book</code></td>
+      </tr>
+      <tr>
+          <td><code>\subsubsection{小小节标题}</code></td>
+          <td>小小节（三级标题）<br /><strong>LaTeX默认只有三级标题，到此为止</strong></td>
+          <td><code>article</code>, <code>report</code>, <code>book</code></td>
+      </tr>
+      <tr>
+          <td><code>\tableofcontents</code></td>
+          <td>-</td>
+          <td>所有</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong><code>\tableofcontents</code>命令会在其所在位置插入一个完整的目录</strong></p>
+<p><strong>LaTeX会自动扫描全文的章节命令来生成此目录</strong></p>
+<p><strong>在Overleaf中，目录的更新是自动的；在本地环境中，有时需要编译两次才能正确生成</strong></p>
+<h3 id="示例-6">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\title</span><span style="color:#e5c07b">{</span>噢耶，构构的文档<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\author</span><span style="color:#e5c07b">{</span>张顺三<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\date</span><span style="color:#e5c07b">{</span><span style="color:#c678dd">\today</span><span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\maketitle</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\tableofcontents</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>引言<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>第一部分的正文内容
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\subsection</span><span style="color:#e5c07b">{</span>研究背景<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>第一部分第一节的正文内容
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\subsubsection</span><span style="color:#e5c07b">{</span>地点调研<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>第一部分第一节第一点的正文内容
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>实验方法<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>第二部分的正文内容
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250817130003732.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250817130003732"
+	
+	
+></p>
+<h2 id="摘要与关键词">摘要与关键词
+</h2><p>摘要（Abstract）是学术文章开头不可或缺的部分，它简要概括了文章的核心内容</p>
+<p>在<code>article</code>和<code>ctexart</code>等文档类型中，LaTeX提供了专门的<code>abstract</code>环境来排版摘要</p>
+<h3 id="环境与命令">环境与命令
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>环境 / 命令</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\begin{abstract}</code><br><code>...</code><br><code>\end{abstract}</code></td>
+          <td><strong>摘要环境</strong><br />放置在此环境中的文本会被自动格式化为摘要样式（通常会带有“摘要”标题，并采用稍窄的页边距）</td>
+      </tr>
+      <tr>
+          <td><code>\textbf{关键词：}</code></td>
+          <td><strong>关键词</strong>并没有标准的独立命令，通常的做法是在摘要内容的末尾，手动换行并使用粗体命令来添加关键词列表</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-7">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\author</span><span style="color:#e5c07b">{</span>笔者<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\title</span><span style="color:#e5c07b">{</span>摘要的示例<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\maketitle</span> <span style="color:#7f848e">% 先显示标题
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>abstract<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\noindent</span> 本文旨在提供一个关于如何在 LaTeX 中创建摘要和关键词的完整示例，通过使用 <span style="color:#c678dd">\texttt</span><span style="color:#e5c07b">{</span>abstract<span style="color:#e5c07b">}</span> 环境，我们可以轻松地生成符合学术规范的摘要部分
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\vspace</span><span style="color:#e5c07b">{</span>1ex<span style="color:#e5c07b">}</span> <span style="color:#7f848e">% 在摘要和关键词之间增加一点垂直距离
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">\noindent\textbf</span><span style="color:#e5c07b">{</span>关键词：<span style="color:#e5c07b">}</span> LaTeX；摘要；关键词；学术写作
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>abstract<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>引言<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>正文内容
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819183240596.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819183240596"
+	
+	
+></p>
+<p><code>\begin{abstract}...\end{abstract}</code>环境会自动在文档标题下方生成一个居中的<strong>摘要</strong>标题，并将环境内的文本以特定格式进行排版</p>
+<p>在摘要正文结束后，我们使用<code>\vspace{1ex}</code> 增加了一个小间距，然后用<code>\noindent</code>取消了接下来的行缩进，并通过<code>\textbf{关键词：}</code> 创建了加粗的关键词标题</p>
+<h2 id="列表环境">列表环境
+</h2><p>列表是组织和呈现条目式信息的有效方式</p>
+<p><strong>LaTeX提供了多种列表环境，它们都以<code>\begin{...}</code>开始，以<code>\end{...}</code>结束</strong></p>
+<p><strong>列表中的每个项目都由<code>\item</code>命令开始</strong></p>
+<h3 id="环境详解">环境详解
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>环境名称</th>
+          <th>列表类型</th>
+          <th>特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>itemize</code></strong></td>
+          <td><strong>无序列表</strong></td>
+          <td>各项默认使用<code>•</code>(实心圆点)作为项目符号</td>
+      </tr>
+      <tr>
+          <td><strong><code>enumerate</code></strong></td>
+          <td><strong>有序列表</strong></td>
+          <td>各项自动编号，默认使用<code>1.</code>，<code>2.</code>，<code>3.</code> &hellip; 作为项目符号</td>
+      </tr>
+      <tr>
+          <td><strong><code>description</code></strong></td>
+          <td><strong>描述列表</strong></td>
+          <td>各项使用<code>\item[标签]</code>自定义标签，标签会加粗显示，适合术语解释</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>任何列表环境都可以嵌套在另一个列表的<code>\item</code>中，形成多级列表</strong></p>
+<h3 id="示例-8">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>水果分类<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>description<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\item</span><span style="color:#e06c75">[常见水果（描述列表）]</span> 这是一些常见的水果：
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>enumerate<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">\item</span> 苹果（有序列表）
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">\item</span> 香蕉
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>enumerate<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\item</span><span style="color:#e06c75">[不常见水果（描述列表）]</span> 这是一些不常见的水果：
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>itemize<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">\item</span> 榴莲（无序列表）
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">\item</span> 蛇皮果
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>itemize<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>description<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250818111246972.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250818111246972"
+	
+	
+></p>
+<p>最外层是一个<code>description</code>列表，用<code>\item[常见水果]</code>和<code>\item[不常见水果]</code>创建了两个带自定义粗体标签的条目</p>
+<p>在常见水果条目内部，嵌套了一个<code>enumerate</code>环境，创建了带自动编号<code>1.</code>和<code>2.</code>的有序列表</p>
+<p>在不常见水果条目内部，嵌套了一个<code>itemize</code>环境，创建了带<code>•</code>符号的无序列表</p>
+<h2 id="脚注">脚注
+</h2><p>脚注用于在页面底部对正文内容进行补充说明、注释或提供引文来源</p>
+<p>LaTeX 提供了完善的自动化支持，可以自动编号和定位</p>
+<h3 id="命令-1">命令
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>作用与说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>\footnote{脚注内容}</code></strong></td>
+          <td><strong>它会在命令所在的位置插入一个上标数字，</strong><br /><strong>并将花括号<code>{}</code>中的脚注内容自动放置在当前页面的底部</strong></td>
+      </tr>
+      <tr>
+          <td><strong><code>\footnotemark[编号]</code></strong></td>
+          <td><strong>只生成上标数字标记，但不生成页面底部的脚注文本</strong><br />用于<code>\footnote</code>命令无法正常工作的特殊环境<br />编号可以省略，也可以加上来指定脚注</td>
+      </tr>
+      <tr>
+          <td><strong><code>\footnotetext[编号]{脚注内容}</code></strong></td>
+          <td><strong>只生成页面底部的脚注文本，不生成上标标记</strong><br />通常与<code>\footnotemark</code>配对使用<br />编号可以省略，省略时自动递增</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="编号规则">编号规则
+</h3><h4 id="默认编号规则">默认编号规则
+</h4><p><strong>使用<code>\footnote{}</code>：</strong></p>
+<p><strong>LaTeX会自动给每个脚注分配连续编号（从 1 开始），编号会根据出现顺序递增</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>第一条脚注<span style="color:#c678dd">\footnote</span><span style="color:#e5c07b">{</span>内容 A<span style="color:#e5c07b">}</span>  
+</span></span><span style="display:flex;"><span>第二条脚注<span style="color:#c678dd">\footnote</span><span style="color:#e5c07b">{</span>内容 B<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250819204954444.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819204954444"
+	
+	
+></p>
+<p><strong>使用<code>\footnotemark</code> + <code>\footnotetext</code>：</strong></p>
+<p><strong>如果不指定编号，<code>\footnotemark</code>会自动使用下一个可用编号，对应的<code>\footnotetext</code>默认使用同一个编号</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>文字<span style="color:#c678dd">\footnotemark</span>  <span style="color:#7f848e">% 自动分配编号 1
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\footnotetext</span><span style="color:#e5c07b">{</span>脚注内容<span style="color:#e5c07b">}</span>  <span style="color:#7f848e">% 编号 1
+</span></span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250819205019473.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819205019473"
+	
+	
+></p>
+<p><strong>下一个脚注会自动编号2：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>字1<span style="color:#c678dd">\footnotemark</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e5c07b">{</span>脚注内容1<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>字2<span style="color:#c678dd">\footnotemark</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e5c07b">{</span>脚注内容2<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250819205812229.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819205812229"
+	
+	
+></p>
+<p><strong>一定要在每个标记后紧跟内容（也就是<code>mark</code>+<code>text</code>成对出现），不然<code>footnotetext</code>无法识别新的编号：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>字1<span style="color:#c678dd">\footnotemark</span>
+</span></span><span style="display:flex;"><span>字2<span style="color:#c678dd">\footnotemark</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e5c07b">{</span>脚注内容1<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e5c07b">{</span>脚注内容2<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250819210030750.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819210030750"
+	
+	
+></p>
+<p><strong><code>\footnotemark</code>使用时，会让当前页脚计数器<code>footnote</code>的值加1</strong></p>
+<p><strong>当我们连续两次使用<code>\footnotemark</code>但还没有用<code>\footnotetext</code>，LaTeX会把两次标记都绑定到当前计数器值，因此两个标记都显示为2</strong></p>
+<h3 id="手动指定编号">手动指定编号
+</h3><p><strong>可以在方括号<code>[]</code>里指定编号，编号不会按顺序递增，而是使用我们指定的数字</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>第一次引用<span style="color:#c678dd">\footnotemark</span><span style="color:#e06c75">[1]</span>  
+</span></span><span style="display:flex;"><span>第二次引用<span style="color:#c678dd">\footnotemark</span><span style="color:#e06c75">[5]</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e06c75">[1]</span><span style="color:#e5c07b">{</span>脚注内容1<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e06c75">[5]</span><span style="color:#e5c07b">{</span>脚注内容5<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250819205310686.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819205310686"
+	
+	
+></p>
+<h3 id="多次引用同一脚注">多次引用同一脚注
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>第一次引用<span style="color:#c678dd">\footnotemark</span><span style="color:#e06c75">[1]</span>，第二次引用同一脚注<span style="color:#c678dd">\footnotemark</span><span style="color:#e06c75">[1]</span>  
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e06c75">[1]</span><span style="color:#e5c07b">{</span>脚注内容<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250819205353648.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819205353648"
+	
+	
+></p>
+<h3 id="特别注意">特别注意
+</h3><p><strong><code>\footnotemark</code>不增加编号计数，除非与<code>\footnotetext</code>配合</strong></p>
+<p><strong><code>\footnote{}</code>会同时生成标记和内容，计数自动递增</strong></p>
+<p><strong>手动编号要小心，避免与自动编号冲突</strong></p>
+<h3 id="示例1常规用法">示例1：常规用法
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\LaTeX</span> <span style="color:#c678dd">\footnote</span><span style="color:#e5c07b">{</span>发音为 /`laːtɛx/<span style="color:#e5c07b">}</span> 是一种高质量的排版系统
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>这个系统基于 TeX<span style="color:#c678dd">\footnote</span><span style="color:#e5c07b">{</span>TeX 是排版引擎，而 <span style="color:#c678dd">\LaTeX</span> 是基于 TeX 的宏包<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819210832146.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819210832146"
+	
+	
+></p>
+<p><strong>这里使用的<code>\LaTeX</code>是一个比较好玩的命令，会显示LaTeX的logo</strong></p>
+<h3 id="示例2在表格等特殊环境中使用">示例2：在表格等特殊环境中使用
+</h3><p>在<code>tabular</code>环境中，直接使用<code>\footnote</code> 会出错，此时需要<code>\footnotemark</code>和<code>\footnotetext</code> 的组合</p>
+<p>表格在后面会讲到：<a class="link" href="#%e5%88%9b%e5%bb%ba%e8%a1%a8%e6%a0%bc" >创建表格
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>table<span style="color:#e5c07b">}</span>[h]
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\centering</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\caption</span><span style="color:#e5c07b">{</span>在表格中使用脚注<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>tabular<span style="color:#e5c07b">}{</span>|l|c|<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">\hline</span>
+</span></span><span style="display:flex;"><span>        项目 <span style="color:#e5c07b">&amp;</span> 预测数值<span style="color:#c678dd">\footnotemark</span><span style="color:#e06c75">[1]</span> <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>        拨款博丽神社 <span style="color:#e5c07b">&amp;</span> 999999999<span style="color:#c678dd">\footnotemark</span><span style="color:#e06c75">[2]</span> <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">\hline</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>tabular<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>table<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e06c75">[1]</span><span style="color:#e5c07b">{</span>此数值为初步估算<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\footnotetext</span><span style="color:#e06c75">[2]</span><span style="color:#e5c07b">{</span>此数值为完全虚构<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819210650692.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819210650692"
+	
+	
+></p>
+<h1 id="插入图片">插入图片
+</h1><p>在 LaTeX 中插入图片通常分为三步：</p>
+<ol>
+<li>加载宏包</li>
+<li>上传图片</li>
+<li>使用<code>figure</code>环境和<code>\includegraphics</code>命令</li>
+</ol>
+<p>图片通常被放置在浮动体(<code>figure</code>)环境中，这允许 LaTeX 自动寻找页面上最合适的位置放置图片，避免产生难看的大片空白</p>
+<h2 id="准备工作">准备工作
+</h2><h3 id="加载宏包">加载宏包
+</h3><p><strong>在导言区必须导入graphicx包：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>graphicx<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><h3 id="上传图片">上传图片
+</h3><p><strong>在Overleaf的左侧文件列表中，点击 &ldquo;Upload&rdquo; 按钮，上传我们的图片文件</strong></p>
+<p><strong>请确保图片文件与<code>.tex</code>文件在同一目录下或在子目录中（此时引用需写明路径，如<code>images/logo.png</code>）</strong></p>
+<h2 id="figure环境">figure环境
+</h2><p>这是包裹图片及其相关信息（如标题）的容器，下面我们一步步解析构成<code>figure</code>环境的各个命令</p>
+<h3 id="beginfigure位置建议符">\begin{figure}[位置建议符]
+</h3><p>**这个命令标志着一个<code>figure</code>浮动环境的开始，注意b</p>
+<p><strong>方括号<code>[]</code>中的位置建议符是可选的，我们通过它向LaTeX建议我们希望图片出现的位置</strong></p>
+<p>常用的建议符有：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>英文含义</th>
+          <th>说明</th>
+          <th>常用组合示例</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>h</code></td>
+          <td><strong>here</strong></td>
+          <td>尽可能把浮动体放在当前位置（代码所在位置附近）</td>
+          <td><code>[h]</code></td>
+          <td>单独使用时可能不生效，因为LaTeX仍然会遵循排版规则</td>
+      </tr>
+      <tr>
+          <td><code>t</code></td>
+          <td><strong>top</strong></td>
+          <td>尝试把浮动体放在页面顶部</td>
+          <td><code>[t]</code></td>
+          <td>浮动体优先放在页面顶部</td>
+      </tr>
+      <tr>
+          <td><code>b</code></td>
+          <td><strong>bottom</strong></td>
+          <td>尝试把浮动体放在页面底部</td>
+          <td><code>[b]</code></td>
+          <td>浮动体优先放在页面底部</td>
+      </tr>
+      <tr>
+          <td><code>p</code></td>
+          <td><strong>page</strong></td>
+          <td>将浮动体放在一个只包含浮动体的专门页面</td>
+          <td><code>[p]</code></td>
+          <td>适合大量图表或大表格</td>
+      </tr>
+      <tr>
+          <td><code>!</code></td>
+          <td><strong>override</strong></td>
+          <td>忽略部分限制，强制LaTeX尽量遵守指定位置</td>
+          <td><code>[!h]</code></td>
+          <td>例如<code>[!ht]</code>，让LaTeX尽量放在当前位置或顶部</td>
+      </tr>
+      <tr>
+          <td><code>H</code></td>
+          <td><strong>here absolutely</strong></td>
+          <td>强制浮动体出现在当前位置，不允许浮动（需<code>float</code>宏包）</td>
+          <td><code>[H]</code></td>
+          <td>完全固定位置，不浮动</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>我们可以将这些建议符组合使用，例如<code>[htbp]</code>，这会告诉LaTeX：</p>
+<p>优先尝试放在这里(<code>h</code>)，如果不行就放在页顶(<code>t</code>)，再不行就放在页底(<code>b</code>)，最差的情况就单独放一页(<code>p</code>)</p>
+<h3 id="centering">\centering
+</h3><p><strong>此命令会使其环境内的内容（在这里就是我们的图片）在页面上水平居中显示</strong></p>
+<p>它独占一行，不需要花括号</p>
+<h3 id="includegraphics">\includegraphics
+</h3><p><strong>这是实际插入图片文件的命令，通常放在<code>figure</code>环境内部</strong></p>
+<p><strong>格式</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\includegraphics</span><span style="color:#e06c75">[可选参数]</span><span style="color:#e5c07b">{</span>图片文件名<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>可选参数</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>width=8cm</code></strong></td>
+          <td>指定图片的显示宽度为8厘米</td>
+      </tr>
+      <tr>
+          <td><strong><code>width=0.5\textwidth</code></strong></td>
+          <td>指定图片的显示宽度为当前文本区域宽度的50%<br />这是一种更灵活、更推荐的方式，因为它会自动适应不同页面设置</td>
+      </tr>
+      <tr>
+          <td><strong><code>height=6cm</code></strong></td>
+          <td>指定图片的显示高度</td>
+      </tr>
+      <tr>
+          <td><strong><code>scale=0.5</code></strong></td>
+          <td>将图片缩放至原始尺寸的50%</td>
+      </tr>
+      <tr>
+          <td><strong><code>angle=45</code></strong></td>
+          <td>将图片逆时针旋转45度</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="caption图片标题">\caption{图片标题}
+</h3><p><strong>这个命令会为我们的图片生成一个带自动编号的标题（例如&quot;图1: 公司Logo&quot;）</strong></p>
+<p>LaTeX会自动管理编号，我们完全无需担心顺序问题，只需要在花括号<code>{}</code>中写入图片的描述即可</p>
+<h3 id="label标签名">\label{标签名}
+</h3><p>该命令为图片设置一个独一无二的标签，<strong>用于在正文中进行交叉引用</strong>，标签本身不会在文档中显示任何内容</p>
+<p>为了便于管理，<strong>我们推荐使用<code>fig:</code>作为图片标签的前缀，也就是写成<code>\label{fig:标签名}</code></strong></p>
+<p><strong>设置好标签后，我们就可以在文中的任何地方使用<code>\ref{fig:标签名}</code>来引用这张图片的编号</strong></p>
+<h3 id="endfigure">\end{figure}
+</h3><p>这个命令标志着<code>figure</code>环境的结束</p>
+<h2 id="示例-9">示例
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-LATEX" data-lang="LATEX"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>graphicx<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>公司简介<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>如图 <span style="color:#c678dd">\ref</span><span style="color:#e5c07b">{</span>fig:logo<span style="color:#e5c07b">}</span> 所示，这是我们公司的Logo，可爱捏
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>figure<span style="color:#e5c07b">}</span>[htbp]	
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\centering</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\includegraphics</span><span style="color:#e06c75">[width=0.4\textwidth]</span><span style="color:#e5c07b">{</span>2.png<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\caption</span><span style="color:#e5c07b">{</span>公司 Logo<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>fig:logo<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>figure<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250818131120411.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250818131120411"
+	
+	
+></p>
+<p>(确保<code>1.png</code>文件已上传至当前Overleaf项目中，注意文件路径)</p>
+<ul>
+<li>
+<p><strong><code>\begin{figure}[htbp]</code></strong></p>
+<p>开始一个图片浮动环境，并建议LaTeX将其放置在当前位置、页面顶部或底部</p>
+</li>
+<li>
+<p><strong><code>\centering</code></strong></p>
+<p>命令<code>\includegraphics</code>输出的图片将会在可用宽度内居中</p>
+</li>
+<li>
+<p><strong><code>\includegraphics[width=0.4\textwidth]{logo.png}</code></strong></p>
+<ul>
+<li><code>{logo.png}</code>: 指定要插入的图片文件</li>
+<li><code>[width=0.4\textwidth]</code>: 将该图片的显示宽度设置为页面文本宽度的 40%</li>
+</ul>
+</li>
+<li>
+<p><strong><code>\caption{公司 Logo}</code></strong></p>
+<p>在图片下方生成带编号的标题</p>
+</li>
+<li>
+<p><strong><code>\label{fig:logo}</code></strong></p>
+<p>为该图赋予一个唯一的标签<code>fig:logo</code></p>
+</li>
+</ul>
+<p>在正文中，<code>如图 \ref{fig:logo} 所示</code> 这句话在编译后会自动变成 “如图 1 所示”，实现了自动引用</p>
+<h1 id="创建表格">创建表格
+</h1><p>与图片类似，表格通常被放置在一个叫<code>table</code>的浮动环境中，以便排版和添加标题</p>
+<p>而表格的实际内容则由<code>tabular</code>环境构建</p>
+<p><strong>对于复杂表格，使用在线表格生成器（如 <a class="link" href="https://www.tablesgenerator.com/"  target="_blank" rel="noopener"
+    >TablesGenerator.com
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>）可以大大提高效率！</strong></p>
+<h2 id="环境与命令-1">环境与命令
+</h2><h3 id="table环境">table环境
+</h3><p><strong><code>table</code>环境是表格的浮动容器，其作用和用法与<code>figure</code>环境几乎完全相同，它允许LaTeX自动寻找最佳位置放置表格，其中<code>\begin{table}[htbp]</code>，<code>\centering</code>，<code>\caption{}</code>和<code>\label{}</code>命令的用法也完全一致</strong></p>
+<p><strong>为了区分，我们最好使用<code>tab:</code>作为表格标签的前缀，例如<code>\label{tab:my-data}</code></strong></p>
+<h3 id="tabular环境">tabular环境
+</h3><p><strong>它就类似图片的\includegraphics，是构建表格内容的主体，所有的文本、数字和分隔线都在这个环境中定义</strong></p>
+<p><strong>一般也放在table环境中</strong></p>
+<h4 id="begintabular列格式定义">\begin{tabular}{列格式定义}
+</h4><p>这个命令标志着表格实际内容的开始</p>
+<p>它有一个必须填写的参数<code>{列格式定义}</code>，由一组特殊的字符构成，用于定义表格有多少列以及每一列的对齐方式</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>含义</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>l</code></strong></td>
+          <td>left</td>
+          <td>定义一个<strong>左</strong>对齐的列</td>
+      </tr>
+      <tr>
+          <td><strong><code>c</code></strong></td>
+          <td>center</td>
+          <td>定义一个<strong>居中</strong>对齐的列</td>
+      </tr>
+      <tr>
+          <td><strong><code>r</code></strong></td>
+          <td>right</td>
+          <td>定义一个<strong>右</strong>对齐的列</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>例如，<code>{l|c|r}</code> 表示创建一个三列的表格，第一列左对齐，第二列居中，第三列右对齐，列与列之间用竖线隔开</p>
+<h4 id="内容和边框">内容和边框
+</h4><p>在 <code>tabular</code> 环境内部，我们使用以下符号和命令来填充内容和绘制线条：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>作用/说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>&amp;</code></strong></td>
+          <td>列分隔符，用于分隔同一行的不同列，如果一行有n列，则该行应有n-1个<code>&amp;</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>\\</code></strong></td>
+          <td>行结束符，结束当前行，后续内容将成为新的一行</td>
+      </tr>
+      <tr>
+          <td><strong><code>\hline</code></strong></td>
+          <td>水平线命令，绘制贯穿表格所有列的完整水平线，通常放在一行的<code>\\</code>之后，分隔不同的行</td>
+      </tr>
+      <tr>
+          <td><strong><code>\cline{i-j}</code></strong></td>
+          <td>局部水平线命令，从第i列左边开始，到第j列右边结束，可精细控制水平线的范围</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="示例-10">示例
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>幻想乡智力表<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>table<span style="color:#e5c07b">}</span>[htbp]
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\centering</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\caption</span><span style="color:#e5c07b">{</span>请输入文本<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>tab:table<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>tabular<span style="color:#e5c07b">}{</span>|c|c|<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#c678dd">\hline</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#c678dd">\textbf</span><span style="color:#e5c07b">{</span>妖精姓名<span style="color:#e5c07b">}</span> <span style="color:#e5c07b">&amp;</span> <span style="color:#c678dd">\textbf</span><span style="color:#e5c07b">{</span>智商<span style="color:#e5c07b">}</span> <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#c678dd">\hline</span>
+</span></span><span style="display:flex;"><span>         大妖精 <span style="color:#e5c07b">&amp;</span> 1 <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#c678dd">\hline</span>
+</span></span><span style="display:flex;"><span>         露娜 <span style="color:#e5c07b">&amp;</span> 1 <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#c678dd">\hline</span>
+</span></span><span style="display:flex;"><span>         琪露诺 <span style="color:#e5c07b">&amp;</span> 9 <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#c678dd">\cline</span><span style="color:#e5c07b">{</span>2-2<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#e5c07b">&amp;</span> 4+5 <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#c678dd">\hline</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>tabular<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>表格底下也能写字哈哈，到底能多长长长长长长长长长长呢
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>table<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>该表格的编号是：<span style="color:#c678dd">\ref</span><span style="color:#e5c07b">{</span>tab:table<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>和图片一样，引用得到的都是编号
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250818183909350.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250818183909350"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong><code>\begin{table}[htbp] ... \end{table}</code></strong></p>
+<p>创建一个表格浮动体</p>
+</li>
+<li>
+<p><strong><code>\centering</code>, <code>\caption</code>, <code>\label</code></strong></p>
+<p>分别使表格居中、添加标题和设置引用标签<code>tab:table</code></p>
+</li>
+<li>
+<p><strong><code>\begin{tabular}{|c|c|}</code></strong></p>
+<ul>
+<li>
+<p>开始<code>tabular</code>环境</p>
+</li>
+<li>
+<p><code>{|c|c|}</code> 定义了表格的格式：最外层有竖线，共两列居中对齐(<code>c</code>)，列之间都有竖线(<code>|</code>)</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>\hline</code></strong></p>
+<p>在表格的顶部、标题行下方和底部绘制了完整的水平分割线</p>
+</li>
+<li>
+<p><strong><code>\textbf{妖精姓名} &amp; \textbf{智商} \\</code></strong></p>
+<p>这是表格的标题行，<code>&amp;</code>分隔了三列的内容，<code>\\</code>结束该行，这里还使用了<code>\textbf</code>命令对标题文字加粗</p>
+</li>
+<li>
+<p><strong><code>琪露诺 &amp; 9 \\</code></strong></p>
+<p>这是第三行数据</p>
+</li>
+<li>
+<p><strong><code>&amp; 4+5 \\</code></strong></p>
+<p>这是第四行数据，注意，因为姓名这一列的内容与上一行相同，所以第一个 <code>&amp;</code> 前留空即可</p>
+</li>
+<li>
+<p><strong><code>\cline{2-2}</code></strong></p>
+<p>绘制了一条第2列的水平线</p>
+</li>
+<li>
+<p><strong><code>\ref{tab:table}</code></strong></p>
+<p>引用表格的编号</p>
+</li>
+</ul>
+<h1 id="数学公式">数学公式
+</h1><p>这是LaTeX最强大的功能，也是它在科技写作领域无可替代的原因</p>
+<h2 id="准备工作-1">准备工作
+</h2><p>在开始之前，确保我们在导言区已经加载了<code>amsmath</code>宏包，它是美国数学学会提供的数学公式扩展包</p>
+<p>通常，我们还会一并加载<code>amssymb</code>（更多符号）和<code>bm</code>（公式加粗）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath, amssymb, bm<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><h2 id="公式模式">公式模式
+</h2><p>LaTeX提供了多种将文本切换到“数学模式”的方式，主要分为三大类</p>
+<ol>
+<li><strong>行内</strong></li>
+<li><strong>无编号行间</strong></li>
+<li><strong>有编号行间</strong></li>
+</ol>
+<h3 id="模式分类">模式分类
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>模式类型</th>
+          <th>代码实现</th>
+          <th>特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>行内公式</strong></td>
+          <td><strong><code>$...$</code></strong></td>
+          <td><strong>公式嵌入在普通文本行中</strong><br />会为了适应行高而适当压缩公式的大小，例如分数会变小</td>
+      </tr>
+      <tr>
+          <td><strong>无编号行间公式</strong></td>
+          <td><strong><code>\[...\]</code></strong></td>
+          <td><strong>公式会单独成行并居中显示</strong><br />以标准、清晰的尺寸进行排版，但不带自动编号</td>
+      </tr>
+      <tr>
+          <td><strong>有编号行间公式</strong></td>
+          <td><strong><code>\begin{equation}</code><br><code>...</code><br><code>\end{equation}</code></strong></td>
+          <td><strong>与<code>\[...\]</code>类似，但会自动在公式右侧添加一个带括号的编号<br />可以使用<code>\labe</code>l加上标签，文中使用<code>\eqre</code>引用其编号<br />只能写一行公式，要多行必须结合<code>aligned</code>等环境</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-11">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>勾股定理<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\noindent</span> 勾股定理是一个基本的几何定理，它说明在直角三角形中，两条直角边的平方和等于斜边的平方，即： <span style="color:#98c379">$</span><span style="color:#e5c07b">a^</span><span style="color:#d19a66">2</span><span style="color:#e5c07b"> </span><span style="color:#56b6c2">+</span><span style="color:#e5c07b"> b^</span><span style="color:#d19a66">2</span><span style="color:#e5c07b"> </span><span style="color:#56b6c2">=</span><span style="color:#e5c07b"> c^</span><span style="color:#d19a66">2</span><span style="color:#98c379">$</span>，这是一个行内公式<span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>我们可以将这个关系式单独展示出来，使其更醒目：
+</span></span><span style="display:flex;"><span><span style="color:#98c379">\[</span><span style="color:#e5c07b"> a^</span><span style="color:#d19a66">2</span><span style="color:#e5c07b"> </span><span style="color:#56b6c2">+</span><span style="color:#e5c07b"> b^</span><span style="color:#d19a66">2</span><span style="color:#e5c07b"> </span><span style="color:#56b6c2">=</span><span style="color:#e5c07b"> c^</span><span style="color:#d19a66">2</span><span style="color:#e5c07b"> </span><span style="color:#98c379">\]</span><span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>为了方便在后文中引用，我们通常使用带编号的公式环境：
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>equation<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    a<span style="color:#e5c07b">^</span>2 + b<span style="color:#e5c07b">^</span>2 = c<span style="color:#e5c07b">^</span>2
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>eq:pythagoras<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>equation<span style="color:#e5c07b">}</span><span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>根据公式 <span style="color:#c678dd">\eqref</span><span style="color:#e5c07b">{</span>eq:pythagoras<span style="color:#e5c07b">}</span>（这个编号是引用的喔），我们可以进行后续的计算
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250818184121980.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250818184121980"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong><code>$...$</code></strong></p>
+<p><code>$</code>符号使<code>a^2 + b^2 = c^2</code> 以行内模式插入文本中</p>
+</li>
+<li>
+<p><strong><code>\[...\]</code></strong></p>
+<p><code>\[</code>和<code>\]</code>将公式在单独一行中居中显示</p>
+</li>
+<li>
+<p><strong><code>\begin{equation}...\end{equation}</code></strong></p>
+<p>这个环境不仅使公式居中独立显示，还在右侧生成了编号<code>(1)</code></p>
+</li>
+<li>
+<p><strong><code>\label{eq:pythagoras}</code></strong></p>
+<p>我们在<code>equation</code>环境内部为这个公式贴上了一个标签<code>eq:pythagoras</code></p>
+</li>
+<li>
+<p><strong><code>\eqref{eq:pythagoras}</code></strong></p>
+<p>在正文中，我们使用<code>\eqref</code>命令引用该标签，LaTeX自动将其替换为带括号的对应编号<code>(1)</code></p>
+</li>
+</ul>
+<h2 id="常用数学命令">常用数学命令
+</h2><p>数学符号和结构是通过反斜杠<code>\</code>开头的命令生成的，下面是几类最常用的命令</p>
+<h3 id="上下标根号与撇求导">上下标、根号与撇（求导）
+</h3><p><strong>注意: 上下标内容如果多于一个字符，必须用花括号<code>{}</code>包裹！</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>命令</th>
+          <th>示例</th>
+          <th>渲染效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>上标</td>
+          <td><code>^</code></td>
+          <td><code>x^{2y}</code></td>
+          <td>$x^{2y}$</td>
+      </tr>
+      <tr>
+          <td>下标</td>
+          <td><code>_</code></td>
+          <td><code>a_{ij}</code></td>
+          <td>$a_{ij}$</td>
+      </tr>
+      <tr>
+          <td>多字符上/下标</td>
+          <td><code>^{...},_{...}</code></td>
+          <td><code>x^{n+1}, a_{i,j}</code></td>
+          <td>$x^{n+1}, a_{i,j}$</td>
+      </tr>
+      <tr>
+          <td>同时上下标</td>
+          <td><code>_...^...</code></td>
+          <td><code>x_i^2</code></td>
+          <td>$x_i^2$</td>
+      </tr>
+      <tr>
+          <td>局部上下标</td>
+          <td><code>\limits</code></td>
+          <td><code>\sum\limits_{i=1}^n</code></td>
+          <td>$\sum\limits_{i=1}^n$</td>
+      </tr>
+      <tr>
+          <td>根号</td>
+          <td><code>\sqrt{}</code></td>
+          <td><code>\sqrt{1+x^2}</code></td>
+          <td>$\sqrt{1+x^2}$</td>
+      </tr>
+      <tr>
+          <td>n次方根</td>
+          <td><code>\sqrt[n]{}</code></td>
+          <td><code>\sqrt[4]{16}</code></td>
+          <td>$\sqrt[4]{16}$</td>
+      </tr>
+      <tr>
+          <td>连续根号</td>
+          <td>多重 <code>\sqrt</code></td>
+          <td><code>\sqrt{\sqrt{x}}</code></td>
+          <td>$\sqrt{\sqrt{x}}$</td>
+      </tr>
+      <tr>
+          <td>撇（导数）</td>
+          <td><code>'</code></td>
+          <td><code>f''(x)</code></td>
+          <td>$f&rsquo;&rsquo;(x)$</td>
+      </tr>
+      <tr>
+          <td>高阶导数</td>
+          <td><code>^{(n)}</code></td>
+          <td><code>f^{(3)}(x)</code></td>
+          <td>$f^{(3)}(x)$</td>
+      </tr>
+      <tr>
+          <td>点记号（微分）</td>
+          <td><code>\dot{}, \ddot{}</code></td>
+          <td><code>\dot{x}, \ddot{y}</code></td>
+          <td>$\dot{x}, \ddot{y}$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="分数">分数
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>命令</th>
+          <th>示例</th>
+          <th>渲染效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>标准分数</td>
+          <td><code>\frac{}{}</code></td>
+          <td><code>\frac{1}{x+y}</code></td>
+          <td>$\frac{1}{x+y}$</td>
+      </tr>
+      <tr>
+          <td>行间分数</td>
+          <td><code>\dfrac{}{}</code></td>
+          <td><code>\dfrac{1}{x+y}</code></td>
+          <td>$\dfrac{1}{x+y}$</td>
+      </tr>
+      <tr>
+          <td>行内小分数</td>
+          <td><code>\tfrac{}{}</code></td>
+          <td><code>\tfrac{1}{2}</code></td>
+          <td>$\tfrac{1}{2}$</td>
+      </tr>
+      <tr>
+          <td>连续分数</td>
+          <td>嵌套 <code>\frac</code></td>
+          <td><code>\frac{1}{1+\frac{1}{x}}</code></td>
+          <td>$\frac{1}{1+\frac{1}{x}}$</td>
+      </tr>
+      <tr>
+          <td>二项式系数</td>
+          <td><code>\binom{n}{k}</code></td>
+          <td><code>\binom{n}{k}</code></td>
+          <td>$\binom{n}{k}$</td>
+      </tr>
+      <tr>
+          <td>组合公式</td>
+          <td><code>\tbinom{n}{k}</code> / <code>\dbinom{n}{k}</code></td>
+          <td><code>\dbinom{n}{k}, \tbinom{n}{k}</code></td>
+          <td>$\dbinom{n}{k}, \tbinom{n}{k}$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="常见运算符">常见运算符
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>命令</th>
+          <th>示例</th>
+          <th>渲染效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>求和</td>
+          <td><code>\sum</code></td>
+          <td><code>\sum_{i=1}^{n} i</code></td>
+          <td>$\sum_{i=1}^{n} i$</td>
+      </tr>
+      <tr>
+          <td>连乘</td>
+          <td><code>\prod</code></td>
+          <td><code>\prod_{i=1}^{n} x_i</code></td>
+          <td>$\prod_{i=1}^{n} x_i$</td>
+      </tr>
+      <tr>
+          <td>积分</td>
+          <td><code>\int</code></td>
+          <td><code>\int_{a}^{b} f(x) \, dx</code></td>
+          <td>$\int_{a}^{b} f(x) , dx$</td>
+      </tr>
+      <tr>
+          <td>二重/三重积分</td>
+          <td><code>\iint</code>, <code>\iiint</code></td>
+          <td><code>\iint_D f(x,y) \, dxdy</code></td>
+          <td>$\iint_D f(x,y) , dxdy$</td>
+      </tr>
+      <tr>
+          <td>极限</td>
+          <td><code>\lim</code></td>
+          <td><code>\lim_{x \to \infty} \frac{1}{x}</code></td>
+          <td>$\lim_{x \to \infty} \frac{1}{x}$</td>
+      </tr>
+      <tr>
+          <td>并集</td>
+          <td><code>\bigcup</code></td>
+          <td><code>\bigcup_{i=1}^{n} A_i</code></td>
+          <td>$\bigcup_{i=1}^{n} A_i$</td>
+      </tr>
+      <tr>
+          <td>交集</td>
+          <td><code>\bigcap</code></td>
+          <td><code>\bigcap_{i=1}^{n} B_i</code></td>
+          <td>$\bigcap_{i=1}^{n} B_i$</td>
+      </tr>
+      <tr>
+          <td>上确界</td>
+          <td><code>\sup</code></td>
+          <td><code>\sup_{x \in S} f(x)</code></td>
+          <td>$\sup_{x \in S} f(x)$</td>
+      </tr>
+      <tr>
+          <td>下确界</td>
+          <td><code>\inf</code></td>
+          <td><code>\inf_{x \in S} f(x)</code></td>
+          <td>$\inf_{x \in S} f(x)$</td>
+      </tr>
+      <tr>
+          <td>绝对值</td>
+          <td><code>\lvert ... \rvert</code></td>
+          <td><code>\lvert a \rvert</code></td>
+          <td>$\lvert a \rvert$</td>
+      </tr>
+      <tr>
+          <td>范数</td>
+          <td><code>\Vert ... \Vert</code></td>
+          <td><code>\Vert v \Vert</code></td>
+          <td>$\Vert v \Vert$</td>
+      </tr>
+      <tr>
+          <td>上取整</td>
+          <td><code>\lceil ... \rceil</code></td>
+          <td><code>\lceil 3.2 \rceil</code></td>
+          <td>$\lceil 3.2 \rceil = 4$</td>
+      </tr>
+      <tr>
+          <td>下取整</td>
+          <td><code>\lfloor ... \rfloor</code></td>
+          <td><code>\lfloor 3.7 \rfloor</code></td>
+          <td>$\lfloor 3.7 \rfloor = 3$</td>
+      </tr>
+      <tr>
+          <td>点乘</td>
+          <td><code>\cdot</code></td>
+          <td><code>\vec{a} \cdot \vec{b}</code></td>
+          <td>$\vec{a} \cdot \vec{b}$</td>
+      </tr>
+      <tr>
+          <td>向量叉乘</td>
+          <td><code>\times</code></td>
+          <td><code>\vec{a} \times \vec{b}</code></td>
+          <td>$\vec{a} \times \vec{b}$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="省略符">省略符
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>横向省略号</th>
+          <th><code>\dots</code></th>
+          <th><code>1,2,\dots,n</code></th>
+          <th>$1,2,\dots,n$</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>横向居中省略号</td>
+          <td><code>\cdots</code></td>
+          <td><code>a_1 + a_2 + \cdots + a_n</code></td>
+          <td>$a_1 + a_2 + \cdots + a_n$</td>
+      </tr>
+      <tr>
+          <td>纵向省略符号</td>
+          <td><code>\vdots</code></td>
+          <td>矩阵元素省略</td>
+          <td>$\vdots$</td>
+      </tr>
+      <tr>
+          <td>对角线省略符号</td>
+          <td><code>\ddots</code></td>
+          <td>矩阵元素省略</td>
+          <td>$\ddots$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="希腊字母">希腊字母
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>小写</th>
+          <th>命令</th>
+          <th>大写</th>
+          <th>命令</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>α</td>
+          <td><code>\alpha</code></td>
+          <td>Α</td>
+          <td><code>\Alpha</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>β</td>
+          <td><code>\beta</code></td>
+          <td>Β</td>
+          <td><code>\Beta</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>γ</td>
+          <td><code>\gamma</code></td>
+          <td>Γ</td>
+          <td><code>\Gamma</code></td>
+      </tr>
+      <tr>
+          <td>δ</td>
+          <td><code>\delta</code></td>
+          <td>Δ</td>
+          <td><code>\Delta</code></td>
+      </tr>
+      <tr>
+          <td>ϵ</td>
+          <td><code>\epsilon</code></td>
+          <td>Ε</td>
+          <td><code>\Epsilon</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>ζ</td>
+          <td><code>\zeta</code></td>
+          <td>Ζ</td>
+          <td><code>\Zeta</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>η</td>
+          <td><code>\eta</code></td>
+          <td>Η</td>
+          <td><code>\Eta</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>θ</td>
+          <td><code>\theta</code></td>
+          <td>Θ</td>
+          <td><code>\Theta</code></td>
+      </tr>
+      <tr>
+          <td>ι</td>
+          <td><code>\iota</code></td>
+          <td>Ι</td>
+          <td><code>\Iota</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>κ</td>
+          <td><code>\kappa</code></td>
+          <td>Κ</td>
+          <td><code>\Kappa</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>λ</td>
+          <td><code>\lambda</code></td>
+          <td>Λ</td>
+          <td><code>\Lambda</code></td>
+      </tr>
+      <tr>
+          <td>μ</td>
+          <td><code>\mu</code></td>
+          <td>Μ</td>
+          <td><code>\Mu</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>ν</td>
+          <td><code>\nu</code></td>
+          <td>Ν</td>
+          <td><code>\Nu</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>ξ</td>
+          <td><code>\xi</code></td>
+          <td>Ξ</td>
+          <td><code>\Xi</code></td>
+      </tr>
+      <tr>
+          <td>ο</td>
+          <td><code>o</code></td>
+          <td>Ο</td>
+          <td><code>\Omicron</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>π</td>
+          <td><code>\pi</code></td>
+          <td>Π</td>
+          <td><code>\Pi</code></td>
+      </tr>
+      <tr>
+          <td>ρ</td>
+          <td><code>\rho</code></td>
+          <td>Ρ</td>
+          <td><code>\Rho</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>σ</td>
+          <td><code>\sigma</code></td>
+          <td>Σ</td>
+          <td><code>\Sigma</code></td>
+      </tr>
+      <tr>
+          <td>τ</td>
+          <td><code>\tau</code></td>
+          <td>Τ</td>
+          <td><code>\Tau</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>υ</td>
+          <td><code>\upsilon</code></td>
+          <td>Υ</td>
+          <td><code>\Upsilon</code></td>
+      </tr>
+      <tr>
+          <td>φ</td>
+          <td><code>\phi</code></td>
+          <td>Φ</td>
+          <td><code>\Phi</code></td>
+      </tr>
+      <tr>
+          <td>χ</td>
+          <td><code>\chi</code></td>
+          <td>Χ</td>
+          <td><code>\Chi</code>（很少用）</td>
+      </tr>
+      <tr>
+          <td>ψ</td>
+          <td><code>\psi</code></td>
+          <td>Ψ</td>
+          <td><code>\Psi</code></td>
+      </tr>
+      <tr>
+          <td>ω</td>
+          <td><code>\omega</code></td>
+          <td>Ω</td>
+          <td><code>\Omega</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="关系符">关系符
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>命令</th>
+          <th>渲染效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>小于等于</td>
+          <td><code>\leq</code></td>
+          <td>$\leq$</td>
+      </tr>
+      <tr>
+          <td>大于等于</td>
+          <td><code>\geq</code></td>
+          <td>$\geq$</td>
+      </tr>
+      <tr>
+          <td>不等于</td>
+          <td><code>\neq</code></td>
+          <td>$\neq$</td>
+      </tr>
+      <tr>
+          <td>近似</td>
+          <td><code>\approx</code></td>
+          <td>$\approx$</td>
+      </tr>
+      <tr>
+          <td>恒等</td>
+          <td><code>\equiv</code></td>
+          <td>$\equiv$</td>
+      </tr>
+      <tr>
+          <td>相似</td>
+          <td><code>\sim</code></td>
+          <td>$\sim$</td>
+      </tr>
+      <tr>
+          <td>成比例</td>
+          <td><code>\propto</code></td>
+          <td>$\propto$</td>
+      </tr>
+      <tr>
+          <td>小于</td>
+          <td><code>&lt;</code></td>
+          <td>$&lt;$</td>
+      </tr>
+      <tr>
+          <td>大于</td>
+          <td><code>&gt;</code></td>
+          <td>$&gt;$</td>
+      </tr>
+      <tr>
+          <td>竖线（用于概率、集合等）</td>
+          <td><code>\mid</code></td>
+          <td>$\mid$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="逻辑符号">逻辑符号
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>命令</th>
+          <th>渲染效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>全称量词</td>
+          <td><code>\forall</code></td>
+          <td>$\forall$</td>
+      </tr>
+      <tr>
+          <td>存在量词</td>
+          <td><code>\exists</code></td>
+          <td>$\exists$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="逻辑与集合符号">逻辑与集合符号
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>命令</th>
+          <th>渲染效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>空集</td>
+          <td><code>\emptyset</code></td>
+          <td>$\emptyset$</td>
+      </tr>
+      <tr>
+          <td>集合元素</td>
+          <td><code>\in</code></td>
+          <td>$\in$</td>
+      </tr>
+      <tr>
+          <td>非集合元素</td>
+          <td><code>\notin</code></td>
+          <td>$\notin$</td>
+      </tr>
+      <tr>
+          <td>并集</td>
+          <td><code>\cup</code></td>
+          <td>$\cup$</td>
+      </tr>
+      <tr>
+          <td>交集</td>
+          <td><code>\cap</code></td>
+          <td>$\cap$</td>
+      </tr>
+      <tr>
+          <td>子集</td>
+          <td><code>\subset</code></td>
+          <td>$\subset$</td>
+      </tr>
+      <tr>
+          <td>真子集</td>
+          <td><code>\subsetneq</code></td>
+          <td>$\subsetneq$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="括号">括号
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>命令</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>固定大小</td>
+          <td><code>( )</code>, <code>[ ]</code>, <code>\{ \}</code></td>
+          <td>尺寸固定，不会随内容变化。输入 <code>{}</code> 需用 <code>\</code> 转义</td>
+      </tr>
+      <tr>
+          <td>自动缩放</td>
+          <td><code>\left(...\right)</code></td>
+          <td>根据内容自动调整大小，必须成对使用</td>
+      </tr>
+      <tr>
+          <td>方括号缩放</td>
+          <td><code>\left[...\right]</code></td>
+          <td>自动缩放方括号</td>
+      </tr>
+      <tr>
+          <td>大括号缩放</td>
+          <td><code>\left\{...\right\}</code></td>
+          <td>自动缩放大括号</td>
+      </tr>
+      <tr>
+          <td>尖括号</td>
+          <td><code>\langle ... \rangle</code></td>
+          <td>常用于内积</td>
+      </tr>
+      <tr>
+          <td>双竖线符号</td>
+          <td><code>\Vert</code></td>
+          <td>双竖线，常用于范数或矩阵行列式</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="矩阵">矩阵
+</h2><p>在LaTeX中排版矩阵是一项核心功能，<code>amsmath</code>宏包为此提供了一系列功能强大且使用便捷的环境</p>
+<p>这些环境可以自动处理元素的对齐和外层括号的样式</p>
+<p>无论使用哪种矩阵环境，内部语法都是统一的：</p>
+<ul>
+<li><strong>使用<code>&amp;</code>分隔列，即分隔同一行中的元素</strong></li>
+<li><strong>使用<code>\\</code>来结束当前行，并开始新的一行</strong></li>
+</ul>
+<p>和表格很像吧</p>
+<h3 id="矩阵环境">矩阵环境
+</h3><p><code>amsmath</code>提供了多种矩阵环境，它们唯一的区别在于最终呈现时外层使用的括号（分隔符）不同</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>环境名称</th>
+          <th>外层括号</th>
+          <th>常见用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>pmatrix</code></td>
+          <td><code>( )</code> (圆括号)</td>
+          <td>用于表示<strong>标准的矩阵</strong></td>
+      </tr>
+      <tr>
+          <td><code>bmatrix</code></td>
+          <td><code>[ ]</code> (方括号)</td>
+          <td><strong>同样用于标准矩阵</strong>，在一些文献中更常见，也常用于增广矩阵</td>
+      </tr>
+      <tr>
+          <td><code>vmatrix</code></td>
+          <td>`</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>Vmatrix</code></td>
+          <td><code>‖ ‖</code> (双竖线）</td>
+          <td>专门用于表示矩阵或向量的<strong>范数</strong></td>
+      </tr>
+      <tr>
+          <td><code>matrix</code></td>
+          <td>(无括号)</td>
+          <td>只排列元素，<strong>不添加外层括号</strong><br />当你需要使用特殊的括号（如<code>{ }</code>）或根本不需要括号时使用</td>
+      </tr>
+      <tr>
+          <td><code>smallmatrix</code></td>
+          <td>(无括号)</td>
+          <td>用于在<strong>行内</strong>创建小型矩阵<br />例如$A = \begin{smallmatrix} 1 &amp; 0 \ 0 &amp; 1 \end{smallmatrix}$</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="矩阵中的省略号">矩阵中的省略号
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>方向</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\cdots</code></td>
+          <td>水平 (Horizontal)</td>
+          <td>用于省略<strong>行</strong>中的元素</td>
+      </tr>
+      <tr>
+          <td><code>\vdots</code></td>
+          <td>垂直 (Vertical)</td>
+          <td>用于省略<strong>列</strong>中的元素</td>
+      </tr>
+      <tr>
+          <td><code>\ddots</code></td>
+          <td>对角 (Diagonal)</td>
+          <td>用于省略<strong>对角线</strong>上的元素</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-12">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>矩阵示例<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>一个 3x3 的矩阵 A 可以用 <span style="color:#c678dd">\texttt</span><span style="color:#e5c07b">{</span>pmatrix<span style="color:#e5c07b">}</span> 表示：
+</span></span><span style="display:flex;"><span><span style="color:#98c379">\[</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">A </span><span style="color:#56b6c2">=</span><span style="color:#e5c07b"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#e06c75">\begin</span><span style="color:#e5c07b">{pmatrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    </span><span style="color:#d19a66">1</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">2</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">3</span><span style="color:#e5c07b"> </span><span style="color:#e06c75">\\</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    </span><span style="color:#d19a66">4</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">5</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">6</span><span style="color:#e5c07b"> </span><span style="color:#e06c75">\\</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    </span><span style="color:#d19a66">7</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">8</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">9</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#e06c75">\end</span><span style="color:#e5c07b">{pmatrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#98c379">\]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>一个 2x2 的行列式可以用 <span style="color:#c678dd">\texttt</span><span style="color:#e5c07b">{</span>vmatrix<span style="color:#e5c07b">}</span> 表示：
+</span></span><span style="display:flex;"><span><span style="color:#98c379">\[</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#e06c75">\det</span><span style="color:#56b6c2">(</span><span style="color:#e5c07b">B</span><span style="color:#56b6c2">)</span><span style="color:#e5c07b"> </span><span style="color:#56b6c2">=</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#e06c75">\begin</span><span style="color:#e5c07b">{vmatrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    x &amp; y </span><span style="color:#e06c75">\\</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    z &amp; w
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#e06c75">\end</span><span style="color:#e5c07b">{vmatrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#98c379">\]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>一个 n 阶的单位矩阵 <span style="color:#98c379">$</span><span style="color:#e5c07b">I_n</span><span style="color:#98c379">$</span> 可以用 <span style="color:#c678dd">\texttt</span><span style="color:#e5c07b">{</span>bmatrix<span style="color:#e5c07b">}</span> 和省略号清晰地表示：
+</span></span><span style="display:flex;"><span><span style="color:#98c379">\[</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">I_n </span><span style="color:#56b6c2">=</span><span style="color:#e5c07b"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#e06c75">\begin</span><span style="color:#e5c07b">{bmatrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    </span><span style="color:#d19a66">1</span><span style="color:#e5c07b">      &amp; </span><span style="color:#d19a66">0</span><span style="color:#e5c07b">      &amp; </span><span style="color:#e06c75">\cdots</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">0</span><span style="color:#e5c07b">      </span><span style="color:#e06c75">\\</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    </span><span style="color:#d19a66">0</span><span style="color:#e5c07b">      &amp; </span><span style="color:#d19a66">1</span><span style="color:#e5c07b">      &amp; </span><span style="color:#e06c75">\cdots</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">0</span><span style="color:#e5c07b">      </span><span style="color:#e06c75">\\</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    </span><span style="color:#e06c75">\vdots</span><span style="color:#e5c07b"> &amp; </span><span style="color:#e06c75">\vdots</span><span style="color:#e5c07b"> &amp; </span><span style="color:#e06c75">\ddots</span><span style="color:#e5c07b"> &amp; </span><span style="color:#e06c75">\vdots</span><span style="color:#e5c07b"> </span><span style="color:#e06c75">\\</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b">    </span><span style="color:#d19a66">0</span><span style="color:#e5c07b">      &amp; </span><span style="color:#d19a66">0</span><span style="color:#e5c07b">      &amp; </span><span style="color:#e06c75">\cdots</span><span style="color:#e5c07b"> &amp; </span><span style="color:#d19a66">1</span><span style="color:#e5c07b">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#e06c75">\end</span><span style="color:#e5c07b">{bmatrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#e5c07b"></span><span style="color:#98c379">\]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819112856760.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819112856760"
+	
+	
+></p>
+<p><strong>矩阵 A</strong>:</p>
+<ul>
+<li><code>\begin{pmatrix}</code>和<code>\end{pmatrix}</code> 创建了一个外层为<strong>圆括号</strong>的矩阵环境</li>
+<li><code>1 &amp; 2 &amp; 3 \\</code>定义了矩阵的第一行：<code>1</code>，<code>2</code>，<code>3</code>三个元素由<code>&amp;</code>分隔，<code>\\</code>表示此行结束。后续行同理</li>
+</ul>
+<p><strong>行列式 det(B)</strong>:</p>
+<ul>
+<li><code>\begin{vmatrix}</code>和<code>\end{vmatrix}</code>创建了一个外层为<strong>单竖线</strong>的环境，这正是行列式的标准数学符号</li>
+</ul>
+<p><strong>单位矩阵 I_n</strong>:</p>
+<ul>
+<li><code>\begin{bmatrix}</code>和<code>\end{bmatrix}</code>创建了一个外层为<strong>方括号</strong>的环境</li>
+<li><code>\cdots</code>被用来表示第一行和第二行中间被省略的<code>0</code></li>
+<li><code>\vdots</code>被用来表示各列中间被省略的<code>0</code></li>
+<li><code>\ddots</code>巧妙地表示了从左上到右下的对角线上被省略的<code>1</code></li>
+<li>通过这些省略号命令的组合，我们能够清晰地表达任意大小的通用矩阵</li>
+</ul>
+<h2 id="多行公式对齐">多行公式对齐
+</h2><p>对于较长的公式推导或一组需要对齐的方程，必须将其拆分为多行以保证清晰可读</p>
+<p><code>amsmath</code>宏包为此提供了多种功能强大的环境，核心控制语法是：</p>
+<ul>
+<li><strong>使用<code>&amp;</code>标记对齐点</strong></li>
+<li><strong>使用<code>\\</code>换行</strong></li>
+</ul>
+<p>哦，还是表格的用法</p>
+<h3 id="环境详解-1">环境详解
+</h3><p>不同的环境主要区别在于<strong>编号方式</strong>和<strong>对齐能力</strong>。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>环境名称</th>
+          <th>编号方式</th>
+          <th>核心特点与用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>aligned</code></td>
+          <td><strong>整体一个编号</strong></td>
+          <td>本身不产生编号，提供对齐功能<br />必须嵌套在其他数学环境（如<code>equation</code>, <code>\[...\]</code>）中使用</td>
+      </tr>
+      <tr>
+          <td><code>split</code></td>
+          <td><strong>整体一个编号</strong></td>
+          <td>和<code>aligned</code>几乎相同，但长公式换行时编号的位置在公式中间<br />必须嵌套在其他数学环境（如<code>equation</code>, <code>\[...\]</code>）中使用</td>
+      </tr>
+      <tr>
+          <td><code>gather</code></td>
+          <td><strong>每行独立编号</strong></td>
+          <td>用于将一组不需要对齐的公式堆叠在一起<br />每行都会居中并获得一个独立的编号</td>
+      </tr>
+      <tr>
+          <td><code>align</code></td>
+          <td><strong>每行独立编号，<br>可灵活对齐</strong></td>
+          <td>允许像写一个两列的表格一样对齐公式（在<code>&amp;</code>处对齐）<br />每行默认都会获得一个编号</td>
+      </tr>
+      <tr>
+          <td><code>align*</code></td>
+          <td><strong>完全无编号</strong></td>
+          <td>是<code>align</code>的无编号版本，功能完全相同，但所有行都不会产生编号</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="控制编号">控制编号
+</h3><p><strong>在<code>align</code> / <code>gather</code>等逐行编号的环境中，如果不希望某一行显示编号，可以在该行的<code>\\</code>之前使用以下命令:</strong></p>
+<ul>
+<li>
+<p><strong><code>\notag</code></strong></p>
+</li>
+<li>
+<p><strong><code>\nonumber</code></strong></p>
+</li>
+</ul>
+<h3 id="示例1aligned环境">示例1：aligned环境
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>公式推导<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>二次展开式的推导过程如下：
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>equation<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>eq:expand<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>aligned<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    (a+b)<span style="color:#e5c07b">^</span>2 <span style="color:#e5c07b">&amp;</span>= (a+b)(a+b) <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#e5c07b">&amp;</span>= a<span style="color:#e5c07b">^</span>2 + ab + ba + b<span style="color:#e5c07b">^</span>2 <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#e5c07b">&amp;</span>= a<span style="color:#e5c07b">^</span>2 + 2ab + b<span style="color:#e5c07b">^</span>2
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>aligned<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>equation<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>整个过程由公式 <span style="color:#c678dd">\eqref</span><span style="color:#e5c07b">{</span>eq:expand<span style="color:#e5c07b">}</span> 概括
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819114400200.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819114400200"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong><code>\begin{equation}</code></strong></p>
+<p>最外层是<code>equation</code>环境，意味着内部的所有内容，无论有多少行，都将作为一个整体，共享一个编号</p>
+</li>
+<li>
+<p><strong><code>\begin{aligned}</code></strong></p>
+<p>内部的<code>aligned</code>环境是实际负责对齐工作的</p>
+</li>
+<li>
+<p><strong><code>&amp;=</code></strong></p>
+<p>每一行的<code>=</code>前面都放置了对齐符<code>&amp;</code>，使得三行公式的等号在垂直方向上对齐（实际是<code>&amp;</code>被对齐了）</p>
+</li>
+<li>
+<p><strong><code>\\</code></strong></p>
+<p>在第一行和第二行的末尾用于换行</p>
+</li>
+</ul>
+<h3 id="示例2align环境">示例2：align环境
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>方程组<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>我们有如下一组基本方程：
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>align<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    a<span style="color:#e5c07b">_</span>1 x + b<span style="color:#e5c07b">_</span>1 y <span style="color:#e5c07b">&amp;</span>= c<span style="color:#e5c07b">_</span>1 <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>eq:line1<span style="color:#e5c07b">}</span> <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>    a<span style="color:#e5c07b">_</span>2 x + b<span style="color:#e5c07b">_</span>2 y <span style="color:#e5c07b">&amp;</span>= c<span style="color:#e5c07b">_</span>2 <span style="color:#c678dd">\notag</span> <span style="color:#c678dd">\\</span>
+</span></span><span style="display:flex;"><span>    E <span style="color:#e5c07b">&amp;</span>= mc<span style="color:#e5c07b">^</span>2 <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>eq:emc2<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>align<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>其中，方程 <span style="color:#c678dd">\eqref</span><span style="color:#e5c07b">{</span>eq:line1<span style="color:#e5c07b">}</span> 和 <span style="color:#c678dd">\eqref</span><span style="color:#e5c07b">{</span>eq:emc2<span style="color:#e5c07b">}</span> 是最重要的
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819114842390.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819114842390"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong><code>\begin{align}</code></strong></p>
+<p>这个环境会默认给每一行分配一个编号</p>
+</li>
+<li>
+<p><strong><code>&amp;=</code></strong></p>
+<p><code>&amp;</code>同样被放在<code>=</code>前面，使得三行公式的等号对齐</p>
+</li>
+<li>
+<p><strong><code> \label{eq:line1}</code></strong></p>
+<p>我们可以在任意行后面添加<code>\label</code>以引用这行的编号，而不是在整个环境中</p>
+</li>
+<li>
+<p><strong><code>\notag</code></strong></p>
+<p>在第二行的<code>\\</code>前，我们加入了<code>\notag</code>命令，阻止LaTeX为这一行生成编号</p>
+</li>
+</ul>
+<h1 id="学术写作">学术写作
+</h1><h2 id="定理类环境">定理类环境
+</h2><p>在数理、计算机等学科的写作中，需要频繁使用“定理”、“引理”、“定义”等结构化论述</p>
+<p><code>amsthm</code> 宏包为此提供了标准化的解决方案。</p>
+<h3 id="定义新环境newtheorem">定义新环境：\newtheorem
+</h3><p><strong>在使用定理环境前，必须先在导言区用<code>\newtheorem</code>命令进行定义它</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\newtheorem</span><span style="color:#e5c07b">{</span>新环境名<span style="color:#e5c07b">}</span>[共享环境名]<span style="color:#e5c07b">{</span>显示标题<span style="color:#e5c07b">}</span>[编号层级]
+</span></span></code></pre></div><p>常用用法：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>语法</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\newtheorem{环境名}{显示标题}</code></td>
+          <td>定义一个全新的、独立编号的环境</td>
+      </tr>
+      <tr>
+          <td><code>\newtheorem{环境名}{显示标题}[编号层级]</code></td>
+          <td>使该环境的编号与某个层级关联<br />最常用的是<code>[section]</code>，表示编号为<code>[章节号].[定理号]</code>，且每章重新从1开始</td>
+      </tr>
+      <tr>
+          <td><code>\newtheorem{新环境名}[共享环境名]{显示标题}</code></td>
+          <td>使新环境与某个已定义的环境共享同一个编号序列</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="在正文中使用">在正文中使用
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>用法</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\begin{环境名} ... \end{环境名}</code></td>
+          <td>开始一个标准的<strong>定理</strong>环境</td>
+      </tr>
+      <tr>
+          <td><code>\begin{环境名}[自定义标题] ... \end{环境名}</code></td>
+          <td><strong>在方括号中添加的标题</strong>，会显示在编号后的括号里</td>
+      </tr>
+      <tr>
+          <td><code>\begin{proof} ... \end{proof}</code></td>
+          <td><code>amsthm</code> 提供的标准<strong>证明</strong>环境<br />会自动以<code>证明.</code>开头，并以一个 Q.E.D. 方块<code>□</code>结尾</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-13">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsthm<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\newtheorem</span><span style="color:#e5c07b">{</span>theorem<span style="color:#e5c07b">}{</span>定理<span style="color:#e5c07b">}</span>[section]       <span style="color:#7f848e">% 定理环境，编号与 section 关联
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\newtheorem</span><span style="color:#e5c07b">{</span>lemma<span style="color:#e5c07b">}</span>[theorem]<span style="color:#e5c07b">{</span>引理<span style="color:#e5c07b">}</span>        <span style="color:#7f848e">% 引理环境，与 theorem 共享编号
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\newtheorem</span><span style="color:#e5c07b">{</span>corollary<span style="color:#e5c07b">}</span>[theorem]<span style="color:#e5c07b">{</span>推论<span style="color:#e5c07b">}</span>     <span style="color:#7f848e">% 推论环境，与 theorem 共享编号
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">\newtheorem</span><span style="color:#e5c07b">{</span>definition<span style="color:#e5c07b">}{</span>定义<span style="color:#e5c07b">}</span>                    <span style="color:#7f848e">% 定义环境，独立编号
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>主要结果<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>我们首先给出一个关键定义：
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>definition<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    这个定义很关键
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>definition<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>然后是本节的核心定理：
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>theorem<span style="color:#e5c07b">}</span>[勾股定理] <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>thm:pythagoras<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    在一个直角三角形中，两条直角边的平方和等于斜边的平方
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>theorem<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>proof<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    证明过程略
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>proof<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>基于定理 <span style="color:#c678dd">\ref</span><span style="color:#e5c07b">{</span>thm:pythagoras<span style="color:#e5c07b">}</span>，我们有一个直接的引理
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>lemma<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    这是一个直接的引理
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>lemma<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>我们还有一个推论：
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>corollary<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>	这是一个推论
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>corollary<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250819141257071.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819141257071"
+	
+	
+></p>
+<p><strong>定义解释</strong>:</p>
+<ul>
+<li>
+<p><code>\newtheorem{theorem}{定理}[section]</code></p>
+<p>创建了<code>theorem</code>环境，显示为“定理”，编号格式为 <code>[章节号].[定理号]</code> (如 1.1, 1.2 &hellip;)</p>
+</li>
+<li>
+<p><code>\newtheorem{lemma}[theorem]{引理}</code> &amp; <code>\newtheorem{corollary}[theorem]{推论}</code></p>
+<p>创建了<code>lemma</code>和<code>corollary</code>环境，它们和<code>theorem</code>使用同一个计数器</p>
+</li>
+<li>
+<p><code>\newtheorem{definition}{定义}</code></p>
+<p>创建了 <code>definition</code> 环境，它自己独立编号 (如 1, 2, 3 &hellip;)</p>
+</li>
+</ul>
+<p><strong>使用解释</strong>:</p>
+<ul>
+<li>第一个<code>definition</code>显示为 “定义 1”</li>
+<li><code>theorem</code>环境因为有<code>[勾股定理]</code>，所以显示为 “定理 1.1 (勾股定理)”</li>
+<li><code>proof</code>环境自动添加了 “证明.” 和结尾的<code>□</code>符号</li>
+<li>由于<code>lemma</code>、<code>corollary</code>与<code>theorem</code>共享编号，所以接下来的<code>lemma</code>显示为 “引理 1.2”，<code>corollary</code>显示为“推论1.3”</li>
+</ul>
+<h2 id="交叉引用">交叉引用
+</h2><p>在LaTeX的手稿修改过程中，章节和图表的编号随时可能变化，要是让我们手动更新这些编号，等死就可以了</p>
+<p>好在LaTeX的交叉引用机制就很好解决了这个问题，我们之前也有提到过</p>
+<p>其原理是：</p>
+<ul>
+<li><strong>为想要引用的、带编号的元素（章节、图片、表格、公式等）设置一个独一无二的标签(<code>\label</code>)</strong></li>
+<li><strong>在需要引用的地方，通过这个标签来提取它对应的编号 (<code>\ref</code>) 或页码 (<code>\pageref</code>)</strong></li>
+</ul>
+<h3 id="核心命令">核心命令
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>作用与说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\label{标签名}</code></td>
+          <td>在一个带编号的元素后面设置一个看不见的标记<br /><strong>标签名在文档中必须是唯一的</strong></td>
+      </tr>
+      <tr>
+          <td><code>\ref{标签名}</code></td>
+          <td><strong>在文本中插入该标签对应的元素编号</strong><br />例如，如果<code>\label{fig:flow}</code>跟着图2的标题，那么<code>\ref{fig:flow}</code>就会显示为2</td>
+      </tr>
+      <tr>
+          <td><code>\eqref{标签名}</code></td>
+          <td><strong><code>amsmath</code>宏包提供的<code>\ref</code>变体，专用于引用公式</strong><br />它会自动在编号两侧加上括号，例如<code>(2)</code></td>
+      </tr>
+      <tr>
+          <td><code>\pageref{标签名}</code></td>
+          <td><strong>在文本中插入该标签所在的页码</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="推荐的标签规范">推荐的标签规范
+</h3><p>为了避免标签名混乱和冲突，强烈推荐使用带前缀的命名方式：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>元素类型</th>
+          <th>推荐前缀</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>章 (Chapter)</td>
+          <td><code>ch:</code></td>
+          <td><code>\label{ch:background}</code></td>
+      </tr>
+      <tr>
+          <td>节 (Section)</td>
+          <td><code>sec:</code></td>
+          <td><code>\label{sec:methodology}</code></td>
+      </tr>
+      <tr>
+          <td>图片 (Figure)</td>
+          <td><code>fig:</code></td>
+          <td><code>\label{fig:results_chart}</code></td>
+      </tr>
+      <tr>
+          <td>表格 (Table)</td>
+          <td><code>tab:</code></td>
+          <td><code>\label{tab:comparison}</code></td>
+      </tr>
+      <tr>
+          <td>公式 (Equation)</td>
+          <td><code>eq:</code></td>
+          <td><code>\label{eq:main_theorem}</code></td>
+      </tr>
+      <tr>
+          <td>定理 (Theorem)</td>
+          <td><code>thm:</code></td>
+          <td><code>\label{thm:pythagoras}</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-14">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>amsmath<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\usepackage</span><span style="color:#e5c07b">{</span>graphicx<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>随便写写<span style="color:#e5c07b">}</span> <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>sec:intro<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>本文介绍一下交叉引用
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>equation<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    E = mc<span style="color:#e5c07b">^</span>2 <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>eq:emc<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>equation<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>方法<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>在章节 <span style="color:#c678dd">\ref</span><span style="color:#e5c07b">{</span>sec:intro<span style="color:#e5c07b">}</span> 中，我们已经提出了核心思想。图 <span style="color:#c678dd">\ref</span><span style="color:#e5c07b">{</span>fig:placeholder<span style="color:#e5c07b">}</span> +1=2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>公式 <span style="color:#c678dd">\eqref</span><span style="color:#e5c07b">{</span>eq:emc<span style="color:#e5c07b">}</span>它位于第 <span style="color:#c678dd">\pageref</span><span style="color:#e5c07b">{</span>eq:emc<span style="color:#e5c07b">}</span> 页。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>figure<span style="color:#e5c07b">}</span>[h]
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\centering</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\includegraphics</span><span style="color:#e06c75">[width=0.4\textwidth]</span><span style="color:#e5c07b">{</span>2.png<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\caption</span><span style="color:#e5c07b">{</span>老图<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">\label</span><span style="color:#e5c07b">{</span>fig:placeholder<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>figure<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819122913418.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819122913418"
+	
+	
+></p>
+<p><strong>定义标签</strong>:</p>
+<ul>
+<li>在<code>\section{引言}</code>后面，我们用<code>\label{sec:intro}</code>将其标记</li>
+<li>在<code>equation</code>环境中，我们用<code>\label{eq:emc}</code>标记了公式</li>
+<li>在<code>figure</code>环境的<code>\caption</code>之后，我们用<code>\label{fig:placeholder}</code>标记了图片</li>
+</ul>
+<p><strong>引用标签</strong>:</p>
+<ul>
+<li><code>章节 \ref{sec:intro}</code>在编译后会显示为 “章节 1”</li>
+<li><code>图 \ref{fig:placeholder}</code>会显示为 “图 1”</li>
+<li><code>公式 \eqref{eq:emc}</code>会显示为 “公式 (1)”</li>
+<li><code>第 \pageref{eq:emc} 页</code>会显示为 “第 1 页”</li>
+</ul>
+<p><strong>如果我们在“随便写写”前再增加一个新的章节，那么原“随便写写”的编号会自动变为 2，而代码中所有 <code>\ref{sec:intro}</code>的地方，输出也会自动更新为2，无需任何手动修改</strong></p>
+<h2 id="参考文献">参考文献
+</h2><p>BibTeX是LaTeX的标准参考文献管理系统，它将文献数据与排版样式彻底分离，实现了参考文献的完全自动化</p>
+<p><strong>工作流程：</strong></p>
+<ol>
+<li>创建一个<code>.bib</code>数据库文件，存放所有文献信息</li>
+<li>在<code>.tex</code>文档的正文中，用<code>\cite{}</code>命令引用文献</li>
+<li>在<code>.tex</code>文档中指定引用的样式和<code>.bib</code>文件的位置</li>
+<li>LaTeX编译器会自动完成文献的排序、格式化和列表生成</li>
+</ol>
+<h3 id="工作流程详解">工作流程详解
+</h3><h4 id="创建bib数据库文件">创建.bib数据库文件
+</h4><p>在Overleaf左侧文件栏，点击New File新建文件，命名为<code>.bib</code>后缀</p>
+<p>这是一个纯文本文件，用于存储文献条目</p>
+<h4 id="添加文献条目">添加文献条目
+</h4><p>我们可以从Google Scholar、知网或各种学术数据库中直接导出BibTeX格式的条目，然后粘贴到<code>.bib</code>文件中</p>
+<p><strong>这部分通常不用我们自己写，做个了解就行</strong></p>
+<p><strong>条目格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#61afef">@类型</span>{<span style="color:#e06c75">引用密钥</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">字段</span> = {<span style="color:#e06c75">值</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#56b6c2">..</span>.
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>常用类型</th>
+          <th>说明</th>
+          <th>常用字段</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>@article</code></td>
+          <td>期刊文章</td>
+          <td><code>author</code>，<code>title</code>，<code>year</code></td>
+          <td>作者, 标题, 年份</td>
+      </tr>
+      <tr>
+          <td><code>@book</code></td>
+          <td>书籍</td>
+          <td><code>journal</code>，<code>volume</code>，<code>pages</code></td>
+          <td>期刊名, 卷, 页码</td>
+      </tr>
+      <tr>
+          <td><code>@inproceedings</code></td>
+          <td>会议论文集中的一篇</td>
+          <td><code>publisher</code>，<code>address</code></td>
+          <td>出版社, 地址</td>
+      </tr>
+      <tr>
+          <td><code>@phdthesis</code></td>
+          <td>博士论文</td>
+          <td><code>doi</code>，<code>url</code></td>
+          <td>数字对象标识符, 网址</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#61afef">@article</span>{<span style="color:#e06c75">einstein1905</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">author</span>  = {<span style="color:#e06c75">Albert</span> <span style="color:#e06c75">Einstein</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">title</span>   = {<span style="color:#e06c75">Zur</span> <span style="color:#e06c75">Elektrodynamik</span> <span style="color:#e06c75">bewegter</span> <span style="color:#e06c75">Körper</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">journal</span> = {<span style="color:#e06c75">Annalen</span> <span style="color:#e06c75">der</span> <span style="color:#e06c75">Physik</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">year</span>    = {<span style="color:#d19a66">1905</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">volume</span>  = {<span style="color:#d19a66">322</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pages</span>   = {<span style="color:#d19a66">891</span><span style="color:#56b6c2">--</span><span style="color:#d19a66">921</span>},
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里的<code>einstein1905</code>就是这篇文献独一无二的引用密钥</p>
+<h4 id="在主文档中设置并引用">在主文档中设置并引用
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>作用</th>
+          <th>放置位置</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\bibliographystyle{样式}</code></td>
+          <td>设置参考文献的格式<br />常用样式有：<br /><code>plain</code> (按字母排序)<br /><code>unsrt</code> (按引用顺序)<br /><code>alpha</code> (作者+年份)<br /><code>abbrv</code> (缩写)</td>
+          <td><strong>文档末尾，<code>\bibliography</code>之前</strong></td>
+      </tr>
+      <tr>
+          <td><code>\cite{引用密钥}</code></td>
+          <td>在正文中引用一篇或多篇文献</td>
+          <td><strong>正文任意位置</strong></td>
+      </tr>
+      <tr>
+          <td><code>\bibliography{文件名}</code></td>
+          <td>指定<code>.bib</code>文件的位置，并在此处生成参考文献列表<br /><strong>注意，文件名不用带<code>.bib</code>后缀</strong></td>
+          <td><strong>文档末尾，<code>\end{document}</code>之前</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-15">示例
+</h3><p><strong><code>main.tex</code> 文件:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#c678dd">\documentclass</span><span style="color:#e5c07b">{</span>ctexart<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\begin</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\section</span><span style="color:#e5c07b">{</span>引言<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>引用文献1：<span style="color:#c678dd">\cite</span><span style="color:#e5c07b">{</span>张健2008精确的程序静态分析<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>引用文献2：<span style="color:#c678dd">\cite</span><span style="color:#e5c07b">{</span>何伟渔1994语法的静态分析和动态分析<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\bibliographystyle</span><span style="color:#e5c07b">{</span>plain<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\bibliography</span><span style="color:#e5c07b">{</span>text<span style="color:#e5c07b">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">\end</span><span style="color:#e5c07b">{</span>document<span style="color:#e5c07b">}</span>
+</span></span></code></pre></div><p><strong><code>references.bib</code> 文件:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#61afef">@phdthesis</span>{<span style="color:#e06c75">张健2008精确的程序静态分析</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">title</span>={<span style="color:#e06c75">精确的程序静态分析</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">author</span>={<span style="color:#e06c75">张健</span> <span style="color:#e06c75">and</span> <span style="color:#e06c75">others</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">year</span>={<span style="color:#d19a66">2008</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#61afef">@article</span>{<span style="color:#e06c75">何伟渔1994语法的静态分析和动态分析</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">title</span>={<span style="color:#e06c75">语法的静态分析和动态分析</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">author</span>={<span style="color:#e06c75">何伟渔</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">journal</span>={<span style="color:#e06c75">上海师范大学学报</span>: <span style="color:#e06c75">哲学社会科学版</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">number</span>={<span style="color:#d19a66">3</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">pages</span>={<span style="color:#d19a66">100</span><span style="color:#56b6c2">--</span><span style="color:#d19a66">106</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">year</span>={<span style="color:#d19a66">1994</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>编译结果：</p>
+<p><img src="http://picture.928330.xyz/typora/image-20250819134920517.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250819134920517"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>在正文中，<code>\cite{何伟渔1994语法的静态分析和动态分析}</code> 和 <code>\cite{张健2008精确的程序静态分析}</code>会被LaTeX替换为<code>[1]</code>和<code>[2]</code>，因为<code>plain</code>样式是按作者字母排序的，这里我直接使用<code>.bib</code>文件的顺序，就是反着的</strong></p>
+</li>
+<li>
+<p><code>\bibliography{references}</code>命令会扫描全文，发现只有这两篇文献被引用了</p>
+</li>
+<li>
+<p><strong>LaTeX会自动读取<code>references.bib</code>文件中这两篇文献的数据，并根据<code>plain</code>样式，在文末生成一个格式化、排序好的参考文献列表，标题都不用写</strong></p>
+</li>
+</ul>
+<hr>
+<p>和所有语言一样，只会语法是远远不够的，一定得多上手编排一些文章进行练习，积累经验！</p>
+<p>下面是一些LaTeX练习网站，感兴趣可以看看：</p>
+<p><a class="link" href="https://texnique.xyz/"  target="_blank" rel="noopener"
+    >TEXnique
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>：互动式LaTeX编程游戏，需要在限定时间内用LaTeX代码实现它给出的公式</p>
+<p><a class="link" href="https://latex.org/forum/viewtopic.php?t=8771"  target="_blank" rel="noopener"
+    >LaTeX.org练习与解答
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>：LaTeX.org的论坛中有用户分享的练习题和解答，内容涉及数学公式、文档结构等方面</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/latex/">LaTeX</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-08-19
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linux命令（文件管理篇）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">windows相关知识总结（下）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">windows相关知识总结（上）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SQL注入：从入门到入土</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速入门SQL</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+   </style>
+
+   <script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+   </script>
+    </body>
+</html>
