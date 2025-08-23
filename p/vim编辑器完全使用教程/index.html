@@ -1202,12 +1202,12 @@
             
                 
 <article class="">
-    <a href="/p/nginx%E5%85%A5%E9%97%A8/">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">Nginx入门</h2>
+            <h2 class="article-title">快速上手docker</h2>
         </div>
     </a>
 </article>
@@ -1215,12 +1215,25 @@
             
                 
 <article class="">
-    <a href="/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/">
+    <a href="/p/apache%E5%85%A5%E9%97%A8/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">快速上手docker</h2>
+            <h2 class="article-title">Apache入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/nginx%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Nginx入门</h2>
         </div>
     </a>
 </article>
@@ -1470,13 +1483,28 @@
      cursor: pointer;  
      font-size: 0.9em;  
     }
-   </style>
 
-   <script>
      
      
      
+    #particles-js {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: -1;
+     pointer-events: none;  
+    }
+</style>
 
+
+<div id="particles-js"></div>
+
+<script>
+     
+     
+     
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -1593,7 +1621,35 @@
      });
     }
 
+    
     initCodeMoreBox();
-   </script>
+
+     
+     
+     
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        if (typeof particlesJS === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
+            script.onload = function() {
+                initParticles();
+            };
+            document.head.appendChild(script);
+        } else {
+            initParticles();
+        }
+    });
+
+    function initParticles() {
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+                console.log('particles.js loaded successfully');
+            });
+        }
+    }
+</script>
+
     </body>
 </html>

@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Wed, 23 Jul 2025 19:32:49 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/docker/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 23 Aug 2025 21:00:03 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/docker/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>快速上手docker</title>
         <link>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/</link>
         <pubDate>Wed, 23 Jul 2025 19:24:02 +0800</pubDate>
@@ -288,21 +288,16 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;主机端口:容器端口&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;docker run -d -p 8080:80 nginx&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
-此命令将主机的`8080`端口映射到容器的`80`端口
-
-- **`&amp;lt;IP地址&amp;gt;:主机端口:容器端口`**
-
-指定只将主机的特定IP地址的端口映射到容器
-
-```shell
-docker run -d -p 127.0.0.1:8081:80 nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此命令将主机&lt;code&gt;127.0.0.1&lt;/code&gt;这个回环地址的&lt;code&gt;8081&lt;/code&gt;端口映射到容器的&lt;code&gt;80&lt;/code&gt;端口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d -p 8080:80 nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令将主机的&lt;code&gt;8080&lt;/code&gt;端口映射到容器的&lt;code&gt;80&lt;/code&gt;端口&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;&amp;lt;IP地址&amp;gt;:主机端口:容器端口&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;指定只将主机的特定IP地址的端口映射到容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d -p 127.0.0.1:8081:80 nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此命令将主机&lt;code&gt;127.0.0.1&lt;/code&gt;这个回环地址的&lt;code&gt;8081&lt;/code&gt;端口映射到容器的&lt;code&gt;80&lt;/code&gt;端口&lt;/p&gt;
 &lt;p&gt;这样，只有在本机才能通过&lt;code&gt;127.0.0.1:8081&lt;/code&gt;访问，来自外部网络的访问会被拒绝&lt;/p&gt;
-&lt;ul&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;主机端口:&amp;lt;容器端口/协议&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;默认情况下，端口映射使用的是TCP协议，也可以显式指定UDP协议&lt;/p&gt;
@@ -478,7 +473,7 @@ docker run -d -p 127.0.0.1:8081:80 nginx
 &lt;/ul&gt;
 &lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250723115500967.png&#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115500967.png&#34;
 	
 	
 	
@@ -637,7 +632,7 @@ docker run -d -p 127.0.0.1:8081:80 nginx
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;连接容器到网络&#34;&gt;连接容器到网络
-&lt;/h3&gt;&lt;p&gt;我们可以在启动容器时使用&lt;code&gt;--network&lt;/code&gt;选项将其连接到指定的网络&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;我们可以在启动容器时使用&lt;code&gt;--network&lt;/code&gt;选项将其连接到指定的网络&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name &amp;lt;容器名称&amp;gt; --network &amp;lt;网络名称&amp;gt; &amp;lt;镜像名称&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
 &lt;p&gt;我们创建两个容器并都连接到&lt;code&gt;my-net&lt;/code&gt;网络&lt;/p&gt;
@@ -656,8 +651,8 @@ docker run -d -p 127.0.0.1:8081:80 nginx
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;容器间通信&#34;&gt;容器间通信
-&lt;/h3&gt;&lt;p&gt;当多个容器连接到同一个自定义网络时，它们可以通过&lt;strong&gt;容器名称&lt;/strong&gt;作为主机名直接互相访问&lt;/p&gt;
-&lt;p&gt;我们可以进入一个容器来测试与另一个容器的连通性&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;当多个容器连接到同一个自定义网络时，它们可以通过容器名称作为主机名直接互相访问&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;我们可以进入一个容器来测试与另一个容器的连通性&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;eg：&lt;/p&gt;
 &lt;p&gt;进入&lt;code&gt;nginx-1&lt;/code&gt;容器，然后&lt;code&gt;ping nginx-2&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; -it nginx-1 /bin/bash
@@ -675,10 +670,10 @@ docker run -d -p 127.0.0.1:8081:80 nginx
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;可以看到，&lt;code&gt;nginx-1&lt;/code&gt; 能够成功解析 &lt;code&gt;nginx-2&lt;/code&gt; 的名称并与之通信，这证明了容器间的互联已经建立shell&lt;/p&gt;
+&lt;p&gt;可以看到，&lt;code&gt;nginx-1&lt;/code&gt;能够成功解析&lt;code&gt;nginx-2&lt;/code&gt;的名称并与之通信，这证明了容器间的互联已经建立shell&lt;/p&gt;
 &lt;h3 id=&#34;查看容器网络信息&#34;&gt;查看容器网络信息
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker inspect &amp;lt;对象ID或名称&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;docker inspect&lt;/code&gt;是一个非常强大的命令，用于查看&lt;strong&gt;容器、镜像、网络、卷等对象的详细底层信息&lt;/strong&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;docker inspect&lt;/code&gt;是一个非常强大的命令，用于查看容器、镜像、网络、卷等对象的详细底层信息&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;它会返回一段JSON 格式的数据，包含几乎所有属性，比如网络配置、挂载卷、环境变量、启动命令等&lt;/p&gt;
 &lt;p&gt;这里我们查看容器的信息，并过滤网络部分：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker inspect &amp;lt;容器ID&amp;gt;/&amp;lt;名称&amp;gt; | grep -A &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;NetworkSettings&amp;#34;&lt;/span&gt;

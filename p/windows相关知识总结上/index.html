@@ -1961,13 +1961,28 @@
      cursor: pointer;  
      font-size: 0.9em;  
     }
-   </style>
 
-   <script>
      
      
      
+    #particles-js {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: -1;
+     pointer-events: none;  
+    }
+</style>
 
+
+<div id="particles-js"></div>
+
+<script>
+     
+     
+     
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -2084,7 +2099,35 @@
      });
     }
 
+    
     initCodeMoreBox();
-   </script>
+
+     
+     
+     
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        if (typeof particlesJS === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
+            script.onload = function() {
+                initParticles();
+            };
+            document.head.appendChild(script);
+        } else {
+            initParticles();
+        }
+    });
+
+    function initParticles() {
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+                console.log('particles.js loaded successfully');
+            });
+        }
+    }
+</script>
+
     </body>
 </html>

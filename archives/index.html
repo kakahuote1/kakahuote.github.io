@@ -364,7 +364,7 @@
                                 <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8" class="category-tag">
                                     <div class="article-details-category">
                                         <h2 class="article-title-category">工具使用</h2>
-                                        <span class="category-count">5</span>
+                                        <span class="category-count">6</span>
                                     </div>
                                 </a>
                             </article>
@@ -437,12 +437,17 @@
                 
                     
                     <a href="/tags/linux" class="tagCloud-tags">
-                        linux<span class="tagCloud-count">4</span>
+                        linux<span class="tagCloud-count">3</span>
                     </a>
                 
                     
                     <a href="/tags/misc" class="tagCloud-tags">
                         misc<span class="tagCloud-count">5</span>
+                    </a>
+                
+                    
+                    <a href="/tags/server" class="tagCloud-tags">
+                        server<span class="tagCloud-count">2</span>
                     </a>
                 
                     
@@ -457,7 +462,7 @@
                 
                     
                     <a href="/tags/web" class="tagCloud-tags">
-                        web<span class="tagCloud-count">2</span>
+                        web<span class="tagCloud-count">3</span>
                     </a>
                 
                     
@@ -480,6 +485,26 @@
     <div class="archives-group" id="2025">
         <h2 class="archives-date section-title"><a href="/archives/#2025">2025</a></h2>
         <div class="article-list--compact">
+            
+                <article>
+    <a href="/p/apache%E5%85%A5%E9%97%A8/">
+        <div class="article-details">
+            <h2 class="article-title">Apache入门</h2>
+            <footer class="article-time">
+                <time datetime='2025-08-23T19:26:25&#43;08:00'>
+                    发布时间：2025-08-23</time>
+            </footer>
+        </div>
+    </a>
+
+    
+    
+    <div class="article-subtitle-archive">
+        还是nginx好用
+    </div>
+    
+
+</article>
             
                 <article>
     <a href="/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/">
@@ -921,13 +946,28 @@
      cursor: pointer;  
      font-size: 0.9em;  
     }
-   </style>
 
-   <script>
      
      
      
+    #particles-js {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: -1;
+     pointer-events: none;  
+    }
+</style>
 
+
+<div id="particles-js"></div>
+
+<script>
+     
+     
+     
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -1044,7 +1084,35 @@
      });
     }
 
+    
     initCodeMoreBox();
-   </script>
+
+     
+     
+     
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        if (typeof particlesJS === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
+            script.onload = function() {
+                initParticles();
+            };
+            document.head.appendChild(script);
+        } else {
+            initParticles();
+        }
+    });
+
+    function initParticles() {
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+                console.log('particles.js loaded successfully');
+            });
+        }
+    }
+</script>
+
     </body>
 </html>

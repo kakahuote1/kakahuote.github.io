@@ -1,0 +1,3113 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="还是nginx好用">
+<title>Apache入门</title>
+
+<link rel='canonical' href='https://blog.928330.xyz/p/apache%E5%85%A5%E9%97%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.d104f99ffceed3ee41d60977d6388bab1b1c30ecb5942604dcae31623baed63c.css"><meta property='og:title' content="Apache入门">
+<meta property='og:description' content="还是nginx好用">
+<meta property='og:url' content='https://blog.928330.xyz/p/apache%E5%85%A5%E9%97%A8/'>
+<meta property='og:site_name' content='kakahuote'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='server' /><meta property='article:published_time' content='2025-08-23T19:26:25&#43;08:00'/><meta property='article:modified_time' content='2025-08-23T21:00:03&#43;08:00'/>
+<meta name="twitter:title" content="Apache入门">
+<meta name="twitter:description" content="还是nginx好用">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画</title>
+    <style>
+        .loading {
+            position: fixed;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: #f5f5fa;
+            transition: transform 1.5s, opacity 1.5s;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .loader-bars {
+            display: flex;  
+            align-items: flex-end;  
+            gap: 3px;  
+            margin-bottom: 20px;  
+        }
+
+        .bar {
+            height: 5px;
+            width: 12px;
+            animation-duration: 0.45s;
+            animation-name: changeHeight;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .red {
+            background-color: #E50000;
+            box-shadow: 1px 1px 10px #E50000;
+            animation-delay: 0.10s;
+        }
+
+        .orange {
+            background-color: #FF8D00;
+            box-shadow: 1px 1px 10px #FF8D00;
+            animation-delay: 0.20s;
+        }
+
+        .yellow {
+            background-color: #FFEE00;
+            box-shadow: 1px 1px 10px #FFEE00;
+            animation-delay: 0.25s;
+        }
+
+        .green {
+            background-color: #008121;
+            box-shadow: 1px 1px 10px #008121;
+            animation-delay: 0.30s;
+        }
+
+        .blue {
+            background-color: #004CFF;
+            box-shadow: 1px 1px 10px #004CFF;
+            animation-delay: 0.35s;
+        }
+
+        .violet {
+            background-color: #760188;
+            box-shadow: 1px 1px 10px #760188;
+            animation-delay: 0.40s;
+        }
+
+        @keyframes changeHeight {
+            from {
+                height: 5px;
+            }
+
+            to {
+                height: 40px;
+            }
+        }
+
+        .scaleAndFadeout {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+         
+        .loading-text {
+            color: #333;  
+            font-size: 16px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <div class="loader-bars">
+            <div class="red bar"></div>
+            <div class="orange bar"></div>
+            <div class="yellow bar"></div>
+            <div class="green bar"></div>
+            <div class="blue bar"></div>
+            <div class="violet bar"></div>
+        </div>
+        <div class="loading-text">loading...</div>
+    </div>
+
+    <script>
+        function initLoading() {
+            let loading = document.querySelector(".loading");
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    loading.classList.add("scaleAndFadeout");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                    }, 1500);
+                }, 50);
+            });
+        }
+
+        initLoading();
+    </script>
+
+</body>
+</html>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img class="site-logo original-logo" src="/img/avatar_hu_4804467f7cda2058.png" width="300" height="300" loading="lazy" alt="原始头像">
+                    
+                    
+                        
+                        <img class="site-logo hover-logo" src="/img/avatar-hover_hu_f231304c77e946da.png" width="300" height="300" loading="lazy" alt="悬停头像">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤝</span>
+                
+            </figure>
+            
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kakahuote</a></h1>
+            <h2 class="site-description">靡不有初，鲜克有终</h2>
+        </div>
+    </header>
+
+    <ol class="menu-social">
+                <li>
+                    <a
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            </ol>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#何为apache">何为Apache</a>
+      <ol>
+        <li><a href="#nginx-vs-apache">Nginx vs Apache</a>
+          <ol>
+            <li><a href="#核心架构">核心架构</a>
+              <ol>
+                <li><a href="#apache">Apache</a></li>
+                <li><a href="#nginx">Nginx</a></li>
+              </ol>
+            </li>
+            <li><a href="#功能与生态">功能与生态</a>
+              <ol>
+                <li><a href="#apache-1">Apache</a></li>
+                <li><a href="#nginx-1">Nginx</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#apache的主要用法">Apache的主要用法</a>
+          <ol>
+            <li><a href="#web服务器">Web服务器</a></li>
+            <li><a href="#反向代理服务器">反向代理服务器</a></li>
+            <li><a href="#负载均衡器">负载均衡器</a></li>
+            <li><a href="#访问控制与url重写">访问控制与URL重写</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#目录结构">目录结构</a>
+      <ol>
+        <li><a href="#源码编译安装">源码编译安装</a></li>
+        <li><a href="#debianubuntu官方仓库-通过apt安装">Debian/Ubuntu官方仓库 (通过apt安装)</a></li>
+        <li><a href="#centosrhel官方仓库-通过yumdnf安装">CentOS/RHEL官方仓库 (通过yum/dnf安装)</a></li>
+        <li><a href="#docker镜像官方-httpd">Docker镜像（官方 httpd）</a></li>
+      </ol>
+    </li>
+    <li><a href="#常用命令">常用命令</a>
+      <ol>
+        <li><a href="#使用systemctl管理apache">使用systemctl管理Apache</a>
+          <ol>
+            <li><a href="#启动">启动</a></li>
+            <li><a href="#停止">停止</a></li>
+            <li><a href="#重启">重启</a></li>
+            <li><a href="#重新加载配置">重新加载配置</a></li>
+            <li><a href="#查看状态">查看状态</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用apachectl或-apache2ctl">使用apachectl（或 apache2ctl）</a>
+          <ol>
+            <li><a href="#启动-1">启动</a></li>
+            <li><a href="#停止-1">停止</a></li>
+            <li><a href="#重新加载配置-1">重新加载配置</a></li>
+            <li><a href="#查看版本">查看版本</a></li>
+            <li><a href="#检查配置文件语法">检查配置文件语法</a></li>
+          </ol>
+        </li>
+        <li><a href="#debianubuntu专属工具a2en--a2dis">Debian/Ubuntu专属工具：a2en* / a2dis*</a>
+          <ol>
+            <li><a href="#管理站点虚拟主机--site">管理站点（虚拟主机） —— site</a>
+              <ol>
+                <li><a href="#启用站点">启用站点</a></li>
+                <li><a href="#禁用站点">禁用站点</a></li>
+              </ol>
+            </li>
+            <li><a href="#管理模块--mod">管理模块 —— mod</a>
+              <ol>
+                <li><a href="#启用模块">启用模块</a></li>
+                <li><a href="#禁用模块">禁用模块</a></li>
+              </ol>
+            </li>
+            <li><a href="#管理配置文件--conf">管理配置文件 —— conf</a>
+              <ol>
+                <li><a href="#启用配置">启用配置</a></li>
+                <li><a href="#禁用配置">禁用配置</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#主配置文件-httpdconf">主配置文件 (httpd.conf)</a>
+      <ol>
+        <li><a href="#全局配置">全局配置</a></li>
+        <li><a href="#模块加载与条件判断">模块加载与条件判断</a></li>
+        <li><a href="#主服务器配置">主服务器配置</a></li>
+        <li><a href="#目录与文件访问控制">目录与文件访问控制</a>
+          <ol>
+            <li><a href="#directory--directorymatch块--物理路径匹配">&lt;Directory&gt; / &lt;DirectoryMatch&gt;块 —— 物理路径匹配</a></li>
+            <li><a href="#files--filesmatch-块---文件名匹配">&lt;Files&gt; / &lt;FilesMatch&gt; 块  —— 文件名匹配</a></li>
+            <li><a href="#location--locationmatch块--url路径匹配">&lt;Location&gt; / &lt;LocationMatch&gt;块 —— URL路径匹配</a></li>
+            <li><a href="#常用指令">常用指令</a>
+              <ol>
+                <li><a href="#require访问授权">Require：访问授权</a></li>
+                <li><a href="#options特性控制">Options：特性控制</a></li>
+                <li><a href="#allowoverride覆盖控制">AllowOverride：覆盖控制</a></li>
+                <li><a href="#auth身份认证系列">Auth*：身份认证系列</a></li>
+                <li><a href="#sethandler处理器指定">SetHandler：处理器指定</a></li>
+                <li><a href="#headerhttp头控制">Header：HTTP头控制</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#日志配置">日志配置</a></li>
+      </ol>
+    </li>
+    <li><a href="#虚拟主机配置文件">虚拟主机配置文件</a>
+      <ol>
+        <li><a href="#virtualhost块">&lt;VirtualHost&gt;块</a></li>
+        <li><a href="#http到https跳转">HTTP到HTTPS跳转</a></li>
+      </ol>
+    </li>
+    <li><a href="#htaccess文件">.htaccess文件</a>
+      <ol>
+        <li><a href="#工作原理">工作原理</a></li>
+        <li><a href="#典型用例与指令">典型用例与指令</a></li>
+      </ol>
+    </li>
+    <li><a href="#常用模块">常用模块</a>
+      <ol>
+        <li><a href="#mod_rewriteurl重写">mod_rewrite：URL重写</a>
+          <ol>
+            <li><a href="#核心指令">核心指令</a>
+              <ol>
+                <li><a href="#rewriteengine">RewriteEngine</a></li>
+                <li><a href="#rewriterule">RewriteRule</a></li>
+                <li><a href="#rewritecond">RewriteCond</a></li>
+              </ol>
+            </li>
+            <li><a href="#示例">示例</a>
+              <ol>
+                <li><a href="#示例1实现伪静态url">示例1：实现伪静态URL</a></li>
+                <li><a href="#示例2强制所有请求到www子域名">示例2：强制所有请求到www子域名</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#mod_proxy代理模块">mod_proxy：代理模块</a>
+          <ol>
+            <li><a href="#反向代理">反向代理</a>
+              <ol>
+                <li><a href="#proxypass">ProxyPass</a></li>
+                <li><a href="#proxypassreverse">ProxyPassReverse</a></li>
+                <li><a href="#proxypreservehost">ProxyPreserveHost</a></li>
+                <li><a href="#示例-1">示例</a></li>
+              </ol>
+            </li>
+            <li><a href="#proxy块">&lt;Proxy&gt;块</a>
+              <ol>
+                <li><a href="#proxy">&lt;Proxy&gt;</a></li>
+                <li><a href="#proxyset">ProxySet</a></li>
+                <li><a href="#示例-2">示例</a></li>
+              </ol>
+            </li>
+            <li><a href="#正向代理">正向代理</a>
+              <ol>
+                <li><a href="#配置">配置</a></li>
+                <li><a href="#示例-3">示例</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#mod_sslssltls加密模块">mod_ssl：SSL/TLS加密模块</a>
+          <ol>
+            <li><a href="#使用之前">使用之前</a></li>
+            <li><a href="#核心指令-1">核心指令</a></li>
+            <li><a href="#示例-4">示例</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#日志分析">日志分析</a>
+      <ol>
+        <li><a href="#访问日志access_log">访问日志（<code>access_log</code>）</a>
+          <ol>
+            <li><a href="#日志格式">日志格式</a></li>
+            <li><a href="#格式字段">格式字段</a></li>
+            <li><a href="#实际示例">实际示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#错误日志error_log">错误日志（<code>error_log</code>）</a>
+          <ol>
+            <li><a href="#格式与字段">格式与字段</a></li>
+            <li><a href="#示例-5">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#docker环境中日志的特殊格式">Docker环境中日志的特殊格式</a>
+          <ol>
+            <li><a href="#示例-6">示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#分析技巧">分析技巧</a>
+          <ol>
+            <li><a href="#统计访问量最多的ip地址">统计访问量最多的IP地址</a></li>
+            <li><a href="#统计特定页面或文件的访问次数">统计特定页面或文件的访问次数</a></li>
+            <li><a href="#统计特定ip地址的访问总次数">统计特定IP地址的访问总次数</a></li>
+            <li><a href="#统计特定时间段内的独立ip访问数">统计特定时间段内的独立IP访问数</a></li>
+            <li><a href="#查找特定ip地址的详细访问记录">查找特定IP地址的详细访问记录</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" >
+                工具使用
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/apache%E5%85%A5%E9%97%A8/">Apache入门</a>
+        </h2>
+        
+        <h3 class="article-subtitle">
+            还是nginx好用
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-08-23</time>
+            </div>
+        
+
+        
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-08-23
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>时隔一个月，又来学服务器了</p>
+<p>其实是因为美亚杯做到了apache相关内容啦</p>
+<p>猜你喜欢：<a class="link" href="http://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/"  target="_blank" rel="noopener"
+    >Nginx入门
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<h1 id="何为apache">何为Apache
+</h1><p>Apache HTTP Server（简称Apache，或httpd，使用时为Apache2）是Apache软件基金会的一个开源网页服务器项目</p>
+<p>自1995年发布以来，它凭借其稳定性、强大的功能、丰富的模块和跨平台特性，一度成为全球使用最广泛的Web服务器</p>
+<p>它的核心优势在于其高度模块化的设计，几乎所有功能，从SSL加密(<code>mod_ssl</code>)、URL重写(<code>mod_rewrite</code>)到与各种后端语言（如PHP的<code>mod_php</code>）的集成，都是通过模块实现的，这使得Apache具有极高的灵活性和可扩展性</p>
+<h2 id="nginx-vs-apache">Nginx vs Apache
+</h2><p>在之前，我们介绍了如何使用nginx：<a class="link" href="http://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/"  target="_blank" rel="noopener"
+    >Nginx入门
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p>那么它和apache之间究竟有什么区别？</p>
+<h3 id="核心架构">核心架构
+</h3><p><strong>这是两者最根本的区别</strong></p>
+<h4 id="apache">Apache
+</h4><p>采用基于进程或线程的模型，它有多种工作模式（MPM），如<code>prefork</code>（每个请求一个进程）和<code>worker</code>/<code>event</code>（每个请求一个线程）</p>
+<p>这种模型对于每个连接都会消耗一定的系统资源，在高并发下内存占用较高</p>
+<h4 id="nginx">Nginx
+</h4><p>采用事件驱动的异步非阻塞架构</p>
+<p>它用极少数的工作进程就能处理成千上万的并发连接，资源消耗极低，特别擅长应对高并发和处理静态资源</p>
+<h3 id="功能与生态">功能与生态
+</h3><h4 id="apache-1">Apache
+</h4><p>历史悠久，功能模块极其丰富，生态系统成熟</p>
+<p>对于动态内容（如PHP），其<code>mod_php</code>模块直接在Apache进程内执行，处理流程简单直接</p>
+<p>它的<code>.htaccess</code>文件提供了强大的目录级配置能力，让开发者无需修改主配置就能调整行为</p>
+<h4 id="nginx-1">Nginx
+</h4><p>核心功能是高性能的HTTP服务和反向代理</p>
+<p>它的模块化设计虽然也很强大，但通常更侧重于性能和网络层面</p>
+<p>它不支持<code>.htaccess</code>，所有配置集中管理，性能更高，也更符合现代运维理念</p>
+<hr>
+<p>总的来说：</p>
+<p><strong>Apache稳定、功能全面，对动态内容支持极佳</strong></p>
+<p><strong>Nginx轻量、高效，在高并发、静态资源和反向代理场景下更好用</strong></p>
+<p><strong>在现代架构中两者常常协同工作，用Nginx处理静态资源和代理，后端再由Apache处理复杂的动态业务逻辑</strong></p>
+<hr>
+<h2 id="apache的主要用法">Apache的主要用法
+</h2><h3 id="web服务器">Web服务器
+</h3><p>直接向客户端提供静态（HTML, CSS, 图片）和动态（PHP, Perl, Python）内容的服务</p>
+<p>Apache对动态内容的原生支持非常出色，是许多传统Web应用（如WordPress, Joomla）的首选平台</p>
+<h3 id="反向代理服务器">反向代理服务器
+</h3><p>通过<code>mod_proxy</code>模块，Apache可以作为客户端和后端应用服务器之间的中间人，实现请求转发、负载均衡，并隐藏后端服务细节</p>
+<h3 id="负载均衡器">负载均衡器
+</h3><p>配合<code>mod_proxy_balancer</code>模块，Apache可以将接收到的请求分发到后端的多台服务器上，从而提高网站的可用性和处理能力</p>
+<h3 id="访问控制与url重写">访问控制与URL重写
+</h3><p>强大的<code>.htaccess</code>和<code>mod_rewrite</code>功能，使其在URL美化（伪静态）、访问权限控制等方面表现非常灵活</p>
+<h1 id="目录结构">目录结构
+</h1><p><strong>和nginx一样，不同发行版和安装方式的apache的目录结构有差异，只不过apache的差异更为显著</strong></p>
+<p><strong>与nginx不同，apache官方一般只提供二进制编译安装的文件，<code>.deb</code>文件更多是交给第三方打包</strong></p>
+<h2 id="源码编译安装">源码编译安装
+</h2><p><strong>名称为apache2</strong></p>
+<p><strong>自定义程度最高，所有文件通常都集中在指定的前缀下（默认为<code>/usr/local/apache2</code>）</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>/                                                  <span style="color:#7f848e"># 根目录</span>
+</span></span><span style="display:flex;"><span>└── usr/
+</span></span><span style="display:flex;"><span>    └── local/
+</span></span><span style="display:flex;"><span>        └── apache2/
+</span></span><span style="display:flex;"><span>            ├── bin/                         <span style="color:#7f848e"># 可执行文件 (httpd, apachectl, ab等)</span>
+</span></span><span style="display:flex;"><span>            ├── build/                      <span style="color:#7f848e"># 编译时使用的脚本和工具</span>
+</span></span><span style="display:flex;"><span>            ├── cgi-bin/                   <span style="color:#7f848e"># CGI脚本示例目录</span>
+</span></span><span style="display:flex;"><span>            ├── conf/                       <span style="color:#7f848e"># 配置文件目录</span>
+</span></span><span style="display:flex;"><span>            │   ├── httpd.<span style="color:#e5c07b">conf</span>         # 主配置文件
+</span></span><span style="display:flex;"><span>            │   ├── extra/                 <span style="color:#7f848e"># 额外的配置文件 (vhosts.conf, ssl.conf等)</span>
+</span></span><span style="display:flex;"><span>            │   └── mime.<span style="color:#e5c07b">types</span>
+</span></span><span style="display:flex;"><span>            ├── htdocs/                    # 默认 Web 根目录
+</span></span><span style="display:flex;"><span>            │   └── index.<span style="color:#e5c07b">html</span>
+</span></span><span style="display:flex;"><span>            ├── icons/                       # Apache默认图标目录
+</span></span><span style="display:flex;"><span>            ├── include/                    <span style="color:#7f848e"># C/C++头文件，用于开发模块</span>
+</span></span><span style="display:flex;"><span>            ├── logs/                         <span style="color:#7f848e"># 日志文件目录 (access_log, error_log)</span>
+</span></span><span style="display:flex;"><span>            └── modules/                  <span style="color:#7f848e"># 动态加载的模块 (.so 文件)</span>
+</span></span></code></pre></div><h2 id="debianubuntu官方仓库-通过apt安装">Debian/Ubuntu官方仓库 (通过apt安装)
+</h2><p><strong>名称为apache2</strong></p>
+<p><strong>目录结构遵循Debian的策略，将配置文件、模块和站点配置分拆到不同目录，便于管理</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>/                                                       <span style="color:#7f848e"># 根目录</span>
+</span></span><span style="display:flex;"><span>├── etc/
+</span></span><span style="display:flex;"><span>│   └── apache2/
+</span></span><span style="display:flex;"><span>│       ├── apache2.<span style="color:#e5c07b">conf</span>                  # 主配置文件，主要包含全局设置
+</span></span><span style="display:flex;"><span>│       ├── conf-available/                <span style="color:#7f848e"># 可用的配置片段目录</span>
+</span></span><span style="display:flex;"><span>│       ├── conf-enabled/                 <span style="color:#7f848e"># 已启用的配置片段 (符号链接)</span>
+</span></span><span style="display:flex;"><span>│       ├── mods-available/              <span style="color:#7f848e"># 可用的模块配置文件 (.load, .conf)</span>
+</span></span><span style="display:flex;"><span>│       ├── mods-enabled/               <span style="color:#7f848e"># 已启用的模块 (符号链接)</span>
+</span></span><span style="display:flex;"><span>│       ├── sites-available/                <span style="color:#7f848e"># 可用的虚拟主机配置文件</span>
+</span></span><span style="display:flex;"><span>│       │   └── 000-default.<span style="color:#e5c07b">conf</span>
+</span></span><span style="display:flex;"><span>│       └── sites-enabled/                 # 已启用的虚拟主机配置 (符号链接)
+</span></span><span style="display:flex;"><span>│           └── 000-default.<span style="color:#e5c07b">conf</span> -&gt; ../sites-available/000-default.conf
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── usr/
+</span></span><span style="display:flex;"><span>│   ├── sbin/
+</span></span><span style="display:flex;"><span>│   │   └── <span style="color:#e5c07b">apache2ctl</span>                     # Apache 控制脚本
+</span></span><span style="display:flex;"><span>│   └── lib/
+</span></span><span style="display:flex;"><span>│       └── apache2/
+</span></span><span style="display:flex;"><span>│           └── modules/                    <span style="color:#7f848e"># 模块二进制文件 (.so)</span>
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── var/
+</span></span><span style="display:flex;"><span>│   ├── www/
+</span></span><span style="display:flex;"><span>│   │   └── html/                             <span style="color:#7f848e"># 默认 Web 根目录</span>
+</span></span><span style="display:flex;"><span>│   │       └── index.<span style="color:#e5c07b">html</span>
+</span></span><span style="display:flex;"><span>│   └── log/
+</span></span><span style="display:flex;"><span>│       └── apache2/                         <span style="color:#7f848e"># 日志文件目录</span>
+</span></span><span style="display:flex;"><span>│           ├── access.<span style="color:#e5c07b">log</span>
+</span></span><span style="display:flex;"><span>│           └── <span style="color:#c678dd">error</span>.log
+</span></span><span style="display:flex;"><span>└── lib/
+</span></span><span style="display:flex;"><span>    └── systemd/
+</span></span><span style="display:flex;"><span>        └── system/
+</span></span><span style="display:flex;"><span>            └── apache2.<span style="color:#e5c07b">service</span> # Systemd 服务单元
+</span></span></code></pre></div><h2 id="centosrhel官方仓库-通过yumdnf安装">CentOS/RHEL官方仓库 (通过yum/dnf安装)
+</h2><p><strong>名称为httpd</strong></p>
+<p><strong>目录结构与Debian系有所不同，但同样遵循系统规范</strong></p>
+<p><strong>关于systemd位置的问题，可以查看</strong>：<a class="link" href="http://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/#systemd%E7%9A%84%E4%BD%8D%E7%BD%AE"  target="_blank" rel="noopener"
+    >nginx入门 — systemd
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>/                                                                     <span style="color:#7f848e"># 根目录</span>
+</span></span><span style="display:flex;"><span>├── etc/
+</span></span><span style="display:flex;"><span>│   └── httpd/
+</span></span><span style="display:flex;"><span>│       ├── conf/
+</span></span><span style="display:flex;"><span>│       │   └── httpd.<span style="color:#e5c07b">conf</span>                              # 主配置文件
+</span></span><span style="display:flex;"><span>│       ├── conf.d/                                         <span style="color:#7f848e"># 子配置目录，所有 .conf 文件会被自动加载</span>
+</span></span><span style="display:flex;"><span>│       │   └── welcome.<span style="color:#e5c07b">conf</span>
+</span></span><span style="display:flex;"><span>│       └── conf.modules.d/                           # 模块加载配置目录
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── usr/
+</span></span><span style="display:flex;"><span>│   ├── sbin/
+</span></span><span style="display:flex;"><span>│   │   └── <span style="color:#e5c07b">httpd</span>                                           # 主程序二进制文件
+</span></span><span style="display:flex;"><span>│   └── lib64/
+</span></span><span style="display:flex;"><span>│       └── httpd/
+</span></span><span style="display:flex;"><span>│           └── modules/                                  <span style="color:#7f848e"># 模块二进制文件 (.so)</span>
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── var/
+</span></span><span style="display:flex;"><span>│   ├── www/
+</span></span><span style="display:flex;"><span>│   │   ├── html/                                            <span style="color:#7f848e"># 默认 Web 根目录</span>
+</span></span><span style="display:flex;"><span>│   │   └── cgi-bin/
+</span></span><span style="display:flex;"><span>│   └── log/
+</span></span><span style="display:flex;"><span>│       └── httpd/                                            <span style="color:#7f848e"># 日志文件目录</span>
+</span></span><span style="display:flex;"><span>│           ├── <span style="color:#e5c07b">access_log</span>
+</span></span><span style="display:flex;"><span>│           └── error_log
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└── usr/
+</span></span><span style="display:flex;"><span>    └── lib/
+</span></span><span style="display:flex;"><span>        └── systemd/
+</span></span><span style="display:flex;"><span>            └── system/
+</span></span><span style="display:flex;"><span>                └── httpd.<span style="color:#e5c07b">service</span>                            # Systemd 服务单元
+</span></span></code></pre></div><h2 id="docker镜像官方-httpd">Docker镜像（官方 httpd）
+</h2><p><strong>docker镜像目录结构取决于镜像的制作者，没有自己的专属结构</strong></p>
+<p>以官方的<code>httpd</code>镜像为例，它是基于Debian或Alpine Linux构建的，其内部结构通常类似于源码编译安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>/                                           <span style="color:#7f848e"># 根目录</span>
+</span></span><span style="display:flex;"><span>└── usr/
+</span></span><span style="display:flex;"><span>    └── local/
+</span></span><span style="display:flex;"><span>        └── apache2/
+</span></span><span style="display:flex;"><span>            ├── bin/
+</span></span><span style="display:flex;"><span>            ├── cgi-bin/
+</span></span><span style="display:flex;"><span>            ├── conf/                <span style="color:#7f848e"># 配置文件目录 (可挂载)</span>
+</span></span><span style="display:flex;"><span>            ├── htdocs/            <span style="color:#7f848e"># 默认 Web 根目录 (可挂载)</span>
+</span></span><span style="display:flex;"><span>            ├── icons/
+</span></span><span style="display:flex;"><span>            ├── include/
+</span></span><span style="display:flex;"><span>            ├── logs/                 <span style="color:#7f848e"># 日志文件目录 (符号链接)</span>
+</span></span><span style="display:flex;"><span>            └── modules/
+</span></span></code></pre></div><p><strong>唯一要注意的是日志文件：</strong></p>
+<p><strong>Docker容器的httpd的日志输出到标准输出(stdout)和标准错误(stderr)，而不是写入文件</strong></p>
+<p>执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grep -E <span style="color:#98c379">&#34;ErrorLog|CustomLog&#34;</span> /usr/local/apache2/conf/httpd.conf
+</span></span></code></pre></div><p>输出中会有这样两行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">ErrorLog</span> /<span style="color:#e06c75">proc</span>/<span style="color:#e06c75">self</span>/<span style="color:#e06c75">fd</span>/<span style="color:#d19a66">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">CustomLog</span> /<span style="color:#e06c75">proc</span>/<span style="color:#e06c75">self</span>/<span style="color:#e06c75">fd</span>/<span style="color:#d19a66">1</span> <span style="color:#e06c75">common</span>
+</span></span></code></pre></div><p>也就是说，访问日志和错误日志不会被写入文件，而是重定向到标准输入和标准错误</p>
+<p><strong>我们可以通过docker的命令来查看它们：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">docker</span> <span style="color:#e06c75">logs</span> &lt;<span style="color:#e06c75">容器ID</span>&gt;
+</span></span></code></pre></div><h1 id="常用命令">常用命令
+</h1><h2 id="使用systemctl管理apache">使用systemctl管理Apache
+</h2><p><strong>适用于通过系统包管理器安装的Apache服务，比如<code>apache2</code>或<code>httpd</code></strong></p>
+<p><strong>下文以<code>apache2</code>为例</strong></p>
+<h3 id="启动">启动
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl start apache2
+</span></span></code></pre></div><h3 id="停止">停止
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl stop apache2
+</span></span></code></pre></div><h3 id="重启">重启
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart apache2
+</span></span></code></pre></div><h3 id="重新加载配置">重新加载配置
+</h3><p><strong>不会中断现有连接</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl reload apache2
+</span></span></code></pre></div><h3 id="查看状态">查看状态
+</h3><pre tabindex="0"><code>systemctl status apache2  # 或 httpd
+</code></pre><h2 id="使用apachectl或-apache2ctl">使用apachectl（或 apache2ctl）
+</h2><p>这是Apache自带的控制工具，适合调试、配置检查</p>
+<p>它其实就是对<code>httpd</code>可执行程序的一个封装，方便管理Apache</p>
+<h3 id="启动-1">启动
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apachectl start
+</span></span></code></pre></div><h3 id="停止-1">停止
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apachectl start
+</span></span></code></pre></div><h3 id="重新加载配置-1">重新加载配置
+</h3><p><strong>不会中断现有连接</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apachectl graceful
+</span></span></code></pre></div><h3 id="查看版本">查看版本
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apachectl -v
+</span></span></code></pre></div><h3 id="检查配置文件语法">检查配置文件语法
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apachectl -t
+</span></span></code></pre></div><h2 id="debianubuntu专属工具a2en--a2dis">Debian/Ubuntu专属工具：a2en* / a2dis*
+</h2><p><strong>这些工具主要管理站点配置和模块，对<code>/etc/apache2/</code>下的文件进行操作</strong></p>
+<ul>
+<li><strong>启用：在<code>*-available</code> → <code>*-enabled</code>创建符号链接</strong></li>
+<li><strong>禁用：删除对应链接</strong></li>
+</ul>
+<p><strong>操作之后要记得重启（<code>reload</code> / <code>graceful</code>）</strong></p>
+<h3 id="管理站点虚拟主机--site">管理站点（虚拟主机） —— site
+</h3><p><strong><code>/etc/apache2/sites-enabled/site.conf</code> -&gt; <code>/etc/apache2/sites-available/site.conf</code></strong></p>
+<h4 id="启用站点">启用站点
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>a2ensite site.conf 
+</span></span></code></pre></div><p><strong><code>site.conf</code>是要启用的虚拟主机配置文件，它定义了一个网站在Apache上的访问方式，包括域名、网站目录、日志路径等</strong></p>
+<h4 id="禁用站点">禁用站点
+</h4><pre tabindex="0"><code>a2dissite site.conf
+</code></pre><h3 id="管理模块--mod">管理模块 —— mod
+</h3><p><strong><code>/etc/apache2/mods-enabled/module_name.load</code> -&gt; <code>/etc/apache2/mods-available/module_name.load</code></strong></p>
+<p><strong><code>/etc/apache2/mods-enabled/module_name.os</code> -&gt; <code>/etc/apache2/mods-available/module_name.os</code></strong></p>
+<p><strong>部分模块会有配置文件：</strong></p>
+<p><strong><code>/etc/apache2/mods-enabled/module_name.conf</code> -&gt; <code>/etc/apache2/mods-available/module_name.conf</code></strong></p>
+<h4 id="启用模块">启用模块
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>a2enmod module_name
+</span></span></code></pre></div><p><strong><code>module_name</code>是要启动的模块名称，不用带后缀名</strong></p>
+<h4 id="禁用模块">禁用模块
+</h4><pre tabindex="0"><code>a2dismod module_name
+</code></pre><h3 id="管理配置文件--conf">管理配置文件 —— conf
+</h3><p><strong><code>/etc/apache2/conf-enabled/config_name.conf</code> -&gt; <code>/etc/apache2/conf-available/config_name.conf</code></strong></p>
+<h4 id="启用配置">启用配置
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>a2enconf config_name
+</span></span></code></pre></div><p><strong><code>config_name</code>是要加载的配置文件名称，不用带后缀名</strong></p>
+<h4 id="禁用配置">禁用配置
+</h4><pre tabindex="0"><code>a2disconf file.conf
+</code></pre><h1 id="主配置文件-httpdconf">主配置文件 (httpd.conf)
+</h1><p>主配置文件在各个不同系统的路径不同：</p>
+<ul>
+<li>
+<p><strong>在RHEL/CentOS上通常是<code>/etc/httpd/conf/httpd.conf</code></strong></p>
+</li>
+<li>
+<p><strong>在Debian/Ubuntu上是<code>/etc/apache2/apache2.conf</code></strong></p>
+</li>
+</ul>
+<p>它定义了服务器的全局行为、加载的模块、默认设置以及如何包含其他配置文件</p>
+<p><strong>不同系统配置文件使用的语法也差不多，以下是一个典型的<code>httpd.conf</code>（RHEL/CentOS风格）文件的结构：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#7f848e"># -------------------- 全局配置 --------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">ServerRoot</span> <span style="color:#98c379">&#34;/etc/httpd&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Listen</span> <span style="color:#d19a66">80</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">User</span> apache
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Group</span> apache
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">PidFile</span> run/httpd.pid
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Timeout</span> <span style="color:#d19a66">60</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">KeepAlive</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">MaxKeepAliveRequests</span> <span style="color:#d19a66">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">KeepAliveTimeout</span> <span style="color:#d19a66">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># -------------------- 模块加载与条件判断 --------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 直接加载关键模块</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> mpm_event_module modules/mod_mpm_event.so
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> authz_core_module modules/mod_authz_core.so
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 包含其他模块配置文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Include</span> conf.modules.d/*.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># -------------------- 主服务器配置 --------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">ServerAdmin</span> root@localhost
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># ServerName www.example.com:80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 使用&lt;IfModule&gt;确保模块存在时才应用指令</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;IfModule</span> <span style="color:#98c379">dir_module</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">DirectoryIndex</span> index.html index.php
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/IfModule&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">DocumentRoot</span> <span style="color:#98c379">&#34;/var/www/html&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># -------------------- 目录与文件访问控制 --------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 限URL需要认证</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Location</span> <span style="color:#98c379">/admin</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthType</span> Basic
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthName</span> <span style="color:#98c379">&#34;Admin Area&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthUserFile</span> <span style="color:#98c379">/etc/httpd/.htpasswd</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> valid-user
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Location&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 默认禁止访问所有文件系统</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">/</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AllowOverride</span> <span style="color:#c678dd">none</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> denied
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 开放 Web 根目录的访问权限</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;/var/www/html&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Options</span> Indexes FollowSymLinks
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AllowOverride</span> <span style="color:#c678dd">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> granted
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 使用&lt;Files&gt;块保护敏感文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Files</span> <span style="color:#98c379">&#34;.ht*&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> denied
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Files&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># -------------------- 日志配置 --------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">ErrorLog</span> <span style="color:#98c379">&#34;logs/error_log&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LogLevel</span> <span style="color:#c678dd">warn</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LogFormat</span> <span style="color:#98c379">&#34;%h %l %u %t \&#34;%r\&#34; %&gt;s %b \&#34;%{Referer}i\&#34; \&#34;%{User-Agent}i\&#34;&#34;</span> combined
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">CustomLog</span> <span style="color:#98c379">&#34;logs/access_log&#34;</span> combined
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># -------------------- 包含其他配置文件 --------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">IncludeOptional</span> conf.d/*.conf
+</span></span></code></pre></div><h2 id="全局配置">全局配置
+</h2><p>这部分指令定义了Apache服务器的底层运行参数，影响服务器的整体性能和安全</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">ServerRoot</span> <span style="color:#98c379">&#34;/etc/httpd&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Listen</span> <span style="color:#d19a66">80</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">User</span> apache
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Group</span> apache
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">PidFile</span> run/httpd.pid
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Timeout</span> <span style="color:#d19a66">60</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">KeepAlive</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">MaxKeepAliveRequests</span> <span style="color:#d19a66">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">KeepAliveTimeout</span> <span style="color:#d19a66">5</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>ServerRoot</code>：指定Apache的安装根目录</strong></p>
+<p>配置文件中的所有相对路径（如<code>PidFile</code>, <code>ErrorLog</code>）都将基于此目录进行解析</p>
+</li>
+<li>
+<p><strong><code>Listen</code>：指定服务器监听的网络地址和端口</strong></p>
+<p>若不指定IP地址，则监听所有网络接口</p>
+<p>可以配置多个<code>Listen</code>指令来监听不同的端口或地址，例如<code>Listen 80</code>和<code>Listen 127.0.0.1:8080</code></p>
+</li>
+<li>
+<p><strong><code>User</code> &amp; <code>Group</code>：设置运行Apache工作进程的系统用户和用户组</strong></p>
+<p>主进程（master process）以root身份启动以绑定低位端口（&lt;1024），但子进程会切换到此处的低权限用户，这是关键的安全措施</p>
+</li>
+<li>
+<p><strong><code>PidFile</code>：指定于存放Apache主进程的进程ID（PID）的文件</strong></p>
+<p>这个文件被<code>apachectl</code>等控制脚本用来向主进程发送信号（如stop, restart, reload）</p>
+<p>路径通常是相对于<code>ServerRoot</code>的，如果没写，Apache 会用编译时的默认路径：</p>
+<ul>
+<li><strong>Debian/Ubuntu</strong>：<code>/var/run/apache2/apache2.pid</code></li>
+<li><strong>RHEL/CentOS</strong>：<code>/var/run/httpd/httpd.pid</code></li>
+<li><strong>源码安装</strong>：<code>logs/httpd.pid</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>Timeout</code>：服务器在各种网络操作中等待的秒数，包括等待接收GET请求、在TCP包发送之间等待ACK等</strong></p>
+<p>如果超过此时长，连接将被视为超时并关闭</p>
+</li>
+<li>
+<p><strong><code>KeepAlive</code>：启用HTTP持久连接</strong></p>
+<p>开启后，客户端可以在同一个TCP连接上发送多个请求，极大减少了TCP握手和慢启动的开销，显著提升网站加载速度，特别是对于包含大量小资源的页面</p>
+</li>
+<li>
+<p><strong><code>MaxKeepAliveRequests</code>：在<code>KeepAlive</code>开启时，限制单个持久连接上允许处理的最大请求数</strong></p>
+<p>达到此数目后，连接会自动关闭，有助于防止某个客户端长时间占用连接，并能周期性地回收资源</p>
+</li>
+<li>
+<p><strong><code>KeepAliveTimeout</code>：在<code>KeepAlive</code>开启时，设置服务器完成请求后等待下次请求的最长时间（秒）</strong></p>
+<p>如果超时仍未收到新请求，连接将关闭</p>
+<p>合理的设置（通常是2-5秒）可以在性能和服务器资源消耗之间取得平衡</p>
+</li>
+</ul>
+<h2 id="模块加载与条件判断">模块加载与条件判断
+</h2><p>Apache的功能是高度模块化的，使用任何高级功能（如SSL、重写、代理）前，必须先加载对应的模块</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> mpm_event_module modules/mod_mpm_event.so
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> authz_core_module modules/mod_authz_core.so
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Include</span> conf.modules.d/*.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;IfModule</span> <span style="color:#98c379">dir_module</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">DirectoryIndex</span> index.html index.php
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>LoadModule</code>：在服务器启动时动态加载指定的模块，使其提供的功能和指令在配置中可用</strong></p>
+<p>语法为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> &lt;模块名&gt; &lt;模块文件路径&gt;
+</span></span></code></pre></div><p>模块名是模块内部定义的标识符，路径通常是相对于<code>ServerRoot</code>的</p>
+</li>
+<li>
+<p><strong><code>Include</code>：把其它配置文件包含进来</strong></p>
+<p>Apache（httpd）的模块配置通常被拆分放在<code>conf.modules.d/</code>目录下，每个模块一个配置文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">etc</span>/<span style="color:#e06c75">httpd</span>/<span style="color:#e06c75">conf</span>.<span style="color:#e06c75">modules</span>.<span style="color:#e06c75">d</span>/<span style="color:#d19a66">00</span>-<span style="color:#e06c75">base</span>.<span style="color:#e06c75">conf</span>
+</span></span><span style="display:flex;"><span>/<span style="color:#e06c75">etc</span>/<span style="color:#e06c75">httpd</span>/<span style="color:#e06c75">conf</span>.<span style="color:#e06c75">modules</span>.<span style="color:#e06c75">d</span>/<span style="color:#d19a66">00</span>-<span style="color:#e06c75">mpm</span>.<span style="color:#e06c75">conf</span>
+</span></span><span style="display:flex;"><span>/<span style="color:#e06c75">etc</span>/<span style="color:#e06c75">httpd</span>/<span style="color:#e06c75">conf</span>.<span style="color:#e06c75">modules</span>.<span style="color:#e06c75">d</span>/<span style="color:#d19a66">01</span>-<span style="color:#e06c75">cgi</span>.<span style="color:#e06c75">conf</span>
+</span></span></code></pre></div><p>这些<code>.conf</code>文件里一般只有一两行<code>LoadModule</code> 指令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> mpm_prefork_module modules/mod_mpm_prefork.so
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> rewrite_module modules/mod_rewrite.so
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> ssl_module modules/mod_ssl.so
+</span></span></code></pre></div><p>那么主配置文件（<code>httpd.conf</code>）里只要写下面的<code>include</code>命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">Include</span> conf.modules.d/*.conf
+</span></span></code></pre></div><p>这样就能把这些模块加载指令全部引入，模块配置更加独立，更好管理</p>
+</li>
+<li>
+<p><strong><code>&lt;IfModule&gt;</code>块：条件容器块，其内部的指令仅在指定的模块被加载时才会被处理</strong></p>
+<p>这使得配置文件具有更好的可移植性，如果将配置文件部署到一个没有加载特定模块的服务器上，Apache不会因为无法识别模块内的指令而启动失败，而是会忽略整个<code>&lt;IfModule&gt;</code>块</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;IfModule</span> <span style="color:#98c379">dir_module</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">DirectoryIndex</span> index.html index.php
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p>在上面的例子，<code>DirectoryIndex</code>指令只有<code>mod_dir</code>模块（在配置文件里显示为<code>dir_module</code>）存在时才生效</p>
+</li>
+</ul>
+<h2 id="主服务器配置">主服务器配置
+</h2><p>这部分指令定义了“默认服务器”的行为</p>
+<p><strong>当一个请求的<code>Host</code>头没有匹配到任何<code>&lt;VirtualHost&gt;</code>块时，Apache会使用这里的配置来处理该请求</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">ServerAdmin</span> root@localhost
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">ServerName</span> www.example.com:80
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">DocumentRoot</span> <span style="color:#98c379">&#34;/var/www/html&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;IfModule</span> <span style="color:#98c379">dir_module</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">DirectoryIndex</span> index.html index.php
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>ServerAdmin</code>：设置了服务器管理员的电子邮件地址</strong></p>
+<p>这个地址会显示在Apache生成的错误页面中，方便用户报告问题</p>
+</li>
+<li>
+<p><strong><code>ServerName</code>：为服务器设置一个规范的域名</strong></p>
+<p>如果未设置，Apache会尝试通过反向DNS查找来确定，这可能导致启动缓慢或结果不准确</p>
+<p>在全局配置中，它主要用于服务器自我识别和生成重定向URL</p>
+</li>
+<li>
+<p><strong><code>DocumentRoot</code>：该指令指定了存放网页文件的根目录</strong></p>
+<p>当收到一个请求时，Apache会在此目录下查找对应的文件</p>
+</li>
+<li>
+<p><strong><code>DirectoryIndex</code>：当客户端请求一个目录（URL以<code>/</code>结尾）时，Apache会在此目录中查找的文件列表</strong></p>
+<p>这是Apache模块<code>dir_module</code>里的命令</p>
+<p>它会按照指令中列出的顺序查找，并返回第一个找到的文件作为响应</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">DirectoryIndex</span> index.html index.php
+</span></span></code></pre></div><p>比如上面的命令，如果用户访问<code>http://www.example.com/docs/</code>（这是个目录），Apache会依次查找：</p>
+<ol>
+<li><code>/var/www/example/docs/index.html</code></li>
+<li><code>/var/www/example/docs/index.php</code></li>
+</ol>
+<p>然后将找到的第一个存在的文件返回</p>
+<p>如果都没有，可能报403Forbidden，或者交给<code>mod_autoindex</code>显示目录列表</p>
+</li>
+</ul>
+<h2 id="目录与文件访问控制">目录与文件访问控制
+</h2><p>这是Apache安全配置的核心，它允许对文件系统中的路径和特定文件名进行精细的访问控制</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Location</span> <span style="color:#98c379">/admin</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthType</span> Basic
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthName</span> <span style="color:#98c379">&#34;Admin Area&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthUserFile</span> <span style="color:#98c379">/etc/httpd/.htpasswd</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> valid-user
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Location&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">/</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AllowOverride</span> <span style="color:#c678dd">none</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> denied
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;/var/www/html&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Options</span> Indexes FollowSymLinks
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AllowOverride</span> <span style="color:#c678dd">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> granted
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Files</span> <span style="color:#98c379">&#34;.ht*&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> denied
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Files&gt;</span>
+</span></span></code></pre></div><p>Apache通过<code>&lt;Directory&gt;</code>、<code>&lt;Files&gt;</code>、<code>&lt;Location&gt;</code>这三种核心容器块，提供了对服务器资源精细化的访问控制</p>
+<p>他们的语法格式十分相似，大部分内部指令也通用，只有小部分不同</p>
+<h3 id="directory--directorymatch块--物理路径匹配">&lt;Directory&gt; / &lt;DirectoryMatch&gt;块 —— 物理路径匹配
+</h3><p><strong>将其中的指令应用于服务器文件系统上的物理目录以及这些目录下的所有文件和子目录</strong></p>
+<p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;物理路径&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span></code></pre></div><p>精确路径：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;/var/www/html&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span></code></pre></div><p>通配符路径：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;/var/www/users/*/public_html&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span></code></pre></div><p><strong>正则有两种写法，效果相同：</strong></p>
+<p>正则表达式路径（使用&lt;Directory&gt;，以 ~ 开头）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">~ &#34;^/var/www/project-(a|b)/src&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span></code></pre></div><p>正则表达式路径（使用&lt;DirectoryMatch&gt;）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;DirectoryMatch</span> <span style="color:#98c379">&#34;^/var/www/project-(a|b)/src&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/DirectoryMatch&gt;</span>
+</span></span></code></pre></div><h3 id="files--filesmatch-块---文件名匹配">&lt;Files&gt; / &lt;FilesMatch&gt; 块  —— 文件名匹配
+</h3><p><strong>将其中的指令应用于特定文件名的文件，而不考虑这些文件位于哪个目录下</strong></p>
+<p>&lt;Files&gt;格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Files</span> <span style="color:#98c379">&#34;文件名&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Files&gt;</span>
+</span></span></code></pre></div><p>具体格式参考&lt;Directory&gt;块</p>
+<h3 id="location--locationmatch块--url路径匹配">&lt;Location&gt; / &lt;LocationMatch&gt;块 —— URL路径匹配
+</h3><p><strong>将其中的指令应用于客户端请求的URL路径</strong></p>
+<p><strong>它不关心这个URL最终对应到哪个文件，甚至这个URL可能根本不对应任何文件（例如由模块动态生成的内容或代理的请求）</strong></p>
+<p>&lt;Location&gt;格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Files</span> <span style="color:#98c379">&#34;文件名&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Files&gt;</span>
+</span></span></code></pre></div><p>具体格式参考&lt;Location&gt;块</p>
+<h3 id="常用指令">常用指令
+</h3><p>以下是在上述容器块中常用的指令，我们会详细说明每个指令的格式、参数和用法</p>
+<h4 id="require访问授权">Require：访问授权
+</h4><p><strong>用于定义谁可以访问资源</strong></p>
+<p><strong>格式</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">Require</span> [not] &lt;授权类型&gt; [参数]
+</span></span></code></pre></div><p><strong><code>not</code>是一个可选的修饰符，用来取反</strong></p>
+<p><strong>授权类型：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>授权类型</th>
+          <th>参数</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>all</code></td>
+          <td><code>granted</code> / <code>denied</code></td>
+          <td><strong>无条件允许或拒绝所有请求</strong></td>
+      </tr>
+      <tr>
+          <td><code>ip</code></td>
+          <td>IP地址, 子网掩码, 网段</td>
+          <td><strong>匹配客户端的IP地址</strong><br />例如<code>192.168.1.1</code>、<code>10.0.0.0/8</code></td>
+      </tr>
+      <tr>
+          <td><code>host</code></td>
+          <td>主机名, 域名</td>
+          <td><strong>匹配客户端的主机名</strong><br />例如<code>example.org</code><br /><strong>注意</strong>：这需要进行DNS查询，可能影响性能</td>
+      </tr>
+      <tr>
+          <td><code>valid-user</code></td>
+          <td>(无)</td>
+          <td><strong>要求用户必须通过身份认证</strong></td>
+      </tr>
+      <tr>
+          <td><code>user</code></td>
+          <td>用户名列表</td>
+          <td><strong>要求用户必须是已认证的指定用户之一</strong><br />例如<code>Require user admin john</code></td>
+      </tr>
+      <tr>
+          <td><code>group</code></td>
+          <td>用户组列表</td>
+          <td><strong>要求用户必须属于已认证的指定用户组之一</strong><br />例如<code>Require group administrators</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>使用Require后，在外层还可以嵌套逻辑容器：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>逻辑容器</th>
+          <th>逻辑关系</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>&lt;RequireAny&gt;</code></td>
+          <td>OR</td>
+          <td>只要有一条<code>Require</code>满足就允许访问</td>
+      </tr>
+      <tr>
+          <td><code>&lt;RequireAll&gt;</code></td>
+          <td>AND</td>
+          <td>必须所有<code>Require</code>条件都满足才允许访问</td>
+      </tr>
+      <tr>
+          <td><code>&lt;RequireNone&gt;</code></td>
+          <td>NOT</td>
+          <td>如果里面任意一条<code>Require</code>满足，就拒绝访问（取反）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;/var/www/private&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;RequireAny&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">&lt;RequireAll&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">Require</span> ip <span style="color:#d19a66">192.168.0.0/16</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">group</span> admins
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">&lt;/RequireAll&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">user</span> superadmin
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;/RequireAny&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span></code></pre></div><p>意思是IP在<code>192.168</code>网段且用户属于<code>admins</code>组，或者用户名是<code>superadmin</code>的，允许访问<code>/var/www/private</code></p>
+<h4 id="options特性控制">Options：特性控制
+</h4><p><strong>控制目录中可用的服务器功能和服务，只用于<code>&lt;Directory&gt;</code>块</strong></p>
+<p><strong>格式</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">Options</span> [+-]关键字1 [+-]关键字2 ...
+</span></span></code></pre></div><p>可以列出多个关键字，使用<code>+</code>或<code>-</code>前缀可以在现有选项基础上添加或移除单个选项</p>
+<p><strong>参数字段</strong>:</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>关键字</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Indexes</code></td>
+          <td>如果目录中缺少索引文件（如 <code>index.html</code>），则<strong>允许服务器生成并显示该目录的文件列表</strong></td>
+      </tr>
+      <tr>
+          <td><code>FollowSymLinks</code></td>
+          <td><strong>允许服务器跟随符号链接访问其指向的文件或目录</strong></td>
+      </tr>
+      <tr>
+          <td><code>SymLinksIfOwnerMatch</code></td>
+          <td>一个更安全的<code>FollowSymLinks</code>版本，<strong>仅当符号链接和目标文件的所有者相同时才跟随</strong></td>
+      </tr>
+      <tr>
+          <td><code>ExecCGI</code></td>
+          <td><strong>允许在该目录中执行CGI脚本</strong></td>
+      </tr>
+      <tr>
+          <td><code>MultiViews</code></td>
+          <td>启用内容协商功能，<strong>当用户请求的URL没有扩展名时，服务器可以根据客户端偏好（如语言）自动选择最合适的文件</strong></td>
+      </tr>
+      <tr>
+          <td><code>All</code></td>
+          <td>启用除<code>MultiViews</code>之外的所有选项</td>
+      </tr>
+      <tr>
+          <td><code>None</code></td>
+          <td>禁用所有选项</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>示例：</strong></p>
+<p>Apache的<code>Options</code>指令有两种使用方式：</p>
+<ol>
+<li>
+<p><strong>覆盖式（没有<code>+</code>/<code>-</code>）</strong></p>
+<pre tabindex="0"><code>Options Indexes FollowSymLinks
+</code></pre><p>这一行会清空继承的配置，然后只启用<code>Indexes</code>和<code>FollowSymLinks</code></p>
+</li>
+<li>
+<p><strong>增量式（有<code>+</code>/<code>-</code>）</strong></p>
+<pre tabindex="0"><code>Options -Indexes -ExecCGI +FollowSymLinks
+</code></pre><p>这一行会在继承父级Options的基础上修改：去掉<code>Indexes</code>，去掉<code>ExecCGI</code>，加上<code>FollowSymLinks</code></p>
+</li>
+</ol>
+<h4 id="allowoverride覆盖控制">AllowOverride：覆盖控制
+</h4><p><strong>决定目录中的<code>.htaccess</code>文件是否可以覆盖主配置文件中的设置，仅能在<code>&lt;Directory&gt;</code>块中使用</strong></p>
+<p>下文会详细说明<code>.htaccess</code>文件：<a class="link" href="#.htaccess%e6%96%87%e4%bb%b6" >.htaccess文件
+    
+</a></p>
+<p><strong>格式</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">AllowOverride</span> 关键字1 关键字2 ...
+</span></span></code></pre></div><p><strong>参数字段</strong>:</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>关键字</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>None</code></td>
+          <td>完全忽略<code>.htaccess</code>文件</td>
+      </tr>
+      <tr>
+          <td><code>All</code></td>
+          <td>允许<code>.htaccess</code>中的所有指令生效</td>
+      </tr>
+      <tr>
+          <td><code>AuthConfig</code></td>
+          <td>允许使用认证相关的指令</td>
+      </tr>
+      <tr>
+          <td><code>FileInfo</code></td>
+          <td>允许使用MIME类型、重写、头信息相关的指令</td>
+      </tr>
+      <tr>
+          <td><code>Indexes</code></td>
+          <td>允许使用索引相关的指令</td>
+      </tr>
+      <tr>
+          <td><code>Limit</code></td>
+          <td>允许使用访问控制指令</td>
+      </tr>
+      <tr>
+          <td><code>Options</code></td>
+          <td>允许在<code>.htaccess</code>中使用<code>Options</code> 指令</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>示例</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;/var/www/wordpress&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AllowOverride</span> FileInfo AuthConfig Limit
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span></code></pre></div><h4 id="auth身份认证系列">Auth*：身份认证系列
+</h4><p>这一系列指令共同工作，为资源设置基于用户名和密码的保护</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>指令</th>
+          <th>作用</th>
+          <th>格式</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>AuthType</code></td>
+          <td><strong>设置认证类型</strong></td>
+          <td>`AuthType Basic</td>
+          <td>Digest`</td>
+      </tr>
+      <tr>
+          <td><code>AuthName</code></td>
+          <td><strong>设置认证区域名称</strong></td>
+          <td><code>AuthName &quot;提示信息&quot;</code></td>
+          <td>浏览器密码输入框会显示该提示信息</td>
+      </tr>
+      <tr>
+          <td><code>AuthUserFile</code></td>
+          <td><strong>指定用户及密码文件</strong></td>
+          <td><code>AuthUserFile &quot;/path/to/.htpasswd&quot;</code></td>
+          <td>文件由 <code>htpasswd</code> 工具创建，存储用户名和加密密码</td>
+      </tr>
+      <tr>
+          <td><code>AuthGroupFile</code></td>
+          <td><strong>指定用户组文件</strong></td>
+          <td><code>AuthGroupFile &quot;/path/to/.htgroups&quot;</code></td>
+          <td>文件定义用户组及其成员，配合 <code>Require group</code> 使用</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Location</span> <span style="color:#98c379">&#34;/admin&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthType</span>        Basic
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthName</span>        <span style="color:#98c379">&#34;Admin Area&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">AuthUserFile</span>    <span style="color:#98c379">&#34;/etc/httpd/.htpasswd&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span>         valid-user
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Location&gt;</span>
+</span></span></code></pre></div><p>用户访问 <code>http://example.com/admin</code>后：</p>
+<ol>
+<li>要求客户端进行Basic认证</li>
+<li>浏览器弹出登录框，显示<code>Admin Area</code></li>
+<li>用户输入用户名/密码，Apache 从<code>/etc/httpd/.htpasswd</code> 验证</li>
+<li>验证成功 → 允许访问<code>/admin</code>
+验证失败 → 返回401 Unauthorized</li>
+</ol>
+<h4 id="sethandler处理器指定">SetHandler：处理器指定
+</h4><p><strong>指定服务器遇到某个资源时，交给哪种处理器来处理请求</strong></p>
+<p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">SetHandler</span> &lt;处理器名称&gt;
+</span></span></code></pre></div><p><strong>参数字段</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>处理器</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>server-status</code></td>
+          <td>由<code>mod_status</code>模块处理，<strong>生成服务器状态报告</strong></td>
+      </tr>
+      <tr>
+          <td><code>server-info</code></td>
+          <td>由<code>mod_info</code>模块处理，<strong>生成服务器详细配置信息</strong></td>
+      </tr>
+      <tr>
+          <td><code>application/x-httpd-php</code></td>
+          <td><strong>强制由PHP处理器执行</strong>（使用<code>mod_php</code>时）</td>
+      </tr>
+      <tr>
+          <td><code>cgi-script</code></td>
+          <td>由<code>mod_cgi</code>或<code>mod_cgid</code>处理，<strong>执行CGI脚本</strong></td>
+      </tr>
+      <tr>
+          <td><code>cgi</code></td>
+          <td>由<code>mod_cgi</code>处理，<strong>通常和<code>cgi-script</code>等价</strong></td>
+      </tr>
+      <tr>
+          <td><code>perl-script</code></td>
+          <td>由<code>mod_perl</code>处理，<strong>执行Perl脚本</strong></td>
+      </tr>
+      <tr>
+          <td><code>proxy-server</code></td>
+          <td>由<code>mod_proxy</code>处理，<strong>将请求代理到后端服务器</strong></td>
+      </tr>
+      <tr>
+          <td><code>dav</code></td>
+          <td>由<code>mod_dav</code>处理，<strong>实现WebDAV功能</strong></td>
+      </tr>
+      <tr>
+          <td><code>imap-file</code></td>
+          <td>由<code>mod_imap</code>处理，<strong>用于访问邮件文件</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;Location</span> <span style="color:#98c379">&#34;/server-status&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SetHandler</span> server-status
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> ip <span style="color:#d19a66">127.0.0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Location&gt;</span>
+</span></span></code></pre></div><p>这段配置开启了Apache的服务器状态监控页面<code>/server-status</code>，但只允许本机访问，常用于管理员调试和性能监控</p>
+<h4 id="headerhttp头控制">Header：HTTP头控制
+</h4><p>来自<code>mod_headers</code>模块，用于添加、修改或删除HTTP响应头</p>
+<p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">Header</span> [condition] action 头部名称 <span style="color:#98c379">&#34;值&#34;</span>
+</span></span></code></pre></div><p><strong>条件参数：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条件 (<code>condition</code>)</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>early</code></td>
+          <td><strong>在响应生成的早期阶段设置头部</strong>（比默认阶段更早）</td>
+      </tr>
+      <tr>
+          <td><code>expr=&quot;表达式&quot;</code></td>
+          <td><strong>只有当表达式为真时才执行该Header动作</strong></td>
+      </tr>
+      <tr>
+          <td><code>always</code></td>
+          <td>无论响应状态码或其他限制，<strong>强制应用该Header</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>动作参数：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>动作 (<code>action</code>)</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>set</code></td>
+          <td><strong>设置HTTP响应头</strong>，如果同名头已存在，则覆盖它</td>
+      </tr>
+      <tr>
+          <td><code>add</code></td>
+          <td><strong>添加HTTP响应头</strong>，即使同名头已存在，也会再添加一个</td>
+      </tr>
+      <tr>
+          <td><code>append</code></td>
+          <td><strong>将值附加到已存在的同名头值的末尾</strong></td>
+      </tr>
+      <tr>
+          <td><code>unset</code></td>
+          <td>从响应中<strong>移除指定的HTTP头</strong></td>
+      </tr>
+      <tr>
+          <td><code>echo</code></td>
+          <td>仅用于调试，<strong>输出指定头的值</strong>（很少用）</td>
+      </tr>
+      <tr>
+          <td><code>edit</code></td>
+          <td><strong>修改已存在头的值</strong>，基于正则替换</td>
+      </tr>
+      <tr>
+          <td><code>merge</code></td>
+          <td><strong>合并多个值为同一个头</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>示例</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;FilesMatch</span> <span style="color:#98c379">&#34;\.(css|js)$&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Header</span> set X-Content-Type-Options <span style="color:#98c379">&#34;nosniff&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">Header</span> set X-Frame-Options <span style="color:#98c379">&#34;DENY&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">Header</span> append X-Powered-By <span style="color:#98c379">&#34;Apache&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">Header</span> set Cache-Control <span style="color:#98c379">&#34;max-age=3600&#34;</span> <span style="color:#98c379">&#34;expr=%{REQUEST_STATUS} == 200&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">Header</span> always set Strict-Transport-Security <span style="color:#98c379">&#34;max-age=31536000; includeSubDomains&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/FilesMatch&gt;</span>
+</span></span></code></pre></div><p>对<code>.css</code>和<code>.js</code>文件设置响应头，防止MIME嗅探和被嵌入iframe，添加服务器标识，同时控制缓存和强制HTTPS</p>
+<h2 id="日志配置">日志配置
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">ErrorLog</span> <span style="color:#98c379">&#34;logs/error_log&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LogLevel</span> <span style="color:#c678dd">warn</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LogFormat</span> <span style="color:#98c379">&#34;%h %l %u %t \&#34;%r\&#34; %&gt;s %b \&#34;%{Referer}i\&#34; \&#34;%{User-Agent}i\&#34;&#34;</span> combined
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">CustomLog</span> <span style="color:#98c379">&#34;logs/access_log&#34;</span> combined
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>ErrorLog</code>：错误日志文件的路径</strong></p>
+<p>服务器启动、运行中的错误、模块的诊断信息都会记录在其中</p>
+</li>
+<li>
+<p><strong><code>LogLevel</code>：记录在错误日志中的信息的详细程度</strong></p>
+<p>每条错误日志条目都会带有一个严重性等级，这些等级是代码里写死的，作为用户无法改变某个错误属于什么等级</p>
+<p>Apache支持的日志级别（从高到低）如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>级别</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>debug</code></td>
+          <td>记录所有信息，主要用于开发或调试，信息量极大，通常需编译时启用</td>
+      </tr>
+      <tr>
+          <td><code>info</code></td>
+          <td>普通信息，如配置加载成功、进程启动、连接创建等</td>
+      </tr>
+      <tr>
+          <td><code>notice</code></td>
+          <td>正常但重要的事件，如配置文件重载、进程关闭等</td>
+      </tr>
+      <tr>
+          <td><code>warn</code></td>
+          <td>警告信息，非致命错误，比如配置中存在问题但可以忽略或继续运行</td>
+      </tr>
+      <tr>
+          <td><code>error</code></td>
+          <td>运行过程中出现的错误，如连接失败、服务不可达等</td>
+      </tr>
+      <tr>
+          <td><code>crit</code></td>
+          <td>严重错误，Nginx可能无法继续运行</td>
+      </tr>
+      <tr>
+          <td><code>alert</code></td>
+          <td>必须立刻处理的严重问题</td>
+      </tr>
+      <tr>
+          <td><code>emerg</code></td>
+          <td>紧急状态，比如系统崩溃，Nginx无法启动</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>是否写入日志文件取决于<code>LogLevel</code>设置的阈值，只会写入大于等于当前设置等级的错误事件</p>
+<p>生产环境通常设置为<code>warn</code>以捕捉重要问题，同时避免日志泛滥</p>
+</li>
+<li>
+<p><strong><code>LogFormat</code>：指定访问日志的格式和名称</strong></p>
+<p><code>LogFormat &quot;...&quot; combined</code>表示把这个格式命名为<code>combined</code></p>
+<p>格式字符串由固定的文本和<code>%</code>开头的变量组成，例如 <code>%h</code> (客户端IP), <code>%&gt;s</code> (HTTP状态码), <code>%D</code> (处理请求的时间，单位微秒)，后面日志分析部分会详细说明</p>
+</li>
+<li>
+<p><strong><code>CustomLog</code>：设置日志文件位置，并指定使用的格式</strong></p>
+<p><code>CustomLog &quot;logs/access_log&quot; combined</code>表示使用名为<code>combined</code>的格式（也就是上一行定义的格式）记录访问信息到<code>logs/access_log</code>文件中</p>
+</li>
+</ul>
+<h1 id="虚拟主机配置文件">虚拟主机配置文件
+</h1><p>虚拟主机是一种技术，它允许一台物理服务器托管多个独立的网站</p>
+<p>与Nginx的一个server块就是一台虚拟主机不同，Apache一般将虚拟主机配置文件单独存放</p>
+<p>通常，我们会为每个网站创建一个独立的配置文件，在RHEL/CentOS中通常存放在<code>conf.d/</code>或<code>conf/vhosts.d/</code> 目录下，而在Debian/Ubuntu中则存放在 <code>sites-available/</code> 目录中</p>
+<h2 id="virtualhost块">&lt;VirtualHost&gt;块
+</h2><p><code>&lt;VirtualHost&gt;</code>块是定义一个虚拟主机所有配置的容器，它通过监听的IP地址和端口号来区分不同的虚拟主机</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;VirtualHost</span> <span style="color:#98c379">[ip-address]:[port]</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div><ul>
+<li><strong><code>[ip-address]</code></strong>: 虚拟主机将响应的IP地址。<code>*</code>代表所有IP地址</li>
+<li><strong><code>[port]</code></strong>: 虚拟主机将监听的端口号。通常是<code>80</code>（HTTP）或<code>443</code>（HTTPS）</li>
+</ul>
+<p>在一个虚拟主机配置文件中，我们可以配置与主配置文件中类似的指令，但范围仅限于这个特定的虚拟主机</p>
+<p>以下是一个完整的的虚拟主机配置文件示例，它处理了HTTPS服务的配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#7f848e"># HTTPS 虚拟主机配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;VirtualHost</span> <span style="color:#98c379">*:443</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 定义该虚拟主机响应的域名</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ServerName</span> www.example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ServerAlias</span> example.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 为该虚拟主机指定独立的Web根目录</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">DocumentRoot</span> <span style="color:#98c379">&#34;/var/www/example.com&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 配置独立的日志文件，便于分析</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ErrorLog</span> <span style="color:#98c379">&#34;/var/log/httpd/example.com-error.log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">CustomLog</span> <span style="color:#98c379">&#34;/var/log/httpd/example.com-access.log&#34;</span> combined
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 开启HTTPS并指定证书文件</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLEngine</span> <span style="color:#c678dd">on</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLCertificateFile</span> <span style="color:#98c379">/etc/pki/tls/certs/example.com.crt</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLCertificateKeyFile</span> <span style="color:#98c379">/etc/pki/tls/private/example.com.key</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLCertificateChainFile</span> <span style="color:#98c379">/etc/pki/tls/certs/chain.crt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 为该站点的目录设置权限</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;Directory</span> <span style="color:#98c379">&#34;/var/www/example.com&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">Options</span> -Indexes +FollowSymLinks
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">AllowOverride</span> <span style="color:#c678dd">All</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> granted
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;/Directory&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>ServerName</code></strong></p>
+<p>为该虚拟主机指定一个唯一的域名，当客户端的请求头中的<code>Host</code>字段与此处的<code>ServerName</code>或<code>ServerAlias</code>匹配时，该请求就会由这个虚拟主机处理</p>
+</li>
+<li>
+<p><strong><code>ServerAlias</code></strong></p>
+<p>为虚拟主机设置一个或多个别名，例如<code>example.com</code>可以作为<code>www.example.com</code>的别名</p>
+</li>
+<li>
+<p><strong>HTTPS 相关的指令：</strong></p>
+<ul>
+<li><strong><code>SSLEngine on</code></strong>: 开启SSL/TLS加密引擎</li>
+<li><strong><code>SSLCertificateFile</code></strong>: 指定SSL证书文件的路径（公钥，通常是<code>.crt</code>或<code>.pem</code>）</li>
+<li><strong><code>SSLCertificateKeyFile</code></strong>: 指定与证书匹配的私钥文件路径（<code>.key</code>）</li>
+<li><strong><code>SSLCertificateChainFile</code></strong>: 如果证书需要中间证书链才能被浏览器信任，则需要指定此文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="http到https跳转">HTTP到HTTPS跳转
+</h2><p>下面是一个经典的例子，它唯一的目的就是利用<code>mod_rewrite</code>模块将所有HTTP请求重定向到对应的HTTPS URL，以确保用户无论如何访问，都会被安全地引导至加密连接</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#7f848e"># 将所有 HTTP 请求永久重定向到 HTTPS</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;VirtualHost</span> <span style="color:#98c379">*:80</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 定义该虚拟主机响应的域名</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ServerName</span> www.example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ServerAlias</span> example.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 启用URL重写引擎</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">RewriteEngine</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 定义重定向规则</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>&lt;VirtualHost *:80&gt;</code></strong></p>
+<p><code>*</code>表示该虚拟主机将响应服务器上任何IP地址的请求，<code>80</code>指定了它只监听来自标准HTTP端口<code>80</code>的请求</p>
+</li>
+<li>
+<p><strong><code>ServerName</code> 和 <code>ServerAlias</code></strong></p>
+<p>当一个请求的<code>Host</code>头（域名）与<code>www.example.com</code>或<code>example.com</code>匹配时，就由该虚拟主机来处理</p>
+<p>这确保了即使服务器上托管了多个网站，这条重定向规则也只会应用于<code>example.com</code>这个域名的HTTP请求，而不会影响到其他网站</p>
+</li>
+<li>
+<p><strong><code>RewriteEngine On</code></strong></p>
+<p>这是启用Apache <code>mod_rewrite</code>模块重写的开关，必须先开启，其下的<code>RewriteRule</code>指令才能生效</p>
+</li>
+<li>
+<p><strong><code>RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]</code></strong></p>
+<p>这是整个重定向逻辑的核心，它定义了一条具体的重写规则</p>
+<ul>
+<li>
+<p><strong><code>^(.\*)$</code></strong></p>
+<p>它捕获了请求路径的全部内容，例如 <code>/about/</code> 或 <code>/images/logo.png?id=123</code></p>
+</li>
+<li>
+<p><strong><code>https://%{HTTP_HOST}%{REQUEST_URI}</code></strong></p>
+<p>这是重定向的目标URL</p>
+<p>**<code>https://</code>：**将协议从HTTP改为HTTPS</p>
+<p>**<code>%{HTTP_HOST}</code>：**这是一个Apache服务器变量，它会动态地获取客户端请求头中的<code>Host</code>字段值</p>
+<p>**<code>%{REQUEST_URI}</code>：**另一个服务器变量，它会动态地获取请求的完整URI路径，包括查询字符串</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>[R=301,L]</code></strong></p>
+<p>这些是控制重写行为的标志</p>
+<ul>
+<li>
+<p><strong><code>R=301</code>：</strong><code>R</code>代表<code>redirect</code>（重定向），<code>301</code>指定了HTTP状态码为301 Moved Permanently，这个状态码告诉浏览器和搜索引擎这个跳转是永久性的，确保SEO权重不丢失</p>
+</li>
+<li>
+<p><strong><code>L</code>：</strong><code>last</code>，指示Apache一旦这条规则被匹配并执行，就停止处理任何后续的重写规则</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>当一个用户访问<code>http://www.example.com/login</code>时，整个流程如下：</strong></p>
+<ol>
+<li>客户端向服务器的<code>80</code>端口发送一个HTTP请求</li>
+<li>Apache接收到请求，根据<code>Host</code>头匹配到这个<code>&lt;VirtualHost *:80&gt;</code>块</li>
+<li><code>RewriteEngine On</code>生效，Apache开始检查<code>RewriteRule</code></li>
+<li><code>RewriteRule</code>匹配到请求路径<code>/login</code></li>
+<li>Apache根据规则，动态构建出目标URL：<code>https://www.example.com/login</code></li>
+<li><code>R=301,L</code>标志告诉Apache向客户端发送一个<code>301</code>重定向响应</li>
+<li>客户端浏览器接收到<code>301</code>响应后，会自动向<code>https://www.example.com/login</code>发起一个新的请求，这个请求将由服务器上监听<code>443</code>端口的虚拟主机（即HTTPS配置）来处理</li>
+</ol>
+<h1 id="htaccess文件">.htaccess文件
+</h1><p><strong><code>.htaccess</code>文件（分布式配置文件）是一个目录级配置片段，只应用于&lt;Directory&gt;块</strong></p>
+<p>它允许开发者或非root用户在不修改主配置文件的情况下，对特定目录及其子目录进行配置</p>
+<h2 id="工作原理">工作原理
+</h2><p><strong>Apach 在读取配置时并不会一次性加载<code>.htaccess</code>，而是每次处理请求时才去磁盘查找并应用它</strong></p>
+<p>比如，当Apache收到一个对<code>/var/www/site/dir/file.html</code>的请求时，它会依次查找以下文件：</p>
+<ol>
+<li><code>/var/www/site/dir/.htaccess</code></li>
+<li><code>/var/www/site/.htaccess</code></li>
+<li><code>/var/www/.htaccess</code></li>
+</ol>
+<p>每找到一个<code>.htaccess</code>，就解析并应用里面的配置写在对应&lt;Directory&gt;块中</p>
+<p>这种递归查找机制对性能有显著影响，因为它增加了文件系统的I/O开销</p>
+<p>因此，除非必要，通常不建议广泛使用<code>.htaccess</code></p>
+<p><strong><code>.htaccess</code>文件中的指令是否生效，完全取决于前文提到过主文件配置的<code>AllowOverride</code>指令：</strong></p>
+<p><a class="link" href="#AllowOverride%ef%bc%9a%e8%a6%86%e7%9b%96%e6%8e%a7%e5%88%b6" >AllowOverride：覆盖控制
+    
+</a></p>
+<h2 id="典型用例与指令">典型用例与指令
+</h2><p>下面是一个典型的<code>.htaccess</code>文件内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#7f848e"># 启用重写引擎</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">RewriteEngine</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 将所有以.html结尾的请求重定向到不带.html的URL</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 例如：/about.html -&gt; /about</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">RewriteRule</span> ^(.*)\.html$ /$1 [R=301,L]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 为目录设置访问密码保护</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">AuthType</span> Basic
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">AuthName</span> <span style="color:#98c379">&#34;Restricted Area&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">AuthUserFile</span> <span style="color:#98c379">/var/www/site/dir/.htpasswd</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">Require</span> valid-user
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 强制将目录索引文件设置为index.php</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">DirectoryIndex</span> index.php
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 在响应头中添加自定义信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;IfModule</span> <span style="color:#98c379">mod_headers.c</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Header</span> set X-Custom-Header <span style="color:#98c379">&#34;My Website&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p>在上面的例子中，我们使用了以下指令：</p>
+<ul>
+<li>
+<p><strong><code>RewriteEngine</code>和<code>RewriteRule</code></strong></p>
+<p>URL重写，这在构建“伪静态”URL或实现SEO友好的链接时非常有用</p>
+</li>
+<li>
+<p><strong><code>Auth*</code>系列指令</strong></p>
+<p>用于对整个目录进行密码保护。这在<code>/admin</code>或<code>/private</code>等需要认证的目录中非常常见</p>
+</li>
+<li>
+<p><strong><code>DirectoryIndex</code></strong></p>
+<p>用于覆盖主配置文件中定义的索引文件顺序</p>
+</li>
+<li>
+<p><strong><code>Header</code></strong></p>
+<p>添加或修改HTTP响应头</p>
+</li>
+</ul>
+<p><strong>这些指令与主配置文件中的用法相同，但其作用范围仅限于<code>.htaccess</code>文件所在的目录</strong></p>
+<p><strong>事实上，&lt;Directory&gt;块能够使用的指令，在<code>.htaccess</code>文件大多都能使用，只是范围受制于<code>AllowOverride</code></strong></p>
+<p><strong>这使得它非常灵活，尤其是在共享主机环境中</strong></p>
+<h1 id="常用模块">常用模块
+</h1><p>Apache的核心优势在于其高度模块化的设计，几乎所有高级功能都由特定的模块提供。这些模块必须在主配置文件（通常是<code>httpd.conf</code>或<code>apache2.conf</code>）中通过<code>LoadModule</code>指令加载后才能使用。</p>
+<p>本章节将详细介绍几个Apache最常用且功能强大的模块，并讲解它们的配置方法。</p>
+<h2 id="mod_rewriteurl重写">mod_rewrite：URL重写
+</h2><p><code>mod_rewrite</code>允许服务器根据正则表达式和规则集来重写请求的URL</p>
+<p>这通常用于实现伪静态、URL美化、HTTP重定向等</p>
+<p>使用之前，我们要确保在主配置文件中启用了<code>mod_rewrite</code>：</p>
+<ul>
+<li>
+<p>在Debian/Ubuntu中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">a2enmod</span> rewrite
+</span></span></code></pre></div></li>
+<li>
+<p>在RHEL/CentOS中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> rewrite_module modules/mod_rewrite.so
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="核心指令">核心指令
+</h3><h4 id="rewriteengine">RewriteEngine
+</h4><p><strong>该指令用于在特定配置上下文中开启或关闭重写引擎</strong></p>
+<p>开启：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">RewriteEngine</span> <span style="color:#c678dd">On</span>
+</span></span></code></pre></div><p>关闭：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">RewriteEngine</span> <span style="color:#c678dd">Off</span>
+</span></span></code></pre></div><h4 id="rewriterule">RewriteRule
+</h4><p><strong>这是定义重写规则的指令，其格式为：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">RewriteRule</span> 模式 替代 [标志]
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模式</strong></td>
+          <td>用于匹配请求的URI路径（不包含域名和协议）的正则表达式</td>
+      </tr>
+      <tr>
+          <td><strong>替代</strong></td>
+          <td>匹配成功后，用于构建新URL的字符串或路径</td>
+      </tr>
+      <tr>
+          <td><strong>标志</strong></td>
+          <td>可选，用于控制重写规则的行为（如外部重定向、停止处理等）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>常用标志：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>标志</th>
+          <th>缩写</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>L</code></td>
+          <td><code>last</code></td>
+          <td><strong>停止处理当前规则集中的其他规则</strong></td>
+      </tr>
+      <tr>
+          <td><code>R</code></td>
+          <td><code>redirect</code></td>
+          <td><strong>执行外部重定向</strong>（发送<code>302</code>状态码给浏览器）可指定状态码，如<code>R=301</code></td>
+      </tr>
+      <tr>
+          <td><code>NC</code></td>
+          <td><code>nocase</code></td>
+          <td><strong>使模式匹配不区分大小写</strong></td>
+      </tr>
+      <tr>
+          <td><code>P</code></td>
+          <td><code>proxy</code></td>
+          <td><strong>将请求代理到指定的替代URL，需要<code>mod_proxy</code>模块</strong></td>
+      </tr>
+      <tr>
+          <td><code>QSA</code></td>
+          <td><code>qsappend</code></td>
+          <td><strong>将原始请求的查询字符串（URL中<code>?</code>之后的部分）附加到替代URL后</strong></td>
+      </tr>
+      <tr>
+          <td><code>NE</code></td>
+          <td><code>noescape</code></td>
+          <td><strong>禁止对重写后的URL进行特殊字符转义</strong></td>
+      </tr>
+      <tr>
+          <td><code>CO</code></td>
+          <td><code>cookie</code></td>
+          <td><strong>设置一个Cookie</strong></td>
+      </tr>
+      <tr>
+          <td><code>E</code></td>
+          <td><code>env</code></td>
+          <td><strong>设置环境变量</strong></td>
+      </tr>
+      <tr>
+          <td><code>G</code></td>
+          <td><code>gone</code></td>
+          <td><strong>返回410 Gone状态码</strong></td>
+      </tr>
+      <tr>
+          <td><code>F</code></td>
+          <td><code>forbidden</code></td>
+          <td><strong>返回403 Forbidden状态码</strong></td>
+      </tr>
+      <tr>
+          <td><code>NC</code></td>
+          <td><code>nocase</code></td>
+          <td><strong>匹配不区分大小写</strong></td>
+      </tr>
+      <tr>
+          <td><code>L</code></td>
+          <td><code>last</code></td>
+          <td><strong>停止后续规则处理</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>多个标志可以使用逗号,隔开，比如<code>[R=301,L]</code></strong></p>
+<h4 id="rewritecond">RewriteCond
+</h4><p><strong>用于设置条件，当条件满足时才执行紧随其后的RewriteRule</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">RewriteCond</span> 字段 模式 [标志]
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>字段</strong></td>
+          <td>待测试的字符串，比如主机名<code>%{HTTP_HOST}</code>等</td>
+      </tr>
+      <tr>
+          <td><strong>模式</strong></td>
+          <td>条件模式，支持正则表达式匹配</td>
+      </tr>
+      <tr>
+          <td><strong>标志</strong></td>
+          <td>可选标志，如 <code>NC</code>、<code>OR</code> 等</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>常用标志：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>标志</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>NC</code></td>
+          <td><strong>No Case</strong>，匹配时忽略大小写</td>
+      </tr>
+      <tr>
+          <td><code>OR</code></td>
+          <td><strong>Logical OR</strong>，与下一条 RewriteCond 条件做“或”逻辑（默认是“与” AND）</td>
+      </tr>
+      <tr>
+          <td><code>AND</code></td>
+          <td><strong>Logical AND</strong>，与下一条条件做“与”逻辑（默认可省略）</td>
+      </tr>
+      <tr>
+          <td><code>GT</code></td>
+          <td><strong>Greater Than</strong>，仅对数值比较有效</td>
+      </tr>
+      <tr>
+          <td><code>LT</code></td>
+          <td><strong>Less Than</strong>，仅对数值比较有效</td>
+      </tr>
+      <tr>
+          <td><code>EQ</code></td>
+          <td><strong>Equal</strong>，数值比较等于</td>
+      </tr>
+      <tr>
+          <td><code>NE</code></td>
+          <td><strong>Not Equal</strong>，数值比较不等于</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例">示例
+</h3><h4 id="示例1实现伪静态url">示例1：实现伪静态URL
+</h4><p>将<code>https://example.com/article.php?id=123</code>重写为<code>https://example.com/article/123</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#7f848e"># 启用重写引擎</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">RewriteEngine</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 编写规则</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">RewriteRule</span> ^article/([0-9]+)$ <span style="color:#98c379">/article.php</span>?id=$1 [NC,L]
+</span></span></code></pre></div><h4 id="示例2强制所有请求到www子域名">示例2：强制所有请求到www子域名
+</h4><p>将<code>example.com</code>重定向到<code>www.example.com</code>，这有助于避免重复内容问题</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#7f848e"># 使用RewriteCond指令添加条件</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">RewriteEngine</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">RewriteCond</span> %{HTTP_HOST} ^example.com [NC]
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">RewriteRule</span> ^(.*)$ https://www.example.com/$1 [R=301,L]
+</span></span></code></pre></div><h2 id="mod_proxy代理模块">mod_proxy：代理模块
+</h2><p><code>mod_proxy</code>允许服务器将客户端的请求转发到其他后端服务器</p>
+<p>它使得Apache能够作为前端网关，对后端服务进行路由、负载均衡和安全保护</p>
+<p>要使用反向代理功能，必须加载<code>mod_proxy</code>及其子模块</p>
+<p>最常用的子模块是<code>mod_proxy_http</code>，用于代理HTTP协议的流量</p>
+<p>在Debian/Ubuntu上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">a2enmod</span> proxy proxy_http
+</span></span></code></pre></div><p>在RHEL/CentOS上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> proxy_module modules/mod_proxy.so
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> proxy_http_module modules/mod_proxy_http.so
+</span></span></code></pre></div><h3 id="反向代理">反向代理
+</h3><h4 id="proxypass">ProxyPass
+</h4><p><strong>用于将匹配路径的请求代理到指定的后端 URL</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">ProxyPass</span> [路径] [URL] [可选参数]
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>路径</strong></td>
+          <td>代理匹配的本地 URI 前缀，例如 <code>/app</code></td>
+      </tr>
+      <tr>
+          <td><strong>URL</strong></td>
+          <td>目标服务器地址，例如 <code>http://127.0.0.1:8080/</code></td>
+      </tr>
+      <tr>
+          <td><strong>可选参数</strong></td>
+          <td><code>retry=</code>, <code>timeout=</code>, <code>keepalive=on/off</code> 等，用于控制代理行为</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>常用参数：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>retry=N</code></td>
+          <td>后端服务器失败时重试次数（默认 0，表示不重试）</td>
+      </tr>
+      <tr>
+          <td><code>timeout=N</code></td>
+          <td>代理请求超时时间（秒），控制连接或响应等待时间</td>
+      </tr>
+      <tr>
+          <td><code>acquire=N</code></td>
+          <td>获取连接的超时时间（秒）</td>
+      </tr>
+      <tr>
+          <td><code>keepalive=on/off</code></td>
+          <td>是否启用与后端的持久连接（HTTP Keep-Alive）</td>
+      </tr>
+      <tr>
+          <td><code>disablereuse=on/off</code></td>
+          <td>禁止复用已建立的后端连接</td>
+      </tr>
+      <tr>
+          <td><code>max=number</code></td>
+          <td>最大并发连接数（可与 <code>mod_proxy_balancer</code> 配合）</td>
+      </tr>
+      <tr>
+          <td><code>ttl=N</code></td>
+          <td>连接在连接池中存活的时间（秒）</td>
+      </tr>
+      <tr>
+          <td><code>timeout=N</code></td>
+          <td>请求超时，连接超时</td>
+      </tr>
+      <tr>
+          <td><code>flushpackets=on/off</code></td>
+          <td>每次写数据包时立即刷新到客户端</td>
+      </tr>
+      <tr>
+          <td><code>lbmethod=byrequests/bytraffic/...</code></td>
+          <td>仅在负载均衡时使用，选择负载均衡策略</td>
+      </tr>
+      <tr>
+          <td><code>keepalive=on/off</code></td>
+          <td>控制是否启用HTTP持久连接</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="proxypassreverse">ProxyPassReverse
+</h4><p><strong>用于修改后端服务器响应头中的重定向地址，使客户端看到的URL正确</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">ProxyPassReverse</span> [路径] [URL]
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>路径</strong></td>
+          <td>客户端访问的本地URI前缀</td>
+      </tr>
+      <tr>
+          <td><strong>URL</strong></td>
+          <td>后端服务器的URL，对响应头进行重写</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>基本上写法和ProxyPass保持一致，也就是把url改回去，改成对应域名</strong></p>
+<p>比如我们写下配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">ProxyPass</span>        <span style="color:#98c379">/app</span>  http://127.0.0.1:8080/myapp
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">ProxyPassReverse</span> <span style="color:#98c379">/app</span>  http://127.0.0.1:8080/myapp
+</span></span></code></pre></div><p>客户端请求：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">GET</span> <span style="color:#98c379">/app/</span> HTTP/1.1
+</span></span><span style="display:flex;"><span>Host: www.example.<span style="color:#e5c07b">com</span>
+</span></span></code></pre></div><p>Apache转发给后端：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">GET</span> <span style="color:#98c379">/myapp/</span> HTTP/1.1
+</span></span><span style="display:flex;"><span>Host: 127.0.0.1:8080
+</span></span></code></pre></div><p>后端响应：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>HTTP/1.1 302 <span style="color:#e5c07b">Found</span>
+</span></span><span style="display:flex;"><span>Location: http://127.0.0.1:8080/myapp/login
+</span></span></code></pre></div><p>如果没有<code>ProxyPassReverse</code>，客户端会收到真实后端地址，绕过了代理</p>
+<p>有<code>ProxyPassReverse</code>时，Apache会把返回的<code>Location</code>改写成：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>HTTP/1.1 302 <span style="color:#e5c07b">Found</span>
+</span></span><span style="display:flex;"><span>Location: http://www.example.com/app/login
+</span></span></code></pre></div><p>客户端依然通过代理访问，保持一致性</p>
+<h4 id="proxypreservehost">ProxyPreserveHost
+</h4><p><strong>用来控制在反向代理时，是否保留客户端原始请求中的<code>Host</code>头信息</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">ProxyPreserveHost</span> <span style="color:#c678dd">On</span>|Off
+</span></span></code></pre></div><ul>
+<li><strong>On</strong>：Apache 转发请求时，保留客户端原始<code>Host</code>头</li>
+<li><strong>Off（默认）</strong>：Apache会把<code>Host</code>头改成后端服务器的地址</li>
+</ul>
+<h4 id="示例-1">示例
+</h4><p>假设有一个Node.js应用在<code>http://127.0.0.1:3000</code>上运行，我们希望通过Apache的<code>/api/</code>路径来访问它</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;VirtualHost</span> <span style="color:#98c379">*:80</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ServerName</span> api.example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 禁用正向代理，后面会提到</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyRequests</span> <span style="color:#c678dd">Off</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 保留客户端原始Host头</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPreserveHost</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 定义代理规则：将所有 /api/ 请求代理到后端服务器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPass</span> <span style="color:#98c379">/api/</span> http://127.0.0.1:3000/
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 重写响应头：将后端返回的 http://127.0.0.1:3000/ 地址重写为 http://api.example.com/api/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPassReverse</span> <span style="color:#98c379">/api/</span> http://127.0.0.1:3000/
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div><p>当用户访问<code>http://api.example.com/api/users</code>时，Apache会接收请求，<code>ProxyPass</code>规则会将该请求转发到后端<code>http://127.0.0.1:3000/users</code></p>
+<p>如果后端服务器返回了一个重定向响应（例如，<code>Location: http://127.0.0.1:3000/auth</code>），<code>ProxyPassReverse</code>会修改该头信息，将其替换为<code>http://api.example.com/api/auth</code>，确保用户的浏览器能够正确地跳转</p>
+<h3 id="proxy块">&lt;Proxy&gt;块
+</h3><h4 id="proxy">&lt;Proxy&gt;
+</h4><p><code>&lt;Proxy&gt;</code>块是一个容器指令，用于对特定的代理URL或一组代理URL应用细粒度的配置</p>
+<p>它的使用类似于<code>&lt;Directory&gt;</code>或<code>&lt;Location&gt;</code>，但针对的是代理目标而不是本地文件系统</p>
+<p>虽然<code>ProxyPass</code>指令支持在行内附加参数，但使用<code>&lt;Proxy&gt;</code>块配合<code>ProxySet</code>指令，可以使配置更加清晰</p>
+<p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>&lt;<span style="color:#e06c75">Proxy</span> [<span style="color:#e06c75">URL</span>]&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#56b6c2">..</span>.
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#e06c75">Proxy</span>&gt;
+</span></span></code></pre></div><p><strong><code>[URL]</code>可以是一个完整的URL，一个协议（如<code>http://</code>），或使用通配符<code>*</code>（匹配所有代理目标）</strong></p>
+<p><strong>也可以使用<code>&lt;ProxyMatch&gt;</code>进行正则表达式匹配，就像之前的访问控制块一样</strong></p>
+<h4 id="proxyset">ProxySet
+</h4><p><code>&lt;Proxy&gt;</code>容器和<code>&lt;Location&gt;</code>等容器一样，可以使用访问控制相关指令（比如 <code>Require</code>）</p>
+<p>但它还额外支持一些和代理相关的指令 —— <code>ProxySet</code></p>
+<p><code>ProxySet</code>允许我们为特定的代理目标设置详细的控制参数</p>
+<p><strong>格式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">ProxySet</span> [<span style="color:#e06c75">参数名</span>]=[<span style="color:#e06c75">值</span>] [<span style="color:#e06c75">参数名</span>]=[<span style="color:#e06c75">值</span>]<span style="color:#56b6c2">..</span>.
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>retry=N</code></td>
+          <td>后端服务器失败时重试次数（默认 0，表示不重试）</td>
+      </tr>
+      <tr>
+          <td><code>timeout=N</code></td>
+          <td>代理请求超时时间（秒），控制连接或响应等待时间</td>
+      </tr>
+      <tr>
+          <td><code>acquire=N</code></td>
+          <td>获取连接的超时时间（秒）</td>
+      </tr>
+      <tr>
+          <td><code>keepalive=on/off</code></td>
+          <td>是否启用与后端的持久连接（HTTP Keep-Alive）</td>
+      </tr>
+      <tr>
+          <td><code>disablereuse=on/off</code></td>
+          <td>禁止复用已建立的后端连接</td>
+      </tr>
+      <tr>
+          <td><code>max=number</code></td>
+          <td>最大并发连接数（可与 <code>mod_proxy_balancer</code> 配合）</td>
+      </tr>
+      <tr>
+          <td><code>ttl=N</code></td>
+          <td>连接在连接池中存活的时间（秒）</td>
+      </tr>
+      <tr>
+          <td><code>flushpackets=on/off</code></td>
+          <td>每次写数据包时立即刷新到客户端</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="示例-2">示例
+</h4><p>假设我们要代理到两个后端服务：一个API和一个博客，并希望为它们设置不同的超时时间</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;VirtualHost</span> <span style="color:#98c379">*:80</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ServerName</span> example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyRequests</span> <span style="color:#c678dd">Off</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPreserveHost</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 代理API服务，设置15秒超时，并启用持久连接</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;Proxy</span> <span style="color:#98c379">&#34;http://127.0.0.1:8080&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">ProxySet</span> timeout=15 keepalive=on
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;/Proxy&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPass</span> <span style="color:#98c379">/api/</span> http://127.0.0.1:8080/
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPassReverse</span> <span style="color:#98c379">/api/</span> http://127.0.0.1:8080/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 代理博客服务，不设置特定超时，使用默认配置</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;Proxy</span> <span style="color:#98c379">&#34;http://127.0.0.1:9000&#34;</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># 可以在此处添加特定配置</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">&lt;/Proxy&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPass</span> <span style="color:#98c379">/blog/</span> http://127.0.0.1:9000/
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ProxyPassReverse</span> <span style="color:#98c379">/blog/</span> http://127.0.0.1:9000/
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div><p>此配置比在<code>ProxyPass</code>中添加参数更清晰，且允许对每个后端应用独特的代理行为</p>
+<h3 id="正向代理">正向代理
+</h3><p>在正向代理模式下，Apache扮演客户端的代理</p>
+<p>当客户端请求外部资源时，请求会首先发送给Apache，由Apache代为访问外部网络</p>
+<h4 id="配置">配置
+</h4><p>正向代理的配置非常简单：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">ProxyRequests</span> <span style="color:#c678dd">On</span>
+</span></span></code></pre></div><p>这是开启正向代理功能的指令</p>
+<h4 id="示例-3">示例
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#7f848e"># 开启正向代理功能</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">ProxyRequests</span> <span style="color:#c678dd">On</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;Proxy</span> <span style="color:#98c379">*</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 允许来自特定IP的请求通过此代理</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> ip <span style="color:#d19a66">192.168.1.0/24</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 禁止所有其他请求</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Require</span> <span style="color:#c678dd">all</span> denied
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/Proxy&gt;</span>
+</span></span></code></pre></div><p>这里<code>&lt;Proxy *&gt;</code>匹配所有目标地址，启用正向代理后，Apache会接受客户端发来的完整URL请求，然后去请求目标站点，再把响应转发回来，目标站点只会看到Apache的IP，不会看到客户端的真实IP</p>
+<h2 id="mod_sslssltls加密模块">mod_ssl：SSL/TLS加密模块
+</h2><p><code>mod_ssl</code>是Apache实现HTTPS加密服务的模块，它使用OpenSSL库来处理加密和解密</p>
+<p>其配置通常在<code>443</code>端口的<code>&lt;VirtualHost&gt;</code>块中完成</p>
+<h3 id="使用之前">使用之前
+</h3><p>大多数现代Linux发行版在安装Apache时，<code>mod_ssl</code>默认已经被加载，如果没有，我们需要手动启用它</p>
+<p>在Debian/Ubuntu上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">a2enmod</span> ssl
+</span></span></code></pre></div><p>在RHEL/CentOS上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#e5c07b">LoadModule</span> ssl_module modules/mod_ssl.so
+</span></span></code></pre></div><h3 id="核心指令-1">核心指令
+</h3><p>这些指令定义了HTTPS服务所需的证书和密钥文件</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>指令</th>
+          <th>格式</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>SSLEngine</code></td>
+          <td><code>SSLEngine on</code>或<code>SSLEngine off</code></td>
+          <td><strong>开启或关闭该虚拟主机上的SSL/TLS引擎</strong></td>
+      </tr>
+      <tr>
+          <td><code>SSLCertificateFile</code></td>
+          <td><code>SSLCertificateFile /path/to/fullchain.crt</code></td>
+          <td><strong>指定SSL证书文件（公钥）</strong><br />推荐使用包含服务器证书和所有中间证书的完整链文件</td>
+      </tr>
+      <tr>
+          <td><code>SSLCertificateKeyFile</code></td>
+          <td><code>SSLCertificateKeyFile /path/to/private.key</code></td>
+          <td><strong>指定与证书配对的私钥文件</strong><br />此文件必须严格保密</td>
+      </tr>
+      <tr>
+          <td><code>SSLCertificateChainFile</code></td>
+          <td><code>SSLCertificateChainFile /path/to/chain.crt</code></td>
+          <td><strong>指定中间证书链文件</strong><br />如果<code>SSLCertificateFile</code>已包含完整链，则此指令可选</td>
+      </tr>
+      <tr>
+          <td><code>Protocols</code></td>
+          <td><code>Protocols h2 http/1.1</code></td>
+          <td><strong>指定服务器支持的协议版本，可写多个</strong><br /><code>h2</code>代表HTTP/2</td>
+      </tr>
+      <tr>
+          <td><code>SSLCipherSuite</code></td>
+          <td><code>SSLCipherSuite [套件列表]</code></td>
+          <td><strong>指定服务器支持的加密套件列表</strong><br />增强安全性</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-4">示例
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e06c75">&lt;VirtualHost</span> <span style="color:#98c379">*:443</span><span style="color:#e06c75">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ServerName</span> secure.example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">DocumentRoot</span> <span style="color:#98c379">&#34;/var/www/secure.example.com&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">ErrorLog</span> <span style="color:#98c379">&#34;logs/secure.example.com-error.log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">CustomLog</span> <span style="color:#98c379">&#34;logs/secure.example.com-access.log&#34;</span> combined
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 开启SSL/TLS引擎</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLEngine</span> <span style="color:#c678dd">on</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 指定证书文件和私钥文件</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLCertificateFile</span> <span style="color:#98c379">/etc/pki/tls/certs/secure.example.com.crt</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLCertificateKeyFile</span> <span style="color:#98c379">/etc/pki/tls/private/secure.example.com.key</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLCertificateChainFile</span> <span style="color:#98c379">/etc/pki/tls/certs/chain.crt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 推荐的安全性设置</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">Protocols</span> h2 http/1.1
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLHonorCipherOrder</span> <span style="color:#c678dd">on</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">SSLCipherSuite</span> EECDH+AESGCM:EDH+AESGCM
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div><p>该配置块定义了一个监听443端口的虚拟主机</p>
+<p>它通过<code>SSLEngine on</code>指令开启了HTTPS服务，并使用<code>SSLCertificateFile</code>、<code>SSLCertificateKeyFile</code>和<code>SSLCertificateChainFile</code>指令指定了相应的证书和密钥</p>
+<p><code>Protocols</code>和<code>SSLCipherSuite</code>指令则用于限制协议版本和加密算法，以确保安全性和性能</p>
+<h1 id="日志分析">日志分析
+</h1><h2 id="访问日志access_log">访问日志（<code>access_log</code>）
+</h2><p>访问日志记录了所有客户端对服务器的请求</p>
+<h3 id="日志格式">日志格式
+</h3><p>Apache默认使用<code>combined</code>格式，它是一种全面且常用的格式，记录了请求的方方面面</p>
+<p>日志格式通过<code>LogFormat</code>指令定义，并由<code>CustomLog</code>指令引用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Apache" data-lang="Apache"><span style="display:flex;"><span><span style="color:#e5c07b">LogFormat</span> <span style="color:#98c379">&#34;%h %l %u %t \&#34;%r\&#34; %&gt;s %b \&#34;%{Referer}i\&#34; \&#34;%{User-Agent}i\&#34;&#34;</span> combined
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">CustomLog</span> <span style="color:#98c379">&#34;logs/access_log&#34;</span> combined
+</span></span></code></pre></div><h3 id="格式字段">格式字段
+</h3><p>下表详细解释了<code>combined</code>日志格式中的每个字段</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段标识符</th>
+          <th>含义</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong><code>%h</code></strong></td>
+          <td><strong>远程主机</strong><br />客户端的IP地址</td>
+          <td><code>123.123.123.123</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>%l</code></strong></td>
+          <td><strong>远程登录名</strong><br />由<code>identd</code>确定，通常为<code>-</code></td>
+          <td><code>-</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>%u</code></strong></td>
+          <td><strong>远程用户</strong><br />由HTTP认证确定的用户名</td>
+          <td><code>用户名</code> (如果进行了认证)，否则为 <code>-</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>%t</code></strong></td>
+          <td><strong>时间</strong><br />服务器收到请求的本地时间</td>
+          <td><code>[10/Oct/2000:13:55:36 -0700]</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>\&quot;%r\&quot;</code></strong></td>
+          <td><strong>请求行</strong><br />完整的HTTP请求行，包括方法、路径和协议</td>
+          <td><code>&quot;GET /apache_pb.gif HTTP/1.0&quot;</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>%&gt;s</code></strong></td>
+          <td><strong>状态码</strong><br />返回给客户端的HTTP状态码<br /><strong><code>%s</code>：最初请求的状态码</strong><br /><strong><code>%&gt;s</code>：最终响应状态码</strong>（如果有内部重定向，记录重定向后的状态码）</td>
+          <td><code>200</code>、<code>404</code>、<code>301</code>、<code>500</code>等</td>
+      </tr>
+      <tr>
+          <td><strong><code>%b</code></strong></td>
+          <td><strong>响应体大小</strong><br />响应体的大小（字节），不包括响应头</td>
+          <td><code>2326</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>\&quot;%{Referer}i\&quot;</code></strong></td>
+          <td><strong>来源</strong><br />请求的来源URL</td>
+          <td><code>&quot;http://www.example.com/start.html&quot;</code></td>
+      </tr>
+      <tr>
+          <td><strong><code>\&quot;%{User-Agent}i\&quot;</code></strong></td>
+          <td><strong>用户代理</strong><br />客户端浏览器或设备信息</td>
+          <td><code>&quot;Mozilla/4.08 [en] (Win98; I ;Nav)&quot;</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="实际示例">实际示例
+</h3><p>下面是一些常见的日志条目：</p>
+<ol>
+<li>
+<p><strong>成功请求 (<code>200 OK</code>)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>10.0.0.5 - - [20/Aug/2025:10:30:01 +0800] &#34;<span style="color:#e5c07b">GET</span> <span style="color:#98c379">/index.html</span> HTTP/1.1<span style="color:#98c379">&#34; 200 450 &#34;</span>http://example.com/home<span style="color:#98c379">&#34; &#34;</span>Mozilla/5.0 (Windows NT <span style="color:#d19a66">10</span>.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36&#34;
+</span></span></code></pre></div><p>来自内网IP<code>10.0.0.5</code>的客户端，使用Chrome浏览器访问<code>http://example.com/home</code>成功请求了根目录下的<code>index.html</code>文件，服务器返回了<code>200</code>状态码，响应体大小为<code>450</code>字节</p>
+</li>
+<li>
+<p><strong>文件未找到 (<code>404 Not Found</code>)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>8.8.4.4 - - [20/Aug/2025:10:30:15 +0800] &#34;<span style="color:#e5c07b">GET</span> <span style="color:#98c379">/robots.txt</span> HTTP/1.1<span style="color:#98c379">&#34; 404 213 &#34;</span>https://www.google.com/search?q=site:example.com<span style="color:#98c379">&#34; &#34;</span>Googlebot/2.1 (+http://www.google.com/bot.html)&#34;
+</span></span></code></pre></div><p>Google爬虫（<code>Googlebot</code>）从搜索引擎结果页进入，请求了<code>robots.txt</code>文件，但服务器返回了 <code>404</code> 错误，表示该文件不存在，响应体大小为<code>213</code>字节，通常是Apache默认的<code>404</code>错误页面</p>
+</li>
+<li>
+<p><strong>永久重定向 (<code>301 Moved Permanently</code>)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>123.123.123.123 - - [20/Aug/2025:10:30:20 +0800] &#34;<span style="color:#e5c07b">GET</span> <span style="color:#98c379">/old-page</span> HTTP/1.1<span style="color:#98c379">&#34; 301 245 &#34;</span>-<span style="color:#98c379">&#34; &#34;</span>Mozilla/5.0 (iPhone; CPU iPhone <span style="color:#c678dd">OS</span> <span style="color:#d19a66">16</span>_0 like Mac <span style="color:#c678dd">OS</span> X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/106.0.5249.101 Mobile/15E148 Safari/604.1&#34;
+</span></span></code></pre></div><p>来自IP<code>123.123.123.123</code>的iPhone客户端请求了<code>/old-page</code>，但服务器配置了<code>301</code>重定向，将请求永久指向了新地址，浏览器从HTTPS页面跳转到HTTP页面时，出于安全考虑，默认不会发送Referer，故而referer字段为空</p>
+</li>
+<li>
+<p><strong>服务器内部错误 (<code>500 Internal Server Error</code>)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span>192.168.1.10 - - [20/Aug/2025:10:30:35 +0800] &#34;<span style="color:#e5c07b">GET</span> <span style="color:#98c379">/api/data</span> HTTP/1.1<span style="color:#98c379">&#34; 500 503 &#34;</span>-<span style="color:#98c379">&#34; &#34;</span>curl/7.68.0&#34;
+</span></span></code></pre></div><p>内网IP<code>192.168.1.10</code>请求<code>http://example.com/dashboard</code>页面（可能是一个脚本或API调用）返回了<code>500</code>内部服务器错误，这通常意味着后端脚本（如PHP或Python）执行失败，要排查具体原因，必须查看错误日志</p>
+</li>
+</ol>
+<h2 id="错误日志error_log">错误日志（<code>error_log</code>）
+</h2><p>错误日志记录了服务器启动、运行、关闭过程中的所有诊断信息和错误</p>
+<h3 id="格式与字段">格式与字段
+</h3><p><code>error.log</code>条目的通用格式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[时间戳]</span> [<span style="color:#e06c75">模块</span>:<span style="color:#e06c75">日志级别</span>] [<span style="color:#e06c75">pid</span> <span style="color:#e06c75">进程ID</span>:<span style="color:#e06c75">tid</span> <span style="color:#e06c75">线程ID</span>] [<span style="color:#e06c75">client</span> <span style="color:#e06c75">客户端IP</span>:<span style="color:#e06c75">端口</span>] <span style="color:#e06c75">错误描述</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>[时间戳]</code></strong></p>
+<p>日志事件发生的时间</p>
+</li>
+<li>
+<p><strong><code>[模块:日志级别]</code></strong></p>
+<p>指明产生日志的Apache模块（如<code>core</code>、<code>proxy_http</code>等）以及该事件的严重程度，具体看：<a class="link" href="#%e6%97%a5%e5%bf%97%e9%85%8d%e7%bd%ae" >日志配置
+    
+</a></p>
+</li>
+<li>
+<p><strong><code>[pid 进程ID:tid 线程ID]</code></strong></p>
+<p>指明是哪个Apache进程和线程产生了该日志，这在调试多进程或多线程问题时很有用</p>
+</li>
+<li>
+<p><strong><code>[client 客户端IP:端口]</code></strong></p>
+<p>指明导致错误的客户端IP地址和端口</p>
+</li>
+</ul>
+<h3 id="示例-5">示例
+</h3><p>下面是一些常见的错误日志条目：</p>
+<ol>
+<li>
+<p><strong>文件权限问题</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[Wed Aug 20 10:30:00.123456 2025]</span> [<span style="color:#e06c75">core</span>:<span style="color:#e06c75">crit</span>] [<span style="color:#e06c75">pid</span> <span style="color:#d19a66">12345</span>] (<span style="color:#d19a66">13</span>)<span style="color:#e06c75">Permission</span> <span style="color:#e06c75">denied</span>: <span style="color:#e06c75">AH00035</span>: <span style="color:#e06c75">Unable</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">change</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">root</span> <span style="color:#e06c75">directory</span>: /<span style="color:#c678dd">var</span>/<span style="color:#e06c75">www</span>/<span style="color:#e06c75">site</span>/<span style="color:#e06c75">dir</span>
+</span></span></code></pre></div><p>这是一个严重的错误（<code>crit</code>），通常发生在Apache启动时，它表明Apache进程（PID为12345）没有权限访问或切换到<code>/var/www/site/dir</code>目录，通常是由于文件或目录权限设置不正确所致，需要检查该目录的用户和组是否与<code>httpd.conf</code>中定义的<code>User</code>和<code>Group</code>匹配</p>
+</li>
+<li>
+<p><strong>配置文件语法错误</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[Wed Aug 20 10:31:00.987654 2025]</span> [<span style="color:#e06c75">core</span>:<span style="color:#e06c75">warn</span>] [<span style="color:#e06c75">pid</span> <span style="color:#d19a66">12345</span>] <span style="color:#e06c75">AH00547</span>: <span style="color:#e06c75">The</span> <span style="color:#e06c75">document</span> <span style="color:#e06c75">root</span> /<span style="color:#c678dd">var</span>/<span style="color:#e06c75">www</span>/<span style="color:#e06c75">example</span>.<span style="color:#e06c75">com</span>/<span style="color:#c678dd">public</span> <span style="color:#e06c75">does</span> <span style="color:#e06c75">not</span> <span style="color:#e06c75">exist</span>
+</span></span></code></pre></div><p>这是一个警告（<code>warn</code>），服务器尝试启动，但发现<code>DocumentRoot</code>指令中指定的 <code>/var/www/example.com/public</code>目录不存在，Apache虽然可以启动，但网站将无法正常访问</p>
+</li>
+<li>
+<p><strong>后端连接失败</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[Wed Aug 20 10:32:00.123456 2025]</span> [<span style="color:#e06c75">proxy</span>:<span style="color:#e06c75">error</span>] [<span style="color:#e06c75">pid</span> <span style="color:#d19a66">12345</span>:<span style="color:#e06c75">tid</span> <span style="color:#d19a66">67890</span>] [<span style="color:#e06c75">client</span> <span style="color:#d19a66">192.168</span>.<span style="color:#d19a66">1.50</span>:<span style="color:#d19a66">12345</span>] <span style="color:#e06c75">AH00959</span>: <span style="color:#e06c75">ap_proxy_connect_backend</span> <span style="color:#e06c75">disabling</span> <span style="color:#e06c75">connection</span>: (<span style="color:#d19a66">111</span>)<span style="color:#e06c75">Connection</span> <span style="color:#e06c75">refused</span>
+</span></span></code></pre></div><p>这是一个错误（<code>error</code>），<code>proxy</code>模块无法连接到后端服务器，因为它返回了“连接被拒绝”（<code>Connection refused</code>）的错误，这通常意味着后端应用服务没有运行，或者防火墙阻止了连接</p>
+</li>
+<li>
+<p><strong><code>mod_rewrite</code> 调试信息</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[Wed Aug 20 10:33:00.789012 2025]</span> [<span style="color:#e06c75">rewrite</span>:<span style="color:#e06c75">trace1</span>] [<span style="color:#e06c75">pid</span> <span style="color:#d19a66">12345</span>] (<span style="color:#d19a66">2</span>) <span style="color:#c678dd">init</span> <span style="color:#e06c75">rewrite</span> <span style="color:#e06c75">engine</span> <span style="color:#e06c75">with</span> <span style="color:#e06c75">requested</span> <span style="color:#e06c75">uri</span> /<span style="color:#e06c75">about</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">[Wed Aug 20 10:33:00.789012 2025]</span> [<span style="color:#e06c75">rewrite</span>:<span style="color:#e06c75">trace3</span>] [<span style="color:#e06c75">pid</span> <span style="color:#d19a66">12345</span>] <span style="color:#e06c75">applying</span> <span style="color:#e06c75">pattern</span> &#39;^(.*)$&#39; <span style="color:#e06c75">to</span> <span style="color:#e06c75">uri</span> &#39;/<span style="color:#e06c75">about</span>&#39;
+</span></span></code></pre></div><p>这些是级别为<code>trace1</code>和<code>trace3</code>的调试信息，它们在 <code>LogLevel</code> 设置为 <code>trace</code> 时才会出现，这对于排查复杂的<code>mod_rewrite</code>规则非常有用，可以逐行跟踪规则的匹配和处理过程</p>
+</li>
+</ol>
+<h2 id="docker环境中日志的特殊格式">Docker环境中日志的特殊格式
+</h2><p>有时，在使用官方<code>httpd</code>Docker镜像时，通过<code>docker logs</code>命令看到的日志格式与直接查看文件日志略有不同</p>
+<p>根据设置，Docker的日志驱动程序在将容器的<code>stdout</code>和<code>stderr</code>流捕获并输出时，可能会给每一行日志加上额外的前缀信息，这个前缀通常包含<strong>时间戳</strong>和<strong>日志流的来源</strong>（<code>stdout</code>或<code>stderr</code>），其标准格式为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[时间戳]</span> [<span style="color:#e06c75">日志流</span>] [<span style="color:#e06c75">原始日志内容</span>]
+</span></span></code></pre></div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>含义</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>时间戳</strong></td>
+          <td>Docker记录该日志的时间，精确到纳秒</td>
+          <td><code>2025-08-20T02:30:00.123456789Z</code></td>
+      </tr>
+      <tr>
+          <td><strong>日志流</strong></td>
+          <td>指明日志来源：<br />标准输出：<code>stdout</code>，对应访问日志<br />标准错误：stderr`，对应错误日志</td>
+          <td><code>stdout</code>或<code>stderr</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例-6">示例
+</h3><p>一个完整的<code>docker logs</code>访问日志条目看起来像这样：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">2025</span>-<span style="color:#d19a66">08</span>-<span style="color:#d19a66">20</span><span style="color:#e06c75">T02</span>:<span style="color:#d19a66">30</span>:<span style="color:#d19a66">00.123456789</span><span style="color:#e06c75">Z</span> <span style="color:#e06c75">stdout</span> <span style="color:#d19a66">172.17</span>.<span style="color:#d19a66">0.3</span> - - [<span style="color:#d19a66">20</span>/<span style="color:#e06c75">Aug</span>/<span style="color:#d19a66">2025</span>:<span style="color:#d19a66">02</span>:<span style="color:#d19a66">30</span>:<span style="color:#d19a66">00</span> +<span style="color:#d19a66">0000</span>] <span style="color:#98c379">&#34;GET / HTTP/1.1&#34;</span> <span style="color:#d19a66">200</span> <span style="color:#d19a66">45</span> <span style="color:#98c379">&#34;-&#34;</span> <span style="color:#98c379">&#34;curl/7.64.1&#34;</span>
+</span></span></code></pre></div><p>一个完整的错误日志条目看起来像这样：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">2025</span>-<span style="color:#d19a66">08</span>-<span style="color:#d19a66">20</span><span style="color:#e06c75">T02</span>:<span style="color:#d19a66">30</span>:<span style="color:#d19a66">05.987654321</span><span style="color:#e06c75">Z</span> <span style="color:#e06c75">stderr</span> [<span style="color:#e06c75">Wed</span> <span style="color:#e06c75">Aug</span> <span style="color:#d19a66">20</span> <span style="color:#d19a66">02</span>:<span style="color:#d19a66">30</span>:<span style="color:#d19a66">05.987654</span> <span style="color:#d19a66">2025</span>] [<span style="color:#e06c75">core</span>:<span style="color:#e06c75">error</span>] [<span style="color:#e06c75">pid</span> <span style="color:#d19a66">1</span>] <span style="color:#e06c75">AH00037</span>: <span style="color:#e06c75">File</span> <span style="color:#e06c75">not</span> <span style="color:#e06c75">found</span>: /<span style="color:#e06c75">usr</span>/<span style="color:#e06c75">local</span>/<span style="color:#e06c75">apache2</span>/<span style="color:#e06c75">htdocs</span>/<span style="color:#e06c75">non</span>-<span style="color:#e06c75">existent</span>-<span style="color:#c678dd">file</span>.<span style="color:#e06c75">html</span>
+</span></span></code></pre></div><h2 id="分析技巧">分析技巧
+</h2><p>以下命令示例均基于<code>access.log</code>文件</p>
+<h3 id="统计访问量最多的ip地址">统计访问量最多的IP地址
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cut -d <span style="color:#98c379">&#39; &#39;</span> -f <span style="color:#d19a66">1</span> access.log | sort | uniq -c | sort -rn | head -10
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>cut -d ' ' -f 1 access.log</code></strong></p>
+<p>使用 <code>cut</code> 命令以空格为分隔符（<code>-d ' '</code>），提取每行的第一个字段（<code>-f 1</code>），即客户端 IP 地址</p>
+</li>
+<li>
+<p><strong><code>sort</code></strong></p>
+<p>对提取出的所有 IP 地址进行排序，这是<code>uniq</code>命令去重和计数的前提</p>
+</li>
+<li>
+<p><strong><code>uniq -c</code></strong></p>
+<p>统计每个 IP 地址出现的次数（<code>-c</code> 表示计数）</p>
+</li>
+<li>
+<p><strong><code>sort -rn</code></strong></p>
+<p>对上一步的结果进行再次排序</p>
+<p><code>-r</code>表示降序排序，<code>-n</code>表示按数值大小排序（而不是按字典顺序），确保最高的访问次数排在最前面</p>
+</li>
+<li>
+<p><strong><code>head -10</code></strong></p>
+<p>输出排序后的前10行，即访问次数最多的前10个IP地址及其次数</p>
+</li>
+</ul>
+<h3 id="统计特定页面或文件的访问次数">统计特定页面或文件的访问次数
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grep -c <span style="color:#98c379">&#34;/index.php&#34;</span> access.log
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>grep &quot;/index.php&quot; access.log</code></strong></p>
+<p>在<code>access.log</code>文件中搜索所有包含<code>/index.php</code>字符串的行</p>
+</li>
+<li>
+<p><strong><code>-c</code>选项</strong></p>
+<p>告诉<code>grep</code>只输出匹配的行数，而不显示匹配的行本身</p>
+</li>
+</ul>
+<h3 id="统计特定ip地址的访问总次数">统计特定IP地址的访问总次数
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep -w <span style="color:#98c379">&#34;192.168.200.2&#34;</span> access.log | wc -l
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>grep -w &quot;192.168.200.2&quot; access.log</code></strong></p>
+<p>使用<code>grep</code>搜索 IP 地址</p>
+<p><code>-w</code>选项确保只匹配一个完整的“单词”，即只匹配<code>192.168.200.2</code>这个完整的IP地址</p>
+</li>
+<li>
+<p><strong><code>|</code></strong></p>
+<p>管道符，将<code>grep</code>命令的输出作为<code>wc</code>命令的输入</p>
+</li>
+<li>
+<p><strong><code>wc -l</code></strong></p>
+<p>统计来自管道的行数（<code>-l</code>表示行）</p>
+<p>每行代表一次访问，因此行数即为总访问次数</p>
+</li>
+</ul>
+<h3 id="统计特定时间段内的独立ip访问数">统计特定时间段内的独立IP访问数
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep <span style="color:#98c379">&#34;03/Aug/2023:08:&#34;</span> access.log | awk <span style="color:#98c379">&#39;{print $1}&#39;</span> | sort | uniq | wc -l
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>grep &quot;03/Aug/2023:08:&quot; access.log</code></strong></p>
+<p>根据日志中的时间戳格式，筛选出所有在 2023年8月03日8时这个小时段内的访问记录</p>
+</li>
+<li>
+<p><strong><code>awk '{print $1}'</code></strong></p>
+<p><code>awk</code>命令默认以空格分隔字段，<code>{print $1}</code>提取每行的第一个字段，即IP地址</p>
+</li>
+<li>
+<p><strong><code>sort</code></strong></p>
+<p>对所有提取出的IP地址进行排序</p>
+</li>
+<li>
+<p><strong><code>uniq</code></strong></p>
+<p>去重，只保留唯一的IP地址</p>
+</li>
+<li>
+<p><strong><code>wc -l</code></strong></p>
+<p>统计去重后剩下的行数，即独立IP地址的数量</p>
+</li>
+</ul>
+<h3 id="查找特定ip地址的详细访问记录">查找特定IP地址的详细访问记录
+</h3><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep <span style="color:#98c379">&#34;192.168.200.2&#34;</span> access.log | more
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>grep &quot;192.168.200.2&quot; access.log</code></strong></p>
+<p>搜索包含该IP地址的所有日志行</p>
+</li>
+<li>
+<p><strong><code>| more</code></strong></p>
+<p>如果匹配的行数太多，<code>more</code>命令会进行分页显示，方便逐页查看，按空格键翻页，按<code>q</code>键退出</p>
+</li>
+</ul>
+<hr>
+<p>文章至此告一段落，笔者使用的也不多，之后边学边更新吧</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/web/">Web</a>
+        
+            <a href="/tags/server/">Server</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-08-23
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/nginx%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Nginx入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wireshark&amp;tshark简易指北</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速上手docker</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">volatility使用说明</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
+    </section>
+
+    <section class="running-time">
+        距离小站第一行代码被置下已经过去
+        <span id="runningdays" class="running-days"></span>    
+    </section>  
+
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        <span>...当然还有kakahuote🤓👆</span>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';  
+     src: url(https://blog.928330.xyz/font/round.ttf) format('truetype');  
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';  
+     --code-font-family: 'yuan';  
+      
+    }
+
+     
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;  
+     bottom: 30px;  
+     right: 450px;  
+     z-index: 99;  
+     cursor: pointer;  
+     width: 30px;  
+     height: 30px;  
+     background-image: url(https://blog.928330.xyz/icons/backTop.svg);  
+     background-size: cover;  
+     transition: transform 0.1s linear;  
+     transform-origin: center center;  
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);  
+    }
+
+     
+     
+     
+    .highlight {
+      
+     max-height: 400px;  
+     overflow: hidden;  
+     position: relative;  
+     transition: max-height 0.3s ease-out;  
+    }
+
+    .code-show {
+     max-height: none !important;  
+    }
+
+    .code-more-box {
+     width: 100%;  
+     padding-top: 20px;  
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);  
+     position: absolute;  
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;  
+     text-align: center;  
+    }
+
+    .code-more-btn {
+     display: inline-block;  
+     padding: 5px 15px;  
+     background: #f0f0f5;  
+     border-radius: 5px;  
+     cursor: pointer;  
+     font-size: 0.9em;  
+    }
+
+     
+     
+     
+    #particles-js {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: -1;
+     pointer-events: none;  
+    }
+</style>
+
+
+<div id="particles-js"></div>
+
+<script>
+     
+     
+     
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+    
+
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    
+    initCodeMoreBox();
+
+     
+     
+     
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        if (typeof particlesJS === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
+            script.onload = function() {
+                initParticles();
+            };
+            document.head.appendChild(script);
+        } else {
+            initParticles();
+        }
+    });
+
+    function initParticles() {
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+                console.log('particles.js loaded successfully');
+            });
+        }
+    }
+</script>
+
+    </body>
+</html>
