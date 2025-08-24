@@ -2397,16 +2397,16 @@
       left: 20px;
       z-index: 10000;
       width: 50px;
-      height: 400px;
+      height: 480px;
       pointer-events: none;
     }
 
     #rope {
       position: absolute;
-      top: 0;
+      top: -80px;
       left: 50%;
       width: 3px;
-      height: 320px;
+      height: 400px;
       background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
       border-radius: 1.5px;
       transform: translateX(-50%);
@@ -2585,32 +2585,33 @@
 
      
      const monthlyEmojis = [
-       { month: 1, name: "腊月", ring: "🧨", falling: "🧨", description: "寒冬腊月，爆竹声声" },
-       { month: 2, name: "正月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
-       { month: 3, name: "二月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
-       { month: 4, name: "三月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
-       { month: 5, name: "四月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
-       { month: 6, name: "五月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
-       { month: 7, name: "六月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
-       { month: 8, name: "七月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
-       { month: 9, name: "八月", ring: "🍁", falling: "🍁", description: "白露时节，秋叶飘落" },
-       { month: 10, name: "九月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
-       { month: 11, name: "十月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
-       { month: 12, name: "十一月", ring: "❄️", falling: "❄️", description: "大雪时节，雪花飞舞" }
+       { month: 1, name: "一月", ring: "❄️", falling: "❄️", description: "寒冬腊月，雪花飞舞" },
+       { month: 2, name: "二月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
+       { month: 3, name: "三月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
+       { month: 4, name: "四月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
+       { month: 5, name: "五月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
+       { month: 6, name: "六月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
+       { month: 7, name: "七月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
+       { month: 8, name: "八月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
+       { month: 9, name: "九月", ring: "🍁", falling: "🍁", description: "白露时节，秋叶飘落" },
+       { month: 10, name: "十月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
+       { month: 11, name: "十一月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
+       { month: 12, name: "十二月", ring: "🌨️", falling: "🌨️", description: "大雪时节，雪花纷飞" }
      ];
 
      
      window.timeEmojis = [
-       { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🦋"], description: "晨曦初露，万物苏醒" },
-       { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🌿", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
+       { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🌿"], description: "晨曦初露，万物苏醒" },
+       { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🦋", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
        { period: "evening", name: "傍晚", emojis: ["🌙", "⭐", "🦉"], description: "夕阳西下，夜幕降临" }
      ];
 
      
-     const currentMonth = new Date().getMonth() + 2;
+     const currentMonth = new Date().getMonth() + 1;
      const currentEmoji = monthlyEmojis.find(emoji => emoji.month === currentMonth);
      
      console.log(`当前月份: ${currentMonth}, 使用emoji: ${currentEmoji.name} - ${currentEmoji.description}`);
+     console.log(`JavaScript Date.getMonth(): ${new Date().getMonth()}, 实际月份: ${currentMonth}`);
 
      
      let ropeContainer = document.createElement("div");
@@ -2621,10 +2622,10 @@
      rope.id = "rope";
      rope.style.cssText = `
        position: absolute;
-       top: 0;
+       top: -80px;
        left: 50%;
        width: 3px;
-       height: 320px;
+       height: 400px;
        background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
        border-radius: 1.5px;
        transform: translateX(-50%);
@@ -2656,11 +2657,11 @@
       console.log('拉绳被点击，开始动画...');
       
       
-      rope.style.transform = 'translateX(-50%) translateY(20px)';
+      rope.style.transform = 'translateX(-50%) translateY(40px)';
       rope.style.background = 'linear-gradient(to bottom, #8B4513, #A0522D, #8B4513, #A0522D, #8B4513)';
       
       
-      pullRing.style.top = '320px';
+      pullRing.style.top = '340px';
       pullRing.style.transform = 'translateX(-50%) scale(0.8)';
       pullRing.style.textShadow = '0 0 15px rgba(255, 255, 255, 1)';
       pullRing.style.filter = 'drop-shadow(0 6px 12px rgba(0,0,0,0.6))';
@@ -3076,16 +3077,16 @@
       left: 20px;
       z-index: 10000;
       width: 50px;
-      height: 400px;
+      height: 480px;
       pointer-events: none;
     }
 
     #rope {
       position: absolute;
-      top: 0;
+      top: -80px;
       left: 50%;
       width: 3px;
-      height: 320px;
+      height: 400px;
       background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
       border-radius: 1.5px;
       transform: translateX(-50%);
@@ -3264,32 +3265,33 @@
 
      
      const monthlyEmojis = [
-       { month: 1, name: "腊月", ring: "🧨", falling: "🧨", description: "寒冬腊月，爆竹声声" },
-       { month: 2, name: "正月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
-       { month: 3, name: "二月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
-       { month: 4, name: "三月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
-       { month: 5, name: "四月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
-       { month: 6, name: "五月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
-       { month: 7, name: "六月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
-       { month: 8, name: "七月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
-       { month: 9, name: "八月", ring: "🍁", falling: "🍁", description: "白露时节，秋叶飘落" },
-       { month: 10, name: "九月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
-       { month: 11, name: "十月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
-       { month: 12, name: "十一月", ring: "❄️", falling: "❄️", description: "大雪时节，雪花飞舞" }
+       { month: 1, name: "一月", ring: "❄️", falling: "❄️", description: "寒冬腊月，雪花飞舞" },
+       { month: 2, name: "二月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
+       { month: 3, name: "三月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
+       { month: 4, name: "四月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
+       { month: 5, name: "五月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
+       { month: 6, name: "六月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
+       { month: 7, name: "七月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
+       { month: 8, name: "八月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
+       { month: 9, name: "九月", ring: "🍁", falling: "🍁", description: "白露时节，秋叶飘落" },
+       { month: 10, name: "十月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
+       { month: 11, name: "十一月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
+       { month: 12, name: "十二月", ring: "🌨️", falling: "🌨️", description: "大雪时节，雪花纷飞" }
      ];
 
      
      window.timeEmojis = [
-       { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🦋"], description: "晨曦初露，万物苏醒" },
-       { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🌿", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
+       { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🌿"], description: "晨曦初露，万物苏醒" },
+       { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🦋", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
        { period: "evening", name: "傍晚", emojis: ["🌙", "⭐", "🦉"], description: "夕阳西下，夜幕降临" }
      ];
 
      
-     const currentMonth = new Date().getMonth() + 2;
+     const currentMonth = new Date().getMonth() + 1;
      const currentEmoji = monthlyEmojis.find(emoji => emoji.month === currentMonth);
      
      console.log(`当前月份: ${currentMonth}, 使用emoji: ${currentEmoji.name} - ${currentEmoji.description}`);
+     console.log(`JavaScript Date.getMonth(): ${new Date().getMonth()}, 实际月份: ${currentMonth}`);
 
      
      let ropeContainer = document.createElement("div");
@@ -3300,10 +3302,10 @@
      rope.id = "rope";
      rope.style.cssText = `
        position: absolute;
-       top: 0;
+       top: -80px;
        left: 50%;
        width: 3px;
-       height: 320px;
+       height: 400px;
        background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
        border-radius: 1.5px;
        transform: translateX(-50%);
@@ -3335,11 +3337,11 @@
       console.log('拉绳被点击，开始动画...');
       
       
-      rope.style.transform = 'translateX(-50%) translateY(20px)';
+      rope.style.transform = 'translateX(-50%) translateY(40px)';
       rope.style.background = 'linear-gradient(to bottom, #8B4513, #A0522D, #8B4513, #A0522D, #8B4513)';
       
       
-      pullRing.style.top = '320px';
+      pullRing.style.top = '340px';
       pullRing.style.transform = 'translateX(-50%) scale(0.8)';
       pullRing.style.textShadow = '0 0 15px rgba(255, 255, 255, 1)';
       pullRing.style.filter = 'drop-shadow(0 6px 12px rgba(0,0,0,0.6))';
