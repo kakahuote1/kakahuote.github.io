@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sun, 24 Aug 2025 12:57:57 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/latex/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 24 Aug 2025 21:42:35 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/latex/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>LaTeX：不太精通的教程</title>
         <link>https://blog.928330.xyz/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/</link>
         <pubDate>Tue, 19 Aug 2025 21:20:24 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/</guid>
-        <description>&lt;p&gt;1978年，为了解决解决当时学术出版里公式排版不美观的问题，计算机科学家Donald Knuth开发了一个排版系统，并给他命名为TeX（发音接近 &amp;ldquo;tech&amp;rdquo;），它的功能强大，但写起来很繁琐&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/LaTeX_logo.svg.jpg" alt="Featured image of post LaTeX：不太精通的教程" /&gt;&lt;p&gt;1978年，为了解决解决当时学术出版里公式排版不美观的问题，计算机科学家Donald Knuth开发了一个排版系统，并给他命名为TeX（发音接近 &amp;ldquo;tech&amp;rdquo;），它的功能强大，但写起来很繁琐&lt;/p&gt;
 &lt;p&gt;而我们要学的LaTeX（读作&amp;quot;Lay-tech&amp;quot;或 &amp;ldquo;Lah-tech&amp;rdquo;）是一个基于TeX的排版系统，它由Leslie Lamport在 1980年开发，目的是让普通人更容易使用TeX&lt;/p&gt;
 &lt;p&gt;可以这样理解：&lt;/p&gt;
 &lt;ul&gt;

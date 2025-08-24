@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 16 Aug 2025 12:03:12 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 24 Aug 2025 21:42:35 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>美亚杯2022取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Fri, 15 Aug 2025 21:32:09 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;p&gt;最诡异的一集，资格赛恐怖如斯&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" alt="Featured image of post 美亚杯2022取证总结" /&gt;&lt;p&gt;最诡异的一集，资格赛恐怖如斯&lt;/p&gt;
 &lt;p&gt;过程中要数次用到数据库，最好可以使用navicate&lt;/p&gt;
 &lt;p&gt;检材分卷压缩，一共九卷，解压之后使用Veracrypt挂载就能得到题目&lt;/p&gt;
 &lt;h1 id=&#34;王晓琳手机1-14&#34;&gt;王晓琳手机(1-14)
@@ -1642,7 +1642,7 @@
         <pubDate>Wed, 13 Aug 2025 14:32:41 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E4%B8%80%E6%96%87%E5%BC%84%E6%87%82%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/</guid>
-        <description>&lt;p&gt;在计算机的世界里，我们看到的所有内容 —— 无论是文字、符号还是表情 —— 本质上都是一串串由&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;组成的二进制数字&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/unicode-101-introduction.social.jpg" alt="Featured image of post 一文弄懂字符集与编码" /&gt;&lt;p&gt;在计算机的世界里，我们看到的所有内容 —— 无论是文字、符号还是表情 —— 本质上都是一串串由&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;组成的二进制数字&lt;/p&gt;
 &lt;p&gt;那么一个我们能看懂的、有意义的符号，是如何被计算机存储，又是如何被准确无误地显示出来的呢？&lt;/p&gt;
 &lt;p&gt;这个过程就是我们今天要讲述的关于“字符”的完整故事&lt;/p&gt;
 &lt;h2 id=&#34;基础概念字符字形字节与字&#34;&gt;基础概念：字符、字形、字节与字
@@ -2535,7 +2535,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         <pubDate>Sat, 26 Jul 2025 13:22:12 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;p&gt;题目：https://ks.wjx.top/vj/rX5h1WB.aspx&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/f99f347d5c5b4907bc54e0e6b9b714e8.png" alt="Featured image of post 长安杯2020取证总结" /&gt;&lt;p&gt;题目：https://ks.wjx.top/vj/rX5h1WB.aspx&lt;/p&gt;
 &lt;p&gt;难难难，不多说了，直接开始&lt;/p&gt;
 &lt;h1 id=&#34;火眼仿真创建虚拟机&#34;&gt;火眼仿真创建虚拟机
 &lt;/h1&gt;&lt;p&gt;&lt;strong&gt;要创建虚拟机，必须要有VMware环境&lt;/strong&gt;&lt;/p&gt;
@@ -3765,7 +3765,8 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         <pubDate>Wed, 09 Jul 2025 21:17:30 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;h1 id=&#34;火眼证据分析&#34;&gt;火眼证据分析
+        <description>&lt;img src="http://picture.928330.xyz/typora/t010423dafdaa0e3353.jpg" alt="Featured image of post 中科实数杯2023取证总结" /&gt;&lt;p&gt;第一次做题，写的比较细比较繁琐&lt;/p&gt;
+&lt;h1 id=&#34;火眼证据分析&#34;&gt;火眼证据分析
 &lt;/h1&gt;&lt;p&gt;火眼证据分析中新建案件，选择镜像文件检材一，打开就会自动创建分析任务进行分析：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -4350,7 +4351,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         <pubDate>Wed, 14 May 2025 01:15:30 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/</guid>
-        <description>&lt;h1 id=&#34;wireshark过滤语法&#34;&gt;wireshark过滤语法
+        <description>&lt;img src="http://picture.928330.xyz/typora/wireshark-for-cybersecurity.jpg" alt="Featured image of post wireshark&amp;tshark简易指北" /&gt;&lt;h1 id=&#34;wireshark过滤语法&#34;&gt;wireshark过滤语法
 &lt;/h1&gt;&lt;h2 id=&#34;运算符&#34;&gt;运算符
 &lt;/h2&gt;&lt;h3 id=&#34;比较运算符&#34;&gt;比较运算符
 &lt;/h3&gt;&lt;table&gt;

@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sun, 24 Aug 2025 12:57:57 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 24 Aug 2025 21:42:35 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Apache入门</title>
         <link>https://blog.928330.xyz/p/apache%E5%85%A5%E9%97%A8/</link>
         <pubDate>Sat, 23 Aug 2025 19:26:25 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/apache%E5%85%A5%E9%97%A8/</guid>
-        <description>&lt;p&gt;时隔一个月，又来学服务器了&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/66d1339d8d7af.jpg" alt="Featured image of post Apache入门" /&gt;&lt;p&gt;时隔一个月，又来学服务器了&lt;/p&gt;
 &lt;p&gt;其实是因为美亚杯做到了apache相关内容啦&lt;/p&gt;
 &lt;p&gt;猜你喜欢：&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Nginx入门
@@ -1969,7 +1969,7 @@
         <pubDate>Tue, 19 Aug 2025 21:20:24 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/</guid>
-        <description>&lt;p&gt;1978年，为了解决解决当时学术出版里公式排版不美观的问题，计算机科学家Donald Knuth开发了一个排版系统，并给他命名为TeX（发音接近 &amp;ldquo;tech&amp;rdquo;），它的功能强大，但写起来很繁琐&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/LaTeX_logo.svg.jpg" alt="Featured image of post LaTeX：不太精通的教程" /&gt;&lt;p&gt;1978年，为了解决解决当时学术出版里公式排版不美观的问题，计算机科学家Donald Knuth开发了一个排版系统，并给他命名为TeX（发音接近 &amp;ldquo;tech&amp;rdquo;），它的功能强大，但写起来很繁琐&lt;/p&gt;
 &lt;p&gt;而我们要学的LaTeX（读作&amp;quot;Lay-tech&amp;quot;或 &amp;ldquo;Lah-tech&amp;rdquo;）是一个基于TeX的排版系统，它由Leslie Lamport在 1980年开发，目的是让普通人更容易使用TeX&lt;/p&gt;
 &lt;p&gt;可以这样理解：&lt;/p&gt;
 &lt;ul&gt;
@@ -5154,7 +5154,7 @@
         <pubDate>Fri, 15 Aug 2025 21:32:09 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;p&gt;最诡异的一集，资格赛恐怖如斯&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" alt="Featured image of post 美亚杯2022取证总结" /&gt;&lt;p&gt;最诡异的一集，资格赛恐怖如斯&lt;/p&gt;
 &lt;p&gt;过程中要数次用到数据库，最好可以使用navicate&lt;/p&gt;
 &lt;p&gt;检材分卷压缩，一共九卷，解压之后使用Veracrypt挂载就能得到题目&lt;/p&gt;
 &lt;h1 id=&#34;王晓琳手机1-14&#34;&gt;王晓琳手机(1-14)
@@ -6783,7 +6783,7 @@
         <pubDate>Wed, 13 Aug 2025 14:32:41 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E4%B8%80%E6%96%87%E5%BC%84%E6%87%82%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/</guid>
-        <description>&lt;p&gt;在计算机的世界里，我们看到的所有内容 —— 无论是文字、符号还是表情 —— 本质上都是一串串由&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;组成的二进制数字&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/unicode-101-introduction.social.jpg" alt="Featured image of post 一文弄懂字符集与编码" /&gt;&lt;p&gt;在计算机的世界里，我们看到的所有内容 —— 无论是文字、符号还是表情 —— 本质上都是一串串由&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;组成的二进制数字&lt;/p&gt;
 &lt;p&gt;那么一个我们能看懂的、有意义的符号，是如何被计算机存储，又是如何被准确无误地显示出来的呢？&lt;/p&gt;
 &lt;p&gt;这个过程就是我们今天要讲述的关于“字符”的完整故事&lt;/p&gt;
 &lt;h2 id=&#34;基础概念字符字形字节与字&#34;&gt;基础概念：字符、字形、字节与字
@@ -7676,7 +7676,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         <pubDate>Wed, 06 Aug 2025 13:08:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/</guid>
-        <description>&lt;p&gt;系统地学习linux命令 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/geek-linux.jpeg" alt="Featured image of post Linux命令（文件管理篇）" /&gt;&lt;p&gt;系统地学习linux命令 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间&lt;/p&gt;
 &lt;p&gt;现在终于得闲了，嘻嘻&lt;/p&gt;
 &lt;p&gt;我个人认为，与其单独地学习linux的知识点，不如从常见的命令开始，跟着命令一起学习&lt;/p&gt;
 &lt;p&gt;而且依照知识点和命令循序渐进，对于初学者应该也比较容易接受&lt;/p&gt;
@@ -9824,7 +9824,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         <pubDate>Sat, 26 Jul 2025 13:22:12 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;p&gt;题目：https://ks.wjx.top/vj/rX5h1WB.aspx&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/f99f347d5c5b4907bc54e0e6b9b714e8.png" alt="Featured image of post 长安杯2020取证总结" /&gt;&lt;p&gt;题目：https://ks.wjx.top/vj/rX5h1WB.aspx&lt;/p&gt;
 &lt;p&gt;难难难，不多说了，直接开始&lt;/p&gt;
 &lt;h1 id=&#34;火眼仿真创建虚拟机&#34;&gt;火眼仿真创建虚拟机
 &lt;/h1&gt;&lt;p&gt;&lt;strong&gt;要创建虚拟机，必须要有VMware环境&lt;/strong&gt;&lt;/p&gt;
@@ -11054,7 +11054,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         <pubDate>Thu, 24 Jul 2025 22:15:30 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/</guid>
-        <description>&lt;p&gt;开玩笑的，其实nginx和apache一样好用&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/94b5f0d5aceb41498d7d03bcff81ecf5.jpeg" alt="Featured image of post Nginx入门" /&gt;&lt;p&gt;开玩笑的，其实nginx和apache一样好用&lt;/p&gt;
 &lt;p&gt;apache移步：&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/apache%E5%85%A5%E9%97%A8/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Apache入门
     
@@ -12290,7 +12290,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
         <pubDate>Wed, 23 Jul 2025 19:24:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/</guid>
-        <description>&lt;p&gt;&lt;span style=&#34;color:aqua;font-size:20px&#34;&gt;本教程针对的是linux环境下的docker&lt;/span&gt;&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/docker.jpg" alt="Featured image of post 快速上手docker" /&gt;&lt;p&gt;&lt;span style=&#34;color:aqua;font-size:20px&#34;&gt;本教程针对的是linux环境下的docker&lt;/span&gt;&lt;/p&gt;
 &lt;h1 id=&#34;docker简介&#34;&gt;Docker简介
 &lt;/h1&gt;&lt;h2 id=&#34;什么是docker&#34;&gt;什么是Docker
 &lt;/h2&gt;&lt;p&gt;Docker是一个开源的容器化平台，旨在简化应用程序的开发、交付和运行&lt;/p&gt;
@@ -13041,7 +13041,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
         <pubDate>Mon, 21 Jul 2025 12:51:01 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
-        <description>&lt;h1 id=&#34;前置步骤问题解决&#34;&gt;前置步骤/问题解决
+        <description>&lt;img src="http://picture.928330.xyz/typora/1pgvz3h0o0wydnqs6q91v9w.jpg" alt="Featured image of post volatility使用说明" /&gt;&lt;h1 id=&#34;前置步骤问题解决&#34;&gt;前置步骤/问题解决
 &lt;/h1&gt;&lt;h2 id=&#34;下载&#34;&gt;下载
 &lt;/h2&gt;&lt;p&gt;Volatility2：https://github.com/volatilityfoundation/volatility&lt;/p&gt;
 &lt;p&gt;Volatility3：https://github.com/volatilityfoundation/volatility3&lt;/p&gt;
@@ -14439,7 +14439,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
         <pubDate>Mon, 21 Jul 2025 12:18:54 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/</guid>
-        <description>&lt;p&gt;&lt;strong&gt;windows相关知识总结（上）：&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/628735" alt="Featured image of post windows相关知识总结（下）" /&gt;&lt;p&gt;&lt;strong&gt;windows相关知识总结（上）：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/
     
@@ -15084,7 +15084,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
         <pubDate>Mon, 21 Jul 2025 12:17:22 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/</guid>
-        <description>&lt;p&gt;写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/628735" alt="Featured image of post windows相关知识总结（上）" /&gt;&lt;p&gt;写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行&lt;/p&gt;
 &lt;p&gt;现在只是大概的了解，如果后续有时间，会把每一个板块都单独拿出来学习的&lt;/p&gt;
 &lt;p&gt;嗯，如果有时间的话&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;windows相关知识总结（下）&lt;/strong&gt;：&lt;/p&gt;
@@ -16082,7 +16082,8 @@ HTTP状态码，表示请求成功&lt;/p&gt;
         <pubDate>Wed, 09 Jul 2025 21:17:30 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;h1 id=&#34;火眼证据分析&#34;&gt;火眼证据分析
+        <description>&lt;img src="http://picture.928330.xyz/typora/t010423dafdaa0e3353.jpg" alt="Featured image of post 中科实数杯2023取证总结" /&gt;&lt;p&gt;第一次做题，写的比较细比较繁琐&lt;/p&gt;
+&lt;h1 id=&#34;火眼证据分析&#34;&gt;火眼证据分析
 &lt;/h1&gt;&lt;p&gt;火眼证据分析中新建案件，选择镜像文件检材一，打开就会自动创建分析任务进行分析：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -16667,7 +16668,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
         <pubDate>Wed, 02 Jul 2025 00:52:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/</guid>
-        <description>&lt;p&gt;SQL注入是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句，以此来实现欺骗数据库服务器执行非授权的任意查询，从而得到相应的数据信息&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/bbe3473c5e7044490ec526dc455a0a8c.jpeg" alt="Featured image of post SQL注入：从入门到入土" /&gt;&lt;p&gt;SQL注入是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句，以此来实现欺骗数据库服务器执行非授权的任意查询，从而得到相应的数据信息&lt;/p&gt;
 &lt;p&gt;我们可以选择&lt;strong&gt;手工注入&lt;/strong&gt;，也能够选择使用自动化工具&lt;strong&gt;sqlmap&lt;/strong&gt;进行注入&lt;/p&gt;
 &lt;h1 id=&#34;手工注入&#34;&gt;手工注入
 &lt;/h1&gt;&lt;h2 id=&#34;0-环境配置&#34;&gt;#0 环境配置
@@ -18304,7 +18305,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
         <pubDate>Tue, 03 Jun 2025 01:14:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/</guid>
-        <description>&lt;h2 id=&#34;模式&#34;&gt;模式
+        <description>&lt;img src="http://picture.928330.xyz/typora/SQL-logo.png" alt="Featured image of post 快速入门SQL" /&gt;&lt;h2 id=&#34;模式&#34;&gt;模式
 &lt;/h2&gt;&lt;h3 id=&#34;定义模式&#34;&gt;定义模式
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;CREATE SCHEMA 模式名 AUTHORIZATION 用户名&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;eg:为用户ZHANG定义一个S-T模式：&lt;/p&gt;
@@ -19151,7 +19152,7 @@ C1，avg_C2列存放C2列的均值)&lt;/p&gt;
         <pubDate>Wed, 14 May 2025 01:15:30 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/</guid>
-        <description>&lt;h1 id=&#34;wireshark过滤语法&#34;&gt;wireshark过滤语法
+        <description>&lt;img src="http://picture.928330.xyz/typora/wireshark-for-cybersecurity.jpg" alt="Featured image of post wireshark&amp;tshark简易指北" /&gt;&lt;h1 id=&#34;wireshark过滤语法&#34;&gt;wireshark过滤语法
 &lt;/h1&gt;&lt;h2 id=&#34;运算符&#34;&gt;运算符
 &lt;/h2&gt;&lt;h3 id=&#34;比较运算符&#34;&gt;比较运算符
 &lt;/h3&gt;&lt;table&gt;
@@ -19581,7 +19582,7 @@ C1，avg_C2列存放C2列的均值)&lt;/p&gt;
         <pubDate>Thu, 08 May 2025 15:28:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
-        <description>&lt;img src="https://blog.928330.xyz/img/vim-bg.jpg" alt="Featured image of post Vim编辑器完全使用教程" /&gt;&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
+        <description>&lt;img src="http://picture.928330.xyz/typora/DeWatermark.ai_1756040226707.jpeg" alt="Featured image of post Vim编辑器完全使用教程" /&gt;&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
 &lt;/h1&gt;&lt;h2 id=&#34;vim键盘图&#34;&gt;vim键盘图
 &lt;/h2&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/vi-vim-cheat-sheet-sch.gif&#34; alt=&#34;img&#34; style=&#34;zoom: 80%;&#34; /&gt;
 &lt;h2 id=&#34;vim操作文件基本方式&#34;&gt;vim操作文件基本方式

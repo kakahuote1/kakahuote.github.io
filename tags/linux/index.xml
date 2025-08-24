@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sun, 24 Aug 2025 12:57:57 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 24 Aug 2025 21:42:35 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Linux命令（文件管理篇）</title>
         <link>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/</link>
         <pubDate>Wed, 06 Aug 2025 13:08:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/</guid>
-        <description>&lt;p&gt;系统地学习linux命令 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/geek-linux.jpeg" alt="Featured image of post Linux命令（文件管理篇）" /&gt;&lt;p&gt;系统地学习linux命令 —— 这是我从接触linux以来就一直想要做的一件事，可是始终没有找到时间&lt;/p&gt;
 &lt;p&gt;现在终于得闲了，嘻嘻&lt;/p&gt;
 &lt;p&gt;我个人认为，与其单独地学习linux的知识点，不如从常见的命令开始，跟着命令一起学习&lt;/p&gt;
 &lt;p&gt;而且依照知识点和命令循序渐进，对于初学者应该也比较容易接受&lt;/p&gt;
@@ -2161,7 +2161,7 @@
         <pubDate>Wed, 23 Jul 2025 19:24:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/</guid>
-        <description>&lt;p&gt;&lt;span style=&#34;color:aqua;font-size:20px&#34;&gt;本教程针对的是linux环境下的docker&lt;/span&gt;&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/docker.jpg" alt="Featured image of post 快速上手docker" /&gt;&lt;p&gt;&lt;span style=&#34;color:aqua;font-size:20px&#34;&gt;本教程针对的是linux环境下的docker&lt;/span&gt;&lt;/p&gt;
 &lt;h1 id=&#34;docker简介&#34;&gt;Docker简介
 &lt;/h1&gt;&lt;h2 id=&#34;什么是docker&#34;&gt;什么是Docker
 &lt;/h2&gt;&lt;p&gt;Docker是一个开源的容器化平台，旨在简化应用程序的开发、交付和运行&lt;/p&gt;
@@ -2912,7 +2912,7 @@
         <pubDate>Thu, 08 May 2025 15:28:02 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
-        <description>&lt;img src="https://blog.928330.xyz/img/vim-bg.jpg" alt="Featured image of post Vim编辑器完全使用教程" /&gt;&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
+        <description>&lt;img src="http://picture.928330.xyz/typora/DeWatermark.ai_1756040226707.jpeg" alt="Featured image of post Vim编辑器完全使用教程" /&gt;&lt;h1 id=&#34;vim使用方式&#34;&gt;VIM使用方式
 &lt;/h1&gt;&lt;h2 id=&#34;vim键盘图&#34;&gt;vim键盘图
 &lt;/h2&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/vi-vim-cheat-sheet-sch.gif&#34; alt=&#34;img&#34; style=&#34;zoom: 80%;&#34; /&gt;
 &lt;h2 id=&#34;vim操作文件基本方式&#34;&gt;vim操作文件基本方式
