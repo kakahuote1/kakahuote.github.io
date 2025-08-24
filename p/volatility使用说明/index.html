@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/'>
 
-<link rel="stylesheet" href="/scss/style.min.669c02ba639424a76bd343c6cc83e092173147b0d98310a4914c8b52f4e80356.css"><meta property='og:title' content="volatility使用说明">
+<link rel="stylesheet" href="/scss/style.min.14088ddd9196c3f4528f2b1a06d652269427e80ffafc666dc5afd9f9b0e727bd.css"><meta property='og:title' content="volatility使用说明">
 <meta property='og:description' content="内存取证利器">
 <meta property='og:url' content='https://blog.928330.xyz/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/'>
 <meta property='og:site_name' content='kakahuote'>
@@ -181,7 +181,7 @@
         
             
             <figure class="site-avatar">
-                <a href="/">
+                <a href="/" id="avatar-link">
                 
                     
                     
@@ -2333,10 +2333,8 @@
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
-
-            </main>
-        </div>
-        <script 
+    
+    <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
@@ -2393,6 +2391,56 @@
      
      
      
+    #rope-container {
+      position: fixed;
+      top: 0;
+      left: 20px;
+      z-index: 10000;
+      width: 50px;
+      height: 400px;
+      pointer-events: none;
+    }
+
+    #rope {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 320px;
+      background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
+      border-radius: 1.5px;
+      transform: translateX(-50%);
+      pointer-events: auto;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    #pull-ring {
+      position: absolute;
+      top: 300px;
+      left: 50%;
+      font-size: 20px;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      transform: translateX(-50%);
+      pointer-events: auto;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    #rope:hover {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    #pull-ring:hover {
+      transform: translateX(-50%) scale(1.2);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 1);
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    }
+
+     
+     
+     
     .highlight {
      max-height: 400px;
      overflow: hidden;
@@ -2429,12 +2477,12 @@
      
      
     #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
+     position: fixed;
+     top: 0;
+     left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
+     z-index: -1;
       pointer-events: none;
     }
     
@@ -2523,6 +2571,284 @@
     
     initScrollTop();
     
+     
+     
+     
+    
+
+    function initRope() {
+     
+     if (document.getElementById('rope-container')) {
+      console.log('绳子已存在，跳过创建');
+      return;
+     }
+
+     
+     const monthlyEmojis = [
+       { month: 1, name: "腊月", ring: "🧨", falling: "🧨", description: "寒冬腊月，爆竹声声" },
+       { month: 2, name: "正月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
+       { month: 3, name: "二月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
+       { month: 4, name: "三月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
+       { month: 5, name: "四月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
+       { month: 6, name: "五月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
+       { month: 7, name: "六月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
+       { month: 8, name: "七月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
+       { month: 9, name: "八月", ring: "🍁", falling: "🍁", description: "白露时节，秋叶飘落" },
+       { month: 10, name: "九月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
+       { month: 11, name: "十月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
+       { month: 12, name: "十一月", ring: "❄️", falling: "❄️", description: "大雪时节，雪花飞舞" }
+     ];
+
+     
+     window.timeEmojis = [
+       { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🦋"], description: "晨曦初露，万物苏醒" },
+       { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🌿", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
+       { period: "evening", name: "傍晚", emojis: ["🌙", "⭐", "🦉"], description: "夕阳西下，夜幕降临" }
+     ];
+
+     
+     const currentMonth = new Date().getMonth() + 2;
+     const currentEmoji = monthlyEmojis.find(emoji => emoji.month === currentMonth);
+     
+     console.log(`当前月份: ${currentMonth}, 使用emoji: ${currentEmoji.name} - ${currentEmoji.description}`);
+
+     
+     let ropeContainer = document.createElement("div");
+     ropeContainer.id = "rope-container";
+     
+     
+     let rope = document.createElement("div");
+     rope.id = "rope";
+     rope.style.cssText = `
+       position: absolute;
+       top: 0;
+       left: 50%;
+       width: 3px;
+       height: 320px;
+       background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
+       border-radius: 1.5px;
+       transform: translateX(-50%);
+       pointer-events: auto;
+       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+     `;
+     
+     
+     let pullRing = document.createElement("div");
+     pullRing.id = "pull-ring";
+     pullRing.innerHTML = currentEmoji.ring;
+     pullRing.title = `${currentEmoji.name}: ${currentEmoji.description}`;
+     pullRing.style.cssText = `
+       position: absolute;
+       top: 300px;
+       left: 50%;
+       font-size: 20px;
+       color: #ffffff;
+       text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+       transform: translateX(-50%);
+       pointer-events: auto;
+       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+     `;
+     
+     
+     function handleRopeClick() {
+      console.log('拉绳被点击，开始动画...');
+      
+      
+      rope.style.transform = 'translateX(-50%) translateY(20px)';
+      rope.style.background = 'linear-gradient(to bottom, #8B4513, #A0522D, #8B4513, #A0522D, #8B4513)';
+      
+      
+      pullRing.style.top = '320px';
+      pullRing.style.transform = 'translateX(-50%) scale(0.8)';
+      pullRing.style.textShadow = '0 0 15px rgba(255, 255, 255, 1)';
+      pullRing.style.filter = 'drop-shadow(0 6px 12px rgba(0,0,0,0.6))';
+      
+      
+      createSeasonalFalling(currentEmoji);
+      
+      
+      setTimeout(() => {
+       console.log('恢复拉绳原状...');
+       rope.style.transform = 'translateX(-50%) translateY(0)';
+       rope.style.background = 'linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321)';
+       
+       
+       pullRing.style.top = '300px';
+       pullRing.style.transform = 'translateX(-50%) scale(1)';
+       pullRing.style.textShadow = '0 0 8px rgba(255, 255, 255, 0.8)';
+       pullRing.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+      }, 800);
+     }
+     
+     
+     rope.addEventListener('click', handleRopeClick);
+     pullRing.addEventListener('click', handleRopeClick);
+     
+     
+     ropeContainer.appendChild(rope);
+     ropeContainer.appendChild(pullRing);
+     document.body.appendChild(ropeContainer);
+     
+     console.log(`可拉动的绳子已创建，使用${currentEmoji.name}主题`);
+    }
+
+    
+
+    function createSeasonalFalling(emojiConfig) {
+     console.log(`开始创建${emojiConfig.name}飘落效果...`);
+     console.log('emojiConfig:', emojiConfig);
+     
+     
+     const fallingContainer = document.createElement('div');
+     fallingContainer.id = 'falling-container';
+     fallingContainer.style.cssText = `
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100vw;
+       height: 100vh;
+       pointer-events: none;
+       z-index: 9999;
+       overflow: hidden;
+     `;
+     document.body.appendChild(fallingContainer);
+     console.log('飘落容器已创建');
+     
+     
+     const currentHour = new Date().getHours();
+     let currentTimePeriod;
+     if (currentHour >= 5 && currentHour < 11) {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "morning");
+     } else if (currentHour >= 11 && currentHour < 17) {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "noon");
+     } else {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "evening");
+     }
+     
+     console.log(`当前时间: ${currentHour}点, 时间段: ${currentTimePeriod.name} - ${currentTimePeriod.description}`);
+     console.log('timeEmojis:', window.timeEmojis);
+     
+     
+     const totalElements = emojiConfig.month >= 11 || emojiConfig.month <= 2 ? 30 : 25; 
+     let activeElements = 0;
+     
+     console.log(`准备创建 ${totalElements} 个飘落元素`);
+     
+     for (let i = 0; i < totalElements; i++) {
+      setTimeout(() => {
+       const element = document.createElement('div');
+       
+       
+       let selectedEmoji, emojiType;
+       if (Math.random() < 0.7) {
+        selectedEmoji = emojiConfig.falling;
+        emojiType = "monthly";
+       } else {
+        
+        selectedEmoji = currentTimePeriod.emojis[Math.floor(Math.random() * currentTimePeriod.emojis.length)];
+        emojiType = "time";
+       }
+       
+       console.log(`创建第 ${i + 1} 个元素: ${selectedEmoji} (${emojiType})`);
+       element.innerHTML = selectedEmoji;
+       
+       
+       let fontSize, color, textShadow;
+       if (emojiType === "time") {
+        
+        if (currentTimePeriod.period === "morning") {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FFD700';
+         textShadow = '0 0 5px rgba(255, 215, 0, 0.7)';
+        } else if (currentTimePeriod.period === "noon") {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FF8C00';
+         textShadow = '0 0 5px rgba(255, 140, 0, 0.7)';
+        } else {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#4B0082';
+         textShadow = '0 0 5px rgba(75, 0, 130, 0.7)';
+        }
+       } else {
+        
+        if (emojiConfig.month >= 11 || emojiConfig.month <= 2) {
+         
+         fontSize = Math.random() * 20 + 15;
+         color = 'white';
+         textShadow = '0 0 5px rgba(255, 255, 255, 0.8)';
+        } else if (emojiConfig.month >= 3 && emojiConfig.month <= 5) {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FF69B4';
+         textShadow = '0 0 5px rgba(255, 105, 180, 0.6)';
+        } else if (emojiConfig.month >= 6 && emojiConfig.month <= 8) {
+         
+         fontSize = Math.random() * 18 + 15;
+         color = '#32CD32';
+         textShadow = '0 0 5px rgba(50, 205, 50, 0.6)';
+        } else {
+         
+         fontSize = Math.random() * 18 + 15;
+         color = '#FF8C00';
+         textShadow = '0 0 5px rgba(255, 140, 0, 0.6)';
+        }
+       }
+       
+       element.style.cssText = `
+         position: absolute;
+         font-size: ${fontSize}px;
+         color: ${color};
+         text-shadow: ${textShadow};
+         left: ${Math.random() * window.innerWidth}px;
+         top: -50px;
+         user-select: none;
+         pointer-events: none;
+         z-index: 9999;
+         transition: all 0.3s ease;
+       `;
+       
+       fallingContainer.appendChild(element);
+       activeElements++;
+       
+       
+       const duration = 4000 + Math.random() * 2000;
+       const endX = parseFloat(element.style.left) + (Math.random() - 0.5) * 400;
+       const endY = window.innerHeight + 50;
+       
+       element.style.transition = `all ${duration}ms linear`;
+       
+       setTimeout(() => {
+        element.style.left = endX + 'px';
+        element.style.top = endY + 'px';
+        element.style.opacity = '0';
+       }, 50);
+       
+       
+       setTimeout(() => {
+        if (element.parentNode) {
+         element.parentNode.removeChild(element);
+        }
+        activeElements--;
+        
+        
+        if (activeElements === 0) {
+         if (fallingContainer && fallingContainer.parentNode) {
+          fallingContainer.parentNode.removeChild(fallingContainer);
+         }
+        }
+       }, duration);
+      }, i * 150);
+     }
+    }
+
+    
+    initRope();
+
      
      
      
@@ -2681,6 +3007,687 @@
     "retina_detect": true
   });
 </script>
+
+
+
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+     
+     
+     
+    @font-face {
+     font-family: 'yuan';
+     src: url('https://blog.928330.xyz/font/round.ttf') format('truetype');
+    }
+
+     
+     
+     
+    :root {
+     --base-font-family: 'yuan';
+     --code-font-family: 'yuan';
+    }
+
+     
+     
+     
+    #backTopBtn {
+     position: fixed;
+     bottom: 30px;
+     right: 450px;
+     z-index: 99;
+     cursor: pointer;
+     width: 30px;
+     height: 30px;
+     background-image: url('https://blog.928330.xyz/icons/backTop.svg');
+     background-size: cover;
+     transition: transform 0.1s linear;
+     transform-origin: center center;
+    }
+
+    #backTopBtn.rotating {
+     transform: rotate(360deg);
+    }
+
+     
+     
+     
+    #rope-container {
+      position: fixed;
+      top: 0;
+      left: 20px;
+      z-index: 10000;
+      width: 50px;
+      height: 400px;
+      pointer-events: none;
+    }
+
+    #rope {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 320px;
+      background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
+      border-radius: 1.5px;
+      transform: translateX(-50%);
+      pointer-events: auto;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    #pull-ring {
+      position: absolute;
+      top: 300px;
+      left: 50%;
+      font-size: 20px;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      transform: translateX(-50%);
+      pointer-events: auto;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    #rope:hover {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    #pull-ring:hover {
+      transform: translateX(-50%) scale(1.2);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 1);
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    }
+
+     
+     
+     
+    .highlight {
+     max-height: 400px;
+     overflow: hidden;
+     position: relative;
+     transition: max-height 0.3s ease-out;
+    }
+
+    .code-show {
+     max-height: none !important;
+    }
+
+    .code-more-box {
+     width: 100%;
+     padding-top: 20px;
+     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;
+     text-align: center;
+    }
+
+    .code-more-btn {
+     display: inline-block;
+     padding: 5px 15px;
+     background: #f0f0f5;
+     border-radius: 5px;
+     cursor: pointer;
+     font-size: 0.9em;
+    }
+
+     
+     
+     
+    #particles-js {
+     position: fixed;
+     top: 0;
+     left: 0;
+      width: 100vw;
+      height: 100vh;
+     z-index: -1;
+      pointer-events: none;
+    }
+    
+    #particles-js canvas {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+    }
+</style>
+
+<script>
+     
+     
+     
+
+    let s1 = '2025-5-8 15:00:00'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    if (document.getElementById('runningdays')) {
+        document.getElementById('runningdays').innerHTML = result;
+    }
+    
+     
+     
+     
+    
+
+    function initScrollTop() {
+     let rightSideBar = document.querySelector(".right-sidebar");
+     if (!rightSideBar) {
+      return;
+     }
+
+     
+     let btn = document.createElement("div");
+     btn.id = "backTopBtn";
+     let isRotating = false; 
+
+     btn.onclick = function() {
+      if (!isRotating) {
+       isRotating = true;
+       backToTop(this, () => {
+        isRotating = false; 
+       });
+      }
+     };
+     rightSideBar.appendChild(btn);
+
+     
+     btn.style.display = "block";
+    }
+
+    
+
+    function backToTop(button, onComplete) {
+     let rotation = 0;
+     let animationInterval;
+
+     window.scrollTo({ top: 0, behavior: "smooth" }); 
+
+     animationInterval = setInterval(() => {
+      rotation += 30; 
+      button.style.transform = `rotate(${rotation}deg)`;
+
+      if (window.scrollY === 0) {
+       clearInterval(animationInterval); 
+       button.style.transform = `rotate(0deg)`; 
+       if (onComplete) {
+        onComplete();
+       }
+      } else if (rotation >= 360 && window.scrollY !== 0) {
+       
+      }
+     }, 20); 
+    }
+
+    
+    initScrollTop();
+    
+     
+     
+     
+    
+
+    function initRope() {
+     
+     if (document.getElementById('rope-container')) {
+      console.log('绳子已存在，跳过创建');
+      return;
+     }
+
+     
+     const monthlyEmojis = [
+       { month: 1, name: "腊月", ring: "🧨", falling: "🧨", description: "寒冬腊月，爆竹声声" },
+       { month: 2, name: "正月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
+       { month: 3, name: "二月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
+       { month: 4, name: "三月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
+       { month: 5, name: "四月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
+       { month: 6, name: "五月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
+       { month: 7, name: "六月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
+       { month: 8, name: "七月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
+       { month: 9, name: "八月", ring: "🍁", falling: "🍁", description: "白露时节，秋叶飘落" },
+       { month: 10, name: "九月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
+       { month: 11, name: "十月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
+       { month: 12, name: "十一月", ring: "❄️", falling: "❄️", description: "大雪时节，雪花飞舞" }
+     ];
+
+     
+     window.timeEmojis = [
+       { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🦋"], description: "晨曦初露，万物苏醒" },
+       { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🌿", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
+       { period: "evening", name: "傍晚", emojis: ["🌙", "⭐", "🦉"], description: "夕阳西下，夜幕降临" }
+     ];
+
+     
+     const currentMonth = new Date().getMonth() + 2;
+     const currentEmoji = monthlyEmojis.find(emoji => emoji.month === currentMonth);
+     
+     console.log(`当前月份: ${currentMonth}, 使用emoji: ${currentEmoji.name} - ${currentEmoji.description}`);
+
+     
+     let ropeContainer = document.createElement("div");
+     ropeContainer.id = "rope-container";
+     
+     
+     let rope = document.createElement("div");
+     rope.id = "rope";
+     rope.style.cssText = `
+       position: absolute;
+       top: 0;
+       left: 50%;
+       width: 3px;
+       height: 320px;
+       background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
+       border-radius: 1.5px;
+       transform: translateX(-50%);
+       pointer-events: auto;
+       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+     `;
+     
+     
+     let pullRing = document.createElement("div");
+     pullRing.id = "pull-ring";
+     pullRing.innerHTML = currentEmoji.ring;
+     pullRing.title = `${currentEmoji.name}: ${currentEmoji.description}`;
+     pullRing.style.cssText = `
+       position: absolute;
+       top: 300px;
+       left: 50%;
+       font-size: 20px;
+       color: #ffffff;
+       text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+       transform: translateX(-50%);
+       pointer-events: auto;
+       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+     `;
+     
+     
+     function handleRopeClick() {
+      console.log('拉绳被点击，开始动画...');
+      
+      
+      rope.style.transform = 'translateX(-50%) translateY(20px)';
+      rope.style.background = 'linear-gradient(to bottom, #8B4513, #A0522D, #8B4513, #A0522D, #8B4513)';
+      
+      
+      pullRing.style.top = '320px';
+      pullRing.style.transform = 'translateX(-50%) scale(0.8)';
+      pullRing.style.textShadow = '0 0 15px rgba(255, 255, 255, 1)';
+      pullRing.style.filter = 'drop-shadow(0 6px 12px rgba(0,0,0,0.6))';
+      
+      
+      createSeasonalFalling(currentEmoji);
+      
+      
+      setTimeout(() => {
+       console.log('恢复拉绳原状...');
+       rope.style.transform = 'translateX(-50%) translateY(0)';
+       rope.style.background = 'linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321)';
+       
+       
+       pullRing.style.top = '300px';
+       pullRing.style.transform = 'translateX(-50%) scale(1)';
+       pullRing.style.textShadow = '0 0 8px rgba(255, 255, 255, 0.8)';
+       pullRing.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+      }, 800);
+     }
+     
+     
+     rope.addEventListener('click', handleRopeClick);
+     pullRing.addEventListener('click', handleRopeClick);
+     
+     
+     ropeContainer.appendChild(rope);
+     ropeContainer.appendChild(pullRing);
+     document.body.appendChild(ropeContainer);
+     
+     console.log(`可拉动的绳子已创建，使用${currentEmoji.name}主题`);
+    }
+
+    
+
+    function createSeasonalFalling(emojiConfig) {
+     console.log(`开始创建${emojiConfig.name}飘落效果...`);
+     console.log('emojiConfig:', emojiConfig);
+     
+     
+     const fallingContainer = document.createElement('div');
+     fallingContainer.id = 'falling-container';
+     fallingContainer.style.cssText = `
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100vw;
+       height: 100vh;
+       pointer-events: none;
+       z-index: 9999;
+       overflow: hidden;
+     `;
+     document.body.appendChild(fallingContainer);
+     console.log('飘落容器已创建');
+     
+     
+     const currentHour = new Date().getHours();
+     let currentTimePeriod;
+     if (currentHour >= 5 && currentHour < 11) {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "morning");
+     } else if (currentHour >= 11 && currentHour < 17) {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "noon");
+     } else {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "evening");
+     }
+     
+     console.log(`当前时间: ${currentHour}点, 时间段: ${currentTimePeriod.name} - ${currentTimePeriod.description}`);
+     console.log('timeEmojis:', window.timeEmojis);
+     
+     
+     const totalElements = emojiConfig.month >= 11 || emojiConfig.month <= 2 ? 30 : 25; 
+     let activeElements = 0;
+     
+     console.log(`准备创建 ${totalElements} 个飘落元素`);
+     
+     for (let i = 0; i < totalElements; i++) {
+      setTimeout(() => {
+       const element = document.createElement('div');
+       
+       
+       let selectedEmoji, emojiType;
+       if (Math.random() < 0.7) {
+        selectedEmoji = emojiConfig.falling;
+        emojiType = "monthly";
+       } else {
+        
+        selectedEmoji = currentTimePeriod.emojis[Math.floor(Math.random() * currentTimePeriod.emojis.length)];
+        emojiType = "time";
+       }
+       
+       console.log(`创建第 ${i + 1} 个元素: ${selectedEmoji} (${emojiType})`);
+       element.innerHTML = selectedEmoji;
+       
+       
+       let fontSize, color, textShadow;
+       if (emojiType === "time") {
+        
+        if (currentTimePeriod.period === "morning") {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FFD700';
+         textShadow = '0 0 5px rgba(255, 215, 0, 0.7)';
+        } else if (currentTimePeriod.period === "noon") {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FF8C00';
+         textShadow = '0 0 5px rgba(255, 140, 0, 0.7)';
+        } else {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#4B0082';
+         textShadow = '0 0 5px rgba(75, 0, 130, 0.7)';
+        }
+       } else {
+        
+        if (emojiConfig.month >= 11 || emojiConfig.month <= 2) {
+         
+         fontSize = Math.random() * 20 + 15;
+         color = 'white';
+         textShadow = '0 0 5px rgba(255, 255, 255, 0.8)';
+        } else if (emojiConfig.month >= 3 && emojiConfig.month <= 5) {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FF69B4';
+         textShadow = '0 0 5px rgba(255, 105, 180, 0.6)';
+        } else if (emojiConfig.month >= 6 && emojiConfig.month <= 8) {
+         
+         fontSize = Math.random() * 18 + 15;
+         color = '#32CD32';
+         textShadow = '0 0 5px rgba(50, 205, 50, 0.6)';
+        } else {
+         
+         fontSize = Math.random() * 18 + 15;
+         color = '#FF8C00';
+         textShadow = '0 0 5px rgba(255, 140, 0, 0.6)';
+        }
+       }
+       
+       element.style.cssText = `
+         position: absolute;
+         font-size: ${fontSize}px;
+         color: ${color};
+         text-shadow: ${textShadow};
+         left: ${Math.random() * window.innerWidth}px;
+         top: -50px;
+         user-select: none;
+         pointer-events: none;
+         z-index: 9999;
+         transition: all 0.3s ease;
+       `;
+       
+       fallingContainer.appendChild(element);
+       activeElements++;
+       
+       
+       const duration = 4000 + Math.random() * 2000;
+       const endX = parseFloat(element.style.left) + (Math.random() - 0.5) * 400;
+       const endY = window.innerHeight + 50;
+       
+       element.style.transition = `all ${duration}ms linear`;
+       
+       setTimeout(() => {
+        element.style.left = endX + 'px';
+        element.style.top = endY + 'px';
+        element.style.opacity = '0';
+       }, 50);
+       
+       
+       setTimeout(() => {
+        if (element.parentNode) {
+         element.parentNode.removeChild(element);
+        }
+        activeElements--;
+        
+        
+        if (activeElements === 0) {
+         if (fallingContainer && fallingContainer.parentNode) {
+          fallingContainer.parentNode.removeChild(fallingContainer);
+         }
+        }
+       }, duration);
+      }, i * 150);
+     }
+    }
+
+    
+    initRope();
+
+     
+     
+     
+    function initCodeMoreBox() {
+     let codeBlocks = document.querySelectorAll(".highlight");
+     if (!codeBlocks) {
+      return;
+     }
+     codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+       return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.innerText = '显示更多'; 
+      let isExpanded = false; 
+
+      codeMoreBtn.addEventListener('click', () => {
+       if (!isExpanded) {
+        codeBlock.classList.add('code-show'); 
+        codeMoreBtn.innerText = '折叠'; 
+        isExpanded = true;
+       } else {
+        codeBlock.classList.remove('code-show'); 
+        codeMoreBtn.innerText = '显示更多'; 
+        isExpanded = false;
+       }
+       
+       window.dispatchEvent(new Event('resize'));
+      });
+      
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+     });
+    }
+
+    initCodeMoreBox();
+</script>
+
+
+<div id="particles-js"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  
+  particlesJS('particles-js', {
+    "particles": {
+      "number": {
+        "value": 80,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": ["#888888", "#aaaaaa", "#cccccc", "#eeeeee"]
+      },
+      "shape": {
+        "type": "circle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        },
+        "polygon": {
+          "nb_sides": 5
+        }
+      },
+      "opacity": {
+        "value": 0.5,
+        "random": false,
+        "anim": {
+          "enable": false,
+          "speed": 1,
+          "opacity_min": 0.1,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 2,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 40,
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 150,
+        "color": "#888888",
+        "opacity": 0.4,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 2,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false,
+        "attract": {
+          "enable": false,
+          "rotateX": 600,
+          "rotateY": 1200
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "grab"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 140,
+          "line_linked": {
+            "opacity": 1
+          }
+        },
+        "bubble": {
+          "distance": 400,
+          "size": 40,
+          "duration": 2,
+          "opacity": 8,
+          "speed": 3
+        },
+        "repulse": {
+          "distance": 200,
+          "duration": 0.4
+        },
+        "push": {
+          "particles_nb": 4
+        },
+        "remove": {
+          "particles_nb": 2
+        }
+      }
+    },
+    "retina_detect": true
+  });
+</script>
+
+
 
     </body>
 </html>

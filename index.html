@@ -7,7 +7,7 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/'>
 
-<link rel="stylesheet" href="/scss/style.min.669c02ba639424a76bd343c6cc83e092173147b0d98310a4914c8b52f4e80356.css"><meta property='og:title' content="kakahuote">
+<link rel="stylesheet" href="/scss/style.min.14088ddd9196c3f4528f2b1a06d652269427e80ffafc666dc5afd9f9b0e727bd.css"><meta property='og:title' content="kakahuote">
 <meta property='og:description' content="靡不有初，鲜克有终">
 <meta property='og:url' content='https://blog.928330.xyz/'>
 <meta property='og:site_name' content='kakahuote'>
@@ -180,7 +180,7 @@
         
             
             <figure class="site-avatar">
-                <a href="/">
+                <a href="/" id="avatar-link">
                 
                     
                     
@@ -536,11 +536,19 @@
         <div class="welcome-main">
           <div class="welcome-emoji" id="welcome-emoji">👋</div>
           <div class="welcome-text">
-            <span class="welcome-greeting">欢迎来到</span>
+            <span class="welcome-greeting" id="welcome-greeting">欢迎来到</span>
             <div class="welcome-name">
-              <span class="name-text">Kakahuote's Blog</span>
+              <span class="name-text" id="name-text">Kakahuote's Blog</span>
             </div>
           </div>
+        </div>
+        
+        
+        <div class="welcome-bg-text-container" id="welcome-bg-text-container">
+          <span class="bg-text" id="bg-text-1">欢</span>
+          <span class="bg-text" id="bg-text-2">迎</span>
+          <span class="bg-text" id="bg-text-3">来</span>
+          <span class="bg-text" id="bg-text-4">到</span>
         </div>
         
         
@@ -585,7 +593,96 @@
           ['😅', '😂', '🤣', '😆', '😁', '😃', '😀', '🙂', '😌', '😋', '😊', '😄', '😉', '🤗', '😍', '🥰']
         ];
         
+        
+        const gestureEmojis = [
+          '👆', '👈', '👉', '👇', '👌', '✌️', '🤞', '🤟', '🤘', '🤙', '👍', '👎', '👊', '✊', '🤝', '🙏',
+          '👏', '🤲', '👐', '🙌', '🤚', '🖐️', '✋', '🖖', '🤌', '🤏'
+        ];
+        
+        
+        let secondEmoji = gestureEmojis[Math.floor(Math.random() * gestureEmojis.length)];
+        
         let currentEmotionStage = 0;
+        let animationTriggered = false; 
+        
+        
+        function triggerWelcomeAnimation() {
+          console.log('触发欢迎横幅动画');
+          if (animationTriggered) {
+            console.log('动画已经触发过，跳过');
+            return;
+          }
+          animationTriggered = true;
+          
+          const welcomeGreeting = document.getElementById('welcome-greeting');
+          const nameText = document.getElementById('name-text');
+          const bgTextContainer = document.getElementById('welcome-bg-text-container');
+          const bgTexts = document.querySelectorAll('.bg-text');
+          
+          
+          welcomeGreeting.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          welcomeGreeting.style.opacity = '0';
+          welcomeGreeting.style.transform = 'scale(0.8)';
+          
+          
+          console.log('开始背景大字动画');
+          bgTextContainer.style.display = 'block';
+          
+          
+          bgTexts.forEach((text, index) => {
+            console.log(`设置背景大字 ${index + 1}:`, text);
+            
+            
+            const positions = [
+              { left: '10%', top: '25%' },  
+              { left: '20%', top: '75%' },  
+              { left: '80%', top: '20%' },  
+              { left: '90%', top: '80%' }   
+            ];
+            
+            
+            text.style.left = '50%';
+            text.style.top = '50%';
+            text.style.transform = 'translate(-50%, -50%) scale(1)';
+            text.style.opacity = '0';
+            text.style.transition = 'none'; 
+            
+            
+            text.offsetHeight;
+          });
+          
+          
+          requestAnimationFrame(() => {
+            bgTexts.forEach((text, index) => {
+              const positions = [
+                { left: '10%', top: '25%' },  
+                { left: '20%', top: '75%' },  
+                { left: '80%', top: '20%' },  
+                { left: '90%', top: '80%' }   
+              ];
+              
+              
+              text.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+              text.style.left = positions[index].left;
+              text.style.top = positions[index].top;
+              text.style.transform = 'translate(-50%, -50%) scale(1.2)';
+              text.style.opacity = '0.15';
+            });
+          });
+          
+          
+          setTimeout(() => {
+            nameText.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            nameText.style.fontSize = '2.5rem';
+            nameText.style.marginTop = '-2.5rem';
+            
+            
+            const welcomeMain = document.querySelector('.welcome-main');
+            welcomeMain.style.flexDirection = 'row';
+            welcomeMain.style.alignItems = 'center';
+            welcomeMain.style.gap = '2rem';
+          }, 800);
+        }
         
         
         const effectTypes = [
@@ -729,9 +826,13 @@
         
         setTimeout(() => {
           if (isInitialState) {
-            transitionEmoji('👋', '👆', () => {
+            
+            transitionEmoji('👋', secondEmoji, () => {
               welcomeContent.classList.add('hint-click');
             });
+            
+            
+            triggerWelcomeAnimation();
           }
         }, 2000);
         
@@ -812,7 +913,8 @@
         
         welcomeContent.addEventListener('mouseenter', function() {
           if (isInitialState) {
-            this.style.cursor = 'pointer';
+            
+            this.style.cursor = '';
           }
         });
       });
@@ -1329,6 +1431,56 @@
      
      
      
+    #rope-container {
+      position: fixed;
+      top: 0;
+      left: 20px;
+      z-index: 10000;
+      width: 50px;
+      height: 400px;
+      pointer-events: none;
+    }
+
+    #rope {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 320px;
+      background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
+      border-radius: 1.5px;
+      transform: translateX(-50%);
+      pointer-events: auto;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    #pull-ring {
+      position: absolute;
+      top: 300px;
+      left: 50%;
+      font-size: 20px;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      transform: translateX(-50%);
+      pointer-events: auto;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    #rope:hover {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    #pull-ring:hover {
+      transform: translateX(-50%) scale(1.2);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 1);
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    }
+
+     
+     
+     
     .highlight {
      max-height: 400px;
      overflow: hidden;
@@ -1365,12 +1517,12 @@
      
      
     #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
+     position: fixed;
+     top: 0;
+     left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
+     z-index: -1;
       pointer-events: none;
     }
     
@@ -1459,6 +1611,284 @@
     
     initScrollTop();
     
+     
+     
+     
+    
+
+    function initRope() {
+     
+     if (document.getElementById('rope-container')) {
+      console.log('绳子已存在，跳过创建');
+      return;
+     }
+
+     
+     const monthlyEmojis = [
+       { month: 1, name: "腊月", ring: "🧨", falling: "🧨", description: "寒冬腊月，爆竹声声" },
+       { month: 2, name: "正月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
+       { month: 3, name: "二月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
+       { month: 4, name: "三月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
+       { month: 5, name: "四月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
+       { month: 6, name: "五月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
+       { month: 7, name: "六月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
+       { month: 8, name: "七月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
+       { month: 9, name: "八月", ring: "🍁", falling: "🍁", description: "白露时节，秋叶飘落" },
+       { month: 10, name: "九月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
+       { month: 11, name: "十月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
+       { month: 12, name: "十一月", ring: "❄️", falling: "❄️", description: "大雪时节，雪花飞舞" }
+     ];
+
+     
+     window.timeEmojis = [
+       { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🦋"], description: "晨曦初露，万物苏醒" },
+       { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🌿", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
+       { period: "evening", name: "傍晚", emojis: ["🌙", "⭐", "🦉"], description: "夕阳西下，夜幕降临" }
+     ];
+
+     
+     const currentMonth = new Date().getMonth() + 2;
+     const currentEmoji = monthlyEmojis.find(emoji => emoji.month === currentMonth);
+     
+     console.log(`当前月份: ${currentMonth}, 使用emoji: ${currentEmoji.name} - ${currentEmoji.description}`);
+
+     
+     let ropeContainer = document.createElement("div");
+     ropeContainer.id = "rope-container";
+     
+     
+     let rope = document.createElement("div");
+     rope.id = "rope";
+     rope.style.cssText = `
+       position: absolute;
+       top: 0;
+       left: 50%;
+       width: 3px;
+       height: 320px;
+       background: linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321);
+       border-radius: 1.5px;
+       transform: translateX(-50%);
+       pointer-events: auto;
+       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+     `;
+     
+     
+     let pullRing = document.createElement("div");
+     pullRing.id = "pull-ring";
+     pullRing.innerHTML = currentEmoji.ring;
+     pullRing.title = `${currentEmoji.name}: ${currentEmoji.description}`;
+     pullRing.style.cssText = `
+       position: absolute;
+       top: 300px;
+       left: 50%;
+       font-size: 20px;
+       color: #ffffff;
+       text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+       transform: translateX(-50%);
+       pointer-events: auto;
+       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+     `;
+     
+     
+     function handleRopeClick() {
+      console.log('拉绳被点击，开始动画...');
+      
+      
+      rope.style.transform = 'translateX(-50%) translateY(20px)';
+      rope.style.background = 'linear-gradient(to bottom, #8B4513, #A0522D, #8B4513, #A0522D, #8B4513)';
+      
+      
+      pullRing.style.top = '320px';
+      pullRing.style.transform = 'translateX(-50%) scale(0.8)';
+      pullRing.style.textShadow = '0 0 15px rgba(255, 255, 255, 1)';
+      pullRing.style.filter = 'drop-shadow(0 6px 12px rgba(0,0,0,0.6))';
+      
+      
+      createSeasonalFalling(currentEmoji);
+      
+      
+      setTimeout(() => {
+       console.log('恢复拉绳原状...');
+       rope.style.transform = 'translateX(-50%) translateY(0)';
+       rope.style.background = 'linear-gradient(to bottom, #654321, #8B4513, #A0522D, #8B4513, #654321)';
+       
+       
+       pullRing.style.top = '300px';
+       pullRing.style.transform = 'translateX(-50%) scale(1)';
+       pullRing.style.textShadow = '0 0 8px rgba(255, 255, 255, 0.8)';
+       pullRing.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+      }, 800);
+     }
+     
+     
+     rope.addEventListener('click', handleRopeClick);
+     pullRing.addEventListener('click', handleRopeClick);
+     
+     
+     ropeContainer.appendChild(rope);
+     ropeContainer.appendChild(pullRing);
+     document.body.appendChild(ropeContainer);
+     
+     console.log(`可拉动的绳子已创建，使用${currentEmoji.name}主题`);
+    }
+
+    
+
+    function createSeasonalFalling(emojiConfig) {
+     console.log(`开始创建${emojiConfig.name}飘落效果...`);
+     console.log('emojiConfig:', emojiConfig);
+     
+     
+     const fallingContainer = document.createElement('div');
+     fallingContainer.id = 'falling-container';
+     fallingContainer.style.cssText = `
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100vw;
+       height: 100vh;
+       pointer-events: none;
+       z-index: 9999;
+       overflow: hidden;
+     `;
+     document.body.appendChild(fallingContainer);
+     console.log('飘落容器已创建');
+     
+     
+     const currentHour = new Date().getHours();
+     let currentTimePeriod;
+     if (currentHour >= 5 && currentHour < 11) {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "morning");
+     } else if (currentHour >= 11 && currentHour < 17) {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "noon");
+     } else {
+      currentTimePeriod = window.timeEmojis.find(t => t.period === "evening");
+     }
+     
+     console.log(`当前时间: ${currentHour}点, 时间段: ${currentTimePeriod.name} - ${currentTimePeriod.description}`);
+     console.log('timeEmojis:', window.timeEmojis);
+     
+     
+     const totalElements = emojiConfig.month >= 11 || emojiConfig.month <= 2 ? 30 : 25; 
+     let activeElements = 0;
+     
+     console.log(`准备创建 ${totalElements} 个飘落元素`);
+     
+     for (let i = 0; i < totalElements; i++) {
+      setTimeout(() => {
+       const element = document.createElement('div');
+       
+       
+       let selectedEmoji, emojiType;
+       if (Math.random() < 0.7) {
+        selectedEmoji = emojiConfig.falling;
+        emojiType = "monthly";
+       } else {
+        
+        selectedEmoji = currentTimePeriod.emojis[Math.floor(Math.random() * currentTimePeriod.emojis.length)];
+        emojiType = "time";
+       }
+       
+       console.log(`创建第 ${i + 1} 个元素: ${selectedEmoji} (${emojiType})`);
+       element.innerHTML = selectedEmoji;
+       
+       
+       let fontSize, color, textShadow;
+       if (emojiType === "time") {
+        
+        if (currentTimePeriod.period === "morning") {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FFD700';
+         textShadow = '0 0 5px rgba(255, 215, 0, 0.7)';
+        } else if (currentTimePeriod.period === "noon") {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FF8C00';
+         textShadow = '0 0 5px rgba(255, 140, 0, 0.7)';
+        } else {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#4B0082';
+         textShadow = '0 0 5px rgba(75, 0, 130, 0.7)';
+        }
+       } else {
+        
+        if (emojiConfig.month >= 11 || emojiConfig.month <= 2) {
+         
+         fontSize = Math.random() * 20 + 15;
+         color = 'white';
+         textShadow = '0 0 5px rgba(255, 255, 255, 0.8)';
+        } else if (emojiConfig.month >= 3 && emojiConfig.month <= 5) {
+         
+         fontSize = Math.random() * 18 + 16;
+         color = '#FF69B4';
+         textShadow = '0 0 5px rgba(255, 105, 180, 0.6)';
+        } else if (emojiConfig.month >= 6 && emojiConfig.month <= 8) {
+         
+         fontSize = Math.random() * 18 + 15;
+         color = '#32CD32';
+         textShadow = '0 0 5px rgba(50, 205, 50, 0.6)';
+        } else {
+         
+         fontSize = Math.random() * 18 + 15;
+         color = '#FF8C00';
+         textShadow = '0 0 5px rgba(255, 140, 0, 0.6)';
+        }
+       }
+       
+       element.style.cssText = `
+         position: absolute;
+         font-size: ${fontSize}px;
+         color: ${color};
+         text-shadow: ${textShadow};
+         left: ${Math.random() * window.innerWidth}px;
+         top: -50px;
+         user-select: none;
+         pointer-events: none;
+         z-index: 9999;
+         transition: all 0.3s ease;
+       `;
+       
+       fallingContainer.appendChild(element);
+       activeElements++;
+       
+       
+       const duration = 4000 + Math.random() * 2000;
+       const endX = parseFloat(element.style.left) + (Math.random() - 0.5) * 400;
+       const endY = window.innerHeight + 50;
+       
+       element.style.transition = `all ${duration}ms linear`;
+       
+       setTimeout(() => {
+        element.style.left = endX + 'px';
+        element.style.top = endY + 'px';
+        element.style.opacity = '0';
+       }, 50);
+       
+       
+       setTimeout(() => {
+        if (element.parentNode) {
+         element.parentNode.removeChild(element);
+        }
+        activeElements--;
+        
+        
+        if (activeElements === 0) {
+         if (fallingContainer && fallingContainer.parentNode) {
+          fallingContainer.parentNode.removeChild(fallingContainer);
+         }
+        }
+       }, duration);
+      }, i * 150);
+     }
+    }
+
+    
+    initRope();
+
      
      
      
@@ -1617,6 +2047,8 @@
     "retina_detect": true
   });
 </script>
+
+
 
     </body>
 </html>
