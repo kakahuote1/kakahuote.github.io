@@ -2216,7 +2216,7 @@
 &lt;p&gt;若有错误，会明确指出是哪一行、哪个文件配置有误&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250724132842292.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250724132842292&#34; href=&#34;http://picture.928330.xyz/typora/image-20250724132842292.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250724132842292.png&#34; alt=&#34;image-20250724132842292&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;

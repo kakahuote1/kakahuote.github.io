@@ -169,7 +169,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817101503310.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250817101503310&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817101503310.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817101503310.png&#34; alt=&#34;image-20250817101503310&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -793,7 +793,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819190726829.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819190726829&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819190726829.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819190726829.png&#34; alt=&#34;image-20250819190726829&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -862,7 +862,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\underline&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\textbf&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\textit&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;既要下划线又要斜体还要加粗就这样&lt;span style=&#34;color:#e5c07b&#34;&gt;}}}&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\\&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817132107426.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250817132107426&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817132107426.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817132107426.png&#34; alt=&#34;image-20250817132107426&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1134,7 +1134,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817125546110.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250817125546110&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817125546110.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817125546110.png&#34; alt=&#34;image-20250817125546110&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1208,7 +1208,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817130003732.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250817130003732&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817130003732.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817130003732.png&#34; alt=&#34;image-20250817130003732&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1258,7 +1258,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819183240596.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819183240596&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819183240596.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819183240596.png&#34; alt=&#34;image-20250819183240596&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1316,7 +1316,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818111246972.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250818111246972&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818111246972.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818111246972.png&#34; alt=&#34;image-20250818111246972&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1358,7 +1358,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;第二条脚注&lt;span style=&#34;color:#c678dd&#34;&gt;\footnote&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;内容 B&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819204954444.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819204954444&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819204954444.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819204954444.png&#34; alt=&#34;image-20250819204954444&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1369,7 +1369,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;  &lt;span style=&#34;color:#7f848e&#34;&gt;% 编号 1
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205019473.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819205019473&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205019473.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205019473.png&#34; alt=&#34;image-20250819205019473&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1382,7 +1382,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容2&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205812229.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819205812229&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205812229.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205812229.png&#34; alt=&#34;image-20250819205812229&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1395,7 +1395,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容2&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210030750.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819210030750&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210030750.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210030750.png&#34; alt=&#34;image-20250819210030750&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1411,7 +1411,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[5]&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容5&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205310686.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819205310686&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205310686.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205310686.png&#34; alt=&#34;image-20250819205310686&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1421,7 +1421,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[1]&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205353648.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819205353648&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205353648.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205353648.png&#34; alt=&#34;image-20250819205353648&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1437,7 +1437,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210832146.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819210832146&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210832146.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210832146.png&#34; alt=&#34;image-20250819210832146&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1463,7 +1463,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210650692.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819210650692&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210650692.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210650692.png&#34; alt=&#34;image-20250819210650692&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1613,7 +1613,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818131120411.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250818131120411&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818131120411.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818131120411.png&#34; alt=&#34;image-20250818131120411&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1762,7 +1762,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818183909350.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250818183909350&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818183909350.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818183909350.png&#34; alt=&#34;image-20250818183909350&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1874,7 +1874,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818184121980.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250818184121980&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818184121980.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818184121980.png&#34; alt=&#34;image-20250818184121980&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -2617,7 +2617,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819112856760.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819112856760&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819112856760.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819112856760.png&#34; alt=&#34;image-20250819112856760&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -2715,7 +2715,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819114400200.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819114400200&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819114400200.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819114400200.png&#34; alt=&#34;image-20250819114400200&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -2754,7 +2754,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819114842390.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819114842390&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819114842390.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819114842390.png&#34; alt=&#34;image-20250819114842390&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -2868,7 +2868,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819141257071.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819141257071&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819141257071.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819141257071.png&#34; alt=&#34;image-20250819141257071&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -3004,7 +3004,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819122913418.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819122913418&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819122913418.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819122913418.png&#34; alt=&#34;image-20250819122913418&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -3149,7 +3149,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819134920517.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250819134920517&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819134920517.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819134920517.png&#34; alt=&#34;image-20250819134920517&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;

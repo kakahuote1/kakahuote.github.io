@@ -665,7 +665,7 @@
 <p><strong>ASCII码现在依然在被广泛使用，你可以在很多编程语言里面见到它，而且可以说它是现代字符编码体系的根基</strong></p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/ascii-1-1.png">
+<a data-fancybox="gallery" data-caption="ASCII 表| 菜鸟教程" href="http://picture.928330.xyz/typora/ascii-1-1.png">
 <img src="http://picture.928330.xyz/typora/ascii-1-1.png" alt="ASCII 表| 菜鸟教程"  />
 </a>
 </div>
@@ -961,7 +961,7 @@
 <p><strong>锟斤拷是传播比较广泛的乱码，真正的乱码形式多种多样，网上有人整理了常见的乱码对照表：</strong></p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/07e042d16001b86b36b38a36dfaf3475.jpeg">
+<a data-fancybox="gallery" data-caption="乱码对照表_乱码符号-CSDN博客" href="http://picture.928330.xyz/typora/07e042d16001b86b36b38a36dfaf3475.jpeg">
 <img src="http://picture.928330.xyz/typora/07e042d16001b86b36b38a36dfaf3475.jpeg" alt="乱码对照表_乱码符号-CSDN博客"  />
 </a>
 </div>
@@ -1840,10 +1840,12 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 
 <div id="particles-js"></div>
 
-<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+  
   particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-    console.log('particles.js loaded - callback');
+    console.log('particles.js loaded successfully');
   });
 </script>
 
@@ -1852,9 +1854,19 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
+    pointer-events: none;
+  }
+  
+   
+  #particles-js canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
   }
 </style>
 

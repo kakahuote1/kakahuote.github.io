@@ -153,7 +153,7 @@
 &lt;p&gt;如果是下面这样的输出，说明配置成功了：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722202433203.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250722202433203&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722202433203.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722202433203.png&#34; alt=&#34;image-20250722202433203&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -188,7 +188,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker images
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722204915819.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250722204915819&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722204915819.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722204915819.png&#34; alt=&#34;image-20250722204915819&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -234,7 +234,7 @@
 &lt;/ol&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723135839721.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723135839721&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723135839721.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723135839721.png&#34; alt=&#34;image-20250723135839721&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -250,7 +250,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker rmi mynginx:mod
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723140153114.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723140153114&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723140153114.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723140153114.png&#34; alt=&#34;image-20250723140153114&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -320,7 +320,7 @@
 &lt;p&gt;如果看到Nginx的欢迎页面，则表示容器已成功运行&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250722140517678&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34; alt=&#34;image-20250722140517678&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -329,7 +329,7 @@
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker ps
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723112548978.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723112548978&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723112548978.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723112548978.png&#34; alt=&#34;image-20250723112548978&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -371,7 +371,7 @@
 &lt;p&gt;这个命令可以找到旧的、已停止的容器，以便重新启动它们或将它们删除以进行清理&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113333889.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723113333889&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113333889.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113333889.png&#34; alt=&#34;image-20250723113333889&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -384,7 +384,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker stop nginx
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113823707.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723113823707&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113823707.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113823707.png&#34; alt=&#34;image-20250723113823707&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -396,7 +396,7 @@
 &lt;p&gt;示例: docker start my-nginx&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113946571.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723113946571&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113946571.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113946571.png&#34; alt=&#34;image-20250723113946571&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -413,7 +413,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker port nginx
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723173634143.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723173634143&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723173634143.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723173634143.png&#34; alt=&#34;image-20250723173634143&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -445,7 +445,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs nginx
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723115500967.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723115500967&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723115500967.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115500967.png&#34; alt=&#34;image-20250723115500967&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -457,7 +457,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; nginx ls -l
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723115709524.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723115709524&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723115709524.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115709524.png&#34; alt=&#34;image-20250723115709524&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -475,7 +475,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; -it nginx /bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723121248325.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723121248325&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723121248325.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723121248325.png&#34; alt=&#34;image-20250723121248325&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -539,7 +539,7 @@
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network ls
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185658135.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723185658135&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185658135.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185658135.png&#34; alt=&#34;image-20250723185658135&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -567,7 +567,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network create -d bridge my-net
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185004431.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723185004431&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185004431.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185004431.png&#34; alt=&#34;image-20250723185004431&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -578,7 +578,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network rm my-net
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185631213.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723185631213&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185631213.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185631213.png&#34; alt=&#34;image-20250723185631213&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -594,7 +594,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name nginx-2 --network my-net nginx
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723190434746.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723190434746&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723190434746.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190434746.png&#34; alt=&#34;image-20250723190434746&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -611,7 +611,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ping nginx-2
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723190515708.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723190515708&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723190515708.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190515708.png&#34; alt=&#34;image-20250723190515708&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -625,7 +625,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker inspect &amp;lt;容器ID&amp;gt;/&amp;lt;名称&amp;gt; | grep -A &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;NetworkSettings&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723191822266.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250723191822266&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723191822266.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723191822266.png&#34; alt=&#34;image-20250723191822266&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -686,7 +686,7 @@
 &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722123536066.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250722123536066&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722123536066.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722123536066.png&#34; alt=&#34;image-20250722123536066&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -725,7 +725,7 @@
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker pull nginx:latest
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140134826.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250722140134826&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140134826.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140134826.png&#34; alt=&#34;image-20250722140134826&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -734,7 +734,7 @@
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker images
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140111160.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250722140111160&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140111160.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140111160.png&#34; alt=&#34;image-20250722140111160&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
@@ -751,7 +751,7 @@
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://localhost:8080
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250722140517678&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;&gt;
 &lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34; alt=&#34;image-20250722140517678&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
