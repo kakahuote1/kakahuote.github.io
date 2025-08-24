@@ -2299,16 +2299,13 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker info | grep -A &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Registry Mirrors&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从输出中查找包含&lt;code&gt;Registry Mirrors&lt;/code&gt;的那一行，并显示它后面10行&lt;/p&gt;
 &lt;p&gt;如果是下面这样的输出，说明配置成功了：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722202433203.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250722202433203&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722202433203.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722202433203.png&#34; alt=&#34;image-20250722202433203&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;注意事项&#34;&gt;注意事项
 &lt;/h2&gt;&lt;p&gt;修改配置文件时要确保JSON格式正确，例如逗号不能多不能少&lt;/p&gt;
 &lt;p&gt;有些加速源如阿里云需要登录账号并绑定使用，获取专属地址&lt;/p&gt;
@@ -2337,16 +2334,13 @@
 &lt;h3 id=&#34;查看本地镜像&#34;&gt;查看本地镜像
 &lt;/h3&gt;&lt;p&gt;列出所有已经下载到本地计算机上的镜像&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker images
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722204915819.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250722204915819&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722204915819.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722204915819.png&#34; alt=&#34;image-20250722204915819&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;REPOSITORY&lt;/strong&gt;：仓库名&lt;/p&gt;
@@ -2386,16 +2380,13 @@
 &lt;li&gt;指定作者为&lt;code&gt;kakahuote&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;创建一个名为&lt;code&gt;mynginx&lt;/code&gt;、标签为&lt;code&gt;mod&lt;/code&gt;的新镜像&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723135839721.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723135839721&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723135839721.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723135839721.png&#34; alt=&#34;image-20250723135839721&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;删除镜像&#34;&gt;删除镜像
 &lt;/h3&gt;&lt;p&gt;当某个镜像不再需要时，可以将其从本地删除以释放磁盘空间&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker rmi &amp;lt;镜像ID&amp;gt;/&amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt;
@@ -2405,16 +2396,13 @@
 &lt;p&gt;如果不指定标签，默认删除的会是&lt;code&gt;latest&lt;/code&gt;标签，如果没有&lt;code&gt;latest&lt;/code&gt;则会报错，所以&lt;strong&gt;建议指定标签删除&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker rmi mynginx:mod
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723140153114.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723140153114&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723140153114.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723140153114.png&#34; alt=&#34;image-20250723140153114&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;容器管理&#34;&gt;容器管理
 &lt;/h2&gt;&lt;h3 id=&#34;创建并运行容器&#34;&gt;创建并运行容器
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;选项&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt;
@@ -2478,28 +2466,22 @@
 &lt;/ol&gt;
 &lt;p&gt;命令执行后，在浏览器中访问&lt;code&gt;http://你的主机IP地址:8080&lt;/code&gt;或&lt;code&gt;http://localhost:8080&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;如果看到Nginx的欢迎页面，则表示容器已成功运行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250722140517678&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34; alt=&#34;image-20250722140517678&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;查看正在运行的容器&#34;&gt;查看正在运行的容器
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker ps
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723112548978.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723112548978&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723112548978.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723112548978.png&#34; alt=&#34;image-20250723112548978&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;CONTAINER ID&lt;/strong&gt;：容器的唯一标识，&lt;strong&gt;可以用全部或者前几位操作该容器，只要能唯一识别&lt;/strong&gt;&lt;/p&gt;
@@ -2535,47 +2517,38 @@
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker ps -a
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;-a&lt;/code&gt;是&lt;code&gt;all&lt;/code&gt;的缩写，代表列出所有容器，包括那些已经停止运行的&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这个命令可以找到旧的、已停止的容器，以便重新启动它们或将它们删除以进行清理&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113333889.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723113333889&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113333889.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113333889.png&#34; alt=&#34;image-20250723113333889&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;这里的&lt;code&gt;STATUS&lt;/code&gt;字段是&lt;code&gt;exited&lt;/code&gt;，说明这是一个退出的、不在运行的容器&lt;/p&gt;
 &lt;h3 id=&#34;停止容器&#34;&gt;停止容器
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker stop &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明: 此命令会向容器内的主进程发送一个 &lt;code&gt;SIGTERM&lt;/code&gt; 信号，请求其正常关闭。应用程序会接收到这个信号并执行关闭前的清理工作。&lt;/p&gt;
 &lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker stop nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113823707.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723113823707&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113823707.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113823707.png&#34; alt=&#34;image-20250723113823707&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;停止后，容器不在运行列表之中&lt;/p&gt;
 &lt;h3 id=&#34;启动一个已停止的容器&#34;&gt;启动一个已停止的容器
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker start &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个命令会使一个处于Exited状态的容器恢复到Up状态，容器会保留其上次停止时的所有配置和数据。&lt;/p&gt;
 &lt;p&gt;示例: docker start my-nginx&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113946571.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723113946571&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723113946571.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723113946571.png&#34; alt=&#34;image-20250723113946571&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;删除容器&#34;&gt;删除容器
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker rm &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;默认情况下，不能删除一个正在运行的容器，必须先使用&lt;code&gt;docker stop&lt;/code&gt;将其停止&lt;/strong&gt;&lt;/p&gt;
@@ -2586,16 +2559,13 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker port &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker port nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723173634143.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723173634143&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723173634143.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723173634143.png&#34; alt=&#34;image-20250723173634143&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;容器内部的80端口被映射到了：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;0.0.0.0:8080&lt;/code&gt;：表示主机的所有&lt;strong&gt;IPv4&lt;/strong&gt;地址上的8080端口&lt;/li&gt;
@@ -2621,31 +2591,25 @@
 &lt;/ul&gt;
 &lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115500967.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723115500967&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723115500967.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115500967.png&#34; alt=&#34;image-20250723115500967&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;在容器内部执行命令&#34;&gt;在容器内部执行命令
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;可以在一个运行中的容器内执行命令，而不进入其交互式Shell&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; &amp;lt;容器名称&amp;gt;/&amp;lt;容器ID&amp;gt; &amp;lt;命令&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; nginx ls -l
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115709524.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723115709524&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723115709524.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723115709524.png&#34; alt=&#34;image-20250723115709524&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;此命令会在名为&lt;code&gt;nginx&lt;/code&gt;的容器内部执行&lt;code&gt;ls -l&lt;/code&gt; 命令，并返回结果，而我们的终端仍然停留在主机上&lt;/p&gt;
 &lt;h3 id=&#34;进入容器的交互式终端&#34;&gt;进入容器的交互式终端
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;对于更复杂的调试，我们就需要一个完整的Shell环境来在容器内部进行操作&lt;/strong&gt;&lt;/p&gt;
@@ -2657,16 +2621,13 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -it &amp;lt;镜像名称&amp;gt;:&amp;lt;标签&amp;gt; /bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker &lt;span style=&#34;color:#e5c07b&#34;&gt;exec&lt;/span&gt; -it nginx /bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723121248325.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723121248325&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723121248325.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723121248325.png&#34; alt=&#34;image-20250723121248325&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;执行后命令提示符改变，表示已经进入了容器，可以像在普通Linux环境中一样运行命令&lt;/p&gt;
 &lt;p&gt;如果想要退出，可以使用&lt;code&gt;Ctrl+D&lt;/code&gt;，或者输入&lt;code&gt;exit&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;容器网络与连接&#34;&gt;容器网络与连接
@@ -2724,16 +2685,13 @@
 &lt;p&gt;适用于容器需要共享网络堆栈（如日志、监控）的情况&lt;/p&gt;
 &lt;h3 id=&#34;查看当前已创建的网络&#34;&gt;查看当前已创建的网络
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network ls
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185658135.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723185658135&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185658135.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185658135.png&#34; alt=&#34;image-20250723185658135&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;NETWORK ID&lt;/strong&gt;：网络的唯一标识&lt;/p&gt;
@@ -2755,30 +2713,24 @@
 &lt;/ul&gt;
 &lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network create -d bridge my-net
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185004431.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723185004431&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185004431.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185004431.png&#34; alt=&#34;image-20250723185004431&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;删除已定义的网络&#34;&gt;删除已定义的网络
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network rm &amp;lt;网络名&amp;gt;/&amp;lt;网络ID&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker network rm my-net
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185631213.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723185631213&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723185631213.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723185631213.png&#34; alt=&#34;image-20250723185631213&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;连接容器到网络&#34;&gt;连接容器到网络
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;我们可以在启动容器时使用&lt;code&gt;--network&lt;/code&gt;选项将其连接到指定的网络&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name &amp;lt;容器名称&amp;gt; --network &amp;lt;网络名称&amp;gt; &amp;lt;镜像名称&amp;gt;
@@ -2788,16 +2740,13 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name nginx-1 --network my-net nginx
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后创建第二个容器 &lt;code&gt;nginx-2&lt;/code&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -d --name nginx-2 --network my-net nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190434746.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723190434746&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723190434746.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190434746.png&#34; alt=&#34;image-20250723190434746&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;容器间通信&#34;&gt;容器间通信
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;当多个容器连接到同一个自定义网络时，它们可以通过容器名称作为主机名直接互相访问&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;我们可以进入一个容器来测试与另一个容器的连通性&lt;/strong&gt;&lt;/p&gt;
@@ -2808,16 +2757,13 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get update &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get install -y iputils-ping
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装完成后，执行&lt;code&gt;ping&lt;/code&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ping nginx-2
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190515708.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723190515708&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723190515708.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723190515708.png&#34; alt=&#34;image-20250723190515708&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;可以看到，&lt;code&gt;nginx-1&lt;/code&gt;能够成功解析&lt;code&gt;nginx-2&lt;/code&gt;的名称并与之通信，这证明了容器间的互联已经建立shell&lt;/p&gt;
 &lt;h3 id=&#34;查看容器网络信息&#34;&gt;查看容器网络信息
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker inspect &amp;lt;对象ID或名称&amp;gt;
@@ -2825,16 +2771,13 @@
 &lt;p&gt;它会返回一段JSON 格式的数据，包含几乎所有属性，比如网络配置、挂载卷、环境变量、启动命令等&lt;/p&gt;
 &lt;p&gt;这里我们查看容器的信息，并过滤网络部分：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker inspect &amp;lt;容器ID&amp;gt;/&amp;lt;名称&amp;gt; | grep -A &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;NetworkSettings&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723191822266.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250723191822266&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250723191822266.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250723191822266.png&#34; alt=&#34;image-20250723191822266&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;dns配置&#34;&gt;DNS配置
 &lt;/h3&gt;&lt;h4 id=&#34;全局配置&#34;&gt;全局配置
 &lt;/h4&gt;&lt;p&gt;我们可以为所有Docker容器配置默认的DNS服务器&lt;/p&gt;
@@ -2889,16 +2832,13 @@
     &lt;/svg&gt;&lt;/span&gt;
     
 &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722123536066.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250722123536066&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722123536066.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722123536066.png&#34; alt=&#34;image-20250722123536066&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;可以copy的字段是拉取当前版本镜像的命令，下面是一些介绍：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -2931,28 +2871,22 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;我们一般都使用最新的，也就是latest&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;拉取最新镜像&#34;&gt;拉取最新镜像
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker pull nginx:latest
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140134826.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250722140134826&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140134826.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140134826.png&#34; alt=&#34;image-20250722140134826&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;查看是否拉取成功&#34;&gt;查看是否拉取成功
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker images
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140111160.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250722140111160&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140111160.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140111160.png&#34; alt=&#34;image-20250722140111160&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;运行容器&#34;&gt;运行容器
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run --name nginx -p 8080:80 -d nginx
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;参数说明：&lt;/p&gt;
@@ -2963,16 +2897,13 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;测试访问&#34;&gt;测试访问
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://localhost:8080
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250722140517678&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250722140517678.png&#34; alt=&#34;image-20250722140517678&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 </description>
         </item>
         <item>

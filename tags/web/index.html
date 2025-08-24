@@ -611,6 +611,12 @@
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
 
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+        
+
         <span>...当然还有kakahuote🤓👆</span>
     </section>
 </footer>
@@ -709,28 +715,13 @@
      cursor: pointer;  
      font-size: 0.9em;  
     }
-
-     
-     
-     
-    #particles-js {
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     z-index: -1;
-     pointer-events: none;  
-    }
-</style>
-
-
-<div id="particles-js"></div>
+ </style>
 
 <script>
      
      
      
+
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -848,34 +839,33 @@
     }
 
     
-    initCodeMoreBox();
-
-     
-     
-     
     
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        if (typeof particlesJS === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
-            script.onload = function() {
-                initParticles();
-            };
-            document.head.appendChild(script);
-        } else {
-            initParticles();
-        }
-    });
 
-    function initParticles() {
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-                console.log('particles.js loaded successfully');
-            });
-        }
-    }
+    initCodeMoreBox();
 </script>
+
+
+
+
+<div id="particles-js"></div>
+
+<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
 
     </body>
 </html>

@@ -851,16 +851,13 @@
 <p>使用后，主进程会fork一个临时子进程，子进程尝试解析所有配置文件，但不会绑定端口或真正启动服务</p>
 <p>若语法无误，会提示<code>syntax is ok</code>和 <code>test is successful</code></p>
 <p>若有错误，会明确指出是哪一行、哪个文件配置有误</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250724132842292.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250724132842292"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250724132842292.png">
+<img src="http://picture.928330.xyz/typora/image-20250724132842292.png" alt="image-20250724132842292"  />
+</a>
+</div>
+</p>
 <h2 id="重新加载配置文件">重新加载配置文件
 </h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nginx -s reload
 </span></span></code></pre></div><h2 id="强制停止">强制停止
@@ -1986,6 +1983,12 @@ HTTP状态码，表示请求成功</p>
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
 
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+        
+
         <span>...当然还有kakahuote🤓👆</span>
     </section>
 </footer>
@@ -2162,28 +2165,13 @@ HTTP状态码，表示请求成功</p>
      cursor: pointer;  
      font-size: 0.9em;  
     }
-
-     
-     
-     
-    #particles-js {
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     z-index: -1;
-     pointer-events: none;  
-    }
-</style>
-
-
-<div id="particles-js"></div>
+ </style>
 
 <script>
      
      
      
+
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -2301,34 +2289,33 @@ HTTP状态码，表示请求成功</p>
     }
 
     
-    initCodeMoreBox();
-
-     
-     
-     
     
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        if (typeof particlesJS === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
-            script.onload = function() {
-                initParticles();
-            };
-            document.head.appendChild(script);
-        } else {
-            initParticles();
-        }
-    });
 
-    function initParticles() {
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-                console.log('particles.js loaded successfully');
-            });
-        }
-    }
+    initCodeMoreBox();
 </script>
+
+
+
+
+<div id="particles-js"></div>
+
+<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
 
     </body>
 </html>

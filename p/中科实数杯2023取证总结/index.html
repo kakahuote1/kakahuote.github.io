@@ -533,41 +533,32 @@
     
     <h1 id="火眼证据分析">火眼证据分析
 </h1><p>火眼证据分析中新建案件，选择镜像文件检材一，打开就会自动创建分析任务进行分析：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709132752466.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709132752466"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709132752466.png">
+<img src="http://picture.928330.xyz/typora/image-20250709132752466.png" alt="image-20250709132752466"  />
+</a>
+</div>
+</p>
 <p>也可以点击快速分析，选择任务进行分析：
-<img src="http://picture.928330.xyz/typora/image-20250709133222223.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709133222223"
-	
-	
-></p>
+
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709133222223.png">
+<img src="http://picture.928330.xyz/typora/image-20250709133222223.png" alt="image-20250709133222223"  />
+</a>
+</div>
+</p>
 <h1 id="检材1计算机磁盘镜像">检材1(计算机磁盘镜像)
 </h1><h2 id="1检材一硬盘的-md5-值为多少">1.检材一硬盘的 MD5 值为多少
 </h2><p>计算哈希，选择md5</p>
 <p>计算过程需要对加密卷解密（文件 -&gt; 右键加密分区 -&gt; 解密），因此最好先把下一问做完再进行计算：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709144006846.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709144006846"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709144006846.png">
+<img src="http://picture.928330.xyz/typora/image-20250709144006846.png" alt="image-20250709144006846"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>80518BC0DBF3315F806E9EDF7EE13C12
 </span></span></code></pre></div><h2 id="2检材一-bitlocker-的恢复密钥是多少">2.检材一 BitLocker 的恢复密钥是多少
 </h2><p>使用EFDD，配合检材三给出的的内存镜像爆破：</p>
@@ -576,157 +567,124 @@
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>585805-292292-462539-352495-691284-509212-527219-095942
 </span></span></code></pre></div><h2 id="3检材一镜像中用户最近一次打开的文件名是什么">3.检材一镜像中用户最近一次打开的文件名是什么
 </h2><p>依次点击：分析 -&gt; 经典视图 -&gt; 查看最后访问时间</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709134325642.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709134325642"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709134325642.png">
+<img src="http://picture.928330.xyz/typora/image-20250709134325642.png" alt="image-20250709134325642"  />
+</a>
+</div>
+</p>
 <p>最后一个文件名称为：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>列表.xlsx
 </span></span></code></pre></div><h2 id="4检材一硬盘系统分区的起始位置">4.检材一硬盘系统分区的起始位置
 </h2><p>查看系统分区：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709134940238.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709134940238"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709134940238.png">
+<img src="http://picture.928330.xyz/typora/image-20250709134940238.png" alt="image-20250709134940238"  />
+</a>
+</div>
+</p>
 <p>分区4是引导加载程序位置，之后的分区六应该才是主系统分区（硬盘分区），起始位置为：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>649216
 </span></span></code></pre></div><h2 id="5检材一系统的版本号是多少格式xxxx">5.检材一系统的版本号是多少(格式:x.x.x.x)
 </h2><p>分析 -&gt; 基本信息 -&gt; 系统信息：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709140134139.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709140134139"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709140134139.png">
+<img src="http://picture.928330.xyz/typora/image-20250709140134139.png" alt="image-20250709140134139"  />
+</a>
+</div>
+</p>
 <p>这里有两个版本号，组合在一起才是题目要求的格式</p>
 <p>在win10和win11中，第二位数字（次要版本号）固定为0：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>10.0.19042.508
 </span></span></code></pre></div><h2 id="6检材一回收站中的文件被删除前的路径">6.检材一回收站中的文件被删除前的路径
 </h2><p>分析 -&gt; 基本信息 -&gt; 回收站记录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709141748631.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709141748631"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709141748631.png">
+<img src="http://picture.928330.xyz/typora/image-20250709141748631.png" alt="image-20250709141748631"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C:/Users/rd/Desktop/iTunes(12.13.0.9).exe
 </span></span></code></pre></div><h2 id="7检材一给出最后一次修改系统时间前的时间格式-yyyy-mm-dd-hhmmss">7.检材一给出最后一次修改系统时间前的时间(格式: YYYY-MM-DD HH:MM:SS)
 </h2><p>分析 -&gt; 基本信息 -&gt; 系统时间变更 -&gt; 时间变更记录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709142136256.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709142136256"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709142136256.png">
+<img src="http://picture.928330.xyz/typora/image-20250709142136256.png" alt="image-20250709142136256"  />
+</a>
+</div>
+</p>
 <p>比对各个更改时间的记录的操作时间，找出最晚操作的时间的原系统时间：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-12 16:37:12
 </span></span></code></pre></div><h2 id="8检材一最后一次远程连接本机的时间格式-yyyy-mm-dd-hhmmss">8.检材一最后一次远程连接本机的时间(格式: YYYY-MM-DD HH:MM:SS）
 </h2><p>分析 -&gt; 远程桌面 -&gt; 远程连接过本机的记录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709142426055.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709142426055"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709142426055.png">
+<img src="http://picture.928330.xyz/typora/image-20250709142426055.png" alt="image-20250709142426055"  />
+</a>
+</div>
+</p>
 <p>查看连接成功记录，比对最晚的连接时间：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-11 15:57:02
 </span></span></code></pre></div><h2 id="9检材一-chrome-浏览器最后一次搜索过的关键词是什么">9.检材一 Chrome 浏览器最后一次搜索过的关键词是什么
 </h2><p>分析 -&gt; Chrome浏览器 -&gt; 历史记录 -&gt; 最后访问时间 ：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709142606570.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709142606570"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709142606570.png">
+<img src="http://picture.928330.xyz/typora/image-20250709142606570.png" alt="image-20250709142606570"  />
+</a>
+</div>
+</p>
 <p>从url里面看出搜索内容：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>常见的诈骗话术2023
 </span></span></code></pre></div><h2 id="10检材一是否连接过-u-盘如有请给出-u-盘的-sn-码">10.检材一是否连接过 U 盘,如有,请给出 U 盘的 SN 码
 </h2><p>分析 -&gt; 基本信息 -&gt; USB最近使用记录 -&gt; 操作时间：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709142917357.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709142917357"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709142917357.png">
+<img src="http://picture.928330.xyz/typora/image-20250709142917357.png" alt="image-20250709142917357"  />
+</a>
+</div>
+</p>
 <p>查看接入过的最后一个设备：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>FC2005927F271
 </span></span></code></pre></div><h2 id="11检材一-edge-浏览器最早一次下载过的文件文件名是">11.检材一 Edge 浏览器最早一次下载过的文件文件名是
 </h2><p>分析 -&gt; Edge浏览器 -&gt; 下载记录 -&gt; 结束时间倒序：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709143212778.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709143212778"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709143212778.png">
+<img src="http://picture.928330.xyz/typora/image-20250709143212778.png" alt="image-20250709143212778"  />
+</a>
+</div>
+</p>
 <p>第一个i4tools8不知道为什么没有时间，但详细条目显示时间晚于winrar：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> winrar-x64-624scp.exe
 </span></span></code></pre></div><h2 id="12嫌疑人访问的微博的密码的-md5-值">12.嫌疑人访问的微博的密码的 MD5 值
 </h2><p>分析 -&gt; Chrome浏览器 -&gt; 保存的密码：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709143425660.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709143425660"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709143425660.png">
+<img src="http://picture.928330.xyz/typora/image-20250709143425660.png" alt="image-20250709143425660"  />
+</a>
+</div>
+</p>
 <p>微博密码是<code>!dfrDj*&amp;j98_jUe8</code>，计算MD5值：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>5cb42860b3b61ef6dd361ad556f48e05
 </span></span></code></pre></div><h1 id="检材二iphone-备份数据">检材二(iPhone 备份数据)
 </h1><h2 id="13检材二备份的设备名称是什么">13.检材二备份的设备名称是什么
 </h2><p>分析 -&gt; 基本信息 -&gt; 设备信息：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709162101944.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709162101944"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709162101944.png">
+<img src="http://picture.928330.xyz/typora/image-20250709162101944.png" alt="image-20250709162101944"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;User&#34;的iPhone
 </span></span></code></pre></div><h2 id="14检材二手机的-ios-系统版本是多少">14.检材二手机的 iOS 系统版本是多少
 </h2><p>同13题图</p>
@@ -737,145 +695,112 @@
 </span></span></code></pre></div><h2 id="16嫌疑人-iphone-手机给号码13502409024最后一次打电话的时间是格式-yyyy-mm-dd-hhmmss">16嫌疑人 iPhone 手机给号码&quot;13502409024&quot;最后一次打电话的时间是(格式: YYYY-MM-DD HH:MM:SS)
 </h2><p>当前的备份文件中没有通话记录，其实这个藏在检材一中</p>
 <p>分析 -&gt; 嵌套证据识别 -&gt; IOS备份：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709171132291.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709171132291"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709171132291.png">
+<img src="http://picture.928330.xyz/typora/image-20250709171132291.png" alt="image-20250709171132291"  />
+</a>
+</div>
+</p>
 <p>给出了一个info.plist文件的地址，但他只是配置文件，我们需要回到上层目录，导出完整备份文件：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709171433124.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709171433124"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709171433124.png">
+<img src="http://picture.928330.xyz/typora/image-20250709171433124.png" alt="image-20250709171433124"  />
+</a>
+</div>
+</p>
 <p>同时，我们也能把它添加为新检材，扫描过程中会发现这是加密后的文件，需要密码</p>
 <p>使用Passware Kit Forensic爆破，这里需要爆破的文件是Manifest.plist，从后文（22题）知道是五位数密码</p>
 <p>选择Customize Settings高级设置：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709173210769.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709173210769"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709173210769.png">
+<img src="http://picture.928330.xyz/typora/image-20250709173210769.png" alt="image-20250709173210769"  />
+</a>
+</div>
+</p>
 <p>只保留brute-force，修改成五位数字：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709173334793.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709173334793"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709173334793.png">
+<img src="http://picture.928330.xyz/typora/image-20250709173334793.png" alt="image-20250709173334793"  />
+</a>
+</div>
+</p>
 <p>爆破：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709173141338.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709173141338"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709173141338.png">
+<img src="http://picture.928330.xyz/typora/image-20250709173141338.png" alt="image-20250709173141338"  />
+</a>
+</div>
+</p>
 <p>输入密码后继续分析，分析完成后刷新一下，就会多出新的检材分析结果了</p>
 <p>分析 -&gt; 基本信息 -&gt; 通话记录 -&gt; 时间：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709172024138.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709172024138"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709172024138.png">
+<img src="http://picture.928330.xyz/typora/image-20250709172024138.png" alt="image-20250709172024138"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> 2023-12-04 13:18:50
 </span></span></code></pre></div><h2 id="17检材二使用过的号码-iccid-是多少">17.检材二使用过的号码 ICCID 是多少
 </h2><p>同13题图</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>89860000191997734908
 </span></span></code></pre></div><h2 id="18检材二手机中高德地图最后搜索的地址">18.检材二手机中高德地图最后搜索的地址
 </h2><p>分析 -&gt; 高德地图 -&gt; 搜索点：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709170611265.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709170611265"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709170611265.png">
+<img src="http://picture.928330.xyz/typora/image-20250709170611265.png" alt="image-20250709170611265"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> 双山大道3号
 </span></span></code></pre></div><h2 id="19检材二手机最后一次登陆注册hotscoin的时间是格式-yyyy-mm-ddhhmmss">19.检材二手机最后一次登陆/注册&quot;HotsCoin&quot;的时间是(格式: YYYY-MM-DDHH:MM:SS)
 </h2><p>HotsCoin是数字交易平台，从短信中能得到登录时间</p>
 <p>分析 -&gt; 基本信息 -&gt; 短信：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709172344826.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709172344826"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709172344826.png">
+<img src="http://picture.928330.xyz/typora/image-20250709172344826.png" alt="image-20250709172344826"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-04 13:28:14
 </span></span></code></pre></div><h2 id="20检材二手机中照片img_0002的拍摄时间是格式-yyyy-mm-dd-hhmmss">20.检材二手机中照片&quot;IMG_0002&quot;的拍摄时间是(格式: YYYY-MM-DD HH:MM:SS)
 </h2><p>分析 -&gt; 基本信息 -&gt; 图片 -&gt; IMG_0002：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709172828523.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709172828523"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709172828523.png">
+<img src="http://picture.928330.xyz/typora/image-20250709172828523.png" alt="image-20250709172828523"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2023-12-06 11:08:30
 </span></span></code></pre></div><h2 id="21检材二中小西米语音-app-的bundle-id是什么">21.检材二中&quot;小西米语音&quot; app 的Bundle ID是什么
 </h2><p>Bundle ID是iOS应用唯一标识符，也就是包名</p>
 <p>分析 -&gt; 基本信息 -&gt; 应用列表 -&gt; 搜索小西米语音：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709173624166.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709173624166"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709173624166.png">
+<img src="http://picture.928330.xyz/typora/image-20250709173624166.png" alt="image-20250709173624166"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>com.titashow.tangliao
 </span></span></code></pre></div><h2 id="22检材二中浏览器最后一次搜索的关键词是什么">22.检材二中浏览器最后一次搜索的关键词是什么
 </h2><p>浏览器不是uc浏览器，指的是safari</p>
 <p>分析 -&gt; Safari -&gt; 搜索历史：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709173822647.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709173822647"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709173822647.png">
+<img src="http://picture.928330.xyz/typora/image-20250709173822647.png" alt="image-20250709173822647"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ios备份密码忘了怎么办 五位纯数字
 </span></span></code></pre></div><p>这里也就是在提示前面的加密备份文件的密码</p>
 <h2 id="23嫌疑人和洗钱人员约定电子钱包的品牌是什么-如有多个用顿号分隔">23.嫌疑人和洗钱人员约定电子钱包的品牌是什么, 如有多个用顿号分隔
@@ -887,16 +812,13 @@
 <p>所以直接沿着下面这个路径找了：</p>
 <p>/Documents/IM5_CN/9031bc3c805ac5e55ecaa151092c2c4b/IM5_storage/1399634813467579522/im5db</p></blockquote>
 <p>查看message表的content字段：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709180909839.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709180909839"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709180909839.png">
+<img src="http://picture.928330.xyz/typora/image-20250709180909839.png" alt="image-20250709180909839"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>imToken、Bitcoin
 </span></span></code></pre></div><h2 id="24嫌疑人和洗钱人员约定电子钱包的金额比例是什么">24.嫌疑人和洗钱人员约定电子钱包的金额比例是什么
 </h2><p>同上题图：</p>
@@ -905,262 +827,202 @@
 </h1><h2 id="25检材三中进程ftk-imagerexe的-pid-是多少">25.检材三中进程&quot;FTK Imager.exe&quot;的 PID 是多少
 </h2><p>不知道为什么我的volatility2不能分析出win10的结果，只好使用volatility3：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>python3 vol.py -f ../memdump2023.raw windows.pslist.PsList | grep FTK
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709195208579.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709195208579"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709195208579.png">
+<img src="http://picture.928330.xyz/typora/image-20250709195208579.png" alt="image-20250709195208579"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>11328
 </span></span></code></pre></div><h2 id="26检材三中显示的系统时间是多少格式-yyyy-mm-dd-hhmmss">26.检材三中显示的系统时间是多少?(格式: YYYY-MM-DD HH:MM:SS)
 </h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>python3 vol.py -f ../memdump2023.raw windows.info.Info  
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709211018795.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709211018795"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709211018795.png">
+<img src="http://picture.928330.xyz/typora/image-20250709211018795.png" alt="image-20250709211018795"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> 2023-12-12 04:06:25
 </span></span></code></pre></div><h2 id="27检材三中记录的当前系统ip是多少">27.检材三中记录的当前系统ip是多少?
 </h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>python3 vol.py -f ../memdump2023.raw windows.netscan.NetScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709200824096.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709200824096"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709200824096.png">
+<img src="http://picture.928330.xyz/typora/image-20250709200824096.png" alt="image-20250709200824096"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>172.18.7.229
 </span></span></code></pre></div><h1 id="检材四-红米手机备份数据">检材四 (红米手机备份数据)
 </h1><h2 id="28检材四中迅雷下载过的文件名是什么">28.检材四中迅雷下载过的文件名是什么?
 </h2><p>分析 -&gt; 迅雷 -&gt; 云盘 -&gt; 离线下载目录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709193648459.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709193648459"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709193648459.png">
+<img src="http://picture.928330.xyz/typora/image-20250709193648459.png" alt="image-20250709193648459"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>《向银河靠近》.txt
 </span></span></code></pre></div><h2 id="29检材四中安装了哪些可是实现翻墙vpn功能的-app">29.检材四中安装了哪些可是实现翻墙(VPN)功能的 app?
 </h2><p>没啥说的：
-<img src="http://picture.928330.xyz/typora/image-20250709193825301.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709193825301"
-	
-	
-></p>
+
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709193825301.png">
+<img src="http://picture.928330.xyz/typora/image-20250709193825301.png" alt="image-20250709193825301"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>clash
 </span></span></code></pre></div><h2 id="30检材四备份的设备系统版本是多少">30.检材四备份的设备系统版本是多少?
 </h2><p>分析 -&gt; 基本信息-&gt; 设备信息 -&gt; 厂商版本：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709193935053.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709193935053"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709193935053.png">
+<img src="http://picture.928330.xyz/typora/image-20250709193935053.png" alt="image-20250709193935053"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> V14.0.2.0.TKSCNXM
 </span></span></code></pre></div><h2 id="31检材四备份的时间是多少答案以-13-位时间戳表示">31.检材四备份的时间是多少(答案以 13 位时间戳表示)
 </h2><p>同上题图，转换时间戳（2023-12-13 17:20:32）：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1702459232429
 </span></span></code></pre></div><h2 id="32检材四中-filecompress-app-包名是什么">32.检材四中 FileCompress app 包名是什么?
 </h2><p>包名就在检材里面列出，复制黏贴就行：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709195000907.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709195000907"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709195000907.png">
+<img src="http://picture.928330.xyz/typora/image-20250709195000907.png" alt="image-20250709195000907"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>com.zs.filecompress
 </span></span></code></pre></div><h2 id="33检材四中备忘录记录的内容是什么">33.检材四中备忘录记录的内容是什么?
 </h2><p>分析 -&gt; 基本信息-&gt; 便签：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709194341673.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709194341673"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709194341673.png">
+<img src="http://picture.928330.xyz/typora/image-20250709194341673.png" alt="image-20250709194341673"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Vcpswd:edgewallet
 </span></span></code></pre></div><h2 id="34请列出检材四中所有虚拟币钱包-app-的包名-如有多个用顿号分隔">34.请列出检材四中所有虚拟币钱包 app 的包名, 如有多个用顿号分隔
 </h2><p>直接搜索检材里的app，一共六个：
-<img src="http://picture.928330.xyz/typora/image-20250709195051880.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709195051880"
-	
-	
-></p>
+
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709195051880.png">
+<img src="http://picture.928330.xyz/typora/image-20250709195051880.png" alt="image-20250709195051880"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>de.schildbach.wallet、com.bitcoin.mwallet、 piuk.blockchain.android、im.token.app、com.paxful.wallet、pro.huobi
 </span></span></code></pre></div><h2 id="35检材四中嫌疑人使用-bitcoin-wallet-钱包地址是什么">35.检材四中嫌疑人使用 Bitcoin Wallet 钱包地址是什么?
 </h2><p>在下面路径中找到并导出日志文件：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Bitcoin Wallet(de.schildbach.wallet).bak/apps/de.schildbach.wallet/f/log/wallet.log
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250709200125980.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709200125980"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709200125980.png">
+<img src="http://picture.928330.xyz/typora/image-20250709200125980.png" alt="image-20250709200125980"  />
+</a>
+</div>
+</p>
 <p>搜索<code>walletaddress</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709200547089.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709200547089"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709200547089.png">
+<img src="http://picture.928330.xyz/typora/image-20250709200547089.png" alt="image-20250709200547089"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>bc1q4ru3a8r0vzymwwcmawvtdyf6hkvt2x9477hjkt
 </span></span></code></pre></div><h2 id="36md5-值为ff3dabd0a610230c2486bffbe15e5dff的文件在检材四中的位置">36.MD5 值为&quot;FF3DABD0A610230C2486BFFBE15E5DFF&quot;的文件在检材四中的位置
 </h2><p>这一题据说是结合前面提到的FileCompress一路找下去就能发现，不过太电波了：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709202128966.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709202128966"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709202128966.png">
+<img src="http://picture.928330.xyz/typora/image-20250709202128966.png" alt="image-20250709202128966"  />
+</a>
+</div>
+</p>
 <p>这里更好的办法是用HashMyFiles，全部算一遍再搜索</p>
 <p>然而我不知道怎么使用这个工具，好在火眼有类似的功能</p>
 <p>文件 -&gt; 检材四 -&gt; 文件系统 -&gt; 勾选所有文件 -&gt; 右键新建哈希集 -&gt; 勾选项：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250710124643356.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250710124643356"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250710124643356.png">
+<img src="http://picture.928330.xyz/typora/image-20250710124643356.png" alt="image-20250710124643356"  />
+</a>
+</div>
+</p>
 <p>创建的新建哈希集任务完成后，选择高级，在文件哈希处输入MD5，过滤范围选择子目录：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250710124613331.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250710124613331"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250710124613331.png">
+<img src="http://picture.928330.xyz/typora/image-20250710124613331.png" alt="image-20250710124613331"  />
+</a>
+</div>
+</p>
 <p>成功找到目标文件：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250710125044835.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250710125044835"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250710125044835.png">
+<img src="http://picture.928330.xyz/typora/image-20250710125044835.png" alt="image-20250710125044835"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>20231213_172032.tar/FileCompress(com.zs.filecompress).bak/FileCompress/11月.txt
 </span></span></code></pre></div><h1 id="综合题目">综合题目
 </h1><h2 id="37检材中受害人的微信号是多少">37.检材中受害人的微信号是多少?
 </h2><p>检材二 -&gt; 微信 -&gt; 好友消息，根据聊天记录能判断出受害者就是小浩：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709202302479.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709202302479"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709202302479.png">
+<img src="http://picture.928330.xyz/typora/image-20250709202302479.png" alt="image-20250709202302479"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B-I-N-A-R-Y
 </span></span></code></pre></div><h2 id="38嫌疑人曾通过微信购买过一个公民信息数据库-该数据库中手机尾号是-8686-的用户的姓名是">38.嫌疑人曾通过微信购买过一个公民信息数据库, 该数据库中手机尾号是 8686 的用户的姓名是
 </h2><p>从另一个微信好友里面能发现购买数据库的名称为database.sqlite：
-<img src="http://picture.928330.xyz/typora/image-20250709202654797.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709202654797"
-	
-	
-></p>
+
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709202654797.png">
+<img src="http://picture.928330.xyz/typora/image-20250709202654797.png" alt="image-20250709202654797"  />
+</a>
+</div>
+</p>
 <p>这个数据库手机看不了，在电脑里能看：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709202742412.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709202742412"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709202742412.png">
+<img src="http://picture.928330.xyz/typora/image-20250709202742412.png" alt="image-20250709202742412"  />
+</a>
+</div>
+</p>
 <p>链接数据库后查找：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">name</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">users</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">phone</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;%8686&#39;</span>;
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250710130255431.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250710130255431"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250710130255431.png">
+<img src="http://picture.928330.xyz/typora/image-20250710130255431.png" alt="image-20250710130255431"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>章敏
 </span></span></code></pre></div><h2 id="39嫌疑人手机中是否保存了小西米语音-app-的账号密码-如有-请写出其密码">39.嫌疑人手机中是否保存了小西米语音 app 的账号密码, 如有, 请写出其密码
 </h2><p>加密iOS备份 -&gt; 钥匙串 -&gt; 网站与应用密码，我们已经知道小西米的包名<code>com.titashow.tangliao</code>：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709203150613.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709203150613"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709203150613.png">
+<img src="http://picture.928330.xyz/typora/image-20250709203150613.png" alt="image-20250709203150613"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> jamvU1@wiwgug$bo
 </span></span></code></pre></div><h2 id="40公民信息数据库中-截止到-2023-年-12-月-31-日-年龄大于等于-18-且小于等于-30-岁之间的用户信息数量">40.公民信息数据库中, 截止到 2023 年 12 月 31 日, 年龄大于等于 18 且小于等于 30 岁之间的用户信息数量
 </h2><p>在38题中得到的database数据库里进行查询：</p>
@@ -1168,101 +1030,77 @@
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">users</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> (<span style="color:#98c379">&#39;20231231&#39;</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">substr</span>(<span style="color:#e06c75">IDCARD</span>, <span style="color:#d19a66">7</span>, <span style="color:#d19a66">8</span>)) <span style="color:#c678dd">between</span> <span style="color:#d19a66">180000</span> <span style="color:#c678dd">and</span> <span style="color:#d19a66">300000</span>;
 </span></span></code></pre></div><p>得到结果：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250712112610915.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250712112610915"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250712112610915.png">
+<img src="http://picture.928330.xyz/typora/image-20250712112610915.png" alt="image-20250712112610915"  />
+</a>
+</div>
+</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1572
 </span></span></code></pre></div><h2 id="41受害人小浩的手机号码是多少">41.受害人小浩的手机号码是多少
 </h2><p>在上面的数据库中没有找到叫小浩的人，微信和短信也没有小浩的联系方式</p>
 <p>结果是之前找到的11月.txt是受害者名单，怎么发现的呢？</p>
 <p>案件 -&gt; 快速分析 -&gt; 耗时任务 -&gt; 特征分析：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250712105749212.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250712105749212"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250712105749212.png">
+<img src="http://picture.928330.xyz/typora/image-20250712105749212.png" alt="image-20250712105749212"  />
+</a>
+</div>
+</p>
 <p>分析任务完成后，在文件 -&gt; 检材 -&gt; 加密文件中找到TrueCrypt容器</p>
 <p>在检材1的20231212.E01/分区6/Users/rd/Documents下有一个新建文本文档.txt是加密容器，有88MB：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250712105717926.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250712105717926"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250712105717926.png">
+<img src="http://picture.928330.xyz/typora/image-20250712105717926.png" alt="image-20250712105717926"  />
+</a>
+</div>
+</p>
 <p>之前备忘录发现的内容Vcpswd:edgewallet，在检材一edge密码中找到对应内容：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709205612210.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709205612210"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709205612210.png">
+<img src="http://picture.928330.xyz/typora/image-20250709205612210.png" alt="image-20250709205612210"  />
+</a>
+</div>
+</p>
 <p>从字面猜测这个密码应该就是vc加密的密码<code>pR7)nZ5&amp;yQ2-oR0&lt;</code>，而加密卷应该就是那个很大的txt文件</p>
 <p>挂载：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709205220440.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709205220440"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709205220440.png">
+<img src="http://picture.928330.xyz/typora/image-20250709205220440.png" alt="image-20250709205220440"  />
+</a>
+</div>
+</p>
 <p>发现里面存在9月和10月两个名单：
-<img src="http://picture.928330.xyz/typora/image-20250709205824323.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709205824323"
-	
-	
->九月是未加密的txt文件，十月却不是txt文件，而是一个pk开头的压缩包，应该是和11月一样的加密方式</p>
+
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709205824323.png">
+<img src="http://picture.928330.xyz/typora/image-20250709205824323.png" alt="image-20250709205824323"  />
+</a>
+</div>
+九月是未加密的txt文件，十月却不是txt文件，而是一个pk开头的压缩包，应该是和11月一样的加密方式</p>
 <p>压缩包密码藏在了FileCompress软件中，找出软件安装包（apk）：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>FileCompress(com.zs.filecompress).bak/apps/com.zs.filecompress/a
 </span></span></code></pre></div><p>导出后，使用jadx逆向：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250710121649367.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250710121649367"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250710121649367.png">
+<img src="http://picture.928330.xyz/typora/image-20250710121649367.png" alt="image-20250710121649367"  />
+</a>
+</div>
+</p>
 <p>com下找到主函数，代码逻辑中得到密码<code>1!8Da9Re5it2b3a.</code>，解密10月和11月：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250709210608385.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250709210608385"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250709210608385.png">
+<img src="http://picture.928330.xyz/typora/image-20250709210608385.png" alt="image-20250709210608385"  />
+</a>
+</div>
+</p>
 <p>小浩的手机号：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>13533333333
 </span></span></code></pre></div><h2 id="42完整的受害人名单是几个人">42.完整的受害人名单是几个人
@@ -1379,6 +1217,12 @@
     <section class="powerby">
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+        
 
         <span>...当然还有kakahuote🤓👆</span>
     </section>
@@ -1556,28 +1400,13 @@
      cursor: pointer;  
      font-size: 0.9em;  
     }
-
-     
-     
-     
-    #particles-js {
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     z-index: -1;
-     pointer-events: none;  
-    }
-</style>
-
-
-<div id="particles-js"></div>
+ </style>
 
 <script>
      
      
      
+
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -1695,34 +1524,33 @@
     }
 
     
-    initCodeMoreBox();
-
-     
-     
-     
     
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        if (typeof particlesJS === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
-            script.onload = function() {
-                initParticles();
-            };
-            document.head.appendChild(script);
-        } else {
-            initParticles();
-        }
-    });
 
-    function initParticles() {
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-                console.log('particles.js loaded successfully');
-            });
-        }
-    }
+    initCodeMoreBox();
 </script>
+
+
+
+
+<div id="particles-js"></div>
+
+<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
 
     </body>
 </html>

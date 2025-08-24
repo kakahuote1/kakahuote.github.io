@@ -806,16 +806,13 @@
 </h4><p>这是vol2进行任何分析前必须执行的第一步，用于确定操作系统的Profile，即版本</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; imageinfo 
 </span></span></code></pre></div><p><strong>&lt;内存镜像&gt;的后缀名没有固定的，可能是raw，dump，img，vmem等等</strong></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250708193517165.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250708193517165"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250708193517165.png">
+<img src="http://picture.928330.xyz/typora/image-20250708193517165.png" alt="image-20250708193517165"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong>Suggested Profile(s)：建议的配置文件</strong></p>
@@ -842,16 +839,13 @@
 <h4 id="volatility3">Volatility3
 </h4><p>V3会自动检测Profile，之后的命令无需手动输入，此命令用于显示详细的信息</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.info.Info
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250712211412813.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250712211412813"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250712211412813.png">
+<img src="http://picture.928330.xyz/typora/image-20250712211412813.png" alt="image-20250712211412813"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong>NTBuildLab</strong>：<strong>Windows操作系统构建版本标签</strong></p>
@@ -882,16 +876,13 @@
 <p>下载打开软件，选择<code>$MFT</code>文件，然后导出到<code>csv</code>文件即可，导出的条目会以<code>csv</code>文件的形式存放在软件目录下</p>
 <h4 id="volatility2-1">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; mftparser
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716202015759.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250716202015759"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250716202015759.png">
+<img src="http://picture.928330.xyz/typora/image-20250716202015759.png" alt="image-20250716202015759"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong>MFT entry found at offset &hellip;</strong>：该MFT记录在内存中的物理偏移地址</p>
@@ -927,16 +918,13 @@
 </ul>
 <h4 id="volatility3-1">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.mftscan.MFTScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716202259656.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250716202259656"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250716202259656.png">
+<img src="http://picture.928330.xyz/typora/image-20250716202259656.png" alt="image-20250716202259656"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong>Offset ：偏移量</strong></p>
@@ -1003,16 +991,13 @@
 </ul>
 <h4 id="volatility3-2">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> vol3 -f &lt;内存镜像&gt; windows.svcscan.SvcScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716210316417.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250716210316417"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250716210316417.png">
+<img src="http://picture.928330.xyz/typora/image-20250716210316417.png" alt="image-20250716210316417"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong>Offset：偏移量</strong></p>
@@ -1121,16 +1106,13 @@
 </h3><h4 id="volatility2-3">Volatility2
 </h4><p><strong>使用<code>modules</code>来查看驱动模块，通过遍历内核中的<code>PsLoadedModuleList</code>官方链表来获取信息：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; modules
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718095930867.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718095930867"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718095930867.png">
+<img src="http://picture.928330.xyz/typora/image-20250718095930867.png" alt="image-20250718095930867"  />
+</a>
+</div>
+</p>
 <ul>
 <li><strong><code>Offset(V)</code></strong>：该模块的<code>_LDR_DATA_TABLE_ENTRY</code>结构在内存中的虚拟地址</li>
 <li><strong><code>Name</code></strong>：模块的名称，例如 <code>ntoskrnl.exe</code></li>
@@ -1140,16 +1122,13 @@
 </ul>
 <p><strong>或者也可以使用<code>driverscan</code>通过扫描内存池来寻找驱动对象，这种方式能发现一部分隐藏的驱动对象：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; driverscan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718100005508.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718100005508"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718100005508.png">
+<img src="http://picture.928330.xyz/typora/image-20250718100005508.png" alt="image-20250718100005508"  />
+</a>
+</div>
+</p>
 <ul>
 <li><strong><code>Offset(P)</code></strong>：该驱动对象在内存中的物理地址</li>
 <li><strong><code>#Ptr</code></strong>：指向该驱动对象的指针数量</li>
@@ -1162,65 +1141,52 @@
 </ul>
 <p><strong>还可以使用modscan扫描模块结构特征寻找驱动，最全面，能发现大多数隐藏模块速度慢，但可能有误报：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; modscan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718120519596.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718120519596"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718120519596.png">
+<img src="http://picture.928330.xyz/typora/image-20250718120519596.png" alt="image-20250718120519596"  />
+</a>
+</div>
+</p>
 <p><strong>物理地址不同是正常的，因为它们扫描和定位的目标数据结构不同</strong></p>
 <h4 id="volatility3-3">Volatility3
 </h4><p>使用<code>modules</code>：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.modules.Modules
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718100737803.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718100737803"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718100737803.png">
+<img src="http://picture.928330.xyz/typora/image-20250718100737803.png" alt="image-20250718100737803"  />
+</a>
+</div>
+</p>
 <p>使用<code>driverscan</code>：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.driverscan.DriverScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718100933982.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718100933982"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718100933982.png">
+<img src="http://picture.928330.xyz/typora/image-20250718100933982.png" alt="image-20250718100933982"  />
+</a>
+</div>
+</p>
 <p>使用<code>modscan</code>：</p>
 <pre tabindex="0"><code>vol3 -f &lt;内存镜像&gt; windows.modscan.ModScan
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250718120611323.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
+</code></pre><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718120611323.png">
+<img src="http://picture.928330.xyz/typora/image-20250718120611323.png" alt=""  />
+</a>
+</div>
+</p>
 <h3 id="查看驱动程序的irpdriverirp">查看驱动程序的IRP（driverirp）
 </h3><h4 id="volatility2-4">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; driverirp 
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718133232360.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718133232360"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718133232360.png">
+<img src="http://picture.928330.xyz/typora/image-20250718133232360.png" alt="image-20250718133232360"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong>DriverName</strong>：目标驱动的名称</p>
@@ -1246,16 +1212,13 @@
 </ul>
 <h4 id="volatility3-4">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.driverirp.DriverIrp
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718133053635.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718133053635"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718133053635.png">
+<img src="http://picture.928330.xyz/typora/image-20250718133053635.png" alt="image-20250718133053635"  />
+</a>
+</div>
+</p>
 <ul>
 <li><strong>Offset</strong>：该驱动对象在内存中的虚拟地址</li>
 <li><strong>Driver Name</strong>：驱动对象的名称</li>
@@ -1277,28 +1240,22 @@
 <h3 id="查看内核回调callbacks">查看内核回调（callbacks）
 </h3><h4 id="volatility2-5">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; callbacks
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718170912078.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718170912078"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718170912078.png">
+<img src="http://picture.928330.xyz/typora/image-20250718170912078.png" alt="image-20250718170912078"  />
+</a>
+</div>
+</p>
 <h4 id="volatility3-5">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.callbacks.Callbacks
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718171002430.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718171002430"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718171002430.png">
+<img src="http://picture.928330.xyz/typora/image-20250718171002430.png" alt="image-20250718171002430"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong><code>Type</code>：回调类型</strong></p>
@@ -1327,16 +1284,13 @@
 <h3 id="查看系统调用ssdt">查看系统调用（ssdt）
 </h3><h4 id="volatility2-6">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; ssdt
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718102449369.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718102449369"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718102449369.png">
+<img src="http://picture.928330.xyz/typora/image-20250718102449369.png" alt="image-20250718102449369"  />
+</a>
+</div>
+</p>
 <ul>
 <li><strong><code>Entry</code></strong>：SSDT 表中的索引号（入口点编号），以十六进制表示</li>
 <li><strong><code>Address</code></strong>：该索引号对应的内核函数在内存中的实际地址</li>
@@ -1345,16 +1299,13 @@
 <p>如果一个函数的Owner不是 <code>ntoskrnl.exe</code>或<code>win32k.sys</code>，而是另一个可疑的驱动，或者显示为 <code>(unknown)</code>，就意味着该函数很可能已被挂钩（Hook），指向了恶意的函数</p>
 <h4 id="volatility3-6">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.ssdt.SSDT
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718103947530.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718103947530"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718103947530.png">
+<img src="http://picture.928330.xyz/typora/image-20250718103947530.png" alt="image-20250718103947530"  />
+</a>
+</div>
+</p>
 <ul>
 <li><strong><code>Index</code></strong>：SSDT 表中的索引号（入口点编号）</li>
 <li><strong><code>Address</code></strong>：该索引号对应的内核函数在内存中的实际地址</li>
@@ -1365,16 +1316,13 @@
 </h3><p>通过扫描内存以寻找并打印出<code>_OBJECT_SYMBOLIC_LINK</code>结构，列出系统内核中存在的符号链接及其指向的目标</p>
 <h4 id="volatility2-7">Volatility2
 </h4><pre tabindex="0"><code>vol2 -f &lt;内存镜像&gt; --profile=&lt;配置文件&gt; symlinkscan
-</code></pre><p><img src="http://picture.928330.xyz/typora/image-20250718174120289.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718174120289"
-	
-	
-></p>
+</code></pre><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718174120289.png">
+<img src="http://picture.928330.xyz/typora/image-20250718174120289.png" alt="image-20250718174120289"  />
+</a>
+</div>
+</p>
 <h3 id="输出字段详解">输出字段详解
 </h3><ul>
 <li><strong><code>Offset(P)</code></strong>：该符号链接对象（<code>_OBJECT_SYMBOLIC_LINK</code> 结构）在内存中的物理地址</li>
@@ -1386,16 +1334,13 @@
 </ul>
 <h4 id="volatility3-7">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.symlinkscan.SymlinkScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250718175036375.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250718175036375"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250718175036375.png">
+<img src="http://picture.928330.xyz/typora/image-20250718175036375.png" alt="image-20250718175036375"  />
+</a>
+</div>
+</p>
 <ul>
 <li><strong><code>Offset</code></strong>：该符号链接对象（<code>_OBJECT_SYMBOLIC_LINK</code> 结构）在内存中的虚拟地址</li>
 <li><strong><code>CreateTime</code></strong>：该符号链接被创建的时间戳（以UTC标准时间显示）</li>
@@ -1409,16 +1354,13 @@
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; pslist 
 </span></span></code></pre></div><p>查看包括隐藏进程在内的进程：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; psscan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713121935145.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250713121935145"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250713121935145.png">
+<img src="http://picture.928330.xyz/typora/image-20250713121935145.png" alt="image-20250713121935145"  />
+</a>
+</div>
+</p>
 <ul>
 <li><strong>Offset(V)</strong>：进程对象在内存中的虚拟地址</li>
 <li><strong>Name</strong>：进程的映像文件名（通常是<code>.exe</code>文件名）</li>
@@ -1483,16 +1425,13 @@
 <p><strong>当一个进程的父进程ID（PPID）比它自身的进程ID（PID）还要大时，很可能有问题</strong></p>
 <h4 id="volatility3-9">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 vol.py -f &lt;内存镜像&gt; windows.pstree.PsTree
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713122632330.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250713122632330"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250713122632330.png">
+<img src="http://picture.928330.xyz/typora/image-20250713122632330.png" alt="image-20250713122632330"  />
+</a>
+</div>
+</p>
 <p><strong>与volatility2不同，3使用<code>*</code>来区分父子进程，<code>*</code>越多，代表进程的层级越深，是更深层的子进程</strong></p>
 <ul>
 <li><strong>Path</strong>：每个进程可执行文件在硬盘上的完整路径</li>
@@ -1508,27 +1447,21 @@
 <img src="http://picture.928330.xyz/typora/image-20250706223629735.png" alt="image-20250706223629735" style="zoom:50%;" />
 <h4 id="volatility3-10">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>python3 vol.py -f &lt;内存镜像&gt; windows.malware.psxview.PsXView
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713130244162.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250713130244162"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250713130244162.png">
+<img src="http://picture.928330.xyz/typora/image-20250713130244162.png" alt="image-20250713130244162"  />
+</a>
+</div>
+</p>
 <p>过滤False项：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250713131252462.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250713131252462"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250713131252462.png">
+<img src="http://picture.928330.xyz/typora/image-20250713131252462.png" alt="image-20250713131252462"  />
+</a>
+</div>
+</p>
 <h3 id="查看进程启动参数cmdline">查看进程启动参数（cmdline）
 </h3><p><strong>能看到进程如何被创建的，包括命令行启动和exe文件点击启动</strong></p>
 <p><strong>但看不到进程内部的交互，不知道进程干了什么</strong></p>
@@ -1541,79 +1474,61 @@
 <h3 id="查看进程加载的dlldlllist">查看进程加载的DLL（dlllist）
 </h3><h4 id="volatility2-12">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; dlllist -p 进程pid
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250713210521338.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250713210521338"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250713210521338.png">
+<img src="http://picture.928330.xyz/typora/image-20250713210521338.png" alt="image-20250713210521338"  />
+</a>
+</div>
+</p>
 <h4 id="volatility3-12">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.dlllist.DllList --pid 进程pid
 </span></span></code></pre></div><p><strong>相较于vol2，vol3还给出了dll的加载时间<code>LoadTime</code>：</strong></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250713210420002.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250713210420002"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250713210420002.png">
+<img src="http://picture.928330.xyz/typora/image-20250713210420002.png" alt="image-20250713210420002"  />
+</a>
+</div>
+</p>
 <h3 id="查看进程权限privs">查看进程权限（privs）
 </h3><h4 id="volatility2-13">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; privs
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714095647063.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714095647063"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714095647063.png">
+<img src="http://picture.928330.xyz/typora/image-20250714095647063.png" alt="image-20250714095647063"  />
+</a>
+</div>
+</p>
 <h4 id="volatility3-13">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.privileges.Privs
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714094913789.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714094913789"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714094913789.png">
+<img src="http://picture.928330.xyz/typora/image-20250714094913789.png" alt="image-20250714094913789"  />
+</a>
+</div>
+</p>
 <h3 id="查看进程对应用户sidgetsids">查看进程对应用户SID（getsids）
 </h3><h4 id="volatility2-14">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; getsids
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716110818864.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250716110818864"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250716110818864.png">
+<img src="http://picture.928330.xyz/typora/image-20250716110818864.png" alt="image-20250716110818864"  />
+</a>
+</div>
+</p>
 <h4 id="volatility3-14">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.getsids.GetSIDs 
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250716110351479.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250716110351479"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250716110351479.png">
+<img src="http://picture.928330.xyz/typora/image-20250716110351479.png" alt="image-20250716110351479"  />
+</a>
+</div>
+</p>
 <p>相较于Volatility2，这个输出更加规范化：</p>
 <ul>
 <li>
@@ -1639,16 +1554,13 @@
 <h3 id="查看可能的恶意代码malfind">查看可能的恶意代码（malfind）
 </h3><h4 id="volatility2-15">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; malfind
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714104850074.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714104850074"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714104850074.png">
+<img src="http://picture.928330.xyz/typora/image-20250714104850074.png" alt="image-20250714104850074"  />
+</a>
+</div>
+</p>
 <p>volatility2还有一个社区插件，是malfind的深度扫描版本malfinddeep：</p>
 <p><a class="link" href="https://github.com/superponible/volatility-plugins"  target="_blank" rel="noopener"
     >https://github.com/superponible/volatility-plugins
@@ -1664,16 +1576,13 @@
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; malfinddeep
 </span></span></code></pre></div><h4 id="volatility3-15">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f MemoryDump_Lab5.raw windows.malware.malfind.Malfind
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714104152510.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714104152510"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714104152510.png">
+<img src="http://picture.928330.xyz/typora/image-20250714104152510.png" alt="image-20250714104152510"  />
+</a>
+</div>
+</p>
 <h3 id="提取进程内存memdumpdump">提取进程内存（memdump/&ndash;dump）
 </h3><p>进程内存中潜藏着很多信息，把他们提取出来才能更好的做分析</p>
 <p>比如TrueCrypt进程中会有加密密钥，导出其为.dmp文件后，可以交给EFDD解密加密卷</p>
@@ -1693,16 +1602,13 @@
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; connscan
 </span></span></code></pre></div><p>查看当前网络链接：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; netscan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714113947510.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714113947510"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714113947510.png">
+<img src="http://picture.928330.xyz/typora/image-20250714113947510.png" alt="image-20250714113947510"  />
+</a>
+</div>
+</p>
 <ul>
 <li>
 <p><strong><code>LISTENING</code></strong>：表示某个程序正在一个端口上“监听”，等待外部连接的建立</p>
@@ -1724,28 +1630,22 @@
 <h4 id="volatility3-17">Volatility3
 </h4><p><strong>更加建议使用NetStat，报告更赏心悦目：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.netstat.NetStat
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714114505605.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714114505605"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714114505605.png">
+<img src="http://picture.928330.xyz/typora/image-20250714114505605.png" alt="image-20250714114505605"  />
+</a>
+</div>
+</p>
 <p><strong>当然，vol3也是有NetScan的：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.netscan.NetScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714113608063.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714113608063"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714113608063.png">
+<img src="http://picture.928330.xyz/typora/image-20250714113608063.png" alt="image-20250714113608063"  />
+</a>
+</div>
+</p>
 <h2 id="注册表分析">注册表分析
 </h2><h3 id="查看注册表整体结构hivelist">查看注册表整体结构（hivelist）
 </h3><p><strong><code>hivelist</code>的主要作用是为后续的<code>printkey</code>等插件提供每个Hive的虚拟地址（第一列）</strong></p>
@@ -1755,59 +1655,47 @@
 <p><strong><code>ntuser.dat</code></strong>：用户的注册表文件，这里表明Alissa Simpson和SmartNet是登录状态或近期登录过</p>
 <h4 id="volatility3-18">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.registry.hivelist.HiveList
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714193939822.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714193939822"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714193939822.png">
+<img src="http://picture.928330.xyz/typora/image-20250714193939822.png" alt="image-20250714193939822"  />
+</a>
+</div>
+</p>
 <h3 id="查看具体注册表项printkey">查看具体注册表项（printkey）
 </h3><h4 id="volatility2-19">Volatility2
 </h4><p><strong>使用逻辑路径：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; printkey -K <span style="color:#98c379">&#34;顶层路径\子路径&#34;</span>
 </span></span></code></pre></div><p><strong>一定是从对应的hive开始，比如<code>SAM</code>，<code>SECURITY</code>等，而不是那五个根键：</strong></p>
-<p><img src="http://picture.928330.xyz/typora/image-20250714194449147.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714194449147"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714194449147.png">
+<img src="http://picture.928330.xyz/typora/image-20250714194449147.png" alt="image-20250714194449147"  />
+</a>
+</div>
+</p>
 <p><strong>也可以使用虚拟地址：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; printkey -o 虚拟地址
 </span></span></code></pre></div><img src="http://picture.928330.xyz/typora/image-20250714194807769.png" alt="image-20250714194807769" style="zoom:150%;" />
 <p><strong>再根据结果返回的<code>SubKeys</code>使用-K参数：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2  -f  &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; -o 虚拟地址 printkey -K <span style="color:#98c379">&#34;子键名称&#34;</span>
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714194911155.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714194911155"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714194911155.png">
+<img src="http://picture.928330.xyz/typora/image-20250714194911155.png" alt="image-20250714194911155"  />
+</a>
+</div>
+</p>
 <h4 id="volatility3-19">Volatility3
 </h4><p><strong>vol3只指定路径会去所有hive中寻找，需要使用逻辑路径＋虚拟地址才能精确定位：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.registry.printkey.PrintKey --offset 虚拟地址 --key <span style="color:#98c379">&#34;顶层路径\子路径&#34;</span>
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714195649342.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714195649342"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714195649342.png">
+<img src="http://picture.928330.xyz/typora/image-20250714195649342.png" alt="image-20250714195649342"  />
+</a>
+</div>
+</p>
 <h2 id="用户活动与执行历史">用户活动与执行历史
 </h2><h3 id="查看cmd历史命令cmdscan">查看cmd历史命令（cmdscan）
 </h3><p><strong>输出干净，有时能找到超出缓冲区范围的命令，即使已经清屏</strong></p>
@@ -1827,16 +1715,13 @@
 <h4 id="volatility3-20">Volatility3
 </h4><p><strong>vol3对于win7等老系统可能不支持，分析会报错，使用时注意</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.cmdscan.CmdScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714203803483.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714203803483"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714203803483.png">
+<img src="http://picture.928330.xyz/typora/image-20250714203803483.png" alt="image-20250714203803483"  />
+</a>
+</div>
+</p>
 <p><strong>1.概览信息</strong></p>
 <pre tabindex="0"><code>PID     Process     ConsoleInfo     Property                Address         Data
 2084    conhost.exe 0x1445c89b900   _COMMAND_HISTORY        0x1445c89b900   None
@@ -1871,29 +1756,23 @@
 <p><strong>但它受缓冲区大小限制，只寻找当前屏幕缓冲区的内容，如果清屏了(<code>cls</code>)就找不到了</strong></p>
 <h4 id="volatility2-21">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; consoles
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714202855628.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714202855628"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714202855628.png">
+<img src="http://picture.928330.xyz/typora/image-20250714202855628.png" alt="image-20250714202855628"  />
+</a>
+</div>
+</p>
 <h4 id="volatility3-21">Volatility3
 </h4><p><strong>vol3对于win7等老系统可能不支持，分析会报错，使用时注意</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.consoles.Consoles
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250714201124616.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250714201124616"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250714201124616.png">
+<img src="http://picture.928330.xyz/typora/image-20250714201124616.png" alt="image-20250714201124616"  />
+</a>
+</div>
+</p>
 <p>此处显示未找到控制台信息&quot;Console Information Not Found&quot;</p>
 <h3 id="查看gui程序执行记录userassist">查看GUI程序执行记录（userassist）
 </h3><p><strong>展示用户通过GUI启动的程序（点击快捷方式、开始菜单等）的信息，证明用户的主动操作行为</strong></p>
@@ -1920,71 +1799,56 @@
 </ul>
 <h4 id="volatility3-22">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.registry.userassist.UserAssist
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250715113900449.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250715113900449"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250715113900449.png">
+<img src="http://picture.928330.xyz/typora/image-20250715113900449.png" alt="image-20250715113900449"  />
+</a>
+</div>
+</p>
 <h3 id="查看程序准备记录shimcacheshimcachemem">查看程序准备记录（shimcache/shimcachemem）
 </h3><p><strong>记录任何准备执行的程序（包括后台服务、被浏览的文件等，不一定真的运行了）</strong></p>
 <p><strong>它甚至能记录已被删除的程序的执行痕迹</strong></p>
 <h4 id="volatility2-23">Volatility2
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; shimcache
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250715124707154.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250715124707154"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250715124707154.png">
+<img src="http://picture.928330.xyz/typora/image-20250715124707154.png" alt="image-20250715124707154"  />
+</a>
+</div>
+</p>
 <h4 id="volatility3-23">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.shimcachemem.ShimcacheMem
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250715124236951.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250715124236951"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250715124236951.png">
+<img src="http://picture.928330.xyz/typora/image-20250715124236951.png" alt="image-20250715124236951"  />
+</a>
+</div>
+</p>
 <h3 id="查看剪贴板内容clipboard">查看剪贴板内容（clipboard）
 </h3><p><span style="color:red"><strong>volatility3没有此功能</strong></span></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; clipboard
 </span></span></code></pre></div><p><strong>除了使用volatility2之外，也可以查看<code>ActivitiesCache.db</code>数据库</strong></p>
 <p>从Windows10版本1803开始，<code>ActivitiesCache.db</code>就开始记录剪贴板活动了，不过前提是要打开下面的设置：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250715200841039.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250715200841039"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250715200841039.png">
+<img src="http://picture.928330.xyz/typora/image-20250715200841039.png" alt="image-20250715200841039"  />
+</a>
+</div>
+</p>
 <p>随后，在下面的路径找到<code>ActivitiesCache.db</code>：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>C:<span style="color:#98c379">\U</span>sers<span style="color:#98c379">\&lt;</span>username&gt;<span style="color:#98c379">\A</span>ppData<span style="color:#98c379">\L</span>ocal<span style="color:#98c379">\C</span>onnectedDevicesPlatform<span style="color:#98c379">\
 </span></span></span></code></pre></div><p>使用数据库链接后，使用它自带的<code>SmartLookup</code>视图：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250715200733649.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250715200733649"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250715200733649.png">
+<img src="http://picture.928330.xyz/typora/image-20250715200733649.png" alt="image-20250715200733649"  />
+</a>
+</div>
+</p>
 <p>这里我的ClipboardPayload字段为空，是因为我没有打开剪贴板历史记录，嘻嘻</p>
 <h3 id="查看窗口图像screeenshot">查看窗口图像（screeenshot）
 </h3><p><strong>从内存中提取窗口图像甚至恢复桌面画面，截图内容通常是窗口的客户区域，不是全屏桌面</strong></p>
@@ -2034,16 +1898,13 @@
   </tbody>
 </table></div>
 <p>比如我这里获得的一张当时的屏幕截图<code>session_2.WinSta0.Default.png</code>，说明用户在查看一张图片：</p>
-<p><img src="http://picture.928330.xyz/typora/image-20250715204836602.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250715204836602"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250715204836602.png">
+<img src="http://picture.928330.xyz/typora/image-20250715204836602.png" alt="image-20250715204836602"  />
+</a>
+</div>
+</p>
 <p>图片名base64解码就是flag：<code>flag{!!_w3LL_d0n3_St4g3-1_0g_L4B_5_D0n3_!!}</code></p>
 <h3 id="查看记事本中的内容notepad">查看记事本中的内容（notepad）
 </h3><p><strong>本质是扫描记事本进程<code>notepad.exe</code>，还原的是正在显示和编辑的内容</strong></p>
@@ -2126,16 +1987,13 @@
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; hashdump
 </span></span></code></pre></div><p>输出格式是：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[<span style="color:#e06c75">用户名</span>]<span style="color:#56b6c2">:</span>[<span style="color:#e06c75">RID</span>]<span style="color:#56b6c2">:</span>[<span style="color:#e06c75">LM哈希</span>]<span style="color:#56b6c2">:</span>[<span style="color:#e06c75">NTLM哈希</span>]<span style="color:#56b6c2">:::</span> 
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250704120945088.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250704120945088"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250704120945088.png">
+<img src="http://picture.928330.xyz/typora/image-20250704120945088.png" alt="image-20250704120945088"  />
+</a>
+</div>
+</p>
 <h3 id="提取lsa密钥lsadump">提取LSA密钥（lsadump）
 </h3><p><strong>lsa是本地安全机构，通过它可以获取当前登录用户、服务账户等多种形式的凭证，甚至可能是明文密码</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; lsadump
@@ -2172,16 +2030,13 @@
 </span></span><span style="display:flex;"><span>deactivate
 </span></span></code></pre></div><p>随后就可以使用了：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; mimikatz
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250708203501496.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250708203501496"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250708203501496.png">
+<img src="http://picture.928330.xyz/typora/image-20250708203501496.png" alt="image-20250708203501496"  />
+</a>
+</div>
+</p>
 <h3 id="查看chrome记录的登录密码lastpass">查看Chrome记录的登录密码（lastpass）
 </h3><p>需要下载插件<code>lastpass</code>：</p>
 <p><a class="link" href="https://github.com/ruokeqx/tool-for-CTF/tree/master/volatility_plugins"  target="_blank" rel="noopener"
@@ -2208,29 +2063,23 @@
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; filescan | grep -i <span style="color:#98c379">&#39;secret.txt&#39;</span>
 </span></span></code></pre></div><p>如果想找指定文件类型（<code>-E</code>正则匹配）：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol2 -f &lt;内存镜像&gt; --profile<span style="color:#56b6c2">=</span>&lt;系统版本&gt; filescan | grep  -E <span style="color:#98c379">&#39;jpg|png|jpeg|bmp|gif&#39;</span>
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250706184859261.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250706184859261"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250706184859261.png">
+<img src="http://picture.928330.xyz/typora/image-20250706184859261.png" alt="image-20250706184859261"  />
+</a>
+</div>
+</p>
 <p><strong>最前面的十六进制是文件地址</strong></p>
 <h4 id="volatility3-24">Volatility3
 </h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vol3 -f &lt;内存镜像&gt; windows.filescan.FileScan
-</span></span></code></pre></div><p><img src="http://picture.928330.xyz/typora/image-20250717182605948.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20250717182605948"
-	
-	
-></p>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/image-20250717182605948.png">
+<img src="http://picture.928330.xyz/typora/image-20250717182605948.png" alt="image-20250717182605948"  />
+</a>
+</div>
+</p>
 <h3 id="从内存中转储指定文件dumpfiles">从内存中转储指定文件（dumpfiles）
 </h3><p><code>filescan</code>插件扫描的是<code>_FILE_OBJECT</code>这样的内核结构，相当于找到了文件的档案卡</p>
 <p><code>dumpfiles</code>插件则是根据这张档案卡的指引，去内存中寻找文件的具体内容</p>
@@ -2390,6 +2239,12 @@
     <section class="powerby">
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
+
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+        
 
         <span>...当然还有kakahuote🤓👆</span>
     </section>
@@ -2567,28 +2422,13 @@
      cursor: pointer;  
      font-size: 0.9em;  
     }
-
-     
-     
-     
-    #particles-js {
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     z-index: -1;
-     pointer-events: none;  
-    }
-</style>
-
-
-<div id="particles-js"></div>
+ </style>
 
 <script>
      
      
      
+
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -2706,34 +2546,33 @@
     }
 
     
-    initCodeMoreBox();
-
-     
-     
-     
     
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        if (typeof particlesJS === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
-            script.onload = function() {
-                initParticles();
-            };
-            document.head.appendChild(script);
-        } else {
-            initParticles();
-        }
-    });
 
-    function initParticles() {
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-                console.log('particles.js loaded successfully');
-            });
-        }
-    }
+    initCodeMoreBox();
 </script>
+
+
+
+
+<div id="particles-js"></div>
+
+<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
 
     </body>
 </html>

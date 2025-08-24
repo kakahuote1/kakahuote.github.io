@@ -167,16 +167,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;% --- 正文区结束 ---
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817101503310.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250817101503310&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817101503310.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817101503310.png&#34; alt=&#34;image-20250817101503310&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;导言区&#34;&gt;导言区
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;这是从&lt;code&gt;\documentclass&lt;/code&gt;开始到&lt;code&gt;\begin{document}&lt;/code&gt;之前的部分，我们在这里进行全局设置&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;文档类型-documentclass&#34;&gt;文档类型 (\documentclass)
@@ -794,16 +791,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\newpage&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;这是新的一页
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819190726829.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819190726829&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819190726829.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819190726829.png&#34; alt=&#34;image-20250819190726829&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;文本样式&#34;&gt;文本样式
 &lt;/h2&gt;&lt;p&gt;LaTeX 提供了一系列命令来改变局部文本的字体样式&lt;/p&gt;
 &lt;h3 id=&#34;命令&#34;&gt;命令
@@ -866,16 +860,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;这是小型大写字母&lt;span style=&#34;color:#c678dd&#34;&gt;\textsc&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;abc&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\\&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;请注意 &lt;span style=&#34;color:#c678dd&#34;&gt;\textsl&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;倾斜&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt; 与 &lt;span style=&#34;color:#c678dd&#34;&gt;\textit&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;意大利斜体&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt; 的细微差别&lt;span style=&#34;color:#c678dd&#34;&gt;\\&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\underline&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\textbf&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\textit&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;既要下划线又要斜体还要加粗就这样&lt;span style=&#34;color:#e5c07b&#34;&gt;}}}&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\\&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817132107426.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250817132107426&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817132107426.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817132107426.png&#34; alt=&#34;image-20250817132107426&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;特殊字符&#34;&gt;特殊字符
 &lt;/h2&gt;&lt;p&gt;在 LaTeX 中，许多键盘上的符号被用作特殊命令，因此不能直接输入。这一节将介绍如何正确地输入这些特殊字符，以及其他一些常用的排版符号。&lt;/p&gt;
 &lt;h3 id=&#34;英文引号&#34;&gt;英文引号
@@ -1141,16 +1132,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817125546110.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250817125546110&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817125546110.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817125546110.png&#34; alt=&#34;image-20250817125546110&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;章节与目录&#34;&gt;章节与目录
 &lt;/h2&gt;&lt;p&gt;对于结构化的长文档，章节是必不可少的&lt;/p&gt;
 &lt;p&gt;LaTeX通过简单的命令即可创建带自动编号的章节，并基于这些章节信息自动生成目录&lt;/p&gt;
@@ -1218,16 +1206,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817130003732.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250817130003732&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250817130003732.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250817130003732.png&#34; alt=&#34;image-20250817130003732&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;摘要与关键词&#34;&gt;摘要与关键词
 &lt;/h2&gt;&lt;p&gt;摘要（Abstract）是学术文章开头不可或缺的部分，它简要概括了文章的核心内容&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;article&lt;/code&gt;和&lt;code&gt;ctexart&lt;/code&gt;等文档类型中，LaTeX提供了专门的&lt;code&gt;abstract&lt;/code&gt;环境来排版摘要&lt;/p&gt;
@@ -1271,16 +1256,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819183240596.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819183240596&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819183240596.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819183240596.png&#34; alt=&#34;image-20250819183240596&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;\begin{abstract}...\end{abstract}&lt;/code&gt;环境会自动在文档标题下方生成一个居中的&lt;strong&gt;摘要&lt;/strong&gt;标题，并将环境内的文本以特定格式进行排版&lt;/p&gt;
 &lt;p&gt;在摘要正文结束后，我们使用&lt;code&gt;\vspace{1ex}&lt;/code&gt; 增加了一个小间距，然后用&lt;code&gt;\noindent&lt;/code&gt;取消了接下来的行缩进，并通过&lt;code&gt;\textbf{关键词：}&lt;/code&gt; 创建了加粗的关键词标题&lt;/p&gt;
 &lt;h2 id=&#34;列表环境&#34;&gt;列表环境
@@ -1332,16 +1314,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;itemize&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;description&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818111246972.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250818111246972&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818111246972.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818111246972.png&#34; alt=&#34;image-20250818111246972&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;最外层是一个&lt;code&gt;description&lt;/code&gt;列表，用&lt;code&gt;\item[常见水果]&lt;/code&gt;和&lt;code&gt;\item[不常见水果]&lt;/code&gt;创建了两个带自定义粗体标签的条目&lt;/p&gt;
 &lt;p&gt;在常见水果条目内部，嵌套了一个&lt;code&gt;enumerate&lt;/code&gt;环境，创建了带自动编号&lt;code&gt;1.&lt;/code&gt;和&lt;code&gt;2.&lt;/code&gt;的有序列表&lt;/p&gt;
 &lt;p&gt;在不常见水果条目内部，嵌套了一个&lt;code&gt;itemize&lt;/code&gt;环境，创建了带&lt;code&gt;•&lt;/code&gt;符号的无序列表&lt;/p&gt;
@@ -1377,62 +1356,50 @@
 &lt;p&gt;&lt;strong&gt;LaTeX会自动给每个脚注分配连续编号（从 1 开始），编号会根据出现顺序递增&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;第一条脚注&lt;span style=&#34;color:#c678dd&#34;&gt;\footnote&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;内容 A&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;第二条脚注&lt;span style=&#34;color:#c678dd&#34;&gt;\footnote&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;内容 B&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819204954444.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819204954444&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819204954444.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819204954444.png&#34; alt=&#34;image-20250819204954444&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;使用&lt;code&gt;\footnotemark&lt;/code&gt; + &lt;code&gt;\footnotetext&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;如果不指定编号，&lt;code&gt;\footnotemark&lt;/code&gt;会自动使用下一个可用编号，对应的&lt;code&gt;\footnotetext&lt;/code&gt;默认使用同一个编号&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;文字&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotemark&lt;/span&gt;  &lt;span style=&#34;color:#7f848e&#34;&gt;% 自动分配编号 1
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;  &lt;span style=&#34;color:#7f848e&#34;&gt;% 编号 1
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205019473.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819205019473&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205019473.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205019473.png&#34; alt=&#34;image-20250819205019473&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;下一个脚注会自动编号2：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;字1&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotemark&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容1&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;字2&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotemark&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容2&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205812229.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819205812229&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205812229.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205812229.png&#34; alt=&#34;image-20250819205812229&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;一定要在每个标记后紧跟内容（也就是&lt;code&gt;mark&lt;/code&gt;+&lt;code&gt;text&lt;/code&gt;成对出现），不然&lt;code&gt;footnotetext&lt;/code&gt;无法识别新的编号：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;字1&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotemark&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;字2&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotemark&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容1&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容2&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210030750.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819210030750&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210030750.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210030750.png&#34; alt=&#34;image-20250819210030750&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;\footnotemark&lt;/code&gt;使用时，会让当前页脚计数器&lt;code&gt;footnote&lt;/code&gt;的值加1&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;当我们连续两次使用&lt;code&gt;\footnotemark&lt;/code&gt;但还没有用&lt;code&gt;\footnotetext&lt;/code&gt;，LaTeX会把两次标记都绑定到当前计数器值，因此两个标记都显示为2&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;手动指定编号&#34;&gt;手动指定编号
@@ -1442,29 +1409,23 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[1]&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容1&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[5]&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容5&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205310686.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819205310686&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205310686.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205310686.png&#34; alt=&#34;image-20250819205310686&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;多次引用同一脚注&#34;&gt;多次引用同一脚注
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;第一次引用&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotemark&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[1]&lt;/span&gt;，第二次引用同一脚注&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotemark&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[1]&lt;/span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[1]&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;脚注内容&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205353648.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819205353648&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819205353648.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819205353648.png&#34; alt=&#34;image-20250819205353648&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;特别注意&#34;&gt;特别注意
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;\footnotemark&lt;/code&gt;不增加编号计数，除非与&lt;code&gt;\footnotetext&lt;/code&gt;配合&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;\footnote{}&lt;/code&gt;会同时生成标记和内容，计数自动递增&lt;/strong&gt;&lt;/p&gt;
@@ -1474,16 +1435,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;这个系统基于 TeX&lt;span style=&#34;color:#c678dd&#34;&gt;\footnote&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;TeX 是排版引擎，而 &lt;span style=&#34;color:#c678dd&#34;&gt;\LaTeX&lt;/span&gt; 是基于 TeX 的宏包&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210832146.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819210832146&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210832146.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210832146.png&#34; alt=&#34;image-20250819210832146&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;这里使用的&lt;code&gt;\LaTeX&lt;/code&gt;是一个比较好玩的命令，会显示LaTeX的logo&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;示例2在表格等特殊环境中使用&#34;&gt;示例2：在表格等特殊环境中使用
 &lt;/h3&gt;&lt;p&gt;在&lt;code&gt;tabular&lt;/code&gt;环境中，直接使用&lt;code&gt;\footnote&lt;/code&gt; 会出错，此时需要&lt;code&gt;\footnotemark&lt;/code&gt;和&lt;code&gt;\footnotetext&lt;/code&gt; 的组合&lt;/p&gt;
@@ -1503,16 +1461,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[1]&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;此数值为初步估算&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\footnotetext&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[2]&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;此数值为完全虚构&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210650692.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819210650692&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819210650692.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819210650692.png&#34; alt=&#34;image-20250819210650692&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h1 id=&#34;插入图片&#34;&gt;插入图片
 &lt;/h1&gt;&lt;p&gt;在 LaTeX 中插入图片通常分为三步：&lt;/p&gt;
 &lt;ol&gt;
@@ -1656,16 +1611,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818131120411.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250818131120411&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818131120411.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818131120411.png&#34; alt=&#34;image-20250818131120411&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;(确保&lt;code&gt;1.png&lt;/code&gt;文件已上传至当前Overleaf项目中，注意文件路径)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1808,16 +1760,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818183909350.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250818183909350&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818183909350.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818183909350.png&#34; alt=&#34;image-20250818183909350&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;\begin{table}[htbp] ... \end{table}&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -1923,16 +1872,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818184121980.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250818184121980&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250818184121980.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250818184121980.png&#34; alt=&#34;image-20250818184121980&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;$...$&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -2669,16 +2615,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819112856760.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819112856760&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819112856760.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819112856760.png&#34; alt=&#34;image-20250819112856760&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;矩阵 A&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;\begin{pmatrix}&lt;/code&gt;和&lt;code&gt;\end{pmatrix}&lt;/code&gt; 创建了一个外层为&lt;strong&gt;圆括号&lt;/strong&gt;的矩阵环境&lt;/li&gt;
@@ -2770,16 +2713,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;整个过程由公式 &lt;span style=&#34;color:#c678dd&#34;&gt;\eqref&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;eq:expand&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt; 概括
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819114400200.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819114400200&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819114400200.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819114400200.png&#34; alt=&#34;image-20250819114400200&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;\begin{equation}&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -2812,16 +2752,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;其中，方程 &lt;span style=&#34;color:#c678dd&#34;&gt;\eqref&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;eq:line1&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt; 和 &lt;span style=&#34;color:#c678dd&#34;&gt;\eqref&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;eq:emc2&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt; 是最重要的
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819114842390.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819114842390&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819114842390.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819114842390.png&#34; alt=&#34;image-20250819114842390&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;\begin{align}&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -2929,16 +2866,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;corollary&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819141257071.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819141257071&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819141257071.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819141257071.png&#34; alt=&#34;image-20250819141257071&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;定义解释&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -3068,16 +3002,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color:#e5c07b&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819122913418.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819122913418&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819122913418.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819122913418.png&#34; alt=&#34;image-20250819122913418&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;定义标签&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在&lt;code&gt;\section{引言}&lt;/code&gt;后面，我们用&lt;code&gt;\label{sec:intro}&lt;/code&gt;将其标记&lt;/li&gt;
@@ -3216,16 +3147,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;year&lt;/span&gt;={&lt;span style=&#34;color:#d19a66&#34;&gt;1994&lt;/span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819134920517.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250819134920517&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; href=&#34;http://picture.928330.xyz/typora/image-20250819134920517.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250819134920517.png&#34; alt=&#34;image-20250819134920517&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;在正文中，&lt;code&gt;\cite{何伟渔1994语法的静态分析和动态分析}&lt;/code&gt; 和 &lt;code&gt;\cite{张健2008精确的程序静态分析}&lt;/code&gt;会被LaTeX替换为&lt;code&gt;[1]&lt;/code&gt;和&lt;code&gt;[2]&lt;/code&gt;，因为&lt;code&gt;plain&lt;/code&gt;样式是按作者字母排序的，这里我直接使用&lt;code&gt;.bib&lt;/code&gt;文件的顺序，就是反着的&lt;/strong&gt;&lt;/p&gt;

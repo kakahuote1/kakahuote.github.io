@@ -663,16 +663,13 @@
 </li>
 </ul>
 <p><strong>ASCII码现在依然在被广泛使用，你可以在很多编程语言里面见到它，而且可以说它是现代字符编码体系的根基</strong></p>
-<p><img src="http://picture.928330.xyz/typora/ascii-1-1.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="ASCII 表| 菜鸟教程"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/ascii-1-1.png">
+<img src="http://picture.928330.xyz/typora/ascii-1-1.png" alt="ASCII 表| 菜鸟教程"  />
+</a>
+</div>
+</p>
 <h4 id="地区性字符集时代">地区性字符集时代
 </h4><p>当计算机走向世界，问题出现了：</p>
 <p>欧洲需要 <code>é</code>, <code>ü</code>，中国需要汉字，日本需要假名，单一的 ASCII 远远不够用！</p>
@@ -962,16 +959,13 @@
 <li>就这样，原本代表解码错误的、在UTF-8下有明确含义的字节序列，在 GBK解码器的一系列巧合误解之下，被翻译成了我们在座各位都无比熟悉的三个汉字——<strong><code>锟斤拷</code></strong></li>
 </ol>
 <p><strong>锟斤拷是传播比较广泛的乱码，真正的乱码形式多种多样，网上有人整理了常见的乱码对照表：</strong></p>
-<p><img src="http://picture.928330.xyz/typora/07e042d16001b86b36b38a36dfaf3475.jpeg"
-	
-	
-	
-	loading="lazy"
-	
-		alt="乱码对照表_乱码符号-CSDN博客"
-	
-	
-></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" href="http://picture.928330.xyz/typora/07e042d16001b86b36b38a36dfaf3475.jpeg">
+<img src="http://picture.928330.xyz/typora/07e042d16001b86b36b38a36dfaf3475.jpeg" alt="乱码对照表_乱码符号-CSDN博客"  />
+</a>
+</div>
+</p>
 <p>如果你不记得什么是ISO-8859-1：<a class="link" href="#%e5%9c%b0%e5%8c%ba%e6%80%a7%e5%ad%97%e7%ac%a6%e9%9b%86%e6%97%b6%e4%bb%a3" >地区性字符集时代
     
 </a></p>
@@ -1530,6 +1524,12 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计 <br />
 
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+        
+
         <span>...当然还有kakahuote🤓👆</span>
     </section>
 </footer>
@@ -1706,28 +1706,13 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
      cursor: pointer;  
      font-size: 0.9em;  
     }
-
-     
-     
-     
-    #particles-js {
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     z-index: -1;
-     pointer-events: none;  
-    }
-</style>
-
-
-<div id="particles-js"></div>
+ </style>
 
 <script>
      
      
      
+
     let s1 = '2025-5-8 15:00:00'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
@@ -1845,34 +1830,33 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     }
 
     
-    initCodeMoreBox();
-
-     
-     
-     
     
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        if (typeof particlesJS === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https:\/\/blog.928330.xyz\/background\/particles.min.js';
-            script.onload = function() {
-                initParticles();
-            };
-            document.head.appendChild(script);
-        } else {
-            initParticles();
-        }
-    });
 
-    function initParticles() {
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-                console.log('particles.js loaded successfully');
-            });
-        }
-    }
+    initCodeMoreBox();
 </script>
+
+
+
+
+<div id="particles-js"></div>
+
+<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
 
     </body>
 </html>
