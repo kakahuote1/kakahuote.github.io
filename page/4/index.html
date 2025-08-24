@@ -7,11 +7,11 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/'>
 
-<link rel="stylesheet" href="/scss/style.min.d104f99ffceed3ee41d60977d6388bab1b1c30ecb5942604dcae31623baed63c.css"><meta property='og:title' content="kakahuote">
+<link rel="stylesheet" href="/scss/style.min.669c02ba639424a76bd343c6cc83e092173147b0d98310a4914c8b52f4e80356.css"><meta property='og:title' content="kakahuote">
 <meta property='og:description' content="靡不有初，鲜克有终">
 <meta property='og:url' content='https://blog.928330.xyz/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-08-23T21:00:03&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-08-24T12:57:57&#43;08:00 '/>
 <meta name="twitter:title" content="kakahuote">
 <meta name="twitter:description" content="靡不有初，鲜克有终"><link rel="alternate" type="application/rss&#43;xml" href="https://blog.928330.xyz/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -525,21 +525,312 @@
     
 
     
-    <div class="welcome">
-      <p style="font-size: 2rem; text-align: center; font-weight: bold">
-        <span class="shake" >👋</span>
-        <span class="jump-text1" style="color:#ADD8E6"> Welcome</span>
-        <span class="jump-text2" style="color:#ADD8E6"> To </span>
-        <span class="jump-text3" style="color:#FF0000">k</span><span class="jump-text4" style="color:#FF4500">a</span><span class="jump-text5" style="color:#FF8C00">k</span><span class="jump-text6" style="color:#FFA500">a</span><span class="jump-text7" style="color:#FFD700">h</span><span class="jump-text8" style="color:#ADFF2F">u</span><span class="jump-text9" style="color:#00FF00">o</span><span class="jump-text10" style="color:#00CED1">t</span><span class="jump-text11" style="color:#00BFFF">e</span><span class="jump-text12" style="color:#4169E1">'</span><span class="jump-text13" style="color:#8A2BE2">s</span>
-        <span class="jump-text14" style="color:#ADD8E6">Blog</span>
-      </p>
+    <div class="elegant-welcome">
+      <div class="welcome-content" id="welcome-content">
+        
+        <div class="welcome-decoration left">
+          <div class="decoration-dash"></div>
+          <div class="decoration-dot"></div>
+        </div>
+        
+        <div class="welcome-main">
+          <div class="welcome-emoji" id="welcome-emoji">👋</div>
+          <div class="welcome-text">
+            <span class="welcome-greeting">欢迎来到</span>
+            <div class="welcome-name">
+              <span class="name-text">Kakahuote's Blog</span>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="welcome-decoration right">
+          <div class="decoration-dot"></div>
+          <div class="decoration-dash"></div>
+        </div>
+        
+        
+        <div class="click-effects" id="click-effects"></div>
+      </div>
     </div>
+
+    <script>
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        const welcomeContent = document.getElementById('welcome-content');
+        const welcomeEmoji = document.getElementById('welcome-emoji');
+        const decorationDashes = document.querySelectorAll('.decoration-dash');
+        const decorationDots = document.querySelectorAll('.decoration-dot');
+        const clickEffects = document.getElementById('click-effects');
+        
+        let isInitialState = true;
+        let clickCount = 0;
+        let isTransitioning = false; 
+        
+        
+        const emotionEmojis = [
+          
+          ['😊', '😄', '😉', '🤗', '😍', '🥰', '😇', '🤩', '😌', '😋', '😎', '🤠', '👋', '🙋‍♂️', '💁‍♂️', '🤝'],
+          
+          
+          ['🤔', '🤨', '🧐', '🤓', '😏', '😶', '😐', '😑', '😯', '😦', '😧', '😮', '🤭', '🤫', '🤐', '😶'],
+          
+          
+          ['😒', '😕', '😟', '😔', '😞', '😣', '😖', '😫', '😩', '😤', '😠', '😡', '🤬', '😈', '👿', '💀'],
+          
+          
+          ['😢', '😭', '😿', '😾', '😤', '😡', '🤬', '😈', '👿', '💀', '☠️', '👻', '💩', '🤡', '👺', '👹'],
+          
+          
+          ['😅', '😂', '🤣', '😆', '😁', '😃', '😀', '🙂', '😌', '😋', '😊', '😄', '😉', '🤗', '😍', '🥰']
+        ];
+        
+        let currentEmotionStage = 0;
+        
+        
+        const effectTypes = [
+          
+          { type: 'star', symbol: '⭐', class: 'effect-star' },
+          { type: 'sparkle', symbol: '✨', class: 'effect-sparkle' },
+          { type: 'diamond', symbol: '💎', class: 'effect-diamond' },
+          { type: 'crown', symbol: '👑', class: 'effect-crown' },
+          { type: 'gem', symbol: '💍', class: 'effect-gem' },
+          
+          
+          { type: 'fire', symbol: '🔥', class: 'effect-fire' },
+          { type: 'lightning', symbol: '⚡', class: 'effect-lightning' },
+          { type: 'snowflake', symbol: '❄️', class: 'effect-snowflake' },
+          { type: 'sun', symbol: '☀️', class: 'effect-sun' },
+          { type: 'moon', symbol: '🌙', class: 'effect-moon' },
+          { type: 'rainbow', symbol: '🌈', class: 'effect-rainbow' },
+          { type: 'flower', symbol: '🌸', class: 'effect-flower' },
+          { type: 'leaf', symbol: '🍃', class: 'effect-leaf' },
+          { type: 'tree', symbol: '🌳', class: 'effect-tree' },
+          
+          
+          { type: 'butterfly', symbol: '🦋', class: 'effect-butterfly' },
+          { type: 'bird', symbol: '🐦', class: 'effect-bird' },
+          { type: 'fish', symbol: '🐠', class: 'effect-fish' },
+          { type: 'dragon', symbol: '🐉', class: 'effect-dragon' },
+          { type: 'unicorn', symbol: '🦄', class: 'effect-unicorn' },
+          { type: 'phoenix', symbol: '🦅', class: 'effect-phoenix' },
+          
+          
+          { type: 'rocket', symbol: '🚀', class: 'effect-rocket' },
+          { type: 'satellite', symbol: '🛰️', class: 'effect-satellite' },
+          { type: 'ufo', symbol: '🛸', class: 'effect-ufo' },
+          { type: 'robot', symbol: '🤖', class: 'effect-robot' },
+          { type: 'alien', symbol: '👽', class: 'effect-alien' },
+          
+          
+          { type: 'pizza', symbol: '🍕', class: 'effect-pizza' },
+          { type: 'hamburger', symbol: '🍔', class: 'effect-hamburger' },
+          { type: 'icecream', symbol: '🍦', class: 'effect-icecream' },
+          { type: 'cake', symbol: '🎂', class: 'effect-cake' },
+          { type: 'candy', symbol: '🍬', class: 'effect-candy' },
+          
+          
+          { type: 'trophy', symbol: '🏆', class: 'effect-trophy' },
+          { type: 'medal', symbol: '🥇', class: 'effect-medal' },
+          { type: 'ball', symbol: '⚽', class: 'effect-ball' },
+          { type: 'basketball', symbol: '🏀', class: 'effect-basketball' },
+          { type: 'tennis', symbol: '🎾', class: 'effect-tennis' },
+          
+          
+          { type: 'musical_note', symbol: '🎵', class: 'effect-musical-note' },
+          { type: 'guitar', symbol: '🎸', class: 'effect-guitar' },
+          { type: 'piano', symbol: '🎹', class: 'effect-piano' },
+          { type: 'microphone', symbol: '🎤', class: 'effect-microphone' },
+          { type: 'headphones', symbol: '🎧', class: 'effect-headphones' },
+          
+          
+          { type: 'game_die', symbol: '🎲', class: 'effect-game-die' },
+          { type: 'joystick', symbol: '🕹️', class: 'effect-joystick' },
+          { type: 'controller', symbol: '🎮', class: 'effect-controller' },
+          { type: 'puzzle', symbol: '🧩', class: 'effect-puzzle' },
+          { type: 'chess', symbol: '♟️', class: 'effect-chess' },
+          
+          
+          { type: 'sparkles', symbol: '✨', class: 'effect-sparkles' },
+          { type: 'crystal_ball', symbol: '🔮', class: 'effect-crystal-ball' },
+          { type: 'magic_wand', symbol: '🪄', class: 'effect-magic-wand' },
+          { type: 'fairy', symbol: '🧚', class: 'effect-fairy' },
+          { type: 'wizard', symbol: '🧙‍♂️', class: 'effect-wizard' }
+        ];
+        
+        
+        function createClickEffect() {
+          const effect = effectTypes[Math.floor(Math.random() * effectTypes.length)];
+          const effectElement = document.createElement('div');
+          effectElement.className = `click-effect ${effect.class}`;
+          effectElement.textContent = effect.symbol;
+          
+          
+          const isLeft = Math.random() > 0.5;
+          let x, y;
+          
+          if (isLeft) {
+            
+            x = Math.random() * 20 + 5; 
+          } else {
+            
+            x = Math.random() * 20 + 75; 
+          }
+          
+          
+          const verticalZone = Math.random();
+          if (verticalZone < 0.4) {
+            
+            y = Math.random() * 30 + 10;
+          } else {
+            
+            y = Math.random() * 30 + 60;
+          }
+          
+          effectElement.style.left = `${x}%`;
+          effectElement.style.top = `${y}%`;
+          
+          clickEffects.appendChild(effectElement);
+          
+          
+          setTimeout(() => {
+            effectElement.remove();
+          }, 2000);
+        }
+        
+        
+        function transitionEmoji(fromEmoji, toEmoji, callback) {
+          if (isTransitioning) return;
+          isTransitioning = true;
+          
+          
+          welcomeEmoji.classList.add('emoji-bounce-shake');
+          
+          setTimeout(() => {
+            
+            welcomeEmoji.classList.remove('emoji-bounce-shake');
+            welcomeEmoji.classList.add('emoji-spin-transition');
+            welcomeEmoji.textContent = toEmoji;
+            
+            
+            setTimeout(() => {
+              welcomeEmoji.classList.remove('emoji-spin-transition');
+              welcomeEmoji.classList.add('emoji-normalize');
+              
+              setTimeout(() => {
+                welcomeEmoji.classList.remove('emoji-normalize');
+                isTransitioning = false;
+                if (callback) callback();
+              }, 300);
+            }, 500);
+          }, 400);
+        }
+        
+        
+        setTimeout(() => {
+          if (isInitialState) {
+            transitionEmoji('👋', '👆', () => {
+              welcomeContent.classList.add('hint-click');
+            });
+          }
+        }, 2000);
+        
+        
+        welcomeContent.addEventListener('click', function() {
+          
+          this.classList.remove('hint-click');
+          isInitialState = false;
+          
+          
+          if (welcomeEmoji.textContent === '👆') {
+            this.classList.add('hint-shake');
+            setTimeout(() => {
+              this.classList.remove('hint-shake');
+            }, 600);
+          } else {
+            
+            this.classList.add('clicked');
+            setTimeout(() => {
+              this.classList.remove('clicked');
+            }, 600);
+          }
+          
+          
+          decorationDots.forEach((dot, index) => {
+            setTimeout(() => {
+              dot.style.animation = 'dotPulse 0.6s ease-in-out';
+              setTimeout(() => {
+                dot.style.animation = 'dotFloat 4s ease-in-out infinite';
+              }, 600);
+            }, index * 150);
+          });
+          
+          decorationDashes.forEach((dash, index) => {
+            setTimeout(() => {
+              dash.style.animation = 'dashExpand 0.6s ease-in-out';
+              setTimeout(() => {
+                dash.style.animation = 'dashFloat 4s ease-in-out infinite';
+              }, 600);
+            }, index * 150);
+          });
+          
+          
+          for (let i = 0; i < 4; i++) {
+            setTimeout(() => {
+              createClickEffect();
+            }, i * 120);
+          }
+          
+          
+          clickCount++;
+          
+          
+          if (clickCount <= 15) {
+            currentEmotionStage = 0; 
+          } else if (clickCount <= 30) {
+            currentEmotionStage = 1; 
+          } else if (clickCount <= 45) {
+            currentEmotionStage = 2; 
+          } else if (clickCount <= 60) {
+            currentEmotionStage = 3; 
+          } else {
+            currentEmotionStage = 4; 
+            if (clickCount > 75) {
+              clickCount = 0; 
+            }
+          }
+          
+          const currentEmotions = emotionEmojis[currentEmotionStage];
+          const randomEmoji = currentEmotions[Math.floor(Math.random() * currentEmotions.length)];
+          
+          
+          transitionEmoji(welcomeEmoji.textContent, randomEmoji);
+          
+          
+        });
+        
+        
+        welcomeContent.addEventListener('mouseenter', function() {
+          if (isInitialState) {
+            this.style.cursor = 'pointer';
+          }
+        });
+      });
+    </script>
 
     <section class="article-list">
         
             
-<article class="">
+<article class="has-image">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+                
+                    <img src="/img/vim-bg.jpg" loading="lazy" alt="Featured image of post Vim编辑器完全使用教程" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -599,7 +890,7 @@
 
 
                <time>
-                   更新时间：2025-07-21
+                   更新时间：2025-08-24
                </time>
            </div>
         <div>
@@ -923,10 +1214,12 @@
 
 <div id="particles-js"></div>
 
-<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+  
   particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-    console.log('particles.js loaded - callback');
+    console.log('particles.js loaded successfully');
   });
 </script>
 
@@ -935,9 +1228,19 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
+    pointer-events: none;
+  }
+  
+   
+  #particles-js canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
   }
 </style>
 

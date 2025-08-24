@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/'>
 
-<link rel="stylesheet" href="/scss/style.min.d104f99ffceed3ee41d60977d6388bab1b1c30ecb5942604dcae31623baed63c.css"><meta property='og:title' content="windows相关知识总结（上）">
+<link rel="stylesheet" href="/scss/style.min.669c02ba639424a76bd343c6cc83e092173147b0d98310a4914c8b52f4e80356.css"><meta property='og:title' content="windows相关知识总结（上）">
 <meta property='og:description' content="NTFS文件系统 • 注册表 • windows安全机制">
 <meta property='og:url' content='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/'>
 <meta property='og:site_name' content='kakahuote'>
@@ -2101,10 +2101,12 @@
 
 <div id="particles-js"></div>
 
-<script src="https://blog.928330.xyz/background/particles.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+  
   particlesJS.load('particles-js', 'https:\/\/blog.928330.xyz\/background\/particlesjs-config.json', function() {
-    console.log('particles.js loaded - callback');
+    console.log('particles.js loaded successfully');
   });
 </script>
 
@@ -2113,9 +2115,19 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
+    pointer-events: none;
+  }
+  
+   
+  #particles-js canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
   }
 </style>
 
