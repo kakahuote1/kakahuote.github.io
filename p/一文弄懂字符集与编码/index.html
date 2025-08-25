@@ -1688,6 +1688,20 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     }
 
      
+    @media (prefers-color-scheme: dark) {
+      #backTopBtn {
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+      }
+      
+      .button-ripple {
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
+        opacity: 0.3;
+      }
+    }
+
+     
     @keyframes gentleFloat {
      0%, 100% { transform: translateY(0px); }
      50% { transform: translateY(-6px); }
@@ -1724,6 +1738,14 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     [data-scheme="dark"] .button-ripple {
      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
      opacity: 0.3;
+    }
+
+     
+    @media (prefers-color-scheme: dark) {
+      .button-ripple {
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
+        opacity: 0.3;
+      }
     }
 
      
@@ -3191,9 +3213,18 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
       
       if (!backTopBtn) return;
       
-      const isDarkMode = document.documentElement.dataset.scheme === 'dark';
+      
+      const isDarkMode = 
+        document.documentElement.dataset.scheme === 'dark' ||
+        document.documentElement.classList.contains('dark') ||
+        document.body.classList.contains('dark') ||
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
       const lightIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop.svg';
       const darkIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop-dark.svg';
+      
+      console.log('检测到主题:', isDarkMode ? '暗色' : '浅色');
+      console.log('当前data-scheme:', document.documentElement.dataset.scheme);
       
       if (isDarkMode) {
         backTopBtn.style.backgroundImage = 'url(' + darkIcon + ')';
@@ -3223,6 +3254,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-scheme') {
+          console.log('检测到主题属性变化:', document.documentElement.dataset.scheme);
           updateBackTopIcon();
         }
       });
@@ -3235,6 +3267,11 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     });
     
     
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateBackTopIcon);
+    }
+    
+    
     if (document.readyState === 'complete') {
       updateBackTopIcon();
     } else {
@@ -3245,6 +3282,9 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(updateBackTopIcon, 100);
     });
+    
+    
+    setInterval(updateBackTopIcon, 2000);
 </script>
 
 
@@ -3319,6 +3359,20 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     }
 
      
+    @media (prefers-color-scheme: dark) {
+      #backTopBtn {
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+      }
+      
+      .button-ripple {
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
+        opacity: 0.3;
+      }
+    }
+
+     
     @keyframes gentleFloat {
      0%, 100% { transform: translateY(0px); }
      50% { transform: translateY(-6px); }
@@ -3355,6 +3409,14 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     [data-scheme="dark"] .button-ripple {
      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
      opacity: 0.3;
+    }
+
+     
+    @media (prefers-color-scheme: dark) {
+      .button-ripple {
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
+        opacity: 0.3;
+      }
     }
 
      
@@ -4822,9 +4884,18 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
       
       if (!backTopBtn) return;
       
-      const isDarkMode = document.documentElement.dataset.scheme === 'dark';
+      
+      const isDarkMode = 
+        document.documentElement.dataset.scheme === 'dark' ||
+        document.documentElement.classList.contains('dark') ||
+        document.body.classList.contains('dark') ||
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
       const lightIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop.svg';
       const darkIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop-dark.svg';
+      
+      console.log('检测到主题:', isDarkMode ? '暗色' : '浅色');
+      console.log('当前data-scheme:', document.documentElement.dataset.scheme);
       
       if (isDarkMode) {
         backTopBtn.style.backgroundImage = 'url(' + darkIcon + ')';
@@ -4854,6 +4925,7 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-scheme') {
+          console.log('检测到主题属性变化:', document.documentElement.dataset.scheme);
           updateBackTopIcon();
         }
       });
@@ -4866,6 +4938,11 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     });
     
     
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateBackTopIcon);
+    }
+    
+    
     if (document.readyState === 'complete') {
       updateBackTopIcon();
     } else {
@@ -4876,6 +4953,9 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(updateBackTopIcon, 100);
     });
+    
+    
+    setInterval(updateBackTopIcon, 2000);
 </script>
 
 
