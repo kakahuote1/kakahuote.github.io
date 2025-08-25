@@ -2171,23 +2171,41 @@ HTTP状态码，表示请求成功</p>
 
      
     [data-scheme="dark"] #backTopBtn {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-     background-color: rgba(0, 0, 0, 0.8);
-     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     background-color: rgba(0, 0, 0, 0.8) !important;
+     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
     }
 
      
     @media (prefers-color-scheme: dark) {
       #backTopBtn {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-        background-color: rgba(0, 0, 0, 0.8);
-        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        background-color: rgba(0, 0, 0, 0.8) !important;
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
       }
       
       .button-ripple {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-        opacity: 0.3;
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        opacity: 0.3 !important;
       }
+    }
+
+     
+    html[data-scheme="dark"] #backTopBtn,
+    body[data-scheme="dark"] #backTopBtn,
+    .dark #backTopBtn,
+    .dark-mode #backTopBtn {
+      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      background-color: rgba(0, 0, 0, 0.8) !important;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
+    }
+
+    html[data-scheme="dark"] .button-ripple,
+    body[data-scheme="dark"] .button-ripple,
+    .dark .button-ripple,
+    .dark-mode .button-ripple {
+      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      opacity: 0.3 !important;
     }
 
      
@@ -2225,15 +2243,15 @@ HTTP状态码，表示请求成功</p>
 
      
     [data-scheme="dark"] .button-ripple {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-     opacity: 0.3;
+     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     opacity: 0.3 !important;
     }
 
      
     @media (prefers-color-scheme: dark) {
       .button-ripple {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-        opacity: 0.3;
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        opacity: 0.3 !important;
       }
     }
 
@@ -3700,7 +3718,10 @@ HTTP状态码，表示请求成功</p>
       const backTopBtn = document.getElementById('backTopBtn');
       const buttonRipple = document.querySelector('.button-ripple');
       
-      if (!backTopBtn) return;
+      if (!backTopBtn) {
+        console.log('返回顶部按钮未找到，等待创建...');
+        return;
+      }
       
       
       const isDarkMode = 
@@ -3712,10 +3733,21 @@ HTTP状态码，表示请求成功</p>
       const lightIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop.svg';
       const darkIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop-dark.svg';
       
+      console.log('=== 主题检测调试信息 ===');
       console.log('检测到主题:', isDarkMode ? '暗色' : '浅色');
       console.log('当前data-scheme:', document.documentElement.dataset.scheme);
+      console.log('document.documentElement.classList:', document.documentElement.classList.toString());
+      console.log('document.body.classList:', document.body.classList.toString());
+      console.log('系统偏好:', window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? '暗色' : '浅色');
+      console.log('返回顶部按钮:', backTopBtn);
+      console.log('按钮当前样式:', {
+        backgroundImage: backTopBtn.style.backgroundImage,
+        backgroundColor: backTopBtn.style.backgroundColor,
+        boxShadow: backTopBtn.style.boxShadow
+      });
       
       if (isDarkMode) {
+        console.log('应用暗色主题样式');
         backTopBtn.style.backgroundImage = 'url(' + darkIcon + ')';
         backTopBtn.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
         backTopBtn.style.boxShadow = '0 4px 20px rgba(255, 255, 255, 0.1)';
@@ -3725,6 +3757,7 @@ HTTP状态码，表示请求成功</p>
           buttonRipple.style.opacity = '0.3';
         }
       } else {
+        console.log('应用浅色主题样式');
         backTopBtn.style.backgroundImage = 'url(' + lightIcon + ')';
         backTopBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
         backTopBtn.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
@@ -3734,6 +3767,9 @@ HTTP状态码，表示请求成功</p>
           buttonRipple.style.opacity = '0.2';
         }
       }
+      
+      console.log('样式应用完成');
+      console.log('========================');
     }
 
     
@@ -3773,7 +3809,30 @@ HTTP状态码，表示请求成功</p>
     });
     
     
+    function waitForBackTopBtn() {
+      const backTopBtn = document.getElementById('backTopBtn');
+      if (backTopBtn) {
+        console.log('返回顶部按钮已找到，立即应用主题样式');
+        updateBackTopIcon();
+      } else {
+        console.log('返回顶部按钮未找到，等待创建...');
+        setTimeout(waitForBackTopBtn, 500);
+      }
+    }
+    
+    
+    waitForBackTopBtn();
+    
+    
     setInterval(updateBackTopIcon, 2000);
+    
+    
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        console.log('页面重新可见，重新应用主题样式');
+        setTimeout(updateBackTopIcon, 100);
+      }
+    });
 </script>
 
 
@@ -3842,23 +3901,41 @@ HTTP状态码，表示请求成功</p>
 
      
     [data-scheme="dark"] #backTopBtn {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-     background-color: rgba(0, 0, 0, 0.8);
-     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     background-color: rgba(0, 0, 0, 0.8) !important;
+     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
     }
 
      
     @media (prefers-color-scheme: dark) {
       #backTopBtn {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-        background-color: rgba(0, 0, 0, 0.8);
-        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        background-color: rgba(0, 0, 0, 0.8) !important;
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
       }
       
       .button-ripple {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-        opacity: 0.3;
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        opacity: 0.3 !important;
       }
+    }
+
+     
+    html[data-scheme="dark"] #backTopBtn,
+    body[data-scheme="dark"] #backTopBtn,
+    .dark #backTopBtn,
+    .dark-mode #backTopBtn {
+      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      background-color: rgba(0, 0, 0, 0.8) !important;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
+    }
+
+    html[data-scheme="dark"] .button-ripple,
+    body[data-scheme="dark"] .button-ripple,
+    .dark .button-ripple,
+    .dark-mode .button-ripple {
+      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      opacity: 0.3 !important;
     }
 
      
@@ -3896,15 +3973,15 @@ HTTP状态码，表示请求成功</p>
 
      
     [data-scheme="dark"] .button-ripple {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-     opacity: 0.3;
+     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     opacity: 0.3 !important;
     }
 
      
     @media (prefers-color-scheme: dark) {
       .button-ripple {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg');
-        opacity: 0.3;
+        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        opacity: 0.3 !important;
       }
     }
 
@@ -5371,7 +5448,10 @@ HTTP状态码，表示请求成功</p>
       const backTopBtn = document.getElementById('backTopBtn');
       const buttonRipple = document.querySelector('.button-ripple');
       
-      if (!backTopBtn) return;
+      if (!backTopBtn) {
+        console.log('返回顶部按钮未找到，等待创建...');
+        return;
+      }
       
       
       const isDarkMode = 
@@ -5383,10 +5463,21 @@ HTTP状态码，表示请求成功</p>
       const lightIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop.svg';
       const darkIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop-dark.svg';
       
+      console.log('=== 主题检测调试信息 ===');
       console.log('检测到主题:', isDarkMode ? '暗色' : '浅色');
       console.log('当前data-scheme:', document.documentElement.dataset.scheme);
+      console.log('document.documentElement.classList:', document.documentElement.classList.toString());
+      console.log('document.body.classList:', document.body.classList.toString());
+      console.log('系统偏好:', window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? '暗色' : '浅色');
+      console.log('返回顶部按钮:', backTopBtn);
+      console.log('按钮当前样式:', {
+        backgroundImage: backTopBtn.style.backgroundImage,
+        backgroundColor: backTopBtn.style.backgroundColor,
+        boxShadow: backTopBtn.style.boxShadow
+      });
       
       if (isDarkMode) {
+        console.log('应用暗色主题样式');
         backTopBtn.style.backgroundImage = 'url(' + darkIcon + ')';
         backTopBtn.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
         backTopBtn.style.boxShadow = '0 4px 20px rgba(255, 255, 255, 0.1)';
@@ -5396,6 +5487,7 @@ HTTP状态码，表示请求成功</p>
           buttonRipple.style.opacity = '0.3';
         }
       } else {
+        console.log('应用浅色主题样式');
         backTopBtn.style.backgroundImage = 'url(' + lightIcon + ')';
         backTopBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
         backTopBtn.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
@@ -5405,6 +5497,9 @@ HTTP状态码，表示请求成功</p>
           buttonRipple.style.opacity = '0.2';
         }
       }
+      
+      console.log('样式应用完成');
+      console.log('========================');
     }
 
     
@@ -5444,7 +5539,30 @@ HTTP状态码，表示请求成功</p>
     });
     
     
+    function waitForBackTopBtn() {
+      const backTopBtn = document.getElementById('backTopBtn');
+      if (backTopBtn) {
+        console.log('返回顶部按钮已找到，立即应用主题样式');
+        updateBackTopIcon();
+      } else {
+        console.log('返回顶部按钮未找到，等待创建...');
+        setTimeout(waitForBackTopBtn, 500);
+      }
+    }
+    
+    
+    waitForBackTopBtn();
+    
+    
     setInterval(updateBackTopIcon, 2000);
+    
+    
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        console.log('页面重新可见，重新应用主题样式');
+        setTimeout(updateBackTopIcon, 100);
+      }
+    });
 </script>
 
 
