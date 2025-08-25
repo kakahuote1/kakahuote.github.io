@@ -1845,7 +1845,7 @@ C1，avg_C2列存放C2列的均值)</p>
      cursor: pointer;
      width: 32px;
      height: 32px;
-     background-image: url('https://blog.928330.xyz/icons/backTop.svg');
+     background-image: url('/icons/backTop.svg');
      background-size: cover;
      background-color: rgba(255, 255, 255, 0.9);
      border-radius: 50%;
@@ -1860,7 +1860,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
      
     [data-scheme="dark"] #backTopBtn {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     background-image: url('/icons/backTop-dark.svg') !important;
      background-color: rgba(0, 0, 0, 0.8) !important;
      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
     }
@@ -1868,13 +1868,13 @@ C1，avg_C2列存放C2列的均值)</p>
      
     @media (prefers-color-scheme: dark) {
       #backTopBtn {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        background-image: url('/icons/backTop-dark.svg') !important;
         background-color: rgba(0, 0, 0, 0.8) !important;
         box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
       }
       
       .button-ripple {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        background-image: url('/icons/backTop-dark.svg') !important;
         opacity: 0.3 !important;
       }
     }
@@ -1884,7 +1884,7 @@ C1，avg_C2列存放C2列的均值)</p>
     body[data-scheme="dark"] #backTopBtn,
     .dark #backTopBtn,
     .dark-mode #backTopBtn {
-      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      background-image: url('/icons/backTop-dark.svg') !important;
       background-color: rgba(0, 0, 0, 0.8) !important;
       box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
     }
@@ -1893,8 +1893,38 @@ C1，avg_C2列存放C2列的均值)</p>
     body[data-scheme="dark"] .button-ripple,
     .dark .button-ripple,
     .dark-mode .button-ripple {
-      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      background-image: url('/icons/backTop-dark.svg') !important;
       opacity: 0.3 !important;
+    }
+
+     
+    [data-scheme="dark"] #backTopBtn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 10px solid #ffffff;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+     
+    #backTopBtn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 10px solid #000000;
+      transform: translate(-50%, -50%);
+      z-index: 1;
     }
 
      
@@ -1911,7 +1941,7 @@ C1，avg_C2列存放C2列的均值)</p>
      width: 32px;
      height: 32px;
      border-radius: 50%;
-     background-image: url('https://blog.928330.xyz/icons/backTop.svg');
+     background-image: url('/icons/backTop.svg');
      background-size: cover;
      background-repeat: no-repeat;
      background-position: center;
@@ -1932,7 +1962,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
      
     [data-scheme="dark"] .button-ripple {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     background-image: url('/icons/backTop-dark.svg') !important;
      opacity: 0.3 !important;
     }
 
@@ -3419,8 +3449,9 @@ C1，avg_C2列存放C2列的均值)</p>
         document.body.classList.contains('dark') ||
         window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       
-      const lightIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop.svg';
-      const darkIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop-dark.svg';
+      
+      const lightIcon = '/icons/backTop.svg';
+      const darkIcon = '/icons/backTop-dark.svg';
       
       console.log('=== 主题检测调试信息 ===');
       console.log('检测到主题:', isDarkMode ? '暗色' : '浅色');
@@ -3575,7 +3606,7 @@ C1，avg_C2列存放C2列的均值)</p>
      cursor: pointer;
      width: 32px;
      height: 32px;
-     background-image: url('https://blog.928330.xyz/icons/backTop.svg');
+     background-image: url('/icons/backTop.svg');
      background-size: cover;
      background-color: rgba(255, 255, 255, 0.9);
      border-radius: 50%;
@@ -3590,7 +3621,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
      
     [data-scheme="dark"] #backTopBtn {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     background-image: url('/icons/backTop-dark.svg') !important;
      background-color: rgba(0, 0, 0, 0.8) !important;
      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
     }
@@ -3598,13 +3629,13 @@ C1，avg_C2列存放C2列的均值)</p>
      
     @media (prefers-color-scheme: dark) {
       #backTopBtn {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        background-image: url('/icons/backTop-dark.svg') !important;
         background-color: rgba(0, 0, 0, 0.8) !important;
         box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
       }
       
       .button-ripple {
-        background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+        background-image: url('/icons/backTop-dark.svg') !important;
         opacity: 0.3 !important;
       }
     }
@@ -3614,7 +3645,7 @@ C1，avg_C2列存放C2列的均值)</p>
     body[data-scheme="dark"] #backTopBtn,
     .dark #backTopBtn,
     .dark-mode #backTopBtn {
-      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      background-image: url('/icons/backTop-dark.svg') !important;
       background-color: rgba(0, 0, 0, 0.8) !important;
       box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
     }
@@ -3623,8 +3654,38 @@ C1，avg_C2列存放C2列的均值)</p>
     body[data-scheme="dark"] .button-ripple,
     .dark .button-ripple,
     .dark-mode .button-ripple {
-      background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+      background-image: url('/icons/backTop-dark.svg') !important;
       opacity: 0.3 !important;
+    }
+
+     
+    [data-scheme="dark"] #backTopBtn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 10px solid #ffffff;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+     
+    #backTopBtn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 10px solid #000000;
+      transform: translate(-50%, -50%);
+      z-index: 1;
     }
 
      
@@ -3641,7 +3702,7 @@ C1，avg_C2列存放C2列的均值)</p>
      width: 32px;
      height: 32px;
      border-radius: 50%;
-     background-image: url('https://blog.928330.xyz/icons/backTop.svg');
+     background-image: url('/icons/backTop.svg');
      background-size: cover;
      background-repeat: no-repeat;
      background-position: center;
@@ -3662,7 +3723,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
      
     [data-scheme="dark"] .button-ripple {
-     background-image: url('https://blog.928330.xyz/icons/backTop-dark.svg') !important;
+     background-image: url('/icons/backTop-dark.svg') !important;
      opacity: 0.3 !important;
     }
 
@@ -5149,8 +5210,9 @@ C1，avg_C2列存放C2列的均值)</p>
         document.body.classList.contains('dark') ||
         window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       
-      const lightIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop.svg';
-      const darkIcon = 'https:\/\/blog.928330.xyz\/icons\/backTop-dark.svg';
+      
+      const lightIcon = '/icons/backTop.svg';
+      const darkIcon = '/icons/backTop-dark.svg';
       
       console.log('=== 主题检测调试信息 ===');
       console.log('检测到主题:', isDarkMode ? '暗色' : '浅色');
