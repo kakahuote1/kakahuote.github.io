@@ -3076,6 +3076,30 @@
   #rope-physics-container {
     pointer-events: auto !important;
   }
+  
+   
+  #rope-svg-container svg {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+  
+  #rope-svg-container path {
+    transition: all 0.1s ease-out;
+  }
+  
+   
+  #rope-svg-container path,
+  #rope-path {
+    stroke: #311b08 !important;
+    stroke-width: 2.5 !important;
+  }
+  
+   
+  #rope-svg-container svg path {
+    stroke: #311b08 !important;
+    stroke-width: 2.5 !important;
+  }
+  
+
 
   #rope {
     position: absolute;
@@ -3673,11 +3697,11 @@
     
     
     
-    const ropeSegments = 40; 
-    const segmentRadius = 2.5; 
+    const ropeSegments = 80; 
+    const segmentRadius = 1.5; 
     const segmentRenderHeight = 6; 
     const segmentRenderWidth = 4; 
-    const constraintLength = 4; 
+    const constraintLength = 2.5; 
 
     const ropeGroup = Matter.Body.nextGroup(true);
     const ropeChain = Composite.create({ label: 'Rope' });
@@ -3687,9 +3711,9 @@
       const segment = Bodies.circle(ropeAnchorX, i * constraintLength, segmentRadius, {
           collisionFilter: { group: ropeGroup },
           density: 0.1, 
-          friction: 0.2, 
-          frictionAir: 0.03, 
-          restitution: 0.05 
+          friction: 0.4, 
+          frictionAir: 0.08, 
+          restitution: 0.02 
       });
       Composite.add(ropeChain, segment);
     }
@@ -3702,9 +3726,9 @@
       {
         collisionFilter: { group: ropeGroup },
         density: 0.01, 
-        friction: 0.3,  
-        frictionAir: 0.05, 
-        restitution: 0.05 
+        friction: 0.5,  
+        frictionAir: 0.1, 
+        restitution: 0.02 
       }
     );
     Composite.add(ropeChain, pullRingBody);
@@ -3724,9 +3748,9 @@
         
         
         
-        stiffness: 0.3, 
-        damping: 0.4,   
-        length: constraintLength,
+        stiffness: 0.8, 
+        damping: 0.8,   
+        length: constraintLength * 0.6, 
         
         render: {
           visible: false
@@ -3743,49 +3767,128 @@
     domContainer.style.zIndex = '10000';
     document.body.appendChild(domContainer);
 
-    const domSegments = [];
-    ropeChain.bodies.forEach((body, index) => {
-      const div = document.createElement('div');
-      if (index === ropeSegments - 1) { 
-        div.id = 'pull-ring-physics';
-        div.innerHTML = currentEmoji.ring;
-        div.title = `${currentEmoji.name}: ${currentEmoji.description}`;
-        div.style.cssText = `
-          font-size: 24px; cursor: grab; pointer-events: auto;
-          width: 30px; height: 30px; text-align: center;
-          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); position: absolute;
-          user-select: none;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-        `;
-        
-        
-        div.addEventListener('mousedown', () => {
-          div.style.cursor = 'grabbing';
-        });
-        
-        div.addEventListener('mouseup', () => {
-          div.style.cursor = 'grab';
-        });
-        
-        
-        
-        
-        
-        
-      } else { 
-        div.className = 'rope-segment';
-        div.style.cssText = `
-          width: ${segmentRenderWidth}px;
-          height: ${segmentRenderHeight}px; 
-          background: linear-gradient(to bottom, #654321, #8B4513, #A0522D);
-          border-radius: 2px; position: absolute;
-        `;
-      }
-      domContainer.appendChild(div);
-      domSegments.push(div);
+    
+    const svgContainer = document.createElement('div');
+    svgContainer.id = 'rope-svg-container';
+    svgContainer.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    `;
+    domContainer.appendChild(svgContainer);
+    
+    
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '100');
+    svg.setAttribute('height', '100vh');
+    svg.setAttribute('viewBox', '0 0 100 100vh');
+    svg.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100vh;
+      overflow: visible;
+    `;
+    svgContainer.appendChild(svg);
+    
+    
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    gradient.setAttribute('id', 'ropeGradient');
+    gradient.setAttribute('x1', '0%');
+    gradient.setAttribute('y1', '0%');
+    gradient.setAttribute('x2', '0%');
+    gradient.setAttribute('y2', '100%');
+    
+    const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', '#654321');
+    
+    const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop2.setAttribute('offset', '25%');
+    stop2.setAttribute('stop-color', '#8B4513');
+    
+    const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop3.setAttribute('offset', '50%');
+    stop3.setAttribute('stop-color', '#A0522D');
+    
+    const stop4 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop4.setAttribute('offset', '75%');
+    stop4.setAttribute('stop-color', '#8B4513');
+    
+    const stop5 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop5.setAttribute('offset', '100%');
+    stop5.setAttribute('stop-color', '#654321');
+    
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    gradient.appendChild(stop3);
+    gradient.appendChild(stop4);
+    gradient.appendChild(stop5);
+    defs.appendChild(gradient);
+    svg.appendChild(defs);
+    
+    
+    const ropePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    ropePath.setAttribute('fill', 'none');
+    
+    ropePath.setAttribute('stroke', '#311b08');
+    ropePath.setAttribute('stroke-width', '2.5');
+    ropePath.setAttribute('stroke-linecap', 'round');
+    ropePath.setAttribute('stroke-linejoin', 'round');
+    ropePath.setAttribute('id', 'rope-path'); 
+    svg.appendChild(ropePath);
+    
+    
+    ropePath.setAttribute('d', `M 50 0 L 50 400`);
+    
+    
+    console.log('绳子路径创建完成:', {
+      stroke: ropePath.getAttribute('stroke'),
+      strokeWidth: ropePath.getAttribute('stroke-width'),
+      id: ropePath.getAttribute('id')
     });
+    
+    
+    const pullRingDiv = document.createElement('div');
+    pullRingDiv.id = 'pull-ring-physics';
+    pullRingDiv.innerHTML = currentEmoji.ring;
+    pullRingDiv.title = `${currentEmoji.name}: ${currentEmoji.description}`;
+    pullRingDiv.style.cssText = `
+      font-size: 24px; cursor: grab; pointer-events: auto;
+      width: 30px; height: 30px; text-align: center;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); position: absolute;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      z-index: 2;
+      transform: translate(35px, 300px); /* 初始位置 */
+    `;
+    
+    
+    pullRingDiv.addEventListener('mousedown', () => {
+      pullRingDiv.style.cursor = 'grabbing';
+    });
+    
+    pullRingDiv.addEventListener('mouseup', () => {
+      pullRingDiv.style.cursor = 'grab';
+    });
+    
+    domContainer.appendChild(pullRingDiv);
+    
+    
+    const ropeElements = {
+      svg: svg,
+      path: ropePath,
+      pullRing: pullRingDiv
+    };
 
     const mouse = Mouse.create(document.body);
     const mouseConstraint = MouseConstraint.create(engine, {
@@ -3893,20 +3996,52 @@
 
     
     (function render() {
+      
+      let pathData = '';
+      
+      
+      const topPoint = { x: 50, y: 0 }; 
+      pathData += `M ${topPoint.x} ${topPoint.y}`;
+      
+      
       ropeChain.bodies.forEach((body, index) => {
-        const div = domSegments[index];
-        if (!div) return;
-        div.style.transform = `translate(
-          ${body.position.x - div.offsetWidth / 2}px,
-          ${body.position.y - div.offsetHeight / 2}px
-        ) rotate(${body.angle}rad)`;
+        if (index < ropeSegments - 1) { 
+          const relativeX = body.position.x - ropeAnchorX + 50; 
+          const relativeY = body.position.y;
+          pathData += ` L ${relativeX} ${relativeY}`;
+        }
       });
-      requestAnimationFrame(render);
+      
+      
+      const pullRingBody = ropeChain.bodies[ropeSegments - 1];
+      if (pullRingBody) {
+        const relativeX = pullRingBody.position.x - ropeAnchorX + 50; 
+        const relativeY = pullRingBody.position.y;
+        pathData += ` L ${relativeX} ${relativeY}`;
+      }
+      
+      
+      ropeElements.path.setAttribute('d', pathData);
+      
+      
+      if (pullRingBody) {
+        ropeElements.pullRing.style.transform = `translate(
+          ${pullRingBody.position.x - 15}px,
+          ${pullRingBody.position.y - 15}px
+        )`;
+        
+        
+        console.log('拉环位置:', pullRingBody.position.x, pullRingBody.position.y);
+      }
+      
+      setTimeout(() => requestAnimationFrame(render), 1000 / 240); 
     })();
     
     
     
     const runner = Runner.create();
+    
+    runner.delta = 1000 / 240; 
     Runner.run(runner, engine);
 
     
@@ -5146,6 +5281,30 @@ particlesJS('particles-js', {
   #rope-physics-container {
     pointer-events: auto !important;
   }
+  
+   
+  #rope-svg-container svg {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+  
+  #rope-svg-container path {
+    transition: all 0.1s ease-out;
+  }
+  
+   
+  #rope-svg-container path,
+  #rope-path {
+    stroke: #311b08 !important;
+    stroke-width: 2.5 !important;
+  }
+  
+   
+  #rope-svg-container svg path {
+    stroke: #311b08 !important;
+    stroke-width: 2.5 !important;
+  }
+  
+
 
   #rope {
     position: absolute;
@@ -5743,11 +5902,11 @@ particlesJS('particles-js', {
     
     
     
-    const ropeSegments = 40; 
-    const segmentRadius = 2.5; 
+    const ropeSegments = 80; 
+    const segmentRadius = 1.5; 
     const segmentRenderHeight = 6; 
     const segmentRenderWidth = 4; 
-    const constraintLength = 4; 
+    const constraintLength = 2.5; 
 
     const ropeGroup = Matter.Body.nextGroup(true);
     const ropeChain = Composite.create({ label: 'Rope' });
@@ -5757,9 +5916,9 @@ particlesJS('particles-js', {
       const segment = Bodies.circle(ropeAnchorX, i * constraintLength, segmentRadius, {
           collisionFilter: { group: ropeGroup },
           density: 0.1, 
-          friction: 0.2, 
-          frictionAir: 0.03, 
-          restitution: 0.05 
+          friction: 0.4, 
+          frictionAir: 0.08, 
+          restitution: 0.02 
       });
       Composite.add(ropeChain, segment);
     }
@@ -5772,9 +5931,9 @@ particlesJS('particles-js', {
       {
         collisionFilter: { group: ropeGroup },
         density: 0.01, 
-        friction: 0.3,  
-        frictionAir: 0.05, 
-        restitution: 0.05 
+        friction: 0.5,  
+        frictionAir: 0.1, 
+        restitution: 0.02 
       }
     );
     Composite.add(ropeChain, pullRingBody);
@@ -5794,9 +5953,9 @@ particlesJS('particles-js', {
         
         
         
-        stiffness: 0.3, 
-        damping: 0.4,   
-        length: constraintLength,
+        stiffness: 0.8, 
+        damping: 0.8,   
+        length: constraintLength * 0.6, 
         
         render: {
           visible: false
@@ -5813,49 +5972,128 @@ particlesJS('particles-js', {
     domContainer.style.zIndex = '10000';
     document.body.appendChild(domContainer);
 
-    const domSegments = [];
-    ropeChain.bodies.forEach((body, index) => {
-      const div = document.createElement('div');
-      if (index === ropeSegments - 1) { 
-        div.id = 'pull-ring-physics';
-        div.innerHTML = currentEmoji.ring;
-        div.title = `${currentEmoji.name}: ${currentEmoji.description}`;
-        div.style.cssText = `
-          font-size: 24px; cursor: grab; pointer-events: auto;
-          width: 30px; height: 30px; text-align: center;
-          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); position: absolute;
-          user-select: none;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-        `;
-        
-        
-        div.addEventListener('mousedown', () => {
-          div.style.cursor = 'grabbing';
-        });
-        
-        div.addEventListener('mouseup', () => {
-          div.style.cursor = 'grab';
-        });
-        
-        
-        
-        
-        
-        
-      } else { 
-        div.className = 'rope-segment';
-        div.style.cssText = `
-          width: ${segmentRenderWidth}px;
-          height: ${segmentRenderHeight}px; 
-          background: linear-gradient(to bottom, #654321, #8B4513, #A0522D);
-          border-radius: 2px; position: absolute;
-        `;
-      }
-      domContainer.appendChild(div);
-      domSegments.push(div);
+    
+    const svgContainer = document.createElement('div');
+    svgContainer.id = 'rope-svg-container';
+    svgContainer.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    `;
+    domContainer.appendChild(svgContainer);
+    
+    
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '100');
+    svg.setAttribute('height', '100vh');
+    svg.setAttribute('viewBox', '0 0 100 100vh');
+    svg.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100vh;
+      overflow: visible;
+    `;
+    svgContainer.appendChild(svg);
+    
+    
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    gradient.setAttribute('id', 'ropeGradient');
+    gradient.setAttribute('x1', '0%');
+    gradient.setAttribute('y1', '0%');
+    gradient.setAttribute('x2', '0%');
+    gradient.setAttribute('y2', '100%');
+    
+    const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', '#654321');
+    
+    const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop2.setAttribute('offset', '25%');
+    stop2.setAttribute('stop-color', '#8B4513');
+    
+    const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop3.setAttribute('offset', '50%');
+    stop3.setAttribute('stop-color', '#A0522D');
+    
+    const stop4 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop4.setAttribute('offset', '75%');
+    stop4.setAttribute('stop-color', '#8B4513');
+    
+    const stop5 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop5.setAttribute('offset', '100%');
+    stop5.setAttribute('stop-color', '#654321');
+    
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    gradient.appendChild(stop3);
+    gradient.appendChild(stop4);
+    gradient.appendChild(stop5);
+    defs.appendChild(gradient);
+    svg.appendChild(defs);
+    
+    
+    const ropePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    ropePath.setAttribute('fill', 'none');
+    
+    ropePath.setAttribute('stroke', '#311b08');
+    ropePath.setAttribute('stroke-width', '2.5');
+    ropePath.setAttribute('stroke-linecap', 'round');
+    ropePath.setAttribute('stroke-linejoin', 'round');
+    ropePath.setAttribute('id', 'rope-path'); 
+    svg.appendChild(ropePath);
+    
+    
+    ropePath.setAttribute('d', `M 50 0 L 50 400`);
+    
+    
+    console.log('绳子路径创建完成:', {
+      stroke: ropePath.getAttribute('stroke'),
+      strokeWidth: ropePath.getAttribute('stroke-width'),
+      id: ropePath.getAttribute('id')
     });
+    
+    
+    const pullRingDiv = document.createElement('div');
+    pullRingDiv.id = 'pull-ring-physics';
+    pullRingDiv.innerHTML = currentEmoji.ring;
+    pullRingDiv.title = `${currentEmoji.name}: ${currentEmoji.description}`;
+    pullRingDiv.style.cssText = `
+      font-size: 24px; cursor: grab; pointer-events: auto;
+      width: 30px; height: 30px; text-align: center;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); position: absolute;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      z-index: 2;
+      transform: translate(35px, 300px); /* 初始位置 */
+    `;
+    
+    
+    pullRingDiv.addEventListener('mousedown', () => {
+      pullRingDiv.style.cursor = 'grabbing';
+    });
+    
+    pullRingDiv.addEventListener('mouseup', () => {
+      pullRingDiv.style.cursor = 'grab';
+    });
+    
+    domContainer.appendChild(pullRingDiv);
+    
+    
+    const ropeElements = {
+      svg: svg,
+      path: ropePath,
+      pullRing: pullRingDiv
+    };
 
     const mouse = Mouse.create(document.body);
     const mouseConstraint = MouseConstraint.create(engine, {
@@ -5963,20 +6201,52 @@ particlesJS('particles-js', {
 
     
     (function render() {
+      
+      let pathData = '';
+      
+      
+      const topPoint = { x: 50, y: 0 }; 
+      pathData += `M ${topPoint.x} ${topPoint.y}`;
+      
+      
       ropeChain.bodies.forEach((body, index) => {
-        const div = domSegments[index];
-        if (!div) return;
-        div.style.transform = `translate(
-          ${body.position.x - div.offsetWidth / 2}px,
-          ${body.position.y - div.offsetHeight / 2}px
-        ) rotate(${body.angle}rad)`;
+        if (index < ropeSegments - 1) { 
+          const relativeX = body.position.x - ropeAnchorX + 50; 
+          const relativeY = body.position.y;
+          pathData += ` L ${relativeX} ${relativeY}`;
+        }
       });
-      requestAnimationFrame(render);
+      
+      
+      const pullRingBody = ropeChain.bodies[ropeSegments - 1];
+      if (pullRingBody) {
+        const relativeX = pullRingBody.position.x - ropeAnchorX + 50; 
+        const relativeY = pullRingBody.position.y;
+        pathData += ` L ${relativeX} ${relativeY}`;
+      }
+      
+      
+      ropeElements.path.setAttribute('d', pathData);
+      
+      
+      if (pullRingBody) {
+        ropeElements.pullRing.style.transform = `translate(
+          ${pullRingBody.position.x - 15}px,
+          ${pullRingBody.position.y - 15}px
+        )`;
+        
+        
+        console.log('拉环位置:', pullRingBody.position.x, pullRingBody.position.y);
+      }
+      
+      setTimeout(() => requestAnimationFrame(render), 1000 / 240); 
     })();
     
     
     
     const runner = Runner.create();
+    
+    runner.delta = 1000 / 240; 
     Runner.run(runner, engine);
 
     
