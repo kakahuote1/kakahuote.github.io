@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Wed, 27 Aug 2025 14:33:00 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 31 Aug 2025 00:31:28 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Linux命令（文件写入与查看篇）</title>
         <link>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/</link>
         <pubDate>Wed, 27 Aug 2025 14:12:37 +0800</pubDate>
@@ -8093,13 +8093,22 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;id&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;and&lt;/span&gt; ...
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;**字符型：**select * from table where id=&amp;rsquo;$id&amp;rsquo;我们需要输入&lt;code&gt;1&#39; and ... #&lt;/code&gt;  ，闭合前后单引号&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;id&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;and&lt;/span&gt; ... &lt;span style=&#34;color:#56b6c2&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;       
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;mark&gt;&lt;strong&gt;关于注释：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&amp;ndash; 是官方的注释，后面必须跟空格&lt;/strong&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;strong&gt;&amp;ndash; 是官方的注释，后面必须跟空格&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;# 是mysql特有的注释，后面无需跟空格&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;如果直接在url中注入而非输入框，需要使用%23代替#，因为浏览器会把#后面内容截断，而非编码&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;&lt;strong&gt;有的网站会过滤空格导致&amp;ndash;报错，这时候可以使用&amp;ndash;+，用+代替空格&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;以上方法不一定全部适用，需要结合实际情况尝试&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;以上方法不一定全部适用，需要结合实际情况尝试&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;基于这种思路，只要我们能够测试注入成功，使得页面不出现语法报错，那么就可以借此判断出类型：&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -8133,11 +8142,21 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;strong&gt;分别测试是否对应的结果&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;mark&gt;&lt;strong&gt;还有更加简单（但是不知道是否一定有效的方法）：&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            📝
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Note
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;strong&gt;还有更加简单（但是不知道是否一定有效的方法）：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;输入&lt;code&gt;2-1&lt;/code&gt;，如果是数字型，就会执行&lt;code&gt;2-1&lt;/code&gt;运算，&lt;code&gt;id=1&lt;/code&gt;；如果是字符型，就会是&lt;code&gt;id=2&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;可以构造一个&lt;code&gt;m-n&lt;/code&gt;，&lt;code&gt;m&lt;/code&gt;是不存在的&lt;code&gt;id&lt;/code&gt;，但&lt;code&gt;m-n&lt;/code&gt;结果是存在的&lt;code&gt;id&lt;/code&gt;，依据结果来判断是字符型还是数字型&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;这一点在盲注时比较方便&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;这一点在盲注时比较方便&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;通过以上测试，我们知道了现在DVWA的注入类型是字符型&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:#fab920;font-size:15px&#34;&gt;&lt;strong&gt;当然，在写题的时候很有可能你一个也试不出来，因为它是被&lt;code&gt;(&#39;&#39;)&lt;/code&gt;或者&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;包裹的，这就需要你凭感觉试了&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:#fab920;font-size:15px&#34;&gt;&lt;strong&gt;不过在此之前，先检查一下你之前的语句有没有写对吧~&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
@@ -8147,9 +8166,19 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; or 1=1 order by 2 #  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; or 1=1 order by 3 #      //报错了
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;order by 3的时候报错，说明当前查询的表中只有2列&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;and&lt;/code&gt;：如果and前为真，执行后面内容&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;or&lt;/code&gt;：如果前面为假，才执行后面内容&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;strong&gt;&lt;code&gt;and&lt;/code&gt;：如果and前为真，执行后面内容&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;or&lt;/code&gt;：如果前面为假，才执行后面内容&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id=&#34;3确定显示的字段顺序&#34;&gt;3.确定显示的字段顺序
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;虽然我们知道了字段数，但很可能这些字段不是都显示在网页前端的&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;假如其中某些字段的查询结果是会返回到前端的，那么我们就需要知道这些字段中哪些结果会回显，如果我们直接输入查询字段进行查询，语句会非常冗长，而且很可能还需要做很多次测试&lt;/p&gt;
@@ -8506,11 +8535,21 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Operand should contain 1 column(s)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而，正如上面所说，&lt;code&gt;extractvalue()&lt;/code&gt; 函数最大返回32个字符，所以现在得到的并非完整的信息，这一点我们也能从结果末尾没有&lt;code&gt;~&lt;/code&gt;看出来**（所以两边都加&lt;code&gt;~&lt;/code&gt;是比较明智的选择）**&lt;/p&gt;
 &lt;p&gt;所以，我们要适当舍弃一些东西，比如把admin单独拿出来，或者使用**&lt;code&gt;substring()&lt;/code&gt;函数**&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;substring(strings,m,n)&lt;/code&gt;：从strings的第m个字符开始，向后截取n个字符。&lt;/strong&gt;
-&lt;strong&gt;&lt;mark&gt;注意&lt;/mark&gt;：1.&lt;code&gt;substring()&lt;/code&gt;的开始位置为1，和&lt;code&gt;limit&lt;/code&gt;不一样！&lt;/strong&gt;
-&lt;strong&gt;2.通常&lt;code&gt;substr()&lt;/code&gt;可以代替它，用法也相同；而&lt;code&gt;mid()&lt;/code&gt;总是可以代替它，因为就是它的别名&lt;/strong&gt;
-&lt;strong&gt;&lt;mark&gt;substr()=substring()=mid()&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;strong&gt;&lt;code&gt;substring(strings,m,n)&lt;/code&gt;：从strings的第m个字符开始，向后截取n个字符&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;code&gt;substring()&lt;/code&gt;的开始位置为1，和&lt;code&gt;limit&lt;/code&gt;不一样！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.通常&lt;code&gt;substr()&lt;/code&gt;可以代替它，用法也相同；而&lt;code&gt;mid()&lt;/code&gt;总是可以代替它，因为就是它的别名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;也就是说：&lt;strong&gt;substr()=substring()=mid()&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&amp;#39;,&amp;#39;,user,password), 1, 30) from users limit 0,1),0x7e)) #
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&amp;#39; and extractvalue(1,concat(0x7e,(select substring(concat_ws(&amp;#39;,&amp;#39;,user,password), 31, 30) from users limit 0,1),0x7e)) #
@@ -8645,8 +8684,17 @@
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;repeat(str,times)&lt;/code&gt;：字符串&lt;code&gt;str&lt;/code&gt;复制&lt;code&gt;times&lt;/code&gt;次&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;*我在dvwa上使用上述的正则匹配方式无法得到延时结果，如果您知道为什么请留言&amp;gt;&amp;lt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            ⚠️
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Warning
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;我在dvwa上使用上述的正则匹配方式无法得到延时结果，如果您知道为什么请留言&amp;gt;&amp;lt;&lt;/p&gt;
 &lt;p&gt;参考文章：&lt;a class=&#34;link&#34; href=&#34;https://www.cdxy.me/?p=789&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;MySQL时间盲注五种延时方法
     
@@ -8657,7 +8705,8 @@
             fill=&#34;currentColor&#34;&gt;
     &lt;/svg&gt;&lt;/span&gt;
     
-&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;时间盲注其余的操作顺序和布尔盲注相同，只是换了一种方式实现判断&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;报错盲注&#34;&gt;报错盲注
 &lt;/h3&gt;&lt;p&gt;报错盲注的思想和时间盲注相同，都是利用if函数&lt;/p&gt;
