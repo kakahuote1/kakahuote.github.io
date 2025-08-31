@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/404.html'>
 
-<link rel="stylesheet" href="/scss/style.min.d706dc6b4d9b51b70b51c7ffd551c1cefb228abf8d2070eeee11d10d2e3bb4b8.css"><meta property='og:title' content="404 Page not found">
+<link rel="stylesheet" href="/scss/style.min.605398a8e2884eb35f9f3054c62db6b5935e3f29c3f93a13872416e35ce898e6.css"><meta property='og:title' content="404 Page not found">
 <meta property='og:description' content="靡不有初，鲜克有终">
 <meta property='og:url' content='https://blog.928330.xyz/404.html'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-08-31T00:31:28&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-08-31T17:13:42&#43;08:00 '/>
 <meta name="twitter:title" content="404 Page not found">
 <meta name="twitter:description" content="靡不有初，鲜克有终">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -1137,13 +1137,13 @@
    
   #rope-svg-container path,
   #rope-path {
-    stroke: #311b08 !important;
+    stroke: #4b2b0f !important;
     stroke-width: 2.5 !important;
   }
   
    
   #rope-svg-container svg path {
-    stroke: #311b08 !important;
+    stroke: #4b2b0f !important;
     stroke-width: 2.5 !important;
   }
   
@@ -1247,10 +1247,10 @@
    
   .toc-lock-btn {
     position: absolute;
-    top: 16px;
-    right: 8px;
-    width: 32px;
-    height: 32px;
+    top: 32px;
+    right: 5px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1273,6 +1273,21 @@
   
   .toc-lock-btn:active {
     transform: scale(0.95);
+  }
+  
+   
+  .toc-lock-btn:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.08);
+  }
+  
+  .toc-lock-btn:focus-visible {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.08);
   }
   
   .toc-lock-btn.locked {
@@ -1304,8 +1319,8 @@
   }
   
   .toc-lock-btn .lock-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     stroke: currentColor;
     fill: none;
     stroke-width: 2.5;
@@ -1317,15 +1332,15 @@
    
   .toc-lock-label {
     position: absolute;
-    top: 16px;
-    right: 43px;
-    font-size: 18px;
+    top: 38px;
+    right: 28px;
+    font-size: 16px;
     color: rgba(0, 0, 0, 0.6);
-    font-weight: 500;
+    font-weight: 700;
     z-index: 100;
     user-select: none;
     pointer-events: none;
-    line-height: 32px;
+    line-height: 1;
     display: flex;
     align-items: center;
   }
@@ -1341,6 +1356,15 @@
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+  }
+  
+   
+  [data-scheme="dark"] .toc-lock-btn:focus,
+  [data-scheme="dark"] .toc-lock-btn:focus-visible {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 2px 8px rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
   }
   
   [data-scheme="dark"] .toc-lock-btn.locked {
@@ -1685,14 +1709,14 @@
   
 
   function initRope() {
-    console.log('initRope (Physics Version) 函数被调用');
+
 
     if (typeof Matter === 'undefined') {
       console.error('Matter.js 库未加载，无法初始化物理绳索。');
       return;
     }
     if (document.getElementById('rope-physics-container')) {
-      console.log('物理绳索已存在，跳过创建');
+
       return;
     }
 
@@ -1886,7 +1910,7 @@
     const ropePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     ropePath.setAttribute('fill', 'none');
     
-    ropePath.setAttribute('stroke', '#311b08');
+    ropePath.setAttribute('stroke', '#4b2b0f');
     ropePath.setAttribute('stroke-width', '2.5');
     ropePath.setAttribute('stroke-linecap', 'round');
     ropePath.setAttribute('stroke-linejoin', 'round');
@@ -1897,11 +1921,7 @@
     ropePath.setAttribute('d', `M 50 0 L 50 400`);
     
     
-    console.log('绳子路径创建完成:', {
-      stroke: ropePath.getAttribute('stroke'),
-      strokeWidth: ropePath.getAttribute('stroke-width'),
-      id: ropePath.getAttribute('id')
-    });
+    
     
     
     const pullRingDiv = document.createElement('div');
@@ -1917,7 +1937,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
       z-index: 2;
-      transform: translate(35px, 300px); /* 初始位置 */
+      transform: translate(40px, 300px); /* 初始位置，向右移动5px */
     `;
     
     
@@ -1956,7 +1976,7 @@
     
     
     Events.on(mouseConstraint, 'mousedown', (event) => {
-      console.log('鼠标按下事件:', event);
+
     });
     
     
@@ -1966,9 +1986,6 @@
     let dragStartPosition = null;
     
     Events.on(mouseConstraint, 'startdrag', () => {
-      console.log('开始拖动:', mouseConstraint.body);
-      console.log('拉环物体:', pullRingBody);
-      console.log('是否匹配:', mouseConstraint.body === pullRingBody);
       document.body.classList.add('no-text-selection');
       
       
@@ -1977,17 +1994,10 @@
           x: mouseConstraint.body.position.x,
           y: mouseConstraint.body.position.y
         };
-        console.log('记录拖动开始位置:', dragStartPosition);
-      } else {
-        console.log('不是拉环，不记录位置');
       }
     });
     
     Events.on(mouseConstraint, 'enddrag', () => {
-      console.log('结束拖动');
-      console.log('拖动物体:', mouseConstraint.body);
-      console.log('拉环物体:', pullRingBody);
-      console.log('拖动开始位置:', dragStartPosition);
       document.body.classList.remove('no-text-selection');
       
       
@@ -2000,11 +2010,8 @@
           Math.pow(currentPosition.y - dragStartPosition.y, 2)
         );
         
-        console.log('拖动距离:', dragDistance);
-        
         
         if (dragDistance > 1) {
-          console.log('拖动距离:', dragDistance, '触发天降表情');
           createSeasonalFalling(currentEmoji);
           
           
@@ -2024,23 +2031,14 @@
             y: dy * 0.001 
           });
           
-        } else {
-          console.log('拖动距离:', dragDistance, '不触发事件');
         }
         
         
         dragStartPosition = null;
-      } else {
-        console.log('没有拖动开始位置，不触发事件');
       }
     });
     
-    
-    Events.on(mouseConstraint, 'mousemove', () => {
-      if (mouseConstraint.body) {
-        console.log('正在拖动:', mouseConstraint.body);
-      }
-    });
+
 
     
     (function render() {
@@ -2073,13 +2071,17 @@
       
       
       if (pullRingBody) {
+        
+        
+        const adjustedX = pullRingBody.position.x - 15 + 3.5; 
+        const adjustedY = pullRingBody.position.y - 15;
+        
         ropeElements.pullRing.style.transform = `translate(
-          ${pullRingBody.position.x - 15}px,
-          ${pullRingBody.position.y - 15}px
+          ${adjustedX}px,
+          ${adjustedY}px
         )`;
         
-        
-        console.log('拉环位置:', pullRingBody.position.x, pullRingBody.position.y);
+
       }
       
       setTimeout(() => requestAnimationFrame(render), 1000 / 240); 
@@ -2099,14 +2101,13 @@
       engine.world.gravity.y = 1.2;
     }, 100); 
 
-    console.log(`可拖动的物理绳索已创建，使用${currentEmoji.name}主题`);
+
   }
 
   
 
   function createSeasonalFalling(emojiConfig) {
-   console.log(`开始创建${emojiConfig.name}飘落效果...`);
-   console.log('emojiConfig:', emojiConfig);
+
    
    
    const fallingContainer = document.createElement('div');
@@ -2122,7 +2123,7 @@
      overflow: hidden;
    `;
    document.body.appendChild(fallingContainer);
-   console.log('飘落容器已创建');
+
    
    
    const currentHour = new Date().getHours();
@@ -2135,14 +2136,13 @@
     currentTimePeriod = window.timeEmojis.find(t => t.period === "evening");
    }
    
-   console.log(`当前时间: ${currentHour}点, 时间段: ${currentTimePeriod.name} - ${currentTimePeriod.description}`);
-   console.log('timeEmojis:', window.timeEmojis);
+
    
    
    const totalElements = emojiConfig.month >= 11 || emojiConfig.month <= 2 ? 30 : 25; 
    let activeElements = 0;
    
-   console.log(`准备创建 ${totalElements} 个飘落元素`);
+
    
    for (let i = 0; i < totalElements; i++) {
     setTimeout(() => {
@@ -2159,7 +2159,7 @@
       emojiType = "time";
      }
      
-     console.log(`创建第 ${i + 1} 个元素: ${selectedEmoji} (${emojiType})`);
+
      element.innerHTML = selectedEmoji;
      
      
@@ -2357,6 +2357,14 @@
   
   function initTocLock() {
     
+    
+    const articleToc = document.querySelector('#TableOfContents');
+    if (!articleToc) {
+      
+      return;
+    }
+    
+    
     const tocContainer = document.querySelector('.widget.archives');
     if (!tocContainer) {
       return;
@@ -2490,7 +2498,7 @@
   
   
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM is fully loaded and parsed. Initializing all functions.');
+  
 
     
     initCodeMoreBox();
@@ -2615,6 +2623,695 @@ particlesJS('particles-js', {
   },
   "retina_detect": true
 });
+</script>
+
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  const categoryColors = [
+    '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57',
+    '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43',
+    '#10ac84', '#ff6348', '#a55eea', '#e17055', '#d63031',
+    '#00b894', '#fdcb6e', '#6c5ce7', '#fd79a8', '#f39c12',
+    '#e67e22', '#e74c3c', '#9b59b6', '#3498db', '#1abc9c',
+    '#16a085', '#27ae60', '#2ecc71', '#f1c40f', '#e67e22'
+  ];
+  
+  
+  function hashString(str) {
+    let hash = 0;
+    if (str.length === 0) return hash;
+    
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; 
+    }
+    
+    return Math.abs(hash);
+  }
+  
+  
+  function assignCategoryColors() {
+
+    
+    
+    const isArchivesPage = document.body.classList.contains('template-archives') ||
+                          window.location.pathname.includes('/archives/');
+    const isArticlePage = document.querySelector('#TableOfContents') || 
+                         document.querySelector('.article-category');
+    
+    
+    
+    
+    if (isArticlePage && !isArchivesPage) {
+      const categoryLinks = document.querySelectorAll('.article-category a');
+
+      
+      categoryLinks.forEach((link, index) => {
+        
+        const href = link.getAttribute('href');
+        const categoryName = href.split('/').pop() || href.split('/').slice(-2, -1)[0] || 'default';
+        
+        
+        const hash = hashString(categoryName);
+        const colorIndex = hash % categoryColors.length;
+        const backgroundColor = categoryColors[colorIndex];
+        
+        
+        
+        
+        link.style.setProperty('background-color', backgroundColor, 'important');
+        link.style.setProperty('color', '#fff', 'important');
+        
+        
+        link.addEventListener('mouseenter', function() {
+          this.style.opacity = '0.8';
+          this.style.transform = 'scale(1.05)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.opacity = '1';
+          this.style.transform = 'scale(1)';
+        });
+      });
+    }
+    
+    
+    if (!isArchivesPage) {
+      
+      const sidebarCategories = document.querySelectorAll('.widget.categories a, .widget.tagCloud a');
+
+      
+      sidebarCategories.forEach((link, index) => {
+        
+        const href = link.getAttribute('href');
+        const categoryName = href.split('/').pop() || href.split('/').slice(-2, -1)[0] || 'default';
+        
+        
+        const hash = hashString(categoryName);
+        const colorIndex = hash % categoryColors.length;
+        const backgroundColor = categoryColors[colorIndex];
+        
+        
+        
+        
+        link.style.setProperty('background-color', backgroundColor, 'important');
+        link.style.setProperty('color', '#fff', 'important');
+        link.style.setProperty('border-radius', '6px', 'important');
+        link.style.setProperty('padding', '8px 12px', 'important');
+        link.style.setProperty('margin', '4px 0', 'important');
+        link.style.setProperty('display', 'inline-block', 'important');
+        link.style.setProperty('text-decoration', 'none', 'important');
+        link.style.setProperty('transition', 'all 0.3s ease', 'important');
+        
+        
+        link.addEventListener('mouseenter', function() {
+          this.style.opacity = '0.8';
+          this.style.transform = 'scale(1.05)';
+          this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.opacity = '1';
+          this.style.transform = 'scale(1)';
+          this.style.boxShadow = 'none';
+        });
+      });
+    } else {
+      
+
+    }
+    
+
+  }
+  
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', assignCategoryColors);
+  } else {
+    assignCategoryColors();
+  }
+  
+  
+  setTimeout(assignCategoryColors, 500);
+  setTimeout(assignCategoryColors, 1000);
+  setTimeout(assignCategoryColors, 2000);
+  
+  
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        
+        const hasNewCategories = Array.from(mutation.addedNodes).some(node => {
+          return node.nodeType === 1 && (
+            node.classList.contains('article-category') ||
+            node.querySelector('.article-category') ||
+            node.classList.contains('widget') ||
+            node.querySelector('.widget')
+          );
+        });
+        
+        if (hasNewCategories) {
+          
+          setTimeout(assignCategoryColors, 100);
+          setTimeout(assignCategoryColors, 500);
+        }
+      }
+    });
+  });
+  
+  
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  function fixDarkModeToggleText() {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) {
+      return;
+    }
+    
+    
+    toggleBtn.classList.add('dark-mode-toggle-fix');
+    
+    
+    const span = toggleBtn.querySelector('span');
+    if (!span) {
+      return;
+    }
+    
+    
+    function updateText() {
+      const isDark = document.documentElement.dataset.scheme === 'dark';
+      span.textContent = isDark ? '亮色模式' : '暗色模式';
+
+    }
+    
+    
+    updateText();
+    
+    
+    function handleThemeChange() {
+      setTimeout(updateText, 100); 
+    }
+    
+    
+    window.addEventListener('onColorSchemeChange', handleThemeChange);
+    
+    
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-scheme') {
+          handleThemeChange();
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-scheme']
+    });
+    
+    
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
+    
+    
+    toggleBtn.addEventListener('click', function() {
+      
+      setTimeout(updateText, 200);
+    });
+    
+
+  }
+  
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixDarkModeToggleText);
+  } else {
+    fixDarkModeToggleText();
+  }
+  
+  
+  setTimeout(fixDarkModeToggleText, 1000);
+  setTimeout(fixDarkModeToggleText, 2000);
+})();
+</script>
+
+  
+  <script>
+  
+  if (!document.getElementById('new-theme-switch')) {
+    document.write(`
+      <div id="new-theme-switch" style="position: fixed; bottom: 50px; left: 50px; z-index: 1000; text-align: center;">
+        <label class="theme-switch">
+          <input type="checkbox" class="theme-switch__checkbox" id="theme-switch-checkbox">
+          <div class="theme-switch__container">
+            <div class="theme-switch__clouds"></div>
+            <div class="theme-switch__stars-container">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 4.38368 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <div class="theme-switch__circle-container">
+              <div class="theme-switch__sun-moon-container">
+                <div class="theme-switch__moon">
+                  <div class="theme-switch__spot"></div>
+                  <div class="theme-switch__spot"></div>
+                  <div class="theme-switch__spot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <div id="theme-switch-text" style="color: #fff; font-size: 14px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.5); margin-top: 8px; text-align: center;">亮色模式</div>
+      </div>
+    `);
+  }
+  </script>
+
+
+<style>
+   
+  .theme-switch {
+    --toggle-size: 20px;  
+    --container-width: 3.75em;
+    --container-height: 1.7em;
+    --container-radius: 4.2em;
+    --container-light-bg: #3D7EAE;
+    --container-night-bg: #1D1F2C;
+    --circle-container-diameter: 2.25em;
+    --sun-moon-diameter: 1.4em;
+    --sun-bg: #ECCA2F;
+    --moon-bg: #C4C9D1;
+    --spot-color: #959DB1;
+    --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+    --stars-color: #fff;
+    --clouds-color: #F3FDFF;
+    --back-clouds-color: #AACADF;
+    --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
+  }
+
+  .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: var(--toggle-size);
+  }
+
+  .theme-switch__container {
+    width: var(--container-width);
+    height: var(--container-height);
+    background-color: var(--container-light-bg);
+    border-radius: var(--container-radius);
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+    box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .theme-switch__container::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    -webkit-box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+    border-radius: var(--container-radius)
+  }
+
+  .theme-switch__checkbox {
+    display: none;
+  }
+
+  .theme-switch__circle-container {
+    width: var(--circle-container-diameter);
+    height: var(--circle-container-diameter);
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    left: var(--circle-container-offset);
+    top: var(--circle-container-offset);
+    border-radius: var(--container-radius);
+    -webkit-box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition: var(--circle-transition);
+    -o-transition: var(--circle-transition);
+    transition: var(--circle-transition);
+    pointer-events: none;
+  }
+
+  .theme-switch__sun-moon-container {
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+    width: var(--sun-moon-diameter);
+    height: var(--sun-moon-diameter);
+    margin: auto;
+    border-radius: var(--container-radius);
+    background-color: var(--sun-bg);
+    -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+    box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+    -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+    overflow: hidden;
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+  }
+
+  .theme-switch__moon {
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+    width: 100%;
+    height: 100%;
+    background-color: var(--moon-bg);
+    border-radius: inherit;
+    -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+    box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .theme-switch__spot {
+    position: absolute;
+    top: 0.75em;
+    left: 0.312em;
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: var(--container-radius);
+    background-color: var(--spot-color);
+    -webkit-box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+  }
+
+  .theme-switch__spot:nth-of-type(2) {
+    width: 0.375em;
+    height: 0.375em;
+    top: 0.937em;
+    left: 1.375em;
+  }
+
+  .theme-switch__spot:nth-last-of-type(3) {
+    width: 0.25em;
+    height: 0.25em;
+    top: 0.312em;
+    left: 0.812em;
+  }
+
+  .theme-switch__clouds {
+    width: 1.25em;
+    height: 1.25em;
+    background-color: var(--clouds-color);
+    border-radius: var(--container-radius);
+    position: absolute;
+    bottom: -0.625em;
+    left: 0.312em;
+    -webkit-box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+    box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+    -webkit-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    -o-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+  }
+
+  .theme-switch__stars-container {
+    position: absolute;
+    color: var(--stars-color);
+    top: -100%;
+    left: 0.312em;
+    width: 2.75em;
+    height: auto;
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+  }
+
+   
+  .theme-switch__checkbox:checked + .theme-switch__container {
+    background-color: var(--container-night-bg);
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
+    left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container:hover {
+    left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter) - 0.187em)
+  }
+
+  .theme-switch__circle-container:hover {
+    left: calc(var(--circle-container-offset) + 0.187em);
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
+    -webkit-transform: translate(0);
+    -ms-transform: translate(0);
+    transform: translate(0);
+    transform: translate(0);
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
+    bottom: -4.062em;
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+   
+  #dark-mode-toggle {
+    display: none !important;
+  }
+
+   
+  .dark-mode-toggle-fix span {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+  }
+</style>
+
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  if (window.themeSwitchInitialized) {
+    console.log('主题切换开关已经初始化，跳过重复执行');
+    return;
+  }
+  
+  let isInitialized = false;
+  let observer = null;
+  
+  function initNewThemeSwitch() {
+    
+    if (isInitialized) {
+      return;
+    }
+    
+    const checkbox = document.getElementById('theme-switch-checkbox');
+    if (!checkbox) {
+      return;
+    }
+    
+    
+    function updateCheckboxState() {
+      const isDark = document.documentElement.dataset.scheme === 'dark';
+      checkbox.checked = isDark;
+      
+      
+      const textElement = document.getElementById('theme-switch-text');
+      if (textElement) {
+        textElement.textContent = isDark ? '暗色模式' : '亮色模式';
+        console.log('更新主题切换文字:', isDark ? '暗色模式' : '亮色模式');
+      }
+      
+      console.log('当前主题状态:', isDark ? 'dark' : 'light', 'checkbox状态:', checkbox.checked);
+    }
+    
+    
+    function waitForThemeSystem() {
+      
+      const schemeFromData = document.documentElement.dataset.scheme;
+      const schemeFromClass = document.documentElement.className.includes('dark') ? 'dark' : 
+                             document.documentElement.className.includes('light') ? 'light' : null;
+      const schemeFromLocalStorage = localStorage.getItem('StackColorScheme');
+      
+      if (schemeFromData || schemeFromClass || schemeFromLocalStorage) {
+        
+        let finalScheme = schemeFromData || schemeFromClass || schemeFromLocalStorage;
+        
+        
+        if (schemeFromData) {
+          finalScheme = schemeFromData;
+        }
+        
+        
+        document.documentElement.dataset.scheme = finalScheme;
+        
+        
+        updateCheckboxState();
+        isInitialized = true;
+        window.themeSwitchInitialized = true;
+        
+        console.log('主题系统已初始化，当前主题:', finalScheme);
+      } else {
+        
+        setTimeout(waitForThemeSystem, 100);
+      }
+    }
+    
+    
+    waitForThemeSystem();
+    
+    
+    checkbox.addEventListener('change', function() {
+      const scheme = this.checked ? 'dark' : 'light';
+      document.documentElement.dataset.scheme = scheme;
+      
+      
+      localStorage.setItem('StackColorScheme', scheme);
+      
+      
+      document.dispatchEvent(new CustomEvent('onColorSchemeChange'));
+    });
+    
+    
+    window.addEventListener('onColorSchemeChange', updateCheckboxState);
+    
+    
+    observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-scheme') {
+          updateCheckboxState();
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-scheme']
+    });
+  }
+  
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNewThemeSwitch);
+  } else {
+    initNewThemeSwitch();
+  }
+  
+  
+  setTimeout(initNewThemeSwitch, 1500);
+})();
+</script>
+
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  if (window.hoverEffectsInitialized) {
+    console.log('悬浮效果已经初始化，跳过重复执行');
+    return;
+  }
+  
+  let isHoverEffectsInitialized = false;
+  let hoverObserver = null;
+  
+  
+  function forceCategoryHoverEffects() {
+    
+    if (isHoverEffectsInitialized) {
+      return;
+    }
+    
+    const articles = document.querySelectorAll('.article-list--compact article');
+    if (articles.length > 0) {
+      articles.forEach(article => {
+        
+        if (article.hasAttribute('data-hover-initialized')) {
+          return;
+        }
+        
+        
+        article.style.setProperty('transition', 'all 0.3s ease', 'important');
+        article.style.setProperty('will-change', 'transform, box-shadow', 'important');
+        
+        
+        article.addEventListener('mouseenter', function() {
+          this.style.setProperty('transform', 'translateY(-5px)', 'important');
+          this.style.setProperty('box-shadow', '0 10px 30px rgba(0, 0, 0, 0.12)', 'important');
+        });
+        
+        article.addEventListener('mouseleave', function() {
+          this.style.setProperty('transform', 'translateY(0)', 'important');
+          this.style.setProperty('box-shadow', 'none', 'important');
+        });
+        
+        
+        article.setAttribute('data-hover-initialized', 'true');
+      });
+      
+      isHoverEffectsInitialized = true;
+      window.hoverEffectsInitialized = true;
+    }
+  }
+  
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', forceCategoryHoverEffects);
+  } else {
+    forceCategoryHoverEffects();
+  }
+  
+  
+  setTimeout(forceCategoryHoverEffects, 1000);
+  
+  
+  hoverObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        
+        setTimeout(forceCategoryHoverEffects, 100);
+      }
+    });
+  });
+  
+  
+  hoverObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
 </script>
 
     </body>
