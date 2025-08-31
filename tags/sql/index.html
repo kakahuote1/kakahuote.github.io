@@ -2300,37 +2300,45 @@
       
       setInterval(() => {
         
-        const randomSegments = Math.floor(Math.random() * 3) + 1; 
-        for (let i = 0; i < randomSegments; i++) {
-          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
-          const segment = ropeChain.bodies[randomIndex];
-          if (segment) {
-            
-            const windForceX = (Math.random() - 0.5) * 0.0008; 
-            const windForceY = (Math.random() - 0.5) * 0.0004; 
-            Matter.Body.applyForce(segment, segment.position, { 
-              x: windForceX, 
-              y: windForceY 
-            });
-          }
-        }
-        
-        
-        if (Math.random() < 0.3) { 
-          const windForceX = (Math.random() - 0.5) * 0.001; 
-          const windForceY = (Math.random() - 0.5) * 0.0005; 
-          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
-            x: windForceX, 
-            y: windForceY 
-          });
-        }
-      }, 200); 
+        const windForceX = (Math.random() - 0.5) * 0.015; 
+        Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+          x: windForceX, 
+          y: 0 
+        });
+      }, 80); 
     }
 
     
     setTimeout(() => {
       addBreezeEffect();
     }, 500); 
+
+    
+    
+    
+    function forceWakeUp() {
+      
+      setInterval(() => {
+        ropeChain.bodies.forEach((body, index) => {
+          if (body && body.sleeping) {
+            
+            Matter.Body.set(body, 'sleeping', false);
+          }
+        });
+        
+        
+        const tinyForceX = (Math.random() - 0.5) * 0.008; 
+        Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+          x: tinyForceX, 
+          y: 0 
+        });
+      }, 50); 
+    }
+
+    
+    setTimeout(() => {
+      forceWakeUp();
+    }, 800); 
 
 
   }
