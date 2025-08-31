@@ -6,14 +6,14 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/'>
 
-<link rel="stylesheet" href="/scss/style.min.605398a8e2884eb35f9f3054c62db6b5935e3f29c3f93a13872416e35ce898e6.css"><meta property='og:title' content="windows相关知识总结（上）">
+<link rel="stylesheet" href="/scss/style.min.60a81f0594ef6ff2fa30e499c69cfabbd0c1852d103f3dade10926efce182fdb.css"><meta property='og:title' content="windows相关知识总结（上）">
 <meta property='og:description' content="NTFS文件系统 • 注册表 • windows安全机制">
 <meta property='og:url' content='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-07-21T12:17:22&#43;08:00'/><meta property='article:modified_time' content='2025-08-24T21:42:35&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/628735' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-07-21T12:17:22&#43;08:00'/><meta property='article:modified_time' content='2025-09-01T00:43:21&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg' />
 <meta name="twitter:title" content="windows相关知识总结（上）">
 <meta name="twitter:description" content="NTFS文件系统 • 注册表 • windows安全机制"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://picture.928330.xyz/typora/628735' />
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -571,7 +571,7 @@
         <div class="article-image">
             <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/">
                 
-                    <img src="http://picture.928330.xyz/typora/628735" loading="lazy" alt="Featured image of post windows相关知识总结（上）" />
+                    <img src="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg" loading="lazy" alt="Featured image of post windows相关知识总结（上）" />
                 
             </a>
         </div>
@@ -635,7 +635,7 @@
 
 
                <time>
-                   更新时间：2025-08-24
+                   更新时间：2025-09-01
                </time>
            </div>
         <div>
@@ -658,9 +658,8 @@
     <p>写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行</p>
 <p>现在只是大概的了解，如果后续有时间，会把每一个板块都单独拿出来学习的</p>
 <p>嗯，如果有时间的话</p>
-<p><strong>windows相关知识总结（下）</strong>：</p>
-<p><a class="link" href="http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/"  target="_blank" rel="noopener"
-    >http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/
+<p>下篇看这里 -&gt; <a class="link" href="http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/"  target="_blank" rel="noopener"
+    >windows相关知识总结（下）
     
     <span style="white-space: nowrap;"><svg width=".7em"
         height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
@@ -1670,7 +1669,7 @@
 
 
         <span>
-            最后更新于 2025-08-24
+            最后更新于 2025-09-01
         </span>
     </section></footer>
 
@@ -1694,7 +1693,7 @@
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/628735" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/628735"/>
+                    <img src="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg"/>
                 
             </div>
         
@@ -3597,6 +3596,45 @@
     setTimeout(() => {
       engine.world.gravity.y = 1.2;
     }, 100); 
+
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
 
 
   }
@@ -6499,6 +6537,45 @@ particlesJS('particles-js', {
     setTimeout(() => {
       engine.world.gravity.y = 1.2;
     }, 100); 
+
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
 
 
   }

@@ -6,14 +6,14 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.605398a8e2884eb35f9f3054c62db6b5935e3f29c3f93a13872416e35ce898e6.css"><meta property='og:title' content="windows相关知识总结（下）">
+<link rel="stylesheet" href="/scss/style.min.60a81f0594ef6ff2fa30e499c69cfabbd0c1852d103f3dade10926efce182fdb.css"><meta property='og:title' content="windows相关知识总结（下）">
 <meta property='og:description' content="进程 • DLL • 系统调用 • 驱动 • 内核回调">
 <meta property='og:url' content='https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-07-21T12:18:54&#43;08:00'/><meta property='article:modified_time' content='2025-08-24T21:42:35&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/628735' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-07-21T12:18:54&#43;08:00'/><meta property='article:modified_time' content='2025-09-01T00:43:21&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg' />
 <meta name="twitter:title" content="windows相关知识总结（下）">
 <meta name="twitter:description" content="进程 • DLL • 系统调用 • 驱动 • 内核回调"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://picture.928330.xyz/typora/628735' />
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -491,7 +491,7 @@
         </li>
         <li><a href="#ssdt">SSDT</a></li>
         <li><a href="#ssdthook">SSDThook</a></li>
-        <li><a href="#系统用的分类">系统用的分类</a>
+        <li><a href="#系统调用的分类">系统调用的分类</a>
           <ol>
             <li><a href="#进程与线程管理">进程与线程管理</a>
               <ol>
@@ -762,7 +762,7 @@
         <div class="article-image">
             <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/">
                 
-                    <img src="http://picture.928330.xyz/typora/628735" loading="lazy" alt="Featured image of post windows相关知识总结（下）" />
+                    <img src="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg" loading="lazy" alt="Featured image of post windows相关知识总结（下）" />
                 
             </a>
         </div>
@@ -826,7 +826,7 @@
 
 
                <time>
-                   更新时间：2025-08-24
+                   更新时间：2025-09-01
                </time>
            </div>
         <div>
@@ -846,9 +846,8 @@
     <section class="article-content">
     
     
-    <p><strong>windows相关知识总结（上）：</strong></p>
-<p><a class="link" href="http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/"  target="_blank" rel="noopener"
-    >http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/
+    <p>上篇看这里 -&gt; <a class="link" href="http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/"  target="_blank" rel="noopener"
+    >windows相关知识总结（上）
     
     <span style="white-space: nowrap;"><svg width=".7em"
         height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
@@ -1057,7 +1056,7 @@
 <p>比如一个文件隐藏Rootkit，可能会用自己的<code>HookedNtQueryDirectoryFile</code>函数地址，替换掉SSDT中原始的 <code>NtQueryDirectoryFile</code>（用于列出目录内容）的地址</p>
 <p>此后，当任何程序（包括 <code>explorer.exe</code>）尝试列出目录内容时，系统调用都会被重定向到这个恶意的 <code>HookedNtQueryDirectoryFile</code>函数这个恶意函数会先获取原始的目录列表，然后将其中所有与Rootkit自身相关的恶意文件名都过滤掉，最后再将一个“干净”的列表返回给应用程序，这样，用户就永远无法看到这些恶意文件了</p>
 <p><strong>如果一个函数的地址指向的不是官方的 <code>ntoskrnl.exe</code> (或 <code>win32k.sys</code>)，而是指向了一个第三方的、可疑的驱动文件，那么就意味着SSDT已被劫持</strong></p>
-<h2 id="系统用的分类">系统用的分类
+<h2 id="系统调用的分类">系统调用的分类
 </h2><h3 id="进程与线程管理">进程与线程管理
 </h3><h4 id="ntcreateprocess">NtCreateProcess
 </h4><p>创建一个新进程</p>
@@ -1508,7 +1507,7 @@
 
 
         <span>
-            最后更新于 2025-08-24
+            最后更新于 2025-09-01
         </span>
     </section></footer>
 
@@ -1532,7 +1531,7 @@
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/628735" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/628735"/>
+                    <img src="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg"/>
                 
             </div>
         
@@ -3435,6 +3434,45 @@
     setTimeout(() => {
       engine.world.gravity.y = 1.2;
     }, 100); 
+
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
 
 
   }
@@ -6337,6 +6375,45 @@ particlesJS('particles-js', {
     setTimeout(() => {
       engine.world.gravity.y = 1.2;
     }, 100); 
+
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
 
 
   }

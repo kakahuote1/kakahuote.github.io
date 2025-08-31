@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sun, 31 Aug 2025 00:31:28 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 01 Sep 2025 00:43:21 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Linux命令（文件写入与查看篇）</title>
         <link>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/</link>
         <pubDate>Wed, 27 Aug 2025 14:12:37 +0800</pubDate>
@@ -6342,9 +6342,8 @@
         <pubDate>Mon, 21 Jul 2025 12:18:54 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/</guid>
-        <description>&lt;img src="http://picture.928330.xyz/typora/628735" alt="Featured image of post windows相关知识总结（下）" /&gt;&lt;p&gt;&lt;strong&gt;windows相关知识总结（上）：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/
+        <description>&lt;img src="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg" alt="Featured image of post windows相关知识总结（下）" /&gt;&lt;p&gt;上篇看这里 -&amp;gt; &lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;windows相关知识总结（上）
     
     &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
         height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
@@ -6553,7 +6552,7 @@
 &lt;p&gt;比如一个文件隐藏Rootkit，可能会用自己的&lt;code&gt;HookedNtQueryDirectoryFile&lt;/code&gt;函数地址，替换掉SSDT中原始的 &lt;code&gt;NtQueryDirectoryFile&lt;/code&gt;（用于列出目录内容）的地址&lt;/p&gt;
 &lt;p&gt;此后，当任何程序（包括 &lt;code&gt;explorer.exe&lt;/code&gt;）尝试列出目录内容时，系统调用都会被重定向到这个恶意的 &lt;code&gt;HookedNtQueryDirectoryFile&lt;/code&gt;函数这个恶意函数会先获取原始的目录列表，然后将其中所有与Rootkit自身相关的恶意文件名都过滤掉，最后再将一个“干净”的列表返回给应用程序，这样，用户就永远无法看到这些恶意文件了&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;如果一个函数的地址指向的不是官方的 &lt;code&gt;ntoskrnl.exe&lt;/code&gt; (或 &lt;code&gt;win32k.sys&lt;/code&gt;)，而是指向了一个第三方的、可疑的驱动文件，那么就意味着SSDT已被劫持&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;系统用的分类&#34;&gt;系统用的分类
+&lt;h2 id=&#34;系统调用的分类&#34;&gt;系统调用的分类
 &lt;/h2&gt;&lt;h3 id=&#34;进程与线程管理&#34;&gt;进程与线程管理
 &lt;/h3&gt;&lt;h4 id=&#34;ntcreateprocess&#34;&gt;NtCreateProcess
 &lt;/h4&gt;&lt;p&gt;创建一个新进程&lt;/p&gt;
@@ -6987,12 +6986,11 @@
         <pubDate>Mon, 21 Jul 2025 12:17:22 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/</guid>
-        <description>&lt;img src="http://picture.928330.xyz/typora/628735" alt="Featured image of post windows相关知识总结（上）" /&gt;&lt;p&gt;写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg" alt="Featured image of post windows相关知识总结（上）" /&gt;&lt;p&gt;写下这篇文章的原因是因为最近在学习电子取证，使用Volatility多少得看得懂输出才行&lt;/p&gt;
 &lt;p&gt;现在只是大概的了解，如果后续有时间，会把每一个板块都单独拿出来学习的&lt;/p&gt;
 &lt;p&gt;嗯，如果有时间的话&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;windows相关知识总结（下）&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/
+&lt;p&gt;下篇看这里 -&amp;gt; &lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;windows相关知识总结（下）
     
     &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
         height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;

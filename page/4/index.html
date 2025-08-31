@@ -7,11 +7,11 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/'>
 
-<link rel="stylesheet" href="/scss/style.min.605398a8e2884eb35f9f3054c62db6b5935e3f29c3f93a13872416e35ce898e6.css"><meta property='og:title' content="kakahuote">
+<link rel="stylesheet" href="/scss/style.min.60a81f0594ef6ff2fa30e499c69cfabbd0c1852d103f3dade10926efce182fdb.css"><meta property='og:title' content="kakahuote">
 <meta property='og:description' content="靡不有初，鲜克有终">
 <meta property='og:url' content='https://blog.928330.xyz/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-08-31T17:13:42&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-09-01T00:43:21&#43;08:00 '/>
 <meta name="twitter:title" content="kakahuote">
 <meta name="twitter:description" content="靡不有初，鲜克有终"><link rel="alternate" type="application/rss&#43;xml" href="https://blog.928330.xyz/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -2827,6 +2827,45 @@
     setTimeout(() => {
       engine.world.gravity.y = 1.2;
     }, 100); 
+
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
 
 
   }

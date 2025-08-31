@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/'>
 
-<link rel="stylesheet" href="/scss/style.min.605398a8e2884eb35f9f3054c62db6b5935e3f29c3f93a13872416e35ce898e6.css"><meta property='og:title' content="快速上手docker">
+<link rel="stylesheet" href="/scss/style.min.60a81f0594ef6ff2fa30e499c69cfabbd0c1852d103f3dade10926efce182fdb.css"><meta property='og:title' content="快速上手docker">
 <meta property='og:description' content="如此伟大的发明，真是太好用啦">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/'>
 <meta property='og:site_name' content='kakahuote'>
@@ -3294,6 +3294,45 @@
       engine.world.gravity.y = 1.2;
     }, 100); 
 
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
+
 
   }
 
@@ -6195,6 +6234,45 @@ particlesJS('particles-js', {
     setTimeout(() => {
       engine.world.gravity.y = 1.2;
     }, 100); 
+
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
 
 
   }

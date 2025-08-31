@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/%E4%B8%80%E6%96%87%E5%BC%84%E6%87%82%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/'>
 
-<link rel="stylesheet" href="/scss/style.min.605398a8e2884eb35f9f3054c62db6b5935e3f29c3f93a13872416e35ce898e6.css"><meta property='og:title' content="一文弄懂字符集与编码">
+<link rel="stylesheet" href="/scss/style.min.60a81f0594ef6ff2fa30e499c69cfabbd0c1852d103f3dade10926efce182fdb.css"><meta property='og:title' content="一文弄懂字符集与编码">
 <meta property='og:description' content="这是一个关于计算机和字符的故事">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E4%B8%80%E6%96%87%E5%BC%84%E6%87%82%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/'>
 <meta property='og:site_name' content='kakahuote'>
@@ -3307,6 +3307,45 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
       engine.world.gravity.y = 1.2;
     }, 100); 
 
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
+
 
   }
 
@@ -6208,6 +6247,45 @@ particlesJS('particles-js', {
     setTimeout(() => {
       engine.world.gravity.y = 1.2;
     }, 100); 
+
+    
+    
+    
+    function addBreezeEffect() {
+      
+      setInterval(() => {
+        
+        const randomSegments = Math.floor(Math.random() * 3) + 1; 
+        for (let i = 0; i < randomSegments; i++) {
+          const randomIndex = Math.floor(Math.random() * (ropeSegments - 1)); 
+          const segment = ropeChain.bodies[randomIndex];
+          if (segment) {
+            
+            const windForceX = (Math.random() - 0.5) * 0.0008; 
+            const windForceY = (Math.random() - 0.5) * 0.0004; 
+            Matter.Body.applyForce(segment, segment.position, { 
+              x: windForceX, 
+              y: windForceY 
+            });
+          }
+        }
+        
+        
+        if (Math.random() < 0.3) { 
+          const windForceX = (Math.random() - 0.5) * 0.001; 
+          const windForceY = (Math.random() - 0.5) * 0.0005; 
+          Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
+            x: windForceX, 
+            y: windForceY 
+          });
+        }
+      }, 200); 
+    }
+
+    
+    setTimeout(() => {
+      addBreezeEffect();
+    }, 500); 
 
 
   }
