@@ -2322,49 +2322,20 @@
     
     
     
-    function addBreezeEffect() {
+    
+    
+    ropeChain.bodies.forEach((body, index) => {
+      Matter.Body.set(body, 'sleeping', false);
       
-      setInterval(() => {
-        
-        const windForceX = (Math.random() - 0.5) * 0.015; 
-        Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
-          x: windForceX, 
-          y: 0 
-        });
-      }, 80); 
-    }
-
-    
-    setTimeout(() => {
-      addBreezeEffect();
-    }, 500); 
-
+      body.sleepThreshold = Infinity;
+    });
     
     
+    engine.enableSleeping = false;
     
-    function forceWakeUp() {
-      
-      setInterval(() => {
-        ropeChain.bodies.forEach((body, index) => {
-          if (body && body.sleeping) {
-            
-            Matter.Body.set(body, 'sleeping', false);
-          }
-        });
-        
-        
-        const tinyForceX = (Math.random() - 0.5) * 0.008; 
-        Matter.Body.applyForce(pullRingBody, pullRingBody.position, { 
-          x: tinyForceX, 
-          y: 0 
-        });
-      }, 50); 
-    }
-
     
-    setTimeout(() => {
-      forceWakeUp();
-    }, 800); 
+    mouseConstraint.constraint.bodyB = null;
+    mouseConstraint.mouse.element = document.body;
 
 
   }
