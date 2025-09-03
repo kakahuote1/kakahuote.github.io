@@ -7,7 +7,577 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Mon, 01 Sep 2025 00:43:21 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 03 Sep 2025 20:17:47 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>獬豸杯2024取证总结</title>
+        <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
+        <pubDate>Wed, 03 Sep 2025 20:08:27 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/b35ad24065e047f6a4dc4b3474ddeb4b.png" alt="Featured image of post 獬豸杯2024取证总结" /&gt;&lt;p&gt;獬（xie）豸（zhi）杯，据说獬豸是古代法律与司法的象征&lt;/p&gt;
+&lt;p&gt;题目不算多，但是很多题目太过跳跃，思路容易断裂，没有之前的循序渐进的感觉（或许这样更符合现实？&lt;/p&gt;
+&lt;p&gt;最大的收获应该就是熟悉了apk的逆向操作吧，还是有值得一做的地方的&lt;/p&gt;
+&lt;h1 id=&#34;计算机部分&#34;&gt;计算机部分
+&lt;/h1&gt;&lt;h2 id=&#34;1计算机系统的安装日期是什么时候标准格式20240120&#34;&gt;1.计算机系统的安装日期是什么时候（标准格式：20240120）
+&lt;/h2&gt;&lt;p&gt;导入火眼分析的时候发现分区7被加密了，先不管它，看看系统信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250901223020784&#34; href=&#34;http://picture.928330.xyz/typora/image-20250901223020784.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250901223020784.png&#34; alt=&#34;image-20250901223020784&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;20240112
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2请问机主最近一次访问压缩包文件得到文件名称是什么标准格式1zip&#34;&gt;2.请问机主最近一次访问压缩包文件得到文件名称是什么（标准格式：1.zip）
+&lt;/h2&gt;&lt;p&gt;在windows里显示后缀名和访问时间，筛选zip，注意下结尾是.zip1的文件即可：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250901224248513&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250901224248513.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250901224248513.png&#34; alt=&#34;image-20250901224248513&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;data.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;3还原数据库请分析root用户最后一次更改密码的时间是什么时候标准格式2024-01-20121212&#34;&gt;3.还原数据库，请分析root用户最后一次更改密码的时间是什么时候（标准格式：2024-01-20.12:12:12)
+&lt;/h2&gt;&lt;p&gt;首先题目要求我们还原数据库，那么数据库在哪里？&lt;/p&gt;
+&lt;p&gt;我们随便用压缩软件预览一下上一题找到的压缩包data.zip，就可以发现原来这是一个打包的mysql数据库：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250901231851374&#34; href=&#34;http://picture.928330.xyz/typora/image-20250901231851374.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250901231851374.png&#34; alt=&#34;image-20250901231851374&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;一解压，发现要密码？&lt;/p&gt;
+&lt;p&gt;嗯，到这里就开始有点奇幻了&lt;/p&gt;
+&lt;p&gt;总览一下给出的windows和ios镜像，可以发现什么软件也没安装，而手机是没有加密的，那么可能我们要找的线索就在之前加密的分区7里面&lt;/p&gt;
+&lt;p&gt;但是这也要密码，只能再四处找一下了，最终在ios的备忘录里面找到了一点奇怪的东西：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250901232357158&#34; href=&#34;http://picture.928330.xyz/typora/image-20250901232357158.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250901232357158.png&#34; alt=&#34;image-20250901232357158&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;里面一共就两个内容：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Longxin@123
+700110
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;全部尝试一遍，发现都不能解压data.zip文件&lt;/p&gt;
+&lt;p&gt;再试一遍能不能解密分区7，哇，发现第一个（Longxin@123）就能解密哎&lt;/p&gt;
+&lt;p&gt;解密之后需要重新分析：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250901235039703&#34; href=&#34;http://picture.928330.xyz/typora/image-20250901235039703.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250901235039703.png&#34; alt=&#34;image-20250901235039703&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;重新分析后果然多了一些东西，其中最为重要的是两个邮件项：Foxmail和Eml邮件&lt;/p&gt;
+&lt;p&gt;其中的内容有些重叠（或者说就是一样的），不过都能找到一些东西：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250901235242700&#34; href=&#34;http://picture.928330.xyz/typora/image-20250901235242700.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250901235242700.png&#34; alt=&#34;image-20250901235242700&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;两人互相发过一个加密文件，刚好之前的data.zip的md5值就跟他说的一样，这扯不扯：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250901235421572&#34; href=&#34;http://picture.928330.xyz/typora/image-20250901235421572.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250901235421572.png&#34; alt=&#34;image-20250901235421572&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;使用ARCPHR掩码爆破一下，还是挺快的：
+
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250902001608886&#34; href=&#34;http://picture.928330.xyz/typora/image-20250902001608886.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250902001608886.png&#34; alt=&#34;image-20250902001608886&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;15566666555
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;解压data.zip后就可以在本机启动myql服务了，这里我选择就在windows上面启动&lt;/p&gt;
+&lt;p&gt;zip文件里面的mysql是典型的5.7版本构造，下载对应版本的mysql之后，写入如下my.ini配置文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-mysql&#34; data-lang=&#34;mysql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;client&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 指定默认链接端口号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4141&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;character&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;utf8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;mysqld&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 跳过密码验证
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;skip&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;grant&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;tables&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 指定链接端口号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4141&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# MySQL安装目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;basedir&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;D&lt;/span&gt;:\&lt;span style=&#34;color:#e06c75&#34;&gt;mysql&lt;/span&gt;\&lt;span style=&#34;color:#e06c75&#34;&gt;mysql_install&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# MySQL数据目录，也就是data.zip解压后的目录，下一级就是各种mysql文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;datadir&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;D&lt;/span&gt;:\&lt;span style=&#34;color:#e06c75&#34;&gt;mysql&lt;/span&gt;\&lt;span style=&#34;color:#e06c75&#34;&gt;data&lt;/span&gt;\&lt;span style=&#34;color:#e06c75&#34;&gt;data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 允许远程连接
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;bind&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;address&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;skip&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;networking&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 其他常用配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;max_connections&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;character&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;utf8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;engine&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;INNODB&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;sql_mode&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;NO_ENGINE_SUBSTITUTION&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;STRICT_TRANS_TABLES&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;mysql默认端口是3306，我因为一些冲突原因改成了4141&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;skip-grant-tables&lt;/code&gt;很重要，我们目的是找最后一次修改密码的时间，而我们本身不知道密码，跳过是最好的选择&lt;/p&gt;
+&lt;p&gt;下面远程连接常用配置是ai写的，这些都不重要，写好保存，记下这个配置文件的路径，就可以启动服务了：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;start /b mysqld --defaults-file&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;D:\mysql\mysql_data\my.ini&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是临时指定配置文件启动mysql服务的命令&lt;/p&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;code&gt;start /b&lt;/code&gt;用来后台启动mysql的服务程序，这样他就不会一直占用当前的窗口了&lt;/p&gt;
+&lt;p&gt;这里使用的是&lt;code&gt;mysqld&lt;/code&gt;，最好去配置一下环境变量，省得每次都要在bin文件里面使用&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;启动之后使用下面的命令登录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mysql -u root -P &lt;span style=&#34;color:#d19a66&#34;&gt;4141&lt;/span&gt; -h 127.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-h&lt;/code&gt;和&lt;code&gt;-P&lt;/code&gt;（大写）用来指定ip地址和端口，没改的话就不用写了&lt;/p&gt;
+&lt;p&gt;如果登陆成功，那么恭喜，连接成功了，我们可以使用下面的命令简单检查一下配置文件有没有顺利生效：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SHOW&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;VARIABLES&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;datadir&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查询结果应该是之前我们写入配置文件的data目录路径&lt;/p&gt;
+&lt;p&gt;到这里都没有问题的话，就可以直接使用navicat连接了，输入之前指定的端口号和ip（回环地址127.0.0.1）即可&lt;/p&gt;
+&lt;p&gt;这个文件里面一共就一个自定义数据库“人员”，其余四个都是mysql自带的&lt;/p&gt;
+&lt;p&gt;我们在名为mysql的数据库里面找到user表，就能看见每个用户修改密码的信息，第一行是root的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250902233647831&#34; href=&#34;http://picture.928330.xyz/typora/image-20250902233647831.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250902233647831.png&#34; alt=&#34;image-20250902233647831&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2021-03-17.15:49:52
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4请问mysql数据库中共存在多少个数据库标准格式阿拉伯数字&#34;&gt;4.请问mysql数据库中共存在多少个数据库（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;见上题，1+4&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5员工编号为204200的员工总工资为多少元标准格式阿拉伯数字&#34;&gt;5.员工编号为204200的员工总工资为多少元（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;人员数据库的salaries_list表用来记录工资信息&lt;/p&gt;
+&lt;p&gt;这里比较坑爹的一点是，每一个员工有不止一条数据，还好先翻了翻&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;sum&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;salary&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;salaries_list&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;emp_no&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;204200&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250902234329527&#34; href=&#34;http://picture.928330.xyz/typora/image-20250902234329527.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250902234329527.png&#34; alt=&#34;image-20250902234329527&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;488313
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6finance部门中在1999年1月1日当天和之后入职的人员数量是多少名标准格式阿拉伯数字&#34;&gt;6.Finance部门中在1999年1月1日当天和之后入职的人员数量是多少名（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;入职信息记录在hiredate表中，在team_list能知道Finance对应的门牌号(?)是d002，依据这个查找&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;count&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;hiredate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dept_no&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;d002&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;from_date&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;1999-01-01&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250902235720721&#34; href=&#34;http://picture.928330.xyz/typora/image-20250902235720721.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250902235720721.png&#34; alt=&#34;image-20250902235720721&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1486
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7请问邮箱服务器的登录密码是多少标准格式admin&#34;&gt;7.请问邮箱服务器的登录密码是多少（标准格式：admin）
+&lt;/h2&gt;&lt;p&gt;什么是邮箱服务器？那就当他问邮箱登录密码了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903000018662&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903000018662.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903000018662.png&#34; alt=&#34;image-20250903000018662&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903000228262&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903000228262.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903000228262.png&#34; alt=&#34;image-20250903000228262&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不过一共登陆过两个账号，不知道问的哪一个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;900110
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;123456
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*标准答案是第一个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;900110
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8邮件服务器中共有多少个账号标准格式阿拉伯数字&#34;&gt;8.邮件服务器中共有多少个账号（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;不就两个吗&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*饿啊我错了，原来真的没有这么简单&lt;/p&gt;
+&lt;p&gt;在hMailServer/Data/longxin.com下面能找到完整的登录记录，一共三个：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903000514218&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903000514218.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903000514218.png&#34; alt=&#34;image-20250903000514218&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不是这啥啊，怎么找到的这玩意，hMailServer又是哪里蹦出来的，不应该是foxmail吗，搞不懂&lt;/p&gt;
+&lt;h2 id=&#34;9邮件服务器中共有多少个域名标准格式阿拉伯数字&#34;&gt;9.邮件服务器中共有多少个域名（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;这问的又是什么玩意，可能是之前看到的接收服务器？&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903002517260&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903002517260.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903002517260.png&#34; alt=&#34;image-20250903002517260&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;两个号共用一个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;好吧我做错了，但我还是不知道怎么辨别有几个服务器&lt;/p&gt;
+&lt;h2 id=&#34;10请问约定见面的地点在哪里标准格式太阳路668号&#34;&gt;10.请问约定见面的地点在哪里（标准格式：太阳路668.号）
+&lt;/h2&gt;&lt;p&gt;*这题没做出来，看答案说是图片瘾写，这也是我第一次在取证里看见图片隐写&lt;/p&gt;
+&lt;p&gt;首先可以在来往邮件里面看见他们发送了一张图片，是一张不明所以的蜡笔小新：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903002916254&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903002916254.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903002916254.png&#34; alt=&#34;image-20250903002916254&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;以后看到这样突兀的图片应该警惕一下了&lt;/p&gt;
+&lt;p&gt;在如下位置找到它，导出：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903003017536&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903003017536.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903003017536.png&#34; alt=&#34;image-20250903003017536&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这是jpg的宽高修改隐写&lt;/p&gt;
+&lt;p&gt;首先我们要知道，JPEG文件格式里有一个标记段叫做SOF0，全称是Start of Frame 0&lt;/p&gt;
+&lt;p&gt;它的作用是描述图像的基本信息，比如宽度、高度、颜色分量等，是jpg解码器必须读取的关键段，格式如下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字节数&lt;/th&gt;
+          &lt;th&gt;内容&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;FFC0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;SOF0标记&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;段长度&lt;/td&gt;
+          &lt;td&gt;包括接下来的所有字节长度&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;精度&lt;/td&gt;
+          &lt;td&gt;每个样本的位数，一般8&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;高度&lt;/td&gt;
+          &lt;td&gt;图像高度（像素）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;宽度&lt;/td&gt;
+          &lt;td&gt;图像宽度（像素）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;颜色分量数量&lt;/td&gt;
+          &lt;td&gt;1=灰度，3=RGB/YUV&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3×N&lt;/td&gt;
+          &lt;td&gt;各分量信息&lt;/td&gt;
+          &lt;td&gt;每个分量的ID、采样因子、量化表号&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;这里我使用010editor打开，搜索十六进制FFC0找这个标记段：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903004245330&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903004245330.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903004245330.png&#34; alt=&#34;image-20250903004245330&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;之后的第4、5字节是高度，现在是0x03AC = 3*256 + 172 = 940px，改成04AC：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903005251367&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903005251367.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903005251367.png&#34; alt=&#34;image-20250903005251367&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;另存打开，就能看见下面隐藏的信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903005321586&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903005321586.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903005321586.png&#34; alt=&#34;image-20250903005321586&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;中国路999号
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;apk部分&#34;&gt;APK部分
+&lt;/h1&gt;&lt;h2 id=&#34;1app包名是多少标准格式comxxxxxx&#34;&gt;1.APP包名是多少（标准格式：com.xxx.xxx）
+&lt;/h2&gt;&lt;p&gt;导入jadx：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903005704523&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903005704523.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903005704523.png&#34; alt=&#34;image-20250903005704523&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;package com.example.readeveryday;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2apk的主函数名是多少标准格式comlongxin&#34;&gt;2.apk的主函数名是多少（标准格式：comlongxin）
+&lt;/h2&gt;&lt;p&gt;查看AndroidManifest.xml：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903133158303&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903133158303.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903133158303.png&#34; alt=&#34;image-20250903133158303&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;StartShow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3apk的签名算法是什么标准格式xxx&#34;&gt;3.apk的签名算法是什么（标准格式：xxx）
+&lt;/h2&gt;&lt;p&gt;查看APK signature：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903133522477&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903133522477.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903133522477.png&#34; alt=&#34;image-20250903133522477&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SHA1withRSA
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4apk的应用版本是多少标准格式12&#34;&gt;4.apk的应用版本是多少（标准格式：1.2）
+&lt;/h2&gt;&lt;p&gt;依旧查看AndroidManifest.xml：：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903133725118&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903133725118.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903133725118.png&#34; alt=&#34;image-20250903133725118&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5请判断该apk是否需要联网标准格式是否&#34;&gt;5.请判断该apk是否需要联网（标准格式：是/否）
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903134405472&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903134405472.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903134405472.png&#34; alt=&#34;image-20250903134405472&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这行代码是向安卓系统申请访问互联网的权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;是
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6apk回传地址标准格式12700112345&#34;&gt;6.APK回传地址？（标准格式：127.0.0.1:12345）
+&lt;/h2&gt;&lt;p&gt;在MainActivity类里面找到如下函数：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903135753002&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903135753002.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903135753002.png&#34; alt=&#34;image-20250903135753002&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;10.0.102.135:8888
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7apk回传数据文件名称是什么标准格式1txt&#34;&gt;7.APK回传数据文件名称是什么（标准格式：1.txt）
+&lt;/h2&gt;&lt;p&gt;在MainActivity的checkAndUpload方法中，代码构建了HTTP请求来上传文件，其中Content-Disposition头部信息指定了上传服务器时所使用的文件名：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903140404970&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903140404970.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903140404970.png&#34; alt=&#34;image-20250903140404970&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Readdata.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8apk回传数据加密密码是多少标准格式admin&#34;&gt;8.APK回传数据加密密码是多少（标准格式：admin）
+&lt;/h2&gt;&lt;p&gt;依旧MainActivity类，在EncryFile方法中，代码将收集到的信息文件readdata.xml进行加密压缩，加密密码被写死在了代码中：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903140518341&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903140518341.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903140518341.png&#34; alt=&#34;image-20250903140518341&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;19_08.05r
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9apk发送回后台服务器的数据包含以下哪些内容多选&#34;&gt;9.APK发送回后台服务器的数据包含以下哪些内容？（多选）
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A.手机通讯录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B.手机短信&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C.相册&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D.GPS定位信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E.手机应用列表&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;依旧MainActivity类，在onCreate方法里调用了三种收集信息的函数：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903140938271&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903140938271.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903140938271.png&#34; alt=&#34;image-20250903140938271&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;分别查看细节逻辑，就能知道采集的信息是什么&lt;/p&gt;
+&lt;p&gt;getContactInfo：通讯录&lt;/p&gt;
+&lt;p&gt;getSmsInPhone：短信&lt;/p&gt;
+&lt;p&gt;getExternalStorageDirectory：应用列表&lt;/p&gt;
+&lt;p&gt;并且代码中没有发现任何与读取相册或获取GPS定位信息相关的代码逻辑，应该就这三个了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ABE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;手机部分&#34;&gt;手机部分
+&lt;/h1&gt;&lt;h2 id=&#34;1ios手机备份包是什么时候开始备份的标准格式2024-01-20121212&#34;&gt;1.IOS手机备份包是什么时候开始备份的（标准格式：2024-01-20.12:12:12)
+&lt;/h2&gt;&lt;p&gt;答案是ios镜像压缩包的名称：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2024年01月15日_14时19分44秒
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;标准格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2024-01-15.14:19:44
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*正确解法（存疑）是去翻找检材同目录下的log文件，得到的答案是一样的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903171533328&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903171533328.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903171533328.png&#34; alt=&#34;image-20250903171533328&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2024-01-15.14:19:44
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2请分析该手机共下载了几款即时通讯工具标准格式阿拉伯数字&#34;&gt;2.请分析，该手机共下载了几款即时通讯工具（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;筛选后可以发现一共两个：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903171642617&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903171642617.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903171642617.png&#34; alt=&#34;image-20250903171642617&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这里还漏了一个，之后题目还有提到小西米语音，这个软件没有被标记为即时通信：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903172145185&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903172145185.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903172145185.png&#34; alt=&#34;image-20250903172145185&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3手机机主的号码得iccid是多少标准格式阿拉伯数字&#34;&gt;3.手机机主的号码得ICCID是多少（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903172236947&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903172236947.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903172236947.png&#34; alt=&#34;image-20250903172236947&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;89860320245121150689
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4手机机主登录小西米语音的日期是什么时候标准格式20240120&#34;&gt;4.手机机主登录小西米语音的日期是什么时候（标准格式：20240120）
+&lt;/h2&gt;&lt;p&gt;查看网络连接情况，之前我们知道了小西米语音的包名是com.titashow.tangliao：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903174415773&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903174415773.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903174415773.png&#34; alt=&#34;image-20250903174415773&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;20240115
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*这样做有些问题，正确解法应该是查看授权日志，第一次进入应该有授权&lt;/p&gt;
+&lt;p&gt;*不过我觉得还是不对，最后想到了看短信，短信里面有验证码，就是登录当天的日期：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903180242444&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903180242444.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903180242444.png&#34; alt=&#34;image-20250903180242444&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;20240115
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5请问嫌疑人家庭住址在哪个小区标准格式松泽家园&#34;&gt;5.请问嫌疑人家庭住址在哪个小区（标准格式：松泽家园）
+&lt;/h2&gt;&lt;p&gt;火眼分析的高德地图下有一个解密的数据库：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903181002210&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903181002210.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903181002210.png&#34; alt=&#34;image-20250903181002210&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;打开后找到这样一条最像是住所的记录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903180521840&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903180521840.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903180521840.png&#34; alt=&#34;image-20250903180521840&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;天铂华庭
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6safari浏览器书签的对应数据库名称是什么标准格式sqltiedb&#34;&gt;6.Safari浏览器书签的对应数据库名称是什么（标准格式：sqltie.db)
+&lt;/h2&gt;&lt;p&gt;随便点开一个书签，查看路径：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903181715815&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903181715815.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903181715815.png&#34; alt=&#34;image-20250903181715815&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Bookmarks.db
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7手机机主计划去哪里旅游标准格式苏州&#34;&gt;7.手机机主计划去哪里旅游（标准格式：苏州）
+&lt;/h2&gt;&lt;p&gt;查看Safari搜索历史：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903181824928&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903181824928.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903181824928.png&#34; alt=&#34;image-20250903181824928&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;拉萨
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8手机机主查询过那个人的身份信息标准格式龙信&#34;&gt;8.手机机主查询过那个人的身份信息（标准格式：龙信）
+&lt;/h2&gt;&lt;p&gt;*这题开始就不会了，后面记录一下正确的解题过程：&lt;/p&gt;
+&lt;p&gt;手机里有这样的一张图片（我的火眼不知道为什么看不了图，这辈子做不出来）：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903183322586&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903183322586.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903183322586.png&#34; alt=&#34;image-20250903183322586&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;要查找的应该就是这个手机号对应的人，记下来全局搜索这个手机号：
+
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903184211250&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903184211250.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903184211250.png&#34; alt=&#34;image-20250903184211250&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;第一个就是存有这段聊天记录的数据库：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903184330735&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903184330735.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903184330735.png&#34; alt=&#34;image-20250903184330735&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;龙黑
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9请问机主共转多少费用用于数据查询标准格式1000&#34;&gt;9.请问机主共转多少费用用于数据查询（标准格式：1000）
+&lt;/h2&gt;&lt;p&gt;还是上题的数据库，可知机主一共查了十一个人，一人100，总费用1100：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903184510107&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903184510107.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903184510107.png&#34; alt=&#34;image-20250903184510107&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1100
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;10机主查询的信息中共有多少男性标准格式阿拉伯数字&#34;&gt;10.机主查询的信息中共有多少男性（标准格式：阿拉伯数字）
+&lt;/h2&gt;&lt;p&gt;在短信里面能找到有人发了这样一张图片：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250903185319124&#34; href=&#34;http://picture.928330.xyz/typora/image-20250903185319124.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250903185319124.png&#34; alt=&#34;image-20250903185319124&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;身份证号码倒数第二位为性别，奇数为男性、偶数为女性&lt;/p&gt;
+&lt;p&gt;最后2个身份证缺少了几位无法辨别，前面男性一共4个人&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>Linux命令（文件写入与查看篇）</title>
         <link>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/</link>
         <pubDate>Wed, 27 Aug 2025 14:12:37 +0800</pubDate>
@@ -6151,7 +6721,7 @@
         
         <guid>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
         <description>&lt;img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" alt="Featured image of post 美亚杯2022取证总结" /&gt;&lt;p&gt;最诡异的一集，资格赛恐怖如斯&lt;/p&gt;
-&lt;p&gt;过程中要数次用到数据库，最好可以使用navicate&lt;/p&gt;
+&lt;p&gt;过程中要数次用到数据库，最好可以使用navicat&lt;/p&gt;
 &lt;p&gt;检材分卷压缩，一共九卷，解压之后使用Veracrypt挂载就能得到题目&lt;/p&gt;
 &lt;h1 id=&#34;王晓琳手机1-14&#34;&gt;王晓琳手机(1-14)
 &lt;/h1&gt;&lt;h2 id=&#34;1王晓琳手机的imei号是什么以阿拉伯数字回答&#34;&gt;1.王晓琳手机的IMEI号是什么?(以阿拉伯数字回答)

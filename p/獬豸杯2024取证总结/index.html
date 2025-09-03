@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="还是apache好用">
-<title>Nginx入门</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="比较离奇的一集">
+<title>獬豸杯2024取证总结</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/'>
+<link rel='canonical' href='https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 
-<link rel="stylesheet" href="/scss/style.min.11710e682057f87e61fdaccbe62c7a3e1dd7654c30f9aae86ee1aced0db2bcf7.css"><meta property='og:title' content="Nginx入门">
-<meta property='og:description' content="还是apache好用">
-<meta property='og:url' content='https://blog.928330.xyz/p/nginx%E5%85%A5%E9%97%A8/'>
+<link rel="stylesheet" href="/scss/style.min.11710e682057f87e61fdaccbe62c7a3e1dd7654c30f9aae86ee1aced0db2bcf7.css"><meta property='og:title' content="獬豸杯2024取证总结">
+<meta property='og:description' content="比较离奇的一集">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='server' /><meta property='article:published_time' content='2025-07-24T22:15:30&#43;08:00'/><meta property='article:modified_time' content='2025-08-24T21:42:35&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/94b5f0d5aceb41498d7d03bcff81ecf5.jpeg' />
-<meta name="twitter:title" content="Nginx入门">
-<meta name="twitter:description" content="还是apache好用"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://picture.928330.xyz/typora/94b5f0d5aceb41498d7d03bcff81ecf5.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-09-03T20:08:27&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T20:17:47&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/b35ad24065e047f6a4dc4b3474ddeb4b.png' />
+<meta name="twitter:title" content="獬豸杯2024取证总结">
+<meta name="twitter:description" content="比较离奇的一集"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/b35ad24065e047f6a4dc4b3474ddeb4b.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -376,143 +376,45 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#什么是nginx">什么是Nginx</a></li>
-    <li><a href="#主要用法">主要用法</a>
+    <li><a href="#计算机部分">计算机部分</a>
       <ol>
-        <li><a href="#web服务器">Web服务器</a></li>
-        <li><a href="#反向代理服务器">反向代理服务器</a></li>
-        <li><a href="#负载均衡器">负载均衡器</a></li>
-        <li><a href="#api网关">API网关</a></li>
+        <li><a href="#1计算机系统的安装日期是什么时候标准格式20240120">1.计算机系统的安装日期是什么时候（标准格式：20240120）</a></li>
+        <li><a href="#2请问机主最近一次访问压缩包文件得到文件名称是什么标准格式1zip">2.请问机主最近一次访问压缩包文件得到文件名称是什么（标准格式：1.zip）</a></li>
+        <li><a href="#3还原数据库请分析root用户最后一次更改密码的时间是什么时候标准格式2024-01-20121212">3.还原数据库，请分析root用户最后一次更改密码的时间是什么时候（标准格式：2024-01-20.12:12:12)</a></li>
+        <li><a href="#4请问mysql数据库中共存在多少个数据库标准格式阿拉伯数字">4.请问mysql数据库中共存在多少个数据库（标准格式：阿拉伯数字）</a></li>
+        <li><a href="#5员工编号为204200的员工总工资为多少元标准格式阿拉伯数字">5.员工编号为204200的员工总工资为多少元（标准格式：阿拉伯数字）</a></li>
+        <li><a href="#6finance部门中在1999年1月1日当天和之后入职的人员数量是多少名标准格式阿拉伯数字">6.Finance部门中在1999年1月1日当天和之后入职的人员数量是多少名（标准格式：阿拉伯数字）</a></li>
+        <li><a href="#7请问邮箱服务器的登录密码是多少标准格式admin">7.请问邮箱服务器的登录密码是多少（标准格式：admin）</a></li>
+        <li><a href="#8邮件服务器中共有多少个账号标准格式阿拉伯数字">8.邮件服务器中共有多少个账号（标准格式：阿拉伯数字）</a></li>
+        <li><a href="#9邮件服务器中共有多少个域名标准格式阿拉伯数字">9.邮件服务器中共有多少个域名（标准格式：阿拉伯数字）</a></li>
+        <li><a href="#10请问约定见面的地点在哪里标准格式太阳路668号">10.请问约定见面的地点在哪里（标准格式：太阳路668.号）</a></li>
       </ol>
     </li>
-    <li><a href="#目录结构">目录结构</a>
+    <li><a href="#apk部分">APK部分</a>
       <ol>
-        <li><a href="#不同来源">不同来源</a>
-          <ol>
-            <li><a href="#官方nginx包从-nginxorg">官方Nginx包（从 nginx.org）</a></li>
-            <li><a href="#源码编译安装">源码编译安装</a></li>
-            <li><a href="#debianubuntu官方仓库">Debian/Ubuntu官方仓库</a></li>
-            <li><a href="#centosrhel官方仓库">CentOS/RHEL官方仓库</a></li>
-            <li><a href="#docker镜像官方-nginx">Docker镜像（官方 Nginx）</a></li>
-          </ol>
-        </li>
-        <li><a href="#一些问题">一些问题</a>
-          <ol>
-            <li><a href="#日志文件">日志文件</a></li>
-            <li><a href="#配置文件">配置文件</a></li>
-            <li><a href="#web-根目录">Web 根目录</a></li>
-            <li><a href="#systemd的位置">systemd的位置</a></li>
-          </ol>
-        </li>
+        <li><a href="#1app包名是多少标准格式comxxxxxx">1.APP包名是多少（标准格式：com.xxx.xxx）</a></li>
+        <li><a href="#2apk的主函数名是多少标准格式comlongxin">2.apk的主函数名是多少（标准格式：comlongxin）</a></li>
+        <li><a href="#3apk的签名算法是什么标准格式xxx">3.apk的签名算法是什么（标准格式：xxx）</a></li>
+        <li><a href="#4apk的应用版本是多少标准格式12">4.apk的应用版本是多少（标准格式：1.2）</a></li>
+        <li><a href="#5请判断该apk是否需要联网标准格式是否">5.请判断该apk是否需要联网（标准格式：是/否）</a></li>
+        <li><a href="#6apk回传地址标准格式12700112345">6.APK回传地址？（标准格式：127.0.0.1:12345）</a></li>
+        <li><a href="#7apk回传数据文件名称是什么标准格式1txt">7.APK回传数据文件名称是什么（标准格式：1.txt）</a></li>
+        <li><a href="#8apk回传数据加密密码是多少标准格式admin">8.APK回传数据加密密码是多少（标准格式：admin）</a></li>
+        <li><a href="#9apk发送回后台服务器的数据包含以下哪些内容多选">9.APK发送回后台服务器的数据包含以下哪些内容？（多选）</a></li>
       </ol>
     </li>
-    <li><a href="#常用命令">常用命令</a>
+    <li><a href="#手机部分">手机部分</a>
       <ol>
-        <li><a href="#查看版本">查看版本</a></li>
-        <li><a href="#检查配置文件语法">检查配置文件语法</a></li>
-        <li><a href="#重新加载配置文件">重新加载配置文件</a></li>
-        <li><a href="#强制停止">强制停止</a></li>
-      </ol>
-    </li>
-    <li><a href="#配置文件-1">配置文件</a>
-      <ol>
-        <li><a href="#全局块">全局块</a></li>
-        <li><a href="#events块">events块</a></li>
-        <li><a href="#http块">http块</a></li>
-        <li><a href="#server块">server块</a></li>
-        <li><a href="#location块">location块</a></li>
-      </ol>
-    </li>
-    <li><a href="#核心功能--web服务">核心功能 —— Web服务</a>
-      <ol>
-        <li><a href="#部署静态资源">部署静态资源</a></li>
-        <li><a href="#url重写与跳转">URL重写与跳转</a>
-          <ol>
-            <li><a href="#rewrite">rewrite</a>
-              <ol>
-                <li><a href="#基本语法">基本语法</a></li>
-                <li><a href="#伪静态处理">伪静态处理</a></li>
-                <li><a href="#隐藏真实路径">隐藏真实路径</a></li>
-              </ol>
-            </li>
-            <li><a href="#return">return</a>
-              <ol>
-                <li><a href="#基本语法-1">基本语法</a></li>
-                <li><a href="#http强制跳转https">HTTP强制跳转HTTPS</a></li>
-                <li><a href="#禁止访问某个目录">禁止访问某个目录</a></li>
-                <li><a href="#简洁跳转到首页">简洁跳转到首页</a></li>
-                <li><a href="#纯文本响应">纯文本响应</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#配置https服务">配置HTTPS服务</a></li>
-      </ol>
-    </li>
-    <li><a href="#核心功能--反向代理">核心功能 —— 反向代理</a></li>
-    <li><a href="#核心功能--负载均衡">核心功能 —— 负载均衡</a>
-      <ol>
-        <li><a href="#http负载均衡配置">HTTP负载均衡配置</a>
-          <ol>
-            <li><a href="#负载均衡策略">负载均衡策略</a></li>
-            <li><a href="#轮询">轮询</a></li>
-            <li><a href="#权重weight">权重（weight）</a></li>
-            <li><a href="#ip哈希ip_hash">IP哈希（ip_hash）</a></li>
-            <li><a href="#最少连接-least_conn">最少连接 (least_conn)</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#核心功能--tcpudp代理">核心功能 —— TCP/UDP代理</a></li>
-    <li><a href="#日志分析">日志分析</a>
-      <ol>
-        <li><a href="#为何要分析nginx日志">为何要分析Nginx日志</a></li>
-        <li><a href="#日志类型与格式">日志类型与格式</a>
-          <ol>
-            <li><a href="#访问日志accesslog">访问日志（access.log）</a>
-              <ol>
-                <li><a href="#默认格式combined--main">默认格式：combined / main</a></li>
-                <li><a href="#增强的自定义格式json">增强的自定义格式：JSON</a></li>
-                <li><a href="#docker环境下的日志">Docker环境下的日志</a></li>
-              </ol>
-            </li>
-            <li><a href="#错误日志errorlog">错误日志（error.log）</a>
-              <ol>
-                <li><a href="#一般格式">一般格式</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#分析技巧">分析技巧</a>
-          <ol>
-            <li><a href="#网站流量核心指标分析-pv--uv">网站流量核心指标分析 (PV &amp; UV)</a>
-              <ol>
-                <li><a href="#统计总uv-根据ip">统计总UV (根据IP)</a></li>
-                <li><a href="#统计总pv">统计总PV</a></li>
-                <li><a href="#统计某时间段的uv--pv">统计某时间段的UV / PV</a></li>
-              </ol>
-            </li>
-            <li><a href="#访问来源与异常排查-ip--url">访问来源与异常排查 (IP &amp; URL)</a>
-              <ol>
-                <li><a href="#查询访问最频繁的top-10-url">查询访问最频繁的Top 10 URL</a></li>
-                <li><a href="#查询访问最频繁的top-10-ip">查询访问最频繁的Top 10 IP</a></li>
-                <li><a href="#查看指定ip在某天访问了哪些-url-top-10">查看指定IP在某天访问了哪些 URL (Top 10)</a></li>
-              </ol>
-            </li>
-            <li><a href="#性能与爬虫分析">性能与爬虫分析</a>
-              <ol>
-                <li><a href="#统计爬取次数">统计爬取次数</a></li>
-                <li><a href="#统计每分钟每秒的请求数-top-20">统计每分钟/每秒的请求数 (Top 20)</a></li>
-              </ol>
-            </li>
-            <li><a href="#分析请求响应时间-需自定义日志格式">分析请求响应时间 (需自定义日志格式)</a>
-              <ol>
-                <li><a href="#列出传输时间超过3秒的top10请求">列出传输时间超过3秒的Top10请求</a></li>
-                <li><a href="#列出最耗时的top10请求">列出最耗时的Top10请求</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
+        <li><a href="#1ios手机备份包是什么时候开始备份的标准格式2024-01-20121212">1.IOS手机备份包是什么时候开始备份的（标准格式：2024-01-20.12:12:12)</a></li>
+        <li><a href="#2请分析该手机共下载了几款即时通讯工具标准格式阿拉伯数字">2.请分析，该手机共下载了几款即时通讯工具（标准格式：阿拉伯数字）</a></li>
+        <li><a href="#3手机机主的号码得iccid是多少标准格式阿拉伯数字">3.手机机主的号码得ICCID是多少（标准格式：阿拉伯数字）</a></li>
+        <li><a href="#4手机机主登录小西米语音的日期是什么时候标准格式20240120">4.手机机主登录小西米语音的日期是什么时候（标准格式：20240120）</a></li>
+        <li><a href="#5请问嫌疑人家庭住址在哪个小区标准格式松泽家园">5.请问嫌疑人家庭住址在哪个小区（标准格式：松泽家园）</a></li>
+        <li><a href="#6safari浏览器书签的对应数据库名称是什么标准格式sqltiedb">6.Safari浏览器书签的对应数据库名称是什么（标准格式：sqltie.db)</a></li>
+        <li><a href="#7手机机主计划去哪里旅游标准格式苏州">7.手机机主计划去哪里旅游（标准格式：苏州）</a></li>
+        <li><a href="#8手机机主查询过那个人的身份信息标准格式龙信">8.手机机主查询过那个人的身份信息（标准格式：龙信）</a></li>
+        <li><a href="#9请问机主共转多少费用用于数据查询标准格式1000">9.请问机主共转多少费用用于数据查询（标准格式：1000）</a></li>
+        <li><a href="#10机主查询的信息中共有多少男性标准格式阿拉伯数字">10.机主查询的信息中共有多少男性（标准格式：阿拉伯数字）</a></li>
       </ol>
     </li>
   </ol>
@@ -529,9 +431,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/nginx%E5%85%A5%E9%97%A8/">
+            <a href="/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
                 
-                    <img src="http://picture.928330.xyz/typora/94b5f0d5aceb41498d7d03bcff81ecf5.jpeg" loading="lazy" alt="Featured image of post Nginx入门" />
+                    <img src="http://picture.928330.xyz/typora/b35ad24065e047f6a4dc4b3474ddeb4b.png" loading="lazy" alt="Featured image of post 獬豸杯2024取证总结" />
                 
             </a>
         </div>
@@ -541,8 +443,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" >
-                工具使用
+            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/" >
+                比赛复盘
             </a>
         
     </header>
@@ -552,11 +454,11 @@
 
 
         <h2 class="article-title">
-            <a href="/p/nginx%E5%85%A5%E9%97%A8/">Nginx入门</a>
+            <a href="/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">獬豸杯2024取证总结</a>
         </h2>
         
         <h3 class="article-subtitle">
-            还是apache好用
+            比较离奇的一集
         </h3>
         
 
@@ -579,7 +481,7 @@
   <path d="M18 16.496v1.504l1 1" />
 </svg>
                 <time class="article-time--published">
-                    发布时间：2025-07-24</time>
+                    发布时间：2025-09-03</time>
             </div>
         
 
@@ -595,7 +497,7 @@
 
 
                <time>
-                   更新时间：2025-08-24
+                   更新时间：2025-09-03
                </time>
            </div>
         <div>
@@ -615,1235 +517,569 @@
     <section class="article-content">
     
     
-    <p>开玩笑的，其实nginx和apache一样好用</p>
-<p>apache移步：<a class="link" href="http://blog.928330.xyz/p/apache%E5%85%A5%E9%97%A8/"  target="_blank" rel="noopener"
-    >Apache入门
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<h1 id="什么是nginx">什么是Nginx
-</h1><p>Nginx（发音为 &ldquo;engine-X&rdquo;）是一款开源的、高性能的HTTP和反向代理服务器</p>
-<p>它的设计哲学是提供极致的性能、稳定性、丰富的功能、简单的配置和低资源消耗，看上去就很厉害</p>
-<p>Nginx采用事件驱动的异步非阻塞架构</p>
-<p>与传统的Apache等服务器为每个请求创建一个新进程或线程不同，Nginx使用一个主进程和少数几个工作进程</p>
-<p>主进程负责读取配置、管理工作进程，而真正处理网络请求的是工作进程</p>
-<p>每个工作进程都是单线程的，异步地处理成千上万个并发连接</p>
-<p>这种模型避免了创建和销毁进程/线程的开销以及上下文切换的成本，因此能以极低的内存占用应对高并发场景</p>
-<p><strong>接下来我们会介绍直接安装的Nginx，也会顺带介绍通过Docker容器启动的Nginx</strong></p>
-<p><strong>二者在活动状态控制和日志方面有些区别，配置基本一致</strong></p>
-<h1 id="主要用法">主要用法
-</h1><h2 id="web服务器">Web服务器
-</h2><p>直接向客户端提供静态资源（如HTML、CSS、图片）的服务</p>
-<p>由于其高效的文件读取和网络传输能力，Nginx在处理静态内容方面表现极其出色,<del>适合搭建博客</del></p>
-<h2 id="反向代理服务器">反向代理服务器
-</h2><p>它是是客户端和后端真实服务器之间的中间人</p>
-<p>它可以将客户端请求转发到后端的应用服务器（如Node.js、Java、Python应用），并将后端响应返回给客户端，从而实现请求分发、负载均衡，并能隐藏后端服务的真实IP和端口，提升安全性</p>
-<h2 id="负载均衡器">负载均衡器
-</h2><p>当后端有多台服务器时，Nginx可以根据预设的策略将请求分发到这些服务器上，从而分担单一服务器的压力</p>
-<h2 id="api网关">API网关
-</h2><p>在微服务架构中，Nginx可以作为所有API请求的统一入口，执行如身份验证、速率限制、日志记录、服务发现等通用功能</p>
-<h1 id="目录结构">目录结构
-</h1><h2 id="不同来源">不同来源
-</h2><p><strong>通过不同方式安装的nginx的默认目录结构都会有所差别</strong></p>
-<h3 id="官方nginx包从-nginxorg">官方Nginx包（从 nginx.org）
-</h3><p>从Nginx下载官方提供的<code>.rpm/.deb</code>包安装</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                                 <span style="color:#7f848e"># 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                           <span style="color:#7f848e"># 配置文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                                <span style="color:#7f848e"># 主配置文件（Nginx 的核心配置）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                              <span style="color:#7f848e"># MIME类型映射表
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                                     <span style="color:#7f848e"># 子配置目录（用于虚拟主机）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                          <span style="color:#7f848e"># 默认网站配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">sbin/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                                       <span style="color:#7f848e"># 主程序二进制文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">share/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">html/</span>                                  <span style="color:#7f848e"># 默认 Web 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                      <span style="color:#7f848e"># 默认欢迎页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                        <span style="color:#7f848e"># 服务器错误页面（如 500、502）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">var/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">log/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                    <span style="color:#7f848e"># 日志文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                           <span style="color:#7f848e"># 访问日志
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                             <span style="color:#7f848e"># 错误日志
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">lib/</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">systemd/</span>                                    <span style="color:#7f848e"># 服务管理相关
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">system/</span>                                   <span style="color:#7f848e"># Nginx systemd 配置
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>              <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx.service</span>
-</span></span></code></pre></div><h3 id="源码编译安装">源码编译安装
-</h3><p>从Nginx官方下载源码<code>.tar.gz</code>，自己编译安装</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                               <span style="color:#7f848e"># 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">└──</span> <span style="color:#98c379">usr/</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">local/</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#98c379">├──</span> <span style="color:#98c379">sbin/</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                              <span style="color:#7f848e"># 主程序二进制文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">├──</span> <span style="color:#98c379">conf/</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                       <span style="color:#7f848e"># 主配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                     <span style="color:#7f848e"># MIME类型映射表
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                            <span style="color:#7f848e"># 子配置目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                <span style="color:#7f848e"># 默认网站配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">├──</span> <span style="color:#98c379">html/</span>                                    <span style="color:#7f848e"># 默认 Web 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                       <span style="color:#7f848e"># 默认欢迎页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                          <span style="color:#7f848e"># 服务器错误页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">└──</span> <span style="color:#98c379">logs/</span>                                     <span style="color:#7f848e"># 日志文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>                <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                         <span style="color:#7f848e"># 访问日志
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>                <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                            <span style="color:#7f848e"># 错误日志
-</span></span></span></code></pre></div><h3 id="debianubuntu官方仓库">Debian/Ubuntu官方仓库
-</h3><p>通过<code>apt</code>安装</p>
-<p><strong>虽然<code>apt</code>也是调用<code>dpkg</code>安装<code>.deb</code>包，但debian/ubuntu维护的<code>.deb</code>包和官方打包的不太一样，因此web根目录等等路径和直接使用官方包安装会有所差别</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                                 <span style="color:#7f848e"># 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                           <span style="color:#7f848e"># 配置文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                                <span style="color:#7f848e"># 主配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                              <span style="color:#7f848e"># MIME类型映射表
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                                     <span style="color:#7f848e"># 子配置目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                         <span style="color:#7f848e"># 默认网站配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">sbin/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                                       <span style="color:#7f848e"># 主程序二进制文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">var/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">www/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">html/</span>                                      <span style="color:#7f848e"># 默认 Web 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                          <span style="color:#7f848e"># 默认欢迎页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                             <span style="color:#7f848e"># 服务器错误页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">log/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                      <span style="color:#7f848e"># 日志文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                            <span style="color:#7f848e"># 访问日志
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                              <span style="color:#7f848e"># 错误日志
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">lib/</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">systemd/</span>                                     <span style="color:#7f848e"># 服务管理相关
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">system/</span>                                   <span style="color:#7f848e"># Nginx systemd 配置
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>              <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx.service</span>
-</span></span></code></pre></div><h3 id="centosrhel官方仓库">CentOS/RHEL官方仓库
-</h3><p>通过<code>yum</code>/<code>dnf</code>安装</p>
-<p><strong>路径、配置和布局就是官方Nginx提供的.rmp包规范的结构，所以和第一种很像</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                               <span style="color:#7f848e"># 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                         <span style="color:#7f848e"># 配置文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                               <span style="color:#7f848e"># 主配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                             <span style="color:#7f848e"># MIME类型映射表
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                                    <span style="color:#7f848e"># 子配置目录（用于虚拟主机）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>                        <span style="color:#7f848e"># 默认网站配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">sbin/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                                      <span style="color:#7f848e"># 主程序二进制文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">share/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">html/</span>                                 <span style="color:#7f848e"># 默认 Web 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>                     <span style="color:#7f848e"># 默认欢迎页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>               <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>                        <span style="color:#7f848e"># 服务器错误页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">var/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">log/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                                    <span style="color:#7f848e"># 日志文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>                          <span style="color:#7f848e"># 访问日志
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                             <span style="color:#7f848e"># 错误日志
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">usr/</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">lib/</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">systemd/</span>                                 <span style="color:#7f848e"># 服务管理相关
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#98c379">└──</span> <span style="color:#98c379">system/</span>                               <span style="color:#7f848e"># Nginx systemd 配置
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>                <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx.service</span>
-</span></span></code></pre></div><h3 id="docker镜像官方-nginx">Docker镜像（官方 Nginx）
-</h3><p><strong>没有固定结构</strong>，因为Docker镜像只是一个文件系统的快照，完全取决于镜像制作者，具体看上面四种</p>
-<p>这里以官方镜像为例，也就是</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">/</span>                                                  <span style="color:#7f848e"># 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">├──</span> <span style="color:#98c379">etc/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                            <span style="color:#7f848e"># 配置文件目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">nginx.conf</span>                  <span style="color:#7f848e"># 主配置文件（Nginx 的核心配置）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">├──</span> <span style="color:#98c379">mime.types</span>                <span style="color:#7f848e"># MIME类型映射表
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">conf.d/</span>                       <span style="color:#7f848e"># 子配置目录（用于虚拟主机）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">default.conf</span>           <span style="color:#7f848e"># 默认网站配置文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">usr/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">├──</span> <span style="color:#98c379">share/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>      <span style="color:#98c379">└──</span> <span style="color:#98c379">html/</span>                     <span style="color:#7f848e"># 默认的 Web 根目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>           <span style="color:#98c379">├──</span> <span style="color:#98c379">index.html</span>        <span style="color:#7f848e"># 默认欢迎页面
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">│</span>           <span style="color:#98c379">└──</span> <span style="color:#98c379">50x.html</span>           <span style="color:#7f848e"># 服务器错误页面（如 500、502）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span>   <span style="color:#98c379">└──</span> <span style="color:#98c379">sbin/</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">│</span>       <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx</span>                         <span style="color:#7f848e"># 主程序二进制文件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#98c379">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">var/</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#98c379">└──</span> <span style="color:#98c379">log/</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#98c379">└──</span> <span style="color:#98c379">nginx/</span>                       <span style="color:#7f848e"># 日志文件目录（部分精简镜像无日志输出）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>             <span style="color:#98c379">├──</span> <span style="color:#98c379">access.log</span>             <span style="color:#7f848e"># 访问日志（默认可能未启用）
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>             <span style="color:#98c379">└──</span> <span style="color:#98c379">error.log</span>                <span style="color:#7f848e"># 错误日志（默认可能未启用）
-</span></span></span></code></pre></div><h2 id="一些问题">一些问题
-</h2><h3 id="日志文件">日志文件
-</h3><p><span style="color:red;font-size:20px"><strong>Docker镜像的Nginx日志默认输出到标准输出/错误，而不是文件中</strong></span></p>
-<p><strong>在编译安装（<code>make install</code>）的传统方式中，Nginx日志会记录在：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">usr</span>/<span style="color:#e06c75">local</span>/<span style="color:#e06c75">nginx</span>/<span style="color:#e06c75">logs</span>/
-</span></span></code></pre></div><p><strong>在<code>.deb</code>包和系统包安装（<code>apt/yum</code>）的方式中，Nginx日志会记录在：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#c678dd">var</span>/<span style="color:#e06c75">log</span>/<span style="color:#e06c75">nginx</span>/
-</span></span></code></pre></div><p><strong>而在Docker官方镜像中，日志默认不写入上面的文件，而是输出到标准输出和标准错误</strong></p>
-<p>执行以下命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l /var/log/nginx/
-</span></span></code></pre></div><p>我们可以看到如下输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>lrwxrwxrwx <span style="color:#d19a66">1</span> root root <span style="color:#d19a66">11</span> Jul <span style="color:#d19a66">15</span> 01:14 access.log -&gt; /dev/stdout
-</span></span><span style="display:flex;"><span>lrwxrwxrwx <span style="color:#d19a66">1</span> root root <span style="color:#d19a66">11</span> Jul <span style="color:#d19a66">15</span> 01:14 error.log -&gt; /dev/stderr
-</span></span></code></pre></div><p>虽然<code>nginx.conf</code>配置的是<code>/var/log/nginx/access.log</code>，但由于它是个符号链接，等于就是输出到了标准输出</p>
-<p><strong>这些输出会被记录到docker容器的日志里，docker中查看日志的方式</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">docker</span> <span style="color:#e06c75">logs</span> &lt;<span style="color:#e06c75">容器ID</span>&gt;/&lt;<span style="color:#e06c75">名称</span>&gt;
-</span></span></code></pre></div><h3 id="配置文件">配置文件
-</h3><p><span style="color:red;font-size:20px"><strong><code>/etc/nginx/conf.d/</code>是主配置目录，<code>/etc/nginx/nginx.conf</code>是主配置文件</strong></span></p>
-<p>Nginx的主配置文件是<code>/etc/nginx/nginx.conf</code>，在这个文件中有这样一行代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">include</span> <span style="color:#e06c75">/etc/nginx/conf.d/*.conf</span>;
-</span></span></code></pre></div><p><strong><code>include</code>是Nginx配置语言中的指令，用于包含其他配置文件</strong></p>
-<p><strong>也就是说，<code>/etc/nginx/nginx.conf</code>默认会包含<code>/etc/nginx/conf.d/</code>这个子目录中的所有配置（.conf）</strong></p>
-<h3 id="web-根目录">Web 根目录
-</h3><p><span style="color:red;font-size:20px"><strong>不同安装方式下，Nginx的默认Web根目录不同</strong></span></p>
-<p><strong>在编译安装（<code>make install</code>）的传统方式中，Web根目录在：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">usr</span>/<span style="color:#e06c75">local</span>/<span style="color:#e06c75">nginx</span>/<span style="color:#e06c75">html</span>/
-</span></span></code></pre></div><p>默认包含以下文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">index</span>.<span style="color:#e06c75">html</span>   # <span style="color:#e06c75">默认欢迎页面</span>
-</span></span><span style="display:flex;"><span><span style="color:#d19a66">50</span><span style="color:#e06c75">x</span>.<span style="color:#e06c75">html</span>     # <span style="color:#e06c75">服务器错误页面</span>
-</span></span></code></pre></div><p><strong>在Debian/Ubuntu系统包安装方式中，Web根目录在：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#c678dd">var</span>/<span style="color:#e06c75">www</span>/<span style="color:#e06c75">html</span>/
-</span></span></code></pre></div><p><strong>在官方包和CentOS/RHEL系统包安装方式中，Web根目录在：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">usr</span>/<span style="color:#e06c75">share</span>/<span style="color:#e06c75">nginx</span>/<span style="color:#e06c75">html</span>/
-</span></span></code></pre></div><p><strong>可以通过修改Nginx配置文件中的<code>root</code>指令来改变Web根目录：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">server_name</span> <span style="color:#e06c75">localhost</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">root</span> /<span style="color:#e06c75">path</span>/<span style="color:#e06c75">to</span>/<span style="color:#e06c75">your</span>/<span style="color:#e06c75">webroot</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">index</span> <span style="color:#e06c75">index</span>.<span style="color:#e06c75">html</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>关于server块我们后面会细讲</p>
-<h3 id="systemd的位置">systemd的位置
-</h3><p>其实这个不是nginx的问题，而是一个历史问题 —— linux文件系统的演进</p>
-<p>**FHS，全称Filesystem Hierarchy Standard（文件系统层次结构标准）**是 Linux 系统的一个标准，规定了 目录结构、文件存放位置及用途，让不同 Linux 发行版在文件布局上保持一致性</p>
-<p>在早期，FHS规定<code>/lib/</code>用于存放核心库文件和与系统启动紧密相关的可执行文件（比如init系统所需的库、二进制），而<code>/usr/lib/</code>用于存放非核心、额外安装的软件库</p>
-<p>但在systemd出现后，由于systemd的服务单元文件属于系统服务配置，与系统启动密切相关，但又不是二进制程序本身，于是他的位置有了一些不同：</p>
-<ul>
-<li><strong>Debian/Ubuntu：选择<code>/lib/systemd/system/</code>放置核心包的单元文件（比如nginx、sshd），保证系统启动时总能找到</strong></li>
-<li><strong>CentOS/RHEL/Fedora：更倾向使用<code>/usr/lib/systemd/system/</code>，虽然<code>/lib/systemd/system/</code>也存在，但它通常是指向前者的符号链接</strong></li>
-</ul>
-<p>现在<code>/lib/</code>和<code>/usr/lib/</code>往往通过软链接或包管理器自动管理，保证旧路径和新路径都能访问到服务单元文件，所以你会看到同样的 Nginx 服务在不同发行版或者不同安装方式下，路径可能不同</p>
-<h1 id="常用命令">常用命令
-</h1><p>Nginx直接安装在本机时，使用<code>systemctl</code>或者<code>service</code>命令控制</p>
-<p>通过Docker容器使用时，就按照Docker容器的使用方法（没用过看这里：<a class="link" href="http://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/"  target="_blank" rel="noopener"
-    >快速上手Docker
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a>）</p>
-<p>下面介绍一些Nginx本身的命令：</p>
-<h2 id="查看版本">查看版本
-</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nginx -v
-</span></span></code></pre></div><p>输出当前安装的Nginx版本号，用于确认是否正确安装Nginx及其版本信息</p>
-<h2 id="检查配置文件语法">检查配置文件语法
-</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nginx -t
-</span></span></code></pre></div><p><strong>在每次修改配置文件后必须执行</strong></p>
-<p>使用后，主进程会fork一个临时子进程，子进程尝试解析所有配置文件，但不会绑定端口或真正启动服务</p>
-<p>若语法无误，会提示<code>syntax is ok</code>和 <code>test is successful</code></p>
-<p>若有错误，会明确指出是哪一行、哪个文件配置有误</p>
+    <p>獬（xie）豸（zhi）杯，据说獬豸是古代法律与司法的象征</p>
+<p>题目不算多，但是很多题目太过跳跃，思路容易断裂，没有之前的循序渐进的感觉（或许这样更符合现实？</p>
+<p>最大的收获应该就是熟悉了apk的逆向操作吧，还是有值得一做的地方的</p>
+<h1 id="计算机部分">计算机部分
+</h1><h2 id="1计算机系统的安装日期是什么时候标准格式20240120">1.计算机系统的安装日期是什么时候（标准格式：20240120）
+</h2><p>导入火眼分析的时候发现分区7被加密了，先不管它，看看系统信息：</p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250724132842292" href="http://picture.928330.xyz/typora/image-20250724132842292.png">
-<img src="http://picture.928330.xyz/typora/image-20250724132842292.png" alt="image-20250724132842292"  />
+<a data-fancybox="gallery" data-caption="image-20250901223020784" href="http://picture.928330.xyz/typora/image-20250901223020784.png">
+<img src="http://picture.928330.xyz/typora/image-20250901223020784.png" alt="image-20250901223020784"  />
 </a>
 </div>
 </p>
-<h2 id="重新加载配置文件">重新加载配置文件
-</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nginx -s reload
-</span></span></code></pre></div><h2 id="强制停止">强制停止
-</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nginx -s stop
-</span></span></code></pre></div><h1 id="配置文件-1">配置文件
-</h1><p><strong>Nginx的所有功能都是通过配置文件<code>nginx.conf</code>来驱动的</strong></p>
-<p>该文件主要由多个配置块组成，这些块由花括号<code>{}</code>界定，可以嵌套，形成了层级分明的结构</p>
-<p>一个典型的<code>nginx.conf</code>结构如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">nginx.conf</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">全局块</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">├──</span> <span style="color:#98c379">events块</span>
-</span></span><span style="display:flex;"><span><span style="color:#98c379">└──</span> <span style="color:#98c379">http块</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">└──</span> <span style="color:#98c379">server块（可多个）</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#98c379">└──</span> <span style="color:#98c379">location块（可多个）</span>
-</span></span></code></pre></div><p>具体示例如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">user</span>  <span style="color:#98c379">nginx</span>; 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">worker_processes</span>  <span style="color:#98c379">auto</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">error_log</span>  <span style="color:#98c379">/var/log/nginx/error.log</span> <span style="color:#98c379">warn</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pid</span>        <span style="color:#98c379">/var/run/nginx.pid</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">events</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">worker_connections</span>  <span style="color:#d19a66">1024</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">http</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">include</span>       <span style="color:#98c379">/etc/nginx/mime.types</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">default_type</span>  <span style="color:#98c379">application/octet-stream</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">log_format</span>  <span style="color:#98c379">main</span>  <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$remote_addr</span> <span style="color:#98c379">-</span> <span style="color:#e06c75">$remote_user</span> <span style="color:#98c379">[</span><span style="color:#e06c75">$time_local]</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$request&#34;</span> <span style="color:#98c379">&#39;</span>
-</span></span><span style="display:flex;"><span>                      <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$status</span> <span style="color:#e06c75">$body_bytes_sent</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_referer&#34;</span> <span style="color:#98c379">&#39;</span>
-</span></span><span style="display:flex;"><span>                      <span style="color:#98c379">&#39;&#34;</span><span style="color:#e06c75">$http_user_agent&#34;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_x_forwarded_for&#34;&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">access_log</span>  <span style="color:#98c379">/var/log/nginx/access.log</span>  <span style="color:#98c379">main</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">sendfile</span>        <span style="color:#e06c75">on</span>; 
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">tcp_nopush</span>      <span style="color:#e06c75">on</span>; 
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">keepalive_timeout</span>  <span style="color:#d19a66">65</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">listen</span>       <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">server_name</span>  <span style="color:#98c379">localhost</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">root</span>   <span style="color:#98c379">/usr/share/nginx/html</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">index</span>  <span style="color:#98c379">index.html</span> <span style="color:#98c379">index.htm</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="全局块">全局块
-</h2><p>位于配置文件顶部，未嵌套于任何块中</p>
-<p>用于配置Nginx整体运行环境，影响所有子模块</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">user</span>  <span style="color:#98c379">nginx</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">worker_processes</span>  <span style="color:#98c379">auto</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">error_log</span>  <span style="color:#98c379">/var/log/nginx/error.log</span> <span style="color:#98c379">warn</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pid</span>        <span style="color:#98c379">/var/run/nginx.pid</span>;
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>user</code>：指定运行工作进程的用户和用户组</strong></p>
-</li>
-<li>
-<p><strong><code>worker_processes</code>：指定工作进程数量</strong></p>
-<p><code>auto</code>表示自动与 CPU 核心数一致</p>
-</li>
-<li>
-<p><strong><code>error_log</code>：设置错误日志的路径和日志级别</strong></p>
-<p>每条错误日志条目都会带有一个严重性等级，这些等级是代码里写死的，作为用户无法改变某个错误属于什么等级</p>
-<p>Nginx支持的日志级别（从高到低）如下：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>级别</th>
-          <th>描述</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>debug</code></td>
-          <td>记录所有信息，主要用于开发或调试，信息量极大，通常需编译时启用</td>
-      </tr>
-      <tr>
-          <td><code>info</code></td>
-          <td>普通信息，如配置加载成功、进程启动、连接创建等</td>
-      </tr>
-      <tr>
-          <td><code>notice</code></td>
-          <td>正常但重要的事件，如配置文件重载、进程关闭等</td>
-      </tr>
-      <tr>
-          <td><code>warn</code></td>
-          <td>警告信息，非致命错误，比如配置中存在问题但可以忽略或继续运行</td>
-      </tr>
-      <tr>
-          <td><code>error</code></td>
-          <td>运行过程中出现的错误，如连接失败、服务不可达等</td>
-      </tr>
-      <tr>
-          <td><code>crit</code></td>
-          <td>严重错误，Nginx可能无法继续运行</td>
-      </tr>
-      <tr>
-          <td><code>alert</code></td>
-          <td>必须立刻处理的严重问题</td>
-      </tr>
-      <tr>
-          <td><code>emerg</code></td>
-          <td>紧急状态，比如系统崩溃，Nginx无法启动</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>是否写入日志文件取决于<code>LogLevel</code>设置的阈值，只会写入大于等于当前设置等级的错误事件</p>
-<p>生产环境通常设置为<code>warn</code>以捕捉重要问题，同时避免日志泛滥</p>
-</li>
-<li>
-<p><strong><code>pid</code>：指定记录主进程PID的文件路径</strong></p>
-</li>
-</ul>
-<h2 id="events块">events块
-</h2><p>紧随全局块之后，一级块</p>
-<p>用于配置与网络连接处理相关的指令，影响工作进程的并发性能</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">events</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">worker_connections</span> <span style="color:#d19a66">1024</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>worker_connections</code>：每个工作进程可同时处理的最大连接数</strong></p>
-<p>总并发连接数约为<code>worker_processes * worker_connections</code></p>
-</li>
-</ul>
-<h2 id="http块">http块
-</h2><p>紧随events块之后，一级块</p>
-<p>用于配置HTTP协议相关的指令，是配置Web服务的核心部分</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">http</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">include</span>       <span style="color:#98c379">/etc/nginx/mime.types</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">default_type</span>  <span style="color:#98c379">application/octet-stream</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">log_format</span>  <span style="color:#98c379">main</span>  <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$remote_addr</span> <span style="color:#98c379">-</span> <span style="color:#e06c75">$remote_user</span> <span style="color:#98c379">[</span><span style="color:#e06c75">$time_local]</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$request&#34;</span> <span style="color:#98c379">&#39;</span>
-</span></span><span style="display:flex;"><span>                      <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$status</span> <span style="color:#e06c75">$body_bytes_sent</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_referer&#34;</span> <span style="color:#98c379">&#39;</span>
-</span></span><span style="display:flex;"><span>                      <span style="color:#98c379">&#39;&#34;</span><span style="color:#e06c75">$http_user_agent&#34;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_x_forwarded_for&#34;&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">access_log</span>  <span style="color:#98c379">/var/log/nginx/access.log</span>  <span style="color:#98c379">main</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">sendfile</span>        <span style="color:#e06c75">on</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">tcp_nopush</span>      <span style="color:#e06c75">on</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">keepalive_timeout</span>  <span style="color:#d19a66">65</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">...</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>include</code>：引入外部文件</strong></p>
-<p>这里<code>/etc/nginx/mime.types</code>用于MIME类型配置</p>
-</li>
-<li>
-<p><strong><code>default_type</code>：未明确 MIME 类型时的默认类型</strong></p>
-</li>
-<li>
-<p><strong><code>log_format</code>：定义日志名称与格式</strong></p>
-</li>
-<li>
-<p><strong><code>access_log</code>：指定访问日志的输出路径及格式</strong></p>
-</li>
-<li>
-<p><strong><code>sendfile</code>：启用高效文件传输方式</strong></p>
-</li>
-<li>
-<p><strong><code>tcp_nopush</code>：优化网络传输性能，避免频繁发送小包</strong></p>
-</li>
-<li>
-<p><strong><code>keepalive_timeout</code>：设置长连接超时时间</strong></p>
-</li>
-</ul>
-<h2 id="server块">server块
-</h2><p>嵌套于http块内部，二级块，可存在多个，用于配置多个虚拟主机</p>
-<p>用于定义单个虚拟主机的配置，通过监听端口和服务器名称对请求进行分发</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span>  <span style="color:#98c379">localhost</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">...</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>listen</code>：设置监听的端口</strong></p>
-<p>只有访问主机该端口的请求才会被接受</p>
-<p><strong>不过得注意，如果使用docker，docker容器一般会把这个端口转发到主机的某个端口上</strong></p>
-<p>基本用法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">listen</span> <span style="color:#98c379">&lt;地址&gt;:&lt;端口&gt;</span> <span style="color:#98c379">[参数]</span>;
-</span></span></code></pre></div><p><strong><code>地址</code></strong>（可选）：指定绑定的 IP（默认是所有IP）</p>
-<p><strong><code>端口</code></strong>：监听的端口</p>
-<p><strong><code>参数</code></strong>（可选）：例如<code>default_server</code>、<code>ssl</code>、<code>http2</code> 等（我们后面都会提到）</p>
-<p><strong>有一个比较特殊的参数：<code>default_server</code>，用来指定默认的server块，当Nginx收到请求但找不到任何<code>server_name</code>匹配时，就会使用这个默认配置来处理请求</strong></p>
-<p><span style="color:yellow;"><strong>介绍几种常见<code>listen</code>字段写法：</strong></span></p>
-<p><code>80</code>：监听所有IP的80端口（80是默认HTTP端口），相当于<code>0.0.0.0:8080</code></p>
-<p><code>127.0.0.1:8080</code>：仅监听本地回环地址的8080端口</p>
-<p><code>[::]:80</code>：IPv6地址监听80端口</p>
-</li>
-<li>
-<p><strong><code>server_name</code>：匹配请求的主机名或域名</strong></p>
-<p>只有请求头中的Host字段符合，Nginx才会把请求交给这个<code>server</code>块处理</p>
-<p>可以在<code>server_name</code>中写多个值，也支持通配符<code>*</code>，也可以使用<code>_</code>表示任何Host值</p>
-<p>如果不写这个字段，http块又只有一个server，那么这个server块会所有请求都匹配（包括 IP）</p>
-<p>如果不写这个字段，http块又有多个server，那么这个server块会作为默认server，处理未匹配的请求</p>
-</li>
-</ul>
-<h2 id="location块">location块
-</h2><p>嵌套于server块内部，三级块</p>
-<p>用于对URI（注意不是URL）进行匹配，制定请求的处理方式，如资源路径、代理规则等</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">root</span>   <span style="color:#98c379">/usr/share/nginx/html</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">index</span>  <span style="color:#98c379">index.html</span> <span style="color:#98c379">index.htm</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>location</code>：用于匹配客户端请求的URI</strong></p>
-<p>示例这里是匹配以<code>/</code>开头的URI（实际上就是匹配所有请求，因为URI就是以<code>/</code>开头的）</p>
-<p><strong>此外，Nginx提供多种匹配方式，优先级不同：</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>类型</th>
-          <th>语法</th>
-          <th>示例</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>精确匹配</td>
-          <td><code>=</code></td>
-          <td><code>location = /login {}</code></td>
-          <td>仅匹配 URI 等于 <code>/login</code> 的请求</td>
-      </tr>
-      <tr>
-          <td>前缀匹配</td>
-          <td><code>/</code></td>
-          <td><code>location /images/ {}</code></td>
-          <td>匹配以 <code>/images/</code> 开头的 URI</td>
-      </tr>
-      <tr>
-          <td>正则匹配</td>
-          <td><code>~</code>（区分大小写）<br /><code>~*</code>（不区分大小写）</td>
-          <td><code>location ~ \.php$ {}</code></td>
-          <td>使用正则表达式匹配 URI</td>
-      </tr>
-      <tr>
-          <td>优先匹配</td>
-          <td><code>^~</code></td>
-          <td><code>location ^~ /static/ {}</code></td>
-          <td>前缀匹配优先于正则匹配</td>
-      </tr>
-  </tbody>
-</table></div>
-</li>
-<li>
-<p><strong><code>root</code>：设置请求资源的根目录路径</strong></p>
-<p>当一个请求到达时，Nginx会将请求的URI拼接到这个路径后面，以确定文件的具体位置</p>
-<p>如果客户端访问<code>/index.html</code>，那么实际访问的是服务器上的<code>/usr/share/nginx/html/index.html</code>文件</p>
-</li>
-<li>
-<p><strong><code>index</code>：指定访问目录时的默认文件名称</strong></p>
-<p>如果用户访问的是目录而不是具体文件，Nginx会在<code>/usr/share/nginx/html/</code>目录下按顺序查找：</p>
-<ol>
-<li><code>index.html</code></li>
-<li><code>index.htm</code></li>
-</ol>
-<p>只要找到其中一个文件，就立即返回该文件作为响应；如果都找不到，会返回403（禁止访问）或404（未找到），视配置而定</p>
-<p><strong><code>root</code>和<code>index</code>也可以直接写在server块里面，作为所有location块的默认值</strong></p>
-</li>
-</ul>
-<p><span style="color:yellow;font-size:18px"><strong>说了这么多，我们最后总结一下<code>listen</code>、<code>server_name</code>、<code>location</code> 三者是如何配合工作的：</strong></span></p>
-<p>用户访问浏览器输入：</p>
-<pre tabindex="0"><code class="language-url" data-lang="url">http://localhost/images/logo.png
-</code></pre><p>Nginx内部处理流程如下：</p>
-<ol>
-<li>
-<p><strong>看端口：</strong>
-该请求是发给哪个端口，是80，那就匹配所有listen 80的server</p>
-</li>
-<li>
-<p><strong>看Host头：</strong>
-Host是localhost，找哪个server_name匹配上了，进入该server块</p>
-</li>
-<li>
-<p><strong>看URI：</strong>
-URI是/images/logo.png，在这个server中找哪个location匹配得最好，执行该location的规则</p>
-</li>
-</ol>
-<h1 id="核心功能--web服务">核心功能 —— Web服务
-</h1><p>Web 服务是 Nginx 最基础，也是最核心的功能，它能够高效地处理客户端对静态资源的请求</p>
-<p>这主要通过<code>server</code>块中的<code>root</code>、<code>index</code>、<code>location</code>来协同完成</p>
-<h2 id="部署静态资源">部署静态资源
-</h2><p>可以把Nginx作为静态资源服务器，当用户请求时，Nginx从服务器的指定文件路径中查找并返回对应的文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span> <span style="color:#98c379">example.com</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">root</span> <span style="color:#98c379">/var/www/my-project/public</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">index</span> <span style="color:#98c379">index.html</span> <span style="color:#98c379">index.htm</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try_files</span> <span style="color:#e06c75">$uri</span> <span style="color:#e06c75">$uri/</span> =<span style="color:#d19a66">404</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> ~<span style="color:#98c379">*</span> <span style="color:#98c379">\.(jpg|jpeg|gif|png|css|js|ico|webp)</span>$ {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">expires</span> <span style="color:#98c379">30d</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>try_files $uri $uri/ =404</code></strong></p>
-<p>这是一个非常强大的指令，常用于处理单页应用（SPA）的路由，它的语法是：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">try_files</span> <span style="color:#98c379">file1</span> <span style="color:#98c379">file2</span> <span style="color:#98c379">...</span> <span style="color:#98c379">final_action</span>;
-</span></span></code></pre></div><ul>
-<li><code>file1, file2, ...</code>：依次判断路径（支持变量），是否存在有效文件或目录</li>
-<li><code>final_action</code>：如果前面都没找到，则执行的动作，常用的有：
-<ul>
-<li><code>=404</code>：返回404错误</li>
-<li><code>@named_location</code>：跳转到命名的location块</li>
-<li><code>uri</code>：重定向到指定URI</li>
-</ul>
-</li>
-</ul>
-<p>现在我们看看示例里面的是什么意思：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">try_files</span> <span style="color:#e06c75">$uri</span> <span style="color:#e06c75">$uri/</span> =<span style="color:#d19a66">404</span>
-</span></span></code></pre></div><ol>
-<li>
-<p><code>$uri</code>：尝试将URI直接作为文件名进行查找</p>
-</li>
-<li>
-<p><code>$uri/</code>：如果上一步失败，则尝试将URI作为一个目录名，并在该目录下查找由<code>index</code>指令定义的文件</p>
-</li>
-<li>
-<p><code>=404</code>：如果前两步都失败，则返回一个404 Not Found错误</p>
-</li>
-</ol>
-</li>
-<li>
-<p><strong><code>location ~* \.(jpg|jpeg|gif|png|css|js|ico|webp)$</code></strong></p>
-<p>这是一个正则匹配，<code>~*</code>表示不区分大小写的正则，它会匹配所有以上述后缀结尾的请求</p>
-</li>
-<li>
-<p><strong><code>expires 30d</code></strong></p>
-<p>用于设置HTTP响应头中的<code>Expires</code>和<code>Cache-Control</code></p>
-<p>告诉客户端浏览器可以将这些静态资源缓存30天，从而减少不必要的请求，提升后续访问速度</p>
-</li>
-</ul>
-<h2 id="url重写与跳转">URL重写与跳转
-</h2><p>Nginx支持在<code>location</code>块内实现URL重写和跳转，常用于：</p>
-<ul>
-<li>伪静态（SEO优化）</li>
-<li>页面重定向</li>
-<li>接口调整兼容</li>
-<li>HTTPS 强制跳转等场景</li>
-</ul>
-<h3 id="rewrite">rewrite
-</h3><p><code>rewrite</code>是Nginx实现伪静态、内部跳转的主要方式</p>
-<p>它的本质是把用户请求的路径改写成另一个内部路径，再由Nginx重新处理</p>
-<h4 id="基本语法">基本语法
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">rewrite</span> &lt;<span style="color:#e06c75">正则匹配</span>&gt; &lt;<span style="color:#e06c75">重写路径</span>&gt; [<span style="color:#e06c75">flag</span>];
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>正则匹配</strong>：对当前请求URI进行匹配（不包含域名）</p>
-</li>
-<li>
-<p><strong>重写路径</strong>：替换匹配url的新URI，可引用正则中的子表达式</p>
-</li>
-<li>
-<p><strong>flag 可选标志</strong>：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>重写方式</th>
-          <th>用法</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>last</code></td>
-          <td>使用新URI，从头开始匹配<code>location</code></td>
-          <td>用于常规重写，不会改变浏览器地址栏</td>
-      </tr>
-      <tr>
-          <td><code>break</code></td>
-          <td>使用新URI，但不再重新匹配<code>location</code></td>
-          <td>跳出<code>rewrite</code>，在当前<code>location</code>内继续执行<br />不会改变浏览器地址栏</td>
-      </tr>
-      <tr>
-          <td><code>permanent</code></td>
-          <td>返回301，永久重定向</td>
-          <td>会改变浏览器地址栏</td>
-      </tr>
-      <tr>
-          <td><code>redirect</code></td>
-          <td>返回302，临时重定向</td>
-          <td>会改变浏览器地址栏</td>
-      </tr>
-  </tbody>
-</table></div>
-</li>
-</ul>
-<h4 id="伪静态处理">伪静态处理
-</h4><p>将 <code>/product/123.html</code> 重写为 <code>/product.php?id=123</code>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">rewrite</span> <span style="color:#98c379">^/product/([0-9]+)\.html</span>$ <span style="color:#98c379">/product.php?id=</span><span style="color:#e06c75">$1</span> <span style="color:#98c379">last</span>;
-</span></span></code></pre></div><h4 id="隐藏真实路径">隐藏真实路径
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">location</span> <span style="color:#98c379">/user/</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">rewrite</span> <span style="color:#98c379">^/user/([a-z]+)</span>$ <span style="color:#98c379">/profile.php?name=</span><span style="color:#e06c75">$1</span> <span style="color:#98c379">last</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="return">return
-</h3><p><code>return</code>用于向客户端返回一个特定的状态码和内容，它不会再走<code>rewrite</code>的内部处理流程</p>
-<p>比起<code>rewrite</code>，它更适合用于明确的重定向、报错处理等</p>
-<h4 id="基本语法-1">基本语法
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#c678dd">return</span> &lt;<span style="color:#e06c75">状态码</span>&gt; [<span style="color:#e06c75">文本</span>|<span style="color:#e06c75">URL</span>];
-</span></span></code></pre></div><ul>
-<li><strong>状态码</strong>：如301（永久重定向）、302（临时重定向）、403（禁止访问）、404（页面不存在）</li>
-<li><strong>文本或URL</strong>：可返回跳转地址，也可直接返回文本内容（仅在状态码为200时有效）</li>
-</ul>
-<h4 id="http强制跳转https">HTTP强制跳转HTTPS
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span> <span style="color:#98c379">example.com</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">301</span> <span style="color:#98c379">https://</span><span style="color:#e06c75">$server_name$request_uri</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>这一点我们下面会详细说明</p>
-<h4 id="禁止访问某个目录">禁止访问某个目录
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">location</span> <span style="color:#98c379">/private/</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">403</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="简洁跳转到首页">简洁跳转到首页
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">location</span> = <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">301</span> <span style="color:#98c379">/home/index.html</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="纯文本响应">纯文本响应
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">location</span> = <span style="color:#98c379">/test</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">200</span> <span style="color:#98c379">&#39;Hello.&#39;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="配置https服务">配置HTTPS服务
-</h2><p>为网站启用HTTPS可以对客户端和服务器之间的传输数据进行加密，确保数据安全</p>
-<p>配置前，我们需要从证书颁发机构（CA）获取SSL/TLS证书文件和私钥文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">443</span> <span style="color:#98c379">ssl</span> <span style="color:#98c379">http2</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span> <span style="color:#98c379">yourdomain.com</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ssl_certificate</span> <span style="color:#98c379">/path/to/fullchain.pem</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ssl_certificate_key</span> <span style="color:#98c379">/path/to/privkey.pem</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ssl_session_cache</span> <span style="color:#98c379">shared:SSL:10m</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ssl_session_timeout</span> <span style="color:#d19a66">10m</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ssl_protocols</span> <span style="color:#98c379">TLSv1.2</span>  <span style="color:#98c379">TLSv1.3</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ssl_ciphers</span> <span style="color:#98c379">&#39;TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ssl_prefer_server_ciphers</span> <span style="color:#e06c75">off</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">root</span> <span style="color:#98c379">/var/www/my-project/public</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">index</span> <span style="color:#98c379">index.html</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try_files</span> <span style="color:#e06c75">$uri</span> <span style="color:#e06c75">$uri/</span> =<span style="color:#d19a66">404</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span> <span style="color:#98c379">yourdomain.com</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">301</span> <span style="color:#98c379">https://</span><span style="color:#e06c75">$server_name$request_uri</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>listen 443 ssl http2</code></strong></p>
-<ul>
-<li>
-<p><code>443</code>是HTTPS的标准端口</p>
-</li>
-<li>
-<p><code>ssl</code>参数表示在此端口上启用SSL/TLS加密</p>
-</li>
-<li>
-<p><code>http2</code>参数表示同时启用HTTP/2协议，它可以显著提升页面加载性能</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong><code>ssl_certificate</code></strong></p>
-<p>指定证书文件的路径，这通常是<code>.pem</code>或<code>.crt</code>格式的公钥证书链文件</p>
-</li>
-<li>
-<p><strong><code>ssl_certificate_key</code></strong></p>
-<p>指定与证书配对的私钥文件的路径，通常是<code>.key</code>格式</p>
-</li>
-<li>
-<p><strong><code>ssl_session_cache</code></strong></p>
-<p>开启SSL会话缓存，用于复用TLS握手过程，提升性能</p>
-</li>
-<li>
-<p><strong><code>ssl_session_timeout</code></strong></p>
-<p>设置SSL会话的有效时间</p>
-</li>
-<li>
-<p><strong><code>ssl_protocols TLSv1.2 TLSv1.3</code></strong></p>
-<p>指定只使用安全的TLS协议版本，废弃老旧且不安全的SSLv3, TLSv1.0, TLSv1.1</p>
-</li>
-<li>
-<p><strong><code>ssl_ciphers</code></strong></p>
-<p>指定加密时使用的加密套件列表，配置安全的套件可以防止降级攻击</p>
-</li>
-<li>
-<p><strong><code>ssl_prefer_server_ciphers</code></strong></p>
-<p>是否优先使用服务器端指定的加密套件，<code>off</code>表示客户端优先</p>
-</li>
-<li>
-<p><strong><code>return 301 https://$server_name$request_uri</code></strong></p>
-<p>发送一个永久重定向的HTTP状态码</p>
-<p><code>$server_name</code>和<code>$request_uri</code>是Nginx变量，分别代表当前请求的域名和完整的 URI（包含参数）</p>
-<p>这能确保用户访问任何HTTP页面时都能被准确地重定向到对应的HTTPS版本</p>
-</li>
-</ul>
-<h1 id="核心功能--反向代理">核心功能 —— 反向代理
-</h1><p>反向代理是Nginx的一个核心功能</p>
-<p><strong>Nginx作为一个中间层，接收客户端的请求，再将请求转发给后端服务器处理，然后将响应返回给客户端</strong></p>
-<p>这种方式的好处包括：</p>
-<ul>
-<li>可以隐藏后端服务器的真实地址和结构</li>
-<li>可以统一对外的入口，便于安全控制和运维管理</li>
-<li>可以实现负载均衡、高可用等复杂功能（后续再讲）</li>
-</ul>
-<p>下面是一个最简单的Nginx配置示例，只实现把请求转发到后端服务器的功能：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span> <span style="color:#98c379">www.example.com</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_pass</span> <span style="color:#98c379">http://127.0.0.1:3000</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>proxy_pass http://127.0.0.1:3000;</code></strong></p>
-<p><span style="color:red;"><strong>这是反向代理的核心语句，即将匹配到的请求转发到本机的3000端口，由本地某个服务来实际处理请求</strong></span></p>
-</li>
-</ul>
-<p>默认情况下，Nginx把请求转发给后端时，不会携带原始客户端的信息</p>
-<p><span style="color:yellow;"><strong>如果后端服务要获取用户的真实IP、请求协议、原始域名等信息，就需要使用<code>proxy_set_header</code>来手动设置</strong>：</span></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span> <span style="color:#98c379">www.example.com</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_pass</span> <span style="color:#98c379">http://127.0.0.1:3000</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">Host</span> <span style="color:#e06c75">$host</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">X-Real-IP</span> <span style="color:#e06c75">$remote_addr</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">X-Forwarded-For</span> <span style="color:#e06c75">$proxy_add_x_forwarded_for</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">X-Forwarded-Proto</span> <span style="color:#e06c75">$scheme</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>这些<code>proxy_set_header</code>是给后端应用用的：</p>
-<ul>
-<li><strong><code>Host $host</code></strong>：原始请求中的主机名</li>
-<li><strong><code>X-Real-IP $remote_addr</code></strong>：客户端的真实 IP</li>
-<li><strong><code>X-Forwarded-For $proxy_add_x_forwarded_for</code></strong>：经过的所有代理 IP 列表</li>
-<li><strong><code>X-Forwarded-Proto $scheme</code></strong>：原始请求的协议（http 或 https）</li>
-</ul>
-<p><span style="color:yellow;"><strong>如果我们有多个后端服务（比如多个进程、多个机器），可以用<code>upstream</code>来统一管理后端服务器组</strong>：</span></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">upstream</span> <span style="color:#98c379">backend</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#e06c75">127.0.0.1</span>:<span style="color:#d19a66">3000</span>;
-</span></span><span style="display:flex;"><span> <span style="color:#7f848e"># server 127.0.0.1:3001;     #可以添加多个
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server_name</span> <span style="color:#98c379">www.example.com</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_pass</span> <span style="color:#98c379">http://backend</span>;   <span style="color:#7f848e">#&lt;--这里不一样了，使用的是upstream
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">Host</span> <span style="color:#e06c75">$host</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">X-Real-IP</span> <span style="color:#e06c75">$remote_addr</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">X-Forwarded-For</span> <span style="color:#e06c75">$proxy_add_x_forwarded_for</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_set_header</span> <span style="color:#98c379">X-Forwarded-Proto</span> <span style="color:#e06c75">$scheme</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>现在，我们只需要在<code>proxy_pass</code>中写 <code>http://backend</code>即可</p>
-<p>具体的地址都集中写在<code>upstream backend</code>块中，方便管理和负载均衡</p>
-<h1 id="核心功能--负载均衡">核心功能 —— 负载均衡
-</h1><p>当<code>upstream</code>块中定义了多台<code>server</code>时，Nginx就自然地成为了一个负载均衡器</p>
-<p>它会根据指定的策略将请求分发到不同的服务器，以分担流量压力</p>
-<h2 id="http负载均衡配置">HTTP负载均衡配置
-</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">upstream</span> <span style="color:#98c379">backend_cluster</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend1.example.com</span> <span style="color:#98c379">weight=5</span>; 
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend2.example.com</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend3.example.com</span> <span style="color:#98c379">backup</span>; 
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend4.example.com</span> <span style="color:#98c379">down</span>;   
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">listen</span> <span style="color:#d19a66">80</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">location</span> <span style="color:#98c379">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_pass</span> <span style="color:#98c379">http://backend_cluster</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_connect_timeout</span> <span style="color:#98c379">5s</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_read_timeout</span> <span style="color:#98c379">10s</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>weight=5</code></strong></p>
-<p>为服务器设置权重，在默认的轮询策略下，权重越高的服务器接收到的请求比例就越高</p>
-<p>这里<code>backend1</code>的请求量大约是<code>backend2</code>的5倍</p>
-</li>
-<li>
-<p><strong><code>backup</code></strong></p>
-<p>将服务器标记为备用服务器</p>
-<p>只有当所有非备用的主服务器都无法访问时，Nginx才会将请求转发给它</p>
-</li>
-<li>
-<p><strong><code>down</code></strong></p>
-<p>将服务器标记为永久下线，Nginx不会向它转发任何请求</p>
-<p>这通常用于服务器维护</p>
-</li>
-<li>
-<p><strong><code>proxy_connect_timeout</code> &amp; <code>proxy_read_timeout</code></strong></p>
-<p>设置Nginx与后端服务器建立连接的超时时间和读取响应的超时时间</p>
-<p>可以防止因个别后端服务响应缓慢而导致请求长时间挂起</p>
-</li>
-</ul>
-<h3 id="负载均衡策略">负载均衡策略
-</h3><h3 id="轮询">轮询
-</h3><p>默认策略，无需任何指令</p>
-<p>请求被按顺序、轮流分发到每台服务器，并考虑权重</p>
-<h3 id="权重weight">权重（weight）
-</h3><p><strong>就像我们之前提到过的例子，<code>weight</code>越高，分配的请求越多</strong></p>
-<p>此策略适合后端性能不一致的情况（强机多干活）</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">upstream</span> <span style="color:#98c379">backend_cluster</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#e06c75">192.168.0.1</span>  <span style="color:#98c379">weight=3</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#e06c75">192.168.0.2</span>  <span style="color:#98c379">weight=1</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>上例中，第一个服务器将获得大约75%的请求，第二个约25%</p>
-<h3 id="ip哈希ip_hash">IP哈希（ip_hash）
-</h3><p><strong>根据客户端IP地址的哈希值来选择服务器</strong>，这能确保来自同一个客户端的请求始终被定向到同一台后端服务器</p>
-<p>此策略对于需要保持用户会话状态的应用非常重要</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">upstream</span> <span style="color:#98c379">backend_cluster</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">ip_hash</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend1.example.com</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend2.example.com</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="最少连接-least_conn">最少连接 (least_conn)
-</h3><p><strong>将新请求发送到当前活动连接数最少的服务器</strong></p>
-<p>此策略在处理耗时不同或长连接较多的请求时，能使负载分布得更加均匀</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">upstream</span> <span style="color:#98c379">backend_cluster</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">least_conn</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend1.example.com</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> <span style="color:#98c379">backend2.example.com</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h1 id="核心功能--tcpudp代理">核心功能 —— TCP/UDP代理
-</h1><p>Nginx不仅能代理HTTP，还能通过<code>stream</code>模块在更底层的传输层（TCP/UDP）进行代理</p>
-<p>例如代理数据库连接、游戏服务器、DNS 查询等</p>
-<p><code>stream</code>块必须配置在<code>http</code>块之外，位于主配置文件的顶层，和<code>http</code>是平级的</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">stream</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">upstream</span> <span style="color:#98c379">mysql_cluster</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">server</span> <span style="color:#e06c75">192.168.1.101</span>:<span style="color:#d19a66">3306</span> <span style="color:#98c379">weight=2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">server</span> <span style="color:#e06c75">192.168.1.102</span>:<span style="color:#d19a66">3306</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">listen</span> <span style="color:#d19a66">3307</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_pass</span> <span style="color:#98c379">mysql_cluster</span>; 
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_timeout</span> <span style="color:#98c379">20s</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">server</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">listen</span> <span style="color:#d19a66">53</span> <span style="color:#98c379">udp</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">proxy_pass</span> <span style="color:#e06c75">8.8.8.8</span>:<span style="color:#d19a66">53</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>你可以看到，stream块和http块的写法基本上是一样的，但是细节上还是有些不同：</p>
-<ul>
-<li><strong><code>stream</code>块不支持<code>location</code>，没有路径匹配</strong></li>
-<li><strong><code>stream</code>块不解析协议内容，没有<code>proxy_set_header</code>，只转发原始TCP/UDP数据流</strong></li>
-<li><strong><code>stream</code>块不支持<code>ip_hash</code>的负载均衡策略</strong></li>
-</ul>
-<h1 id="日志分析">日志分析
-</h1><h2 id="为何要分析nginx日志">为何要分析Nginx日志
-</h2><p>在现代 Web 架构中，Nginx 作为流量的入口，记录着大量有用的信息</p>
-<p>虽然ELK等日志平台功能强大，但并非所有环境都配备</p>
-<p>掌握底层的命令行分析技巧，能让我们在任何服务器上快速、灵活地定位问题</p>
-<p><strong>注意</strong>：</p>
-<p>在处理大型日志文件（如 &gt;1GB）时，应避免直接使用<code>cat</code>读取整个文件，这会消耗大量内存</p>
-<p>应使用<code>head</code>,<code>tail</code>,<code>grep</code>,<code>sed</code>,<code>awk</code>等可以流式处理的工具进行查看修改，或先对日志进行切割</p>
-<p>实在想要看全部，也应该选择使用<code>less</code>或<code>more</code></p>
-<h2 id="日志类型与格式">日志类型与格式
-</h2><h3 id="访问日志accesslog">访问日志（access.log）
-</h3><p><code>access.log</code>记录了每一个对Nginx服务器的HTTP请求的详细信息</p>
-<h4 id="默认格式combined--main">默认格式：combined / main
-</h4><p>Nginx官方默认格式是<code>combined</code>，不过现在常见的更多是<code>main</code>（包括之前我们给出的docker容器的nginx）</p>
-<p>其实<code>main</code>只是自定义的名字，本质和<code>combined</code>是类似的，甚至很多公司就是直接copy默认的<code>combined</code>格式起个名叫<code>main</code>，但更多的则是增加了一些字段（比如新增<code>$http_x_forwarded_for</code>字段）</p>
-<p>我们就以上文提到的配置文件示例里的<code>main</code>格式为例，这也是最为常见的格式之一，理解了就行</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Nginx" data-lang="Nginx"><span style="display:flex;"><span><span style="color:#c678dd">log_format</span>  <span style="color:#98c379">main</span>  <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$remote_addr</span> <span style="color:#98c379">-</span> <span style="color:#e06c75">$remote_user</span> <span style="color:#98c379">[</span><span style="color:#e06c75">$time_local]</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$request&#34;</span> <span style="color:#98c379">&#39;</span>
-</span></span><span style="display:flex;"><span>                  <span style="color:#98c379">&#39;</span><span style="color:#e06c75">$status</span> <span style="color:#e06c75">$body_bytes_sent</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_referer&#34;</span> <span style="color:#98c379">&#39;</span>
-</span></span><span style="display:flex;"><span>                  <span style="color:#98c379">&#39;&#34;</span><span style="color:#e06c75">$http_user_agent&#34;</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_x_forwarded_for&#34;&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">access_log</span>  <span style="color:#98c379">/var/log/nginx/access.log</span>  <span style="color:#98c379">main</span>;
-</span></span></code></pre></div><p><strong>变量名是Nginx内置的变量</strong>，<strong>不能随意改名字</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>变量</th>
-          <th>解释</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong><code>$remote_addr</code></strong></td>
-          <td><strong>客户端IP地址</strong></td>
-      </tr>
-      <tr>
-          <td><strong><code>$remote_user</code></strong></td>
-          <td><strong>客户端用户名称</strong>（用于HTTP认证，通常为<code>-</code>）</td>
-      </tr>
-      <tr>
-          <td><strong><code>[$time_local]</code></strong></td>
-          <td><strong>服务器本地的请求处理完成时间</strong></td>
-      </tr>
-      <tr>
-          <td><strong><code>&quot;$request&quot;</code></strong></td>
-          <td><strong>完整的原始请求行</strong>，如 <code>&quot;GET /index.html HTTP/1.1&quot;</code></td>
-      </tr>
-      <tr>
-          <td><strong><code>$status</code></strong></td>
-          <td><strong>HTTP响应状态码</strong></td>
-      </tr>
-      <tr>
-          <td><strong><code>$body_bytes_sent</code></strong></td>
-          <td><strong>发送给客户端的响应体大小</strong>（字节）</td>
-      </tr>
-      <tr>
-          <td><strong><code>&quot;$http_referer&quot;</code></strong></td>
-          <td><strong>请求的来源页面URL</strong></td>
-      </tr>
-      <tr>
-          <td><strong><code>&quot;$http_user_agent&quot;</code></strong></td>
-          <td><strong>客户端的浏览器、操作系统等信息</strong></td>
-      </tr>
-      <tr>
-          <td><strong><code>&quot;$http_x_forwarded_for&quot;</code></strong></td>
-          <td><strong>（重要）</strong> 记录了<strong>通过代理服务器访问的客户端真实IP地址</strong></td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>来看一个实际的main格式的access.log的条目：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">111.111</span>.<span style="color:#d19a66">111.111</span> - - [<span style="color:#d19a66">28</span>/<span style="color:#e06c75">Apr</span>/<span style="color:#d19a66">2021</span>:<span style="color:#d19a66">14</span>:<span style="color:#d19a66">44</span>:<span style="color:#d19a66">11</span> +<span style="color:#d19a66">0800</span>] <span style="color:#98c379">&#34;GET /api/channel/unread.jsp HTTP/1.1&#34;</span> <span style="color:#d19a66">200</span> <span style="color:#d19a66">65</span> <span style="color:#98c379">&#34;https://www.xxxx.cn/&#34;</span> <span style="color:#98c379">&#34;Mozilla/5.0...&#34;</span> <span style="color:#98c379">&#34;123.123.123.123&#34;</span>
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>$remote_addr</code></strong>：<code>111.111.111.111</code></p>
-<p>这是Nginx看到的客户端IP，可能是负载均衡/代理的IP，不一定是真实用户的IP</p>
-</li>
-<li>
-<p><strong><code>$remote_user</code></strong>：<code>- -</code>
-如果客户端经过了HTTP认证，这里会记录认证用户名，否则为<code>-</code></p>
-<ul>
-<li>第一个 <code>-</code>：远程用户名（几乎不用，常为空）</li>
-<li>第二个 <code>-</code>：认证用户名（如果用 Basic Auth 才会有）</li>
-</ul>
-</li>
-<li>
-<p><strong><code>$time_local</code></strong>：<code>28/Apr/2021:14:44:11 +0800</code>
-这是Nginx记录的本地时间，时区为+0800（北京时间）</p>
-</li>
-<li>
-<p><strong><code>$request</code></strong>：<code>GET /api/channel/unread.jsp HTTP/1.1</code>
-包含请求方法、URL路径和HTTP协议版本</p>
-</li>
-<li>
-<p><strong><code>$status</code></strong>：<code>200</code>
-HTTP状态码，表示请求成功</p>
-</li>
-<li>
-<p><strong><code>$body_bytes_sent</code></strong>：<code>65</code>
-响应体大小（字节数），不包含响应头</p>
-</li>
-<li>
-<p><strong><code>$http_referer</code></strong>：<code>https://www.xxxx.cn/</code>
-请求来源页面，如果用户是从某个页面跳转过来的，这里会显示该页面URL，若没有则为<code>-</code></p>
-</li>
-<li>
-<p><strong><code>$http_user_agent</code></strong>：<code>Mozilla/5.0...</code>
-客户端的User-Agent，表示浏览器或客户端的标识信息</p>
-</li>
-<li>
-<p><strong><code>$http_x_forwarded_for</code></strong>：<code>123.123.123.123</code>
-代理服务器通过HTTP头传递的真实客户端IP，用来识别经过代理时的原始用户地址</p>
-</li>
-</ul>
-<p><strong>这条日志告诉我们：</strong></p>
-<p>在北京时间<code>021-04-28 14:44:11</code>，有一个客户端访问了接口<code>/api/channel/unread.jsp</code>，使用的是<code>GET</code>请求，HTTP版本是<code>1.1</code>，返回状态码<code>200</code>（成功），响应大小<code>65</code>字节，请求来自页面<code>https://www.xxxx.cn/</code>，使用的客户端是某个<code>Mozilla浏览器/模拟器</code>，其真实IP是<code>123.123.123.123</code>，但请求是经过代理，Nginx看到的源IP是<code>111.111.111.111</code></p>
-<h4 id="增强的自定义格式json">增强的自定义格式：JSON
-</h4><p>为了便于程序（如 Logstash, Fluentd）解析，JSON格式也是目前的主流选择，属于典型的非默认格式</p>
-<p>它的结构清晰，键值对明确，机器解析友好，避免了<code>awk</code>和<code>cut</code>对字段位置的强依赖</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#c678dd">log_format</span> <span style="color:#98c379">json_analytics</span> <span style="color:#98c379">escape=json</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#98c379">&#39;</span>{<span style="color:#c678dd">&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;timestamp&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$time_iso8601&#34;,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;client_ip&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$remote_addr&#34;,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;request&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$request&#34;,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;status&#34;:</span> <span style="color:#e06c75">$status,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;bytes_sent&#34;:</span> <span style="color:#e06c75">$body_bytes_sent,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;http_referer&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_referer&#34;,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;http_user_agent&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_user_agent&#34;,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;real_ip&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$http_x_forwarded_for&#34;,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;request_time&#34;:</span> <span style="color:#e06c75">$request_time,&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#39;&#34;upstream_time&#34;:</span> <span style="color:#98c379">&#34;</span><span style="color:#e06c75">$upstream_response_time&#34;&#39;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#98c379">&#39;</span>}<span style="color:#98c379">&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">access_log</span> <span style="color:#98c379">/var/log/nginx/access.log</span> <span style="color:#98c379">json_analytics</span>;
-</span></span></code></pre></div><p><strong>新增字段</strong>:</p>
-<ul>
-<li>
-<p><strong><code>$request_time</code></strong></p>
-<p>Nginx从接收到请求第一个字节到发送完最后一个字节的总时长（秒），性能指标</p>
-</li>
-<li>
-<p><strong><code>$upstream_response_time</code></strong></p>
-<p>从Nginx连接到上游后端服务到接收完响应头的时长，用于判断是 Nginx 慢还是后端服务慢</p>
-</li>
-</ul>
-<p><strong>上面一个例子的JSON格式示例如下</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{<span style="color:#e06c75">&#34;timestamp&#34;</span>: <span style="color:#98c379">&#34;2025-08-16T14:30:00+09:00&#34;</span>, <span style="color:#e06c75">&#34;client_ip&#34;</span>: <span style="color:#98c379">&#34;111.111.111.111&#34;</span>, <span style="color:#e06c75">&#34;request&#34;</span>: <span style="color:#98c379">&#34;GET /api/users HTTP/1.1&#34;</span>, <span style="color:#e06c75">&#34;status&#34;</span>: <span style="color:#d19a66">200</span>, <span style="color:#e06c75">&#34;bytes_sent&#34;</span>: <span style="color:#d19a66">1500</span>, <span style="color:#e06c75">&#34;http_referer&#34;</span>: <span style="color:#98c379">&#34;-&#34;</span>, <span style="color:#e06c75">&#34;http_user_agent&#34;</span>: <span style="color:#98c379">&#34;curl/7.68.0&#34;</span>, <span style="color:#e06c75">&#34;real_ip&#34;</span>: <span style="color:#98c379">&#34;123.123.123.123&#34;</span>, <span style="color:#e06c75">&#34;request_time&#34;</span>: <span style="color:#d19a66">0.025</span>, <span style="color:#e06c75">&#34;upstream_time&#34;</span>: <span style="color:#98c379">&#34;0.024&#34;</span>}
-</span></span></code></pre></div><p><strong>JSON日志使用<code>jq</code>工具可以轻松解析：</strong></p>
-<p>统计状态码为500的请求数量:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat access.log | jq <span style="color:#98c379">&#39;select(.status == 500)&#39;</span> | wc -l
-</span></span></code></pre></div><p>找出请求时间最长的10个请求：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat access.log | jq <span style="color:#98c379">&#39;.request_time&#39;</span> | sort -nr | head -n <span style="color:#d19a66">10</span>
-</span></span></code></pre></div><h4 id="docker环境下的日志">Docker环境下的日志
-</h4><p>上文已经提到过，在Docker中，nginx日志输出到标准输出和标准错误，记录在docker的日志中</p>
-<p>虽然日志本身的格式不会变，但Docker的日志驱动可能（取决于设置）会在每行日志前添加额外信息：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[时间戳]</span> [<span style="color:#e06c75">日志流</span>] [<span style="color:#e06c75">原始日志内容</span>]
-</span></span></code></pre></div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>字段</th>
-          <th>含义</th>
-          <th>示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>时间戳</strong></td>
-          <td>Docker记录该日志的时间，精确到纳秒</td>
-          <td><code>2025-08-20T02:30:00.123456789Z</code></td>
-      </tr>
-      <tr>
-          <td><strong>日志流</strong></td>
-          <td>指明日志来源：<br />标准输出：<code>stdout</code>，对应访问日志<br />标准错误：stderr`，对应错误日志</td>
-          <td><code>stdout</code>或<code>stderr</code></td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>实际Docker日志示例（还是上面的例子）</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">2025</span>-<span style="color:#d19a66">08</span>-<span style="color:#d19a66">16</span><span style="color:#e06c75">T05</span>:<span style="color:#d19a66">45</span>:<span style="color:#d19a66">01.123456789</span><span style="color:#e06c75">Z</span> <span style="color:#e06c75">stdout</span> <span style="color:#e06c75">F</span> <span style="color:#d19a66">111.111</span>.<span style="color:#d19a66">111.111</span> - - [<span style="color:#d19a66">28</span>/<span style="color:#e06c75">Apr</span>/<span style="color:#d19a66">2021</span>:<span style="color:#d19a66">14</span>:<span style="color:#d19a66">44</span>:<span style="color:#d19a66">11</span> +<span style="color:#d19a66">0800</span>] <span style="color:#98c379">&#34;GET /api/channel/unread.jsp HTTP/1.1&#34;</span> <span style="color:#d19a66">200</span> <span style="color:#d19a66">65</span> <span style="color:#98c379">&#34;https://www.xxxx.cn/&#34;</span> <span style="color:#98c379">&#34;Mozilla/5.0...&#34;</span> <span style="color:#98c379">&#34;123.123.123.123&#34;</span>
-</span></span></code></pre></div><ul>
-<li>
-<p><strong><code>2025-08-16T05:45:01.123456789Z</code></strong></p>
-<p><strong>Docker捕获日志的UTC时间（纳秒精度）</strong></p>
-</li>
-<li>
-<p><strong><code>stdout F</code></strong></p>
-<p><strong>日志来源是stdout，并且标记为F，表示一行完整日志</strong></p>
-<p><strong>此外还有P标记，示这是多行日志的一部分，被拆分了，需要和后续/前面的片段合并</strong></p>
-</li>
-</ul>
-<p>可以直接通过管道分析<code>docker logs</code>的输出，但通常会配置Docker的日志驱动将这些日志流自动转发到集中的日志管理平台进行统一分析</p>
-<p>比如，<strong>统计客户端IP出现次数的前10：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker logs nginx | awk <span style="color:#98c379">&#39;{print $4}&#39;</span> | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">10</span>
-</span></span></code></pre></div><h3 id="错误日志errorlog">错误日志（error.log）
-</h3><p><code>error.log</code> 记录 Nginx 启动和运行过程中的诊断信息，是排查问题的关键。</p>
-<h4 id="一般格式">一般格式
-</h4><pre tabindex="0"><code>时间戳 [错误级别] pid#tid: *cid 错误描述, client: 客户端IP, server: 服务端, request: &#34;请求行&#34;, host: &#34;Host&#34;
-</code></pre><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>字段</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>时间戳</strong></td>
-          <td>错误发生时间</td>
-      </tr>
-      <tr>
-          <td><strong>[错误级别]</strong></td>
-          <td>当前条目错误的错误等级，具体看：<a class="link" href="#%e5%85%a8%e5%b1%80%e5%9d%97" >错误等级
-    
-</a></td>
-      </tr>
-      <tr>
-          <td><strong>pid#tid</strong></td>
-          <td>Nginx工作进程ID和线程ID</td>
-      </tr>
-      <tr>
-          <td>*<strong>cid</strong></td>
-          <td>客户端连接序列号</td>
-      </tr>
-      <tr>
-          <td><strong>错误描述</strong></td>
-          <td>具体的错误信息，例如<code>connect() to 127.0.0.1:9000 failed (13: Permission denied)</code></td>
-      </tr>
-      <tr>
-          <td><strong>client</strong></td>
-          <td>发生错误的客户端IP</td>
-      </tr>
-      <tr>
-          <td><strong>server</strong></td>
-          <td>请求的服务端</td>
-      </tr>
-      <tr>
-          <td><strong>request</strong></td>
-          <td>请求行，如&quot;GET /api HTTP/1.1&quot;`</td>
-      </tr>
-      <tr>
-          <td><strong>host</strong></td>
-          <td>客户端请求的目标主机名</td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>具体示例：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">2025</span>/<span style="color:#d19a66">08</span>/<span style="color:#d19a66">16</span> <span style="color:#d19a66">14</span>:<span style="color:#d19a66">35</span>:<span style="color:#d19a66">00</span> [<span style="color:#e06c75">crit</span>] <span style="color:#d19a66">12345</span>#<span style="color:#d19a66">12345</span>: *<span style="color:#d19a66">6789</span> <span style="color:#e06c75">connect</span>() <span style="color:#e06c75">to</span> <span style="color:#d19a66">127.0</span>.<span style="color:#d19a66">0.1</span>:<span style="color:#d19a66">9000</span> <span style="color:#e06c75">failed</span> (<span style="color:#d19a66">13</span>: <span style="color:#e06c75">Permission</span> <span style="color:#e06c75">denied</span>) <span style="color:#c678dd">while</span> <span style="color:#e06c75">connecting</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">upstream</span>, <span style="color:#e06c75">client</span>: <span style="color:#d19a66">192.168</span>.<span style="color:#d19a66">1.10</span>, <span style="color:#e06c75">server</span>: <span style="color:#e06c75">example</span>.<span style="color:#e06c75">com</span>, <span style="color:#e06c75">request</span>: <span style="color:#98c379">&#34;GET /api HTTP/1.1&#34;</span>, <span style="color:#e06c75">host</span>: <span style="color:#98c379">&#34;example.com&#34;</span>
-</span></span></code></pre></div><ul>
-<li><strong>时间戳</strong>：<code>2025/08/16 14:35:00</code></li>
-<li><strong>错误级别</strong>：<code>crit</code>（严重错误）</li>
-<li><strong>pid#tid</strong>：<code>12345#12345</code></li>
-<li>*<strong>cid</strong>：<code>*6789</code></li>
-<li><strong>错误描述</strong>：<code>connect() to 127.0.0.1:9000 failed (13: Permission denied) while connecting to upstream</code></li>
-<li><strong>客户端</strong>：<code>192.168.1.10</code></li>
-<li><strong>服务端</strong>：<code>example.com</code></li>
-<li><strong>请求</strong>：<code>&quot;GET /api HTTP/1.1&quot;</code></li>
-<li><strong>Host</strong>：<code>example.com</code></li>
-</ul>
-<p><strong>分析</strong>：</p>
-<p>客户端<code>192.168.1.10</code>请求 <code>/api</code>接口时，Nginx尝试连接上游服务<code>127.0.0.1:9000</code>失败，原因是权限被拒绝（<code>Permission denied</code>）。日志级别为 <code>crit</code>，说明这是严重错误，需要检查Nginx或上游服务的权限设置</p>
-<h2 id="分析技巧">分析技巧
-</h2><h3 id="网站流量核心指标分析-pv--uv">网站流量核心指标分析 (PV &amp; UV)
-</h3><p>PV (Page View，页面浏览量) 和 UV (Unique Visitor，独立访客) 是衡量网站价值和用户行为趋势的重要指标</p>
-<h4 id="统计总uv-根据ip">统计总UV (根据IP)
-</h4><p><strong>提取第1个字段(IP)，排序，去重，最后统计独立IP总数：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $1}&#39;</span> access.log | sort | uniq | wc -l
-</span></span></code></pre></div><h4 id="统计总pv">统计总PV
-</h4><p><strong>直接统计日志总行数即为PV：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wc -l access.log
-</span></span></code></pre></div><h4 id="统计某时间段的uv--pv">统计某时间段的UV / PV
-</h4><p><strong>统计2021年4月28日14:00-14:59的UV：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>grep <span style="color:#98c379">&#34;28/Apr/2021:14&#34;</span> access.log | awk <span style="color:#98c379">&#39;{print $1}&#39;</span> | sort | uniq | wc -l
-</span></span></code></pre></div><p><strong>使用sed进行更精确的时间段筛选 (14点到20点)：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sed -n <span style="color:#98c379">&#39;/28\/Apr\/2021:14/,/28\/Apr\/2021:20/p&#39;</span> access.log | awk <span style="color:#98c379">&#39;{print $1}&#39;</span> | sort | uniq | wc -l
-</span></span></code></pre></div><h3 id="访问来源与异常排查-ip--url">访问来源与异常排查 (IP &amp; URL)
-</h3><p>用于判断是否被攻击、接口是否存在Bug或排查流量报警</p>
-<h4 id="查询访问最频繁的top-10-url">查询访问最频繁的Top 10 URL
-</h4><p><strong>提取第7字段(URL)，排序，去重并计数，按计数值倒序排列:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $7}&#39;</span> access.log | sort | uniq -c | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
-</span></span></code></pre></div><h4 id="查询访问最频繁的top-10-ip">查询访问最频繁的Top 10 IP
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $1}&#39;</span> access.log | sort | uniq -c | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
-</span></span></code></pre></div><h4 id="查看指定ip在某天访问了哪些-url-top-10">查看指定IP在某天访问了哪些 URL (Top 10)
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep <span style="color:#98c379">&#34;111.111.111.111&#34;</span> access.log | grep <span style="color:#98c379">&#34;28/Apr/2021&#34;</span> | awk <span style="color:#98c379">&#39;{print $7}&#39;</span> | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">10</span>
-</span></span></code></pre></div><h3 id="性能与爬虫分析">性能与爬虫分析
-</h3><h4 id="统计爬取次数">统计爬取次数
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>grep -i <span style="color:#98c379">&#39;spider\|bot&#39;</span> access.log | wc -l
-</span></span></code></pre></div><h4 id="统计每分钟每秒的请求数-top-20">统计每分钟/每秒的请求数 (Top 20)
-</h4><p><strong>每分钟: 截取时间字段($4)的第2到18位(到分钟)</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $4}&#39;</span> access.log | cut -c 2-18 | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">20</span>
-</span></span></code></pre></div><p><strong>每秒: 截取时间字段($4)的第2到21位(到秒)</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $4}&#39;</span> access.log | cut -c 2-21 | sort | uniq -c | sort -nr | head -n <span style="color:#d19a66">20</span>
-</span></span></code></pre></div><h3 id="分析请求响应时间-需自定义日志格式">分析请求响应时间 (需自定义日志格式)
-</h3><p><strong>前提</strong>: 确保<code>log_format</code>中包含了<code>$request_time</code>，我们假设它在最后一个字段</p>
-<h4 id="列出传输时间超过3秒的top10请求">列出传输时间超过3秒的Top10请求
-</h4><p><strong>$NF代表最后一个字段，此命令筛选出最后一个字段值大于3的行：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;$NF &gt; 3 {print $NF, $7}&#39;</span> access.log | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
-</span></span></code></pre></div><h4 id="列出最耗时的top10请求">列出最耗时的Top10请求
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#98c379">&#39;{print $NF, $7}&#39;</span> access.log | sort -k1 -nr | head -n <span style="color:#d19a66">10</span>
-</span></span></code></pre></div><hr>
-<p>暂时就先讲到这，毕竟只是入个门，详细使用就在实践里面学习吧</p>
-<p>如果之后我需要更加深入使用，这篇文章也会更新的~</p>
+<pre tabindex="0"><code>20240112
+</code></pre><h2 id="2请问机主最近一次访问压缩包文件得到文件名称是什么标准格式1zip">2.请问机主最近一次访问压缩包文件得到文件名称是什么（标准格式：1.zip）
+</h2><p>在windows里显示后缀名和访问时间，筛选zip，注意下结尾是.zip1的文件即可：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250901224248513" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250901224248513.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250901224248513.png" alt="image-20250901224248513"  />
+</a>
+</div>
+</p>
+<pre tabindex="0"><code>data.zip
+</code></pre><h2 id="3还原数据库请分析root用户最后一次更改密码的时间是什么时候标准格式2024-01-20121212">3.还原数据库，请分析root用户最后一次更改密码的时间是什么时候（标准格式：2024-01-20.12:12:12)
+</h2><p>首先题目要求我们还原数据库，那么数据库在哪里？</p>
+<p>我们随便用压缩软件预览一下上一题找到的压缩包data.zip，就可以发现原来这是一个打包的mysql数据库：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250901231851374" href="http://picture.928330.xyz/typora/image-20250901231851374.png">
+<img src="http://picture.928330.xyz/typora/image-20250901231851374.png" alt="image-20250901231851374"  />
+</a>
+</div>
+</p>
+<p>一解压，发现要密码？</p>
+<p>嗯，到这里就开始有点奇幻了</p>
+<p>总览一下给出的windows和ios镜像，可以发现什么软件也没安装，而手机是没有加密的，那么可能我们要找的线索就在之前加密的分区7里面</p>
+<p>但是这也要密码，只能再四处找一下了，最终在ios的备忘录里面找到了一点奇怪的东西：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250901232357158" href="http://picture.928330.xyz/typora/image-20250901232357158.png">
+<img src="http://picture.928330.xyz/typora/image-20250901232357158.png" alt="image-20250901232357158"  />
+</a>
+</div>
+</p>
+<p>里面一共就两个内容：</p>
+<pre tabindex="0"><code>Longxin@123
+700110
+</code></pre><p>全部尝试一遍，发现都不能解压data.zip文件</p>
+<p>再试一遍能不能解密分区7，哇，发现第一个（Longxin@123）就能解密哎</p>
+<p>解密之后需要重新分析：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250901235039703" href="http://picture.928330.xyz/typora/image-20250901235039703.png">
+<img src="http://picture.928330.xyz/typora/image-20250901235039703.png" alt="image-20250901235039703"  />
+</a>
+</div>
+</p>
+<p>重新分析后果然多了一些东西，其中最为重要的是两个邮件项：Foxmail和Eml邮件</p>
+<p>其中的内容有些重叠（或者说就是一样的），不过都能找到一些东西：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250901235242700" href="http://picture.928330.xyz/typora/image-20250901235242700.png">
+<img src="http://picture.928330.xyz/typora/image-20250901235242700.png" alt="image-20250901235242700"  />
+</a>
+</div>
+</p>
+<p>两人互相发过一个加密文件，刚好之前的data.zip的md5值就跟他说的一样，这扯不扯：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250901235421572" href="http://picture.928330.xyz/typora/image-20250901235421572.png">
+<img src="http://picture.928330.xyz/typora/image-20250901235421572.png" alt="image-20250901235421572"  />
+</a>
+</div>
+</p>
+<p>使用ARCPHR掩码爆破一下，还是挺快的：
 
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250902001608886" href="http://picture.928330.xyz/typora/image-20250902001608886.png">
+<img src="http://picture.928330.xyz/typora/image-20250902001608886.png" alt="image-20250902001608886"  />
+</a>
+</div>
+</p>
+<pre tabindex="0"><code>15566666555
+</code></pre><p>解压data.zip后就可以在本机启动myql服务了，这里我选择就在windows上面启动</p>
+<p>zip文件里面的mysql是典型的5.7版本构造，下载对应版本的mysql之后，写入如下my.ini配置文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>[<span style="color:#e06c75">client</span>]
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 指定默认链接端口号
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">port</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">4141</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">default</span><span style="color:#56b6c2">-</span><span style="color:#c678dd">character</span><span style="color:#56b6c2">-</span><span style="color:#e5c07b">set</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">utf8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#e06c75">mysqld</span>]
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 跳过密码验证
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">skip</span><span style="color:#56b6c2">-</span><span style="color:#c678dd">grant</span><span style="color:#56b6c2">-</span><span style="color:#c678dd">tables</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 指定链接端口号
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">port</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">4141</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># MySQL安装目录
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">basedir</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">D</span>:\<span style="color:#e06c75">mysql</span>\<span style="color:#e06c75">mysql_install</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># MySQL数据目录，也就是data.zip解压后的目录，下一级就是各种mysql文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">datadir</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">D</span>:\<span style="color:#e06c75">mysql</span>\<span style="color:#e06c75">data</span>\<span style="color:#e06c75">data</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 允许远程连接
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">bind</span><span style="color:#56b6c2">-</span><span style="color:#e06c75">address</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0</span>.<span style="color:#d19a66">0</span>.<span style="color:#d19a66">0</span>.<span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">skip</span><span style="color:#56b6c2">-</span><span style="color:#e06c75">networking</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 其他常用配置
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">max_connections</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">200</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">character</span><span style="color:#56b6c2">-</span><span style="color:#e5c07b">set</span><span style="color:#56b6c2">-</span><span style="color:#e06c75">server</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">utf8</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">default</span><span style="color:#56b6c2">-</span><span style="color:#e06c75">storage</span><span style="color:#56b6c2">-</span><span style="color:#c678dd">engine</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">INNODB</span> 
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">sql_mode</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">NO_ENGINE_SUBSTITUTION</span>,<span style="color:#e06c75">STRICT_TRANS_TABLES</span>
+</span></span></code></pre></div><p>mysql默认端口是3306，我因为一些冲突原因改成了4141</p>
+<p><code>skip-grant-tables</code>很重要，我们目的是找最后一次修改密码的时间，而我们本身不知道密码，跳过是最好的选择</p>
+<p>下面远程连接常用配置是ai写的，这些都不重要，写好保存，记下这个配置文件的路径，就可以启动服务了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>start /b mysqld --defaults-file<span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;D:\mysql\mysql_data\my.ini&#34;</span>
+</span></span></code></pre></div><p>这是临时指定配置文件启动mysql服务的命令</p>
+<div class="alert alert-tip">
+    <div class="alert-header">
+        <span class="alert-icon">
+            💡
+        </span>
+        <span class="alert-title">
+            Tip
+        </span>
+    </div>
+    <div class="alert-content">
+        <p><code>start /b</code>用来后台启动mysql的服务程序，这样他就不会一直占用当前的窗口了</p>
+<p>这里使用的是<code>mysqld</code>，最好去配置一下环境变量，省得每次都要在bin文件里面使用</p></div>
+</div>
+<p>启动之后使用下面的命令登录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mysql -u root -P <span style="color:#d19a66">4141</span> -h 127.0.0.1
+</span></span></code></pre></div><p><code>-h</code>和<code>-P</code>（大写）用来指定ip地址和端口，没改的话就不用写了</p>
+<p>如果登陆成功，那么恭喜，连接成功了，我们可以使用下面的命令简单检查一下配置文件有没有顺利生效：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SHOW</span> <span style="color:#e06c75">VARIABLES</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;datadir&#39;</span>
+</span></span></code></pre></div><p>查询结果应该是之前我们写入配置文件的data目录路径</p>
+<p>到这里都没有问题的话，就可以直接使用navicat连接了，输入之前指定的端口号和ip（回环地址127.0.0.1）即可</p>
+<p>这个文件里面一共就一个自定义数据库“人员”，其余四个都是mysql自带的</p>
+<p>我们在名为mysql的数据库里面找到user表，就能看见每个用户修改密码的信息，第一行是root的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250902233647831" href="http://picture.928330.xyz/typora/image-20250902233647831.png">
+<img src="http://picture.928330.xyz/typora/image-20250902233647831.png" alt="image-20250902233647831"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2021-03-17.15:49:52
+</span></span></code></pre></div><h2 id="4请问mysql数据库中共存在多少个数据库标准格式阿拉伯数字">4.请问mysql数据库中共存在多少个数据库（标准格式：阿拉伯数字）
+</h2><p>见上题，1+4</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>5
+</span></span></code></pre></div><h2 id="5员工编号为204200的员工总工资为多少元标准格式阿拉伯数字">5.员工编号为204200的员工总工资为多少元（标准格式：阿拉伯数字）
+</h2><p>人员数据库的salaries_list表用来记录工资信息</p>
+<p>这里比较坑爹的一点是，每一个员工有不止一条数据，还好先翻了翻</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#c678dd">sum</span>(<span style="color:#e06c75">salary</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">salaries_list</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> <span style="color:#e06c75">emp_no</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">204200</span>;
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250902234329527" href="http://picture.928330.xyz/typora/image-20250902234329527.png">
+<img src="http://picture.928330.xyz/typora/image-20250902234329527.png" alt="image-20250902234329527"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>488313
+</span></span></code></pre></div><h2 id="6finance部门中在1999年1月1日当天和之后入职的人员数量是多少名标准格式阿拉伯数字">6.Finance部门中在1999年1月1日当天和之后入职的人员数量是多少名（标准格式：阿拉伯数字）
+</h2><p>入职信息记录在hiredate表中，在team_list能知道Finance对应的门牌号(?)是d002，依据这个查找</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">select</span> <span style="color:#c678dd">count</span>(<span style="color:#56b6c2">*</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span>  <span style="color:#e06c75">hiredate</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">where</span> <span style="color:#e06c75">dept_no</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#39;d002&#39;</span> <span style="color:#c678dd">and</span> <span style="color:#e06c75">from_date</span> <span style="color:#56b6c2">&gt;=</span> <span style="color:#98c379">&#39;1999-01-01&#39;</span>;
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250902235720721" href="http://picture.928330.xyz/typora/image-20250902235720721.png">
+<img src="http://picture.928330.xyz/typora/image-20250902235720721.png" alt="image-20250902235720721"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1486
+</span></span></code></pre></div><h2 id="7请问邮箱服务器的登录密码是多少标准格式admin">7.请问邮箱服务器的登录密码是多少（标准格式：admin）
+</h2><p>什么是邮箱服务器？那就当他问邮箱登录密码了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903000018662" href="http://picture.928330.xyz/typora/image-20250903000018662.png">
+<img src="http://picture.928330.xyz/typora/image-20250903000018662.png" alt="image-20250903000018662"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903000228262" href="http://picture.928330.xyz/typora/image-20250903000228262.png">
+<img src="http://picture.928330.xyz/typora/image-20250903000228262.png" alt="image-20250903000228262"  />
+</a>
+</div>
+</p>
+<p>不过一共登陆过两个账号，不知道问的哪一个</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>900110
+</span></span><span style="display:flex;"><span>123456
+</span></span></code></pre></div><p>*标准答案是第一个</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>900110
+</span></span></code></pre></div><h2 id="8邮件服务器中共有多少个账号标准格式阿拉伯数字">8.邮件服务器中共有多少个账号（标准格式：阿拉伯数字）
+</h2><p>不就两个吗</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2
+</span></span></code></pre></div><p>*饿啊我错了，原来真的没有这么简单</p>
+<p>在hMailServer/Data/longxin.com下面能找到完整的登录记录，一共三个：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903000514218" href="http://picture.928330.xyz/typora/image-20250903000514218.png">
+<img src="http://picture.928330.xyz/typora/image-20250903000514218.png" alt="image-20250903000514218"  />
+</a>
+</div>
+</p>
+<p>不是这啥啊，怎么找到的这玩意，hMailServer又是哪里蹦出来的，不应该是foxmail吗，搞不懂</p>
+<h2 id="9邮件服务器中共有多少个域名标准格式阿拉伯数字">9.邮件服务器中共有多少个域名（标准格式：阿拉伯数字）
+</h2><p>这问的又是什么玩意，可能是之前看到的接收服务器？</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903002517260" href="http://picture.928330.xyz/typora/image-20250903002517260.png">
+<img src="http://picture.928330.xyz/typora/image-20250903002517260.png" alt="image-20250903002517260"  />
+</a>
+</div>
+</p>
+<p>两个号共用一个</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2
+</span></span></code></pre></div><p>好吧我做错了，但我还是不知道怎么辨别有几个服务器</p>
+<h2 id="10请问约定见面的地点在哪里标准格式太阳路668号">10.请问约定见面的地点在哪里（标准格式：太阳路668.号）
+</h2><p>*这题没做出来，看答案说是图片瘾写，这也是我第一次在取证里看见图片隐写</p>
+<p>首先可以在来往邮件里面看见他们发送了一张图片，是一张不明所以的蜡笔小新：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903002916254" href="http://picture.928330.xyz/typora/image-20250903002916254.png">
+<img src="http://picture.928330.xyz/typora/image-20250903002916254.png" alt="image-20250903002916254"  />
+</a>
+</div>
+</p>
+<p>以后看到这样突兀的图片应该警惕一下了</p>
+<p>在如下位置找到它，导出：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903003017536" href="http://picture.928330.xyz/typora/image-20250903003017536.png">
+<img src="http://picture.928330.xyz/typora/image-20250903003017536.png" alt="image-20250903003017536"  />
+</a>
+</div>
+</p>
+<p>这是jpg的宽高修改隐写</p>
+<p>首先我们要知道，JPEG文件格式里有一个标记段叫做SOF0，全称是Start of Frame 0</p>
+<p>它的作用是描述图像的基本信息，比如宽度、高度、颜色分量等，是jpg解码器必须读取的关键段，格式如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字节数</th>
+          <th>内容</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2</td>
+          <td><code>FFC0</code></td>
+          <td>SOF0标记</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>段长度</td>
+          <td>包括接下来的所有字节长度</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>精度</td>
+          <td>每个样本的位数，一般8</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>高度</td>
+          <td>图像高度（像素）</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>宽度</td>
+          <td>图像宽度（像素）</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>颜色分量数量</td>
+          <td>1=灰度，3=RGB/YUV</td>
+      </tr>
+      <tr>
+          <td>3×N</td>
+          <td>各分量信息</td>
+          <td>每个分量的ID、采样因子、量化表号</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>这里我使用010editor打开，搜索十六进制FFC0找这个标记段：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903004245330" href="http://picture.928330.xyz/typora/image-20250903004245330.png">
+<img src="http://picture.928330.xyz/typora/image-20250903004245330.png" alt="image-20250903004245330"  />
+</a>
+</div>
+</p>
+<p>之后的第4、5字节是高度，现在是0x03AC = 3*256 + 172 = 940px，改成04AC：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903005251367" href="http://picture.928330.xyz/typora/image-20250903005251367.png">
+<img src="http://picture.928330.xyz/typora/image-20250903005251367.png" alt="image-20250903005251367"  />
+</a>
+</div>
+</p>
+<p>另存打开，就能看见下面隐藏的信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903005321586" href="http://picture.928330.xyz/typora/image-20250903005321586.png">
+<img src="http://picture.928330.xyz/typora/image-20250903005321586.png" alt="image-20250903005321586"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>中国路999号
+</span></span></code></pre></div><h1 id="apk部分">APK部分
+</h1><h2 id="1app包名是多少标准格式comxxxxxx">1.APP包名是多少（标准格式：com.xxx.xxx）
+</h2><p>导入jadx：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903005704523" href="http://picture.928330.xyz/typora/image-20250903005704523.png">
+<img src="http://picture.928330.xyz/typora/image-20250903005704523.png" alt="image-20250903005704523"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>package com.example.readeveryday;
+</span></span></code></pre></div><h2 id="2apk的主函数名是多少标准格式comlongxin">2.apk的主函数名是多少（标准格式：comlongxin）
+</h2><p>查看AndroidManifest.xml：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903133158303" href="http://picture.928330.xyz/typora/image-20250903133158303.png">
+<img src="http://picture.928330.xyz/typora/image-20250903133158303.png" alt="image-20250903133158303"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>StartShow
+</span></span></code></pre></div><h2 id="3apk的签名算法是什么标准格式xxx">3.apk的签名算法是什么（标准格式：xxx）
+</h2><p>查看APK signature：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903133522477" href="http://picture.928330.xyz/typora/image-20250903133522477.png">
+<img src="http://picture.928330.xyz/typora/image-20250903133522477.png" alt="image-20250903133522477"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>SHA1withRSA
+</span></span></code></pre></div><h2 id="4apk的应用版本是多少标准格式12">4.apk的应用版本是多少（标准格式：1.2）
+</h2><p>依旧查看AndroidManifest.xml：：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903133725118" href="http://picture.928330.xyz/typora/image-20250903133725118.png">
+<img src="http://picture.928330.xyz/typora/image-20250903133725118.png" alt="image-20250903133725118"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1.0
+</span></span></code></pre></div><h2 id="5请判断该apk是否需要联网标准格式是否">5.请判断该apk是否需要联网（标准格式：是/否）
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903134405472" href="http://picture.928330.xyz/typora/image-20250903134405472.png">
+<img src="http://picture.928330.xyz/typora/image-20250903134405472.png" alt="image-20250903134405472"  />
+</a>
+</div>
+</p>
+<p>这行代码是向安卓系统申请访问互联网的权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>是
+</span></span></code></pre></div><h2 id="6apk回传地址标准格式12700112345">6.APK回传地址？（标准格式：127.0.0.1:12345）
+</h2><p>在MainActivity类里面找到如下函数：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903135753002" href="http://picture.928330.xyz/typora/image-20250903135753002.png">
+<img src="http://picture.928330.xyz/typora/image-20250903135753002.png" alt="image-20250903135753002"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>10.0.102.135:8888
+</span></span></code></pre></div><h2 id="7apk回传数据文件名称是什么标准格式1txt">7.APK回传数据文件名称是什么（标准格式：1.txt）
+</h2><p>在MainActivity的checkAndUpload方法中，代码构建了HTTP请求来上传文件，其中Content-Disposition头部信息指定了上传服务器时所使用的文件名：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903140404970" href="http://picture.928330.xyz/typora/image-20250903140404970.png">
+<img src="http://picture.928330.xyz/typora/image-20250903140404970.png" alt="image-20250903140404970"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Readdata.zip
+</span></span></code></pre></div><h2 id="8apk回传数据加密密码是多少标准格式admin">8.APK回传数据加密密码是多少（标准格式：admin）
+</h2><p>依旧MainActivity类，在EncryFile方法中，代码将收集到的信息文件readdata.xml进行加密压缩，加密密码被写死在了代码中：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903140518341" href="http://picture.928330.xyz/typora/image-20250903140518341.png">
+<img src="http://picture.928330.xyz/typora/image-20250903140518341.png" alt="image-20250903140518341"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>19_08.05r
+</span></span></code></pre></div><h2 id="9apk发送回后台服务器的数据包含以下哪些内容多选">9.APK发送回后台服务器的数据包含以下哪些内容？（多选）
+</h2><p><strong>A.手机通讯录</strong></p>
+<p><strong>B.手机短信</strong></p>
+<p><strong>C.相册</strong></p>
+<p><strong>D.GPS定位信息</strong></p>
+<p><strong>E.手机应用列表</strong></p>
+<p>依旧MainActivity类，在onCreate方法里调用了三种收集信息的函数：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903140938271" href="http://picture.928330.xyz/typora/image-20250903140938271.png">
+<img src="http://picture.928330.xyz/typora/image-20250903140938271.png" alt="image-20250903140938271"  />
+</a>
+</div>
+</p>
+<p>分别查看细节逻辑，就能知道采集的信息是什么</p>
+<p>getContactInfo：通讯录</p>
+<p>getSmsInPhone：短信</p>
+<p>getExternalStorageDirectory：应用列表</p>
+<p>并且代码中没有发现任何与读取相册或获取GPS定位信息相关的代码逻辑，应该就这三个了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ABE
+</span></span></code></pre></div><h1 id="手机部分">手机部分
+</h1><h2 id="1ios手机备份包是什么时候开始备份的标准格式2024-01-20121212">1.IOS手机备份包是什么时候开始备份的（标准格式：2024-01-20.12:12:12)
+</h2><p>答案是ios镜像压缩包的名称：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2024年01月15日_14时19分44秒
+</span></span></code></pre></div><p>标准格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2024-01-15.14:19:44
+</span></span></code></pre></div><p>*正确解法（存疑）是去翻找检材同目录下的log文件，得到的答案是一样的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903171533328" href="http://picture.928330.xyz/typora/image-20250903171533328.png">
+<img src="http://picture.928330.xyz/typora/image-20250903171533328.png" alt="image-20250903171533328"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2024-01-15.14:19:44
+</span></span></code></pre></div><h2 id="2请分析该手机共下载了几款即时通讯工具标准格式阿拉伯数字">2.请分析，该手机共下载了几款即时通讯工具（标准格式：阿拉伯数字）
+</h2><p>筛选后可以发现一共两个：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903171642617" href="http://picture.928330.xyz/typora/image-20250903171642617.png">
+<img src="http://picture.928330.xyz/typora/image-20250903171642617.png" alt="image-20250903171642617"  />
+</a>
+</div>
+</p>
+<p>这里还漏了一个，之后题目还有提到小西米语音，这个软件没有被标记为即时通信：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903172145185" href="http://picture.928330.xyz/typora/image-20250903172145185.png">
+<img src="http://picture.928330.xyz/typora/image-20250903172145185.png" alt="image-20250903172145185"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>3
+</span></span></code></pre></div><h2 id="3手机机主的号码得iccid是多少标准格式阿拉伯数字">3.手机机主的号码得ICCID是多少（标准格式：阿拉伯数字）
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903172236947" href="http://picture.928330.xyz/typora/image-20250903172236947.png">
+<img src="http://picture.928330.xyz/typora/image-20250903172236947.png" alt="image-20250903172236947"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>89860320245121150689
+</span></span></code></pre></div><h2 id="4手机机主登录小西米语音的日期是什么时候标准格式20240120">4.手机机主登录小西米语音的日期是什么时候（标准格式：20240120）
+</h2><p>查看网络连接情况，之前我们知道了小西米语音的包名是com.titashow.tangliao：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903174415773" href="http://picture.928330.xyz/typora/image-20250903174415773.png">
+<img src="http://picture.928330.xyz/typora/image-20250903174415773.png" alt="image-20250903174415773"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>20240115
+</span></span></code></pre></div><p>*这样做有些问题，正确解法应该是查看授权日志，第一次进入应该有授权</p>
+<p>*不过我觉得还是不对，最后想到了看短信，短信里面有验证码，就是登录当天的日期：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903180242444" href="http://picture.928330.xyz/typora/image-20250903180242444.png">
+<img src="http://picture.928330.xyz/typora/image-20250903180242444.png" alt="image-20250903180242444"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>20240115
+</span></span></code></pre></div><h2 id="5请问嫌疑人家庭住址在哪个小区标准格式松泽家园">5.请问嫌疑人家庭住址在哪个小区（标准格式：松泽家园）
+</h2><p>火眼分析的高德地图下有一个解密的数据库：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903181002210" href="http://picture.928330.xyz/typora/image-20250903181002210.png">
+<img src="http://picture.928330.xyz/typora/image-20250903181002210.png" alt="image-20250903181002210"  />
+</a>
+</div>
+</p>
+<p>打开后找到这样一条最像是住所的记录：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903180521840" href="http://picture.928330.xyz/typora/image-20250903180521840.png">
+<img src="http://picture.928330.xyz/typora/image-20250903180521840.png" alt="image-20250903180521840"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>天铂华庭
+</span></span></code></pre></div><h2 id="6safari浏览器书签的对应数据库名称是什么标准格式sqltiedb">6.Safari浏览器书签的对应数据库名称是什么（标准格式：sqltie.db)
+</h2><p>随便点开一个书签，查看路径：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903181715815" href="http://picture.928330.xyz/typora/image-20250903181715815.png">
+<img src="http://picture.928330.xyz/typora/image-20250903181715815.png" alt="image-20250903181715815"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Bookmarks.db
+</span></span></code></pre></div><h2 id="7手机机主计划去哪里旅游标准格式苏州">7.手机机主计划去哪里旅游（标准格式：苏州）
+</h2><p>查看Safari搜索历史：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903181824928" href="http://picture.928330.xyz/typora/image-20250903181824928.png">
+<img src="http://picture.928330.xyz/typora/image-20250903181824928.png" alt="image-20250903181824928"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>拉萨
+</span></span></code></pre></div><h2 id="8手机机主查询过那个人的身份信息标准格式龙信">8.手机机主查询过那个人的身份信息（标准格式：龙信）
+</h2><p>*这题开始就不会了，后面记录一下正确的解题过程：</p>
+<p>手机里有这样的一张图片（我的火眼不知道为什么看不了图，这辈子做不出来）：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903183322586" href="http://picture.928330.xyz/typora/image-20250903183322586.png">
+<img src="http://picture.928330.xyz/typora/image-20250903183322586.png" alt="image-20250903183322586"  />
+</a>
+</div>
+</p>
+<p>要查找的应该就是这个手机号对应的人，记下来全局搜索这个手机号：
+
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903184211250" href="http://picture.928330.xyz/typora/image-20250903184211250.png">
+<img src="http://picture.928330.xyz/typora/image-20250903184211250.png" alt="image-20250903184211250"  />
+</a>
+</div>
+</p>
+<p>第一个就是存有这段聊天记录的数据库：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903184330735" href="http://picture.928330.xyz/typora/image-20250903184330735.png">
+<img src="http://picture.928330.xyz/typora/image-20250903184330735.png" alt="image-20250903184330735"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>龙黑
+</span></span></code></pre></div><h2 id="9请问机主共转多少费用用于数据查询标准格式1000">9.请问机主共转多少费用用于数据查询（标准格式：1000）
+</h2><p>还是上题的数据库，可知机主一共查了十一个人，一人100，总费用1100：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903184510107" href="http://picture.928330.xyz/typora/image-20250903184510107.png">
+<img src="http://picture.928330.xyz/typora/image-20250903184510107.png" alt="image-20250903184510107"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1100
+</span></span></code></pre></div><h2 id="10机主查询的信息中共有多少男性标准格式阿拉伯数字">10.机主查询的信息中共有多少男性（标准格式：阿拉伯数字）
+</h2><p>在短信里面能找到有人发了这样一张图片：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250903185319124" href="http://picture.928330.xyz/typora/image-20250903185319124.png">
+<img src="http://picture.928330.xyz/typora/image-20250903185319124.png" alt="image-20250903185319124"  />
+</a>
+</div>
+</p>
+<p>身份证号码倒数第二位为性别，奇数为男性、偶数为女性</p>
+<p>最后2个身份证缺少了几位无法辨别，前面男性一共4个人</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>2
+</span></span></code></pre></div>
 </section>
 
 
@@ -1851,9 +1087,9 @@ HTTP状态码，表示请求成功</p>
     
     <section class="article-tags">
         
-            <a href="/tags/web/">Web</a>
+            <a href="/tags/forensics/">Forensics</a>
         
-            <a href="/tags/server/">Server</a>
+            <a href="/tags/misc/">Misc</a>
         
     </section>
 
@@ -1868,7 +1104,7 @@ HTTP状态码，表示请求成功</p>
 
 
         <span>
-            最后更新于 2025-08-24
+            最后更新于 2025-09-03
         </span>
     </section></footer>
 
@@ -1887,18 +1123,18 @@ HTTP状态码，表示请求成功</p>
             
                 
 <article class="has-image">
-    <a href="/p/apache%E5%85%A5%E9%97%A8/">
+    <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/66d1339d8d7af.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/66d1339d8d7af.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/638b75a2d7286.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Apache入门</h2>
+            <h2 class="article-title">美亚杯2022取证总结</h2>
         </div>
     </a>
 </article>
@@ -1906,18 +1142,18 @@ HTTP状态码，表示请求成功</p>
             
                 
 <article class="has-image">
-    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/">
+    <a href="/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/wireshark-for-cybersecurity.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/wireshark-for-cybersecurity.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/f99f347d5c5b4907bc54e0e6b9b714e8.png" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/f99f347d5c5b4907bc54e0e6b9b714e8.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">wireshark&amp;tshark简易指北</h2>
+            <h2 class="article-title">长安杯2020取证总结</h2>
         </div>
     </a>
 </article>
@@ -1925,56 +1161,18 @@ HTTP状态码，表示请求成功</p>
             
                 
 <article class="has-image">
-    <a href="/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/">
+    <a href="/p/%E4%B8%AD%E7%A7%91%E5%AE%9E%E6%95%B0%E6%9D%AF2023%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/docker.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/docker.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/t010423dafdaa0e3353.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/t010423dafdaa0e3353.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">快速上手docker</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/11656e3e84668fccb365afc0b917f85b.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/11656e3e84668fccb365afc0b917f85b.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">volatility使用说明</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/DeWatermark.ai_1756040226707.jpeg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/DeWatermark.ai_1756040226707.jpeg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+            <h2 class="article-title">中科实数杯2023取证总结</h2>
         </div>
     </a>
 </article>
