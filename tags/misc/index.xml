@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Wed, 03 Sep 2025 20:17:47 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 04 Sep 2025 18:43:17 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>獬豸杯2024取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Wed, 03 Sep 2025 20:08:27 +0800</pubDate>
@@ -386,7 +386,15 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;10.0.102.135:8888
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7apk回传数据文件名称是什么标准格式1txt&#34;&gt;7.APK回传数据文件名称是什么（标准格式：1.txt）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*雷电app分析也能检测出来：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250904094809087&#34; href=&#34;http://picture.928330.xyz/typora/image-20250904094809087.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250904094809087.png&#34; alt=&#34;image-20250904094809087&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;7apk回传数据文件名称是什么标准格式1txt&#34;&gt;7.APK回传数据文件名称是什么（标准格式：1.txt）
 &lt;/h2&gt;&lt;p&gt;在MainActivity的checkAndUpload方法中，代码构建了HTTP请求来上传文件，其中Content-Disposition头部信息指定了上传服务器时所使用的文件名：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -426,7 +434,15 @@
 &lt;p&gt;getExternalStorageDirectory：应用列表&lt;/p&gt;
 &lt;p&gt;并且代码中没有发现任何与读取相册或获取GPS定位信息相关的代码逻辑，应该就这三个了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ABE
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;手机部分&#34;&gt;手机部分
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*雷电app分析直接一键扒下来底裤了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250904094738816&#34; href=&#34;http://picture.928330.xyz/typora/image-20250904094738816.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250904094738816.png&#34; alt=&#34;image-20250904094738816&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;手机部分&#34;&gt;手机部分
 &lt;/h1&gt;&lt;h2 id=&#34;1ios手机备份包是什么时候开始备份的标准格式2024-01-20121212&#34;&gt;1.IOS手机备份包是什么时候开始备份的（标准格式：2024-01-20.12:12:12)
 &lt;/h2&gt;&lt;p&gt;答案是ios镜像压缩包的名称：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2024年01月15日_14时19分44秒
@@ -619,7 +635,8 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ABD
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3王晓琳于什么日子和时间曾经通过即时通讯软件发出一个pdf档案以时区utc8回答&#34;&gt;3.王晓琳于什么日子和时间曾经通过即时通讯软件发出一个PDF档案?(以时区UTC+8回答)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;回过头再来看，其实火眼分析的也不一定准确，我觉得最好的方式是所有的都看一遍，不过真有那么多时间吗？嗯。存疑&lt;/p&gt;
+&lt;h2 id=&#34;3王晓琳于什么日子和时间曾经通过即时通讯软件发出一个pdf档案以时区utc8回答&#34;&gt;3.王晓琳于什么日子和时间曾经通过即时通讯软件发出一个PDF档案?(以时区UTC+8回答)
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A.2022-09-30 17:39:53&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;B.2022-10-01 17:39:53&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;C.2022-09-30 18:30:28&lt;/strong&gt;&lt;/p&gt;
@@ -912,7 +929,7 @@
 &lt;p&gt;先是看了一遍图片，没有找到快递相关的东西&lt;/p&gt;
 &lt;p&gt;又跑到文件里面找图片，七千多张翻了二十多页，啥也没有，太耗时间了，还给我火眼整的卡卡的&lt;/p&gt;
 &lt;p&gt;我想到耗时任务里面有图片文字提取，但是使用要苍穹ai引擎，而且也没有关键词，不一定好找&lt;/p&gt;
-&lt;p&gt;接着又在浏览器里面找，还是没有快递相关，遂放弃&lt;/p&gt;
+&lt;p&gt;接着又在浏览器里面找，还是没有快递相关，遂放弃，呃啊&lt;/p&gt;
 &lt;h2 id=&#34;18李大辉收到的电邮中有一个钓鱼链结phishing-link这个链结的地址是什么&#34;&gt;18.李大辉收到的电邮中有一个钓鱼链结(Phishing Link)，这个链结的地址是什么?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 以上皆非&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;B. &lt;a class=&#34;link&#34; href=&#34;https://bit.ly/3yeARcO&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -970,13 +987,13 @@
 &lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;同上题图&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;20承上题寄出这封电邮的ip地址是&#34;&gt;20.承上题，寄出这封电邮的IP地址是?
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;20承上题寄出这封电邮的ip地址是&#34;&gt;20.承上题，寄出这封电邮的IP地址是?&lt;?&gt;
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 以上皆非&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;B. 65.54.185.39&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;C. 10.13.105.56&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;D. 58.152.110.218&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这题我也不知道怎么做，查看了Gmail的&lt;/p&gt;
-&lt;p&gt;不过10开头的好像是内网地址，不能在公网上路由？那也只能排除C&lt;/p&gt;
+&lt;p&gt;嗯，不过10开头的是内网地址，不能在公网上路由？但那也只能排除C&lt;/p&gt;
 &lt;h2 id=&#34;21李大辉手机有一个orderxlsx-的档案被加密了解密钥匙是什么&#34;&gt;21.李大辉手机有一个order.xlsx 的档案被加密了，解密钥匙是什么?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 2022 Nov!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;B. 20221101&lt;/strong&gt;&lt;/p&gt;
@@ -1109,7 +1126,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──(kali㉿kali)-[~]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ file 111.pdf
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;111.pdf: Composite Document File V2 Document, Little Endian, Os: MacOS, Version 6.12, Code page: 10000, Author: user30, Last Saved By: user30, Name of Creating Application: Microsoft Macintosh Excel, Create Time/Date: Wed Sep 28 12:06:13 2022, Last Saved Time/Date: Fri Sep 30 10:37:41 2022, Security: 0
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出里面的&lt;code&gt;Composite Document File V2 Document&lt;/code&gt;表明这是 OLE 容器格式，而&lt;code&gt;Microsoft Macintosh Excel&lt;/code&gt;说明是 Excel生成的OLE文档，也就是&lt;code&gt;.xls&lt;/code&gt;文件&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出里面的&lt;code&gt;Composite Document File V2 Document&lt;/code&gt;表明这是 OLE 容器格式，而&lt;code&gt;Microsoft Macintosh Excel&lt;/code&gt;说明是Excel生成的OLE文档，也就是&lt;code&gt;.xls&lt;/code&gt;文件&lt;/p&gt;
 &lt;p&gt;修改后缀名打开：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -1176,7 +1193,7 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;124500
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;题目给的例子有问题吧&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;题目给的例子有问题应该&lt;/p&gt;
 &lt;h2 id=&#34;33于林浚熙的手机里在2022年9月1日或以后哪一张照片是由其他手机拍摄的而它的档案名是什么不要输入以大写英文及阿拉伯数字回答如-cat10jpg需回答cat10jpg&#34;&gt;33.于林浚熙的手机里，在2022年9月1日或以后，哪一张照片是由其他手机拍摄的，而它的档案名是什么?(不要输入，以大写英文及阿拉伯数字回答。如 Cat10.jpg，需回答CAT10JPG)
 &lt;/h2&gt;&lt;p&gt;使用耗时任务的图片exif分析，分析完之后点左上角切换成行视图，再点击右边的设置列，把型号勾选上：&lt;/p&gt;
 &lt;p&gt;
@@ -1208,7 +1225,7 @@
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
-&lt;p&gt;连接后查询四个选项哪一个在表里面，sqlite的机制和常见的mysql不一样，交给ai就好：&lt;/p&gt;
+&lt;p&gt;连接后查询四个选项哪一个在表里面，sqlite的机制和常见的mysql不一样，没学过，交给ai了：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;ZIMPORTEDFROMSOURCEIDENTIFIER&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;column_name&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;table_name&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;sqlite_master&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;table&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;AND&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;sql&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;%ZIMPORTEDFROMSOURCEIDENTIFIER%&amp;#39;&lt;/span&gt;
@@ -1614,7 +1631,8 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;123456
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时37题的真正的答案也出来了：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Halo
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;林浚熙计算机39-52&#34;&gt;林浚熙计算机(39-52)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是比赛是断网的吧，赛场上这一题我断然是做不出来的&lt;/p&gt;
+&lt;h1 id=&#34;林浚熙计算机39-52&#34;&gt;林浚熙计算机(39-52)
 &lt;/h1&gt;&lt;h2 id=&#34;39林浚熙计算机computer-的操作系统operating-system-版本是什么&#34;&gt;39.林浚熙计算机(Computer) 的操作系统(Operating System) 版本是什么?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. Windows 10 Pro for Workstations 21H2&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;B. Windows 10 Pro 22H2&lt;/strong&gt;&lt;/p&gt;
@@ -1667,7 +1685,7 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Bitcoin
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;话说这不就是题目示例的吗，心理战这一块&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;话说这不就是题目示例的吗？心理战这一块&lt;/p&gt;
 &lt;h2 id=&#34;43林浚熙的加密货币钱包cryptocurrency-wallet-名称是什么不要输入符号以大写英文及阿拉伯数字回答&#34;&gt;43.林浚熙的加密货币钱包Cryptocurrency Wallet) 名称是什么?不要输入符号，以大写英文及阿拉伯数字回答)
 &lt;/h2&gt;&lt;p&gt;火眼里面找不到什么有用的信息，仿真进入电脑桌面看一下：&lt;/p&gt;
 &lt;p&gt;
@@ -1824,7 +1842,7 @@
 &lt;p&gt;&lt;strong&gt;B.46a8762b-78ea-49aa-a6f5-b24975ec189f&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;C.9729bf92-ab9c-45f7-8147-66234296aele&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;D.47233ffe-1a73-4b3d-b97c-626246ec3129&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;完蛋了，db.sqlite文件打不开，做不了，难道是有隐写吗？可是也没发现任何线索&lt;/p&gt;
+&lt;p&gt;我的db.sqlite文件打不开，做不了，难道是有隐写吗？可是也没发现任何线索，跳了吧&lt;/p&gt;
 &lt;h2 id=&#34;52承上题林浚熙曾经于2022年10月20日转账transfer-money-予上述对话人士那次转账的参考编号是什么以大写英文及阿拉伯数字回答&#34;&gt;52.承上题，林浚熙曾经于2022年10月20日转账（Transfer Money) 予上述对话人士,那次转账的参考编号是什么?(以大写英文及阿拉伯数字回答)
 &lt;/h2&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -1897,7 +1915,7 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;p&gt;这里可以看到是vsftp&lt;/p&gt;
-&lt;p&gt;具体判断方式需要审查vsftpd的黑白名单，结合uid和shell的允许与否，整理成下面的shell脚本：&lt;/p&gt;
+&lt;p&gt;具体判断方式需要审查vsftpd的黑白名单，结合uid和shell的允许与否，给ai整理成下面的shell脚本：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#!/bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CONFIG&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;/etc/vsftpd.conf&amp;#34;&lt;/span&gt;
@@ -1956,7 +1974,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;fi&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$ANONYMOUS_ENABLE&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;YES&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;匿名用户可登录&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们保存为test.sh，给他添加执行权限：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;保存为test.sh，给他添加执行权限：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x test.sh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./test.sh
@@ -1986,7 +2004,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;AD
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*做到后面回来看，会发现其实真正只有一个 ——  docker的nginx是可以使用的，本机无法检测到nginx和apache，所以这一题真正应该是只nginx：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;A
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;*再次更正，其实是有apache的，只不过服务名称是apache2，所以答案还是：&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;*再次更正，其实是有apache的，只不过apache在ubuntu的服务名称是apache2，所以答案还是：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;AD
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;58网页服务器目录内有图片档案而此档案的储存位置是&#34;&gt;58.网页服务器目录内有图片档案，而此档案的储存位置是?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. /var/www/html/post/src&lt;/strong&gt;&lt;/p&gt;
@@ -2188,10 +2206,10 @@
 &lt;p&gt;&lt;strong&gt;C.诈骗&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;D.勒索金钱&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;E.购买毒品&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;最好玩的一题&lt;/p&gt;
+&lt;p&gt;嗯，最好玩的一题&lt;/p&gt;
 &lt;p&gt;C是对李大辉&lt;/p&gt;
 &lt;p&gt;D是对王晓琳&lt;/p&gt;
-&lt;p&gt;E是在林俊熙电脑里面的signal可以看见溜冰的记录：
+&lt;p&gt;E在林俊熙电脑里面有线索，signal可以看见溜冰的记录：
 
 &lt;div class=&#34;post-img-view&#34;&gt;
 &lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250815212505751&#34; href=&#34;http://picture.928330.xyz/typora/image-20250815212505751.png&#34;&gt;
@@ -2199,11 +2217,11 @@
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
-&lt;p&gt;死罪！！！！&lt;/p&gt;
+&lt;p&gt;嘻嘻，死罪！！！！&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CDE
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
 &lt;p&gt;总算做完了，这套题是处处透露着诡异，个别题目意义不明，难度两极分化，选择题太多，根据选项才能得到结果，不根据选项又白白浪费提示，要绕很大一圈&lt;/p&gt;
-&lt;p&gt;不过整体来说过程还是很清楚的，好玩还是挺好玩&lt;/p&gt;
+&lt;p&gt;不过整体来说过程还是很清楚的，好玩还是挺好玩，故事挺有带入感的&lt;/p&gt;
 </description>
         </item>
         <item>
