@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Mon, 01 Sep 2025 00:43:21 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 13 Sep 2025 01:47:55 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Linux命令（文件写入与查看篇）</title>
         <link>https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/</link>
         <pubDate>Wed, 27 Aug 2025 14:12:37 +0800</pubDate>
@@ -305,9 +305,9 @@
 &lt;/h2&gt;&lt;h3 id=&#34;标准输入输出&#34;&gt;标准输入输出
 &lt;/h3&gt;&lt;p&gt;在Linux中，命令运行时默认会关联三个数据流：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;标准输入 (stdin)：命令获取数据的默认来源，一般是键盘输入，文件描述符为0&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;标准输出 (stdout)：命令输出结果的默认目的地，一般是终端屏幕，文件描述符为1&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;标准错误 (stderr)：命令的错误信息输出的默认目的地，也是终端屏幕，文件描述符为2&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;标准输入(stdin)：命令获取数据的默认来源，一般是键盘输入，文件描述符为0&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;标准输出(stdout)：命令输出结果的默认目的地，一般是终端屏幕，文件描述符为1&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;标准错误(stderr)：命令的错误信息输出的默认目的地，也是终端屏幕，文件描述符为2&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;例如执行&lt;code&gt;cat file.txt&lt;/code&gt;，程序会从标准输入中读取文件内容并写到标准输出，因此屏幕上可以看到结果&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;使用&lt;code&gt;&amp;amp;&lt;/code&gt;+&lt;code&gt;文件描述符&lt;/code&gt;，可以表示对应输入输出的位置，比如&lt;code&gt;&amp;amp;1&lt;/code&gt;就是标准输出当前所在的位置，类似指针&lt;/strong&gt;&lt;/p&gt;
@@ -315,12 +315,15 @@
 &lt;/h3&gt;&lt;p&gt;重定向是指把命令的标准输入或标准输出指向到其他位置（如文件），常见用法包括：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;：把命令的标准输出重定向到指定文件，如果文件存在，会覆盖原内容&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;：把命令的标准输出重定向到指定文件，如果文件存在，会覆盖原内容，默认作用于标准输出(stdout)&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt; &amp;gt; test.txt
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面命令会把字符串写入&lt;code&gt;test.txt&lt;/code&gt;，覆盖其原有内容&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;我们还可以使用空的内容重定向文件，快速做到清除文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;因为&amp;gt;默认作用于stdout，也就是说平时代表标准输入的1省略了，他等价于：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt; 1&amp;gt; test.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意&lt;code&gt;1&lt;/code&gt;和&lt;code&gt;&amp;gt;&lt;/code&gt;之间不能有任何空格，否则会被解析成&lt;code&gt;echo&lt;/code&gt;后字符串的一部分，对于&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;2&lt;/code&gt;也是一样&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;还可以使用空的内容重定向文件，快速做到清除文件：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; test.txt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;经过我的测试，这个效果和&lt;code&gt;cat &amp;gt; test.txt&lt;/code&gt;一样，执行之后要手动&lt;code&gt;ctrl+c&lt;/code&gt;退出，不然输入的内容就写进去了&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;经过我的测试，这个效果和&lt;code&gt;cat &amp;gt; test.txt&lt;/code&gt;一样，执行之后要手动&lt;code&gt;ctrl+c&lt;/code&gt;退出，不然输入的内容就写进去了，或许不同系统有不同效果吧&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;：把命令的标准输出以追加方式重定向到指定文件，不会覆盖原内容&lt;/strong&gt;&lt;/p&gt;
@@ -351,14 +354,15 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面命令会把错误信息追加到&lt;code&gt;error.log&lt;/code&gt;文件末尾&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;&amp;amp;&amp;gt;&lt;/code&gt;：同时重定向标准输出和标准错误流到指定文件，覆盖原内容&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yourcommand &amp;amp;&amp;gt; log
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面命令会把命令执行的结果的标准输出和标准错误都写入到&lt;code&gt;log&lt;/code&gt;文件&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;2&amp;gt;&amp;amp;1&lt;/code&gt;：把标准错误重定向到标准输出的位置（合并到一起）&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yourcommand &amp;gt; log 2&amp;gt;&amp;amp;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面命令会把标准输出和标准错误都写入到&lt;code&gt;log&lt;/code&gt;文件中&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面命令会把标准输出和标准错误都写入到&lt;code&gt;log&lt;/code&gt;文件中（先把标准输出重定向到&lt;code&gt;log&lt;/code&gt;，再把标准错误重定向到标准输出，也是&lt;code&gt;log&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;同样的，&lt;code&gt;&amp;gt;&lt;/code&gt;和&lt;code&gt;&amp;amp;1&lt;/code&gt;之间不能有空格，否则&lt;code&gt;&amp;amp;1&lt;/code&gt;会被当成文件名处理&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;&amp;amp;&amp;gt;&lt;/code&gt;：同时重定向标准输出和标准错误流到指定文件&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yourcommand &amp;amp;&amp;gt; log
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面命令也会把标准输出和标准错误都写入到&lt;code&gt;log&lt;/code&gt;文件中，一步到位，但只在bash或zsh等兼容shell中有效，老的sh不支持&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;上面我们提到的重定向都是针对当前的命令，如果想要对整个当前shell都生效，必须用&lt;code&gt;exec&lt;/code&gt;重定向：&lt;/strong&gt;&lt;/p&gt;

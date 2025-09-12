@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/'>
 
-<link rel="stylesheet" href="/scss/style.min.11710e682057f87e61fdaccbe62c7a3e1dd7654c30f9aae86ee1aced0db2bcf7.css"><meta property='og:title' content="Linux命令（文件写入与查看篇）">
+<link rel="stylesheet" href="/scss/style.min.b22c8029054811ea492fcc18d7c327f80515e7ac9fc4fdaf9df850ff7fa374c4.css"><meta property='og:title' content="Linux命令（文件写入与查看篇）">
 <meta property='og:description' content="Linux中与文件编辑查看相关的命令及基本知识">
 <meta property='og:url' content='https://blog.928330.xyz/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-08-27T14:12:37&#43;08:00'/><meta property='article:modified_time' content='2025-08-27T14:33:00&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/fcc033dfd187d8eb0d29169a672d75ce.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-08-27T14:12:37&#43;08:00'/><meta property='article:modified_time' content='2025-09-13T01:47:55&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/fcc033dfd187d8eb0d29169a672d75ce.jpg' />
 <meta name="twitter:title" content="Linux命令（文件写入与查看篇）">
 <meta name="twitter:description" content="Linux中与文件编辑查看相关的命令及基本知识"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://picture.928330.xyz/typora/fcc033dfd187d8eb0d29169a672d75ce.jpg' />
@@ -581,7 +581,7 @@
 
 
                <time>
-                   更新时间：2025-08-27
+                   更新时间：2025-09-13
                </time>
            </div>
         <div>
@@ -893,9 +893,9 @@
 </h2><h3 id="标准输入输出">标准输入输出
 </h3><p>在Linux中，命令运行时默认会关联三个数据流：</p>
 <ol>
-<li><strong>标准输入 (stdin)：命令获取数据的默认来源，一般是键盘输入，文件描述符为0</strong></li>
-<li><strong>标准输出 (stdout)：命令输出结果的默认目的地，一般是终端屏幕，文件描述符为1</strong></li>
-<li><strong>标准错误 (stderr)：命令的错误信息输出的默认目的地，也是终端屏幕，文件描述符为2</strong></li>
+<li><strong>标准输入(stdin)：命令获取数据的默认来源，一般是键盘输入，文件描述符为0</strong></li>
+<li><strong>标准输出(stdout)：命令输出结果的默认目的地，一般是终端屏幕，文件描述符为1</strong></li>
+<li><strong>标准错误(stderr)：命令的错误信息输出的默认目的地，也是终端屏幕，文件描述符为2</strong></li>
 </ol>
 <p>例如执行<code>cat file.txt</code>，程序会从标准输入中读取文件内容并写到标准输出，因此屏幕上可以看到结果</p>
 <p><strong>使用<code>&amp;</code>+<code>文件描述符</code>，可以表示对应输入输出的位置，比如<code>&amp;1</code>就是标准输出当前所在的位置，类似指针</strong></p>
@@ -903,12 +903,15 @@
 </h3><p>重定向是指把命令的标准输入或标准输出指向到其他位置（如文件），常见用法包括：</p>
 <ul>
 <li>
-<p><strong><code>&gt;</code>：把命令的标准输出重定向到指定文件，如果文件存在，会覆盖原内容</strong></p>
+<p><strong><code>&gt;</code>：把命令的标准输出重定向到指定文件，如果文件存在，会覆盖原内容，默认作用于标准输出(stdout)</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#e5c07b">echo</span> <span style="color:#98c379">&#34;Hello&#34;</span> &gt; test.txt
 </span></span></code></pre></div><p>上面命令会把字符串写入<code>test.txt</code>，覆盖其原有内容</p>
-<p><strong>我们还可以使用空的内容重定向文件，快速做到清除文件：</strong></p>
+<p>因为&gt;默认作用于stdout，也就是说平时代表标准输入的1省略了，他等价于：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#e5c07b">echo</span> <span style="color:#98c379">&#34;Hello&#34;</span> 1&gt; test.txt
+</span></span></code></pre></div><p><strong>注意<code>1</code>和<code>&gt;</code>之间不能有任何空格，否则会被解析成<code>echo</code>后字符串的一部分，对于<code>0</code>和<code>2</code>也是一样</strong></p>
+<p><strong>还可以使用空的内容重定向文件，快速做到清除文件：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>&gt; test.txt
-</span></span></code></pre></div><p>经过我的测试，这个效果和<code>cat &gt; test.txt</code>一样，执行之后要手动<code>ctrl+c</code>退出，不然输入的内容就写进去了</p>
+</span></span></code></pre></div><p>经过我的测试，这个效果和<code>cat &gt; test.txt</code>一样，执行之后要手动<code>ctrl+c</code>退出，不然输入的内容就写进去了，或许不同系统有不同效果吧</p>
 </li>
 <li>
 <p><strong><code>&gt;&gt;</code>：把命令的标准输出以追加方式重定向到指定文件，不会覆盖原内容</strong></p>
@@ -939,14 +942,15 @@
 </span></span></code></pre></div><p>上面命令会把错误信息追加到<code>error.log</code>文件末尾</p>
 </li>
 <li>
-<p><strong><code>&amp;&gt;</code>：同时重定向标准输出和标准错误流到指定文件，覆盖原内容</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yourcommand &amp;&gt; log
-</span></span></code></pre></div><p>上面命令会把命令执行的结果的标准输出和标准错误都写入到<code>log</code>文件</p>
-</li>
-<li>
 <p><strong><code>2&gt;&amp;1</code>：把标准错误重定向到标准输出的位置（合并到一起）</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yourcommand &gt; log 2&gt;&amp;<span style="color:#d19a66">1</span>
-</span></span></code></pre></div><p>上面命令会把标准输出和标准错误都写入到<code>log</code>文件中</p>
+</span></span></code></pre></div><p>上面命令会把标准输出和标准错误都写入到<code>log</code>文件中（先把标准输出重定向到<code>log</code>，再把标准错误重定向到标准输出，也是<code>log</code>）</p>
+<p><strong>同样的，<code>&gt;</code>和<code>&amp;1</code>之间不能有空格，否则<code>&amp;1</code>会被当成文件名处理</strong></p>
+</li>
+<li>
+<p><strong><code>&amp;&gt;</code>：同时重定向标准输出和标准错误流到指定文件</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yourcommand &amp;&gt; log
+</span></span></code></pre></div><p>上面命令也会把标准输出和标准错误都写入到<code>log</code>文件中，一步到位，但只在bash或zsh等兼容shell中有效，老的sh不支持</p>
 </li>
 </ul>
 <p><strong>上面我们提到的重定向都是针对当前的命令，如果想要对整个当前shell都生效，必须用<code>exec</code>重定向：</strong></p>
@@ -1612,7 +1616,7 @@
 
 
         <span>
-            最后更新于 2025-08-27
+            最后更新于 2025-09-13
         </span>
     </section></footer>
 

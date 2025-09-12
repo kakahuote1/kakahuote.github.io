@@ -7,7 +7,1280 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 04 Sep 2025 18:43:17 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 13 Sep 2025 01:47:55 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>獬豸杯2025取证总结</title>
+        <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
+        <pubDate>Sat, 13 Sep 2025 01:35:34 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/06846724f28c56ddac00bf19256bf4b0.jpg" alt="Featured image of post 獬豸杯2025取证总结" /&gt;&lt;p&gt;很难，真不愧是经常做题的人出的题目，水平确实高，题目质量相比去年也提升了很多很多&lt;/p&gt;
+&lt;p&gt;美中不足的是我没看见案件背景，感觉就是纯粹的做题&lt;/p&gt;
+&lt;p&gt;题目覆盖的知识范围很广，虽然不深，但是都要懂一点，特别是在手机和计算机取证的时候，着实是几步一卡&lt;/p&gt;
+&lt;p&gt;服务器取证方面，由于之前做的比较多了，除了k8s坏了做不了部分题目、网站抽风不能访问导致前端网页看不了只能后端php+mysql进行麻烦的分析之外也没遇到什么困难，比较顺利&lt;/p&gt;
+&lt;h1 id=&#34;手机&#34;&gt;手机
+&lt;/h1&gt;&lt;h2 id=&#34;1登录的直播app的idx是什么标准格式25236541&#34;&gt;1.登录的直播APP的IDX是什么？[标准格式：25236541]
+&lt;/h2&gt;&lt;p&gt;手机里面一共有两个和直播有关的APP：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250907202834384&#34; href=&#34;http://picture.928330.xyz/typora/image-20250907202834384.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250907202834384.png&#34; alt=&#34;image-20250907202834384&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;分辨方法可以根据第二题，看看哪个平台有等级就行&lt;/p&gt;
+&lt;p&gt;我觉得比较好的办法是注册个账号进去看一眼谁的等级是有&amp;quot;碌碌无为&amp;quot;的，不过这种软件毕竟有很大风险，就算了，当我知道了&lt;/p&gt;
+&lt;p&gt;答案是烟雨直播&lt;/p&gt;
+&lt;p&gt;记住包名，在文件系统里面找到对应的包文件，然后过滤数据库，id大概率是在本地&lt;/p&gt;
+&lt;p&gt;因为不知道数据存储位置，只能一个一个看过去，最终在miao.db的login表里面找到了idx字段：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250907202609060&#34; href=&#34;http://picture.928330.xyz/typora/image-20250907202609060.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250907202609060.png&#34; alt=&#34;image-20250907202609060&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;35248617
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2目前直播的等级名称是什么标准格式碌碌无为&#34;&gt;2.目前直播的等级名称是什么？[标准格式：碌碌无为]
+&lt;/h2&gt;&lt;p&gt;试了一下login里的密码，登录超时，大概率是加密存储的&lt;/p&gt;
+&lt;p&gt;如果上一题注册了账号，就能搜到这个家伙，也当我知道了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;一无所有
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3地图中哪座山有绝望坡标准格式太行山&#34;&gt;3.地图中哪座山有绝望坡？[标准格式：太行山]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250907234750053&#34; href=&#34;http://picture.928330.xyz/typora/image-20250907234750053.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250907234750053.png&#34; alt=&#34;image-20250907234750053&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;武功山
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4手机的历史sim卡中中国电信卡的imsi是多少标准格式123456789&#34;&gt;4.手机的历史SIM卡中，中国电信卡的IMSI是多少？[标准格式：123456789]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250907234027675&#34; href=&#34;http://picture.928330.xyz/typora/image-20250907234027675.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250907234027675.png&#34; alt=&#34;image-20250907234027675&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;460115143563428
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;51月22日1640的会议号是多少标准格式xxx-xxx-xxx&#34;&gt;5.1月22日16：40的会议号是多少？[标准格式：xxx-xxx-xxx]
+&lt;/h2&gt;&lt;p&gt;转换时间戳，因为没有毫秒，就取前面八位数进行搜索&lt;/p&gt;
+&lt;p&gt;在搜索结果里面看见一个&amp;quot;startTime&amp;quot;字段：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908003605107&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908003605107.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908003605107.png&#34; alt=&#34;image-20250908003605107&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;点进去一找，果然有meetingNum字段，并且符合格式位数，应该就是他了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908003522534&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908003522534.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908003522534.png&#34; alt=&#34;image-20250908003522534&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;312118071
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6网易会议中个人会议号是多少标准格式2523654199&#34;&gt;6.网易会议中个人会议号是多少？[标准格式：2523654199]
+&lt;/h2&gt;&lt;p&gt;找半天找不到，无从搜起&lt;/p&gt;
+&lt;h2 id=&#34;7记账软件中一共记了几笔标准格式9&#34;&gt;7.记账软件中一共记了几笔？[标准格式：9]
+&lt;/h2&gt;&lt;p&gt;我服了，记录数据的数据库文件竟然不是任何一个常见后缀名&lt;/p&gt;
+&lt;p&gt;照常过滤了.db/.sqlite。。。。还有.log和.xml，都没发现任何记账的记录&lt;/p&gt;
+&lt;p&gt;最后在data.tar/data_248/com.csmountainaccount.easy/databases目录下发现，有些识别成&amp;quot;文件&amp;quot;的文件也是数据库：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908205354045&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908205354045.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908205354045.png&#34; alt=&#34;image-20250908205354045&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个识别出来就是sqlite，真是离了大谱了&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908205334591&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908205334591.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908205334591.png&#34; alt=&#34;image-20250908205334591&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;总之在里面找到了记账记录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908205455032&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908205455032.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908205455032.png&#34; alt=&#34;image-20250908205455032&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*多刷新几次发现他又变成识别出来是数据库文件了&lt;/p&gt;
+&lt;h2 id=&#34;8谁给了机主100000标准格式某某&#34;&gt;8.谁给了机主100000？[标准格式：某某]
+&lt;/h2&gt;&lt;p&gt;同上题数据库：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908210118596&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908210118596.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908210118596.png&#34; alt=&#34;image-20250908210118596&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;勇哥
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9聊天软件是否需要手机号登录标准格式填写是或者否&#34;&gt;9.聊天软件是否需要手机号登录？[标准格式：填写是或者否]
+&lt;/h2&gt;&lt;p&gt;找半天不知道聊天软件是什么，直接导出问ai，说盒子IM是聊天软件，查了一下还真是：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908214837346&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908214837346.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908214837346.png&#34; alt=&#34;image-20250908214837346&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;同样也能搜索到登录需要手机号&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;是
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;10机主的给对方的活有多少钱标准格式53100&#34;&gt;10.机主的给对方的活有多少钱？[标准格式：53100]
+&lt;/h2&gt;&lt;p&gt;已经有经验了，直接找databases数据库文件夹，第一个就存有聊天记录，果然又是无后缀的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908220016065&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908220016065.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908220016065.png&#34; alt=&#34;image-20250908220016065&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;复制出来看比较方便：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908215948021&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908215948021.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908215948021.png&#34; alt=&#34;image-20250908215948021&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;30000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;11机主的手机号是多少标准格式13652492155&#34;&gt;11.机主的手机号是多少？[标准格式：13652492155]
+&lt;/h2&gt;&lt;p&gt;感觉之前找东西的时候见过，但是怎么也想不起来了&lt;/p&gt;
+&lt;p&gt;现在找不到，只能猜测几个字段硬搜：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908221003935&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908221003935.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908221003935.png&#34; alt=&#34;image-20250908221003935&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;事实证明搜不到，怎么会搜出这么多来的&lt;/p&gt;
+&lt;h2 id=&#34;12手机的imei1后四位是多少标准格式2536&#34;&gt;12.手机的IMEI1后四位是多少？[标准格式：2536]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908221307918&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908221307918.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908221307918.png&#34; alt=&#34;image-20250908221307918&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1055
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13手机上一共有几个地图软件标准格式9&#34;&gt;13.手机上一共有几个地图软件？[标准格式：9]
+&lt;/h2&gt;&lt;p&gt;一个个看软件列表就行了，事实证明搜索也能搜出来：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908221727534&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908221727534.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908221727534.png&#34; alt=&#34;image-20250908221727534&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;百度地图、蔚蓝地图、白马地图&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过火眼应该能解析百度地图数据啊，为什么没有呢&lt;/p&gt;
+&lt;h1 id=&#34;计算机&#34;&gt;计算机
+&lt;/h1&gt;&lt;h2 id=&#34;1网卡的mac地址是多少标准格式xx-xx-xx-xx-xx-xx&#34;&gt;1.网卡的Mac地址是多少？[标准格式：XX-XX-XX-XX-XX-XX]
+&lt;/h2&gt;&lt;p&gt;火眼识别出来的网络适配器有两张物理网卡，没办法分辨：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908230121371&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908230121371.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908230121371.png&#34; alt=&#34;image-20250908230121371&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;仿真后查看：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908224129321&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908224129321.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908224129321.png&#34; alt=&#34;image-20250908224129321&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;00-0C-29-3F-32-D4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2系统内部版本号是多少标准格式12345&#34;&gt;2.系统内部版本号是多少？[标准格式：12345]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908222723821&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908222723821.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908222723821.png&#34; alt=&#34;image-20250908222723821&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;18363
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3计算机系统开机密码是多少标准格式根据实际值填写&#34;&gt;3.计算机系统开机密码是多少？[标准格式：根据实际值填写]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908230143168&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908230143168.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908230143168.png&#34; alt=&#34;image-20250908230143168&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;WAXD9128@ 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4分析计算机检材中手机流量包请问黑客虚拟身份的密码是什么标准格式x123&#34;&gt;4.分析计算机检材中手机流量包，请问黑客虚拟身份的密码是什么？[标准格式：x123]
+&lt;/h2&gt;&lt;p&gt;在文档里面找到.saz流量文件，这是Fiddler的流量包：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908232755584&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908232755584.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908232755584.png&#34; alt=&#34;image-20250908232755584&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;我们打开，可以找到login的页面请求，里面有password：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908232550140&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908232550140.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908232550140.png&#34; alt=&#34;image-20250908232550140&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a12345678
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5分析计算机检材中手机流量包请问黑客人员使用的夜神模拟器的手机型号是什么标准格式xx-x123x&#34;&gt;5.分析计算机检材中手机流量包，请问黑客人员使用的夜神模拟器的手机型号是什么？[标准格式：XX-X123X]
+&lt;/h2&gt;&lt;p&gt;搜索yeshen，在这些流量里面查看http报文标头：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250908235420913&#34; href=&#34;http://picture.928330.xyz/typora/image-20250908235420913.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250908235420913.png&#34; alt=&#34;image-20250908235420913&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;让ai分析一下就行：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909000742802&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909000742802.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909000742802.png&#34; alt=&#34;image-20250909000742802&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SM-G955N
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6分析计算机检材中手机流量包请问黑客看视频的时间是几月份标准格式1&#34;&gt;6.分析计算机检材中手机流量包，请问黑客看视频的时间是几月份？[标准格式：1]
+&lt;/h2&gt;&lt;p&gt;搜video，找到的host是抖音，原始数据里面有时间：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909003919819&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909003919819.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909003919819.png&#34; alt=&#34;image-20250909003919819&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7分析计算机检材中手机流量包请问天戮宇宙出自哪个小说平台标准格式番茄小说网&#34;&gt;7.分析计算机检材中手机流量包，请问“天戮宇宙”出自哪个小说平台？[标准格式：番茄小说网]
+&lt;/h2&gt;&lt;p&gt;搜索book，发现传输类型是image的报文，里面就有天戮宇宙：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909005221477&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909005221477.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909005221477.png&#34; alt=&#34;image-20250909005221477&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;依旧搜索：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909005434198&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909005434198.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909005434198.png&#34; alt=&#34;image-20250909005434198&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;阅文集团
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8请在手机模拟器中勒索apk软件的sha256值是什么标准格式全小写&#34;&gt;8.请在手机模拟器中勒索apk软件的sha256值是什么？[标准格式：全小写]
+&lt;/h2&gt;&lt;p&gt;被摆了一道，在计算机仿真里面打开夜神模拟器会直接卡死，需要做一些准备工作&lt;/p&gt;
+&lt;p&gt;首先要保证虚拟化功能是开启的，在任务管理器性能页面查看：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909205810810&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909205810810.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909205810810.png&#34; alt=&#34;image-20250909205810810&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;其次，需要开启vmware的虚拟化（默认关闭）：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909203622745&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909203622745.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909203622745.png&#34; alt=&#34;image-20250909203622745&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;之后为了防止冲突，还需要关闭本机的虚拟化服务：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909205656592&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909205656592.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909205656592.png&#34; alt=&#34;image-20250909205656592&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;重启电脑，再次进入计算机仿真，打开夜神模拟器：&lt;/p&gt;
+&lt;p&gt;我的天啊，怎么还是报错&lt;/p&gt;
+&lt;p&gt;最终找到了解决办法，打开管理员权限cmd输入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcdedit /set hypervisorlaunchtype off
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;显示操作成功之后重启电脑，这样就成了，坏消息是再也用不了WSL了&lt;/p&gt;
+&lt;p&gt;更坏的消息是成功进入模拟器也无法找出勒索软件，模拟器似乎是新建的？&lt;/p&gt;
+&lt;p&gt;尝试在火眼里面导出.vmdk直接分析，也有问题：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909220222141&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909220222141.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909220222141.png&#34; alt=&#34;image-20250909220222141&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;先跳过吧&lt;/p&gt;
+&lt;h2 id=&#34;9接上题请问勒索apk软件的解锁密码是什么标准格式qwercom&#34;&gt;9.接上题，请问勒索apk软件的解锁密码是什么？[标准格式：qwer.com]
+&lt;/h2&gt;&lt;p&gt;不知道&lt;/p&gt;
+&lt;h2 id=&#34;10signed_xzexe程序sha1后6位是多少标准格式524c62&#34;&gt;10.signed_xz.exe程序SHA1后6位是多少？[标准格式：524c62]
+&lt;/h2&gt;&lt;p&gt;搜一下直接计算：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909220432592&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909220432592.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909220432592.png&#34; alt=&#34;image-20250909220432592&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8955B1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;11signed_xzexe程序中的函数名为curl_version_info的函数地址是多少标准格式0c6875c2&#34;&gt;11.signed_xz.exe程序中的函数名为curl_version_info的函数地址是多少？[标准格式：0c6875c2]
+&lt;/h2&gt;&lt;p&gt;使用IDA分析，左侧搜索函数名：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909221131834&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909221131834.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909221131834.png&#34; alt=&#34;image-20250909221131834&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;0x004393C0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;题目0c应该是打错了吧&lt;/p&gt;
+&lt;h2 id=&#34;12signed_xzexe程序中节名为reloc的虚拟地址是多少标准格式0c526n5624&#34;&gt;12.signed_xz.exe程序中节名为.reloc的虚拟地址是多少？[标准格式：0c526n5624]
+&lt;/h2&gt;&lt;p&gt;很奇怪，我的IDA无法找到.reloc节：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909222132740&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909222132740.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909222132740.png&#34; alt=&#34;image-20250909222132740&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;换成别的PE分析软件（这里使用CFF）就可以：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909222204837&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909222204837.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909222204837.png&#34; alt=&#34;image-20250909222204837&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;0x035B5000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13请分析检材中澳门新葡京apk其包名是标准格式comabcdxxx&#34;&gt;13.请分析检材中澳门新葡京APK其包名是？[标准格式：com.abcd.xxx]
+&lt;/h2&gt;&lt;p&gt;导出用雷电app分析：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909223414624&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909223414624.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909223414624.png&#34; alt=&#34;image-20250909223414624&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;com.suijideszzuiji.cocosandroid
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14请分析检材中澳门新葡京apk是否加固加固则说明是什么加固标准格式360加固宝或未加固&#34;&gt;14.请分析检材中澳门新葡京APK是否加固，加固则说明是什么加固？[标准格式：360加固宝或未加固]
+&lt;/h2&gt;&lt;p&gt;在jadx和DIE检测下都没发现加壳线索，最后发现原来雷电分析的源码分析模块直接就有：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909224857566&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909224857566.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909224857566.png&#34; alt=&#34;image-20250909224857566&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;未加固
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;15请分析检材中澳门新葡京apk是否会往手机的sd卡中写入数据则该权限的名称是标准格式androidxxxxx&#34;&gt;15.请分析检材中澳门新葡京APK是否会往手机的SD卡中写入数据，则该权限的名称是？[标准格式：android.xx.xxx]
+&lt;/h2&gt;&lt;p&gt;依旧雷电：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909225105416&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909225105416.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909225105416.png&#34; alt=&#34;image-20250909225105416&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;android.permission.WRITE_EXTERNAL_STORAGE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;16请分析检材中澳门新葡京apk登录的api地址标准格式httpswwwbaiducomapilogin&#34;&gt;16.请分析检材中澳门新葡京APK登录的api地址。[标准格式：https://www.baidu.com/api/login]
+&lt;/h2&gt;&lt;p&gt;不知道怎么做，代码量太大了，调了几个可疑的问ai也没有结果&lt;/p&gt;
+&lt;h2 id=&#34;17请分析检材中澳门新葡京apk其中关于腾讯运营商的服务留存了qq号是标准格式123456790&#34;&gt;17.请分析检材中澳门新葡京APK其中关于腾讯运营商的服务留存了QQ号是？[标准格式：123456790]
+&lt;/h2&gt;&lt;p&gt;很巧，之前分析上一题的时候复制了一段代码给ai（具体是org.cocos2dx.javascript.AppActivity），就这么问出来了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-202509092313439422&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909233439422.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909233439422.png&#34; alt=&#34;image-202509092313439422&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1108221663
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;18请分析navicat中root用户的密码是什么标准格式123aa&#34;&gt;18.请分析Navicat中root用户的密码是什么？[标准格式：@123Aa]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250909233802639&#34; href=&#34;http://picture.928330.xyz/typora/image-20250909233802639.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250909233802639.png&#34; alt=&#34;image-20250909233802639&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(=3]Zwjt#W
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;服务器&#34;&gt;服务器
+&lt;/h1&gt;&lt;h2 id=&#34;1该集群主节点操作系统版本是标准格式100100100&#34;&gt;1.该集群主节点操作系统版本是？[标准格式：100.100.100]
+&lt;/h2&gt;&lt;p&gt;第一件事就是把三台服务器全部仿真&lt;/p&gt;
+&lt;p&gt;随便点开一个服务器查看网络配置信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910000803468&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910000803468.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910000803468.png&#34; alt=&#34;image-20250910000803468&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;另外两台的配置也一样，这是使用了k8s&lt;/p&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;K8s，也就是Kubernetes的缩写，是一个开源的容器编排平台，用来管理、部署和扩展容器化应用&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;进入仿真机，能看见001是master主节点，另外两个都是node工作节点：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910001131671&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910001131671.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910001131671.png&#34; alt=&#34;image-20250910001131671&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910001158036&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910001158036.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910001158036.png&#34; alt=&#34;image-20250910001158036&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910001221189&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910001221189.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910001221189.png&#34; alt=&#34;image-20250910001221189&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;所以应该是001的操作系统版本：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910001301708&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910001301708.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910001301708.png&#34; alt=&#34;image-20250910001301708&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 7.9.2009
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;另外，我发现三台服务器都在192.168.2.0/24网段，查看后发现都是设置好的静态ip&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913012027858&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913012027858.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913012027858.png&#34; alt=&#34;image-20250913012027858&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;先改一下vmware的虚拟网络适配器，仅主机模式的设置关掉DHCP分配的功能，这样就能让他们保持原有的静态ip了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913012352339&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913012352339.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913012352339.png&#34; alt=&#34;image-20250913012352339&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;配置完后，它们服务应该就能正常使用了&lt;/p&gt;
+&lt;h2 id=&#34;2该集群创建时间是标准格式0000-00-00t000000z&#34;&gt;2.该集群创建时间是？[标准格式：0000-00-00T00:00:00Z]
+&lt;/h2&gt;&lt;p&gt;从这题开始到第五题，由于k8s打不开（似乎是证书过期了），没办法做&lt;/p&gt;
+&lt;p&gt;这部分应该就是些k8s的指令，后续学一下吧&lt;/p&gt;
+&lt;h2 id=&#34;3该集群共有多少个命名空间标准格式100&#34;&gt;3.该集群共有多少个命名空间？[标准格式：100]
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4该集群所有命名空间内总共有多少个pod标准格式100&#34;&gt;4.该集群所有命名空间内总共有多少个pod？[标准格式：100]
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5请给出该集群所使用的cni网络插件及其版本标准格式abc-v111&#34;&gt;5.请给出该集群所使用的cni网络插件及其版本？[标准格式：abc-V1.1.1]
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6其中打金平台的后台登录地址跳转文件是标准格式abcphp&#34;&gt;6.其中打金平台的后台登录地址跳转文件是？[标准格式：abc.php]
+&lt;/h2&gt;&lt;p&gt;从现在开始重组服务器&lt;/p&gt;
+&lt;p&gt;在火眼里面能看到工作节点1、2都安装了宝塔面板，由于不知道明文密码，我们分别登录两台服务器修改密码&lt;/p&gt;
+&lt;p&gt;输入&lt;code&gt;bt&lt;/code&gt;，唤起宝塔面板命令行控制程序：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910174201499&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910174201499.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910174201499.png&#34; alt=&#34;image-20250910174201499&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;宝塔面板网页控制程序的url通过&lt;code&gt;bt default&lt;/code&gt;查看：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910174418291&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910174418291.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910174418291.png&#34; alt=&#34;image-20250910174418291&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;一定要使用https访问（尽管没有证书）&lt;/p&gt;
+&lt;p&gt;进入之后，可以看见两台服务器都使用nginx各自托管了两个网站&lt;/p&gt;
+&lt;p&gt;我们当然可以直接查看配置文件来判断网站是什么，不过最好的办法还是亲自访问一下更快&lt;/p&gt;
+&lt;p&gt;先把nginx打开：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910143104637&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910143104637.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910143104637.png&#34; alt=&#34;image-20250910143104637&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;nginx会通过配置文件里的server块的server_name字段参数来判断我们访问的时候应该加载哪一个网页，所以我们需要给自己的电脑HOST文件加上对应解析，这样访问的时候host值才会是域名而不是ip，才能正确访问网站&lt;/p&gt;
+&lt;p&gt;我这里使用utools插件加一下：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910202534973&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910202534973.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910202534973.png&#34; alt=&#34;image-20250910202534973&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;但是很离奇的事情发生了，dns解析之后我无法访问这四个网站的任何一个&lt;/p&gt;
+&lt;p&gt;报错是502，服务器的问题，尝试很多方法都无法解决，甚至连错误日志都没有记录我的访问，百思不得其解&lt;/p&gt;
+&lt;p&gt;换个办法，一个个查看底下的index文件&lt;/p&gt;
+&lt;p&gt;使用宝塔部署的网站源码被放在了/www/wwwroot，而更糟糕的是（对于我来说）网站使用的是ThinkPHP框架，这意味着index文件不再被放在当前网站根目录下（事实上那里也只有一个宝塔面板生成网站成功的页面），而是被放在了application目录下，更加难找了&lt;/p&gt;
+&lt;p&gt;好在四个网站的类型在后面的题目有提到：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;打金平台、金瑞币平台，盲盒平台、借贷平台&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我的办法是过滤index.html/.htm和default.html/.htm文件，因为可以在/www/server/panel/vhost/nginx/www.gsjksu2kig.com.conf路径下看到配置文件，里面有这样对root和index的定义：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911205256149&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911205256149.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911205256149.png&#34; alt=&#34;image-20250911205256149&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;四个网站都是这样&lt;/p&gt;
+&lt;p&gt;但是我找第一个的时候就没办法判断，因为根本找不到欢迎页面，也有可能找到了但是网站logo被存储在某张图片里面，还有可能名称就是错误的&lt;/p&gt;
+&lt;p&gt;没办法，如果连图片一起看的话实在太多了，我试着翻了一下还找到一张没打码的身份证？？？所以还是看文字就好，相信index和default吧&lt;/p&gt;
+&lt;p&gt;先四个都看一遍，找找线索，然后统一确定&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.www.gSJKsu2kig.com：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911204958761&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911204958761.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911204958761.png&#34; alt=&#34;image-20250911204958761&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;暂时不能分辨，但根据后面可以判断出来&lt;/p&gt;
+&lt;p&gt;金瑞币平台&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.www.mtbtsdafda.com&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911211116032&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911211116032.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911211116032.png&#34; alt=&#34;image-20250911211116032&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;前脚还在烦恼怎么和上一个区分呢，后面就来了答案&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911211338953&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911211338953.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911211338953.png&#34; alt=&#34;image-20250911211338953&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;打金平台&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3.www.jiaoyoumf0up.com&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个网站很奇怪，除了宝塔默认的index之外再无别的了&lt;/p&gt;
+&lt;p&gt;不过它的index,php里面写了这样的东西：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;include&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;view/index.php&amp;#39;&lt;/span&gt;;    &lt;span style=&#34;color:#7f848e&#34;&gt;// 如果没有 $mod，就加载默认首页
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;顺利的在view下找到了证据：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911212144279&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911212144279.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911212144279.png&#34; alt=&#34;image-20250911212144279&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;盲盒平台&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4.www.jiedai0rmr.com&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个也和之前不同，使用的是老版本的ThinkPHP框架&lt;/p&gt;
+&lt;p&gt;其实做到这里基本上也明了了，因为第一个网站根目录里找到的有挖矿和博彩的功能，怎么说也不可能在借贷平台里面加上挖矿的页面吧，而且网站名称就是借贷的拼音&lt;/p&gt;
+&lt;p&gt;*而且24题搞什么，直接题目就给出来了啊&lt;/p&gt;
+&lt;p&gt;不过还是找一下证据吧：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911213010860&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911213010860.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911213010860.png&#34; alt=&#34;image-20250911213010860&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;嗯，其实感觉这个证据不太好，还不如前面的判断&lt;/p&gt;
+&lt;p&gt;借贷平台&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ok，现在全都知道了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.gSJKsu2kig.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.gSJKsu2kig.com
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;：金瑞币平台&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mtbtsdafda.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.mtbtsdafda.com
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;：打金平台&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jiaoyoumf0up.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.jiaoyoumf0up.com
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;：盲盒平台&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jiedai0rmr.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.jiedai0rmr.com
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;：借贷平台&lt;/p&gt;
+&lt;p&gt;回到题目，打金平台的后台登录地址跳转文件&lt;/p&gt;
+&lt;p&gt;其实我没指望grep搜出什么东西，比较login字符串太常见了，结果就是那么巧，最后一行是答案：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911214302404&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911214302404.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911214302404.png&#34; alt=&#34;image-20250911214302404&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;实地考察，果真如此，原来就在根目录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911214348463&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911214348463.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911214348463.png&#34; alt=&#34;image-20250911214348463&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;WIdbdgd1Us.php
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7其中打金平台密码加密算法是标准格式abc&#34;&gt;7.其中打金平台密码加密算法是？[标准格式：abc]
+&lt;/h2&gt;&lt;p&gt;由上题可知打金平台为www.mtbtsdafda.com&lt;/p&gt;
+&lt;p&gt;在对应文件夹下找到三个可能和登录有关的东西：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910215659308&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910215659308.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910215659308.png&#34; alt=&#34;image-20250910215659308&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;其中前两个是前台登录，里面有这样的代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;I&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;md5&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;后面一个是后台登录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;I&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;sha1&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不知道正确的是哪一个&lt;/p&gt;
+&lt;h2 id=&#34;8其中打金平台中13067137585用户的累计产量有多少标准格式10000&#34;&gt;8.其中打金平台中&amp;quot;13067137585&amp;quot;用户的累计产量有多少？[标准格式：100.00]
+&lt;/h2&gt;&lt;p&gt;这题肯定是要连接数据库才能做出来的题目了&lt;/p&gt;
+&lt;p&gt;一个比较好的办法是本地使用navicat链接数据库，因为这个数据库只允许本地访问，直接连是连不上去的，必须要使用ssh隧道，这样才能假装是在本地访问的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910233959488&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910233959488.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910233959488.png&#34; alt=&#34;image-20250910233959488&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;可以选择使用宝塔找到的普通使用者的账户密码，也能选择使用root：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910233949525&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910233949525.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910233949525.png&#34; alt=&#34;image-20250910233949525&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不过root的密码不知道为什么总是登不进去，建议是重启数据库，加上&amp;ndash;skip-grant-tables选项&lt;/p&gt;
+&lt;p&gt;另外，重启还能解决一个问题&lt;/p&gt;
+&lt;p&gt;如果直接使用宝塔面板管理数据库的话，会提示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;数据库服务器连接失败！&amp;lt;pre&amp;gt;Can&amp;#39;t connect to MySQL server on &amp;#39;localhost&amp;#39; ([Errno 2] No such file or directory)&amp;lt;/pre&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;尝试在直接在这台服务器登录，也会报错&amp;quot;找不到/tmp/socket文件&amp;quot;，和上面其实是一个原因：&lt;/p&gt;
+&lt;p&gt;这个服务器配置了默认使用unix socket作为连接方式，而套接字文件又被他搞不见了！&lt;/p&gt;
+&lt;p&gt;在本机navicat使用ssh隧道可以正常登录，因为它没有使用socket文件，而是用TCP端口（大概是这个原因）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决办法之一是在连接的时候强制指定tcp：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mysql -u 用户名 -p -h 127.0.0.1 -P &lt;span style=&#34;color:#d19a66&#34;&gt;3306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;还有一种办法就是重启了&lt;/strong&gt;，重启能让mysqld再次生成socket文件，正常使用socket（前提是设置里写了，这台服务器是写了的）&lt;/p&gt;
+&lt;p&gt;先停止mysql服务：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl stop mysqld
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过我在做这一步的时候有问题，它不能完全清除后台的进程，所以要手动杀死进程&lt;/p&gt;
+&lt;p&gt;确认mysql进程pid：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ps -ef | grep mysqld
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;强制杀掉进程：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kill -9 [进程号]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;到这里后重启，也不能使用mysqld直接启动，否则会报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2025-09-11T15:02:42.423175Z &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;ERROR&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; Fatal error: Please &lt;span style=&#34;color:#e5c07b&#34;&gt;read&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Security&amp;#34;&lt;/span&gt; section of the manual to find out how to run mysqld as root!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;也就是说mysql不能直接以root用户启动，这是linux的安全设计，windows是没有的&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;正确启动方式是使用mysql_safe&lt;/strong&gt;，这是linux里mysql自带的安全脚本，会调用mysqld并增加一些安全功能&lt;/p&gt;
+&lt;p&gt;上文提到root密码不能登录，&lt;strong&gt;所以加上&amp;ndash;skip-grant-tables选项&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;此外，mysqld_safe本身是一个shell脚本，默认会在前台运行，把日志直接输出到终端从而会占用整个窗口，&lt;strong&gt;加上&amp;amp;后就不会了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最终重启命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mysqld_safe --skip-grant-tables &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启后所有问题都消失了，/tmp/socket重现人间，使用&lt;code&gt;mysql -u root&lt;/code&gt;无需密码就能登录root，宝塔的数据库管理面板也不报错，可以使用了&lt;/p&gt;
+&lt;p&gt;查看集群服务器的二号工作节点，会发现他的数据库也是存在这台一号机里面的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911235434979&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911235434979.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911235434979.png&#34; alt=&#34;image-20250911235434979&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;所以root登录好处多多啊&lt;/p&gt;
+&lt;p&gt;回到问题：打金平台中&amp;quot;13067137585&amp;quot;用户的累计产量有多少&lt;/p&gt;
+&lt;p&gt;我觉得需要结合前端网站分析，直接找数据库还是太难了&lt;/p&gt;
+&lt;p&gt;不过也有办法，就是找有哪个表里面同时包含用户id和累计产量，但表和字段毕竟不是中文，还是很哪找的&lt;/p&gt;
+&lt;p&gt;我直接看wp了，就是ds_order表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250911235934823&#34; href=&#34;http://picture.928330.xyz/typora/image-20250911235934823.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250911235934823.png&#34; alt=&#34;image-20250911235934823&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;sql查询：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;SUM&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;already_profit&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ds_order&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;13067137585&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912000249219&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912000249219.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912000249219.png&#34; alt=&#34;image-20250912000249219&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;43853.21258852
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9其中打金平台会员组最高溢价比例是多少标准格式1000&#34;&gt;9.其中打金平台会员组最高溢价比例是多少？[标准格式：10.00]
+&lt;/h2&gt;&lt;p&gt;这是真没办法，不知道什么是溢价比，无从下手找&lt;/p&gt;
+&lt;h2 id=&#34;10其中打金平台会员推广人数最多的会员其姓名是标准格式名字&#34;&gt;10.其中打金平台会员推广人数最多的会员其姓名是？[标准格式：名字]
+&lt;/h2&gt;&lt;p&gt;依旧无从下手&lt;/p&gt;
+&lt;h2 id=&#34;11其中打金平台最早一次备份数据库的时间asiashanghai是标准格式2024-01-01-010101&#34;&gt;11.其中打金平台最早一次备份数据库的时间（Asia/Shanghai）是？[标准格式：2024-01-01-01:01:01]
+&lt;/h2&gt;&lt;p&gt;在对象页面能看到ds_log记录了系统操作日志：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912000908757&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912000908757.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912000908757.png&#34; alt=&#34;image-20250912000908757&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;时间是用时间戳的形式存储的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912001209164&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912001209164.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912001209164.png&#34; alt=&#34;image-20250912001209164&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;看不懂？哎🤓👆，这时候就可以用到我的时间戳转换工具了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912001558581&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912001558581.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912001558581.png&#34; alt=&#34;image-20250912001558581&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;可以看到时间是增大的，而表第8行就是最早的备份时间：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912001802926&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912001802926.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912001802926.png&#34; alt=&#34;image-20250912001802926&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912001751642.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912001751642.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2019-05-06 22:27:57
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12其中金瑞币jinrui-coin平台图片上传平台是哪种类型标准格式腾讯云abc&#34;&gt;12.其中金瑞币（JINRUI COIN）平台图片上传平台是哪种类型？[标准格式：腾讯云ABC]
+&lt;/h2&gt;&lt;p&gt;一个个找不现实，使用宝塔的文件内容搜索，相信好的编程人员会留下充足的中文注释的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912002958380&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912002958380.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912002958380.png&#34; alt=&#34;image-20250912002958380&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;点击编辑，打开看看：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912002940535&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912002940535.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912002940535.png&#34; alt=&#34;image-20250912002940535&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;OSS\OssClient是阿里云对象存储OSS官方PHP SDK的命名空间&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;阿里云OSS
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其实这个代码也没有限制上传文件类型，只是引入了think\Image&lt;/p&gt;
+&lt;h2 id=&#34;13其中金瑞币平台手机直充接口是什么标准格式httpxxxxxxxxxxxx&#34;&gt;13.其中金瑞币平台手机直充接口是什么？[标准格式：http://xxx.xxx.xxx/xxx]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912003208955&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912003208955.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912003208955.png&#34; alt=&#34;image-20250912003208955&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;打开就能看见：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912003246812&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912003246812.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912003246812.png&#34; alt=&#34;image-20250912003246812&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://op.juhe.cn/ofpay/sinopec/onlineorder
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14其中金瑞币平台后台登录地址是标准格式httpxxxxxxxxxxxx&#34;&gt;14.其中金瑞币平台后台登录地址是？[标准格式：http://xxx/xxx/xxx.xxx]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912003844001&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912003844001.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912003844001.png&#34; alt=&#34;image-20250912003844001&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;找到表单提交对象url：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912003831450&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912003831450.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912003831450.png&#34; alt=&#34;image-20250912003831450&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;那就应该是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://www.gSJKsu2kig.com/admin/login/index
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;15其中金瑞币平台中密码加密盐值是标准格式abc1d&#34;&gt;15.其中金瑞币平台中密码加密盐值是？[标准格式：AbC1d]
+&lt;/h2&gt;&lt;p&gt;搜索中文盐搜不出来，搜到了好玩的东西：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912004700781&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912004700781.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912004700781.png&#34; alt=&#34;image-20250912004700781&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;笑死了&lt;/p&gt;
+&lt;p&gt;原来要搜英文的salt：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912010209204&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912010209204.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912010209204.png&#34; alt=&#34;image-20250912010209204&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GWwRbMOPJYZCvE5gembG
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;16其中金瑞币平台中交易手续费是百分之多少标准格式100&#34;&gt;16.其中金瑞币平台中交易手续费是百分之多少？[标准格式：100]
+&lt;/h2&gt;&lt;p&gt;搜索手续费，发现是由变量$base_config的trade_sxf键控制：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912010821573&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912010821573.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912010821573.png&#34; alt=&#34;image-20250912010821573&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个变量没有定义在这个文件，全局搜索一下：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912203244868&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912203244868.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912203244868.png&#34; alt=&#34;image-20250912203244868&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;发现这样一行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$base_config&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Db&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;name&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;system&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;field&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;where&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;base_config&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;find&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这段代码用的应该是ThinkPHP框架的数据库操作类&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;name()&lt;/code&gt;&lt;/strong&gt;：指定要操作的数据表，表名是system&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;field()&lt;/code&gt;&lt;/strong&gt;：只取出指定的这一列&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;where()&lt;/code&gt;&lt;/strong&gt;：加条件&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;find()&lt;/code&gt;&lt;/strong&gt;：只取一条记录（返回数组/对象）&lt;/p&gt;
+&lt;p&gt;也就是说这行代码等价于：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;value&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;system&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;base_config&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;limit&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那么现在只要找出哪个数据库里面有system表就行了，对mysql的information_schema表查询：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;table_schema&lt;/span&gt;,&lt;span style=&#34;color:#c678dd&#34;&gt;table_name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;information_schema&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;tables&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;table_name&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;system&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912214022627&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912214022627.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912214022627.png&#34; alt=&#34;image-20250912214022627&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;额，返回结果却是空？那搜索列名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;table_schema&lt;/span&gt;,&lt;span style=&#34;color:#c678dd&#34;&gt;table_name&lt;/span&gt;,&lt;span style=&#34;color:#c678dd&#34;&gt;column_name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;information_schema&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;columns&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;column_name&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912214129562&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912214129562.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912214129562.png&#34; alt=&#34;image-20250912214129562&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;虽然没有搜索到system表，但有一个wym_system表，事实上也的确就是这个表&lt;/p&gt;
+&lt;p&gt;这里涉及一个点：在ThinkPHP里，&lt;code&gt;Db::name()&lt;/code&gt;并不是直接拿表名，而是会根据配置里的表前缀prefix拼接出来&lt;/p&gt;
+&lt;p&gt;我们搜索prefix可以看到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912214318069&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912214318069.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912214318069.png&#34; alt=&#34;image-20250912214318069&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这里也就说明了表的前缀是由prefix指定的&lt;/p&gt;
+&lt;p&gt;搜索prefix，可以在database.php文件里面看见定义的前缀，正是&lt;code&gt;wym_&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912215408049&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912215408049.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912215408049.png&#34; alt=&#34;image-20250912215408049&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;回到找到的wym_system，的确是有name为base_config的行：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912215632600&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912215632600.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912215632600.png&#34; alt=&#34;image-20250912215632600&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这里value存储的是一段PHP序列化的数据：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;40&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;reg_zs&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;reg_zskj&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;体验矿机&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;reg_pzskj&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sign&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.01&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;zjcj&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_sxf&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;36&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;kj_sxf&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;cn_money&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.16&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_price&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.83&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;add_price&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.04&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;buy_count&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;ykcz_sxf&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;30&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;hfcz_sxf&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;30&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;btc_sxf&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;30&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_count&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;gsell_count&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;gsell2_count&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_start&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_end&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_start1&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_end1&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_start&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_end&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_start1&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_end1&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_start2&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_end2&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_start3&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_end3&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_start4&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_end4&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_start5&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;09:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_end5&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;23:00&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;zt&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;}&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;team&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;}&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;zcjl&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;}&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;kjjl&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;}&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;mzt&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;9999999&amp;#34;&lt;/span&gt;;}&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;mzcjl&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;}&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;mkjjl&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;;&lt;span style=&#34;color:#e06c75&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;}}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所谓php序列化，就是把php的变量转换成字符串，方便存数据库、文件、网络传输&lt;/p&gt;
+&lt;p&gt;可以直接使用php的反序列化函数&lt;code&gt;unserialize()&lt;/code&gt;解码（序列化是&lt;code&gt;serialize()&lt;/code&gt;），大概就是下面这样：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;array&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;reg_zs&amp;#34;&lt;/span&gt;      &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;reg_zskj&amp;#34;&lt;/span&gt;    &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;体验矿机&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;reg_pzskj&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sign&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.01&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;zjcj&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_sxf&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;36&amp;#34;&lt;/span&gt;,   &lt;span style=&#34;color:#7f848e&#34;&gt;// ← 交易手续费
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;kj_sxf&amp;#34;&lt;/span&gt;      &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;cn_money&amp;#34;&lt;/span&gt;    &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.16&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;trade_price&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.83&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;add_price&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;0.04&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;buy_count&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;ykcz_sxf&amp;#34;&lt;/span&gt;    &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;30&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;hfcz_sxf&amp;#34;&lt;/span&gt;    &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;30&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;btc_sxf&amp;#34;&lt;/span&gt;     &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;30&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sell_count&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;999999&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#56b6c2&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;终于找到手续费trade_sxf的值了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;36
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;17其中金瑞币平台中目前有几种充值方式标准格式100&#34;&gt;17.其中金瑞币平台中目前有几种充值方式？[标准格式：100]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912221541653&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912221541653.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912221541653.png&#34; alt=&#34;image-20250912221541653&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;18二号集群节点有源代码的网站目录有几个正在运行的除外标准格式1&#34;&gt;18.二号集群节点有源代码的网站目录有几个？（正在运行的除外）[标准格式：1]
+&lt;/h2&gt;&lt;p&gt;只在二号工作节点看到一个未被使用的网站：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912222016468&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912222016468.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912222016468.png&#34; alt=&#34;image-20250912222016468&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不过这里面只有一个ini文件，不知道算不算，如果不算似乎一个也没有了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;19二号集群节点memcached端口是标准格式100&#34;&gt;19.二号集群节点memcached端口是？[标准格式：100]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910205107702&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910205107702.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250910205107702.png&#34; alt=&#34;image-20250910205107702&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;11211
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;20盲盒平台中余额最多的用户是标准格式abc1d&#34;&gt;20.盲盒平台中余额最多的用户是？[标准格式：AbC1d]
+&lt;/h2&gt;&lt;p&gt;依旧文件搜索：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912230438235&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912230438235.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912230438235.png&#34; alt=&#34;image-20250912230438235&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;余额是通过$userInfo[&amp;lsquo;rmb&amp;rsquo;]变量存储的，搜索$userInfo：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912230152763&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912230152763.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912230152763.png&#34; alt=&#34;image-20250912230152763&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;也就是说到$userInfo是pre_user数据库的一行信息，通过user定位&lt;/p&gt;
+&lt;p&gt;再结合之前的$userInfo[&amp;lsquo;rmb&amp;rsquo;]，得到这个表有rmb和user两个字段，依据这个查询（有上题经验，不搜表名）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;table_schema&lt;/span&gt;,&lt;span style=&#34;color:#c678dd&#34;&gt;table_name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;information_schema&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;columns&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;column_name&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;in&lt;/span&gt; (&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;rmb&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;group&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;by&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;table_schema&lt;/span&gt;,&lt;span style=&#34;color:#c678dd&#34;&gt;table_name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;having&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;count&lt;/span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;distinct&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;column_name&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912231630664&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912231630664.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912231630664.png&#34; alt=&#34;image-20250912231630664&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;果然根本不叫pre_user，点开就能找到rmb最多的人：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912231742757&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912231742757.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912231742757.png&#34; alt=&#34;image-20250912231742757&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ZrAuyMT1tyo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;21盲盒平台可选二级域名有多少个标准格式100&#34;&gt;21.盲盒平台可选二级域名有多少个？[标准格式：100]
+&lt;/h2&gt;&lt;p&gt;搜索域名，查看相关文件，可以放在它的值来源于&lt;code&gt;config(&#39;user_url&#39;)&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912232935710&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912232935710.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912232935710.png&#34; alt=&#34;image-20250912232935710&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;继续搜索config，发现一个pre_config表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912234159244&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912234159244.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912234159244.png&#34; alt=&#34;image-20250912234159244&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;它存在与盲盒数据库里面，恰好有user_url，应该就是目标表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912234257082&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912234257082.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912234257082.png&#34; alt=&#34;image-20250912234257082&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;9yx.xyz,3rd.xyz,g3h.xyz,524f.fit,ze3g.fit,xa43.fit,scv4g.xyz,cxse.xyz,ddv.xyz,awev.xyz,eafv.fit,zxee3g.fit,zsefg.fit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;数一下就行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;13
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22盲盒平台的支付密钥是标准格式abc1d&#34;&gt;22.盲盒平台的支付密钥是？[标准格式：AbC1d]
+&lt;/h2&gt;&lt;p&gt;搜索密钥可以看见支付密钥还是来源于config，也就是上一题的表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912234835145&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912234835145.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912234835145.png&#34; alt=&#34;image-20250912234835145&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912234728919&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912234728919.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912234728919.png&#34; alt=&#34;image-20250912234728919&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LDAWIucAQQGQp7rEE4nSlvzQMKZxTxopqNSwjL8PcAIBbVLJkh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;23盲盒平台中拥有分站的用户名是标准格式123abc&#34;&gt;23.盲盒平台中拥有分站的用户名是？[标准格式：123abc]
+&lt;/h2&gt;&lt;p&gt;之前找可选域名的时候就找到了:&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912235136652&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912235136652.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912235136652.png&#34; alt=&#34;image-20250912235136652&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$res&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$DB&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;query&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;UPDATE `pre_site` SET `url`=&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$user_url&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39; WHERE `user`=&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$userName&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;找到这个pre_site，根据之前的经验很快就找到了真实表名mh_site：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250912235244317&#34; href=&#34;http://picture.928330.xyz/typora/image-20250912235244317.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250912235244317.png&#34; alt=&#34;image-20250912235244317&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;只有一条记录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5432ef
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;24借贷平台wwwjiedai0rmrcom中验证码发送接口域名是标准格式httpxxxxxxxxx&#34;&gt;24.借贷平台（&lt;a class=&#34;link&#34; href=&#34;https://www.google.com/search?q=https://www.jiedai0rmr.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.jiedai0rmr.com
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;）中验证码发送接口域名是？[标准格式：http://xxx.xxx.xxx/]
+&lt;/h2&gt;&lt;p&gt;从这题开始不知道宝塔犯什么病，一点编辑就卡死（可能是文件太多了或者别的什么），所以就用火眼了，实在麻烦，说一下大概思路&lt;/p&gt;
+&lt;p&gt;搜索验证码：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913000102782&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913000102782.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913000102782.png&#34; alt=&#34;image-20250913000102782&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个文件里面可以看见是由sendSSms函数进行验证码服务：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913001415308&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913001415308.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913001415308.png&#34; alt=&#34;image-20250913001415308&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;搜素sendSSms，可以看到下面的代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$Smsapi&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Smsapi&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$apiKey&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;$apiSecret&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;也就是说真正发短信的逻辑在Smsapi这个类里，找到它看内容就行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Smsapi&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$sendurl&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;http://api.smsbao.com/&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;send&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$number&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;$cont&lt;/span&gt;){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;$user&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;yunbeiw&amp;#34;&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;//短信平台帐号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;$pass&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;md5&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;yunbeiw&amp;#34;&lt;/span&gt;); &lt;span style=&#34;color:#7f848e&#34;&gt;//短信平台密码
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;$sendurl&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;sendurl&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;sms?u=&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$user&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;amp;p=&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$pass&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;amp;m=&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$number&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;amp;c=&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;urlencode&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$cont&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;$result&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;file_get_contents&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$sendurl&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$result&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://api.smsbao.com/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;25借贷平台后台登录密码的加密算法中共使用了多少次hash函数加密标准格式10&#34;&gt;25.借贷平台后台登录密码的加密算法中共使用了多少次hash函数加密？[标准格式：10]
+&lt;/h2&gt;&lt;p&gt;在上一题的CommonAction文件里面有：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;getpass&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$pass&lt;/span&gt;){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;sha1&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;md5&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;md5&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;C&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;cfg_adminkey&amp;#39;&lt;/span&gt;))&lt;span style=&#34;color:#56b6c2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;md5&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$pass&lt;/span&gt;)));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3次MD5+1次SHA1&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;26接上题借贷平台中后台登录的密码额外加密字符串标准格式123abc&#34;&gt;26.接上题，借贷平台中后台登录的密码额外加密字符串？[标准格式：123ABc+]
+&lt;/h2&gt;&lt;p&gt;上题能知道是cfg_adminkey变量，搜索：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913003957091&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913003957091.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913003957091.png&#34; alt=&#34;image-20250913003957091&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;26XBAmVMs+n_
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;27借贷平台中一共有多少借款订单标准格式100&#34;&gt;27.借贷平台中一共有多少借款订单？[标准格式：100]
+&lt;/h2&gt;&lt;p&gt;依旧搜索：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913004926052&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913004926052.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913004926052.png&#34; alt=&#34;image-20250913004926052&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;代码中&lt;code&gt;checkorder()&lt;/code&gt;函数检查当前用户是否已经有借款订单，其中有这样的几行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$Order&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;D&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;order&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$arr&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;array&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;getLoginUser&lt;/span&gt;(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;money&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$money&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;months&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$month&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;monthmoney&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ceil&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$order&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;huankuan&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$order&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;fuwufei&amp;#39;&lt;/span&gt;]),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;donemonth&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;addtime&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;time&lt;/span&gt;(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;status&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;pid&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$status&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;bank&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$info&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;bankname&amp;#39;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;banknum&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$info&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;bankcard&amp;#39;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;ordernum&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$ordernum&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;discode&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$co&lt;/span&gt;[&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;discode&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$status&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$Order&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;$arr&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ThinkPHP中D(&amp;ldquo;order&amp;rdquo;)会返回对应的模型对象，操作的就是数据库表order，而下面的$arr内容则是order表的各个字段名称&lt;/p&gt;
+&lt;p&gt;在二号工作节点，一共是三个数据库，前面用过两个，剩下的motx5dw就是借贷平台的了&lt;/p&gt;
+&lt;p&gt;很快就能找打order表，并且字段名也对得上：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913005312072&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913005312072.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913005312072.png&#34; alt=&#34;image-20250913005312072&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;43
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;28借贷平台中包玉莲的收款卡号是标准格式1000&#34;&gt;28.借贷平台中&amp;quot;包玉莲&amp;quot;的收款卡号是？[标准格式：1000]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913010021999&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913010021999.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913010021999.png&#34; alt=&#34;image-20250913010021999&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;查看文件，里面提到修改卡号的逻辑：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$Order&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;D&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;userinfo&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$status&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$Order&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;where&lt;/span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;array&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$user&lt;/span&gt;))&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;save&lt;/span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;array&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;bankname&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$bank&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;bankcard&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$banknum&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;找到userinfo表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913010013010&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913010013010.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913010013010.png&#34; alt=&#34;image-20250913010013010&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;342622197303241606
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;29借贷平台中贷款最大限额是多少标准格式100&#34;&gt;29.借贷平台中贷款最大限额是多少？[标准格式：100]
+&lt;/h2&gt;&lt;p&gt;依旧公式：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913010653160&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913010653160.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913010653160.png&#34; alt=&#34;image-20250913010653160&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913010722362&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913010722362.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913010722362.png&#34; alt=&#34;image-20250913010722362&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913010737611.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913010737611.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;350000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;30请综合该集群一共有多少个网站数据库标准格式100&#34;&gt;30.请综合该集群一共有多少个网站数据库？[标准格式：100]
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250913010932780&#34; href=&#34;http://picture.928330.xyz/typora/image-20250913010932780.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250913010932780.png&#34; alt=&#34;image-20250913010932780&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;一共11个，其中&lt;code&gt;information_schema&lt;/code&gt;、&lt;code&gt;msyql&lt;/code&gt;、&lt;code&gt;performance_schema&lt;/code&gt;、&lt;code&gt;sys&lt;/code&gt;这四个是系统自带&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;7
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>獬豸杯2024取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Wed, 03 Sep 2025 20:08:27 +0800</pubDate>
@@ -930,7 +2203,24 @@
 &lt;p&gt;又跑到文件里面找图片，七千多张翻了二十多页，啥也没有，太耗时间了，还给我火眼整的卡卡的&lt;/p&gt;
 &lt;p&gt;我想到耗时任务里面有图片文字提取，但是使用要苍穹ai引擎，而且也没有关键词，不一定好找&lt;/p&gt;
 &lt;p&gt;接着又在浏览器里面找，还是没有快递相关，遂放弃，呃啊&lt;/p&gt;
-&lt;h2 id=&#34;18李大辉收到的电邮中有一个钓鱼链结phishing-link这个链结的地址是什么&#34;&gt;18.李大辉收到的电邮中有一个钓鱼链结(Phishing Link)，这个链结的地址是什么?
+&lt;p&gt;*这张图片其实是被删掉了，但在下面路径存有一个缩略图：&lt;/p&gt;
+&lt;p&gt;Android.bin/分区57/data/com.google.android.apps.photos/cache/glide_cache/&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250904195117573&#34; href=&#34;http://picture.928330.xyz/typora/image-20250904195117573.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250904195117573.png&#34; alt=&#34;image-20250904195117573&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250904195207671&#34; href=&#34;http://picture.928330.xyz/typora/image-20250904195207671.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250904195207671.png&#34; alt=&#34;image-20250904195207671&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4567567812344567
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;18李大辉收到的电邮中有一个钓鱼链结phishing-link这个链结的地址是什么&#34;&gt;18.李大辉收到的电邮中有一个钓鱼链结(Phishing Link)，这个链结的地址是什么?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 以上皆非&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;B. &lt;a class=&#34;link&#34; href=&#34;https://bit.ly/3yeARcO&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://bit.ly/3yeARcO
@@ -1217,6 +2507,7 @@
 &lt;p&gt;&lt;strong&gt;B. ZIMPORTEDBYBUNDLEIDENTIFIER&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;C. ZRECEIVEMETHODIDENTIFIER&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;D. ZRECEIVEDFROMIDENTIFIER&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;ios会把所有照片绑在一起放在Photos.sqlite里面存储，然后标记来源方便查找&lt;/p&gt;
 &lt;p&gt;搜索这个数据库：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -1351,7 +2642,7 @@
 &lt;/p&gt;
 &lt;p&gt;果真找到了对应数据，sql查询一下：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ZCRYPTOITERATIONCOUNT&lt;/code&gt; 显示加密迭代次数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ZCRYPTOITERATIONCOUNT&lt;/code&gt;显示加密迭代次数&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;ZISPASSWORDPROTECTED&lt;/code&gt;=1表示有密码保护，0表示没有&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;SELECT&lt;/span&gt; 
@@ -1407,9 +2698,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Apple Secure Notes的加密算法对应16200这个模式，我们指定然后运行，这里用的是kali自带字典：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hashcat -m &lt;span style=&#34;color:#d19a66&#34;&gt;16200&lt;/span&gt; -a &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; hash_first.txt /usr/share/wordlists/rockyou.txt
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而我是在一台Kali虚拟机里操作的，虚拟机环境无法直接调用物理GPU，Hashcat只能切换到CPU模式&lt;/p&gt;
-&lt;p&gt;行吧，CPU就CPU，慢点就慢点，但第二个问题出现了：Hashcat的通用CPU驱动内存分配上限很低，而&lt;code&gt;-m 16200&lt;/code&gt;恰恰要很多内存，这就导致跑不动破解的哈希算法&lt;/p&gt;
-&lt;p&gt;为了解决这个问题，我折腾了很久：修复Kali的apt源、安装开源驱动、都没有用&lt;/p&gt;
-&lt;p&gt;最后只能换一个工具（早该想到的）：John the Ripper，据说对CPU的支持非常出色，没有内存限制问题，而且kali也默认安装了它：&lt;/p&gt;
+&lt;p&gt;行吧慢点就慢点，但可恶的Hashcat的通用CPU驱动内存分配上限很低，而&lt;code&gt;-m 16200&lt;/code&gt;恰恰要很多内存，这就导致跑不动破解的哈希算法&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，我折腾了很久都没有用，最后只能换一个工具（早该想到的）John the Ripper，据说对CPU的支持非常出色，没有内存限制问题，而且kali也默认安装了它：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;john --wordlist&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/usr/share/wordlists/rockyou.txt hash_first.txt
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后运行很成功，查看破解密码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;john --show hash_first.txt
@@ -1563,7 +2853,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;__name__&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;简单说一下运行过程：&lt;/p&gt;
-&lt;p&gt;脚本首先将我们输入的密码、从数据库&lt;code&gt;ZICCLOUDSYNCINGOBJECT&lt;/code&gt;表中读取的盐和迭代次数 三者混合，进行20000次SHA256哈希，得到主密钥，用主密钥去解密从&lt;code&gt;ZICCLOUDSYNCINGOBJECT&lt;/code&gt;表得到的 &lt;code&gt;ZCRYPTOWRAPPEDKEY&lt;/code&gt;列，取出专门用于加密这条笔记内容的笔记密钥&lt;/p&gt;
+&lt;p&gt;脚本首先将我们输入的密码、从数据库&lt;code&gt;ZICCLOUDSYNCINGOBJECT&lt;/code&gt;表中读取的盐和迭代次数三者混合，进行20000次SHA256哈希，得到主密钥，用主密钥去解密从&lt;code&gt;ZICCLOUDSYNCINGOBJECT&lt;/code&gt;表得到的 &lt;code&gt;ZCRYPTOWRAPPEDKEY&lt;/code&gt;列，取出专门用于加密这条笔记内容的笔记密钥&lt;/p&gt;
 &lt;p&gt;接着脚本会检查两个可能存放笔记内容的位置，使用笔记密钥配合从&lt;code&gt;ZICNOTEDATA&lt;/code&gt;表中读取的初始化向量和认证标签，对加密内容进行解密&lt;/p&gt;
 &lt;p&gt;最后解密出的数据并非纯文本，而是一个gzip压缩包，调用&lt;code&gt;zlib.decompress&lt;/code&gt;函数对其进行解压，得到最终的二进制数据（Protobuf格式），再尽力将这些二进制数据解码为UTF-8文本，并将其中可读的部分打印在屏幕上&lt;/p&gt;
 &lt;p&gt;嗯，真是太麻烦了&lt;/p&gt;
@@ -1834,6 +3124,20 @@
 &lt;p&gt;这四个人的电话（+852）和昵称都对得上，那应该是四个&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;另外，上一题的db文件打不开，经检查发现不是sqlite格式，也不是其他常见文件格式，不知道有什么猫腻&lt;/p&gt;
+&lt;p&gt;*原来这是因为加密了&lt;/p&gt;
+&lt;p&gt;Signal会把消息和相关数据存储在一个&lt;code&gt;db.sqlite&lt;/code&gt;数据库文件中，但这个数据库本身是加密的&lt;/p&gt;
+&lt;p&gt;具体来说消息数据库存放位置通常在用户目录下，例如Windows:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:\Users\&amp;lt;用户名&amp;gt;\AppData\Roaming\Signal\sql\db.sqlite
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Signal使用SQLCipher对SQLite数据库进行加密，解密密钥存放在另一个文件里：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:\Users\&amp;lt;用户名&amp;gt;\AppData\Roaming\Signal\config.json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在ChunHei_Desktop.E01/1/Users/HEI/AppData/Roaming/Signal/config.json中可以找到数据库密码：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250904200719695&#34; href=&#34;http://picture.928330.xyz/typora/image-20250904200719695.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250904200719695.png&#34; alt=&#34;image-20250904200719695&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;50林浚熙在signal-曾经与某人对话那人的手机号码是什么-需要与区码area-code-一同答以阿拉伯数字&#34;&gt;50.林浚熙在“Signal&amp;rsquo; 曾经与某人对话，那人的手机号码是什么? 需要与区码(Area Code) 一同答(以阿拉伯数字)
 &lt;/h2&gt;&lt;p&gt;上面过程中已经找过，是ROCKY，不多赘述：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;85270711901

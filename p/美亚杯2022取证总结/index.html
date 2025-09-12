@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 
-<link rel="stylesheet" href="/scss/style.min.11710e682057f87e61fdaccbe62c7a3e1dd7654c30f9aae86ee1aced0db2bcf7.css"><meta property='og:title' content="美亚杯2022取证总结">
+<link rel="stylesheet" href="/scss/style.min.b22c8029054811ea492fcc18d7c327f80515e7ac9fc4fdaf9df850ff7fa374c4.css"><meta property='og:title' content="美亚杯2022取证总结">
 <meta property='og:description' content="四个小时还是太短了">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-08-15T21:32:09&#43;08:00'/><meta property='article:modified_time' content='2025-09-04T18:43:17&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/638b75a2d7286.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-08-15T21:32:09&#43;08:00'/><meta property='article:modified_time' content='2025-09-13T01:47:55&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/638b75a2d7286.jpg' />
 <meta name="twitter:title" content="美亚杯2022取证总结">
 <meta name="twitter:description" content="四个小时还是太短了"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://picture.928330.xyz/typora/638b75a2d7286.jpg' />
@@ -546,7 +546,7 @@
 
 
                <time>
-                   更新时间：2025-09-04
+                   更新时间：2025-09-13
                </time>
            </div>
         <div>
@@ -897,7 +897,24 @@
 <p>又跑到文件里面找图片，七千多张翻了二十多页，啥也没有，太耗时间了，还给我火眼整的卡卡的</p>
 <p>我想到耗时任务里面有图片文字提取，但是使用要苍穹ai引擎，而且也没有关键词，不一定好找</p>
 <p>接着又在浏览器里面找，还是没有快递相关，遂放弃，呃啊</p>
-<h2 id="18李大辉收到的电邮中有一个钓鱼链结phishing-link这个链结的地址是什么">18.李大辉收到的电邮中有一个钓鱼链结(Phishing Link)，这个链结的地址是什么?
+<p>*这张图片其实是被删掉了，但在下面路径存有一个缩略图：</p>
+<p>Android.bin/分区57/data/com.google.android.apps.photos/cache/glide_cache/</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250904195117573" href="http://picture.928330.xyz/typora/image-20250904195117573.png">
+<img src="http://picture.928330.xyz/typora/image-20250904195117573.png" alt="image-20250904195117573"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250904195207671" href="http://picture.928330.xyz/typora/image-20250904195207671.png">
+<img src="http://picture.928330.xyz/typora/image-20250904195207671.png" alt="image-20250904195207671"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4567567812344567
+</span></span></code></pre></div><h2 id="18李大辉收到的电邮中有一个钓鱼链结phishing-link这个链结的地址是什么">18.李大辉收到的电邮中有一个钓鱼链结(Phishing Link)，这个链结的地址是什么?
 </h2><p><strong>A. 以上皆非</strong></p>
 <p><strong>B. <a class="link" href="https://bit.ly/3yeARcO"  target="_blank" rel="noopener"
     >https://bit.ly/3yeARcO
@@ -1184,6 +1201,7 @@
 <p><strong>B. ZIMPORTEDBYBUNDLEIDENTIFIER</strong></p>
 <p><strong>C. ZRECEIVEMETHODIDENTIFIER</strong></p>
 <p><strong>D. ZRECEIVEDFROMIDENTIFIER</strong></p>
+<p>ios会把所有照片绑在一起放在Photos.sqlite里面存储，然后标记来源方便查找</p>
 <p>搜索这个数据库：</p>
 <p>
 <div class="post-img-view">
@@ -1318,7 +1336,7 @@
 </p>
 <p>果真找到了对应数据，sql查询一下：</p>
 <ul>
-<li><code>ZCRYPTOITERATIONCOUNT</code> 显示加密迭代次数</li>
+<li><code>ZCRYPTOITERATIONCOUNT</code>显示加密迭代次数</li>
 <li><code>ZISPASSWORDPROTECTED</code>=1表示有密码保护，0表示没有</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> 
@@ -1374,9 +1392,8 @@
 </span></span></code></pre></div><p>Apple Secure Notes的加密算法对应16200这个模式，我们指定然后运行，这里用的是kali自带字典：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hashcat -m <span style="color:#d19a66">16200</span> -a <span style="color:#d19a66">0</span> hash_first.txt /usr/share/wordlists/rockyou.txt
 </span></span></code></pre></div><p>然而我是在一台Kali虚拟机里操作的，虚拟机环境无法直接调用物理GPU，Hashcat只能切换到CPU模式</p>
-<p>行吧，CPU就CPU，慢点就慢点，但第二个问题出现了：Hashcat的通用CPU驱动内存分配上限很低，而<code>-m 16200</code>恰恰要很多内存，这就导致跑不动破解的哈希算法</p>
-<p>为了解决这个问题，我折腾了很久：修复Kali的apt源、安装开源驱动、都没有用</p>
-<p>最后只能换一个工具（早该想到的）：John the Ripper，据说对CPU的支持非常出色，没有内存限制问题，而且kali也默认安装了它：</p>
+<p>行吧慢点就慢点，但可恶的Hashcat的通用CPU驱动内存分配上限很低，而<code>-m 16200</code>恰恰要很多内存，这就导致跑不动破解的哈希算法</p>
+<p>为了解决这个问题，我折腾了很久都没有用，最后只能换一个工具（早该想到的）John the Ripper，据说对CPU的支持非常出色，没有内存限制问题，而且kali也默认安装了它：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>john --wordlist<span style="color:#56b6c2">=</span>/usr/share/wordlists/rockyou.txt hash_first.txt
 </span></span></code></pre></div><p>最后运行很成功，查看破解密码：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>john --show hash_first.txt
@@ -1530,7 +1547,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#e06c75">__name__</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#39;__main__&#39;</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">main</span>()
 </span></span></code></pre></div><p>简单说一下运行过程：</p>
-<p>脚本首先将我们输入的密码、从数据库<code>ZICCLOUDSYNCINGOBJECT</code>表中读取的盐和迭代次数 三者混合，进行20000次SHA256哈希，得到主密钥，用主密钥去解密从<code>ZICCLOUDSYNCINGOBJECT</code>表得到的 <code>ZCRYPTOWRAPPEDKEY</code>列，取出专门用于加密这条笔记内容的笔记密钥</p>
+<p>脚本首先将我们输入的密码、从数据库<code>ZICCLOUDSYNCINGOBJECT</code>表中读取的盐和迭代次数三者混合，进行20000次SHA256哈希，得到主密钥，用主密钥去解密从<code>ZICCLOUDSYNCINGOBJECT</code>表得到的 <code>ZCRYPTOWRAPPEDKEY</code>列，取出专门用于加密这条笔记内容的笔记密钥</p>
 <p>接着脚本会检查两个可能存放笔记内容的位置，使用笔记密钥配合从<code>ZICNOTEDATA</code>表中读取的初始化向量和认证标签，对加密内容进行解密</p>
 <p>最后解密出的数据并非纯文本，而是一个gzip压缩包，调用<code>zlib.decompress</code>函数对其进行解压，得到最终的二进制数据（Protobuf格式），再尽力将这些二进制数据解码为UTF-8文本，并将其中可读的部分打印在屏幕上</p>
 <p>嗯，真是太麻烦了</p>
@@ -1801,6 +1818,20 @@
 <p>这四个人的电话（+852）和昵称都对得上，那应该是四个</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4
 </span></span></code></pre></div><p>另外，上一题的db文件打不开，经检查发现不是sqlite格式，也不是其他常见文件格式，不知道有什么猫腻</p>
+<p>*原来这是因为加密了</p>
+<p>Signal会把消息和相关数据存储在一个<code>db.sqlite</code>数据库文件中，但这个数据库本身是加密的</p>
+<p>具体来说消息数据库存放位置通常在用户目录下，例如Windows:</p>
+<pre tabindex="0"><code>C:\Users\&lt;用户名&gt;\AppData\Roaming\Signal\sql\db.sqlite
+</code></pre><p>Signal使用SQLCipher对SQLite数据库进行加密，解密密钥存放在另一个文件里：</p>
+<pre tabindex="0"><code>C:\Users\&lt;用户名&gt;\AppData\Roaming\Signal\config.json
+</code></pre><p>在ChunHei_Desktop.E01/1/Users/HEI/AppData/Roaming/Signal/config.json中可以找到数据库密码：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250904200719695" href="http://picture.928330.xyz/typora/image-20250904200719695.png">
+<img src="http://picture.928330.xyz/typora/image-20250904200719695.png" alt="image-20250904200719695"  />
+</a>
+</div>
+</p>
 <h2 id="50林浚熙在signal-曾经与某人对话那人的手机号码是什么-需要与区码area-code-一同答以阿拉伯数字">50.林浚熙在“Signal&rsquo; 曾经与某人对话，那人的手机号码是什么? 需要与区码(Area Code) 一同答(以阿拉伯数字)
 </h2><p>上面过程中已经找过，是ROCKY，不多赘述：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>85270711901
@@ -2214,7 +2245,7 @@
 
 
         <span>
-            最后更新于 2025-09-04
+            最后更新于 2025-09-13
         </span>
     </section></footer>
 
@@ -2230,6 +2261,25 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/06846724f28c56ddac00bf19256bf4b0.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/06846724f28c56ddac00bf19256bf4b0.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">獬豸杯2025取证总结</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
