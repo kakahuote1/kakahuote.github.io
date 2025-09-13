@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 13 Sep 2025 01:47:55 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 13 Sep 2025 20:47:10 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>獬豸杯2025取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Sat, 13 Sep 2025 01:35:34 +0800</pubDate>
@@ -3062,7 +3062,57 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;也就是说，访问日志和错误日志不会被写入文件，而是重定向到标准输入和标准错误&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;我们可以通过docker的命令来查看它们：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;docker&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;容器ID&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;常用命令&#34;&gt;常用命令
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;宝塔面板&#34;&gt;宝塔面板
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;宝塔面板中Apache名称仍为&lt;code&gt;apache&lt;/code&gt;或&lt;code&gt;httpd&lt;/code&gt;（取决于系统）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为了方便管理，宝塔有下面的这些特点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;每个站点有独立的根目录&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每个站点日志独立&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主程序和配置统一管理在 &lt;code&gt;/www/server/httpd/&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-apache&#34; data-lang=&#34;apache&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/                                                               &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── www/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   ├── wwwroot/                                   &lt;span style=&#34;color:#7f848e&#34;&gt;# 网站根目录，每个站点一个文件夹&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   ├── example1.com/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   │   ├── index.&lt;span style=&#34;color:#e5c07b&#34;&gt;html&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   │   └── ...其他文件
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   └── example2.com/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │       ├── index.&lt;span style=&#34;color:#e5c07b&#34;&gt;html&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │       └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   ├── wwwlogs/                                   &lt;span style=&#34;color:#7f848e&#34;&gt;# 站点日志目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   ├── example1.com.&lt;span style=&#34;color:#e5c07b&#34;&gt;log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   └── example1.com.error.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   ├── example2.com.&lt;span style=&#34;color:#e5c07b&#34;&gt;log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   └── example2.com.error.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   │   ├── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   └── server/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│       └── httpd/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           ├── conf/                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           │   └── httpd.&lt;span style=&#34;color:#e5c07b&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           ├── conf/vhost/                        # 虚拟主机配置，每个站点一个.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           │   ├── example.com.&lt;span style=&#34;color:#e5c07b&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           │   └── test.com.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           ├── logs/                                   &lt;span style=&#34;color:#7f848e&#34;&gt;# Apache全局日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           │   ├── access.&lt;span style=&#34;color:#e5c07b&#34;&gt;log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           │   └── &lt;span style=&#34;color:#c678dd&#34;&gt;error&lt;/span&gt;.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           ├── modules/                            &lt;span style=&#34;color:#7f848e&#34;&gt;# Apache模块 (.so)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│           └── sbin/                                   &lt;span style=&#34;color:#7f848e&#34;&gt;# 可执行文件 httpd, apachectl 等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└── etc/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └── init.d/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        └── &lt;span style=&#34;color:#e5c07b&#34;&gt;bt&lt;/span&gt;                                             # 宝塔面板统一管理脚本（启动/停止Apache）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有以下几个需要注意的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;/www/server/httpd/sbin/httpd&lt;/code&gt;为主程序，宝塔一般会在&lt;code&gt;/usr/bin/httpd&lt;/code&gt;做软连接，方便命令行直接运行&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;/etc/init.d/bt&lt;/code&gt;面板也可以控制Apache启动、停止、重载&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;/www/wwwlogs/&amp;lt;domain&amp;gt;.log&lt;/code&gt;为每个站点单独日志 ，&lt;code&gt;/www/server/httpd/logs/&lt;/code&gt;为Apache全局日志，记录全局错误（和nginx不同，不强制记录站点严重错误）及未单独指定站点的请求&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;常用命令&#34;&gt;常用命令
 &lt;/h1&gt;&lt;h2 id=&#34;使用systemctl管理apache&#34;&gt;使用systemctl管理Apache
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;适用于通过系统包管理器安装的Apache服务，比如&lt;code&gt;apache2&lt;/code&gt;或&lt;code&gt;httpd&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;下文以&lt;code&gt;apache2&lt;/code&gt;为例&lt;/strong&gt;&lt;/p&gt;
@@ -3076,8 +3126,8 @@
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;不会中断现有连接&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl reload apache2
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;查看状态&#34;&gt;查看状态
-&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl status apache2  # 或 httpd
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;使用apachectl或-apache2ctl&#34;&gt;使用apachectl（或 apache2ctl）
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl status apache2  &lt;span style=&#34;color:#7f848e&#34;&gt;# 或 httpd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;使用apachectl或-apache2ctl&#34;&gt;使用apachectl（或 apache2ctl）
 &lt;/h2&gt;&lt;p&gt;这是Apache自带的控制工具，适合调试、配置检查&lt;/p&gt;
 &lt;p&gt;它其实就是对&lt;code&gt;httpd&lt;/code&gt;可执行程序的一个封装，方便管理Apache&lt;/p&gt;
 &lt;h3 id=&#34;启动-1&#34;&gt;启动
@@ -3122,7 +3172,22 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;config_name&lt;/code&gt;是要加载的配置文件名称，不用带后缀名&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;禁用配置&#34;&gt;禁用配置
 &lt;/h4&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;a2disconf file.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;主配置文件-httpdconf&#34;&gt;主配置文件 (httpd.conf)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;使用bt管理apache&#34;&gt;使用bt管理Apache
+&lt;/h2&gt;&lt;p&gt;在宝塔面板中，&lt;code&gt;/etc/init.d/bt&lt;/code&gt;并不是单独只管理Apache的启动脚本，而是宝塔统一的管理脚本&lt;/p&gt;
+&lt;p&gt;它的作用类似于传统Linux的服务脚本，但通过一个入口统一管理多个服务&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用的方式类似systemctl，下文以&lt;code&gt;apache2&lt;/code&gt;为例&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;启动-2&#34;&gt;启动
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/etc/init.d/bt start apache2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;停止-2&#34;&gt;停止
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/etc/init.d/bt stop apache2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重启-1&#34;&gt;重启
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/etc/init.d/bt restart apache2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重新加载配置-2&#34;&gt;重新加载配置
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;不会中断现有连接&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/etc/init.d/bt reload apache2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;查看状态-1&#34;&gt;查看状态
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/etc/init.d/bt status apache2  &lt;span style=&#34;color:#7f848e&#34;&gt;# 或 httpd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;主配置文件-httpdconf&#34;&gt;主配置文件 (httpd.conf)
 &lt;/h1&gt;&lt;p&gt;主配置文件在各个不同系统的路径不同：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -14033,33 +14098,37 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;debianubuntu官方仓库&#34;&gt;Debian/Ubuntu官方仓库
 &lt;/h3&gt;&lt;p&gt;通过&lt;code&gt;apt&lt;/code&gt;安装&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;虽然&lt;code&gt;apt&lt;/code&gt;也是调用&lt;code&gt;dpkg&lt;/code&gt;安装&lt;code&gt;.deb&lt;/code&gt;包，但debian/ubuntu维护的&lt;code&gt;.deb&lt;/code&gt;包和官方打包的不太一样，因此web根目录等等路径和直接使用官方包安装会有所差别&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                                 &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                           &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                                &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                              &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 子配置目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default.conf&lt;/span&gt;                         &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;p&gt;&lt;strong&gt;一般偏向Debian系列的“sites-available / sites-enabled” 设计，也就是apache那样&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.conf&lt;/span&gt;                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;mime.types&lt;/span&gt;                   &lt;span style=&#34;color:#7f848e&#34;&gt;# MIME类型映射表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf.d/&lt;/span&gt;                           &lt;span style=&#34;color:#7f848e&#34;&gt;# 可选，通常空的，给用户放额外配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sites-available/&lt;/span&gt;              &lt;span style=&#34;color:#7f848e&#34;&gt;# 所有站点配置（未必启用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default&lt;/span&gt;                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认网站配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sites-enabled/&lt;/span&gt;               &lt;span style=&#34;color:#7f848e&#34;&gt;# 启用的站点（使用符号链接到sites-available即为启用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;../sites-available/default&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;usr/&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;sbin/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx&lt;/span&gt;                              &lt;span style=&#34;color:#7f848e&#34;&gt;# 主程序二进制文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;var/&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;www/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认 Web 根目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;                          &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;                             &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;html/&lt;/span&gt;                             &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认 Web 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.nginx-debian.html&lt;/span&gt;  &lt;span style=&#34;color:#7f848e&#34;&gt;# 默认欢迎页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;50x.html&lt;/span&gt;                    &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务器错误页面
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;log/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                              &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;       &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                             &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;           &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;lib/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;systemd/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 服务管理相关
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;system/&lt;/span&gt;                                   &lt;span style=&#34;color:#7f848e&#34;&gt;# Nginx systemd 配置
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;              &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.service&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;centosrhel官方仓库&#34;&gt;CentOS/RHEL官方仓库
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;systemd/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;system/&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.service&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# systemd 单元文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;centosrhel官方仓库&#34;&gt;CentOS/RHEL官方仓库
 &lt;/h3&gt;&lt;p&gt;通过&lt;code&gt;yum&lt;/code&gt;/&lt;code&gt;dnf&lt;/code&gt;安装&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;路径、配置和布局就是官方Nginx提供的.rmp包规范的结构，所以和第一种很像&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                               &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
@@ -14093,8 +14162,9 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;system/&lt;/span&gt;                               &lt;span style=&#34;color:#7f848e&#34;&gt;# Nginx systemd 配置
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx.service&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;docker镜像官方-nginx&#34;&gt;Docker镜像（官方 Nginx）
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;没有固定结构&lt;/strong&gt;，因为Docker镜像只是一个文件系统的快照，完全取决于镜像制作者，具体看上面四种&lt;/p&gt;
-&lt;p&gt;这里以官方镜像为例，也就是&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;没有固定结构&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;因为Docker镜像只是一个文件系统的快照，完全取决于镜像制作者，具体看上面四种&lt;/p&gt;
+&lt;p&gt;这里以官方镜像为例&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                            &lt;span style=&#34;color:#7f848e&#34;&gt;# 配置文件目录
@@ -14117,14 +14187,54 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 日志文件目录（部分精简镜像无日志输出）
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;             &lt;span style=&#34;color:#7f848e&#34;&gt;# 访问日志（默认可能未启用）
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# 错误日志（默认可能未启用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;宝塔面板安装的nginx&#34;&gt;宝塔面板安装的Nginx
+&lt;/h3&gt;&lt;p&gt;宝塔不会用系统默认路径，而是自定义了一套目录结构&lt;/p&gt;
+&lt;p&gt;这其实是方便面板统一管理多个网站、日志和SSL证书，也方便我们寻找&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;/&lt;/span&gt;                                                                  &lt;span style=&#34;color:#7f848e&#34;&gt;# 根目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;www/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;wwwroot/&lt;/span&gt;                                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 网站根目录（每个站点一个子目录）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example.com/&lt;/span&gt;                         &lt;span style=&#34;color:#7f848e&#34;&gt;# example.com 站点目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;index.html&lt;/span&gt;                        &lt;span style=&#34;color:#7f848e&#34;&gt;# 网站首页
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;...&lt;/span&gt;                                      &lt;span style=&#34;color:#7f848e&#34;&gt;# 网站源码/文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;OtherSite.com/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 其他站点
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;wwwlogs/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# 所有网站的日志（不区分文件夹）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example1.com.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example1.com.error.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example2.com.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example2.com.error.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;server/&lt;/span&gt;                                         &lt;span style=&#34;color:#7f848e&#34;&gt;# 宝塔自身运行目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;panel/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# 宝塔面板核心
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;nginx/&lt;/span&gt;                                     &lt;span style=&#34;color:#7f848e&#34;&gt;# Nginx 配置与二进制
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf/nginx.conf&lt;/span&gt;                &lt;span style=&#34;color:#7f848e&#34;&gt;# 主配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;conf/vhost/&lt;/span&gt;                       &lt;span style=&#34;color:#7f848e&#34;&gt;# 各站点虚拟主机配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;example.com.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;other-site.com.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;    &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;logs/&lt;/span&gt;                                 &lt;span style=&#34;color:#7f848e&#34;&gt;# Nginx 全局日志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;         &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;access.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;         &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;error.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;        &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;php/&lt;/span&gt;                                       &lt;span style=&#34;color:#7f848e&#34;&gt;# PHP 版本管理
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;├──&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;74&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# PHP 7.4
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;             &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;81&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;/&lt;/span&gt;                                    &lt;span style=&#34;color:#7f848e&#34;&gt;# PHP 8.1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;etc/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#98c379&#34;&gt;└──&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;init.d/nginx&lt;/span&gt;                                 &lt;span style=&#34;color:#7f848e&#34;&gt;# 启动脚本（也可能链接到 systemd）
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;一些问题&#34;&gt;一些问题
 &lt;/h2&gt;&lt;h3 id=&#34;日志文件&#34;&gt;日志文件
-&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;Docker镜像的Nginx日志默认输出到标准输出/错误，而不是文件中&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;在编译安装（&lt;code&gt;make install&lt;/code&gt;）的传统方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在编译安装（&lt;code&gt;make install&lt;/code&gt;）的传统方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt;/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在&lt;code&gt;.deb&lt;/code&gt;包和系统包安装（&lt;code&gt;apt/yum&lt;/code&gt;）的方式中，Nginx日志会记录在：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;log&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;而在Docker官方镜像中，日志默认不写入上面的文件，而是输出到标准输出和标准错误&lt;/strong&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在宝塔面板安装方式中，日志位置有两个：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;wwwlogs&lt;/span&gt;/                       # &lt;span style=&#34;color:#e06c75&#34;&gt;每个站点一个日志文件&lt;/span&gt;，&lt;span style=&#34;color:#e06c75&#34;&gt;包含访问和错误日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt;/         # &lt;span style=&#34;color:#e06c75&#34;&gt;Nginx全局日志&lt;/span&gt;（&lt;span style=&#34;color:#e06c75&#34;&gt;access&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;log&lt;/span&gt;、&lt;span style=&#34;color:#e06c75&#34;&gt;error&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;log&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;访问日志&lt;/strong&gt;：如果某个站点配置了自己的access_log，那么它的请求不会再写到全局access.log&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;错误日志&lt;/strong&gt;：全局错误（服务器级别的错误，而不是单个站点的错误），以及所有站点的严重错误（crit、alert、emerg，具体看：&lt;a class=&#34;link&#34; href=&#34;#%e5%85%a8%e5%b1%80%e5%9d%97&#34; &gt;错误等级
+    
+&lt;/a&gt;)，会进入全局error.log&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:red;&#34;&gt;&lt;strong&gt;在Docker官方镜像中，日志默认不写入上面的文件，而是输出到标准输出和标准错误&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;执行以下命令：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls -l /var/log/nginx/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们可以看到如下输出：&lt;/p&gt;
@@ -14134,12 +14244,53 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;p&gt;&lt;strong&gt;这些输出会被记录到docker容器的日志里，docker中查看日志的方式&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;docker&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;logs&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;容器ID&lt;/span&gt;&amp;gt;/&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;名称&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;配置文件&#34;&gt;配置文件
-&lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;是主配置目录，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;是主配置文件&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Nginx的主配置文件是&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;，在这个文件中有这样一行代码：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;include&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;/etc/nginx/conf.d/*.conf&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;include&lt;/code&gt;是Nginx配置语言中的指令，用于包含其他配置文件&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;也就是说，&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;默认会包含&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;这个子目录中的所有配置（.conf）&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;web-根目录&#34;&gt;Web 根目录
+&lt;/h3&gt;&lt;p&gt;Nginx的主配置文件一般在：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;etc&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在这个文件中常见的一行是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;include&lt;/span&gt; /&lt;span style=&#34;color:#e06c75&#34;&gt;etc&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;d&lt;/span&gt;/*.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;code&gt;include&lt;/code&gt;是Nginx配置语言中的指令，用于引入其他配置文件&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;不同安装方式下，&lt;code&gt;include&lt;/code&gt;的目录略有差异：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CentOS / RHEL / Fedora官方包&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;include&lt;/span&gt; /&lt;span style=&#34;color:#e06c75&#34;&gt;etc&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;d&lt;/span&gt;/*.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Debian / Ubuntu官方包&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;include&lt;/span&gt; /&lt;span style=&#34;color:#e06c75&#34;&gt;etc&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;sites&lt;/span&gt;-&lt;span style=&#34;color:#e06c75&#34;&gt;enabled&lt;/span&gt;/*;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;配置分两部分：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/etc/nginx/sites-available/&lt;/code&gt;：存放所有站点配置&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/etc/nginx/sites-enabled/&lt;/code&gt;：通过符号链接指向&lt;code&gt;/etc/nginx/sites-available/&lt;/code&gt;下的配置，以启用站点&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;源码编译安装&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通常不会使用&lt;code&gt;include&lt;/code&gt;，也不会自动拆分&lt;code&gt;conf.d/&lt;/code&gt;或&lt;code&gt;sites-enabled/&lt;/code&gt;，默认是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;宝塔面板安装&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;宝塔为了方便面板管理，使用了自己的路径布局，主配置文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在这个文件中，宝塔会包含：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;include&lt;/span&gt; /&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;panel&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;vhost&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/*.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;每个站点在&lt;code&gt;/www/server/panel/vhost/nginx/&lt;/code&gt;下生成一个独立的&lt;code&gt;.conf&lt;/code&gt;文件，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;panel&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;vhost&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;example&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;com&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;panel&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;vhost&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;test&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;com&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这就是为什么宝塔能通过Web面板为每个站点单独管理配置&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;web根目录&#34;&gt;Web根目录
 &lt;/h3&gt;&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;不同安装方式下，Nginx的默认Web根目录不同&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;在编译安装（&lt;code&gt;make install&lt;/code&gt;）的传统方式中，Web根目录在：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;/
@@ -14150,6 +14301,11 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在官方包和CentOS/RHEL系统包安装方式中，Web根目录在：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;share&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;在宝塔面板安装方式中，Web根目录在：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;wwwroot&lt;/span&gt;/&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;domain&lt;/span&gt;&amp;gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;domain是不同的站点，宝塔会为他们各自创建一个根目录，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;wwwroot&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;example&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;com&lt;/span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;wwwroot&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;gSJKsu2kig&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;com&lt;/span&gt;/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;可以通过修改Nginx配置文件中的&lt;code&gt;root&lt;/code&gt;指令来改变Web根目录：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;listen&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;80&lt;/span&gt;;
@@ -14157,17 +14313,38 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;root&lt;/span&gt; /&lt;span style=&#34;color:#e06c75&#34;&gt;path&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;your&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;webroot&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;index&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;html&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;关于server块我们后面会细讲&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;指定根目录在管理的时候很有用，因为默认都挤在一起了，关于server块我们后面会细讲&lt;/p&gt;
+&lt;h3 id=&#34;二进制文件位置&#34;&gt;二进制文件位置
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;系统包安装（apt/yum/dnf 安装）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一般放在sbin，而不是bin&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;sbin&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;源码编译安装&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;编译安装时位置完全取决于&lt;code&gt;--prefix&lt;/code&gt;参数，下面是默认位置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;usr&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;local&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;sbin&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;宝塔安装&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;sbin&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;www&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;server&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;nginx&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是它会在&lt;code&gt;/usr/bin/nginx&lt;/code&gt;或&lt;code&gt;/usr/sbin/nginx&lt;/code&gt;下做一个软链接，指向上面的位置，方便在命令行里直接运行 &lt;code&gt;nginx&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;systemd的位置&#34;&gt;systemd的位置
 &lt;/h3&gt;&lt;p&gt;其实这个不是nginx的问题，而是一个历史问题 —— linux文件系统的演进&lt;/p&gt;
 &lt;p&gt;**FHS，全称Filesystem Hierarchy Standard（文件系统层次结构标准）**是 Linux 系统的一个标准，规定了 目录结构、文件存放位置及用途，让不同 Linux 发行版在文件布局上保持一致性&lt;/p&gt;
 &lt;p&gt;在早期，FHS规定&lt;code&gt;/lib/&lt;/code&gt;用于存放核心库文件和与系统启动紧密相关的可执行文件（比如init系统所需的库、二进制），而&lt;code&gt;/usr/lib/&lt;/code&gt;用于存放非核心、额外安装的软件库&lt;/p&gt;
 &lt;p&gt;但在systemd出现后，由于systemd的服务单元文件属于系统服务配置，与系统启动密切相关，但又不是二进制程序本身，于是他的位置有了一些不同：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Debian/Ubuntu：选择&lt;code&gt;/lib/systemd/system/&lt;/code&gt;放置核心包的单元文件（比如nginx、sshd），保证系统启动时总能找到&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;CentOS/RHEL/Fedora：更倾向使用&lt;code&gt;/usr/lib/systemd/system/&lt;/code&gt;，虽然&lt;code&gt;/lib/systemd/system/&lt;/code&gt;也存在，但它通常是指向前者的符号链接&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Debian/Ubuntu&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;选择&lt;code&gt;/lib/systemd/system/&lt;/code&gt;放置核心包的单元文件（比如nginx、sshd），保证系统启动时总能找到&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CentOS/RHEL/Fedora&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;更倾向使用&lt;code&gt;/usr/lib/systemd/system/&lt;/code&gt;，虽然&lt;code&gt;/lib/systemd/system/&lt;/code&gt;也存在，但它通常是指向前者的符号链接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;宝塔面板&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;遵循上面两条，但一般会在&lt;code&gt;/etc/init.d/nginx&lt;/code&gt;或&lt;code&gt;/etc/init.d/bt&lt;/code&gt;下放置额外的启动脚本，以便面板通过Web界面统一管理&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;现在&lt;code&gt;/lib/&lt;/code&gt;和&lt;code&gt;/usr/lib/&lt;/code&gt;往往通过软链接或包管理器自动管理，保证旧路径和新路径都能访问到服务单元文件，所以你会看到同样的 Nginx 服务在不同发行版或者不同安装方式下，路径可能不同&lt;/p&gt;
+&lt;p&gt;现在&lt;code&gt;/lib/&lt;/code&gt;和&lt;code&gt;/usr/lib/&lt;/code&gt;往往通过软链接或包管理器自动管理，保证旧路径和新路径都能访问到服务单元文件，所以我们会看到同样的Nginx服务在不同发行版或者不同安装方式下，路径可能不同&lt;/p&gt;
 &lt;h1 id=&#34;常用命令&#34;&gt;常用命令
 &lt;/h1&gt;&lt;p&gt;Nginx直接安装在本机时，使用&lt;code&gt;systemctl&lt;/code&gt;或者&lt;code&gt;service&lt;/code&gt;命令控制&lt;/p&gt;
 &lt;p&gt;通过Docker容器使用时，就按照Docker容器的使用方法（没用过看这里：&lt;a class=&#34;link&#34; href=&#34;http://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -14871,7 +15048,7 @@ URI是/images/logo.png，在这个server中找哪个location匹配得最好，�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;proxy_pass&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;8.8.8.8&lt;/span&gt;:&lt;span style=&#34;color:#d19a66&#34;&gt;53&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;你可以看到，stream块和http块的写法基本上是一样的，但是细节上还是有些不同：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以看到，stream块和http块的写法基本上是一样的，但是细节上还是有些不同：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;stream&lt;/code&gt;块不支持&lt;code&gt;location&lt;/code&gt;，没有路径匹配&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;stream&lt;/code&gt;块不解析协议内容，没有&lt;code&gt;proxy_set_header&lt;/code&gt;，只转发原始TCP/UDP数据流&lt;/strong&gt;&lt;/li&gt;
@@ -15067,7 +15244,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
 &lt;p&gt;比如，&lt;strong&gt;统计客户端IP出现次数的前10：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker logs nginx | awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $4}&amp;#39;&lt;/span&gt; | sort | uniq -c | sort -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;错误日志errorlog&#34;&gt;错误日志（error.log）
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;error.log&lt;/code&gt; 记录 Nginx 启动和运行过程中的诊断信息，是排查问题的关键。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;error.log&lt;/code&gt;记录Nginx启动和运行过程中的诊断信息，是排查问题的关键&lt;/p&gt;
 &lt;h4 id=&#34;一般格式&#34;&gt;一般格式
 &lt;/h4&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;时间戳 [错误级别] pid#tid: *cid 错误描述, client: 客户端IP, server: 服务端, request: &amp;#34;请求行&amp;#34;, host: &amp;#34;Host&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;table&gt;
@@ -15171,7 +15348,7 @@ HTTP状态码，表示请求成功&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;$NF &amp;gt; 3 {print $NF, $7}&amp;#39;&lt;/span&gt; access.log | sort -k1 -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;列出最耗时的top10请求&#34;&gt;列出最耗时的Top10请求
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awk &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;{print $NF, $7}&amp;#39;&lt;/span&gt; access.log | sort -k1 -nr | head -n &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;+++&lt;/p&gt;
 &lt;p&gt;暂时就先讲到这，毕竟只是入个门，详细使用就在实践里面学习吧&lt;/p&gt;
 &lt;p&gt;如果之后我需要更加深入使用，这篇文章也会更新的~&lt;/p&gt;
 </description>
