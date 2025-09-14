@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sat, 13 Sep 2025 01:47:55 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/forensics/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 14 Sep 2025 17:06:19 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/forensics/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>獬豸杯2025取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Sat, 13 Sep 2025 01:35:34 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;img src="http://picture.928330.xyz/typora/06846724f28c56ddac00bf19256bf4b0.jpg" alt="Featured image of post 獬豸杯2025取证总结" /&gt;&lt;p&gt;很难，真不愧是经常做题的人出的题目，水平确实高，题目质量相比去年也提升了很多很多&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/06846724f28c56ddac00bf19256bf4b0.jpg" alt="Featured image of post 獬豸杯2025取证总结" /&gt;&lt;p&gt;不愧是经常做题的人出的题目，水平确实高，题目质量相比去年也提升了很多很多&lt;/p&gt;
 &lt;p&gt;美中不足的是我没看见案件背景，感觉就是纯粹的做题&lt;/p&gt;
 &lt;p&gt;题目覆盖的知识范围很广，虽然不深，但是都要懂一点，特别是在手机和计算机取证的时候，着实是几步一卡&lt;/p&gt;
 &lt;p&gt;服务器取证方面，由于之前做的比较多了，除了k8s坏了做不了部分题目、网站抽风不能访问导致前端网页看不了只能后端php+mysql进行麻烦的分析之外也没遇到什么困难，比较顺利&lt;/p&gt;
@@ -29,7 +29,7 @@
 &lt;/p&gt;
 &lt;p&gt;分辨方法可以根据第二题，看看哪个平台有等级就行&lt;/p&gt;
 &lt;p&gt;我觉得比较好的办法是注册个账号进去看一眼谁的等级是有&amp;quot;碌碌无为&amp;quot;的，不过这种软件毕竟有很大风险，就算了，当我知道了&lt;/p&gt;
-&lt;p&gt;答案是烟雨直播&lt;/p&gt;
+&lt;p&gt;答案肯定是不太正经的烟雨直播&lt;/p&gt;
 &lt;p&gt;记住包名，在文件系统里面找到对应的包文件，然后过滤数据库，id大概率是在本地&lt;/p&gt;
 &lt;p&gt;因为不知道数据存储位置，只能一个一个看过去，最终在miao.db的login表里面找到了idx字段：&lt;/p&gt;
 &lt;p&gt;
@@ -43,8 +43,20 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2目前直播的等级名称是什么标准格式碌碌无为&#34;&gt;2.目前直播的等级名称是什么？[标准格式：碌碌无为]
 &lt;/h2&gt;&lt;p&gt;试了一下login里的密码，登录超时，大概率是加密存储的&lt;/p&gt;
 &lt;p&gt;如果上一题注册了账号，就能搜到这个家伙，也当我知道了&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;出乎意料的解法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可以在小米手机的相册缩略图里面找到主页图片：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;data.tar/media_435/0/Android/data/com.miui.gallery/files/gallery_disk_cache/full_size/e61ab074425cf3ee2cbc0fc97f448b7f88a359cf646f77a024b87a6d9c8f5d33.0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250914161522611&#34; href=&#34;http://picture.928330.xyz/typora/image-20250914161522611.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250914161522611.png&#34; alt=&#34;image-20250914161522611&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这样一二两题都很快做出来了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;一无所有
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3地图中哪座山有绝望坡标准格式太行山&#34;&gt;3.地图中哪座山有绝望坡？[标准格式：太行山]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;美亚杯2022找快递单也用到了这一招&lt;/p&gt;
+&lt;h2 id=&#34;3地图中哪座山有绝望坡标准格式太行山&#34;&gt;3.地图中哪座山有绝望坡？[标准格式：太行山]
 &lt;/h2&gt;&lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
 &lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250907234750053&#34; href=&#34;http://picture.928330.xyz/typora/image-20250907234750053.png&#34;&gt;
@@ -111,7 +123,7 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*多刷新几次发现他又变成识别出来是数据库文件了&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*多刷新几次发现他又变成识别出来是数据库文件了，靠，或许以后应该匹配文件名有&lt;code&gt;.db&lt;/code&gt;之类的&lt;/p&gt;
 &lt;h2 id=&#34;8谁给了机主100000标准格式某某&#34;&gt;8.谁给了机主100000？[标准格式：某某]
 &lt;/h2&gt;&lt;p&gt;同上题数据库：&lt;/p&gt;
 &lt;p&gt;
