@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sun, 14 Sep 2025 17:06:19 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 15 Sep 2025 18:37:47 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>獬豸杯2025取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Sat, 13 Sep 2025 01:35:34 +0800</pubDate>
@@ -737,10 +737,10 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl stop mysqld
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过我在做这一步的时候有问题，它不能完全清除后台的进程，所以要手动杀死进程&lt;/p&gt;
 &lt;p&gt;确认mysql进程pid：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ps -ef | grep mysqld
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;强制杀掉进程：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kill -9 [进程号]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;到这里后重启，也不能使用mysqld直接启动，否则会报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ps -ef | grep mysqld
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;强制杀掉进程：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;kill&lt;/span&gt; -9 &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;进程号&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;到这里后重启，也不能使用mysqld直接启动，否则会报错：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2025-09-11T15:02:42.423175Z &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;ERROR&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; Fatal error: Please &lt;span style=&#34;color:#e5c07b&#34;&gt;read&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Security&amp;#34;&lt;/span&gt; section of the manual to find out how to run mysqld as root!
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;也就是说mysql不能直接以root用户启动，这是linux的安全设计，windows是没有的&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;正确启动方式是使用mysql_safe&lt;/strong&gt;，这是linux里mysql自带的安全脚本，会调用mysqld并增加一些安全功能&lt;/p&gt;
@@ -782,10 +782,60 @@
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;43853.21258852
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9其中打金平台会员组最高溢价比例是多少标准格式1000&#34;&gt;9.其中打金平台会员组最高溢价比例是多少？[标准格式：10.00]
-&lt;/h2&gt;&lt;p&gt;这是真没办法，不知道什么是溢价比，无从下手找&lt;/p&gt;
-&lt;h2 id=&#34;10其中打金平台会员推广人数最多的会员其姓名是标准格式名字&#34;&gt;10.其中打金平台会员推广人数最多的会员其姓名是？[标准格式：名字]
-&lt;/h2&gt;&lt;p&gt;依旧无从下手&lt;/p&gt;
-&lt;h2 id=&#34;11其中打金平台最早一次备份数据库的时间asiashanghai是标准格式2024-01-01-010101&#34;&gt;11.其中打金平台最早一次备份数据库的时间（Asia/Shanghai）是？[标准格式：2024-01-01-01:01:01]
+&lt;/h2&gt;&lt;p&gt;宝塔网页，文件 -&amp;gt; 文件内容搜索，搜索溢价比：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250915182429429&#34; href=&#34;http://picture.928330.xyz/typora/image-20250915182429429.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250915182429429.png&#34; alt=&#34;image-20250915182429429&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;发现存储在yjbl这个变量里面，继续搜索：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250915182708192&#34; href=&#34;http://picture.928330.xyz/typora/image-20250915182708192.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250915182708192.png&#34; alt=&#34;image-20250915182708192&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;也就是存储在数据库表member_group字段名yjbl，通过会员组的level来定位取值&lt;/p&gt;
+&lt;p&gt;找到这个表：
+
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250915182953747&#34; href=&#34;http://picture.928330.xyz/typora/image-20250915182953747.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250915182953747.png&#34; alt=&#34;image-20250915182953747&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.70
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;10其中打金平台会员推广人数最多的会员其姓名是标准格式名字&#34;&gt;10.其中打金平台会员推广人数最多的会员其姓名是？[标准格式：名字]
+&lt;/h2&gt;&lt;p&gt;搜索推广，看到可疑的文件：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250915183331905&#34; href=&#34;http://picture.928330.xyz/typora/image-20250915183331905.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250915183331905.png&#34; alt=&#34;image-20250915183331905&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;打开找到人数处理的部分：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250915183319242&#34; href=&#34;http://picture.928330.xyz/typora/image-20250915183319242.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250915183319242.png&#34; alt=&#34;image-20250915183319242&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;推广人数存储在member表里，直推人数字段是ztnum，团队人数字段是tdnum&lt;/p&gt;
+&lt;p&gt;还是找到这个表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250915183655395&#34; href=&#34;http://picture.928330.xyz/typora/image-20250915183655395.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250915183655395.png&#34; alt=&#34;image-20250915183655395&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;李奕欣
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;11其中打金平台最早一次备份数据库的时间asiashanghai是标准格式2024-01-01-010101&#34;&gt;11.其中打金平台最早一次备份数据库的时间（Asia/Shanghai）是？[标准格式：2024-01-01-01:01:01]
 &lt;/h2&gt;&lt;p&gt;在对象页面能看到ds_log记录了系统操作日志：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
