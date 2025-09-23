@@ -7,7 +7,403 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Fri, 19 Sep 2025 13:40:06 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 23 Sep 2025 20:22:02 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>常见检材类型</title>
+        <link>https://blog.928330.xyz/p/%E5%B8%B8%E8%A7%81%E6%A3%80%E6%9D%90%E7%B1%BB%E5%9E%8B/</link>
+        <pubDate>Tue, 23 Sep 2025 20:18:13 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E5%B8%B8%E8%A7%81%E6%A3%80%E6%9D%90%E7%B1%BB%E5%9E%8B/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/2f56641afcc38e8ed63fa3beb6d312cc.jpg" alt="Featured image of post 常见检材类型" /&gt;&lt;p&gt;在电子取证过程中拿到的检材形式各异，它们可能是从硬盘完整复制下来的镜像文件，也可能是RAID阵列中的多个磁盘，或者是手机的逻辑备份，而知道这些检材是是什么怎么用，才是启动分析的第一步&lt;/p&gt;
+&lt;p&gt;以弘连火眼证据分析软件为例，选取检材的时候会看见如下选项：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250918095757243&#34; href=&#34;http://picture.928330.xyz/typora/image-20250918095757243.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250918095757243.png&#34; alt=&#34;image-20250918095757243&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这些都是什么呢？我们先大致说一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;镜像文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最常见的证据形式，是物理存储的数字副本，单个的手机、计算机都可能是这个&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多镜像文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当单个镜像文件被分割成多个小文件时，就会变成多镜像，有点像分卷压缩&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;物理磁盘&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;直接对连接到取证机的原始硬盘或SSD进行分析，或者挂载镜像为系统盘后分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件集合&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;非完整的磁盘镜像，仅包含从源设备中提取的特定文件和文件夹，比如手机系统的备份&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;移动设备&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;由于要使用雷电手机快取软件，我至今没有用过这个功能&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;不过好像是连接手机、平板等进行数据提取分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;磁盘阵列&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对由多块硬盘组成的RAID进行重组和分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面我们系统介绍一些检材常用的格式，以及转换方法&lt;/p&gt;
+&lt;h1 id=&#34;计算机取证镜像&#34;&gt;计算机取证镜像
+&lt;/h1&gt;&lt;h2 id=&#34;标准镜像文件式&#34;&gt;标准镜像文件式
+&lt;/h2&gt;&lt;h3 id=&#34;原始镜像&#34;&gt;原始镜像
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;纯粹的位对位（bit-by-bit）副本，文件大小与源磁盘/分区容量完全一致&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无元数据、无压缩、无加密（因为本身就是字节流，没有这些标识概念），但是利用命令和工具可以做到&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以，就算把他们后缀名去掉，使用方法也是一样的&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;dd&#34;&gt;.dd
+&lt;/h4&gt;&lt;p&gt;这个扩展名源自Unix/Linux系统下的**&lt;code&gt;dd&lt;/code&gt;(dataset definition，数据集定义)**命令，它是制作原始镜像最经典、最基础的工具，因此&lt;code&gt;.dd&lt;/code&gt;成为了原始镜像的代名词&lt;/p&gt;
+&lt;p&gt;命令行制作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dd &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/dev/sda &lt;span style=&#34;color:#e06c75&#34;&gt;of&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;image.dd &lt;span style=&#34;color:#e06c75&#34;&gt;bs&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;4M &lt;span style=&#34;color:#e06c75&#34;&gt;conv&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;noerror,sync
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;意思是把整块硬盘&lt;code&gt;/dev/sda&lt;/code&gt;按照4MB为单位复制到&lt;code&gt;image.dd&lt;/code&gt;文件里，如果遇到坏扇区，不报错不中止，而是用0填充，保证镜像完整且和原盘大小一致&lt;/p&gt;
+&lt;p&gt;几乎所有主流取证工具都支持创建和导出为&lt;code&gt;.dd&lt;/code&gt;，非常的常见&lt;/p&gt;
+&lt;h4 id=&#34;img--raw--bin&#34;&gt;.img / .raw / .bin
+&lt;/h4&gt;&lt;p&gt;这些都是描述性的扩展名，&lt;code&gt;img&lt;/code&gt;代表 &amp;ldquo;镜像&amp;rdquo;，&lt;code&gt;raw&lt;/code&gt;代表 &amp;ldquo;原始&amp;rdquo;，&lt;code&gt;bin&lt;/code&gt;代表 &amp;ldquo;二进制文件&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;它们在功能和结构上与&lt;code&gt;.dd&lt;/code&gt;文件完全相同，都是指原始的、逐位的副本，只是使用场景和工具不同叫法也不同&lt;/p&gt;
+&lt;p&gt;这些扩展名实际能用于很多场景，遇见了不确定的话就一个个尝试吧，能分析出来就行&lt;/p&gt;
+&lt;h3 id=&#34;封装镜像&#34;&gt;封装镜像
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;本质上也包含了原始磁盘或分区的bit-by-bit数据，但是采用了封装数据 + 元数据（采集者、采集时间、硬盘序列号、哈希值）的形式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;也正因此，他们支持压缩、加密等形式来节约空间，支持分卷存储大型镜像文件，部分可随机访问（如AFF）&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;e01-ex01&#34;&gt;.E01, .Ex01
+&lt;/h4&gt;&lt;p&gt;由EnCase Forensic开发的证据文件格式，已成为事实上的行业标准，也就是说法庭认可度最高！&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.Ex01&lt;/code&gt;是其更新的“专家见证”格式，支持更强的AES-256加密和更大的文件大小&lt;/p&gt;
+&lt;p&gt;它主要通过EnCase Forensic软件制作，同时，绝大多数第三方取证工具也都支持直接采集为 &lt;code&gt;.E01&lt;/code&gt; 格式以保证兼容性&lt;/p&gt;
+&lt;h4 id=&#34;aff--aff4af4&#34;&gt;.aff / .aff4(.af4)
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.aff&lt;/code&gt;，全称是高级取证格式 (Advanced Forensic Format)&lt;/strong&gt;，它是一个开源项目，旨在克服&lt;code&gt;.dd&lt;/code&gt;格式无元数据和&lt;code&gt;.E01&lt;/code&gt;格式专有的缺点&lt;/p&gt;
+&lt;p&gt;而&lt;code&gt;.aff4&lt;/code&gt;是&lt;code&gt;.aff&lt;/code&gt;的第四代版本，是一个经过大幅重新设计的格式，可以存储多种数据流，包括磁盘映像、内存映像、逻辑文件，甚至是网络流量，也被简写成&lt;code&gt;.af4&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;他们都是通过支持AFFLIB库的工具制作的，比如Evimetry等&lt;/p&gt;
+&lt;h4 id=&#34;ad1&#34;&gt;.ad1
+&lt;/h4&gt;&lt;p&gt;由AccessData开发的证据文件格式，&lt;strong&gt;全称AccessData Evidence Container&lt;/strong&gt;，主要用于他的产品FTK系列&lt;/p&gt;
+&lt;p&gt;大多数主流取证软件都能识别导入&lt;code&gt;.ad1&lt;/code&gt;文件&lt;/p&gt;
+&lt;h3 id=&#34;多镜像文件&#34;&gt;多镜像文件
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;扩展名可能是上面的任意一种+序列号&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当单个大镜像被分割存储时，会看到一组序列文件：&lt;/p&gt;
+&lt;p&gt;可能是&lt;code&gt;disk_part1.dd&lt;/code&gt;、&lt;code&gt;disk_part2.dd&lt;/code&gt;、 &lt;code&gt;disk_part3.dd&lt;/code&gt;这样的原始文件分卷&lt;/p&gt;
+&lt;p&gt;也能是&lt;code&gt;case.E01&lt;/code&gt;、&lt;code&gt;case.E02&lt;/code&gt;、&lt;code&gt;case.E03&lt;/code&gt;，或者&lt;code&gt;case001.E01&lt;/code&gt;、&lt;code&gt;case002.E01&lt;/code&gt;、&lt;code&gt;case003.E01&lt;/code&gt;这样的封装镜像分卷&lt;/p&gt;
+&lt;p&gt;它们必须放在一起才能被完整加载，也就是之前提到的“多镜像文件”这一栏&lt;/p&gt;
+&lt;h2 id=&#34;物理磁盘与磁盘阵列&#34;&gt;物理磁盘与磁盘阵列
+&lt;/h2&gt;&lt;h3 id=&#34;物理磁盘&#34;&gt;物理磁盘
+&lt;/h3&gt;&lt;p&gt;这不是一种文件格式，而是一种证据源&lt;/p&gt;
+&lt;p&gt;比如把一块嫌疑人电脑里的硬盘拔下来，接到自己电脑，或者某块硬盘里面有着线索，直接对他分析&lt;/p&gt;
+&lt;p&gt;也有可能是使用FTK等工具挂载镜像成为系统盘&lt;/p&gt;
+&lt;h3 id=&#34;磁盘阵列-raid&#34;&gt;磁盘阵列 (RAID)
+&lt;/h3&gt;&lt;p&gt;RAID（Redundant Array of Independent/Inexpensive Disks，独立冗余磁盘阵列）是一种将多块物理磁盘组合成一个逻辑磁盘的技术，用于提升容错能力，抗数据丢失&lt;/p&gt;
+&lt;p&gt;遇到这类检材，一般是考察RAID的磁盘重组，也就是把分散的块组合成可以&lt;/p&gt;
+&lt;p&gt;这部分内容有点多，后面单开一篇学习&lt;/p&gt;
+&lt;h1 id=&#34;逻辑镜像&#34;&gt;逻辑镜像
+&lt;/h1&gt;&lt;p&gt;与获取整个磁盘不同，这类检材只包含从源系统中选择性提取的部分数据（特定文件和文件夹）&lt;/p&gt;
+&lt;h2 id=&#34;l01--lx01&#34;&gt;.L01 / .Lx01
+&lt;/h2&gt;&lt;p&gt;同样来自EnCase，是它的逻辑证据文件格式&lt;/p&gt;
+&lt;p&gt;在EnCase软件中选择要导出的文件条目，再通过添加至逻辑证据文件功能创建&lt;code&gt;.L01&lt;/code&gt;文件&lt;/p&gt;
+&lt;h2 id=&#34;ad1-1&#34;&gt;.ad1
+&lt;/h2&gt;&lt;p&gt;嗯，就是之前提到过的那个&lt;/p&gt;
+&lt;p&gt;使用FTK软件时，选择获取逻辑证据，然后添加特定的文件/文件夹就能创建&lt;code&gt;.ad1&lt;/code&gt;文件&lt;/p&gt;
+&lt;h2 id=&#34;zip--tar--rar&#34;&gt;.zip / .tar / .rar
+&lt;/h2&gt;&lt;p&gt;其实就是手动打包一系列要分析的文件，不使用专业软件而已&lt;/p&gt;
+&lt;h1 id=&#34;系统备份&#34;&gt;系统备份
+&lt;/h1&gt;&lt;h2 id=&#34;tib--tibx&#34;&gt;.tib / .tibx
+&lt;/h2&gt;&lt;p&gt;由Acronis True Image软件创建的备份镜像格式&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.tib&lt;/code&gt;是旧版格式，而&lt;code&gt;.tibx&lt;/code&gt;是较新版本引入的格式，提供了更强的性能和可靠性&lt;/p&gt;
+&lt;p&gt;这类文件包含了整个磁盘或分区的完整快照，可以通过Acronis软件进行恢复或挂载浏览&lt;/p&gt;
+&lt;h2 id=&#34;gho&#34;&gt;.gho
+&lt;/h2&gt;&lt;p&gt;来自Symantec Ghost软件的磁盘克隆镜像&lt;/p&gt;
+&lt;p&gt;在21世纪初非常流行，现在虽然少见，但在一些旧的系统备份中仍可能遇到&lt;/p&gt;
+&lt;h2 id=&#34;bkf&#34;&gt;.bkf
+&lt;/h2&gt;&lt;p&gt;由旧版Windows（如 XP, Server 2003）自带的NTBackup工具创建的备份文件&lt;/p&gt;
+&lt;p&gt;它主要用于备份文件和系统状态，而不是完整的磁盘镜像&lt;/p&gt;
+&lt;h2 id=&#34;bak&#34;&gt;.bak
+&lt;/h2&gt;&lt;p&gt;通用的备份文件扩展名，它没有统一的格式标准，具体内容取决于创建它的应用程序，不过一般是移动设备&lt;/p&gt;
+&lt;h1 id=&#34;虚拟磁盘镜像&#34;&gt;虚拟磁盘镜像
+&lt;/h1&gt;&lt;p&gt;虚拟机镜像是案件中的常见角色，它们本身就是完整的操作系统环境&lt;/p&gt;
+&lt;p&gt;它们一样能被当成整个的镜像文件被分析&lt;/p&gt;
+&lt;h2 id=&#34;vmdk&#34;&gt;.vmdk
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;全称Virtual Machine Disk&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;是VMware公司为其虚拟化产品开发的格式，在VMware产品中创建新虚拟机时自动生成&lt;/p&gt;
+&lt;p&gt;也可以使用其命令行工具&lt;code&gt;vmware-vdiskmanager.exe&lt;/code&gt;手动创建&lt;/p&gt;
+&lt;h2 id=&#34;vhd--vhdx&#34;&gt;.vhd / .vhdx
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;全称Virtual Hard Disk&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.vhd&lt;/code&gt;源于Connectix公司，后被微软收购用于Virtual PC&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.vhdx&lt;/code&gt;是其现代化的后继者，随Windows Server 2012推出，支持更大容量和更好的性能&lt;/p&gt;
+&lt;p&gt;在Windows的Hyper-V管理器或“磁盘管理”工具中（操作 -&amp;gt; 创建VHD）可以直接创建&lt;/p&gt;
+&lt;h2 id=&#34;avhd--avhdx&#34;&gt;.avhd / .avhdx
+&lt;/h2&gt;&lt;p&gt;这是Microsoft Hyper-V的快照文件&lt;/p&gt;
+&lt;p&gt;当为虚拟机创建快照后，系统会创建一个&lt;code&gt;.avhd(x)&lt;/code&gt;文件，之后所有对虚拟磁盘的增量修改都会写入这个文件，而原始的&lt;code&gt;.vhd(x)&lt;/code&gt;文件则保持只读&lt;/p&gt;
+&lt;p&gt;将快照文件与父磁盘文件（&lt;code&gt;.vhd&lt;/code&gt;/&lt;code&gt;.vhdx&lt;/code&gt;）合并，才能看到虚拟机在快照时间点的完整状态&lt;/p&gt;
+&lt;h2 id=&#34;vdi&#34;&gt;.vdi
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;全称Virtual Disk Image&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;是Oracle公司为其开源虚拟化软件VirtualBox开发，在VirtualBox中创建新虚拟机时自动生成&lt;/p&gt;
+&lt;h2 id=&#34;qcow--qcow2--qcow3&#34;&gt;.qcow / .qcow2 / .qcow3
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.qcow&lt;/code&gt;全称QEMUCopy-On-Write&lt;/strong&gt;，来自开源的QEMU项目（后面会提到）&lt;/p&gt;
+&lt;p&gt;而&lt;code&gt;.qcow2&lt;/code&gt;是第二版，也是目前的主流，&lt;code&gt;.qcow3&lt;/code&gt;则是实验性版本，同样不太使用&lt;/p&gt;
+&lt;p&gt;主要通过&lt;code&gt;qemu-img&lt;/code&gt;命令行工具创建，比如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img create -f qcow2 image.qcow2 20G
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;意思是创建一个大小为20GB、格式为qcow2的虚拟磁盘文件&lt;code&gt;image.qcow2&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;dmg--sparseimage&#34;&gt;.dmg / .sparseimage
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.dmg&lt;/code&gt;全称Apple Disk Image&lt;/strong&gt;，是macOS下标准的磁盘映像格式，用于软件分发和数据归档，类似于Windows下的ISO（不过ISO没办法被火眼解析，真是很奇怪了）&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;.sparseimage&lt;/code&gt;**是&lt;code&gt;.dmg&lt;/code&gt;的一种稀疏捆绑磁盘映像，它的特点是文件大小会根据实际存储数据的增多而动态增长，而不是一开始就占用全部分配空间，非常节省存储，类似growable的&lt;code&gt;.vmdk&lt;/code&gt;文件&lt;/p&gt;
+&lt;p&gt;这两种格式都是通过macOS系统自带的磁盘工具应用程序创建&lt;/p&gt;
+&lt;h2 id=&#34;zvhd2&#34;&gt;.zvhd2
+&lt;/h2&gt;&lt;p&gt;这是Parallels Desktop虚拟机软件使用的专有虚拟磁盘格式&lt;/p&gt;
+&lt;p&gt;Parallels是一款在macOS上运行Windows和其他操作系统的流行软件，虚拟机硬盘会以&lt;code&gt;.zvhd2&lt;/code&gt;格式存储&lt;/p&gt;
+&lt;h2 id=&#34;xva&#34;&gt;.xva
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;全称Xen Virtual Appliance&lt;/strong&gt;，是Citrix XenServer/XCP-ng虚拟化平台的虚拟机导出格式&lt;/p&gt;
+&lt;p&gt;它不仅仅是一个磁盘镜像，而是一个包含了虚拟机完整配置（CPU、内存、网络）和所有虚拟磁盘（VHD格式）的归档包（实际上是一个TAR归档文件），用于虚拟机的备份和迁移&lt;/p&gt;
+&lt;h1 id=&#34;内存镜像&#34;&gt;内存镜像
+&lt;/h1&gt;&lt;h2 id=&#34;mem--raw&#34;&gt;.mem / .raw
+&lt;/h2&gt;&lt;p&gt;通用描述性名称，代表原始内存数据&lt;/p&gt;
+&lt;p&gt;使用专业的内存获取工具，如DumpIt等能够制作，在Linux中也可从&lt;code&gt;/dev/mem&lt;/code&gt;等设备文件转储&lt;/p&gt;
+&lt;p&gt;这是最为常见的一类，使用频繁&lt;/p&gt;
+&lt;h2 id=&#34;dmp&#34;&gt;.dmp
+&lt;/h2&gt;&lt;p&gt;常见于Microsoft Windows系统崩溃（也就是蓝屏）时由系统自动生成&lt;code&gt;MEMORY.DMP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;也可以通过任务管理器（针对单个进程）或WinDbg等调试工具手动创建&lt;/p&gt;
+&lt;h2 id=&#34;vmem&#34;&gt;.vmem
+&lt;/h2&gt;&lt;p&gt;VMware的内存镜像格式&lt;/p&gt;
+&lt;p&gt;这是虚拟机的内存文件，当一个正在运行的VM被挂起时，其内存内容会被写入&lt;code&gt;.vmem&lt;/code&gt;文件&lt;/p&gt;
+&lt;h2 id=&#34;vmsn&#34;&gt;.vmsn
+&lt;/h2&gt;&lt;p&gt;同样被使用于VMware&lt;/p&gt;
+&lt;p&gt;为虚拟机创建一个快照时生成，&lt;code&gt;.vmsn&lt;/code&gt;文件保存了虚拟机在快照那一刻的运行状态，其中就包含了内存数据&lt;/p&gt;
+&lt;h1 id=&#34;移动设备镜像&#34;&gt;移动设备镜像
+&lt;/h1&gt;&lt;h2 id=&#34;ios&#34;&gt;iOS
+&lt;/h2&gt;&lt;h3 id=&#34;文件夹集合&#34;&gt;文件夹集合
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;就是文件的集合，没有任何格式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通过iTunes或Finder连接执行备份操作时创建，部分第三方取证工具也能调用此协议进行提取&lt;/p&gt;
+&lt;p&gt;主文件夹名通常是设备的UUID（一长串十六进制字符），内部包含大量以两位哈希值命名的子文件夹和散列文件名，里面有&lt;code&gt;Info.plist&lt;/code&gt;，&lt;code&gt;Manifest.db&lt;/code&gt;，&lt;code&gt;Status.plist&lt;/code&gt;等关键索引文件&lt;/p&gt;
+&lt;p&gt;看到这种结构，即可100%确定为iOS的官方备份&lt;/p&gt;
+&lt;h3 id=&#34;zip--tar&#34;&gt;.zip / .tar
+&lt;/h3&gt;&lt;p&gt;移动取证工具供应商，如Cellebrite, Grayshift, Magnet Forensics等都能制作，或者使用别的办法直接导出&lt;/p&gt;
+&lt;p&gt;解压后会看到完整的iOS文件系统目录结构，如&lt;code&gt;/private/var/&lt;/code&gt;等&lt;/p&gt;
+&lt;p&gt;这比上面备份操作得到的集合包含更多系统文件、应用缓存和数据库&lt;/p&gt;
+&lt;h3 id=&#34;bin--raw--dd--img&#34;&gt;.bin / .raw / .dd / .img
+&lt;/h3&gt;&lt;p&gt;和计算机镜像文件一样，是对闪存芯片最底层的、逐位的完整复制&lt;/p&gt;
+&lt;h2 id=&#34;android&#34;&gt;Android
+&lt;/h2&gt;&lt;h3 id=&#34;ab&#34;&gt;.ab
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;全称Android Backup&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在电脑上通过Android调试桥(ADB)工具执行&lt;code&gt;adb backup&lt;/code&gt;命令创建&lt;/p&gt;
+&lt;h3 id=&#34;zip--tar-1&#34;&gt;.zip / .tar
+&lt;/h3&gt;&lt;p&gt;和ios一样来源于移动取证工具供应商，或者通过完全root的手段导出&lt;/p&gt;
+&lt;p&gt;压缩包内包含了&lt;code&gt;/data&lt;/code&gt;分区的完整目录结构，也就是很多&lt;code&gt;com.&lt;/code&gt;开头的包，包含了所有用户安装的应用和数据&lt;/p&gt;
+&lt;h3 id=&#34;bin--raw--dd--img-1&#34;&gt;.bin / .raw / .dd / .img
+&lt;/h3&gt;&lt;p&gt;无需多言&lt;/p&gt;
+&lt;h1 id=&#34;安卓模拟器镜像&#34;&gt;安卓模拟器镜像
+&lt;/h1&gt;&lt;p&gt;模拟器本质是运行在PC上的虚拟机&lt;/p&gt;
+&lt;p&gt;多数模拟器既可以直接获取其运行中的磁盘文件，也可以处理其专有的备份文件&lt;/p&gt;
+&lt;p&gt;备份文件通常是包含了磁盘文件的压缩包，如同&lt;code&gt;.apk&lt;/code&gt;格式一样，改后缀名就能解压得到其中的虚拟磁盘文件&lt;/p&gt;
+&lt;p&gt;需要注意的是，不同模拟器使用的虚拟磁盘格式也有出入&lt;/p&gt;
+&lt;h2 id=&#34;雷电模拟器&#34;&gt;雷电模拟器
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;虚拟磁盘格式：&lt;code&gt;.vmdk&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;磁盘文件位于安装目录的&lt;code&gt;vms&lt;/code&gt;文件夹下，点进对应模拟器也能得到&lt;code&gt;.vmdk&lt;/code&gt;文件&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922202115478&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922202115478.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922202115478.png&#34; alt=&#34;image-20250922202115478&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;备份格式：&lt;code&gt;.ldbk&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.ldbk&lt;/code&gt;文件是一个ZIP压缩包，修改扩展名为&lt;code&gt;.zip&lt;/code&gt;后解压，就能得到&lt;code&gt;data.vmdk&lt;/code&gt;和&lt;code&gt;sdcard.vmdk&lt;/code&gt;两个虚拟磁盘文件&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922202353214&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922202353214.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922202353214.png&#34; alt=&#34;image-20250922202353214&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;mumu模拟器v12&#34;&gt;MuMu模拟器（v12）
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;虚拟磁盘格式：&lt;code&gt;.vdi&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;磁盘位置和雷电模拟器如出一辙，位于安装目录的&lt;code&gt;vms&lt;/code&gt;文件夹下，不多赘述&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;备份格式：&lt;code&gt;.mumudata&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.mumudata&lt;/code&gt;也是一个ZIP压缩包，按同样方法改名解压后可获取&lt;code&gt;.vdi&lt;/code&gt;磁盘文件：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922203347610&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922203347610.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922203347610.png&#34; alt=&#34;image-20250922203347610&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;夜神模拟器&#34;&gt;夜神模拟器
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;虚拟磁盘格式：&lt;code&gt;.vmdk&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不过它的磁盘位置是位于安装目录的&lt;code&gt;BignoxVMS&lt;/code&gt;文件夹下：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922210328577&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922210328577.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922210328577.png&#34; alt=&#34;image-20250922210328577&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;备份格式：&lt;code&gt;.npdk&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;官方文档说32位是&lt;code&gt;.npbk&lt;/code&gt;，64位是&lt;code&gt;.anpbk&lt;/code&gt;，我测试下来64位是&lt;code&gt;.npbk&lt;/code&gt;，32位没找到下载方式&lt;/p&gt;
+&lt;p&gt;解压方式不变：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922210404888&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922210404888.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922210404888.png&#34; alt=&#34;image-20250922210404888&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;逍遥模拟器&#34;&gt;逍遥模拟器
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;虚拟磁盘格式：&lt;code&gt;.vmdk&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它的磁盘位置也不一样，或者说它的文件目录构造就和上面三个不一样&lt;/p&gt;
+&lt;p&gt;它的磁盘位于安装目录的&lt;code&gt;\MEmu\MemuHyperv VMs&lt;/code&gt;文件夹下：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922212347566&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922212347566.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922212347566.png&#34; alt=&#34;image-20250922212347566&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;备份格式：&lt;code&gt;.ova&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;解压方式不变：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922213411215&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922213411215.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922213411215.png&#34; alt=&#34;image-20250922213411215&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;bluestacks蓝叠5&#34;&gt;BlueStacks(蓝叠5)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;虚拟磁盘格式：&lt;code&gt;.vhd&lt;/code&gt;、&lt;code&gt;vhdx&lt;/code&gt;、&lt;code&gt;.vdi&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它的磁盘位置完全就和上面这些不是一个构造了&lt;/p&gt;
+&lt;p&gt;它的虚拟机统一放在安装目录下的Engine文件夹中：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922224220777&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922224220777.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922224220777.png&#34; alt=&#34;image-20250922224220777&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;Engine文件夹下也放置了一些json/cfg格式配置文件，以及Manager和UserData文件夹，所有虚拟机共用&lt;/p&gt;
+&lt;p&gt;同时，他的磁盘似乎是分开存储的，fastboot使用的是&lt;code&gt;.vdi&lt;/code&gt;，而数据和root使用&lt;code&gt;.vhd&lt;/code&gt;和&lt;code&gt;.vhdx&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Data.vhdx ≈ 用户数据分区&lt;/li&gt;
+&lt;li&gt;Root.vhd ≈ 系统分区&lt;/li&gt;
+&lt;li&gt;fastboot.vdi ≈ fastboot引导镜像&lt;/li&gt;
+&lt;li&gt;.bstk / .cfg 文件 ≈ 配置与快照&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922224340909&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922224340909.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922224340909.png&#34; alt=&#34;image-20250922224340909&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;备份格式：文件集合&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;蓝叠备份文件不会压缩，而是直接导出一整个原始文件夹，包含Engine文件夹下的所有必要配置：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250922224729609&#34; href=&#34;http://picture.928330.xyz/typora/image-20250922224729609.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250922224729609.png&#34; alt=&#34;image-20250922224729609&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;格式转换&#34;&gt;格式转换
+&lt;/h1&gt;&lt;h2 id=&#34;虚拟磁盘之间转换&#34;&gt;虚拟磁盘之间转换
+&lt;/h2&gt;&lt;h3 id=&#34;命令行工具--qemu-img&#34;&gt;命令行工具 —— qemu-img
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;qemu-img&lt;/code&gt; 是 QEMU 虚拟化套件中的一个功能极其强大的命令行工具，被誉为虚拟磁盘管理的“瑞士军刀”。它支持几乎所有主流虚拟磁盘格式的读写和转换&lt;/p&gt;
+&lt;p&gt;下载地址：&lt;a class=&#34;link&#34; href=&#34;https://qemu.weilnetz.de/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;QEMU
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;查看镜像信息&#34;&gt;查看镜像信息
+&lt;/h4&gt;&lt;p&gt;在转换前，最好先用&lt;code&gt;info&lt;/code&gt;命令检查源文件的格式和参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img info source_disk.vmdk
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出会显示格式 (file format)、虚拟大小 (virtual size)、物理大小 (disk size) 等信息&lt;/p&gt;
+&lt;h4 id=&#34;格式转换-1&#34;&gt;格式转换
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;基本语法：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img convert &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt; -f &amp;lt;source_fmt&amp;gt; -O &amp;lt;output_fmt&amp;gt; &amp;lt;source_file&amp;gt; &amp;lt;target_file&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;常用参数：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt;：显示转换进度条&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-f &amp;lt;format&amp;gt;&lt;/code&gt;：指定源文件格式（通常可自动识别，但显式指定更可靠）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-O &amp;lt;format&amp;gt;&lt;/code&gt;：指定输出文件格式（必填！）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;支持格式 keyword：&lt;/strong&gt;&lt;code&gt;vmdk&lt;/code&gt;, &lt;code&gt;vhdx&lt;/code&gt;, &lt;code&gt;vdi&lt;/code&gt;, &lt;code&gt;qcow2&lt;/code&gt;, &lt;code&gt;raw&lt;/code&gt; (对应.dd或.img) 等&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;vmdk转 vhdx&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img convert -p -f vmdk -O vhdx source.vmdk target.vhdx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;需要注意的是VMware分片vmdk需要用描述文件&lt;code&gt;.vmdk&lt;/code&gt;，单独&lt;code&gt;s001.vmdk&lt;/code&gt;这样的文件不能直接转换&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;vdi 转 vmdk&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img convert -p -f vdi -O vmdk source.vdi target.vmdk
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;qcow2 转 raw&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img convert -p -f qcow2 -O raw source.qcow2 target.img
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;raw/dd/img 转 vmdk&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img convert -p -f raw -O vmdk source.dd target.vmdk
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;图形化工具--starwind-v2v-converter&#34;&gt;图形化工具 —— StarWind V2V Converter
+&lt;/h3&gt;&lt;p&gt;一款功能强大的免费工具，界面直观，非常轻量化，支持多种物理和虚拟格式的互相转换&lt;/p&gt;
+&lt;h4 id=&#34;选择要转换的镜像&#34;&gt;选择要转换的镜像
+&lt;/h4&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250923171013911&#34; href=&#34;http://picture.928330.xyz/typora/image-20250923171013911.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250923171013911.png&#34; alt=&#34;image-20250923171013911&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;选择转换目标&#34;&gt;选择转换目标
+&lt;/h4&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250923171314141&#34; href=&#34;http://picture.928330.xyz/typora/image-20250923171314141.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250923171314141.png&#34; alt=&#34;image-20250923171314141&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;growable是&lt;strong&gt;动态扩展磁盘&lt;/strong&gt;，磁盘文件初始体积较小，随着写入数据逐渐增大&lt;/p&gt;
+&lt;p&gt;Pre-allocated是&lt;strong&gt;预分配磁盘&lt;/strong&gt;，创建时会一次性占用所有空间，性能更稳定，但占用磁盘空间大&lt;/p&gt;
+&lt;p&gt;ESX是专门为VMware ESX/ESXi虚拟化平台使用的vmdk格式，和Workstation/Player用的vmdk略有不同&lt;/p&gt;
+&lt;h4 id=&#34;选择虚拟机磁盘接口类型&#34;&gt;选择虚拟机磁盘接口类型
+&lt;/h4&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250923171644294&#34; href=&#34;http://picture.928330.xyz/typora/image-20250923171644294.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250923171644294.png&#34; alt=&#34;image-20250923171644294&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;接下来选择保存位置即可&lt;/p&gt;
+&lt;h3 id=&#34;图形化工具--vmware-vcenter-converter&#34;&gt;图形化工具 —— VMware vCenter Converter
+&lt;/h3&gt;&lt;p&gt;VMware官方工具，需要单独下载安装：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250923181919052&#34; href=&#34;http://picture.928330.xyz/typora/image-20250923181919052.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250923181919052.png&#34; alt=&#34;image-20250923181919052&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个软件功能繁多，还能做到物理磁盘到虚拟磁盘的迁移（P2V），由于主题不在此，就不多赘述&lt;/p&gt;
+&lt;h2 id=&#34;不同镜像格式转换&#34;&gt;不同镜像格式转换
+&lt;/h2&gt;&lt;p&gt;实际上，使用上面提到过的VMware vCenter Converter就能做到这一点&lt;/p&gt;
+&lt;p&gt;先用挂载工具把源镜像挂载为物理磁盘，然后使用VMware vCenter Converter导出为虚拟磁盘即可&lt;/p&gt;
+&lt;p&gt;以及使用一些软件，比如火眼仿真提供的gho转vmdk：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250923182631921&#34; href=&#34;http://picture.928330.xyz/typora/image-20250923182631921.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20250923182631921.png&#34; alt=&#34;image-20250923182631921&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>獬豸杯2025取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Sat, 13 Sep 2025 01:35:34 +0800</pubDate>
