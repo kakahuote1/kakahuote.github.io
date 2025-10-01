@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="饮水机">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="饮水机，以及一些磁盘管理知识">
 <title>RAID</title>
 
 <link rel='canonical' href='https://blog.928330.xyz/p/raid/'>
 
 <link rel="stylesheet" href="/scss/style.min.b22c8029054811ea492fcc18d7c327f80515e7ac9fc4fdaf9df850ff7fa374c4.css"><meta property='og:title' content="RAID">
-<meta property='og:description' content="饮水机">
+<meta property='og:description' content="饮水机，以及一些磁盘管理知识">
 <meta property='og:url' content='https://blog.928330.xyz/p/raid/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:published_time' content='2025-09-28T22:52:36&#43;08:00'/><meta property='article:modified_time' content='2025-09-28T22:54:09&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-09-28T22:52:36&#43;08:00'/><meta property='article:modified_time' content='2025-10-02T01:51:40&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg' />
 <meta name="twitter:title" content="RAID">
-<meta name="twitter:description" content="饮水机"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="饮水机，以及一些磁盘管理知识"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
@@ -377,11 +377,29 @@
             <nav id="TableOfContents">
   <ol>
     <li><a href="#什么是raid">什么是RAID</a></li>
-    <li><a href="#一些基本术语">一些基本术语</a>
+    <li><a href="#前置知识">前置知识</a>
       <ol>
         <li><a href="#物理盘physical-diskpd">物理盘（Physical Disk，PD）</a></li>
         <li><a href="#虚拟盘virtual-disk-vd-">虚拟盘（Virtual Disk ，VD ）</a></li>
         <li><a href="#逻辑盘logical-disk-ld">逻辑盘（Logical Disk ，LD）</a></li>
+        <li><a href="#磁盘组disk-group">磁盘组（Disk Group）</a></li>
+        <li><a href="#扇区sector">扇区（Sector）</a>
+          <ol>
+            <li><a href="#物理扇区">物理扇区</a>
+              <ol>
+                <li><a href="#糟糕的问题">糟糕的问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#逻辑扇区">逻辑扇区</a></li>
+            <li><a href="#硬盘扇区格式标准">硬盘扇区格式标准</a>
+              <ol>
+                <li><a href="#512n512-native512原生">512n（512 Native，512原生）</a></li>
+                <li><a href="#512e512-emulation512模拟">512e（512 Emulation，512模拟）</a></li>
+                <li><a href="#4kn4k-native4k原生">4Kn（4K Native，4K原生）</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
         <li><a href="#linux系统的物理盘与逻辑盘表示">Linux系统的物理盘与逻辑盘表示</a>
           <ol>
             <li><a href="#设备命名规则">设备命名规则</a>
@@ -399,10 +417,46 @@
                 <li><a href="#gpt-guid-partition-tableguid分区表">GPT (GUID Partition Table，GUID分区表)</a></li>
               </ol>
             </li>
-            <li><a href="#实例演示">实例演示</a></li>
+            <li><a href="#实例">实例</a></li>
           </ol>
         </li>
-        <li><a href="#disk-group磁盘组">Disk Group（磁盘组）</a></li>
+        <li><a href="#文件系统">文件系统</a>
+          <ol>
+            <li><a href="#格式化">格式化</a>
+              <ol>
+                <li><a href="#快速格式化">快速格式化</a></li>
+                <li><a href="#完全格式化">完全格式化</a></li>
+              </ol>
+            </li>
+            <li><a href="#常见的文件系统类型">常见的文件系统类型</a>
+              <ol>
+                <li><a href="#fat">FAT</a></li>
+                <li><a href="#ntfs">NTFS</a></li>
+                <li><a href="#refs">ReFS</a></li>
+                <li><a href="#ext">ext</a></li>
+                <li><a href="#btrfs">Btrfs</a></li>
+                <li><a href="#xfs">XFS</a></li>
+                <li><a href="#tmpfs">tmpfs</a></li>
+                <li><a href="#devtmpfs">devtmpfs</a></li>
+                <li><a href="#hfs-与-apfs">HFS+ 与 APFS</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#卷volume">卷（Volume）</a></li>
+        <li><a href="#windows物理磁盘的管理模式">Windows物理磁盘的管理模式</a>
+          <ol>
+            <li><a href="#基础磁盘-basic-disk">基础磁盘 (Basic Disk)</a></li>
+            <li><a href="#动态磁盘-dynamic-disk">动态磁盘 (Dynamic Disk)</a></li>
+          </ol>
+        </li>
+        <li><a href="#驱动器drive">驱动器（Drive）</a></li>
+        <li><a href="#挂载mount">挂载（Mount）</a>
+          <ol>
+            <li><a href="#windows挂载">windows挂载</a></li>
+            <li><a href="#linux挂载">Linux挂载</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
     <li><a href="#raid级别">RAID级别</a>
@@ -444,10 +498,10 @@
       <ol>
         <li><a href="#2023美亚">2023美亚</a>
           <ol>
-            <li><a href="#使用usf进行恢复">使用USF进行恢复</a>
+            <li><a href="#usf">USF</a>
               <ol>
-                <li><a href="#自动分析">自动分析</a></li>
-                <li><a href="#手动分析">手动分析</a></li>
+                <li><a href="#自动充足">自动充足</a></li>
+                <li><a href="#手动重组">手动重组</a></li>
                 <li><a href="#导出磁盘">导出磁盘</a></li>
               </ol>
             </li>
@@ -458,6 +512,12 @@
                 <li><a href="#导出镜像">导出镜像</a></li>
               </ol>
             </li>
+            <li><a href="#火眼证据分析">火眼证据分析</a></li>
+          </ol>
+        </li>
+        <li><a href="#2019">2019</a>
+          <ol>
+            <li><a href="#ftk--美亚取证大师">FTK + 美亚取证大师</a></li>
           </ol>
         </li>
       </ol>
@@ -503,7 +563,7 @@
         </h2>
         
         <h3 class="article-subtitle">
-            饮水机
+            饮水机，以及一些磁盘管理知识
         </h3>
         
 
@@ -542,7 +602,7 @@
 
 
                <time>
-                   更新时间：2025-09-28
+                   更新时间：2025-10-02
                </time>
            </div>
         <div>
@@ -562,7 +622,8 @@
     <section class="article-content">
     
     
-    <p>参考资料：</p>
+    <p><strong>本来是只想写写RAID题目的，但有太多概念不清楚了，不知不觉有点写过头了&hellip;&hellip;</strong></p>
+<p>参考资料：</p>
 <p><a class="link" href="https://zh.wikipedia.org/wiki/RAID"  target="_blank" rel="noopener"
     >RAID&ndash;维基百科
     
@@ -647,11 +708,11 @@
 <p>假设有两块硬盘DiskA、DiskB，要存储的数据是字符串<code>ABCDEFGH</code>：</p>
 <p><strong>未条带化</strong>（普通存储）：</p>
 <ul>
-<li>Disk A：<code>ABCDEFGH</code></li>
-<li>Disk B：空</li>
+<li>DiskA：<code>ABCDEFGH</code></li>
+<li>DiskB：空</li>
 </ul>
 <p>读取的时候只能A读，B不工作</p>
-<p><strong>条带化存储</strong>（条带大小=2字节）：</p>
+<p><strong>条带化存储</strong>（条带大小2字节）：</p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -683,20 +744,51 @@
       </tr>
   </tbody>
 </table></div>
-<p>也就是说第一个条带 = <code>A</code>（DiskA） + <code>B</code>（DiskB），大小就是<code>AB</code>（两个字节），后面的也以此类推</p>
+<p>也就是说第一个条带=<code>A</code>（DiskA） +   <code>B</code>（DiskB），大小就是<code>AB</code>（两个字节），后面的也以此类推</p>
 <p>同一个条带的上下两部分数据存储在了AB两块磁盘的同一个位置</p>
 <p>每次读取数据时，<strong>按照条带来读，无需切换硬盘</strong>，和普通的两个盘分别存储有本质区别</p>
 <p>这样读取的时候两块盘可以同时工作，速度几乎翻倍！这就是最简单的RAID0的工作原理</p>
 </li>
 </ul>
-<h1 id="一些基本术语">一些基本术语
-</h1><p>在开始介绍RAID之前，还是得先知道一点相关术语才行</p>
+<h1 id="前置知识">前置知识
+</h1><p>不想看的可以跳转：<a class="link" href="#RAID%e7%ba%a7%e5%88%ab" >RAID级别
+    
+</a></p>
 <h2 id="物理盘physical-diskpd">物理盘（Physical Disk，PD）
-</h2><p>实际存在的硬件存储设备，如HDD（Hard Disk Drive，机械硬盘）、SSD（Solid State Drive，固态硬盘）</p>
+</h2><p>是实际存在的硬件存储设备，如HDD（Hard Disk Drive，机械硬盘）、SSD（Solid State Drive，固态硬盘）</p>
+<p><strong>HDD是依靠旋转的磁盘和机械磁头读写数据的传统硬盘</strong>，有真实的机械运动，因此读写速度受机械臂移动和盘片旋转限制，随机访问慢，并且不耐摔，但大容量成本低，所以通常用作大容量备份或冷存储</p>
+<p><strong>SSD则完全没有机械部件，数据存储在电子闪存中</strong>，读写几乎即时，随机访问和顺序访问速度都很快，是耐摔王，但价格高，写入次数有限，需要通过固件和控制器管理寿命，通常作系统盘和高速应用</p>
 <h2 id="虚拟盘virtual-disk-vd-">虚拟盘（Virtual Disk ，VD ）
-</h2><p>通过软件技术模拟出来的磁盘存储设备，没有物理结构，但在系统层面像真实磁盘，可以安装文件系统、存储数据、运行程序</p>
+</h2><p>是通过软件技术模拟出来的磁盘存储设备，没有物理结构，但在系统层面像真实磁盘</p>
+<p>常见以下几类：</p>
+<ul>
+<li>
+<p><strong>本地虚拟盘</strong></p>
+<p>在单台计算机上由操作系统或软件创建的虚拟盘，例如VHD、VMDK之类的，用于虚拟机</p>
+</li>
+<li>
+<p><strong>网络存储虚拟盘</strong></p>
+<p>通过网络提供的虚拟盘，可以被多台设备访问，比如：</p>
+<ul>
+<li>
+<p><strong>NAS（Network Attached Storage）</strong></p>
+<p>文件级存储，通过网络共享文件，常用于家庭或企业文件共享</p>
+</li>
+<li>
+<p><strong>SAN（Storage Area Network）</strong></p>
+<p>块级存储，通过高速网络提供虚拟磁盘给服务器使用，多用于企业数据库或虚拟机存储</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>云存储虚拟盘</strong></p>
+<p>云服务商提供的块存储或对象存储虚拟盘，把我们的文件放在远程服务器上，这些服务器内部可能是HDD 或SSD，经过虚拟化后提供我们一个虚拟盘，通过网络访问就像访问本地盘一样，例如百度网盘</p>
+</li>
+</ul>
+<p><strong>网络存储虚拟盘更像企业内部自建硬盘，使用局域网（LAN）</strong></p>
+<p><strong>而云存储虚拟盘是互联网远程虚拟盘，使用互联网（WAN），用户只是远程使用而已</strong></p>
 <h2 id="逻辑盘logical-disk-ld">逻辑盘（Logical Disk ，LD）
-</h2><p>在物理盘上通过软件划分出来的具有逻辑结构的存储区域，依赖物理盘，没有物理盘就无法创建</p>
+</h2><p>是在物理盘上通过软件划分出来的具有逻辑结构的存储区域，依赖物理盘，也叫做分区</p>
 <p>一个物理盘可划分为多个逻辑盘，如Windows的C、D盘，Linux的/dev/sda1、/dev/sda2分区</p>
 <p><strong>为什么要分区？</strong></p>
 <ul>
@@ -715,6 +807,70 @@
 <p>将频繁读写的文件（如日志）放在独立分区，可以减少磁盘碎片，方便备份和管理</p>
 </li>
 </ul>
+<h2 id="磁盘组disk-group">磁盘组（Disk Group）
+</h2><p>是将多块物理盘组合成一个组，RAID阵列就是磁盘组</p>
+<h2 id="扇区sector">扇区（Sector）
+</h2><h3 id="物理扇区">物理扇区
+</h3><p><strong>是硬盘硬件上可以独立寻址和进行读写操作的最小物理区域</strong></p>
+<p>由于物理层面的原因，没有硬盘能做到一个bit一个bit对数据进行操作</p>
+<p>对于<strong>机械硬盘</strong>，它指的是盘片上磁道的一个特定弧段，硬盘的磁头在执行一次读写命令时，至少要处理这么大一块物理区域</p>
+<p>对于<strong>固态硬盘</strong>，它对应于NAND闪存芯片中的一个物理页或块的一部分，是SSD主控能够操作的最小数据单元</p>
+<p><strong>一个物理扇区并不完全用来存储用户数据，它还包含了其余内容，用于确保数据能被准确定位和可靠读写：</strong></p>
+<ul>
+<li><strong>间隙</strong>：用于分隔不同的扇区</li>
+<li><strong>同步标记</strong>：帮助磁头在高速旋转中同步数据读取的时机</li>
+<li><strong>地址标记</strong>：记录这个扇区的唯一物理地址（哪个磁头、哪个柱面、哪个扇区）</li>
+<li><strong>纠错码（ECC）</strong>：这是一段根据数据内容计算出来的校验码，在读取数据时，硬盘会重新计算ECC并与存储的ECC进行比对，以发现并纠位错误</li>
+</ul>
+<p>这样方便了管理，也产生了空间开销</p>
+<p>随着硬盘容量的急剧增大，使用512字节的物理扇区变得越来越低效，现在很多硬盘物理扇区扩大到了4096字节（4KB），被称为先进格式化（Advanced Format，AF），相当于把8个小扇区的管理开销合并为1个大扇区的开销，空间利用率显著提高，并且更大的扇区意味着可以分配更多的空间给ECC码，从而设计出更好的纠错算法</p>
+<h4 id="糟糕的问题">糟糕的问题
+</h4><p>当我们要写入HDD的数据不足512B的时候，硬盘也会先把包含目标字节的整个扇区512B读入缓存，在缓存中修改要写入的那些字节，之后重新计算ECC，最后把整个512B扇区写回磁盘</p>
+<p>也就是说，硬盘把所有<strong>不是512B整数倍</strong>的<strong>写</strong>过程，都变成了<strong>读-改-写</strong>的过程！这会造成性能的浪费！</p>
+<p>而对于SSD，这个情况更加严重：</p>
+<p>SSD最小写单元是页，通常是4KB，但它最小的可擦除单元却是按照块计算，通常是128KB</p>
+<div class="alert alert-tip">
+    <div class="alert-header">
+        <span class="alert-icon">
+            💡
+        </span>
+        <span class="alert-title">
+            Tip
+        </span>
+    </div>
+    <div class="alert-content">
+        <p>NAND闪存写入页之前页必须是干净的，也就是所有位都是1，不能直接覆盖，而擦除必须整块擦除</p>
+<p>如果把块设置成和页一样大，可擦除最小单位变成4KB，坏块产生概率更高，还会加速磨损</p>
+<p>如果把页设置成和块一样大，写入最小单位变成128KB，小文件写入会严重浪费，性能下降</p>
+<p>所以现在的设置是理论最优喔</p></div>
+</div>
+<p>当写入数据不是4KB的整数倍的时候会变成读-改-写，这还好，如果要写的页已经写过，无法覆盖，那就必须擦除，而擦除所带来的改就是整个块的改动，有几百KB，甚至达到MB的级别！</p>
+<p>这就是所谓的“<strong>写放大</strong>”问题，而它几乎是不可避免的</p>
+<h3 id="逻辑扇区">逻辑扇区
+</h3><p><strong>类似逻辑地址，逻辑扇区是一个抽象概念，是硬盘让操作系统和用户看到的假设出来的东西</strong></p>
+<p>操作系统使用一种名为<strong>逻辑块地址 (Logical Block Addressing, LBA)</strong> 的方式来访问硬盘</p>
+<p>在这种模式下，整个硬盘被看作一个从0开始编号的、连续线性的逻辑扇区数组，操作系统无需关心数据具体存放在哪个盘片、哪个磁头、哪个柱面上，只需要关心线性的LBA地址就可以了，这极大地简化了软件开发</p>
+<p>比如，当操作系统需要读取数据时，它只用发出简单的指令：给我LBA地址为12345的数据，就会自动取出第12346个扇区（注意扇区编号从0开始的）</p>
+<p>并且，这还保证了新硬件能够兼容旧的操作系统，比如从HDD变为SSD，或改变内部存储结构，只要硬盘的固件能够正确地将操作系统发来的LBA地址请求翻译成对内部物理存储单元的操作即可</p>
+<p><strong>逻辑扇区大小可以与物理扇区不同</strong>，接着往下看</p>
+<h3 id="硬盘扇区格式标准">硬盘扇区格式标准
+</h3><h4 id="512n512-native512原生">512n（512 Native，512原生）
+</h4><p>最传统的标准，即硬盘的物理扇区大小和逻辑扇区大小都是512字节</p>
+<p>所见即所得，操作系统看到的逻辑结构与硬盘的物理结构完全一致，不存在转换和模拟</p>
+<h4 id="512e512-emulation512模拟">512e（512 Emulation，512模拟）
+</h4><p>这是当前最主流的标准，硬盘的物理扇区大小是4096字节 (4KB)，但它对外伪装成512字节的逻辑扇区与操作系统沟通，来保证对旧软件和操作系统的向后兼容性</p>
+<p>在windows的cmd，使用下面的命令可以查看C盘扇区大小：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fsutil fsinfo ntfsinfo C:
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250930163549065" href="http://picture.928330.xyz/typora/image-20250930163549065.png">
+<img src="http://picture.928330.xyz/typora/image-20250930163549065.png" alt="image-20250930163549065"  />
+</a>
+</div>
+</p>
+<p>但这样也会导致问题：当操作系统尝试写入一个未与底层4KB物理扇区边界对齐的512字节逻辑扇区时，就会触发一次之前说过的读-改-写操作，这被称为<strong>未对齐写入</strong>，也会导致性能下降</p>
+<h4 id="4kn4k-native4k原生">4Kn（4K Native，4K原生）
+</h4><p>最现代的标准，硬盘的物理扇区大小和逻辑扇区大小都是4096字节</p>
 <h2 id="linux系统的物理盘与逻辑盘表示">Linux系统的物理盘与逻辑盘表示
 </h2><p>在Linux的设计哲学中，有一个核心思想是“一切皆文件”，这意味着硬件设备，如硬盘、键盘、鼠标等，都会在文件系统中以一个特殊文件的形式存在</p>
 <p>这些设备文件都集中存放在<code>/dev</code>目录（也就是device的意思）下，通过读写这些文件，就可以与对应的硬件设备进行交互</p>
@@ -799,7 +955,7 @@
 </h4><p>这是一种更现代、更灵活的分区方案，是当前的主流标准，理论上支持无限个分区（但操作系统通常限制为128个）</p>
 <p>没有主分区、扩展分区、逻辑分区的复杂概念，所有分区地位平等</p>
 <p>分区编号就是简单地从<code>1</code>开始连续递增，如<code>/dev/sda1</code>、<code>/dev/sda2</code>、<code>/dev/sda3</code>&hellip;</p>
-<h3 id="实例演示">实例演示
+<h3 id="实例">实例
 </h3><p>在linux里使用<code>lsblk</code> (list block devices，列出块设备) 命令可以清晰地看到系统中的磁盘和分区结构</p>
 <p>假设一台Linux服务器有两块SATA硬盘，<code>lsblk</code>的输出如下（我现有的linux机分盘都很少，杜撰一个吧）：</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">NAME</span>   <span style="color:#e06c75">MAJ</span>:<span style="color:#e06c75">MIN</span> <span style="color:#e06c75">RM</span>   <span style="color:#e06c75">SIZE</span> <span style="color:#e06c75">RO</span> <span style="color:#e06c75">TYPE</span> <span style="color:#e06c75">MOUNTPOINT</span>
@@ -846,10 +1002,216 @@
       </tr>
   </tbody>
 </table></div>
-<h2 id="disk-group磁盘组">Disk Group（磁盘组）
-</h2><p>将多块物理盘组合成一个组，RAID阵列就是磁盘组</p>
+<h2 id="文件系统">文件系统
+</h2><p>当我们有了一个分区后，它还只是一片空白的存储空间，我们还需要一种规则来组织和管理将要存入其中的数据，这种规则就是文件系统，<strong>文件系统本质上是操作系统的一部分</strong></p>
+<p>在windows的cmd下，可以使用下面命令查看所有卷的文件系统：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wmic logicaldisk get name,filesystem
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251001235258602" href="http://picture.928330.xyz/typora/image-20251001235258602.png">
+<img src="http://picture.928330.xyz/typora/image-20251001235258602.png" alt="image-20251001235258602"  />
+</a>
+</div>
+</p>
+<p>在linux则可以使用下面的命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>df -T
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251001235356981" href="http://picture.928330.xyz/typora/image-20251001235356981.png">
+<img src="http://picture.928330.xyz/typora/image-20251001235356981.png" alt="image-20251001235356981"  />
+</a>
+</div>
+</p>
+<h3 id="格式化">格式化
+</h3><p>在一个分区上创建文件系统的过程，就叫做<strong>格式化（Format）</strong></p>
+<p><strong>从技术上讲，格式化的核心就是在指定的分区上创建一套全新空白的文件系统</strong>，就像拿到一本空白的笔记本，在第一页画好目录的表格，为之后写内容做好组织规划</p>
+<p>不过为什么我们日常的体验是“格式化=擦除数据”呢？</p>
+<p>这完全取决于我们执行的是哪一种格式化，格式化主要分为两种：<strong>快速格式化</strong>和<strong>完全格式化</strong></p>
+<h4 id="快速格式化">快速格式化
+</h4><p><strong>操作系统只会擦除文件系统的索引区域，然后写入一套新的空白的索引，不会处理真正存储内容的数据区域</strong></p>
+<p>对操作系统来说，既然目录已经是空白的了，那它就认为这个分区上没有任何文件，因此硬盘看起来是空的</p>
+<p>但实际上，之前的所有数据都还原封不动地在磁盘上，只是失去了能够找到它们的索引信息</p>
+<p>也正因如此，数据恢复可能性非常高，数据恢复软件会跳过被删除的目录，直接扫描整个硬盘的数据区域，根据文件头信息和数据结构来重建出原始文件</p>
+<h4 id="完全格式化">完全格式化
+</h4><p><strong>既删除目录，也擦除所有内容</strong></p>
+<p>执行完全格式化，操作系统会做两件事：</p>
+<ol>
+<li>执行一次快速格式化，创建新的空白文件系统。</li>
+<li>从头到尾扫描整个分区，并向每一个扇区的每一个bit写入0</li>
+</ol>
+<p>这样一来，所有旧数据都会被毫无意义的0数据彻底覆盖掉。硬盘被真正地清空了，完全不能恢复</p>
+<h3 id="常见的文件系统类型">常见的文件系统类型
+</h3><h4 id="fat">FAT
+</h4><p><strong>全称File Allocation Table，文件分配表</strong></p>
+<p>结构简单，兼容性极佳，几乎所有主流操作系统和电子设备都支持，常用于U盘、SD卡、移动硬盘，作为跨平台数据交换的媒介</p>
+<p>FAT文件系统关键结构就是FAT，即文件分配表，作用就是记录磁盘上每个簇的使用情况和文件存储位置，簇是磁盘上最小的数据分配单位，由若干扇区组成</p>
+<p>FAT的分区大小=最大簇数×每簇大小，最大簇数由每个簇编号占用的位数决定，通常写在名字里，比如FAT12就是每个簇用12位表示，最大簇数2¹²=4096个，而每簇大小不太固定</p>
+<ul>
+<li>
+<p><strong>FAT16</strong></p>
+<p>非常早期的版本，在DOS和Windows 95时代流行，已经基本被淘汰</p>
+<p>最大仅支持2GB的分区（在某些系统中可达4GB）</p>
+</li>
+<li>
+<p><strong>FAT32</strong></p>
+<p>是FAT16的改进版本，但它依旧无法管理大于4GB的单个文件，并且最大分区支持也有限（Windows上限制为32GB，理论上可达2TB）</p>
+</li>
+<li>
+<p><strong>exFAT (Extended File Allocation Table)</strong></p>
+<p>由微软推出，专为解决FAT32的缺点</p>
+<p>它打破了4GB单文件和分区大小的限制，同时针对闪存介质的特性进行了优化，减少了不必要的写入操作</p>
+</li>
+</ul>
+<h4 id="ntfs">NTFS
+</h4><p><strong>全称New Technology File System，新技术文件系统</strong></p>
+<p>是Windows系统的标准文件系统，支持大文件和大分区，并提供文件权限管理、加密、日志、压缩等强大功能，可靠性和安全性高</p>
+<p>感兴趣可以看看我的另一篇博客：<a class="link" href="https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/#ntfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"  target="_blank" rel="noopener"
+    >NTFS系统
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<h4 id="refs">ReFS
+</h4><p><strong>全称Resilient File System，弹性文件系统</strong></p>
+<p>是微软为Windows Server系统推出的、旨在替代NTFS的新一代文件系统，但它的核心设计目标不是替代桌面版的NTFS，而是为数据中心和大规模存储提供更高的数据完整性和可用性</p>
+<p>它通过对元数据和可选的用户数据进行校验和来主动检测和修复数据损坏，其写入时复制（Copy-on-Write）机制确保了在写入过程中发生意外时，旧数据不会被破坏，极大地增强了数据恢复能力</p>
+<p>常用于Windows Server的存储空间和Hyper-V虚拟化场景</p>
+<h4 id="ext">ext
+</h4><p><strong>全称Extended File System，扩展文件系统</strong></p>
+<p>Linux系统的标准文件系统，用于几乎所有的Linux发行版，从桌面到服务器，<strong>以及安卓手机的内部存储</strong></p>
+<ul>
+<li>
+<p><strong>ext2</strong></p>
+<p>经典的早期版本，性能良好，但与FAT类似，缺少日志功能，在服务器等场景下可靠性不足</p>
+</li>
+<li>
+<p><strong>ext3</strong></p>
+<p>它在ext2的基础上加入了日志功能，在不改变底层结构的情况下，极大地提升了文件系统的可靠性，成为了许多Linux发行版的长期默认选项</p>
+</li>
+<li>
+<p><strong>ext4</strong></p>
+<p>当前的主流标准，它在前代基础上引入了多项重要改进，如Extents（优化大文件的存储方式，减少碎片并提升性能）、支持更大的文件和卷、更快的自检速度等，使其更现代化、性能更强</p>
+</li>
+</ul>
+<h4 id="btrfs">Btrfs
+</h4><p><strong>全称B-tree File System</strong></p>
+<p>是Linux的新一代文件系统，旨在替代ext系列文件系统，尤其适合企业级存储和虚拟化环境</p>
+<p>Btrfs内置了快照、校验和、数据压缩、写时复制以及多磁盘管理等功能，它非常灵活，允许动态地添加、删除设备和调整卷大小，目前已成为一些Linux发行版（如Fedora, openSUSE）的默认文件系统</p>
+<h4 id="xfs">XFS
+</h4><p><strong>全称Extended Filesystem X，扩展文件系统X</strong></p>
+<p>是一种高性能日志文件系统，最初由硅谷图形公司SGI为其IRIX操作系统开发，后来被Linux采用</p>
+<p>XFS的结构设计使其在文件数量和大小增长时，性能下降幅度很小，特别适合处理大文件和高并发读写场景</p>
+<p>因其稳定性和高吞吐量的特性，XFS成为了许多企业级Linux发行版（如Red Hat Enterprise Linux及其衍生版CentOS）的默认文件系统，尤其适用于数据库、媒体服务器和科学计算等场景</p>
+<h4 id="tmpfs">tmpfs
+</h4><p><strong>全称Temporary File System，临时文件系统</strong></p>
+<p>是Linux下的一种虚拟文件系统，完全驻留在内存中，用于存放临时文件</p>
+<p>数据不持久，重启后丢失，支持动态调整大小，常用于<code>/tmp</code>、<code>/run</code>等目录</p>
+<h4 id="devtmpfs">devtmpfs
+</h4><p><strong>全称Device Temporary File System，设备临时文件系统</strong></p>
+<p>是Linux内核专门为<code>/dev</code>目录提供的虚拟文件系统，用于管理设备节点</p>
+<p>在内存中动态生成，不占用硬盘，系统启动早期即可挂载，方便设备驱动初始化</p>
+<h4 id="hfs-与-apfs">HFS+ 与 APFS
+</h4><p><strong>HFS+全称Hierarchical File System Plus，分层文件系统增强版</strong></p>
+<p><strong>APFS全称Apple File System，苹果文件系统</strong></p>
+<p>他们都是苹果macOS系统的文件系统，HFS+是长期的标准，而APFS（Apple File System）是从2017年开始推出的新一代文件系统，专门为固态硬盘和闪存优化，性能和可靠性更强</p>
+<h2 id="卷volume">卷（Volume）
+</h2><p><strong>卷是将分区格式化后, 创建了文件系统, 能够被系统所识别和访问的存储区域</strong></p>
+<p>在最简单的情况下，一个卷和一个分区是一一对应的，比如在一块硬盘上划分了C、D两个分区，那么就有两个对应的卷</p>
+<p>但一个卷也可以跨越多个分区，甚至多块物理硬盘，例如RAID阵列，在操作系统看来就是一个跨越了多块物理盘的巨大逻辑卷</p>
+<h2 id="windows物理磁盘的管理模式">Windows物理磁盘的管理模式
+</h2><h3 id="基础磁盘-basic-disk">基础磁盘 (Basic Disk)
+</h3><p>这是Windows系统默认的磁盘类型，当我们初始化一块新硬盘时，系统默认会将其设置为基础磁盘</p>
+<p>它使用我们之前讨论过的传统分区表（MBR或GPT）来组织磁盘</p>
+<p>基础磁盘上的一个分区（或简单卷）不能跨越到多个物理磁盘上，每个分区都完全包含在一块物理硬盘的内部</p>
+<h3 id="动态磁盘-dynamic-disk">动态磁盘 (Dynamic Disk)
+</h3><p>这是Windows提供的一种更高级的磁盘管理模式，它提供了基础磁盘所不具备的许多高级功能</p>
+<p>动态磁盘不使用传统的分区表来定义卷，而是使用一个逻辑磁盘管理器（LDM，Logical Disk Manager）的数据库来跟踪所有动态卷的信息，这个数据库会被复制到系统中每一个动态磁盘上，以实现冗余</p>
+<p><strong>动态磁盘允许创建跨越多个物理硬盘的卷（这实际上就是一种软件RAID的实现，后面会讲到）</strong></p>
+<ul>
+<li>
+<p><strong>简单卷</strong></p>
+<p>功能上等同于基础磁盘上的一个分区，但它只能在动态磁盘上创建</p>
+</li>
+<li>
+<p><strong>跨区卷</strong></p>
+<p>将来自多个物理磁盘上的未分配空间合并成一个巨大的卷</p>
+<p>数据会先写满第一块盘的空间，然后再接着写到下一块盘，类似JBOD（Just a Bunch of Disks）概念</p>
+</li>
+<li>
+<p><strong>带区卷</strong></p>
+<p>将数据条带化地同时写入到多个物理磁盘上，以提高读写性能，等同于软件RAID0</p>
+</li>
+<li>
+<p><strong>镜像卷</strong></p>
+<p>将数据完全一致地写入到两块物理磁盘上，实现数据冗余，等同于软件RAID1</p>
+</li>
+<li>
+<p><strong>RAID-5 卷</strong></p>
+<p>将数据和奇偶校验信息条带化地分布到三个或更多的物理磁盘上，等同于软件RAID5</p>
+</li>
+</ul>
+<p>它无需昂贵的硬件RAID卡，就能在操作系统层面实现RAID功能，管理非常灵活</p>
+<p>但不好的是兼容性差，因为这是微软的专有技术，Linux和macOS系统通常无法原生识别动态磁盘卷</p>
+<p>此外，从动态磁盘转换回基础磁盘，需要删除磁盘上的所有卷，会导致数据丢失</p>
+<h2 id="驱动器drive">驱动器（Drive）
+</h2><p>驱动器是指可以存储和访问数据的存储单元，它可以是分区、卷或者磁盘</p>
+<p><strong>物理驱动器</strong>：真实存在的硬盘或固态盘</p>
+<p><strong>逻辑驱动器</strong>：操作系统识别后的分区或者卷</p>
+<p><strong>虚拟驱动器</strong>：通过工具在内存中创建的模拟磁盘，操作系统可像对待真实磁盘一样访问</p>
+<p>每一个驱动器都会有一个驱动器号，是Windows系统为方便用户访问而给卷分配的标识符，例如<code>C:</code>、<code>D:</code></p>
+<p>我们完整看到的驱动器号过程应该是这样的：</p>
+<p><strong>物理硬盘 → 分区 → 文件系统  → 卷 → 挂载 → 驱动器</strong></p>
+<p>比如我们插入U盘，系统会识别分区（U盘通常只有一个分区），然后作为卷挂载，它是实打实的新的硬盘空间</p>
+<p>而当用FTKImager这样的工具挂载镜像时，软件会在内存中创建一个虚拟磁盘，Windows会识别其中的卷，并给它分配一个驱动器号，之后就能在“我的电脑”里看到一个新盘符，空间来源就是镜像文件</p>
+<h2 id="挂载mount">挂载（Mount）
+</h2><p><strong>挂载是将存储设备（磁盘、分区、镜像、容器等）接入文件系统，从而让用户和程序能够访问其内容的过程</strong></p>
+<p>挂载前，设备的内容是孤立的，操作系统无法通过普通路径访问</p>
+<p>挂载后，就可以通过某个路径访问设备里的数据了</p>
+<p><strong>而挂载点就是操作系统用来访问挂载设备的路径或位置</strong>，在Linux通常是一个空目录，比如 <code>/mnt/usb</code>、<code>/media/cdrom</code>，而Windows默认挂载方式是分配驱动器号，也可以挂载到空目录</p>
+<h3 id="windows挂载">windows挂载
+</h3><p>插入U盘、使用软件挂载镜像应该都很熟悉了，这里正好借着我添加移动硬盘的过程来说一下：</p>
+<p>首先win+x组合键调出功能栏，打开磁盘管理</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251002005926909" href="http://picture.928330.xyz/typora/image-20251002005926909.png">
+<img src="http://picture.928330.xyz/typora/image-20251002005926909.png" alt="image-20251002005926909"  />
+</a>
+</div>
+</p>
+<p>新的硬盘会显示未分配空间，是灰色的（我的分配好了），在这上面右键，选择新建简单卷：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251002012039643" href="http://picture.928330.xyz/typora/image-20251002012039643.png">
+<img src="http://picture.928330.xyz/typora/image-20251002012039643.png" alt="image-20251002012039643"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251002012052615" href="http://picture.928330.xyz/typora/image-20251002012052615.png">
+<img src="http://picture.928330.xyz/typora/image-20251002012052615.png" alt="image-20251002012052615"  />
+</a>
+</div>
+</p>
+<p>一直下一步默认，其中会让你选择驱动器符号和填写磁盘名称，按自己的喜好来就行</p>
+<h3 id="linux挂载">Linux挂载
+</h3><p><strong>命令行挂载</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mount /dev/sdb1 /mnt/usb
+</span></span></code></pre></div><p><code>/dev/sdb1</code>是要挂载的目标，<code>/mnt/usb</code>是挂载点</p>
+<p><strong>查看挂载信息</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mount        <span style="color:#7f848e"># 查看当前所有挂载</span>
+</span></span><span style="display:flex;"><span>df -h        <span style="color:#7f848e"># 查看挂载的设备及占用空间</span>
+</span></span></code></pre></div><p><strong>卸载设备</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>umount /mnt/usb   <span style="color:#7f848e"># 或 umount /dev/sdb1</span>
+</span></span></code></pre></div><p>Linux的文件系统是树结构，所有挂载都是挂在这个树上</p>
 <h1 id="raid级别">RAID级别
-</h1><p>不同的数据组织方式和冗余策略，形成了不同的RAID级别</p>
+</h1><p>ok啊，终于进入正题了</p>
+<p>根据不同的数据组织方式和冗余策略，形成有不同的RAID级别</p>
 <p>找资料的时候看见一张特好玩的图：</p>
 <p>
 <div class="post-img-view">
@@ -892,7 +1254,7 @@
 </div>
 <h2 id="raid0条带化">RAID0：条带化
 </h2><p>2个以上硬盘并联</p>
-<p>将数据分块，无冗余地并行写入阵列中的所有磁盘，空间利用率高高的</p>
+<p>将数据分块，无冗余地并行写入阵列中的所有磁盘，空间利用率高高的，就是磁盘本身的容量</p>
 <p>读写性能极高，是所有RAID级别中理论速度最快的</p>
 <p>但也因为没有任何数据冗余，任何一块磁盘损坏都会导致所有数据的丢失</p>
 <p>
@@ -904,7 +1266,7 @@
 </p>
 <h2 id="raid1镜像">RAID1：镜像
 </h2><p>将数据完整地复制到另一块或多块磁盘上，形成互为镜像的副本，提供了很高的数据安全性</p>
-<p>但其磁盘空间利用率极低，并且写入性能相比单盘没有提升（没有使用条带化），是比较不行的冗余方式</p>
+<p>但其磁盘空间利用率只有一半，并且写入性能相比单盘没有提升（没有使用条带化），是比较不行的冗余方式</p>
 <p>
 <div class="post-img-view">
 <a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/250px-RAID_1.svg.png">
@@ -913,8 +1275,10 @@
 </div>
 </p>
 <h2 id="raid2位级条带化汉明码校验">RAID2：位级条带化+汉明码校验
-</h2><p>在位（bit）级别上对数据进行条带化，并使用专门的磁盘存储汉明码进行错误校验，实时纠正单位数据错误</p>
-<p>但这种方式实现复杂，需要较多磁盘作为校验盘，随着现代硬盘自带纠错功能，该级别已被市场淘汰了</p>
+</h2><p>在<strong>位</strong>级别上对数据进行条带化，并使用专门的磁盘存储汉明码进行错误校验，实时纠正单位数据错误</p>
+<p>这种方式实现复杂，可用空间是(N-P)*S，其中N是总盘数，P是校验盘数，S是盘容量</p>
+<p>校验盘的数量P与数据盘的数量有关，关系有点复杂，就不展开了</p>
+<p>随着现代硬盘自带纠错功能，该级别已被市场淘汰了</p>
 <p>
 <div class="post-img-view">
 <a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/RAID2_arch.svg/500px-RAID2_arch.svg.png">
@@ -923,8 +1287,9 @@
 </div>
 </p>
 <h2 id="raid3块级条带化专用校验盘">RAID3：块级条带化+专用校验盘
-</h2><p>在字节（byte）级别上进行数据条带化，使用一块专用的磁盘来存储所有数据的奇偶校验信息</p>
-<p>至少使用三块硬盘，由于数据按字节分布在所有数据盘上，任何读写操作都需要所有磁盘协同工作，这使其不适合处理大量随机的小型读写请求，适合大块连续数据的读写，例如未压缩视频编辑</p>
+</h2><p>在<strong>字节</strong>级别上进行数据条带化，使用一块专用的磁盘来存储所有数据的奇偶校验信息，可用空间是(N-1)*S</p>
+<p>至少使用三块硬盘，如果只有两块就和RAID1一样了</p>
+<p>由于数据按字节分布在所有数据盘上，任何读写操作都需要所有磁盘协同工作，这使其不适合处理大量随机的小型读写请求，适合大块连续数据的读写，例如未压缩视频编辑</p>
 <p>但由于所有校验操作都集中在一块专用盘上，导致高并发随机写入的性能被大幅限制，因此也已很少使用</p>
 <p>
 <div class="post-img-view">
@@ -934,7 +1299,8 @@
 </div>
 </p>
 <h2 id="raid4块级条带化专用校验盘">RAID4：块级条带化+专用校验盘
-</h2><p>在块（block）级别上对数据进行条带化，并同样使用一块专用磁盘存储奇偶校验信息</p>
+</h2><p>在<strong>块</strong>级别上对数据进行条带化，并同样使用一块专用磁盘存储奇偶校验信息，所以可用空间也是(N-1)*S</p>
+<p>至少使用三块盘，理由和RAID3一样</p>
 <p>相比RAID3，改善了小文件的读取性能，因为读取请求可以由单个数据盘独立完成</p>
 <p>但写入操作时，这块专用的校验盘依然制约了性能，核心问题并未得到解决</p>
 <p>
@@ -945,8 +1311,10 @@
 </div>
 </p>
 <h2 id="raid5分布式奇偶校验">RAID5：分布式奇偶校验
-</h2><p>在块级别上条带化数据，将奇偶校验信息交错地分布到所有磁盘上，性能、容量和安全性之间有很好的平衡</p>
-<p>至少使用三块硬盘，允许单块磁盘损坏而不丢失数据，因为后续的读取可以通过阵列中剩余的数据和奇偶校验块计算出来</p>
+</h2><p>在<strong>块</strong>级别上条带化数据，将奇偶校验信息交错地分布到所有磁盘上，性能、容量和安全性之间有很好的平衡</p>
+<p>因为奇偶校验信息占据的空间刚好是一块盘，所以可用空间也是(N-1)*S</p>
+<p>至少使用三块硬盘，如果只有两块的话就无法存储完整的条带信息了</p>
+<p>它可以在单块磁盘损坏时不丢失数据，因为后续的读取可以通过阵列中剩余的数据和奇偶校验块计算出来</p>
 <p>但由于奇偶校验计算是在整个条带上进行的，其每个写入操作都需要重新计算校验值，性能会有一定损失</p>
 <p>
 <div class="post-img-view">
@@ -1200,6 +1568,7 @@
 <p><strong>至此，我们就掌握了完整的RAID5写入标准数据与校验数据的方式</strong></p>
 <h2 id="raid6双分布式奇偶校验">RAID6：双分布式奇偶校验
 </h2><p>在RAID5的基础上增加了第二个独立的校验块，并将两种校验信息都交错分布在所有磁盘上</p>
+<p>有两组独立的校验信息，占用的总空间等于两块磁盘的容量，所以可用空间是(N-2)*S</p>
 <p>至少需要4块磁盘，可以容忍两块磁盘同时损坏</p>
 <p>但也因为要进行两次校验计算，RAID6的写入性能，尤其是小数据块的随机写入，通常低于RAID5</p>
 <p>
@@ -1212,7 +1581,7 @@
 <h2 id="raid10-10">RAID10 (1+0)
 </h2><p>先将磁盘两两配对做RAID1（镜像），然后再将这些镜像对组合成一个RAID0（条带化）</p>
 <p>兼具RAID1的高可靠性和RAID0的高性能，只要每个镜像对中至少有一块磁盘正常，数据就不会丢失</p>
-<p>但成本高，磁盘利用率仅50%</p>
+<p>但成本高，且磁盘利用率和RAID1一样，只有50%</p>
 <p>eg：</p>
 <div class="table-wrapper"><table>
   <thead>
@@ -1246,6 +1615,7 @@
 <h2 id="raid50-50">RAID50 (5+0)
 </h2><p>先将磁盘分组构建多个RAID5阵列，再将这些RAID5阵列组合成一个RAID0</p>
 <p>每个子RAID5组都允许坏一块盘，提供了比单个RAID5更高的性能和更好的容错能力</p>
+<p>可用空间是K*(M-1)*S，K是RAID5子阵列的数量，M是每个子阵列中的磁盘数量</p>
 <p>eg：</p>
 <div class="table-wrapper"><table>
   <thead>
@@ -1285,6 +1655,8 @@
 <h2 id="raid60-60">RAID60 (6+0)
 </h2><p>先将磁盘分组构建多个RAID6阵列，再将这些RAID6阵列组合成一个RAID0</p>
 <p>每个子RAID6组都允许坏两块盘，提供了极高的性能和顶级的容错能力</p>
+<p>可用空间是K*(M-2)*S</p>
+<p>eg：</p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -1350,9 +1722,9 @@
 </a>
 </div>
 </p>
-<h3 id="使用usf进行恢复">使用USF进行恢复
+<h3 id="usf">USF
 </h3><p>这个工具强到离谱，速度快而且非常自动化</p>
-<h4 id="自动分析">自动分析
+<h4 id="自动充足">自动充足
 </h4><p>打开三个镜像：</p>
 <p>
 <div class="post-img-view">
@@ -1391,11 +1763,13 @@
 <p>RAID5阵列的组件</p>
 </li>
 </ul>
+<p>这三块5.40GB硬盘组成的RAID5阵列，可用容量为<code>(3-1) * 5.40 GB = 10.80 GB</code>，也就是组好的SG7:2的大小</p>
+<p>而下面重组完成的卷大小是10GB，非常合理</p>
 <p>右键对应的RAID分区，选择查看信息，可以看到具体的RAID情况：</p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928172229195" href="http://picture.928330.xyz/typora/image-20250928172229195.png">
-<img src="http://picture.928330.xyz/typora/image-20250928172229195.png" alt="image-20250928172229195"  />
+<a data-fancybox="gallery" data-caption="image-20250930162538750" href="http://picture.928330.xyz/typora/image-20250930162538750.png">
+<img src="http://picture.928330.xyz/typora/image-20250930162538750.png" alt="image-20250930162538750"  />
 </a>
 </div>
 </p>
@@ -1415,7 +1789,7 @@
 </a>
 </div>
 </p>
-<h4 id="手动分析">手动分析
+<h4 id="手动重组">手动重组
 </h4><p>除了自动分析，也能使用手动分析重组功能：</p>
 <p>
 <div class="post-img-view">
@@ -1454,9 +1828,18 @@
 </a>
 </div>
 </p>
-<p>不知道为什么导出了也不能火眼仿真，学长他们最后是使用Xway分析的，</p>
+<p>火眼可以正常解析：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225553541" href="http://picture.928330.xyz/typora/image-20250929225553541.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225553541.png" alt="image-20250929225553541"  />
+</a>
+</div>
+</p>
+<p>但不知道为什么不能进行火眼仿真</p>
 <h3 id="r-studio">R-Studio
-</h3><p>
+</h3><p>点击打开镜像，把三个镜像都导进去，然后再使用右上角的RAID功能：</p>
+<p>
 <div class="post-img-view">
 <a data-fancybox="gallery" data-caption="image-20250928204440006" href="http://picture.928330.xyz/typora/image-20250928204440006.png">
 <img src="http://picture.928330.xyz/typora/image-20250928204440006.png" alt="image-20250928204440006"  />
@@ -1522,7 +1905,27 @@
 </a>
 </div>
 </p>
-<p>重组后才能看到文件系统，不过我做的过程里只需要扫描磁盘结构之后就能看到了，不知道这一步是什么意思，可能是方便之后导出镜像？</p>
+<div class="alert alert-note">
+    <div class="alert-header">
+        <span class="alert-icon">
+            📝
+        </span>
+        <span class="alert-title">
+            Note
+        </span>
+    </div>
+    <div class="alert-content">
+        <p>这里也能看见三个盘的起始的偏移量都是4832886784字节，条带大小是128扇区，符合RAID5的规范</p>
+<p>但回顾之前使用USF的分析结果，那边说偏移量是9439232扇区，64KB</p>
+<p><strong>其实这里涉及到计算：一个扇区的大小是512字节</strong></p>
+<p>（以防你是跳着看的：<a class="link" href="#%e6%89%87%e5%8c%ba%ef%bc%88Sector%ef%bc%89" >扇区
+    
+</a>）</p>
+<p>由此能计算出他们其实是一样的：</p>
+<p><strong>偏移量 = 9439232扇区*512字节 = 4832886784字节</strong></p>
+<p><strong>条带大小 = 128扇区*512字节 = 65536字节 = 64K字节</strong></p></div>
+</div>
+<p>据说重组后才能看到文件系统，不过我做的过程里只需要扫描磁盘结构之后就能看到了，不知道这一步是什么意思，可能是方便之后导出镜像？</p>
 <p>总之以后注意一下，遇到问题再重组一下</p>
 <h4 id="导出镜像">导出镜像
 </h4><p>右键RAID5选择制作镜像文件：</p>
@@ -1533,6 +1936,7 @@
 </a>
 </div>
 </p>
+<p>这里可以选择镜像文件的格式：</p>
 <p>
 <div class="post-img-view">
 <a data-fancybox="gallery" data-caption="image-20250928201947883" href="http://picture.928330.xyz/typora/image-20250928201947883.png">
@@ -1540,6 +1944,164 @@
 </a>
 </div>
 </p>
+<p>导出后还会附赠一个说明文档：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225504653" href="http://picture.928330.xyz/typora/image-20250929225504653.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225504653.png" alt="image-20250929225504653"  />
+</a>
+</div>
+</p>
+<p>火眼能够正常解析：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225516891" href="http://picture.928330.xyz/typora/image-20250929225516891.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225516891.png" alt="image-20250929225516891"  />
+</a>
+</div>
+</p>
+<h3 id="火眼证据分析">火眼证据分析
+</h3><p>需要在工具箱里面下载使用：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929214704136" href="http://picture.928330.xyz/typora/image-20250929214704136.png">
+<img src="http://picture.928330.xyz/typora/image-20250929214704136.png" alt="image-20250929214704136"  />
+</a>
+</div>
+</p>
+<p>使用信息查询能快速分析RAID的各种信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250930155819686" href="http://picture.928330.xyz/typora/image-20250930155819686.png">
+<img src="http://picture.928330.xyz/typora/image-20250930155819686.png" alt="image-20250930155819686"  />
+</a>
+</div>
+</p>
+<p>这里也是使用扇区来表示偏移量的</p>
+<p>使用重组功能，勾选自动解析，就能自动重组了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929214819769" href="http://picture.928330.xyz/typora/image-20250929214819769.png">
+<img src="http://picture.928330.xyz/typora/image-20250929214819769.png" alt="image-20250929214819769"  />
+</a>
+</div>
+</p>
+<p>导出的文件是<code>.001</code>格式，会放在一个火眼生成的虚拟驱动器里：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929215206710" href="http://picture.928330.xyz/typora/image-20250929215206710.png">
+<img src="http://picture.928330.xyz/typora/image-20250929215206710.png" alt="image-20250929215206710"  />
+</a>
+</div>
+</p>
+<p>这个文件也是能被正常解析的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225407141" href="http://picture.928330.xyz/typora/image-20250929225407141.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225407141.png" alt="image-20250929225407141"  />
+</a>
+</div>
+</p>
+<p>比较坑的是生成的虚拟驱动器想要关掉很麻烦，火眼没有这个功能，windows的磁盘管理也看不见这个驱动器</p>
+<p>试了好几次，我的步骤是：</p>
+<p><strong>1.手动删除生成的镜像（剪切也行，反正别让他在里面，让这个虚拟驱动器里面没有东西）</strong></p>
+<p><strong>2.在重组页面点击“清空”，把拖进去重组的镜像都删除</strong></p>
+<p><strong>3.再次点击生成文件，此时提示找不到信息，虚拟驱动器也随之消失了</strong></p>
+<p>据客服所说，关掉RAID重组工具页面就会自动卸载，不过我没试过</p>
+<h2 id="2019">2019
+</h2><p>给出的是四个机械硬盘镜像</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250930103649432" href="http://picture.928330.xyz/typora/image-20250930103649432.png">
+<img src="http://picture.928330.xyz/typora/image-20250930103649432.png" alt="image-20250930103649432"  />
+</a>
+</div>
+</p>
+<h3 id="ftk--美亚取证大师">FTK + 美亚取证大师
+</h3><p>先使用当时最广为流传的解法</p>
+<p>使用FTK挂载这四个镜像（选择每个盘的.E01就可以，后面的会自动识别的）：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929010420615" href="http://picture.928330.xyz/typora/image-20250929010420615.png">
+<img src="http://picture.928330.xyz/typora/image-20250929010420615.png" alt="image-20250929010420615"  />
+</a>
+</div>
+</p>
+<p>挂载完成后可以在检材目录下看见一个<code>.adcf</code>文件：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225647571" href="http://picture.928330.xyz/typora/image-20250929225647571.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225647571.png" alt="image-20250929225647571"  />
+</a>
+</div>
+</p>
+<p><strong>这个<code>.adcf</code>文件是FTK创建的缓存/差异文件</strong></p>
+<p>使用<code>writable</code>(可写入)模式时，为了保护原文件不被修改，FTK会把所有写入操作都记录在这个文件中</p>
+<p>挂载过程里你可能可能看见这样的错误提示：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251002013300975" href="http://picture.928330.xyz/typora/image-20251002013300975.png">
+<img src="http://picture.928330.xyz/typora/image-20251002013300975.png" alt="image-20251002013300975"  />
+</a>
+</div>
+</p>
+<p>错误提示表明这个已经存在的<code>HDD1.E01.adcf</code>文件已经损坏，删掉再挂载即可，会生成一个新的</p>
+<p>不知道为什么，挂载之后在文件管理器可以看见，但在磁盘管理看不见这两个驱动器：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929012450186" href="http://picture.928330.xyz/typora/image-20250929012450186.png">
+<img src="http://picture.928330.xyz/typora/image-20250929012450186.png" alt="image-20250929012450186"  />
+</a>
+</div>
+</p>
+<p>无伤大雅，美亚是可以识别到的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929004556468" href="http://picture.928330.xyz/typora/image-20250929004556468.png">
+<img src="http://picture.928330.xyz/typora/image-20250929004556468.png" alt="image-20250929004556468"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929004610756" href="http://picture.928330.xyz/typora/image-20250929004610756.png">
+<img src="http://picture.928330.xyz/typora/image-20250929004610756.png" alt="image-20250929004610756"  />
+</a>
+</div>
+</p>
+<p>全都勾选后，自动计算序列，要一点时间：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929010516351" href="http://picture.928330.xyz/typora/image-20250929010516351.png">
+<img src="http://picture.928330.xyz/typora/image-20250929010516351.png" alt="image-20250929010516351"  />
+</a>
+</div>
+</p>
+<p>只有一种可能啊，那就是正确的了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929011513915" href="http://picture.928330.xyz/typora/image-20250929011513915.png">
+<img src="http://picture.928330.xyz/typora/image-20250929011513915.png" alt="image-20250929011513915"  />
+</a>
+</div>
+</p>
+<p>双击应用这个序列：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929011801653" href="http://picture.928330.xyz/typora/image-20250929011801653.png">
+<img src="http://picture.928330.xyz/typora/image-20250929011801653.png" alt="image-20250929011801653"  />
+</a>
+</div>
+</p>
+<p>已经还原了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929012403125" href="http://picture.928330.xyz/typora/image-20250929012403125.png">
+<img src="http://picture.928330.xyz/typora/image-20250929012403125.png" alt="image-20250929012403125"  />
+</a>
+</div>
+</p>
+<p>这几个磁盘都很大，或许是挂载之后让美亚重组更方便了，才能如此迅速扫出来</p>
 
 </section>
 
@@ -1549,6 +2111,10 @@
     <section class="article-tags">
         
             <a href="/tags/forensics/">Forensics</a>
+        
+            <a href="/tags/windows/">Windows</a>
+        
+            <a href="/tags/linux/">Linux</a>
         
     </section>
 
@@ -1563,7 +2129,7 @@
 
 
         <span>
-            最后更新于 2025-09-28
+            最后更新于 2025-10-02
         </span>
     </section></footer>
 
@@ -1639,25 +2205,6 @@
             
                 
 <article class="has-image">
-    <a href="/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/LaTeX_logo.svg.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/LaTeX_logo.svg.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">LaTeX：不太精通的教程</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/">
         
         
@@ -1670,6 +2217,25 @@
 
         <div class="article-details">
             <h2 class="article-title">Linux命令（文件管理篇）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/LaTeX_logo.svg.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/LaTeX_logo.svg.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">LaTeX：不太精通的教程</h2>
         </div>
     </a>
 </article>
