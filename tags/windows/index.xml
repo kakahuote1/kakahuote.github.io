@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 02 Oct 2025 02:01:40 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/windows/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 07 Oct 2025 15:03:18 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/windows/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>RAID</title>
         <link>https://blog.928330.xyz/p/raid/</link>
         <pubDate>Sun, 28 Sep 2025 22:52:36 +0800</pubDate>
@@ -554,11 +554,20 @@
 &lt;p&gt;&lt;strong&gt;物理驱动器&lt;/strong&gt;：真实存在的硬盘或固态盘&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;逻辑驱动器&lt;/strong&gt;：操作系统识别后的分区或者卷&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;虚拟驱动器&lt;/strong&gt;：通过工具在内存中创建的模拟磁盘，操作系统可像对待真实磁盘一样访问&lt;/p&gt;
-&lt;p&gt;每一个驱动器都会有一个驱动器号，是Windows系统为方便用户访问而给卷分配的标识符，例如&lt;code&gt;C:&lt;/code&gt;、&lt;code&gt;D:&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;每一个驱动器都会有一个驱动器号&lt;/strong&gt;，是Windows系统为方便用户访问而给卷分配的标识符，例如&lt;code&gt;C:&lt;/code&gt;、&lt;code&gt;D:&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;我们完整看到的驱动器号过程应该是这样的：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;物理硬盘 → 分区 → 文件系统  → 卷 → 挂载 → 驱动器&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;比如我们插入U盘，系统会识别分区（U盘通常只有一个分区），然后作为卷挂载，它是实打实的新的硬盘空间&lt;/p&gt;
+&lt;p&gt;比如我们插入U盘，系统会识别分区，然后作为卷挂载，它是实打实的新的硬盘空间&lt;/p&gt;
 &lt;p&gt;而当用FTKImager这样的工具挂载镜像时，软件会在内存中创建一个虚拟磁盘，Windows会识别其中的卷，并给它分配一个驱动器号，之后就能在“我的电脑”里看到一个新盘符，空间来源就是镜像文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;驱动器不会用盘符标识，&lt;strong&gt;而是通过设备文件和挂载点来管理&lt;/strong&gt;，比如&lt;code&gt;/dev/sda1&lt;/code&gt;挂载到&lt;code&gt;/home&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;挂载mount&#34;&gt;挂载（Mount）
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;挂载是将存储设备（磁盘、分区、镜像、容器等）接入文件系统，从而让用户和程序能够访问其内容的过程&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;挂载前，设备的内容是孤立的，操作系统无法通过普通路径访问&lt;/p&gt;
@@ -1351,7 +1360,7 @@
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
-&lt;h3 id=&#34;火眼证据分析&#34;&gt;火眼证据分析
+&lt;h3 id=&#34;弘连火眼证据分析&#34;&gt;弘连火眼证据分析
 &lt;/h3&gt;&lt;p&gt;需要在工具箱里面下载使用：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -1409,7 +1418,7 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;h3 id=&#34;ftk--美亚取证大师&#34;&gt;FTK + 美亚取证大师
-&lt;/h3&gt;&lt;p&gt;先使用当时最广为流传的解法&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;没找到其他办法，可能是因为这是硬RAID？&lt;/p&gt;
 &lt;p&gt;使用FTK挂载这四个镜像（选择每个盘的.E01就可以，后面的会自动识别的）：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;

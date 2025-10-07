@@ -7,7 +7,1692 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 02 Oct 2025 02:01:40 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 07 Oct 2025 15:03:18 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>逆向基础1：内存与汇编</title>
+        <link>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/</link>
+        <pubDate>Tue, 07 Oct 2025 14:46:52 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/42ba84e45ada7162acccf1dd3f2b6d9c.jpg" alt="Featured image of post 逆向基础1：内存与汇编" /&gt;&lt;p&gt;早就想学了，正好学校选修了这门课，跟着老师的进度记录一下&lt;/p&gt;
+&lt;h1 id=&#34;体系结构&#34;&gt;体系结构
+&lt;/h1&gt;&lt;h2 id=&#34;x86-与-x64&#34;&gt;x86 与 x64
+&lt;/h2&gt;&lt;h3 id=&#34;x86focusia-32&#34;&gt;x86（focus：IA-32）
+&lt;/h3&gt;&lt;p&gt;一个基于Intel8086处理器，向后兼容的指令集体系结构（ISA，Instruction Set Architecture）的总称&lt;/p&gt;
+&lt;p&gt;我们通常所说的x86逆向，主要指的是其32位版本，即&lt;strong&gt;IA-32&lt;/strong&gt;（Intel Architecture, 32-bit）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IA-32架构有三种主要操作模式：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实模式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;16位运行环境，是早期MS-DOS等操作系统使用的模式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;保护模式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;现代操作系统所采用的模式，支持虚拟内存、分页等高级特性，为程序提供了独立的、受保护的内存空间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;系统管理模式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用于执行固件中的特殊系统管理代码&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;x64&#34;&gt;x64
+&lt;/h3&gt;&lt;p&gt;也称为x86-64，是x86体系结构的64位扩展，它完全兼容IA-32，意味着32位程序可以在64位系统上运行&lt;/p&gt;
+&lt;h2 id=&#34;字节序&#34;&gt;字节序
+&lt;/h2&gt;&lt;p&gt;字节序定义了多字节数据（如一个4字节的整数）在内存中是如何排列的&lt;/p&gt;
+&lt;h3 id=&#34;小端序&#34;&gt;小端序
+&lt;/h3&gt;&lt;p&gt;数据的低位字节存储在内存的低地址处&lt;/p&gt;
+&lt;p&gt;这是Intel x86/x64架构使用的模式，因其电路设计和数据处理效率较高&lt;/p&gt;
+&lt;h3 id=&#34;大端序&#34;&gt;大端序
+&lt;/h3&gt;&lt;p&gt;数据的高位字节存储在内存的低地址处&lt;/p&gt;
+&lt;p&gt;这种方式更符合人类的阅读习惯，常见于一些RISC架构的处理器&lt;/p&gt;
+&lt;h3 id=&#34;一个例子&#34;&gt;一个例子
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现在需要存储一个4字节的整数&lt;code&gt;0x12345678&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;内存地址&lt;/th&gt;
+          &lt;th&gt;大端序存储&lt;/th&gt;
+          &lt;th&gt;小端序存储&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;低地址&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;12&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;78&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;↓&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;34&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;56&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;↓&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;56&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;34&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;高地址&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;78&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;12&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;在逆向分析中，内存二进制地址方向是从上至下，从左至右增大&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;因此，当我们在内存窗口看到&lt;code&gt;78 56 34 12&lt;/code&gt;时，须将其理解为&lt;code&gt;0x12345678&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ia-32-内存&#34;&gt;IA-32 内存
+&lt;/h1&gt;&lt;h2 id=&#34;内存模型&#34;&gt;内存模型
+&lt;/h2&gt;&lt;h3 id=&#34;平面内存模型&#34;&gt;平面内存模型
+&lt;/h3&gt;&lt;p&gt;现代操作系统普遍采用的模型&lt;/p&gt;
+&lt;p&gt;程序的所有部分（代码、数据、栈）都位于一个连续统一的线性地址空间中&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251005111551905&#34; href=&#34;http://picture.928330.xyz/typora/image-20251005111551905.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251005111551905.png&#34; alt=&#34;image-20251005111551905&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;分段内存模型&#34;&gt;分段内存模型
+&lt;/h3&gt;&lt;p&gt;程序被划分为多个独立的段，比如有代码段、数据段、栈段等&lt;/p&gt;
+&lt;p&gt;一个逻辑地址由&lt;strong&gt;段选择器&lt;/strong&gt;和&lt;strong&gt;段内偏移&lt;/strong&gt;两部分组成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;逻辑地址&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;段寄存器中的段选择器&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;段选择子&lt;/span&gt; + &lt;span style=&#34;color:#e06c75&#34;&gt;段内偏移量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;段选择子是一个16位的值，它存放在段寄存器里，二进制结构如下：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;保护模式篇——段描述符与段选择子- 寂静的羽夏- 博客园&#34; href=&#34;http://picture.928330.xyz/typora/o_2109200226344-2.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/o_2109200226344-2.png&#34; alt=&#34;保护模式篇——段描述符与段选择子- 寂静的羽夏- 博客园&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;位段&lt;/th&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Index&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;描述符索引&lt;/td&gt;
+          &lt;td&gt;表示该段描述符在描述符表中的序号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;TI&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;表标志&lt;/td&gt;
+          &lt;td&gt;指示去哪个描述符表查段描述符（0是GDT，1是LDT）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;RPL&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;请求特权级&lt;/td&gt;
+          &lt;td&gt;用于访问权限控制（0最高，3最低）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;而汇编代码里一般只写偏移量，段选择器是隐含的，CPU自动知道用哪个段寄存器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;比如&lt;code&gt;mov EAX, [0x0010]&lt;/code&gt;，就相当于是&lt;code&gt;mov EAX, DS:[0x0010]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;汇编语句类型&lt;/th&gt;
+          &lt;th&gt;默认段寄存器&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;mov eax, [offset]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;DS&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;mov [offset], eax&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;DS&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;栈操作（&lt;code&gt;push&lt;/code&gt; / &lt;code&gt;pop&lt;/code&gt;）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;SS&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;代码取指令&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CS&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251005111539852&#34; href=&#34;http://picture.928330.xyz/typora/image-20251005111539852.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251005111539852.png&#34; alt=&#34;image-20251005111539852&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;分段内存模型的内存管理&#34;&gt;分段内存模型的内存管理
+&lt;/h2&gt;&lt;p&gt;对于分段内存模型，不同操作模式（实模式/保护模式）下，内存管理方式和寻址模式存在差异&lt;/p&gt;
+&lt;h3 id=&#34;实模式下的内存管理&#34;&gt;实模式下的内存管理
+&lt;/h3&gt;&lt;h4 id=&#34;管理方式&#34;&gt;管理方式
+&lt;/h4&gt;&lt;p&gt;实模式的内存管理方式非常简单，可以看作是一种特殊的分段模型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;有20位地址总线，CPU能够访问的物理内存上限为1MB的地址空间&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内存被划分为一系列64KB大小的段&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;程序使用的地址由两部分组成：&lt;/p&gt;
+&lt;p&gt;一个16位的&lt;strong&gt;段选择器&lt;/strong&gt;和一个16位的&lt;strong&gt;偏移地址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通过将段选择器的值左移4位，相当于乘以16（因为地址线是20位），加上16位的偏移地址得到物理地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;物理地址&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;-&lt;span style=&#34;color:#e06c75&#34;&gt;bit&lt;/span&gt;) = &lt;span style=&#34;color:#e06c75&#34;&gt;段选择器&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt;-&lt;span style=&#34;color:#e06c75&#34;&gt;bit&lt;/span&gt;)*&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt; + &lt;span style=&#34;color:#e06c75&#34;&gt;偏移量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt;-&lt;span style=&#34;color:#e06c75&#34;&gt;bit&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251005111518978&#34; href=&#34;http://picture.928330.xyz/typora/image-20251005111518978.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251005111518978.png&#34; alt=&#34;image-20251005111518978&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;示例&#34;&gt;示例
+&lt;/h4&gt;&lt;p&gt;假设段寄存器&lt;code&gt;DS&lt;/code&gt;的值为&lt;code&gt;0x1000&lt;/code&gt;，指令要访问的偏移地址是&lt;code&gt;0x0123&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CPU取出段选择器的值：&lt;code&gt;0x1000&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将其左移4位：&lt;code&gt;0x10000&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;加上偏移地址：&lt;code&gt;0x10000 + 0x0123&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;最终得到的物理地址是&lt;code&gt;0x10123&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实模式没有内存保护机制，任何程序都可以访问全部1MB的内存空间，一个程序的错误可能会导致整个系统崩溃，也不支持虚拟内存等现代操作系统的核心功能&lt;/p&gt;
+&lt;h3 id=&#34;保护模式下的内存管理&#34;&gt;保护模式下的内存管理
+&lt;/h3&gt;&lt;h4 id=&#34;总体流程&#34;&gt;总体流程
+&lt;/h4&gt;&lt;p&gt;在保护模式下，我们代码中使用的地址（逻辑地址）需要经过CPU的转换才能访问到真正的物理内存&lt;/p&gt;
+&lt;p&gt;这个过程对程序是透明的&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;保护模式的地址管理必须使用分段，另外也可以选择使用分页&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;下图是完整的地址访问流程：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251005111658646&#34; href=&#34;http://picture.928330.xyz/typora/image-20251005111658646.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251005111658646.png&#34; alt=&#34;image-20251005111658646&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;逻辑地址--线性地址&#34;&gt;逻辑地址 → 线性地址
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;逻辑地址的段选择器告诉CPU该去哪一个描述符表（GDT/LDT）查询得到段描述符&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;段描述符&lt;/strong&gt;里存有&lt;strong&gt;段基址&lt;/strong&gt;、段界限、访问权限等内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;线性地址&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;段基址&lt;/span&gt; + &lt;span style=&#34;color:#e06c75&#34;&gt;偏移量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;线性地址--物理地址&#34;&gt;线性地址 → 物理地址
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;如果没有开启分页机制&lt;/strong&gt;**，那么：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;物理地址&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;线性地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是现代操作系统一般都启用了分页，CPU的&lt;strong&gt;内存管理单元 (MMU)&lt;/strong&gt; 会进行下一步转换&lt;/p&gt;
+&lt;p&gt;MMU将32位的线性地址拆分为三部分：&lt;strong&gt;页目录索引&lt;/strong&gt; (10位) + &lt;strong&gt;页表索引&lt;/strong&gt; (10位) + &lt;strong&gt;页内偏移&lt;/strong&gt; (12位)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;页目录表&lt;/strong&gt;：有1024个表项，每项4B，共4KB，每项指向一个页表&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;页表&lt;/strong&gt;：也有1024个表项，每项4B，共4KB，每项指向一个物理页框&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;页框&lt;/strong&gt;：大小固定为4KB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;先查页目录，再查页表，最终找到数据所在的物理内存页，加上页内偏移，就得到了最终的物理地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;物理地址&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;物理页框基址&lt;/span&gt; + &lt;span style=&#34;color:#e06c75&#34;&gt;页内偏移&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;逻辑地址、线性地址和物理地址| vosamo&#34; href=&#34;http://picture.928330.xyz/typora/fenye.jpg&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/fenye.jpg&#34; alt=&#34;逻辑地址、线性地址和物理地址| vosamo&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;示例-1&#34;&gt;示例
+&lt;/h4&gt;&lt;p&gt;我们现在运行在一个 32位保护模式的系统中，分页功能已经开启，程序中有这样一条指令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;eax&lt;/span&gt;, [&lt;span style=&#34;color:#d19a66&#34;&gt;0x1234&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这条指令的意思是把内存中地址&lt;code&gt;DS:0x1234&lt;/code&gt;处的数据读到EAX寄存器中，也就是说，这里访问的逻辑地址是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;逻辑地址&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;DS&lt;/span&gt; : &lt;span style=&#34;color:#d19a66&#34;&gt;0x1234&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;假设段寄存器DS的内容是&lt;code&gt;0x0008&lt;/code&gt;，二进制表示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1000&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;位&lt;/th&gt;
+          &lt;th&gt;值&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Index&lt;/td&gt;
+          &lt;td&gt;15:3&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;第1个描述符&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TI&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;从GDT中查&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RPL&lt;/td&gt;
+          &lt;td&gt;1–0&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;当前访问特权级 0&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;假设GDT[1]这个描述符里存的段信息是：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;值&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;段基址&lt;/td&gt;
+          &lt;td&gt;0x00400000&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;段界限&lt;/td&gt;
+          &lt;td&gt;0x000FFFFF&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;访问属性&lt;/td&gt;
+          &lt;td&gt;可读可写数据段&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;于是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;段基址&lt;/span&gt; = &lt;span style=&#34;color:#d19a66&#34;&gt;0x00400000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;线性地址&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;段基址&lt;/span&gt; + &lt;span style=&#34;color:#e06c75&#34;&gt;偏移量&lt;/span&gt; = &lt;span style=&#34;color:#d19a66&#34;&gt;0x00400000&lt;/span&gt; + &lt;span style=&#34;color:#d19a66&#34;&gt;0x00001234&lt;/span&gt; = &lt;span style=&#34;color:#d19a66&#34;&gt;0x00401234&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在系统开启了分页，假设页目录基址寄存器CR3的值是&lt;code&gt;0x00100000&lt;/code&gt;，即页目录表在物理内存&lt;code&gt;0x00100000&lt;/code&gt;处&lt;/p&gt;
+&lt;p&gt;把线性地址&lt;code&gt;0x00401234&lt;/code&gt;拆成三段，二进制表示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0100&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0001&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0010&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0011&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;部分&lt;/th&gt;
+          &lt;th&gt;位数&lt;/th&gt;
+          &lt;th&gt;值（二进制）&lt;/th&gt;
+          &lt;th&gt;十进制&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;页目录索引&lt;/td&gt;
+          &lt;td&gt;10 位&lt;/td&gt;
+          &lt;td&gt;0000000001&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;页表索引&lt;/td&gt;
+          &lt;td&gt;10 位&lt;/td&gt;
+          &lt;td&gt;0000000010&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;页内偏移&lt;/td&gt;
+          &lt;td&gt;12 位&lt;/td&gt;
+          &lt;td&gt;001101000100&lt;/td&gt;
+          &lt;td&gt;0x234&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;页目录表起始于&lt;code&gt;0x00100000&lt;/code&gt;，每个表项占4字节，页目录索引是&lt;code&gt;1&lt;/code&gt;，所以要读的表项地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0x00100000&lt;/span&gt; + &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; * &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; = &lt;span style=&#34;color:#d19a66&#34;&gt;0x00100004&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;假设这个页目录项内容是&lt;code&gt;0x00200003&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;高20位：页表的物理基址，是&lt;code&gt;0x00200000&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;低12位：标志位（Present=1, RW=1, US=0）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;页表基址&lt;code&gt;0x00200000&lt;/code&gt;，页表索引是&lt;code&gt;2&lt;/code&gt;，所以要读的表项地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0x00200000&lt;/span&gt; + &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; * &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; = &lt;span style=&#34;color:#d19a66&#34;&gt;0x00200008&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;假设这个页表项内容是&lt;code&gt;0x00A00003&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;高20位：物理页框基址，是&lt;code&gt;0x00A00000&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最终得到物理地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;物理地址&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;页框基址&lt;/span&gt; + &lt;span style=&#34;color:#e06c75&#34;&gt;页内偏移&lt;/span&gt; = &lt;span style=&#34;color:#d19a66&#34;&gt;0x00A00000&lt;/span&gt; + &lt;span style=&#34;color:#d19a66&#34;&gt;0x00000234&lt;/span&gt; = &lt;span style=&#34;color:#d19a66&#34;&gt;0x00A00234&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;ia-32核心寄存器&#34;&gt;IA-32核心寄存器
+&lt;/h1&gt;&lt;h2 id=&#34;通用寄存器-gpr&#34;&gt;通用寄存器 (GPR)
+&lt;/h2&gt;&lt;p&gt;IA-32架构有8个32位通用寄存器&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;32位&lt;/th&gt;
+          &lt;th&gt;16位&lt;/th&gt;
+          &lt;th&gt;8位高/低&lt;/th&gt;
+          &lt;th&gt;主要功能&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EAX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;AX&lt;/td&gt;
+          &lt;td&gt;AH / AL&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;累加器（Accumulator）&lt;/strong&gt;&lt;br /&gt;用于算术运算和函数返回值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EBX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;BX&lt;/td&gt;
+          &lt;td&gt;BH / BL&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;基址寄存器（Base）&lt;/strong&gt;&lt;br /&gt;用于在内存中寻址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ECX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;CX&lt;/td&gt;
+          &lt;td&gt;CH / CL&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;计数器（Counter）&lt;/strong&gt;&lt;br /&gt;用于循环和字符串操作的计数，是&lt;strong&gt;无符号计数器&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EDX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;DX&lt;/td&gt;
+          &lt;td&gt;DH / DL&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;数据寄存器（Data）&lt;/strong&gt;&lt;br /&gt;配合EAX进行乘除法运算或存放I/O指针&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ESI&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;SI&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;源变址寄存器（Source Index）&lt;/strong&gt;&lt;br /&gt;字符串和内存操作的源地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EDI&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;DI&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;目的变址寄存器（Destination Index）&lt;/strong&gt;&lt;br /&gt;字符串和内存操作的目的地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ESP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;SP&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;栈指针（Stack Pointer)&lt;/strong&gt;&lt;br /&gt;永远指向当前栈的栈顶&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EBP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;BP&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;基址指针（Base Pointer）&lt;/strong&gt;&lt;br /&gt;用作当前函数栈帧的基址，用于访问局部变量和参数&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;程序状态与控制寄存器-eflags&#34;&gt;程序状态与控制寄存器 (EFLAGS)
+&lt;/h2&gt;&lt;p&gt;EFLAGS寄存器是一个32位的寄存器&lt;/p&gt;
+&lt;p&gt;它的每一位（标志位）都记录了程序运行中的特定状态，主要用于条件判断和流程控制&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;Basic Execution Environment of Intel Processor 32-bit Architecture | Tachyon&#34; href=&#34;http://picture.928330.xyz/typora/eflags.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/eflags.png&#34; alt=&#34;Basic Execution Environment of Intel Processor 32-bit Architecture | Tachyon&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;下面是一些常用的标志位：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;标志位&lt;/th&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;描述和功能&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZF&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;零标志&lt;/strong&gt;&lt;br /&gt;(Zero Flag)&lt;/td&gt;
+          &lt;td&gt;若算术运算结果为0，则ZF置为1，否则为0，常用于判断相等&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;OF&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;溢出标志&lt;/strong&gt;&lt;br /&gt;(Overflow Flag)&lt;/td&gt;
+          &lt;td&gt;当有符号整数运算的结果超出寄存器能表示的范围时，OF置为1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;CF&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;进位标志&lt;/strong&gt;&lt;br /&gt;(Carry Flag)&lt;/td&gt;
+          &lt;td&gt;当无符号整数运算的结果溢出（产生进位或借位）时，CF置为1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;SF&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;符号标志&lt;/strong&gt;&lt;br /&gt;(Sign Flag)&lt;/td&gt;
+          &lt;td&gt;等于运算结果的最高位（也就是符号位）&lt;br /&gt;对于有符号数，0表示正数，1表示负数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;DF&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;方向标志&lt;/strong&gt;&lt;br /&gt;(Direction Flag)&lt;/td&gt;
+          &lt;td&gt;控制字符串操作指令（如MOVS, SCAS）的处理方向&lt;br /&gt;若DF=0，变址寄存器（ESI, EDI）地址递增&lt;br /&gt;若DF=1，则地址递减&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;TF&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;陷阱标志&lt;/strong&gt;&lt;br /&gt;(Trap Flag)&lt;/td&gt;
+          &lt;td&gt;若置为1，CPU在执行每条指令后会产生一个单步中断&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;IF&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;中断允许标志&lt;/strong&gt;&lt;br /&gt;(Interrupt Enable Flag)&lt;/td&gt;
+          &lt;td&gt;若置为1，CPU可以响应外部设备的中断请求&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;指令指针寄存器-eip&#34;&gt;指令指针寄存器 (EIP)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;EIP（Extended Instruction Pointer）是一个32位的寄存器，存放着下一条将要被CPU执行的指令的地址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;CPU总是根据CS段寄存器和EIP寄存器中的地址来读取下一条指令，&lt;strong&gt;每当一条指令被读取后，EIP的值会自动增加，增加的大小等于刚刚被读取指令的字节数&lt;/strong&gt;，从而指向紧随其后的下一条指令&lt;/p&gt;
+&lt;p&gt;EIP寄存器的值不能被直接修改，&lt;strong&gt;它的改变只能通过特定的控制流指令（如 &lt;code&gt;JMP&lt;/code&gt;, &lt;code&gt;CALL&lt;/code&gt;, &lt;code&gt;RET&lt;/code&gt;）或者由中断、异常来完成&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;段寄存器&#34;&gt;段寄存器
+&lt;/h2&gt;&lt;p&gt;段寄存器是6个16位的寄存器，在保护模式的内存分段管理中，它们存放着指向各个内存段的“段选择器”，CPU通过这些段选择器在系统描述符表（GDT/LDT）中找到段的实际基地址。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;寄存器&lt;/th&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;主要功能&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;CS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;代码段寄存器&lt;/strong&gt;&lt;br /&gt;(Code Segment)&lt;/td&gt;
+          &lt;td&gt;存放应用程序代码所在段的段选择器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;SS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;栈段寄存器&lt;/strong&gt;&lt;br /&gt;(Stack Segment)&lt;/td&gt;
+          &lt;td&gt;存放当前程序栈所在段的段选择器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;DS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;数据段寄存器&lt;/strong&gt;&lt;br /&gt;(Data Segment)&lt;/td&gt;
+          &lt;td&gt;存放程序主要数据所在段的段选择器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ES/FS/GS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;附加数据段寄存器&lt;/strong&gt;&lt;br /&gt;(Extra Segment)&lt;/td&gt;
+          &lt;td&gt;存放程序使用的附加数据段的段选择器&lt;br /&gt;可用于特殊目的，比如通过FS定位线程环境块（TEB）等&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;ia-32数据类型&#34;&gt;IA-32数据类型
+&lt;/h1&gt;&lt;h2 id=&#34;基本数据类型&#34;&gt;基本数据类型
+&lt;/h2&gt;&lt;p&gt;这些是构成更复杂数据结构的基础整数类型&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251005155825457&#34; href=&#34;http://picture.928330.xyz/typora/image-20251005155825457.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251005155825457.png&#34; alt=&#34;image-20251005155825457&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Byte&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1字节（8位）的数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Word&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;2字节（16位）的数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Doubleword&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;4字节（32位）的数据&lt;/p&gt;
+&lt;p&gt;这是IA-32架构中最常用的数据大小，与通用寄存器（如EAX）的大小一致&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Quadword&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;8字节（64位）的数据&lt;/p&gt;
+&lt;p&gt;虽然IA-32没有64位的通用寄存器，但在某些特定指令（如&lt;code&gt;RDTSC&lt;/code&gt;）或通过组合EDX和EAX寄存器，可以处理64位数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Double Quadword&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;16字节（128位）的数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;浮点数据类型&#34;&gt;浮点数据类型
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251005160136310&#34; href=&#34;http://picture.928330.xyz/typora/image-20251005160136310.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251005160136310.png&#34; alt=&#34;image-20251005160136310&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;半精度（Half Precision）&lt;/strong&gt;：16位浮点数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单精度（Single Precision）&lt;/strong&gt;：32位浮点数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;双精度（Double Precision）&lt;/strong&gt;：64位浮点数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;扩展双精度（Double Extended Precision）&lt;/strong&gt;：80位浮点数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;指针类型&#34;&gt;指针类型
+&lt;/h2&gt;&lt;p&gt;指针在IA-32中用于存储内存地址，主要分为两种&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251005160342658&#34; href=&#34;http://picture.928330.xyz/typora/image-20251005160342658.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251005160342658.png&#34; alt=&#34;image-20251005160342658&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Near Pointer（近指针）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是一个32位的偏移量&lt;/p&gt;
+&lt;p&gt;它指向当前段内的某个地址，在现代操作系统的平面内存模型下，这实际上就是程序的虚拟地址&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Far Pointer（远指针）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是一个48位的指针，由一个16位的段选择器和一个32位的偏移量组成&lt;/p&gt;
+&lt;p&gt;它用于在分段内存模型下，跨段访问数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;ia-32汇编指令&#34;&gt;IA-32汇编指令
+&lt;/h1&gt;&lt;h2 id=&#34;intel与att汇编语法&#34;&gt;Intel与AT&amp;amp;T汇编语法
+&lt;/h2&gt;&lt;h3 id=&#34;intel语法&#34;&gt;Intel语法
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是Windows环境下的主流语法，易于阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[指令]&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;目标操作数&lt;/span&gt;], [&lt;span style=&#34;color:#e06c75&#34;&gt;源操作数&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;逗号后面空格不是语法必须的&lt;/strong&gt;，但是加空格是一个非常推荐的习惯，大多数逆向软件也遵从这个习惯&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:red;font-size:20px&#34;&gt;&lt;strong&gt;本文档后续将统一使用Intel语法&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;att语法&#34;&gt;AT&amp;amp;T语法
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;常用于Linux和GNU工具链&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;[指令]&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;源操作数&lt;/span&gt;], [&lt;span style=&#34;color:#e06c75&#34;&gt;目标操作数&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;示例-2&#34;&gt;示例
+&lt;/h3&gt;&lt;p&gt;将立即数4移动到EAX寄存器&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;语法&lt;/th&gt;
+          &lt;th&gt;指令&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Intel&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;mov eax, 4&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AT&amp;amp;T&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;mov $4, %eax&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;数据移动指令&#34;&gt;数据移动指令
+&lt;/h2&gt;&lt;p&gt;这类指令用于在寄存器、内存和立即数之间传递数据&lt;/p&gt;
+&lt;h3 id=&#34;mov数据传送&#34;&gt;MOV：数据传送
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;MOV&lt;/code&gt;(move)是数据传送指令，将右边操作数的值复制到左边操作数中&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;但是这两个操作数中最多只能有&lt;strong&gt;一个是内存操作数（带方括号的那种）&lt;/strong&gt;，另一个必须是寄存器或立即数&lt;/p&gt;
+&lt;h4 id=&#34;立即数---寄存器&#34;&gt;立即数 -&amp;gt; 寄存器
+&lt;/h4&gt;&lt;p&gt;将常量&lt;code&gt;0x12345678&lt;/code&gt;放入&lt;code&gt;ESI&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0x12345678&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;寄存器---寄存器&#34;&gt;寄存器 -&amp;gt; 寄存器
+&lt;/h4&gt;&lt;p&gt;将&lt;code&gt;ECX&lt;/code&gt;的内容复制到&lt;code&gt;EAX&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;立即数---内存&#34;&gt;立即数 -&amp;gt; 内存
+&lt;/h4&gt;&lt;p&gt;将地址为&lt;code&gt;EAX&lt;/code&gt;的4字节内存设为1&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PTR&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;], &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;[EAX]&lt;/code&gt;表示取&lt;code&gt;EAX&lt;/code&gt;寄存器中的值作为内存地址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;DWORD PTR&lt;/code&gt;表示操作的内存数据大小是4字节（32 位）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当汇编器不清楚要操作内存的大小时，就需要使用修饰符来确定，以下是常用的修饰符：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;修饰符&lt;/th&gt;
+          &lt;th&gt;大小&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;BYTE PTR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;1 字节（8 位）&lt;/td&gt;
+          &lt;td&gt;访问 8 位数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;WORD PTR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;2 字节（16 位）&lt;/td&gt;
+          &lt;td&gt;访问 16 位数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;DWORD PTR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;4 字节（32 位）&lt;/td&gt;
+          &lt;td&gt;访问 32 位数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;QWORD PTR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;8 字节（64 位）&lt;/td&gt;
+          &lt;td&gt;访问 64 位数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;NEAR PTR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;2/4 字节偏移&lt;/td&gt;
+          &lt;td&gt;近指针，只包含偏移，段寄存器不变，常用于近调用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;FAR PTR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;段 + 偏移&lt;/td&gt;
+          &lt;td&gt;远指针，包含段选择符和偏移，常用于跨段调用&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;寄存器---内存&#34;&gt;寄存器 -&amp;gt; 内存
+&lt;/h4&gt;&lt;p&gt;将&lt;code&gt;EBX&lt;/code&gt;的值写入地址为&lt;code&gt;EAX&lt;/code&gt;的内存中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;], &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将&lt;code&gt;EAX&lt;/code&gt;的值写入地址为&lt;code&gt;ESI+0x34&lt;/code&gt;的内存中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;34&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;H&lt;/span&gt;], &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意这里的&lt;code&gt;[]&lt;/code&gt;不能拆开写！&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;内存---寄存器&#34;&gt;内存 -&amp;gt; 寄存器
+&lt;/h4&gt;&lt;p&gt;将地址为&lt;code&gt;ECX&lt;/code&gt;的内存中的值读入&lt;code&gt;EAX&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, [&lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将地址为&lt;code&gt;ECX+EAX&lt;/code&gt;的内存中的值读入&lt;code&gt;EDX&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;, [&lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;]  
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将内存中地址&lt;code&gt;0x50&lt;/code&gt;处的数据读入寄存器&lt;code&gt;EAX&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, [&lt;span style=&#34;color:#d19a66&#34;&gt;0x50&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;lea加载有效地址&#34;&gt;LEA：加载有效地址
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;LEA&lt;/code&gt; (Load Effective Address) 用于计算源操作数指定的内存地址，并将地址加载到目标寄存器中&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它与&lt;code&gt;MOV&lt;/code&gt;的关键区别在于，&lt;code&gt;MOV&lt;/code&gt;会访问该地址并取出其中的数据，&lt;strong&gt;而&lt;code&gt;LEA&lt;/code&gt;只计算地址，不访问内存&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;也正因如此，使用&lt;code&gt;LEA&lt;/code&gt;计算时，寄存器必须加上&lt;code&gt;[]&lt;/code&gt;表示取地址&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;计算内存地址&#34;&gt;计算内存地址
+&lt;/h4&gt;&lt;p&gt;假设&lt;code&gt;EAX = 0x1000&lt;/code&gt;, 内存地址&lt;code&gt;0x1000&lt;/code&gt;处的值为&lt;code&gt;0xABCD&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用MOV：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, [&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;MOV&lt;/code&gt;将地址&lt;code&gt;EAX&lt;/code&gt;（&lt;code&gt;0x1000&lt;/code&gt;）指向的数据&lt;code&gt;0xABCD&lt;/code&gt;放入&lt;code&gt;EBX&lt;/code&gt;，结果是&lt;code&gt;EBX = 0xABCD&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用LEA：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;LEA&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, [&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;]  
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;LEA&lt;/code&gt;将地址表达式&lt;code&gt;[EAX]&lt;/code&gt;本身的值&lt;code&gt;0x1000&lt;/code&gt;放入&lt;code&gt;EBX&lt;/code&gt;，结果是&lt;code&gt;EBX = 0x1000&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;执行快速数学运算&#34;&gt;执行快速数学运算
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;LEA&lt;/code&gt;可以执行一些基础的数学运算，且比使用&lt;code&gt;ADD&lt;/code&gt;或&lt;code&gt;MUL&lt;/code&gt;等指令更高效，因为它不影响CPU的标志位&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;计算&lt;code&gt;EAX = EBX + ECX * 4 + 100H&lt;/code&gt;&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;LEA&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, [&lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;H&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意这里的&lt;code&gt;[]&lt;/code&gt;不能拆开写！&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;串操作&#34;&gt;串操作
+&lt;/h3&gt;&lt;p&gt;这类指令专门用于高效处理内存中的连续数据块（字符串）&lt;/p&gt;
+&lt;p&gt;它们通常与 &lt;code&gt;REP&lt;/code&gt; 系列前缀结合使用，以重复执行相同的操作，重复次数由 &lt;code&gt;ECX&lt;/code&gt; 寄存器控制&lt;/p&gt;
+&lt;h4 id=&#34;rep系列前缀&#34;&gt;REP系列前缀
+&lt;/h4&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;REP&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;全称REPeat，在执行指令前会检查&lt;code&gt;ECX&lt;/code&gt;，指令会重复执行&lt;code&gt;ECX&lt;/code&gt;次&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;        ; 重复次数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;REP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;MOVSB&lt;/span&gt;         ; 将[&lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;]的字节移动到[&lt;span style=&#34;color:#e06c75&#34;&gt;EDI&lt;/span&gt;]，重复&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;次
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;REPE / REPZ&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;全称REPeat While Equal / REPeat While Zero，当&lt;code&gt;ZF=1&lt;/code&gt;且&lt;code&gt;ECX&lt;/code&gt;不为0时继续重复&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;REP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;CMPSB&lt;/span&gt;        ; 比较两个字符串，&lt;span style=&#34;color:#e06c75&#34;&gt;ZF&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;时继续，最多&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;次
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;REPNE / REPNZ&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;全称REPeat while Not Equal / REPeat while Not Zero，当&lt;code&gt;ZF=0&lt;/code&gt;且&lt;code&gt;ECX&lt;/code&gt;不为0时继续重复&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;REPNE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SCASB&lt;/span&gt;       ; 扫描字符串，&lt;span style=&#34;color:#e06c75&#34;&gt;ZF&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;时继续，最多&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;次
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;索引增减控制指令cldstd&#34;&gt;索引增减控制指令CLD/STD
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;EFLAGS&lt;/code&gt;寄存器中的&lt;code&gt;DF&lt;/code&gt;标志位决定了每次操作后&lt;code&gt;ESI&lt;/code&gt;和&lt;code&gt;EDI&lt;/code&gt;的变化方向，而&lt;code&gt;CLD&lt;/code&gt;和&lt;code&gt;SLD&lt;/code&gt;指令控制着&lt;code&gt;DF&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;CLD指令&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;全称Clear Direction Flag，&lt;strong&gt;&lt;code&gt;DF = 0&lt;/code&gt;，&lt;code&gt;ESI&lt;/code&gt;和&lt;code&gt;EDI&lt;/code&gt;在每次操作后递增&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;STD指令&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;全称Set Direction Flag，&lt;strong&gt;&lt;code&gt;DF = 1&lt;/code&gt;，&lt;code&gt;ESI&lt;/code&gt;和&lt;code&gt;EDI&lt;/code&gt;在每次操作后递减&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;取地址运算符offset&#34;&gt;取地址运算符OFFSET
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;OFFSET&lt;/code&gt;是汇编语言中的一个编译时运算符，作用是取得一个标号（变量、数组等）的内存地址（偏移量）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;比如我在数据段（.data）定义一个变量：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;SourceAddress&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;DB&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;B&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;C&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;假设编译器把这段数据放在内存地址&lt;code&gt;0x00405000&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;那么&lt;code&gt;OFFSET SourceAddress&lt;/code&gt;在汇编时就会被计算为&lt;code&gt;0x00405000&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;这里的DB被称作&lt;strong&gt;伪指令&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它不是CPU执行的指令，是给汇编器用的命令，告诉汇编器在程序中生成数据、定义常量或分配空间&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;类似伪指令还有：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指令&lt;/th&gt;
+          &lt;th&gt;全称&lt;/th&gt;
+          &lt;th&gt;定义单位&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;DB&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Define Byte&lt;/td&gt;
+          &lt;td&gt;1 字节&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;DB 1, 2, 3&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;DW&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Define Word&lt;/td&gt;
+          &lt;td&gt;2 字节&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;DW 1234h&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;DD&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Define Doubleword&lt;/td&gt;
+          &lt;td&gt;4 字节&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;DD 0x12345678&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;DQ&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Define Quadword&lt;/td&gt;
+          &lt;td&gt;8 字节&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;DQ 0x1122334455667788&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4 id=&#34;movsb--movsw--movsd移动字符串&#34;&gt;MOVSB / MOVSW / MOVSD：移动字符串
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;MOVS&lt;/code&gt;（Move String）指令用于将数据从源地址&lt;code&gt;DS:ESI&lt;/code&gt;复制到目标地址&lt;code&gt;ES:EDI&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;根据指令后缀，它每次可以复制1、2或4个字节&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;MOVSB&lt;/code&gt;：移动1字节（Byte）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;MOVSW&lt;/code&gt;：移动2字节（Word）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;MOVSD&lt;/code&gt;：移动4字节（Double Word）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面的代码是使用&lt;code&gt;REP MOVSD&lt;/code&gt;将源地址的32字节数据复制到目标地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;设置参数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;OFFSET&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SourceAddress&lt;/span&gt;      ; 将源地址加载到&lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDI&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;OFFSET&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;DestAddress&lt;/span&gt;         ; 将目标地址加载到&lt;span style=&#34;color:#e06c75&#34;&gt;EDI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;                                       ; 设置重复次数 (&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;次&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;字节&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;次&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;32&lt;/span&gt;字节)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;执行复制
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CLD&lt;/span&gt;                                                     ; 清除方向标志位（&lt;span style=&#34;color:#e06c75&#34;&gt;DF&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;），确保&lt;span style=&#34;color:#e06c75&#34;&gt;ESI和EDI递增&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;REP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;MOVSD&lt;/span&gt;                                        ; 重复执行&lt;span style=&#34;color:#e06c75&#34;&gt;MOVSD指令ECX次&lt;/span&gt;，即&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;次
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;stosb--stosw--stosd存储字符串&#34;&gt;STOSB / STOSW / STOSD：存储字符串
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;STOS&lt;/code&gt;（Store String）指令用于将&lt;code&gt;AL&lt;/code&gt;/&lt;code&gt;AX&lt;/code&gt;/&lt;code&gt;EAX&lt;/code&gt;寄存器中的值存储到&lt;code&gt;ES:EDI&lt;/code&gt;指向的内存地址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它常用于初始化一块内存区域&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;STOSB&lt;/code&gt;：将&lt;code&gt;AL&lt;/code&gt;的内容存入&lt;code&gt;[EDI]&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;STOSW&lt;/code&gt;：将&lt;code&gt;AX&lt;/code&gt;的内容存入&lt;code&gt;[EDI]&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;STOSD&lt;/code&gt;：将&lt;code&gt;EAX&lt;/code&gt;的内容存入&lt;code&gt;[EDI]&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以下代码演示了如何将&lt;code&gt;EDI&lt;/code&gt;指向的 36 字节内存块全部设置为 0&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;设置参数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDI&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;                   ; 设置目标内存地址 (假设地址已在&lt;span style=&#34;color:#e06c75&#34;&gt;ESI中&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;XOR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;                  ; 将&lt;span style=&#34;color:#e06c75&#34;&gt;EAX清零&lt;/span&gt;，这是我们要写入的值
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;                     ; 设置重复次数 (&lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;次&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;字节&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;次&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;36&lt;/span&gt;字节)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;执行写入
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CLD&lt;/span&gt;                                  ; 确保&lt;span style=&#34;color:#e06c75&#34;&gt;EDI递增&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;REP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;STOSD&lt;/span&gt;                      ; 重复执行&lt;span style=&#34;color:#e06c75&#34;&gt;STOSD指令ECX次&lt;/span&gt;，将&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;)连续写入目标内存
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            📝
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Note
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;strong&gt;&lt;code&gt;XOR EAX, EAX&lt;/code&gt;效果和&lt;code&gt;MOV EAX, 0&lt;/code&gt;一样，都是将寄存器值置零，但是会更加高效&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是因为CPU看到&lt;code&gt;XOR reg, reg&lt;/code&gt;这种特殊模式，会自动识别为清零优化，不会依赖旧值&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Intel官方优化手册明确指出：&lt;/p&gt;
+&lt;p&gt;“Zero idioms such as&lt;code&gt;XOR reg, reg&lt;/code&gt;or&lt;code&gt;SUB reg, reg&lt;/code&gt;are recognized by the processor and are handled specially — they do not create a dependency on the old register value.”&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4 id=&#34;scasb--scasw--scasd扫描字符串&#34;&gt;SCASB / SCASW / SCASD：扫描字符串
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;SCAS&lt;/code&gt;（Scan String）指令用于将&lt;code&gt;AL&lt;/code&gt;/&lt;code&gt;AX&lt;/code&gt;/&lt;code&gt;EAX&lt;/code&gt;寄存器中的值与&lt;code&gt;ES:EDI&lt;/code&gt;指向的内存值进行比较，并根据比较结果设置&lt;code&gt;EFLAGS&lt;/code&gt;寄存器的标志位&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;寄存器值等于内存值：&lt;code&gt;ZF = 1&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;寄存器值不等于内存值：&lt;code&gt;ZF = 0&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;它常用于在字符串中搜索特定字符&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;SCASB&lt;/code&gt;：比较&lt;code&gt;AL&lt;/code&gt;和&lt;code&gt;[EDI]&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;SCASW&lt;/code&gt;：比较&lt;code&gt;AX&lt;/code&gt;和&lt;code&gt;[EDI]&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;SCASD&lt;/code&gt;：比较&lt;code&gt;EAX&lt;/code&gt;和&lt;code&gt;[EDI]&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面的代码展示了如何计算一个以&lt;code&gt;\0&lt;/code&gt;（NULL）结尾的字符串的长度&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;设置参数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDI&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;                   ; 假设字符串的起始地址在&lt;span style=&#34;color:#e06c75&#34;&gt;EBX中&lt;/span&gt;，将其加载到&lt;span style=&#34;color:#e06c75&#34;&gt;EDI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;XOR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt;                        ; 将&lt;span style=&#34;color:#e06c75&#34;&gt;AL设置为0&lt;/span&gt;，即我們要查找的字符串结束符&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;                     ; 将&lt;span style=&#34;color:#e06c75&#34;&gt;ECX设为最大值&lt;/span&gt;，以扫描任意长度的字符串
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;执行扫描
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CLD&lt;/span&gt;                                    ; 确保&lt;span style=&#34;color:#e06c75&#34;&gt;EDI递增&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;REPNE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SCASB&lt;/span&gt;                    ; 当&lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;!=&lt;/span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;EDI&lt;/span&gt;]时重复扫描，每次扫描&lt;span style=&#34;color:#e06c75&#34;&gt;EDI都会递增&lt;/span&gt;，直到找到&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;或扫描完&lt;span style=&#34;color:#e06c75&#34;&gt;ECX次&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           ; 找到&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;后，&lt;span style=&#34;color:#e06c75&#34;&gt;EDI指向&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;字符的下一个字节
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;计算长度
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;                            ; 对&lt;span style=&#34;color:#e06c75&#34;&gt;ECX按位取反&lt;/span&gt;，得到扫描过的字符数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;DEC&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;                             ; 让&lt;span style=&#34;color:#e06c75&#34;&gt;ECX减一&lt;/span&gt;，即减去最后的&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;字符，得到字符串的实际长度
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           ; 最终长度存储在&lt;span style=&#34;color:#e06c75&#34;&gt;ECX中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            📝
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Note
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;strong&gt;&lt;code&gt;MOV ECX, -1&lt;/code&gt;这一步是为了什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在底层机器码中，&lt;code&gt;-1&lt;/code&gt;并不会以负号形式存储，而是使用补码表示，而32位补码中&lt;code&gt;-1 = 0xFFFFFFFF&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;所以这条指令本质上等价于：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFFF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这样就把&lt;code&gt;ECX&lt;/code&gt;设为了最大值&lt;code&gt;0xFFFFFFFF&lt;/code&gt;，而&lt;code&gt;ECX&lt;/code&gt;是无符号计数器，递减就从这个极大数开始，而不是&lt;code&gt;-1&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SCASB&lt;/code&gt;每执行一次，会自动让&lt;code&gt;ECX&lt;/code&gt;减1，我们不知道字符串长度是多少，所以干脆从最大值开始扫&lt;/p&gt;
+&lt;p&gt;看看类似的用法：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;汇编写法&lt;/th&gt;
+          &lt;th&gt;实际数值&lt;/th&gt;
+          &lt;th&gt;寄存器值&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;MOV ECX, 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0x00000000&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;MOV ECX, 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0x00000001&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;MOV ECX, -1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;-1&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0xFFFFFFFF&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;MOV ECX, -2&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;-2&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0xFFFFFFFE&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;算术与位运算指令&#34;&gt;算术与位运算指令
+&lt;/h2&gt;&lt;p&gt;这类指令用于执行基本的数学计算和位级操作&lt;/p&gt;
+&lt;h3 id=&#34;add--sub加法--减法&#34;&gt;ADD / SUB：加法 / 减法
+&lt;/h3&gt;&lt;p&gt;执行加法或减法运算，并将结果存回目标操作数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;ADD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dest&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;src&lt;/span&gt;              ; 结果是&lt;span style=&#34;color:#e06c75&#34;&gt;dest&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dest&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;src&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;SUB&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dest&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;src&lt;/span&gt;               ; 结果是&lt;span style=&#34;color:#e06c75&#34;&gt;dest&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dest&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;src&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;inc--dec加一--减一&#34;&gt;INC / DEC：加一 / 减一
+&lt;/h3&gt;&lt;p&gt;将操作数的值增加1或减少1，比等效的 &lt;code&gt;ADD/SUB&lt;/code&gt; 指令更短、更快&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;INC&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;                       ; 结果是&lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;DEC&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;                      ; 结果是&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;neg取补&#34;&gt;NEG：取补
+&lt;/h3&gt;&lt;p&gt;通过执行按位取反后加一的操作来获得操作数的算术相反数（补码）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;NEG&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;                     ; 结果是&lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;imul--mul有符号--无符号乘法&#34;&gt;IMUL / MUL：有符号 / 无符号乘法
+&lt;/h3&gt;&lt;p&gt;执行乘法运算，根据操作数的数量，用法有所不同&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指令&lt;/th&gt;
+          &lt;th&gt;操作数形式&lt;/th&gt;
+          &lt;th&gt;结果寄存器&lt;/th&gt;
+          &lt;th&gt;是否占用EDX&lt;/th&gt;
+          &lt;th&gt;特点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;MUL SRC&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;单操作数&lt;/td&gt;
+          &lt;td&gt;EDX:EAX&lt;/td&gt;
+          &lt;td&gt;是&lt;/td&gt;
+          &lt;td&gt;完整64位结果，无符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;IMUL SRC&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;单操作数&lt;/td&gt;
+          &lt;td&gt;EDX:EAX&lt;/td&gt;
+          &lt;td&gt;是&lt;/td&gt;
+          &lt;td&gt;完整64位结果，有符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;IMUL DEC, SRC&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;双操作数&lt;/td&gt;
+          &lt;td&gt;ECX&lt;/td&gt;
+          &lt;td&gt;否&lt;/td&gt;
+          &lt;td&gt;只保留低32位，有符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;IMUL DEC, SRC, 立即数&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;三操作数&lt;/td&gt;
+          &lt;td&gt;ECX&lt;/td&gt;
+          &lt;td&gt;否&lt;/td&gt;
+          &lt;td&gt;可立即数乘，有符号&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;单操作数imul和mul都支持&#34;&gt;单操作数（IMUL和MUL都支持）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;将&lt;code&gt;EAX&lt;/code&gt;与指定操作数相乘，结果是一个64位数，高32位存入&lt;code&gt;EDX&lt;/code&gt;，低32位存入&lt;code&gt;EAX&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;       ; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFFE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;IMUL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;           ; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;                        &lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;           &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;:&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFFF&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFFA&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MUL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;            ; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4294967290&lt;/span&gt;        &lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;           &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;:&lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0x00000002&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFFA&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;多操作数只有imul支持&#34;&gt;多操作数（只有IMUL支持）
+&lt;/h4&gt;&lt;p&gt;提供更高的灵活性，&lt;strong&gt;，可指定目标寄存器，结果直接存入目标寄存器，不分高低位，不占用EDX&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;IMUL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;        ; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;IMUL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;    ; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;; 也可以直接指定内存，假设 [&lt;span style=&#34;color:#d19a66&#34;&gt;0x123&lt;/span&gt;] &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;IMUL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, [&lt;span style=&#34;color:#d19a66&#34;&gt;0x123&lt;/span&gt;], &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;   ; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;15&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;idiv--div有符号--无符号除法&#34;&gt;IDIV / DIV：有符号 / 无符号除法
+&lt;/h3&gt;&lt;p&gt;执行除法运算&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;位宽&lt;/th&gt;
+          &lt;th&gt;被除数寄存器&lt;/th&gt;
+          &lt;th&gt;商寄存器&lt;/th&gt;
+          &lt;th&gt;余数寄存器&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;8位&lt;/td&gt;
+          &lt;td&gt;AX&lt;/td&gt;
+          &lt;td&gt;AL&lt;/td&gt;
+          &lt;td&gt;AH&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;16位&lt;/td&gt;
+          &lt;td&gt;DX:AX&lt;/td&gt;
+          &lt;td&gt;AX&lt;/td&gt;
+          &lt;td&gt;DX&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;32位&lt;/td&gt;
+          &lt;td&gt;EDX:EAX&lt;/td&gt;
+          &lt;td&gt;EAX&lt;/td&gt;
+          &lt;td&gt;EDX&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;无符号的div&#34;&gt;无符号的DIV
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;       ; 低 &lt;span style=&#34;color:#d19a66&#34;&gt;32&lt;/span&gt; 位被除数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;        ; 高 &lt;span style=&#34;color:#d19a66&#34;&gt;32&lt;/span&gt; 位被除数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;        ; 除数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;DIV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt; (商)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; (余数)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;有符号的idiv&#34;&gt;有符号的IDIV
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;        ; 除数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;IDIV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt; (商)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; (余数)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;and--or--xor按位与--或--异或&#34;&gt;AND / OR / XOR：按位与 / 或 / 异或
+&lt;/h3&gt;&lt;p&gt;对操作数进行按位逻辑运算，&lt;strong&gt;结果存回第一个操作数&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指令&lt;/th&gt;
+          &lt;th&gt;运算类型&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AND&lt;/td&gt;
+          &lt;td&gt;按位与&lt;/td&gt;
+          &lt;td&gt;两位都为1时结果为1，否则为0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OR&lt;/td&gt;
+          &lt;td&gt;按位或&lt;/td&gt;
+          &lt;td&gt;两位有1时结果为1，否则为0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;XOR&lt;/td&gt;
+          &lt;td&gt;按位异或&lt;/td&gt;
+          &lt;td&gt;两位不同时结果为1，相同为0&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;AND&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0x0F&lt;/span&gt;                        ; 取低&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;位，清除高&lt;span style=&#34;color:#d19a66&#34;&gt;28&lt;/span&gt;位
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;OR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;                            ; 将&lt;span style=&#34;color:#e06c75&#34;&gt;EBX中为1的位合并到EAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;XOR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFFF&lt;/span&gt;              ; 按位取反
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之前提到过的&lt;code&gt;XOR EAX, EAX&lt;/code&gt;是将&lt;code&gt;EAX&lt;/code&gt;寄存器清零的最快方式，CPU能识别这种特殊形式并进行优化，不产生对旧值的依赖，因此比&lt;code&gt;MOV EAX, 0&lt;/code&gt;更高效&lt;/p&gt;
+&lt;h3 id=&#34;not按位取反&#34;&gt;NOT：按位取反
+&lt;/h3&gt;&lt;p&gt;将操作数的每一位反转（0变1，1变0）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0x0F&lt;/span&gt;                         ; 二进制&lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;                                    ; 变成&lt;span style=&#34;color:#d19a66&#34;&gt;1111&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1111&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1111&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0000&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFF0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;shl--sal--shr--sar逻辑--算数-的-左移--右移&#34;&gt;SHL / SAL / SHR / SAR：逻辑 / 算数 的 左移 / 右移
+&lt;/h3&gt;&lt;p&gt;将操作数的位向左或向右移动，空出的位用0填充&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指令&lt;/th&gt;
+          &lt;th&gt;运算&lt;/th&gt;
+          &lt;th&gt;填充位&lt;/th&gt;
+          &lt;th&gt;运算结果&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SHL / SAL&lt;/td&gt;
+          &lt;td&gt;左移&lt;/td&gt;
+          &lt;td&gt;低位补 0&lt;/td&gt;
+          &lt;td&gt;左移N位=乘以$2^N$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SHR&lt;/td&gt;
+          &lt;td&gt;逻辑右移&lt;/td&gt;
+          &lt;td&gt;高位补 0&lt;/td&gt;
+          &lt;td&gt;右移N位=无符号除以$2^N$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SAR&lt;/td&gt;
+          &lt;td&gt;算术右移&lt;/td&gt;
+          &lt;td&gt;高位补符号位&lt;/td&gt;
+          &lt;td&gt;右移N位=有符号除以$2^N$（保留符号）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;SHL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;        ; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;SAL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;        ; 和&lt;span style=&#34;color:#e06c75&#34;&gt;SHL完全一样&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt;    ; &lt;span style=&#34;color:#d19a66&#34;&gt;0x00000010&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;SHR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;        ; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; (无符号除以 &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt;   ; &lt;span style=&#34;color:#d19a66&#34;&gt;0xFFFFFFF0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;SAR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;        ; &lt;span style=&#34;color:#e06c75&#34;&gt;ECX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; (保留符号)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;rol--ror循环左移--右移&#34;&gt;ROL / ROR：循环左移 / 右移
+&lt;/h3&gt;&lt;p&gt;将操作数的位向左或向右移动，移出的位会从另一端循环回来填充空位&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;10010011&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;       ; 二进制数 &lt;span style=&#34;color:#d19a66&#34;&gt;10010011&lt;/span&gt;，&lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0x93&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;ROL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;                         ; &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;01001110&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;, 原高&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;位“&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;”循环到低位
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;ROR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;                        ; &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;11001001&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;, 低&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;位“&lt;span style=&#34;color:#d19a66&#34;&gt;110&lt;/span&gt;”循环到高位
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;控制流指令&#34;&gt;控制流指令
+&lt;/h2&gt;&lt;p&gt;这类指令通过修改&lt;code&gt;EIP&lt;/code&gt;（指令指针）寄存器的值来改变程序的执行流程，从而实现分支、循环等结构&lt;/p&gt;
+&lt;h3 id=&#34;比较指令&#34;&gt;比较指令
+&lt;/h3&gt;&lt;p&gt;这两个指令通过执行内部运算来改变&lt;code&gt;EFLAGS&lt;/code&gt;寄存器中的状态标志位，&lt;strong&gt;但不会修改操作数本身&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它们为后续的条件跳转指令提供判断依据&lt;/p&gt;
+&lt;h4 id=&#34;cmp减法比较&#34;&gt;CMP：减法比较
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;内部执行&lt;code&gt;A - B&lt;/code&gt;的减法运算&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CMP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;       ; 实际执行 &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;JG&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;greater&lt;/span&gt;          ; 如果 &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;, 跳转
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;testand比较&#34;&gt;TEST：AND比较
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;内部执行&lt;code&gt;A AND B&lt;/code&gt;的按位与运算&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg1：检测寄存器是否为0&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;TEST&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;         ; &lt;span style=&#34;color:#e06c75&#34;&gt;A&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AND&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;A&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;JZ&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;is_zero&lt;/span&gt;                ; 如果结果为 &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ZF&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;)，跳转
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eg2：检测某一位是否为1&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;TEST&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AL&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;                 ; 检查最低位是否为 &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;JNZ&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;odd_number&lt;/span&gt;      ; 若最低位为&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;（奇数），跳转
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;jmp无条件跳转&#34;&gt;JMP：无条件跳转
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;JMP&lt;/code&gt;（Jump）指令会立即无条件地将程序的执行点转移到指定的目标地址&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;基本语法：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;JMP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;label&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;label&lt;/code&gt;可以是同一段代码内的标签（短跳转或近跳转），也可以是其他段的地址（远跳转）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;      ; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;JMP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;skip&lt;/span&gt;            ; 无条件跳转到 &lt;span style=&#34;color:#e06c75&#34;&gt;skip&lt;/span&gt; 标签
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;      ; 这一行永远不会被执行！
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;skip&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;      ; 执行到这里
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;jcc条件跳转&#34;&gt;Jcc：条件跳转
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Jcc&lt;/code&gt; (Jump on Condition) 是一系列指令的统称&lt;/p&gt;
+&lt;p&gt;它们在&lt;code&gt;CMP&lt;/code&gt;或&lt;code&gt;TEST&lt;/code&gt;指令之后，根据&lt;code&gt;EFLAGS&lt;/code&gt;寄存器的状态来决定是否进行跳转&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指令&lt;/th&gt;
+          &lt;th&gt;跳转条件（基于 EFLAGS）&lt;/th&gt;
+          &lt;th&gt;含义（中文描述）&lt;/th&gt;
+          &lt;th&gt;比较类型&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JE / JZ&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ZF = 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;相等 / 结果为零&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JNE / JNZ&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ZF = 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;不相等 / 结果非零&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JG / JNLE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ZF = 0 AND SF = OF&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;大于（有符号数）&lt;/td&gt;
+          &lt;td&gt;有符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JGE / JNL&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;SF = OF&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;大于等于（有符号数）&lt;/td&gt;
+          &lt;td&gt;有符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JL / JNGE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;SF ≠ OF&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;小于（有符号数）&lt;/td&gt;
+          &lt;td&gt;有符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JLE / JNG&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ZF = 1 OR SF ≠ OF&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;小于等于（有符号数）&lt;/td&gt;
+          &lt;td&gt;有符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JA / JNBE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CF = 0 AND ZF = 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;大于（无符号数）&lt;/td&gt;
+          &lt;td&gt;无符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JAE / JNB&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CF = 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;大于等于（无符号数）&lt;/td&gt;
+          &lt;td&gt;无符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JB / JNAE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CF = 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;小于（无符号数）&lt;/td&gt;
+          &lt;td&gt;无符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JBE / JNA&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CF = 1 OR ZF = 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;小于等于（无符号数）&lt;/td&gt;
+          &lt;td&gt;无符号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;SF = 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;结果为负&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JNS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;SF = 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;结果为正或零&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JO&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;OF = 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;溢出发生&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JNO&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;OF = 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;无溢出&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JC&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CF = 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;进位（或借位）发生&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JNC&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CF = 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;无进位 / 无借位&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JP / JPE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;PF = 1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;奇偶标志为偶（结果1个数为偶数）&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;JNP / JPO&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;PF = 0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;奇偶标志为奇&lt;/td&gt;
+          &lt;td&gt;通用&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;跳转指令前缀&#34;&gt;跳转指令前缀
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;跳转指令前缀是汇编器用来指示跳转类型或范围的关键字&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它不改变跳转的条件本身，只影响指令编码和偏移量大小，也就是CPU计算跳转地址时用多少字节表示偏移&lt;/p&gt;
+&lt;p&gt;这本质上是告诉CPU跳转目标离它有多远，CPU会选择合适的指令长度（1-6字节）存储偏移&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;前缀&lt;/th&gt;
+          &lt;th&gt;偏移量大小&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;SHORT&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;8位有符号偏移量 (-128 ~ +127)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;近距离跳转&lt;/strong&gt;，小范围循环或if/else&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;NEAR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;16位或32位偏移量（同段跳转）&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;目标在当前代码段内，距离较远&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;FAR&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;16/32位段内偏移 + 16位段选择子&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;跨段跳转&lt;/strong&gt;，改变CS寄存器&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;条件跳转（Jcc）默认使用SHORT，如果目标太远，汇编器会自动转换为NEAR&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;流程控制结构示例&#34;&gt;流程控制结构示例
+&lt;/h3&gt;&lt;h4 id=&#34;if-else结构&#34;&gt;if-else结构
+&lt;/h4&gt;&lt;p&gt;C语言：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;esi&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;// block A
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;// block B
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;汇编：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;, [&lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;]      ; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;esi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;TEST&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt;       ; 比较 &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt; 和 &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;JZ&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SHORT&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;block_B&lt;/span&gt;    ; 如果 &lt;span style=&#34;color:#e06c75&#34;&gt;EDX&lt;/span&gt; 为 &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;, 则跳转到 &lt;span style=&#34;color:#e06c75&#34;&gt;block_B&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ;&lt;span style=&#34;color:#e06c75&#34;&gt;block&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;A&lt;/span&gt; 的代码
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;block_B&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ;&lt;span style=&#34;color:#e06c75&#34;&gt;block&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;B&lt;/span&gt; 的代码
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;for循环结构&#34;&gt;for循环结构
+&lt;/h4&gt;&lt;p&gt;C语言：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;; &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;; &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;%d&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;汇编：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;XOR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;                                              ; &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; (作为计数器 &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;LOOP_START&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ;调用 &lt;span style=&#34;color:#e06c75&#34;&gt;printf&lt;/span&gt; 的代码
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;PUSH&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;PUSH&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;OFFSET&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;FORMAT_STRING&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;CALL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;printf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ADD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;                    						      ; 平衡堆栈
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;INC&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;            											  ; &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;++&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;CMP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESI&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;         									  ; 比较 &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt; 和 &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;JL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SHORT&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;LOOP_START&lt;/span&gt;  						    ; 如果 &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;, 继续循环
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;栈与函数调用指令&#34;&gt;栈与函数调用指令
+&lt;/h2&gt;&lt;h3 id=&#34;栈&#34;&gt;栈
+&lt;/h3&gt;&lt;p&gt;在IA-32架构下，栈是连续的内存区域，用于存储临时数据、函数参数和返回地址&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;栈存在于一个栈段内，由段寄存器SS指向段描述符&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ESP寄存器所包含的栈指针永远指向栈顶位置，所有针对栈的操作都是基于&lt;code&gt;SS:ESP&lt;/code&gt;的地址引用&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;IA-32 的栈通常是&lt;strong&gt;高地址向低地址生长&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;栈帧&#34;&gt;栈帧
+&lt;/h3&gt;&lt;h4 id=&#34;什么是栈帧&#34;&gt;什么是栈帧
+&lt;/h4&gt;&lt;p&gt;每当一个函数被调用时，都会在栈上为其分配一块专属空间，称为该函数的&lt;strong&gt;栈帧&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;栈帧用于存放函数的局部变量、传递给其他函数的参数以及保存调用者的上下文信息&lt;/p&gt;
+&lt;p&gt;栈帧的组成内容如下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;内容&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;局部变量&lt;/td&gt;
+          &lt;td&gt;函数内部声明的变量，存放在栈帧中&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;参数&lt;/td&gt;
+          &lt;td&gt;调用被调用函数时压入栈的参数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;栈帧相关指针&lt;/td&gt;
+          &lt;td&gt;用于管理函数返回与栈帧切换&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;返回指令指针&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CALL&lt;/code&gt;指令将EIP（下一条指令地址）压栈，函数返回后跳转到这里执行&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;栈帧基指针ebp&#34;&gt;栈帧基指针（EBP）
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;EBP&lt;/code&gt;在函数调用时用作栈帧的固定参考点，方便访问局部变量和函数参数&lt;/p&gt;
+&lt;h3 id=&#34;基本栈操作push--pop&#34;&gt;基本栈操作：PUSH / POP
+&lt;/h3&gt;&lt;h4 id=&#34;push压栈&#34;&gt;PUSH：压栈
+&lt;/h4&gt;&lt;p&gt;将一个寄存器、内存或立即数的值压入栈顶&lt;/p&gt;
+&lt;p&gt;先将栈顶指针&lt;code&gt;ESP&lt;/code&gt;减去一个单位，然后将操作数存入&lt;code&gt;ESP&lt;/code&gt;指向的新地址：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;栈向低地址扩展，IA-32下，一个单位4字节（32bit）：&lt;code&gt;ESP = ESP - 4&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;将数据写入栈顶：&lt;code&gt;[ESP] = 操作数&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;0x1234&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PUSH&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EAX&lt;/span&gt;   ; &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; , [&lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;] &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0x1234&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;PUSH先减再存值&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;h4 id=&#34;pop出栈&#34;&gt;POP：出栈
+&lt;/h4&gt;&lt;p&gt;从栈顶取出数据到寄存器或内存，并恢复栈指针&lt;/p&gt;
+&lt;p&gt;先将&lt;code&gt;ESP&lt;/code&gt;指向地址的值取出到目标操作数，然后将&lt;code&gt;ESP&lt;/code&gt;增加一个单位：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;取出&lt;code&gt;[ESP]&lt;/code&gt;的值到目标操作数&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;栈指针上移，恢复原位置：&lt;code&gt;ESP = ESP + 4&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;POP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt;    ; &lt;span style=&#34;color:#e06c75&#34;&gt;EBX&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; 栈顶值 , &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;&lt;strong&gt;POP先取值再加&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;h3 id=&#34;调用与返回的分类&#34;&gt;调用与返回的分类
+&lt;/h3&gt;&lt;p&gt;根据目标函数与调用者是否在同一个代码段，调用和返回可以分为两类&lt;/p&gt;
+&lt;h4 id=&#34;近调用-near-call--近返回-near-return&#34;&gt;近调用 (Near Call) / 近返回 (Near Return)
+&lt;/h4&gt;&lt;p&gt;控制流转移到&lt;strong&gt;当前代码段&lt;/strong&gt;中的函数，或从当前代码段的函数返回&lt;/p&gt;
+&lt;p&gt;这是最常见的调用方式，用于访问程序内部的本地函数&lt;/p&gt;
+&lt;h4 id=&#34;远调用-far-call--远返回-far-return&#34;&gt;远调用 (Far Call) / 远返回 (Far Return)
+&lt;/h4&gt;&lt;p&gt;控制流转移到&lt;strong&gt;其他代码段&lt;/strong&gt;中的函数，或从其他代码段返回&lt;/p&gt;
+&lt;p&gt;这种方式通常用于访问操作系统提供的服务（API）或其他进程的函数&lt;/p&gt;
+&lt;h3 id=&#34;call调用函数&#34;&gt;CALL：调用函数
+&lt;/h3&gt;&lt;p&gt;跳转到被调用函数，并保存返回地址以便函数执行完毕后回到调用点&lt;/p&gt;
+&lt;h4 id=&#34;近调用&#34;&gt;近调用
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;压栈返回地址&lt;/strong&gt;：&lt;code&gt;CALL&lt;/code&gt;指令会将下一条指令的地址（EIP） 压入栈顶&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跳转到函数入口&lt;/strong&gt;：CPU将EIP设置为被调用函数的起始地址&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;; 假设当前 &lt;span style=&#34;color:#e06c75&#34;&gt;EIP&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0x00401000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CALL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;my_function&lt;/span&gt;  ; &lt;span style=&#34;color:#d19a66&#34;&gt;1.&lt;/span&gt; 保存返回地址：&lt;span style=&#34;color:#e06c75&#34;&gt;PUSH&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0x00401005&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;CALL指令长度为5字节&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                               ; &lt;span style=&#34;color:#d19a66&#34;&gt;2.&lt;/span&gt; 跳转到&lt;span style=&#34;color:#e06c75&#34;&gt;my_function&lt;/span&gt;：&lt;span style=&#34;color:#e06c75&#34;&gt;JMP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;my_function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;远调用&#34;&gt;远调用
+&lt;/h4&gt;&lt;p&gt;对于远调用，由于跨越了代码段，CPU不仅需要保存返回的地址偏移（EIP），还必须保存返回的段（CS），以便能够正确返回到调用者所在的原始代码段&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;压栈段寄存器CS&lt;/strong&gt;：将当前代码段寄存器CS的值压入栈顶&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;压栈返回地址EIP&lt;/strong&gt;：将EIP的当前值压入栈顶&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跳转到函数入口&lt;/strong&gt;：将目标函数的段选择器和偏移地址分别载入CS和EIP寄存器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;CALL&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;FAR&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PTR&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2000&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;h&lt;/span&gt;:&lt;span style=&#34;color:#d19a66&#34;&gt;0100&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;h&lt;/span&gt;  ; 远调用到 &lt;span style=&#34;color:#d19a66&#34;&gt;2000&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这里必须使用&lt;code&gt;FAR PTR&lt;/code&gt;表示是远调用，否则会被当成近调用处理&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ret从函数返回&#34;&gt;RET：从函数返回
+&lt;/h3&gt;&lt;p&gt;从栈顶取出返回地址，恢复执行流到调用者&lt;/p&gt;
+&lt;h4 id=&#34;近返回retretn&#34;&gt;近返回（RET/RETN）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;弹出返回地址&lt;/strong&gt;：从栈顶弹出一个32位的值到EIP寄存器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;清理参数 (可选)&lt;/strong&gt;：&lt;code&gt;RET n&lt;/code&gt;会在弹出返回地址后，额外将ESP增加n字节，用于清理调用者压入栈的参数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RET&lt;/span&gt;       ; 标准返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RETN&lt;/span&gt;     ; 近返回
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RET&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;     ; 返回并清理栈上 &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt; 字节参数
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时就可以把RET理解为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;POP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EIP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;远返回retf&#34;&gt;远返回（RETF）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;弹出返回地址EIP&lt;/strong&gt;：从栈顶弹出一个32位的值到EIP寄存器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;弹出段寄存器CS&lt;/strong&gt;：从栈顶弹出一个16位的值到CS寄存器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RETF&lt;/span&gt; ; 远返回
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CPU不跟踪返回指令指针在栈上的位置，程序员必须确保在执行&lt;code&gt;RET&lt;/code&gt;指令时，栈顶内容恰好是正确的返回地址&lt;/p&gt;
+&lt;p&gt;如果栈上的返回地址在&lt;code&gt;RET&lt;/code&gt;执行前被修改（例如通过缓冲区溢出），程序的执行流就可能被劫持，这是一个常见的安全漏洞&lt;/p&gt;
+&lt;h3 id=&#34;调用约定&#34;&gt;调用约定
+&lt;/h3&gt;&lt;p&gt;这是函数调用双方必须遵守的一套规则，它规定了参数如何传递、返回值如何返回、以及哪一方（调用者或被调用者）负责清理栈上的参数。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;cdecl&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;C语言的默认约定，参数从右到左压栈，&lt;strong&gt;调用者&lt;/strong&gt;负责清理栈&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;stdcall&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Win32API常用，参数从右到左压栈，&lt;strong&gt;被调用者&lt;/strong&gt;负责清理栈（通过 &lt;code&gt;RET n&lt;/code&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;fastcall&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;stdcall&lt;/code&gt;的变种，前两个（或更多）参数通过&lt;code&gt;ECX&lt;/code&gt;和&lt;code&gt;EDX&lt;/code&gt;等寄存器传递，以提高速度，剩余参数压栈，被调用者负责清理&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;栈帧的创建与销毁函数指令框架&#34;&gt;栈帧的创建与销毁（函数指令框架）
+&lt;/h3&gt;&lt;h4 id=&#34;函数序言-prologue&#34;&gt;函数序言 (Prologue)
+&lt;/h4&gt;&lt;p&gt;当执行&lt;code&gt;CALL&lt;/code&gt;语句之后，函数开始时建立自己的栈帧&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PUSH&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;              ; 保存调用者的栈帧基址 (旧&lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;        ; 将当前栈顶设为新的栈帧基址
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;SUB&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;H&lt;/span&gt;         ; 让栈顶向低地址处延伸，以此为局部变量分配&lt;span style=&#34;color:#d19a66&#34;&gt;32&lt;/span&gt;字节空间
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;局部变量会放在&lt;code&gt;EBP&lt;/code&gt;下面（地址更小），参数会放在&lt;code&gt;EBP&lt;/code&gt;上面（地址更大），也就是这样访问：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;]     	   	    ; 第一个参数（返回地址占用了&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;字节，所以从第&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;字节开始）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;]     		   ; 第二个参数
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]     		     ; 第一个局部变量
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;]     		      ; 第二个局部变量
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;函数结尾-epilogue&#34;&gt;函数结尾 (Epilogue)
+&lt;/h4&gt;&lt;p&gt;函数返回前恢复调用者栈帧的标准操作&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;         ; 释放局部变量空间
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;POP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                  ; 恢复调用者的栈帧基址
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RET&lt;/span&gt;                          ; 返回
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;enter--leave&#34;&gt;ENTER / LEAVE
+&lt;/h4&gt;&lt;p&gt;高级指令，用于简化栈帧的创建和销毁&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;ENTER&lt;/code&gt;等价于函数序言，&lt;code&gt;LEAVE&lt;/code&gt;等价于&lt;code&gt;MOV ESP, EBP; POP EBP&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;也就是说，一个函数应该（不是必须）写在这样的框架里：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PUSH&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;（函数主体，局部变量&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;操作）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOV&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;POP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RET&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;ENTER&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;;（函数主体，局部变量&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;操作）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;LEAVE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RET&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;调用流程总结&#34;&gt;调用流程总结
+&lt;/h3&gt;&lt;p&gt;结合之前所说的一切，我们就总结出来一个函数被调用时触发的操作顺序：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;调用者准备调用      （压入参数）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行CALL指令        （压入返回地址）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;函数序言                （压入调用者的EBP，为局部变量开辟空间）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;函数主体                （压入局部变量）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那么当一个栈帧创建完毕，应该是这样的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;参数&lt;/span&gt;                                        ← &lt;span style=&#34;color:#e06c75&#34;&gt;函数调用者压入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;返回地址&lt;/span&gt;                                 ← &lt;span style=&#34;color:#e06c75&#34;&gt;call&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;自动压入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;旧&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;（&lt;span style=&#34;color:#e06c75&#34;&gt;上一个EBP&lt;/span&gt;）             ← &lt;span style=&#34;color:#e06c75&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;保存调用者基址&lt;/span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;局部变量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;而在&lt;code&gt;PUSH EBP&lt;/code&gt;之后，当前栈顶变成了栈帧的基址，也就是说帧创建完毕后，EBP和ESP位置如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;参数&lt;/span&gt;                                       
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;返回地址&lt;/span&gt;                                 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;旧&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;（&lt;span style=&#34;color:#e06c75&#34;&gt;上一个EBP&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;   [EBP位置]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;局部变量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;   [ESP位置]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时[EBP]存放着调用者的EBP，[ESP]存放着最后一个局部变量（如果申请的空间用满了的话）&lt;/p&gt;
+&lt;p&gt;下面的图就很好展示了调用函数栈帧变化：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;栈帧与调用惯例| nullwy&amp;rsquo;s blog&#34; href=&#34;http://picture.928330.xyz/typora/stack-frame-layout-zh.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/stack-frame-layout-zh.png&#34; alt=&#34;栈帧与调用惯例| nullwy&amp;rsquo;s blog&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;调用流程示例&#34;&gt;调用流程示例
+&lt;/h3&gt;&lt;p&gt;举个例子，假设有这样一个程序：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;call&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;sub&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PTR&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;], &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; ;局部变量
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; ;传入&lt;span style=&#34;color:#e06c75&#34;&gt;bar的参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;call&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;pop&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;sub&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;pop&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;进入main&#34;&gt;进入main
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;EBP&lt;/code&gt;：main的旧EBP&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;ESP&lt;/code&gt;：main栈顶（局部变量区底）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌───────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;（&lt;span style=&#34;color:#e06c75&#34;&gt;也许有也许没有&lt;/span&gt;）				   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt;                          │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;调用者是CRT&lt;/span&gt;（&lt;span style=&#34;color:#e06c75&#34;&gt;C运行时&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;调用&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的栈帧的EBP&lt;/span&gt;                │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;指向这里&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt;                          │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└───────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;call-foo&#34;&gt;call foo
+&lt;/h4&gt;&lt;p&gt;main函数先把foo需要的参数压栈，之后&lt;code&gt;call foo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;call foo&lt;/code&gt;做了两件事：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.把&lt;code&gt;call&lt;/code&gt;下一条指令的地址，即当前EIP（指向call指令）+call指令长度，也即foo的返回地址，压入栈&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.让EIP跳转到foo的开始地址&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌───────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt;                          │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;调用&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的栈帧的EBP&lt;/span&gt;                │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt;                          │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ → &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├───────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ → &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;)     │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└───────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;进入foo&#34;&gt;进入foo
+&lt;/h4&gt;&lt;p&gt;进入foo后，执行序言，为foo创建帧：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;         ; 保存 &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; 的 &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;    ; 建立 &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; 的基址
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;sub&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;esp&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;      ; 为 &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; 的局部变量分配空间
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;EBP&lt;/code&gt;：当前栈帧的固定基址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;[EBP]&lt;/code&gt;：main的旧EBP&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;[EBP+4]&lt;/code&gt;：返回地址（返回 main）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;[EBP-4]&lt;/code&gt;、&lt;code&gt;[EBP-8]&lt;/code&gt;：foo的局部变量&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌─────────────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                               │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt;                                        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;调用&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的栈帧的EBP&lt;/span&gt;                              │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt;                                         │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;)                      │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│  → &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                            │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│  → &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                           │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;指向这里&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;mov&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PTR&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;ebp&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;], &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;给foo的局部变量空间写入值&lt;/p&gt;
+&lt;h4 id=&#34;foo调用bar&#34;&gt;foo调用bar
+&lt;/h4&gt;&lt;p&gt;同样的流程&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;.                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;)                        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt;)                           │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                   │  ← &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;返回过程&#34;&gt;返回过程
+&lt;/h4&gt;&lt;p&gt;首先bar执行&lt;code&gt;MOV ESP, EBP&lt;/code&gt;，释放bar栈帧中存放了bar局部变量的地方&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;.                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;)                        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt;)                           │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤ 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                   │   ← &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;  ← &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │ （&lt;span style=&#34;color:#e06c75&#34;&gt;被释放&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后执行&lt;code&gt;POP EBP&lt;/code&gt;，将ESP指向的内容（foo的EBP）给EBP，然后释放这部分空间&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;.                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;)                        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                 │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt;)                           │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤ 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                   │ （&lt;span style=&#34;color:#e06c75&#34;&gt;被释放&lt;/span&gt;）   
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │ （&lt;span style=&#34;color:#e06c75&#34;&gt;被释放&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后执行&lt;code&gt;RET&lt;/code&gt;，弹出返回地址，&lt;code&gt;EIP&lt;/code&gt;跳转到foo的返回位置（main函数）&lt;/p&gt;
+&lt;p&gt;如果有参数则额外&lt;code&gt;RET N&lt;/code&gt;释放参数空间&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;高地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;.                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;)                        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                 │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │ ← &lt;span style=&#34;color:#e06c75&#34;&gt;ESP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的参数&lt;/span&gt;                                                    │（&lt;span style=&#34;color:#e06c75&#34;&gt;被释放&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的返回地址&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;ret&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt;)                           │（&lt;span style=&#34;color:#e06c75&#34;&gt;被释放&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤ 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;EBP&lt;/span&gt;                                                   │ （&lt;span style=&#34;color:#e06c75&#34;&gt;被释放&lt;/span&gt;）   
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─────────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│ &lt;span style=&#34;color:#e06c75&#34;&gt;bar&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;的局部变量&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;字节&lt;/span&gt;)                                 │ （&lt;span style=&#34;color:#e06c75&#34;&gt;被释放&lt;/span&gt;）
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;低地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样一来，bar的整个栈帧被销毁，ESP和EBP还原至foo栈帧&lt;/p&gt;
+&lt;p&gt;foo返回也是一样&lt;/p&gt;
+&lt;p&gt;下图关于参数划分的栈帧位置有些不同，不过也能辅助理解嵌套调用：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;函数调用实现过程详解（栈空间解析）_函数调用栈过程-CSDN博客&#34; href=&#34;http://picture.928330.xyz/typora/f44cf3dc1d84b6bc6cd299fb572340a6.gif&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/f44cf3dc1d84b6bc6cd299fb572340a6.gif&#34; alt=&#34;函数调用实现过程详解（栈空间解析）_函数调用栈过程-CSDN博客&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>RAID</title>
         <link>https://blog.928330.xyz/p/raid/</link>
         <pubDate>Sun, 28 Sep 2025 22:52:36 +0800</pubDate>
@@ -554,11 +2239,20 @@
 &lt;p&gt;&lt;strong&gt;物理驱动器&lt;/strong&gt;：真实存在的硬盘或固态盘&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;逻辑驱动器&lt;/strong&gt;：操作系统识别后的分区或者卷&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;虚拟驱动器&lt;/strong&gt;：通过工具在内存中创建的模拟磁盘，操作系统可像对待真实磁盘一样访问&lt;/p&gt;
-&lt;p&gt;每一个驱动器都会有一个驱动器号，是Windows系统为方便用户访问而给卷分配的标识符，例如&lt;code&gt;C:&lt;/code&gt;、&lt;code&gt;D:&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;每一个驱动器都会有一个驱动器号&lt;/strong&gt;，是Windows系统为方便用户访问而给卷分配的标识符，例如&lt;code&gt;C:&lt;/code&gt;、&lt;code&gt;D:&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;我们完整看到的驱动器号过程应该是这样的：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;物理硬盘 → 分区 → 文件系统  → 卷 → 挂载 → 驱动器&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;比如我们插入U盘，系统会识别分区（U盘通常只有一个分区），然后作为卷挂载，它是实打实的新的硬盘空间&lt;/p&gt;
+&lt;p&gt;比如我们插入U盘，系统会识别分区，然后作为卷挂载，它是实打实的新的硬盘空间&lt;/p&gt;
 &lt;p&gt;而当用FTKImager这样的工具挂载镜像时，软件会在内存中创建一个虚拟磁盘，Windows会识别其中的卷，并给它分配一个驱动器号，之后就能在“我的电脑”里看到一个新盘符，空间来源就是镜像文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;驱动器不会用盘符标识，&lt;strong&gt;而是通过设备文件和挂载点来管理&lt;/strong&gt;，比如&lt;code&gt;/dev/sda1&lt;/code&gt;挂载到&lt;code&gt;/home&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;挂载mount&#34;&gt;挂载（Mount）
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;挂载是将存储设备（磁盘、分区、镜像、容器等）接入文件系统，从而让用户和程序能够访问其内容的过程&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;挂载前，设备的内容是孤立的，操作系统无法通过普通路径访问&lt;/p&gt;
@@ -1351,7 +3045,7 @@
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
-&lt;h3 id=&#34;火眼证据分析&#34;&gt;火眼证据分析
+&lt;h3 id=&#34;弘连火眼证据分析&#34;&gt;弘连火眼证据分析
 &lt;/h3&gt;&lt;p&gt;需要在工具箱里面下载使用：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -1409,7 +3103,7 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;h3 id=&#34;ftk--美亚取证大师&#34;&gt;FTK + 美亚取证大师
-&lt;/h3&gt;&lt;p&gt;先使用当时最广为流传的解法&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;没找到其他办法，可能是因为这是硬RAID？&lt;/p&gt;
 &lt;p&gt;使用FTK挂载这四个镜像（选择每个盘的.E01就可以，后面的会自动识别的）：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
