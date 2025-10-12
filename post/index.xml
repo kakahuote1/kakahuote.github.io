@@ -7,13 +7,1436 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Tue, 07 Oct 2025 15:03:18 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 13 Oct 2025 01:17:05 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>逆向基础4：PE文件</title>
+        <link>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/</link>
+        <pubDate>Sun, 12 Oct 2025 23:25:42 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg" alt="Featured image of post 逆向基础4：PE文件" /&gt;&lt;p&gt;同样是很重要的文件格式，本篇设计到一些简单逻辑计算，也是挺有意思的&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PE结构详解
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pe文件的类别&#34;&gt;PE文件的类别
+&lt;/h1&gt;&lt;p&gt;PE文件格式是Windows操作系统下使用的标准可执行文件格式，按照系统划分一般有两个称呼：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PE32：指32位的可执行文件，也有人直接用PE代指&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PE32+：64位系统下的可执行文件，是PE32格式的一个扩展，也被叫做PE+&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;PE格式涵盖了多种文件类型，它们通过不同的扩展名来区分：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;种类&lt;/th&gt;
+          &lt;th&gt;主扩展名&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;可执行系列&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;.exe&lt;/code&gt;，&lt;code&gt;.scr&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;库系列&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;.dll&lt;/code&gt;，&lt;code&gt;.ocx&lt;/code&gt;，&lt;code&gt;.cpl&lt;/code&gt;，&lt;code&gt;.drv&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;驱动程序系列&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;.sys&lt;/code&gt;，&lt;code&gt;.vxd&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;对象文件系列&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;.obj&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其中，除了用于链接过程的对象文件（&lt;code&gt;.obj&lt;/code&gt;）之外，其他类型的文件都能够被系统加载并执行&lt;/p&gt;
+&lt;h1 id=&#34;pe32文件的基本结构&#34;&gt;PE32文件的基本结构
+&lt;/h1&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;1&#34; href=&#34;http://picture.928330.xyz/typora/1.jpg&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/1.jpg&#34; alt=&#34;1&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;dos头&#34;&gt;DOS头
+&lt;/h2&gt;&lt;p&gt;PE结构的最前端是DOS头，这是一个历史遗留的结构，主要为了兼容古老的MS-DOS系统&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_DOS_HEADER&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_magic&lt;/span&gt;;      &lt;span style=&#34;color:#7f848e&#34;&gt;// 魔数，必须是 0x5A4D，即“MZ”
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_cblp&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_cp&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_crlc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_cparhdr&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_minalloc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_maxalloc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_ss&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_sp&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_csum&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_ip&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_cs&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_lfarlc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_ovno&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_res&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_oemid&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_oeminfo&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_res2&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;LONG&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;e_lfanew&lt;/span&gt;;     &lt;span style=&#34;color:#7f848e&#34;&gt;// 指向 PE 头的偏移
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_DOS_HEADER&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PIMAGE_DOS_HEADER&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还是使用一个hello.c生成的exe文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里用010editor查看exe文件的二进制，它有模版功能，能很好的展示PE文件的结构：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012120832329&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012120832329.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012120832329.png&#34; alt=&#34;image-20251012120832329&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;PE的起始两个字节是固定的签名“MZ”（&lt;code&gt;0x4D5A&lt;/code&gt;），是识别一个PE文件的最初步标志&lt;/p&gt;
+&lt;p&gt;DOS头最重要的作用是其末尾的四字节的&lt;code&gt;e_lfanew&lt;/code&gt;字段，该字段保存了指向NT头的偏移量，也就是PE程序的真正入口&lt;/p&gt;
+&lt;h2 id=&#34;dos存根&#34;&gt;DOS存根
+&lt;/h2&gt;&lt;p&gt;紧随DOS头之后的是一段可选的DOS存根（DOS Stub）小程序&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012125641309&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012125641309.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012125641309.png&#34; alt=&#34;image-20251012125641309&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个东西的由来比较好玩，也稍微讲讲&lt;/p&gt;
+&lt;p&gt;在上世纪80～90年代初期，个人电脑主要运行MS-DOS系统，那时候的可执行文件格式是MZ格式，由微软工程师Mark Zbikowski设计（他名字的首字母就是MZ）&lt;/p&gt;
+&lt;p&gt;后来到了Windows3.x，微软引入了PE格式，但那时的很多电脑还经常在DOS模式下启动，用户如果直接在DOS命令行中里运行一个PE格式的程序就会出现问题：DOS根本不认识PE格式！&lt;/p&gt;
+&lt;p&gt;微软不希望让DOS报错或者死机，于是做了这样的设计：在新格式的开头保留了一个旧的MZ头和一小段能在DOS下执行的程序，这就是DOS存根&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果在纯DOS环境下尝试运行一个现代的Windows程序，这段存根代码会被执行，它通常只会在屏幕上打印一句提示信息“This program cannot be run in DOS mode”，然后正常退出&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;而在windows环境下，当windows识别到这是一个PE文件，就会直接跳转到文件偏移&lt;code&gt;e_lfanew&lt;/code&gt;处，DOS存根会被完全忽略掉&lt;/strong&gt;&lt;del&gt;所以可以随便改这一段也不会出错&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;这样既保证了兼容性，也避免了错误，还是挺不错的&lt;/p&gt;
+&lt;h2 id=&#34;nt头&#34;&gt;NT头
+&lt;/h2&gt;&lt;p&gt;NT头是PE格式的核心头部，包含了关于文件的大量关键信息，它由一个签名和两个重要的子结构组成&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_NT_HEADERS&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Signature&lt;/span&gt;;                                                    &lt;span style=&#34;color:#7f848e&#34;&gt;// 签名 &amp;#34;PE\0\0&amp;#34; (0x00004550)，四字节
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_FILE_HEADER&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;FileHeader&lt;/span&gt;;                              &lt;span style=&#34;color:#7f848e&#34;&gt;// 文件头，20字节
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_OPTIONAL_HEADER32&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;OptionalHeader&lt;/span&gt;;      &lt;span style=&#34;color:#7f848e&#34;&gt;// 可选头（对于32位），32位下224字节， 64位下240字节
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_NT_HEADERS32&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PIMAGE_NT_HEADERS32&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加载器通过签名确认文件是有效的PE文件&lt;/p&gt;
+&lt;h3 id=&#34;文件头&#34;&gt;文件头
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_FILE_HEADER&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;Machine&lt;/span&gt;;              &lt;span style=&#34;color:#7f848e&#34;&gt;// 运行平台（如 x86 = 0x14C，x64 = 0x8664）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;NumberOfSections&lt;/span&gt;;     &lt;span style=&#34;color:#7f848e&#34;&gt;// 节区数量
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TimeDateStamp&lt;/span&gt;;        &lt;span style=&#34;color:#7f848e&#34;&gt;// 时间戳（文件编译时间）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PointerToSymbolTable&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 调试符号表指针（现代 PE 通常为 0）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;NumberOfSymbols&lt;/span&gt;;      &lt;span style=&#34;color:#7f848e&#34;&gt;// 符号数量（通常为 0）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfOptionalHeader&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 可选头大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;Characteristics&lt;/span&gt;;      &lt;span style=&#34;color:#7f848e&#34;&gt;// 文件属性标志位
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_FILE_HEADER&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PIMAGE_FILE_HEADER&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;可选头&#34;&gt;可选头
+&lt;/h3&gt;&lt;p&gt;也有称呼其为扩展头的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_OPTIONAL_HEADER32&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;Magic&lt;/span&gt;;                       &lt;span style=&#34;color:#7f848e&#34;&gt;// 标识类型：0x10B 表示 PE32，0x20B 表示 PE32+
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;BYTE&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MajorLinkerVersion&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// 链接器主版本号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;BYTE&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MinorLinkerVersion&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// 链接器次版本号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfCode&lt;/span&gt;;                  &lt;span style=&#34;color:#7f848e&#34;&gt;// 代码段总大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfInitializedData&lt;/span&gt;;       &lt;span style=&#34;color:#7f848e&#34;&gt;// 已初始化数据段大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfUninitializedData&lt;/span&gt;;     &lt;span style=&#34;color:#7f848e&#34;&gt;// 未初始化数据段大小（.bss）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AddressOfEntryPoint&lt;/span&gt;;         &lt;span style=&#34;color:#7f848e&#34;&gt;// 程序入口点（RVA）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;BaseOfCode&lt;/span&gt;;                  &lt;span style=&#34;color:#7f848e&#34;&gt;// 代码段起始 RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;BaseOfData&lt;/span&gt;;                  &lt;span style=&#34;color:#7f848e&#34;&gt;// 数据段起始 RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ImageBase&lt;/span&gt;;                   &lt;span style=&#34;color:#7f848e&#34;&gt;// 程序首选装载基址
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SectionAlignment&lt;/span&gt;;            &lt;span style=&#34;color:#7f848e&#34;&gt;// 节区在内存中的对齐单位
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;FileAlignment&lt;/span&gt;;                  &lt;span style=&#34;color:#7f848e&#34;&gt;// 节区在文件中的对齐单位
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MajorOperatingSystemVersion&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 目标操作系统主版本
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MinorOperatingSystemVersion&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 次版本
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MajorImageVersion&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 程序版本号（主）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MinorImageVersion&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 程序版本号（次）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MajorSubsystemVersion&lt;/span&gt;;       &lt;span style=&#34;color:#7f848e&#34;&gt;// 子系统版本号（主）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;MinorSubsystemVersion&lt;/span&gt;;       &lt;span style=&#34;color:#7f848e&#34;&gt;// 子系统版本号（次）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Win32VersionValue&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 保留（一般为 0）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfImage&lt;/span&gt;;                 &lt;span style=&#34;color:#7f848e&#34;&gt;// 映像在内存中的总大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfHeaders&lt;/span&gt;;               &lt;span style=&#34;color:#7f848e&#34;&gt;// 所有头部的总大小（对齐后）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;CheckSum&lt;/span&gt;;                    &lt;span style=&#34;color:#7f848e&#34;&gt;// 校验和（系统文件使用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;Subsystem&lt;/span&gt;;                   &lt;span style=&#34;color:#7f848e&#34;&gt;// 子系统类型（GUI、CUI 等）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;DllCharacteristics&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// DLL 特性标志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfStackReserve&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// 保留的栈空间大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfStackCommit&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 已提交的栈空间大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfHeapReserve&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 保留的堆空间大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfHeapCommit&lt;/span&gt;;            &lt;span style=&#34;color:#7f848e&#34;&gt;// 已提交的堆空间大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;LoaderFlags&lt;/span&gt;;                 &lt;span style=&#34;color:#7f848e&#34;&gt;// 加载标志（保留）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;NumberOfRvaAndSizes&lt;/span&gt;;         &lt;span style=&#34;color:#7f848e&#34;&gt;// 数据目录数量（一般为 16）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_DATA_DIRECTORY&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;DataDirectory&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt;]; &lt;span style=&#34;color:#7f848e&#34;&gt;// 数据目录数组（导入表、导出表等）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_OPTIONAL_HEADER32&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PIMAGE_OPTIONAL_HEADER32&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;程序的真正入口点 = &lt;code&gt;ImageBase&lt;/code&gt; + &lt;code&gt;AddressOfEntryPoint&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            📝
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Note
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;虚拟地址 (Virtual Address, VA)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;程序在内存中执行时使用的绝对地址&lt;/p&gt;
+&lt;p&gt;在32位系统中，这是一个0x00000000到0xFFFFFFFF范围内的值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;映像基址 (ImageBase)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;PE映像在内存中的起始虚拟地址&lt;/p&gt;
+&lt;p&gt;这是一个非常重要的值，加载器会优先尝试将文件加载到这里&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;相对虚拟地址 (Relative Virtual Address, RVA)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;相对于&lt;code&gt;ImageBase&lt;/code&gt;的偏移量&lt;/p&gt;
+&lt;p&gt;由于在创建PE文件时，无法预知它最终会被加载到内存的哪个确切位置，因此PE文件内部的大部分地址信息都以RVA的形式存在，这样便于后续的重定位&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;公式：&lt;code&gt;VA = RVA + ImageBase&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;原始偏移 (RAW offset)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;数据在磁盘文件中的位置，相对于文件开头的偏移量，起始值为0，就是我们在十六进制查看器里面看到的地址值&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012143534278&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012143534278.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012143534278.png&#34; alt=&#34;image-20251012143534278&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;节表&#34;&gt;节表
+&lt;/h2&gt;&lt;p&gt;紧跟在NT头后面的是节表，这是一个数组，它由多个节区头结构&lt;code&gt;IMAGE_SECTION_HEADER&lt;/code&gt;结构组成&lt;/p&gt;
+&lt;p&gt;文件中有多少个节区，就有多少个节区头，节表就有多少个元素，详细描述着PE体中对应节区的属性&lt;/p&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;和ELF的节类似，PE的节也用于分类各种不同的数据&lt;/p&gt;
+&lt;p&gt;不过不同的是，PE的节是直接参与到程序运行中的，而ELF则依靠段运行，节删掉也无所谓&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;换言之，PE的节更像是ELF节与段的结合&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;除此之外，PE节的名称也有所不同，这里列举一些常见的节：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.text&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;可执行代码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.data&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;已初始化数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.rdata&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;只读数据（常量、字符串）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.bss&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;未初始化数据（通常不占文件空间）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.rsrc&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;资源（图标、菜单、对话框）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.reloc&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;重定位表&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.idata&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;导入表（Import Table）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.edata&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;导出表（Export Table）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;每个节区头大小固定为40字节&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#define IMAGE_SIZEOF_SHORT_NAME 8
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_SECTION_HEADER&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;BYTE&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_SIZEOF_SHORT_NAME&lt;/span&gt;]; &lt;span style=&#34;color:#7f848e&#34;&gt;// 节名称，例如 &amp;#34;.text&amp;#34; &amp;#34;.data&amp;#34; &amp;#34;.rdata&amp;#34; &amp;#34;.rsrc&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;union&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PhysicalAddress&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;VirtualSize&lt;/span&gt;;               &lt;span style=&#34;color:#7f848e&#34;&gt;// 节区在内存中的大小（RVA对应）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    } &lt;span style=&#34;color:#e06c75&#34;&gt;Misc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;VirtualAddress&lt;/span&gt;;                     &lt;span style=&#34;color:#7f848e&#34;&gt;// 节在内存中的 RVA（相对于 ImageBase）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfRawData&lt;/span&gt;;                   &lt;span style=&#34;color:#7f848e&#34;&gt;// 节在文件中的大小（磁盘对齐后的字节数）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PointerToRawData&lt;/span&gt;;               &lt;span style=&#34;color:#7f848e&#34;&gt;// 节在文件中的起始偏移
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PointerToRelocations&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 重定位表指针（如果有重定位信息）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;PointerToLinenumbers&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 行号信息指针（调试用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;NumberOfRelocations&lt;/span&gt;;             &lt;span style=&#34;color:#7f848e&#34;&gt;// 重定位表条目数量
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;  &lt;span style=&#34;color:#e06c75&#34;&gt;NumberOfLinenumbers&lt;/span&gt;;            &lt;span style=&#34;color:#7f848e&#34;&gt;// 行号条目数量
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Characteristics&lt;/span&gt;;                               &lt;span style=&#34;color:#7f848e&#34;&gt;// 节特性标志（可读、可写、可执行等）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_SECTION_HEADER&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PIMAGE_SECTION_HEADER&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以看到各个节区的大小固定，不足的都使用0填充了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012145412911&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012145412911.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012145412911.png&#34; alt=&#34;image-20251012145412911&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;有一点需要注意的是，表示PE头（DOS头 + DOS Stub + NT头 + 节表）的大小的字段&lt;code&gt;SizeOfHeaders&lt;/code&gt;是根据NT头的文件头的文件在&lt;strong&gt;磁盘&lt;/strong&gt;的对齐字段&lt;code&gt;FileAlignment&lt;/code&gt;对齐的，也就是&lt;code&gt;SizeOfHeaders&lt;/code&gt;的大小按照&lt;code&gt;FileAlignment&lt;/code&gt;向上取整，这种大小称作&lt;code&gt;SizeOfRawData&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;另外还有&lt;code&gt;SectionAlignment&lt;/code&gt;，这是文件在&lt;strong&gt;内存&lt;/strong&gt;的对齐大小，一般要比&lt;code&gt;FileAlignment&lt;/code&gt;大得多，虽然比较稀疏浪费空间，但可以提高CPU访问效率，这种大小称作&lt;code&gt;VirtualSize&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;下图我们能看见示例exe里面的具体数据，&lt;code&gt;SizeOfHeaders&lt;/code&gt;的确是&lt;code&gt;FileAlignment&lt;/code&gt;的整数倍：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012142942423&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012142942423.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012142942423.png&#34; alt=&#34;image-20251012142942423&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;而PE头结束处地址也确实是&lt;code&gt;600h&lt;/code&gt;，不足的地方都补0了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012141813286&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012141813286.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012141813286.png&#34; alt=&#34;image-20251012141813286&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;更好的工具查看&#34;&gt;更好的工具查看
+&lt;/h2&gt;&lt;p&gt;虽然010有模版功能，但终究不是很直观，要找某一个字段还是有些困难&lt;/p&gt;
+&lt;p&gt;现在已经有很多PE文件结构查看器，比如PEview，就能很方便查看PE文件结构：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012193311068.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012193311068.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;动态链接&#34;&gt;动态链接
+&lt;/h1&gt;&lt;h2 id=&#34;动态链接库dll&#34;&gt;动态链接库（DLL）
+&lt;/h2&gt;&lt;h3 id=&#34;什么是dll&#34;&gt;什么是DLL
+&lt;/h3&gt;&lt;p&gt;DLL是一个独立于主程序文件之外的程序库文件，它包含可被多个应用程序共享使用的代码、数据和资源&lt;/p&gt;
+&lt;p&gt;与静态链接将LIB库代码直接嵌入到可执行文件中不同，DLL的代码和数据在程序编译时并不合并，而是在程序运行时才被链接到主程序中，就像ELF的&lt;code&gt;.so&lt;/code&gt;共享文件&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;静态库（.lib）&lt;/th&gt;
+          &lt;th&gt;动态库（.dll）&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;链接时机&lt;/td&gt;
+          &lt;td&gt;编译/链接阶段直接嵌入 EXE&lt;/td&gt;
+          &lt;td&gt;程序运行时才加载（动态链接）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;共享性&lt;/td&gt;
+          &lt;td&gt;每个EXE拥有独立副本&lt;/td&gt;
+          &lt;td&gt;多个进程可共享同一 DLL的代码段&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;文件大小&lt;/td&gt;
+          &lt;td&gt;EXE文件增大&lt;/td&gt;
+          &lt;td&gt;EXE文件较小，DLL独立存在&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;更新&lt;/td&gt;
+          &lt;td&gt;更新库需重新编译 EXE&lt;/td&gt;
+          &lt;td&gt;更新DLL不需重新编译EXE（只要接口未变）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;strong&gt;可以使用软件dnspy对dll进行逆向&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;dll的装载方式&#34;&gt;DLL的装载方式
+&lt;/h3&gt;&lt;h4 id=&#34;显式链接explicit-linking&#34;&gt;显式链接（Explicit Linking）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;程序运行到对应代码的时候时才装载DLL&lt;/strong&gt;，使用完毕后立即释放内存&lt;/p&gt;
+&lt;p&gt;应用程序通过调用Windows API完成对DLL中特定函数的链接：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;HMODULE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;hDll&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;LoadLibrary&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;example.dll&amp;#34;&lt;/span&gt;);         &lt;span style=&#34;color:#7f848e&#34;&gt;// 加载 DLL
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;FARPROC&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;GetProcAddress&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;hDll&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;FunctionName&amp;#34;&lt;/span&gt;); &lt;span style=&#34;color:#7f848e&#34;&gt;// 获取函数地址
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;FreeLibrary&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;hDll&lt;/span&gt;);                                 &lt;span style=&#34;color:#7f848e&#34;&gt;// 卸载 DLL
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果发现没办法调用目标DLL，程序才会报错&lt;/p&gt;
+&lt;h4 id=&#34;隐式链接implicit-linking&#34;&gt;隐式链接（Implicit Linking）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;程序启动时就装载所有需要使用的DLL&lt;/strong&gt;，程序终止时才释放占用的内存&lt;/p&gt;
+&lt;p&gt;在EXE编译时就声明依赖DLL，Windows加载器在进程初始化时扫描EXE的导入表，并加载所有依赖DLL&lt;/p&gt;
+&lt;p&gt;如果DLL缺失，程序启动会失败&lt;/p&gt;
+&lt;h2 id=&#34;导入表&#34;&gt;导入表
+&lt;/h2&gt;&lt;p&gt;当一个PE文件需要调用其他DLL提供的函数（称为导入函数）时，它就通过导入表来记录这些依赖关系&lt;/p&gt;
+&lt;p&gt;PE文件加载时，Windows加载器会读取其导入表，得知它需要哪些DLL，之后加载器会找到并加载这些DLL，然后查询DLL的导出表，找到所需函数的真实内存地址，最后将这个地址填入PE文件的导入地址表中&lt;/p&gt;
+&lt;h3 id=&#34;导入表目录&#34;&gt;导入表目录
+&lt;/h3&gt;&lt;p&gt;不知道你是否还记得，在之前介绍可选头的时候，结构体里面最后有一个数组：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_DATA_DIRECTORY&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;DataDirectory&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中第2个元素（&lt;code&gt;OptionalHeader.DataDirectory[1]&lt;/code&gt;）就是&lt;strong&gt;导入表的目录&lt;/strong&gt;，它也是一个结构体：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_DATA_DIRECTORY&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;VirtualAddress&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 导入表在文件内存映像中的RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Size&lt;/span&gt;;                  &lt;span style=&#34;color:#7f848e&#34;&gt;// 导入表大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_DATA_DIRECTORY&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;它的作用就是指向导入表的开头&lt;/p&gt;
+&lt;h3 id=&#34;导入表结构&#34;&gt;导入表结构
+&lt;/h3&gt;&lt;p&gt;导入表由&lt;code&gt;IMAGE_IMPORT_DESCRIPTOR&lt;/code&gt;数组构成，结构如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_IMPORT_DESCRIPTOR&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;union&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Characteristics&lt;/span&gt;; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;OriginalFirstThunk&lt;/span&gt;;  &lt;span style=&#34;color:#7f848e&#34;&gt;//导入名称表 INT 的 RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;TimeDateStamp&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 通常为 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ForwarderChain&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// 通常为 -1 或 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;;                    &lt;span style=&#34;color:#7f848e&#34;&gt;// DLL 名称的 RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;FirstThunk&lt;/span&gt;;              &lt;span style=&#34;color:#7f848e&#34;&gt;// 导入地址表 IAT 的 RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_IMPORT_DESCRIPTOR&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;导入名称表int与导入地址表iat&#34;&gt;导入名称表（INT）与导入地址表（IAT）
+&lt;/h3&gt;&lt;p&gt;导入名称表（Import Name Table，INT）与导入地址表（Import Address Table，IAT）都是&lt;code&gt;IMAGE_THUNK_DATA&lt;/code&gt;结构的数组：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_THUNK_DATA32&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;union&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ForwarderString&lt;/span&gt;;  &lt;span style=&#34;color:#7f848e&#34;&gt;// 转发字符串的RVA（不常见）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Function&lt;/span&gt;;         &lt;span style=&#34;color:#7f848e&#34;&gt;// 实际函数地址（IAT加载后填充）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Ordinal&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// 按序号导入时的标志和序号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;AddressOfData&lt;/span&gt;;    &lt;span style=&#34;color:#7f848e&#34;&gt;// 指向 IMAGE_IMPORT_BY_NAME 的RVA（INT按名称导入时）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    } &lt;span style=&#34;color:#e06c75&#34;&gt;u1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_THUNK_DATA32&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;导入名称表INT（OriginalFirstThunk）&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;每个条目指向&lt;code&gt;IMAGE_IMPORT_BY_NAME&lt;/code&gt;，包含导入函数的名称或序号：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_IMPORT_BY_NAME&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Hint&lt;/span&gt;;        &lt;span style=&#34;color:#7f848e&#34;&gt;// 提示值（编译器生成的索引，用于加快查找）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;BYTE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;];     &lt;span style=&#34;color:#7f848e&#34;&gt;// 函数名称的字符串，以&amp;#39;\0&amp;#39;结尾
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_IMPORT_BY_NAME&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;记录函数信息，但未解析真实地址&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;与导入地址表IAT（FirstThunk）&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;在加载前，IAT内容和INT 一模一样&lt;/p&gt;
+&lt;p&gt;加载时Windows加载器解析DLL中函数实际地址，然后覆盖IAT对应条目&lt;/p&gt;
+&lt;p&gt;程序调用函数时，通过IAT中的地址直接跳转&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;PE文件加载前：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;10&#34; href=&#34;http://picture.928330.xyz/typora/10.jpg&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/10.jpg&#34; alt=&#34;10&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;PE文件运行时：&lt;/p&gt;
+&lt;p&gt;读取INT条目获取函数名，使用DLL模块导出表找到函数实际地址，覆盖IAT对应条目&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;11&#34; href=&#34;http://picture.928330.xyz/typora/11.jpg&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/11.jpg&#34; alt=&#34;11&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;示例&#34;&gt;示例
+&lt;/h3&gt;&lt;p&gt;我们用PEview&lt;/p&gt;
+&lt;h4 id=&#34;找到导入表&#34;&gt;找到导入表
+&lt;/h4&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            📝
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Note
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;先区分几个概念以及公式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;虚拟地址 (Virtual Address, VA)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;程序在内存中执行时使用的绝对地址&lt;/p&gt;
+&lt;p&gt;在32位系统中，这是一个0x00000000到0xFFFFFFFF范围内的值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;映像基址 (ImageBase)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;PE映像在内存中的起始虚拟地址&lt;/p&gt;
+&lt;p&gt;这是一个非常重要的值，加载器会优先尝试将文件加载到这里&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;相对虚拟地址 (Relative Virtual Address, RVA)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;相对于&lt;code&gt;ImageBase&lt;/code&gt;的偏移量&lt;/p&gt;
+&lt;p&gt;由于在创建PE文件时，无法预知它最终会被加载到内存的哪个确切位置，因此PE文件内部的大部分地址信息都以RVA的形式存在，这样便于后续的重定位&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;VA&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;RVA&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ImageBase&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;原始偏移 (RAW offset)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;数据在磁盘文件中的位置，相对于文件开头的偏移量也就是文件偏移，起始值为0，就是我们在十六进制查看器里面看到的地址值&lt;/p&gt;
+&lt;p&gt;这个位置一般通过已知的RAW确定，特别是节的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;目标&lt;span style=&#34;color:#e06c75&#34;&gt;RAW&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; 节在文件中的起始位置 &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; (目标&lt;span style=&#34;color:#e06c75&#34;&gt;RVA&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; 节在内存中的起始虚拟地址)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中&lt;code&gt;节在内存中的起始虚拟地址&lt;/code&gt;就是节的RVA，&lt;code&gt;节在文件中的起始位置&lt;/code&gt;就是节的RAW&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;RVA - 节在内存中的起始虚拟地址&lt;/code&gt;计算的就是目标在节内的偏移&lt;/p&gt;
+&lt;p&gt;尽量理解吧，真是弯弯又绕绕&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;现在&lt;code&gt;OptionalHeader&lt;/code&gt;中找到导入表的RVA为&lt;code&gt;0x2A5AC&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;（这个就是可选头末尾数组的第二项&lt;code&gt;_IMAGE_DATA_DIRECTORY&lt;/code&gt;，存放了导入表的RVA和大小）&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012193440142&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012193440142.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012193440142.png&#34; alt=&#34;image-20251012193440142&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;接下来我们要去找到表被存储在了哪个节里&lt;/p&gt;
+&lt;p&gt;先看第一个&lt;code&gt;.text&lt;/code&gt;节，我们关注的是&lt;code&gt;RVA&lt;/code&gt;、&lt;code&gt;SizeOfRawData&lt;/code&gt;、&lt;code&gt;PointerToRawData&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;由于&lt;code&gt;ImageBase&lt;/code&gt;只有一个值，我们就能通过&lt;code&gt;RVA&lt;/code&gt;判断位置&lt;/p&gt;
+&lt;p&gt;因为&lt;code&gt;0x01000 + 0x26A00 ＜ 0x2A5AC&lt;/code&gt;，也就是说导入表的位置不可能在&lt;code&gt;.text&lt;/code&gt;节里面：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012193533307&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012193533307.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012193533307.png&#34; alt=&#34;image-20251012193533307&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;就这样逐个往下找，能找到导入表位置在&lt;code&gt;.idata&lt;/code&gt;节：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012200435441&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012200435441.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012200435441.png&#34; alt=&#34;image-20251012200435441&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;接下来，我们要求出导入表的RAW&lt;/p&gt;
+&lt;p&gt;知道了导入表的RVA为&lt;code&gt;0x2A5AC&lt;/code&gt;，再结合&lt;code&gt;.idata&lt;/code&gt;节的RVA(&lt;code&gt;0x2A000&lt;/code&gt;)和RAW(&lt;code&gt;0x27800&lt;/code&gt;)，就能计算出第一个&lt;code&gt;IMAGE_IMPORT_DESCRIPTOR&lt;/code&gt;在文件中的RAW为&lt;code&gt;0x2A5AC - 0x2A000 + 0x27800 = 0x27DAC&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;打开导入表，果然第一项的INT地址和我们算的一样（导入表结构最前面的就是INT）：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012200811269&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012200811269.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012200811269.png&#34; alt=&#34;image-20251012200811269&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;根据表里面存储的INT的RVA，能计算出它的RAW：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;0x2A9C4 - 0x2A000 + 0x27800 = 0x281C4&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看INT，这个地址对应的就是第一项：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012203024038&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012203024038.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012203024038.png&#34; alt=&#34;image-20251012203024038&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;INT存储的是&lt;code&gt;IMAGE_IMPORT_BY_NAME&lt;/code&gt;的RVA，还是这样算出RAW：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;0x2B004 - 0x2A000 + 0x27800 = 0x28804&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在文件偏移里能找到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012203711363&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012203711363.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012203711363.png&#34; alt=&#34;image-20251012203711363&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;总结一下过程：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;可选头的导出表入口 -&amp;gt; 导出表 -&amp;gt; INT -&amp;gt; &lt;code&gt;IMAGE_IMPORT_BY_NAME&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这一切都基于对应节的RAW&lt;/p&gt;
+&lt;h2 id=&#34;导出表&#34;&gt;导出表
+&lt;/h2&gt;&lt;p&gt;装载DLL文件时，实际上也创建了一系列能够被其他PE文件调用的函数，而导出表就是DLL文件用来告诉外界它能提供哪些函数的功能的，EXE文件通常没有导出表&lt;/p&gt;
+&lt;p&gt;和导入表一样，它的地址也在可选头末尾的数组里，是第一个元素&lt;code&gt;OptionalHeader.DataDirectory[0]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;组成导出表的结构如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_EXPORT_DIRECTORY&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;Characteristics&lt;/span&gt;;        &lt;span style=&#34;color:#7f848e&#34;&gt;// 保留，通常为 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;TimeDateStamp&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// 时间戳
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;MajorVersion&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 主版本号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;MinorVersion&lt;/span&gt;;           &lt;span style=&#34;color:#7f848e&#34;&gt;// 次版本号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;Name&lt;/span&gt;;                   &lt;span style=&#34;color:#7f848e&#34;&gt;// DLL 名称 RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;Base&lt;/span&gt;;                   &lt;span style=&#34;color:#7f848e&#34;&gt;// 起始序号（Ordinals 从 Base 开始）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;NumberOfFunctions&lt;/span&gt;;      &lt;span style=&#34;color:#7f848e&#34;&gt;// EAT 中函数总数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;NumberOfNames&lt;/span&gt;;          &lt;span style=&#34;color:#7f848e&#34;&gt;// ENT 中函数名总数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;AddressOfFunctions&lt;/span&gt;;     &lt;span style=&#34;color:#7f848e&#34;&gt;// EAT RVA（函数地址表）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;AddressOfNames&lt;/span&gt;;         &lt;span style=&#34;color:#7f848e&#34;&gt;// ENT RVA（函数名表）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;AddressOfNameOrdinals&lt;/span&gt;;  &lt;span style=&#34;color:#7f848e&#34;&gt;// 序数数组 RVA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_EXPORT_DIRECTORY&lt;/span&gt;, &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;PIMAGE_EXPORT_DIRECTORY&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个结构中包含了三个重要的指针数组的RVA：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;AddressOfFunctions&lt;/code&gt;：指向导出地址表（EAT）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;AddressOfNames&lt;/code&gt;：指向导出名称表（ENT）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;AddressOfNameOrdinals&lt;/code&gt;：指向一个序数数组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这三个表协同工作：通过函数名在ENT中找到其索引，用这个索引在序数数组中找到对应的序数，最后用这个序数作为索引在EAT中找到函数的最终RVA&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012212321253&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012212321253.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012212321253.png&#34; alt=&#34;image-20251012212321253&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;基址重定位&#34;&gt;基址重定位
+&lt;/h2&gt;&lt;h3 id=&#34;为什么需要重定位&#34;&gt;为什么需要重定位
+&lt;/h3&gt;&lt;p&gt;当加载器准备将一个DLL加载到其首选的ImageBase地址时，如果该地址已经被其他模块占用，会发生什么？&lt;/p&gt;
+&lt;p&gt;答案是加载器会为这个DLL在内存中另找一个空闲的位置，然后对其进行&lt;strong&gt;基址重定位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;虽然说PE文件中大部分地址是RVA，但代码或数据中仍然可能存在一些硬编码的绝对地址（也就是确定的虚拟地址，VA），这些地址是基于原始ImageBase计算的&lt;/p&gt;
+&lt;p&gt;当ImageBase改变时，这些地址就必须被修正：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;新地址 &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; 硬编码地址 &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; 固有&lt;span style=&#34;color:#e06c75&#34;&gt;ImageBase&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; 实际加载基址
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重定位表&#34;&gt;重定位表
+&lt;/h3&gt;&lt;p&gt;PE文件通过基址重定位表来告诉加载器哪些位置存在硬编码地址需要修正&lt;/p&gt;
+&lt;p&gt;重定位表的地址也存放在可选头末尾的数组中，是第六个元素&lt;code&gt;OptionalHeader.DataDirectory[5]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;组成重定位表的结构如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;_IMAGE_BASE_RELOCATION&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;VirtualAddress&lt;/span&gt;;  &lt;span style=&#34;color:#7f848e&#34;&gt;// 本块起始 RVA（相对于 ImageBase）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;DWORD&lt;/span&gt;   &lt;span style=&#34;color:#e06c75&#34;&gt;SizeOfBlock&lt;/span&gt;;     &lt;span style=&#34;color:#7f848e&#34;&gt;// 当前块大小，包括头部 + 16-bit 偏移表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;WORD&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;TypeOffset&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;];   &lt;span style=&#34;color:#7f848e&#34;&gt;// 可变长度的 16-bit 数组，记录偏移和类型
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#e06c75&#34;&gt;IMAGE_BASE_RELOCATION&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251012213310777&#34; href=&#34;http://picture.928330.xyz/typora/image-20251012213310777.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251012213310777.png&#34; alt=&#34;image-20251012213310777&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;每个块中，&lt;code&gt;VirtualAddress&lt;/code&gt;字段定义了一个基准RVA，块后面紧跟一个&lt;code&gt;TypeOffset&lt;/code&gt;数组&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;TypeOffset&lt;/code&gt;是16bit元素构成的数组，每个元素可以如下分割：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;高4bit：重定位类型&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Type&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;IMAGE_REL_BASED_ABSOLUTE（不调整，占位用）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;IMAGE_REL_BASED_HIGHLOW（32-bit 地址调整，常用在 PE32）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;IMAGE_REL_BASED_DIR64（64-bit 地址调整，PE32+）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;其他&lt;/td&gt;
+          &lt;td&gt;不同平台/特殊用途&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;低12bit：相对于VirtualAddress的偏移&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将这个偏移量与块的基准RVA相加，就得到了一个需要被重定位的硬编码地址的RVA&lt;/p&gt;
+&lt;p&gt;加载器会定位到这些RVA的RAW，读取其中的硬编码VA，然后进行修正&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;它们就存储在.reloc节里：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013011531638&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013011531638.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013011531638.png&#34; alt=&#34;image-20251013011531638&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>逆向基础3：ELF文件</title>
+        <link>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/</link>
+        <pubDate>Sat, 11 Oct 2025 09:45:23 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg" alt="Featured image of post 逆向基础3：ELF文件" /&gt;&lt;p&gt;终于讲到了，久闻ELF大名，真的很有意思&lt;/p&gt;
+&lt;p&gt;在几乎所有的现代Unix-like操作系统（比如Linux）中，从可执行程序、共享库到目标文件，背后都有一个共同的标准——那就是&lt;strong&gt;ELF （Executable and Linkable Format，可执行和可链接格式）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;ELF格式的文件也常简称&lt;strong&gt;对象文件&lt;/strong&gt;，对象文件参与程序的链接和执行&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.laumy.tech/1091.html/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;静态链接与动态链接
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/linhaostudy/p/8855238.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ELF文件结构描述 
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://yjy123123.github.io/2021/12/06/%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;延迟绑定过程分析
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;三种形态&#34;&gt;三种形态
+&lt;/h1&gt;&lt;p&gt;根据在程序生命周期中所处的阶段，ELF文件主要表现为三种形式：&lt;/p&gt;
+&lt;h2 id=&#34;可重定位文件o&#34;&gt;可重定位文件（.o）
+&lt;/h2&gt;&lt;p&gt;由编译器和汇编器生成，包含了代码和数据&lt;/p&gt;
+&lt;p&gt;它可以与其他目标文件链接，以创建可执行文件或共享库&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 从 test.c 生成可重定位文件 test.o&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc -c test.c -o test.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;可执行文件&#34;&gt;可执行文件
+&lt;/h2&gt;&lt;p&gt;包含了执行一个程序所需的全部信息，它指定了如何创建一个进程映像&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 从 test.o 链接生成可执行文件 test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc test.o -o &lt;span style=&#34;color:#e5c07b&#34;&gt;test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;共享对象文件-so&#34;&gt;共享对象文件 （.so）
+&lt;/h2&gt;&lt;p&gt;这就是我们常说的动态链接库，它有两个用法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;链接器能将它与其他&lt;code&gt;.o&lt;/code&gt;和&lt;code&gt;.so&lt;/code&gt;文件链接，生成新的对象文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;动态链接器在程序运行时能将多个它与可执行文件结合，共同创建进程映像&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 生成位置无关代码的目标文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc -c -fPIC shared.c -o shared.o
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 链接生成共享库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc -shared -o libshared.so shared.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;链接与执行&#34;&gt;链接与执行
+&lt;/h1&gt;&lt;p&gt;ELF格式的一个核心设计思想是为同一个文件提供两种不同的解析视图，以满足不同工具的需求&lt;/p&gt;
+&lt;h2 id=&#34;链接视图&#34;&gt;链接视图
+&lt;/h2&gt;&lt;p&gt;供链接器使用&lt;/p&gt;
+&lt;p&gt;文件被看作是一系列**节（Section）**的集合，链接器通过解析节头表来处理和合并这些节&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010153927970&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010153927970.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010153927970.png&#34; alt=&#34;image-20251010153927970&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;执行视图&#34;&gt;执行视图
+&lt;/h2&gt;&lt;p&gt;供加载器（操作系统内核的一部分）使用&lt;/p&gt;
+&lt;p&gt;文件被看作是一系列**段（Segment）**的集合，加载器通过解析程序头表来将段加载到内存并创建进程&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010153944253&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010153944253.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010153944253.png&#34; alt=&#34;image-20251010153944253&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;下面我们会分别解释它们是什么&lt;/p&gt;
+&lt;h1 id=&#34;elf文件核心结构&#34;&gt;ELF文件核心结构
+&lt;/h1&gt;&lt;h2 id=&#34;elf头&#34;&gt;ELF头
+&lt;/h2&gt;&lt;p&gt;位于文件的最开始（即偏移量是0），是整个文件的索引名片，包含了最基本的信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件魔数&lt;/strong&gt;，用于识别ELF格式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件位数&lt;/strong&gt;，32位还是64位&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;数据编码存储方式&lt;/strong&gt;，大端序还是小端序&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;指令集体系结构&lt;/strong&gt;，如 x86-64、ARM&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;程序执行的入口点地址&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;程序头表和节头表在文件中的偏移量、条目数量和大小&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;还由其他的一些信息&lt;/p&gt;
+&lt;p&gt;可以使用&lt;code&gt;readelf&lt;/code&gt;命令查看ELF头：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;readelf -h &amp;lt;filename&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010205639241&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010205639241.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010205639241.png&#34; alt=&#34;image-20251010205639241&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;节头表与重要节区&#34;&gt;节头表与重要节区
+&lt;/h2&gt;&lt;p&gt;这是&lt;strong&gt;链接视图&lt;/strong&gt;的核心&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它是一个数组，描述了文件中所有的节，每个节都是一块具有相似属性的数据或代码的集合&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一些重要的节：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;节名称&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.text&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;程序的可执行指令（代码）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.data&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;已初始化的全局变量和静态变量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.bss&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;未初始化的全局变量和静态变量（在文件中不占空间，加载时才分配）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.rodata&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;只读数据，如字符串常量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.interp&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;存放&lt;strong&gt;动态链接器的路径名&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.plt&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;过程链接表&lt;/strong&gt;，用于动态链接中的函数调用跳转&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.got&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;全局偏移量表&lt;/strong&gt;，存储动态链接符号的地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.rel.&amp;lt;x&amp;gt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;节&lt;code&gt;&amp;lt;x&amp;gt;&lt;/code&gt;的重定位信息，比如&lt;code&gt;.rel.text&lt;/code&gt;就是&lt;code&gt;.text&lt;/code&gt;节的重定位信息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.dynamic&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;动态链接所需的信息&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;可以使用&lt;code&gt;readelf&lt;/code&gt;查看详细的节头表信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;readelf -S &amp;lt;filename&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010210448607&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010210448607.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010210448607.png&#34; alt=&#34;image-20251010210448607&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;程序头表与段&#34;&gt;程序头表与段
+&lt;/h2&gt;&lt;p&gt;这是&lt;strong&gt;执行视图&lt;/strong&gt;的核心&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在加载器眼中，文件被划分为若干个段，而它告诉系统如何将文件内容加载到内存中以创建一个进程&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;重要的段类型：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;段类型&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;LOAD&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;可加载段，加载器需要将此类型的段从文件映射到内存&lt;br /&gt;通常，一个&lt;code&gt;LOAD&lt;/code&gt;段对应代码（可读可执行），另一个对应数据（可读可写）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;INTERP&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;指向动态链接器的路径（对应&lt;code&gt;.interp&lt;/code&gt;节）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;DYNAMIC&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;指向动态链接信息（对应&lt;code&gt;.dynamic&lt;/code&gt;节）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;PHDR&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;描述程序头表本身的位置和大小&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;可以使用&lt;code&gt;readelf -l &amp;lt;filename&amp;gt;&lt;/code&gt;查看程序头表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010210617934&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010210617934.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010210617934.png&#34; alt=&#34;image-20251010210617934&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;节与段到底是什么啊&#34;&gt;节与段到底是什么啊
+&lt;/h2&gt;&lt;p&gt;这俩东西的确有些难以理解，我们展开说一下&lt;/p&gt;
+&lt;h3 id=&#34;节&#34;&gt;节
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;节是ELF文件中基本的逻辑单位，用来分类不同类型的数据，编译器在生成目标文件（&lt;code&gt;.o&lt;/code&gt;）时，会把不同性质的内容放到不同的节里&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;还是拿之前打印输出hello的那个c语言程序举例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们把它编译链接生成可执行文件后，这个可执行文件内部就有了许多的节&lt;/p&gt;
+&lt;p&gt;比如&lt;code&gt;.text&lt;/code&gt;存放的是函数的机器指令，也就是&lt;code&gt;main()&lt;/code&gt;函数的汇编代码，而&lt;code&gt;.rodata&lt;/code&gt;存放只读常量，比如字符串 &lt;code&gt;&amp;quot;hello&amp;quot;&lt;/code&gt;，也就是给文件里面的东西分类摆放了&lt;/p&gt;
+&lt;p&gt;当多个&lt;code&gt;.o&lt;/code&gt;文件被合并时，链接器会把同名的节拼在一起，比如把所有&lt;code&gt;.text&lt;/code&gt;合并成一个大&lt;code&gt;.text&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;注意，这些节只对编译器和链接器有意义，别的东西来看是没有什么用的&lt;/p&gt;
+&lt;h3 id=&#34;段&#34;&gt;段
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;当链接器把&lt;code&gt;.o&lt;/code&gt;文件合并成最终的可执行文件后，它还要告诉操作系统运行这个程序时要加载哪些部分，这时它就会生成一组段信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;段描述的是内存映射的区域，比如哪一部分是可执行的（代码段），哪一部分又是可读写的（数据段）等等，&lt;strong&gt;一个段往往包含多个节&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在上面代码编译生成最终的可执行文件会有两个主要的加载段：&lt;/p&gt;
+&lt;p&gt;第一个是可执行段，包含&lt;code&gt;.text&lt;/code&gt;和&lt;code&gt;.rodata&lt;/code&gt;，程序加载时，这部分会映射成只读、可执行的内存区域&lt;/p&gt;
+&lt;p&gt;第二个是可读写段，包含&lt;code&gt;.data&lt;/code&gt;和&lt;code&gt;.bss&lt;/code&gt;，程序加载时，这部分会映射成可读可写的区域，用于存储全局变量&lt;/p&gt;
+&lt;p&gt;除了这两个段还会有一些特殊段，就不多说了&lt;/p&gt;
+&lt;p&gt;我们上面说的都是“程序加载时”，也就是说段是给加载器看的，在加载的时候才起作用&lt;/p&gt;
+&lt;h3 id=&#34;如此羁绊&#34;&gt;如此羁绊
+&lt;/h3&gt;&lt;p&gt;总之啊可以这样理解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;节是编译器和链接器关心的划分，它描述&lt;strong&gt;文件中的逻辑内容&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;段是操作系统加载器关心的划分，它描述&lt;strong&gt;程序加载到内存后的布局&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;节是&lt;strong&gt;编译时&lt;/strong&gt;的单位&lt;/p&gt;
+&lt;p&gt;段是&lt;strong&gt;运行时&lt;/strong&gt;的单位&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;节存在于&lt;strong&gt;文件逻辑结构&lt;/strong&gt;中&lt;/p&gt;
+&lt;p&gt;段存在于&lt;strong&gt;文件加载映射&lt;/strong&gt;中&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;在链接阶段完成之后，节和段完全就是两个东西，不会互相干扰&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;readelf -l&lt;/code&gt;看文件的时候，其实还会有下面这样的输出：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010210659755&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010210659755.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010210659755.png&#34; alt=&#34;image-20251010210659755&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;左边就是段表各个段的索引号，右边就是对应段里面存储了那些节&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;记得之前的&lt;code&gt;strip&lt;/code&gt;命令吗，当执行&lt;code&gt;strip&lt;/code&gt;时，程序会删除节头表，于是里面的信息，也就是元数据，都没有了&lt;/p&gt;
+&lt;p&gt;那为什么删除它不会影响执行呢？现在我们就应该知道了——&lt;/p&gt;
+&lt;p&gt;**因为操作系统加载程序时只看段信息！**节没了就没了呗&lt;/p&gt;
+&lt;h1 id=&#34;程序的链接与装载&#34;&gt;程序的链接与装载
+&lt;/h1&gt;&lt;p&gt;ok，我们已经了解了ELF文件的内部结构，但一个静态的文件是怎么变成一个在内存中运行的进程的呢？&lt;/p&gt;
+&lt;p&gt;这个过程的核心就是&lt;strong&gt;链接和装载&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;而链接则负责解决不同代码模块之间的依赖关系，而装载负责将文件内容搬入内存&lt;/p&gt;
+&lt;h2 id=&#34;代码的两种形态&#34;&gt;代码的两种形态
+&lt;/h2&gt;&lt;p&gt;在介绍链接细节之前，我们先看看代码生成的两种不同模式，它们直接决定了文件应如何被加载&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意，下面的概念都是基于虚拟地址的&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;绝对代码absolute-code&#34;&gt;绝对代码（Absolute Code）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是在编译时就假定自己会被加载到内存中一个固定地址的代码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个预设的地址被记录在程序头表的&lt;code&gt;p_vaddr&lt;/code&gt;字段中，操作系统加载器必须将代码段存放到这个指定的虚拟地址，否则程序内部的地址引用就会全部出错&lt;/p&gt;
+&lt;p&gt;对于一个进程的主程序来说，这是可行的，因为它是第一个被加载的，其首选地址通常是空闲的&lt;/p&gt;
+&lt;h3 id=&#34;位置无关代码pic-position-independent-code&#34;&gt;位置无关代码（PIC, Position-Independent Code）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;这是为共享库（&lt;code&gt;.so&lt;/code&gt;文件）量身定做的代码喔&lt;/strong&gt;，在之前介绍.so文件的时候已经提到过，使用GCC编译时加上&lt;code&gt;-fPIC&lt;/code&gt;选项即可生成&lt;/p&gt;
+&lt;p&gt;共享库会被许多不同的进程加载和共享，我们无法为一个库预设一个固定的加载地址，因为这个地址在A进程中可能是空闲的，但在B进程中可能已经被主程序或其他库占用了&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PIC通过生成不依赖于任何绝对地址的代码，完美地解决了这个问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当加载一个PIC库时，系统会为它在当前进程中选择一个空闲的虚拟基地址，这意味着同一个&lt;code&gt;.so&lt;/code&gt;文件，在不同的进程中其段的起始虚拟地址是不同的&lt;/p&gt;
+&lt;p&gt;PIC代码之所以能正常工作，关键在于它内部所有的地址引用（如调用库内另一个函数、访问全局变量）都不是硬编码的绝对地址，而是通过&lt;strong&gt;相对寻址&lt;/strong&gt;的方式实现的&lt;/p&gt;
+&lt;p&gt;系统为PIC代码维护了段间的相对位置，无论库被加载到多高的基地址，其代码段和数据段之间的虚拟地址差值始终保持不变，这个差值与它们在原始&lt;code&gt;.so&lt;/code&gt;文件中的虚拟地址差值是相等的&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;strong&gt;叽里呱啦说那么多，总之位置无关代码很灵活，在不同进程的虚拟地址空间里位置可变，但内部各段之间的相对位置保持不变&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;h2 id=&#34;静态链接&#34;&gt;静态链接
+&lt;/h2&gt;&lt;p&gt;静态链接发生在程序编译的最后阶段，它是一个将分散的模块组合成一个完整、独立的可执行文件的过程&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;链接器读取开发者编写的多个可重定位文件（&lt;code&gt;.o&lt;/code&gt;文件）和可能用到的静态库（&lt;code&gt;.a&lt;/code&gt;文件），将它们的所有内容“打包”到一个单独的可执行文件中&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;链接的核心操作之一是将所有输入文件中的同类型节合并，在之前介绍节的时候提到过的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;img&#34; href=&#34;http://picture.928330.xyz/typora/wp_editor_md_3a5fd321b0149ea88c936a9277eb0ea0.jpg&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/wp_editor_md_3a5fd321b0149ea88c936a9277eb0ea0.jpg&#34; alt=&#34;img&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;而在合并的过程中，链接器最关键的工作就是进行重定位&lt;/p&gt;
+&lt;p&gt;它负责解析各个模块间的符号引用（比如函数调用），并修正代码和数据中的地址，确保它们指向正确的位置&lt;/p&gt;
+&lt;h2 id=&#34;重定位&#34;&gt;重定位
+&lt;/h2&gt;&lt;h3 id=&#34;重定位的作用&#34;&gt;重定位的作用
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;重定位本质上是一种对二进制文件进行打补丁的机制，它将代码中对符号的引用连接到该符号的定义上，解决地址未知问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;还是拿之前的&lt;code&gt;hello.c&lt;/code&gt;程序举例吧，我们调用了&lt;code&gt;printf&lt;/code&gt;函数，但是程序不知道这个函数在哪，所以编译器只能在机器码里留下一个临时的占位符，再用一个重定位入口来告诉链接器“这里有个地址需要你填一下”&lt;/p&gt;
+&lt;p&gt;或许你还记得之前使用&lt;code&gt;objdump&lt;/code&gt;查看汇编后的文件的那张图片：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251011153952525&#34; href=&#34;http://picture.928330.xyz/typora/image-20251011153952525.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251011153952525.png&#34; alt=&#34;image-20251011153952525&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;里面call（调用函数）这一行怎么理解呢？&lt;/p&gt;
+&lt;p&gt;右边是汇编，我们不管，只看左边：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;17&lt;/span&gt;: &lt;span style=&#34;color:#e06c75&#34;&gt;e8&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;00&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;冒号前面的&lt;code&gt;17&lt;/code&gt;意思是当前指令地址为&lt;code&gt;0x17&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;冒号后面的&lt;code&gt;e8 00 00 00 00&lt;/code&gt;五个字节是指令，其中第一个字节&lt;code&gt;e8&lt;/code&gt;是对应call的操作码，后面四个字节是偏移量，都是“00”，这就是“编译器在机器码里留下的临时占位符”！&lt;/p&gt;
+&lt;p&gt;之前我们没有看链接后的可执行文件结构，现在我们来看看，还是使用&lt;code&gt;objdump&lt;/code&gt;命令：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251011154918553&#34; href=&#34;http://picture.928330.xyz/typora/image-20251011154918553.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251011154918553.png&#34; alt=&#34;image-20251011154918553&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;哦！链接之后，这里的偏移量被换成了确定的数据了！&lt;/p&gt;
+&lt;p&gt;这就是重定位的作用&lt;/p&gt;
+&lt;h3 id=&#34;重定位入口&#34;&gt;重定位入口
+&lt;/h3&gt;&lt;p&gt;链接器之所以知道要去哪里打补丁，是因为它读取了文件中的重定位节，也就是&lt;code&gt;.rel.&amp;lt;X&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;每个入口都用以下字段描述了一个重定位操作：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;OFFSET&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;需要修正的位置在节内的偏移量，以字节为单位&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;TYPE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;重定位类型，决定怎么计算地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;VALUE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;目标符号，也就是被引用的对象的名称&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;使用&lt;code&gt;objdump&lt;/code&gt;能查看重定位表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251011160328709&#34; href=&#34;http://picture.928330.xyz/typora/image-20251011160328709.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251011160328709.png&#34; alt=&#34;image-20251011160328709&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;里面的第二条记录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0000000000000018&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;R_X86_64_PLT32&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;printf&lt;/span&gt;-&lt;span style=&#34;color:#d19a66&#34;&gt;0x4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明在&lt;code&gt;.text&lt;/code&gt;段偏移&lt;code&gt;0x18&lt;/code&gt;处有一个通过PLT（过程链接表）调用的&lt;code&gt;printf&lt;/code&gt;的指令&lt;/p&gt;
+&lt;h3 id=&#34;重定位地址计算&#34;&gt;重定位地址计算
+&lt;/h3&gt;&lt;p&gt;链接器根据重定位类型使用特定公式来计算最终要填入的值&lt;/p&gt;
+&lt;p&gt;上文的记录的类型是&lt;code&gt;R_X86_64_PLT32&lt;/code&gt;，用在&lt;code&gt;x86-64&lt;/code&gt;架构，即64位架构&lt;/p&gt;
+&lt;p&gt;我们这里介绍一个类似的用在32位的&lt;code&gt;R_386_PC32&lt;/code&gt;类型，其公式为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;目标值&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;S&lt;/span&gt; + &lt;span style=&#34;color:#e06c75&#34;&gt;A&lt;/span&gt; - &lt;span style=&#34;color:#e06c75&#34;&gt;P&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;S&lt;/strong&gt;：是符号的最终值，即被调用函数在内存中的绝对地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A&lt;/strong&gt;：是存储在要修改位置的原始值，称为隐式加数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;P&lt;/strong&gt;：是要修改位置本身的地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;动态链接&#34;&gt;动态链接
+&lt;/h2&gt;&lt;p&gt;动态链接将链接过程的一部分推迟到程序运行时进行。当程序依赖于共享库（如&lt;code&gt;libc.so&lt;/code&gt;）时，操作系统会在程序启动时找到这些库，并将它们动态地绑定到进程上。这种方式极大地减少了可执行文件的体积和系统内存的占用。&lt;/p&gt;
+&lt;h3 id=&#34;启动过程&#34;&gt;启动过程
+&lt;/h3&gt;&lt;p&gt;系统装载可执行文件本身后，如果在解析程序头表时发现有一个&lt;code&gt;INTERP&lt;/code&gt;段，它就知道这个程序需要动态链接&lt;/p&gt;
+&lt;p&gt;此时会加载并启动&lt;code&gt;INTERP&lt;/code&gt;段中指定的&lt;strong&gt;动态链接器&lt;/strong&gt;（在Linux上通常是&lt;code&gt;/lib/ld-linux.so.2&lt;/code&gt;），并将控制权移交给动态链接器&lt;/p&gt;
+&lt;p&gt;动态连接器会分析可执行文件需要依赖哪些共享库，然后查找、加载这些库，并将它们也映射到进程的内存空间中&lt;/p&gt;
+&lt;h3 id=&#34;延迟绑定&#34;&gt;延迟绑定
+&lt;/h3&gt;&lt;p&gt;为了加快程序的启动速度，动态链接器默认采用延迟绑定策略：一个外部库函数的地址只有在它第一次被调用时才会被解析&lt;/p&gt;
+&lt;p&gt;这个机制由&lt;strong&gt;过程链接表 (PLT)&lt;/strong&gt; 和 &lt;strong&gt;全局偏移量表 (GOT)&lt;/strong&gt; 协同完成&lt;/p&gt;
+&lt;h4 id=&#34;过程链接表-plt&#34;&gt;过程链接表 (PLT)
+&lt;/h4&gt;&lt;p&gt;给外部函数提供一个统一的跳板入口，负责第一次调用的动态解析&lt;/p&gt;
+&lt;p&gt;它在运行之前就已经确定并且不会被修改&lt;/p&gt;
+&lt;h4 id=&#34;全局偏移量表-got&#34;&gt;全局偏移量表 (GOT)
+&lt;/h4&gt;&lt;p&gt;保存外部函数或全局变量的真实地址，程序通过它来间接访问外部符号&lt;/p&gt;
+&lt;p&gt;它可以在程序运行中被修改（这就导致它很容易作为漏洞利用）&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;关于PLT和GOT的详细的结构，主要是pwn的内容，我们学逆向就点到为止&lt;/del&gt;&lt;/p&gt;
+&lt;h4 id=&#34;绑定过程&#34;&gt;绑定过程
+&lt;/h4&gt;&lt;p&gt;下面我们用&lt;code&gt;printf&lt;/code&gt;为例看看什么叫延迟绑定：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首次调用函数：
+&lt;ol&gt;
+&lt;li&gt;代码中的&lt;code&gt;call&lt;/code&gt;指令实际上跳转到&lt;code&gt;printf&lt;/code&gt;在PLT中的一个专属条目，我们称之为&lt;code&gt;printf@plt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;printf@plt&lt;/code&gt;的第一条指令是跳转到GOT中为&lt;code&gt;printf&lt;/code&gt;函数预留的地址槽&lt;code&gt;printf_in_got&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;GOT槽里存放的并不是&lt;code&gt;printf&lt;/code&gt;的真实地址，而是&lt;code&gt;printf@plt&lt;/code&gt;中下一条指令的地址！所以这个&lt;code&gt;jmp&lt;/code&gt;实际上又跳了回来&lt;/li&gt;
+&lt;li&gt;程序继续执行PLT条目中的后续指令，它会将&lt;code&gt;printf&lt;/code&gt;函数的一个标识信息压栈，然后跳转到动态链接器中一个公共的解析函数&lt;/li&gt;
+&lt;li&gt;解析函数根据传入的标识信息，查找&lt;code&gt;printf&lt;/code&gt;函数的真实地址，然后用这个真实地址覆盖GOT中&lt;code&gt;printf_in_got&lt;/code&gt;原来的值&lt;/li&gt;
+&lt;li&gt;最后，解析函数直接跳转到&lt;code&gt;printf&lt;/code&gt;的真实地址去执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;再次调用函数：
+&lt;ol&gt;
+&lt;li&gt;代码再次执行&lt;code&gt;call printf@plt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;PLT条目再次执行&lt;code&gt;jmp *[printf_in_got]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;但这一次，&lt;code&gt;printf_in_got&lt;/code&gt;这个槽里已经存放了&lt;code&gt;printf&lt;/code&gt;函数的真实地址！所以，程序会直接跳转到&lt;code&gt;printf&lt;/code&gt;函数，完全不再需要动态链接器介入，从而实现了高效调用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;img&#34; href=&#34;http://picture.928330.xyz/typora/3.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/3.png&#34; alt=&#34;img&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;总之，plt就像指示牌，指向got，而got里面存了真正的地址，第一次使用plt会更新got值，后面就随便用了&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;程序的装载&#34;&gt;程序的装载
+&lt;/h1&gt;&lt;p&gt;将一个静态的ELF可执行文件转换为一个动态运行的进程映像，操作系统的加载器有着严谨的步骤&lt;/p&gt;
+&lt;h2 id=&#34;shell调用&#34;&gt;Shell调用
+&lt;/h2&gt;&lt;p&gt;当用户在shell输入&lt;code&gt;./hello&lt;/code&gt;时，shell的执行流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;调用&lt;code&gt;fork()&lt;/code&gt;创建一个子进程&lt;/li&gt;
+&lt;li&gt;子进程调用&lt;code&gt;execve(&amp;quot;./a.out&amp;quot;, argv, envp)&lt;/code&gt;执行指定的ELF文件&lt;/li&gt;
+&lt;li&gt;父进程（shell）继续挂起，等待子进程结束后继续接收用户输入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;也就是说，此时shell本身并不直接执行ELF文件，而是通过&lt;code&gt;execve()&lt;/code&gt;请求内核将子进程的地址空间替换为ELF可执行文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;execve()&lt;/code&gt;的原型：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;execve&lt;/span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;filename&lt;/span&gt;, &lt;span style=&#34;color:#e5c07b&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;argv&lt;/span&gt;[], &lt;span style=&#34;color:#e5c07b&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;envp&lt;/span&gt;[]);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;参数分别为：程序文件名、命令行参数、环境变量&lt;/p&gt;
+&lt;h2 id=&#34;execve系统调用&#34;&gt;execve系统调用
+&lt;/h2&gt;&lt;p&gt;系统调用入口为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;sys_execve&lt;/span&gt;(&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;filename&lt;/span&gt;, &lt;span style=&#34;color:#e5c07b&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;argv&lt;/span&gt;[], &lt;span style=&#34;color:#e5c07b&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;envp&lt;/span&gt;[]);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在内核中，&lt;code&gt;sys_execve()&lt;/code&gt;会调用&lt;code&gt;do_execve()&lt;/code&gt;，把用户传入的文件名、&lt;code&gt;argv&lt;/code&gt;、&lt;code&gt;envp&lt;/code&gt;（环境变量数组）封装为内核可以使用的格式，然后进入&lt;code&gt;do_execve_common()&lt;/code&gt;，处理实际加载过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;检查进程限制&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;例如每用户进程数是否超过限制&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调度准备&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sched_exec()&lt;/code&gt;选择负载最小的CPU&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;准备执行参数结构&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;创建结构体&lt;code&gt;struct linux_binprm bprm&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;linux_binfmt&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;bprm&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;list_head&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;lh&lt;/span&gt;;        &lt;span style=&#34;color:#7f848e&#34;&gt;// 单链表表头
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;module&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;module&lt;/span&gt;;      &lt;span style=&#34;color:#7f848e&#34;&gt;// 模块
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; (&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;load_binary&lt;/span&gt;)(&lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;linux_binprm&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;); &lt;span style=&#34;color:#7f848e&#34;&gt;// 装载函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;保存文件指针、命令行参数和环境变量、文件开头的缓冲区（前128字节）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;拷贝参数与环境变量到内核&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;调用&lt;code&gt;copy_strings()&lt;/code&gt;将argv和envp拷贝到内核空间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用&lt;code&gt;exec_binprm()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;搜索可执行文件格式，并调用对应加载函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;格式识别&#34;&gt;格式识别
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;exec_binprm()&lt;/code&gt;会调用&lt;code&gt;search_binary_handler()&lt;/code&gt;，遍历由bprm组成的链表，调用对应格式的&lt;code&gt;load_binary()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接着，对于可能的ELF文件，调用&lt;code&gt;load_elf_binary()&lt;/code&gt;，并执行以下操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;读取ELF头&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;读取文件开头128字节，检查魔数 &lt;code&gt;{0x7f, &#39;E&#39;, &#39;L&#39;, &#39;F&#39;}&lt;/code&gt;，验证ELF类型（&lt;code&gt;ET_EXEC&lt;/code&gt; 或 &lt;code&gt;ET_DYN&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;你可能奇怪为什么已经知道是ELF了，还要再识别一次，那是因为之前只是初步匹配，这一步才是严格检查&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;读取程序头表&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;获取段的数量、偏移位置等信息，确定每个段在文件中的偏移、大小、内存加载地址和权限。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;检查动态链接器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果存在&lt;code&gt;.interp&lt;/code&gt;段，说明ELF需要动态链接，内核会打开动态链接器ELF文件，并递归调用 &lt;code&gt;load_elf_binary()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;规划内存布局&#34;&gt;规划内存布局
+&lt;/h2&gt;&lt;p&gt;在读取程序头表的时候，加载器会特别关注所有类型为&lt;code&gt;LOAD&lt;/code&gt;的段，因为这些段是需要被完整加载到内存中的&lt;/p&gt;
+&lt;p&gt;程序头表中的每个&lt;code&gt;LOAD&lt;/code&gt;条目都精确地指明了下面的内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;该段在文件中的偏移量和大小（&lt;code&gt;p_offset&lt;/code&gt;, &lt;code&gt;p_filesz&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;该段应该被加载到的目标虚拟内存地址（&lt;code&gt;p_vaddr&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;该段在内存中应该占据的空间大小（&lt;code&gt;p_memsz&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;该段的内存访问权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;之后，跟据这些信息确定内存布局：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.text&lt;/code&gt;、&lt;code&gt;.rodata&lt;/code&gt; → 可执行、只读段&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.data&lt;/code&gt;、&lt;code&gt;.bss&lt;/code&gt; → 可写段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;准备工作&#34;&gt;准备工作
+&lt;/h2&gt;&lt;p&gt;调用&lt;code&gt;flush_old_exec(bprm)&lt;/code&gt;释放旧程序的代码段、数据段、栈等资源&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;setup_new_exec(bprm)&lt;/code&gt;初始化&lt;code&gt;mm_struct&lt;/code&gt;(进程地址空间描述符)、地址空间&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;setup_arg_pages()&lt;/code&gt;，为进程分配用户态栈，将&lt;code&gt;argv&lt;/code&gt;、&lt;code&gt;envp&lt;/code&gt;写入栈顶&lt;/p&gt;
+&lt;h2 id=&#34;映射段到内存&#34;&gt;映射段到内存
+&lt;/h2&gt;&lt;p&gt;根据规划好的内存布局，加载器开始为每一个&lt;code&gt;LOAD&lt;/code&gt;段执行内存映射操作：&lt;/p&gt;
+&lt;p&gt;首先，在进程的虚拟地址空间中，于&lt;code&gt;p_vaddr&lt;/code&gt;处开辟一块内存区域，大小为&lt;code&gt;p_memsz&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接着，将段的数据从ELF文件中（从&lt;code&gt;p_offset&lt;/code&gt;偏移量开始）复制到刚刚开辟的虚拟内存中，复制的数据量为&lt;code&gt;p_filesz&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            📝
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Note
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;值得注意的是，&lt;code&gt;p_memsz&lt;/code&gt;（内存大小）常常会大于&lt;code&gt;p_filesz&lt;/code&gt;（文件大小）&lt;/p&gt;
+&lt;p&gt;这种差异通常是为了方便&lt;code&gt;.bss&lt;/code&gt;节，这里存放的是未初始化的全局和静态变量，它们在程序运行前没有具体值，因此在文件中无需存储，不占用磁盘空间&lt;/p&gt;
+&lt;p&gt;加载器会在内存中将&lt;code&gt;p_memsz&lt;/code&gt;与&lt;code&gt;p_filesz&lt;/code&gt;之间的差额部分全部用0填充，从而完成这些变量的默认初始化&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;最后，加载器根据程序头表中为该段指定的权限位，设置这块内存区域的访问权限&lt;/p&gt;
+&lt;h2 id=&#34;设置入口点&#34;&gt;设置入口点
+&lt;/h2&gt;&lt;p&gt;对于静态链接程序，直接使用ELF头中的&lt;code&gt;e_entry&lt;/code&gt;作为入口&lt;/p&gt;
+&lt;p&gt;对于动态链接程序，入口点由动态链接器提供&lt;/p&gt;
+&lt;h2 id=&#34;返回用户态&#34;&gt;返回用户态
+&lt;/h2&gt;&lt;p&gt;调用&lt;code&gt;start_thread()&lt;/code&gt;初始化用户态寄存器，设置&lt;code&gt;EIP&lt;/code&gt;为程序入口，设置&lt;code&gt;ESP&lt;/code&gt;为栈顶，设置CPU标志位&lt;/p&gt;
+&lt;h2 id=&#34;启动程序执行&#34;&gt;启动程序执行
+&lt;/h2&gt;&lt;p&gt;控制权交给ELF程序，程序从入口点&lt;code&gt;_start&lt;/code&gt;或动态链接器入口开始运行&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>逆向基础2：可执行文件概述</title>
+        <link>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/</link>
+        <pubDate>Thu, 09 Oct 2025 15:52:32 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png" alt="Featured image of post 逆向基础2：可执行文件概述" /&gt;&lt;p&gt;比较简短，结合&lt;a class=&#34;link&#34; href=&#34;https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;逆向基础1
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;看吧，之后的内容比较复杂就单独开篇了~&lt;/p&gt;
+&lt;h1 id=&#34;从源代码到可执行文件&#34;&gt;从源代码到可执行文件
+&lt;/h1&gt;&lt;h2 id=&#34;编程语言的层次&#34;&gt;编程语言的层次
+&lt;/h2&gt;&lt;p&gt;计算机硬件的世界建立在二进制之上，电子器件的开与关直接对应着0和1&lt;/p&gt;
+&lt;p&gt;要驱动这些硬件，就需要一种它们能直接“听懂”的语言，这便是编程语言演进的起点&lt;/p&gt;
+&lt;h3 id=&#34;机器语言&#34;&gt;机器语言
+&lt;/h3&gt;&lt;p&gt;这是最底层的语言&lt;/p&gt;
+&lt;p&gt;它由0和1组成的二进制序列构成，即机器码或原生码，CPU可以不经任何翻译直接解读并执行&lt;/p&gt;
+&lt;p&gt;早期的计算机程序，例如1951年“哈维尔·德卡特伦”计算机所使用的穿孔纸带，记录的就是这种机器码&lt;/p&gt;
+&lt;p&gt;然而，它完全没有可移植性，且对人类来说极其晦涩难懂，毕竟谁会去背那么多不同的一长串的0和1？&lt;/p&gt;
+&lt;h3 id=&#34;汇编语言&#34;&gt;汇编语言
+&lt;/h3&gt;&lt;p&gt;为了改善机器语言的可读性，汇编语言应运而生，它使用助记符来代替二进制指令，因此也被称为符号语言&lt;/p&gt;
+&lt;p&gt;汇编语言与机器语言几乎是一一对应的关系，在执行前需要通过&lt;strong&gt;汇编器&lt;/strong&gt;转换为目标平台的机器码&lt;/p&gt;
+&lt;p&gt;但尽管它的可读性大幅提升了，却依然与特定的CPU指令集架构绑定，可移植性很差&lt;/p&gt;
+&lt;h3 id=&#34;高级语言&#34;&gt;高级语言
+&lt;/h3&gt;&lt;p&gt;高级语言是编程领域的伟大又伟大的革命&lt;/p&gt;
+&lt;p&gt;它高度抽象和封装了底层硬件细节，语法结构更接近自然语言，逻辑也更贴合人类的思维习惯&lt;/p&gt;
+&lt;p&gt;这使得程序员可以从繁琐的内存地址和寄存器操作中解放出来，专注于业务逻辑的实现，从而极大地提高了开发效率和代码的可读性&lt;/p&gt;
+&lt;p&gt;如今我们熟知的 Java, C, C++, Python, C# 等等，都属于高级语言&lt;/p&gt;
+&lt;h2 id=&#34;编译与解释&#34;&gt;编译与解释
+&lt;/h2&gt;&lt;p&gt;拥有了编程语言这一工具后，我们需要一个工作台来编写、调试和生成程序&lt;/p&gt;
+&lt;p&gt;这个工作台就是&lt;strong&gt;IDE（Integrated Development Environment，集成开发环境）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通过IDE，我们可以将源代码转化为可执行的程序，根据生成和运行方式的不同，程序主要分为两类&lt;/p&gt;
+&lt;h3 id=&#34;编译型程序&#34;&gt;编译型程序
+&lt;/h3&gt;&lt;p&gt;在执行前，通过编译器将全部源代码一次性翻译成目标平台的机器码，并打包成一个可执行文件&lt;/p&gt;
+&lt;p&gt;运行效率非常高，跨平台性差，比如为Windows编译的程序无法直接在Linux上运行&lt;/p&gt;
+&lt;p&gt;C、C++、Go都是如此&lt;/p&gt;
+&lt;h3 id=&#34;解释型程序&#34;&gt;解释型程序
+&lt;/h3&gt;&lt;p&gt;运行时，由解释器逐行读取源代码，并即时翻译成机器码交给CPU执行&lt;/p&gt;
+&lt;p&gt;跨平台性好，只要有解释器，代码就能运行，但是运行效率相对较低&lt;/p&gt;
+&lt;p&gt;常用的有Python, JavaScript, Ruby&lt;/p&gt;
+&lt;h3 id=&#34;混合型范例&#34;&gt;混合型范例
+&lt;/h3&gt;&lt;p&gt;Java！&lt;/p&gt;
+&lt;p&gt;所谓“一次编译，到处运行”的Java采用了一种巧妙的混合模式，源代码首先被编译成一种平台无关的中间代码——&lt;strong&gt;字节码（.class文件）&lt;/strong&gt;，然后，在不同平台上的**Java虚拟机（JVM）**会解释执行这些字节码&lt;/p&gt;
+&lt;p&gt;为了提升性能，JVM还引入了JIT（Just-In-Time Compilation，即时编译）技术，它会将频繁执行的“热点代码”编译为本地机器码，从而实现接近编译型语言的运行效率，真是很有创新了&lt;/p&gt;
+&lt;h2 id=&#34;c程序的构建&#34;&gt;C程序的构建
+&lt;/h2&gt;&lt;p&gt;作为编译型语言的典范，C/C++程序的生成过程是理解可执行文件结构的基础&lt;/p&gt;
+&lt;p&gt;这个过程的最终产物，便是一个可执行文件，它主要经历&lt;strong&gt;编译&lt;/strong&gt;和&lt;strong&gt;链接&lt;/strong&gt;两大阶段&lt;/p&gt;
+&lt;h3 id=&#34;编译&#34;&gt;编译
+&lt;/h3&gt;&lt;p&gt;此阶段由编译器负责，将源代码文件（&lt;code&gt;.c&lt;/code&gt;）转换为包含机器码的目标文件（&lt;code&gt;.o&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;下面以一个简单的&lt;code&gt;hello.c&lt;/code&gt;程序为例&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;源码helloc&#34;&gt;源码（hello.c）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010133610168&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010133610168.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010133610168.png&#34; alt=&#34;image-20251010133610168&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;预处理编译为汇编-hellos&#34;&gt;预处理、编译为汇编 (hello.s)
+&lt;/h4&gt;&lt;p&gt;编译器首先进行预处理（比如包含头文件），然后将C代码翻译成汇编代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# -S 选项: 仅编译，不进行后续的汇编和链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc -S -o hello.s hello.c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010133737711&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010133737711.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010133737711.png&#34; alt=&#34;image-20251010133737711&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;汇编为目标文件helloo&#34;&gt;汇编为目标文件（hello.o）
+&lt;/h4&gt;&lt;p&gt;汇编器将汇编代码转换为二进制的目标文件&lt;/p&gt;
+&lt;p&gt;这个文件包含了机器码，但还不能独立运行，因为它可能引用了其他外部函数（比如&lt;code&gt;printf&lt;/code&gt;就是外部函数）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# -c 选项: 编译并汇编，但不链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc -c -o hello.o hello.s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010133908624&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010133908624.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010133908624.png&#34; alt=&#34;image-20251010133908624&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;看不懂呢&amp;hellip;&amp;hellip;因为这是二进制，没办法完全转成正常的unicode，使用od查看原始的数据：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010134108713&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010134108713.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010134108713.png&#34; alt=&#34;image-20251010134108713&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;还是看不懂哈哈，其实还可以使用&lt;code&gt;objdump&lt;/code&gt;命令查看，本质就是&lt;code&gt;.s&lt;/code&gt;文件翻译的机器码而已&lt;/p&gt;
+&lt;p&gt;用&lt;code&gt;-d&lt;/code&gt;选项反汇编所有可执行节，&lt;code&gt;-M intel&lt;/code&gt;指定使用intel汇编语法（概念看不懂没关系，后面都会有的）：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010134453910&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010134453910.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010134453910.png&#34; alt=&#34;image-20251010134453910&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;链接&#34;&gt;链接
+&lt;/h3&gt;&lt;p&gt;链接器的任务是将一个或多个目标文件以及它们所需的系统库“链接”在一起，生成最终的可执行文件&lt;/p&gt;
+&lt;p&gt;其核心工作是&lt;strong&gt;符号解析&lt;/strong&gt;和&lt;strong&gt;重定位&lt;/strong&gt;（下文会说这是啥）&lt;/p&gt;
+&lt;p&gt;链接分为两种主要方式：&lt;/p&gt;
+&lt;h4 id=&#34;动态链接&#34;&gt;动态链接
+&lt;/h4&gt;&lt;p&gt;现在最为常用的链接方式&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;只在可执行文件中记录所需库的引用信息，程序运行时，由操作系统加载共享的库文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;节约资源、易于更新，但是依赖外部环境&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 默认进行动态链接，生成可执行文件 hello&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc -o hello hello.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010135257589&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010135257589.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010135257589.png&#34; alt=&#34;image-20251010135257589&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;静态链接&#34;&gt;静态链接
+&lt;/h4&gt;&lt;p&gt;将所有依赖的库代码完整地复制并合并到最终的可执行文件中&lt;/p&gt;
+&lt;p&gt;可独立运行，但体积大且更新困难&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 使用 -static 选项进行静态链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcc -static -o hello_static hello.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010140156961&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010140156961.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010140156961.png&#34; alt=&#34;image-20251010140156961&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;对比一下就能看出它有多大：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010140247990&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010140247990.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010140247990.png&#34; alt=&#34;image-20251010140247990&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;动态链接的只要一万多字节，而静态的要八十万字节！&lt;del&gt;林冲&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;我们在之后会详细说明这两种链接方式的实现&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;可执行文件&#34;&gt;可执行文件
+&lt;/h1&gt;&lt;h2 id=&#34;何为可执行文件&#34;&gt;何为可执行文件？
+&lt;/h2&gt;&lt;p&gt;在上文，编译后链接生成的这个文件，就是一个可执行文件&lt;/p&gt;
+&lt;p&gt;顾名思义，他是能直接被用户执行的文件，这个名称也是一类文件的规范，它定义了链接器和加载器如何处理和执行二进制代码，规定了代码、数据、元信息等内容如何组织在一个文件中&lt;/p&gt;
+&lt;p&gt;目前，主流操作系统主要使用两种格式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unix/Linux 系统： ELF （Executable and Linkable Format，可执行和可链接格式）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Windows 系统：PE （Portable Executable，便携可执行文件）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;之后我们会详细讲它们俩，不过不是这一篇&lt;/p&gt;
+&lt;h2 id=&#34;可执行文件的元信息&#34;&gt;可执行文件的元信息
+&lt;/h2&gt;&lt;p&gt;可执行文件不是纯粹的机器码集合，编译器在生成目标文件时，可以选择性地嵌入丰富的元信息&lt;/p&gt;
+&lt;p&gt;这些信息对于链接、调试和程序分析至关重要。元信息的存在与否，直接决定了逆向分析和调试的难易程度&lt;/p&gt;
+&lt;p&gt;主要的元信息包括以下三类：&lt;/p&gt;
+&lt;h3 id=&#34;符号表&#34;&gt;符号表
+&lt;/h3&gt;&lt;p&gt;符号表记录了源代码中的符号信息，例如函数名、全局变量名等&lt;/p&gt;
+&lt;p&gt;表中每一个表项都包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;符号名&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;绑定地址&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;符号类型&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;其他信息&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;链接器（用于解析不同文件间的符号引用）和调试器（用于将地址映射回人类可读的名称）都会使用它&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用objdump查看符号表（&lt;code&gt;-t&lt;/code&gt;）和动态符号表（&lt;code&gt;-T&lt;/code&gt;）：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;objdump -tT hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010141137496&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010141137496.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010141137496.png&#34; alt=&#34;image-20251010141137496&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用readelf查看符号信息：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;readelf -s hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010141213960&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010141213960.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010141213960.png&#34; alt=&#34;image-20251010141213960&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;重定位信息&#34;&gt;重定位信息
+&lt;/h3&gt;&lt;p&gt;在编译单个文件时，编译器并不知道函数和全局数据最终会被加载到内存的哪个确切地址，因此，它会在代码中留下标记，并生成一系列的重定位入口&lt;/p&gt;
+&lt;p&gt;当链接器将所有目标文件组合时，它会根据这些入口信息，用最终的绝对地址或相对地址来“修补”这些代码，确保程序能够正确跳转和访问数据&lt;/p&gt;
+&lt;h3 id=&#34;调试信息&#34;&gt;调试信息
+&lt;/h3&gt;&lt;p&gt;为了方便调试，编译器可以生成详细的调试信息，并将其嵌入到可执行文件中&lt;/p&gt;
+&lt;p&gt;调试信息包含源代码文件名、行号信息、变量的类型与作用域等，这将二进制代码与原始的源代码关联起来&lt;/p&gt;
+&lt;p&gt;调试器可以利用这些信息，让我们可以在源代码级别设置断点、查看变量值，极大地提高了调试效率&lt;/p&gt;
+&lt;h2 id=&#34;精简与非精简二进制&#34;&gt;精简与非精简二进制
+&lt;/h2&gt;&lt;p&gt;根据是否包含上述元信息，可执行文件可分为两类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;非精简二进制（Unstripped）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;包含完整的元信息，体积较大，但易于调试和反汇编&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;精简二进制（Stripped）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;只保留运行必需的纯代码，几乎所有元信息都被移除&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;进行精简可以显著减小文件体积，并且由于缺少符号信息，大大增加了逆向工程的难度&lt;/p&gt;
+&lt;p&gt;在Linux系统中，可以使用&lt;code&gt;strip&lt;/code&gt;命令来完成这个精简过程：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;strip hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251010142239669&#34; href=&#34;http://picture.928330.xyz/typora/image-20251010142239669.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251010142239669.png&#34; alt=&#34;image-20251010142239669&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>逆向基础1：内存与汇编</title>
         <link>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/</link>
         <pubDate>Tue, 07 Oct 2025 14:46:52 +0800</pubDate>
         
         <guid>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/</guid>
-        <description>&lt;img src="http://picture.928330.xyz/typora/42ba84e45ada7162acccf1dd3f2b6d9c.jpg" alt="Featured image of post 逆向基础1：内存与汇编" /&gt;&lt;p&gt;早就想学了，正好学校选修了这门课，跟着老师的进度记录一下&lt;/p&gt;
+        <description>&lt;img src="http://picture.928330.xyz/typora/b0cd314b8588e4e7b43938004c890c48.png" alt="Featured image of post 逆向基础1：内存与汇编" /&gt;&lt;p&gt;早就想学了，正好学校选修了这门课，跟着老师的进度记录一下&lt;/p&gt;
 &lt;h1 id=&#34;体系结构&#34;&gt;体系结构
 &lt;/h1&gt;&lt;h2 id=&#34;x86-与-x64&#34;&gt;x86 与 x64
 &lt;/h2&gt;&lt;h3 id=&#34;x86focusia-32&#34;&gt;x86（focus：IA-32）

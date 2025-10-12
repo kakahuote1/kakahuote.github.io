@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="从这里开始的第一步">
-<title>逆向基础1：内存与汇编</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="或许应该放在基础1">
+<title>逆向基础2：可执行文件概述</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/'>
+<link rel='canonical' href='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="逆向基础1：内存与汇编">
-<meta property='og:description' content="从这里开始的第一步">
-<meta property='og:url' content='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/'>
+<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="逆向基础2：可执行文件概述">
+<meta property='og:description' content="或许应该放在基础1">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-07T14:46:52&#43;08:00'/><meta property='article:modified_time' content='2025-10-13T01:17:05&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/b0cd314b8588e4e7b43938004c890c48.png' />
-<meta name="twitter:title" content="逆向基础1：内存与汇编">
-<meta name="twitter:description" content="从这里开始的第一步"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://picture.928330.xyz/typora/b0cd314b8588e4e7b43938004c890c48.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-09T15:52:32&#43;08:00'/><meta property='article:modified_time' content='2025-10-13T01:17:05&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png' />
+<meta name="twitter:title" content="逆向基础2：可执行文件概述">
+<meta name="twitter:description" content="或许应该放在基础1"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -376,199 +376,52 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#体系结构">体系结构</a>
+    <li><a href="#从源代码到可执行文件">从源代码到可执行文件</a>
       <ol>
-        <li><a href="#x86-与-x64">x86 与 x64</a>
+        <li><a href="#编程语言的层次">编程语言的层次</a>
           <ol>
-            <li><a href="#x86focusia-32">x86（focus：IA-32）</a></li>
-            <li><a href="#x64">x64</a></li>
+            <li><a href="#机器语言">机器语言</a></li>
+            <li><a href="#汇编语言">汇编语言</a></li>
+            <li><a href="#高级语言">高级语言</a></li>
           </ol>
         </li>
-        <li><a href="#字节序">字节序</a>
+        <li><a href="#编译与解释">编译与解释</a>
           <ol>
-            <li><a href="#小端序">小端序</a></li>
-            <li><a href="#大端序">大端序</a></li>
-            <li><a href="#一个例子">一个例子</a></li>
+            <li><a href="#编译型程序">编译型程序</a></li>
+            <li><a href="#解释型程序">解释型程序</a></li>
+            <li><a href="#混合型范例">混合型范例</a></li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#ia-32-内存">IA-32 内存</a>
-      <ol>
-        <li><a href="#内存模型">内存模型</a>
+        <li><a href="#c程序的构建">C程序的构建</a>
           <ol>
-            <li><a href="#平面内存模型">平面内存模型</a></li>
-            <li><a href="#分段内存模型">分段内存模型</a></li>
-          </ol>
-        </li>
-        <li><a href="#分段内存模型的内存管理">分段内存模型的内存管理</a>
-          <ol>
-            <li><a href="#实模式下的内存管理">实模式下的内存管理</a>
+            <li><a href="#编译">编译</a>
               <ol>
-                <li><a href="#管理方式">管理方式</a></li>
-                <li><a href="#示例">示例</a></li>
+                <li><a href="#源码helloc">源码（hello.c）</a></li>
+                <li><a href="#预处理编译为汇编-hellos">预处理、编译为汇编 (hello.s)</a></li>
+                <li><a href="#汇编为目标文件helloo">汇编为目标文件（hello.o）</a></li>
               </ol>
             </li>
-            <li><a href="#保护模式下的内存管理">保护模式下的内存管理</a>
+            <li><a href="#链接">链接</a>
               <ol>
-                <li><a href="#总体流程">总体流程</a></li>
-                <li><a href="#逻辑地址--线性地址">逻辑地址 → 线性地址</a></li>
-                <li><a href="#线性地址--物理地址">线性地址 → 物理地址</a></li>
-                <li><a href="#示例-1">示例</a></li>
+                <li><a href="#动态链接">动态链接</a></li>
+                <li><a href="#静态链接">静态链接</a></li>
               </ol>
             </li>
           </ol>
         </li>
       </ol>
     </li>
-    <li><a href="#ia-32核心寄存器">IA-32核心寄存器</a>
+    <li><a href="#可执行文件">可执行文件</a>
       <ol>
-        <li><a href="#通用寄存器-gpr">通用寄存器 (GPR)</a></li>
-        <li><a href="#程序状态与控制寄存器-eflags">程序状态与控制寄存器 (EFLAGS)</a></li>
-        <li><a href="#指令指针寄存器-eip">指令指针寄存器 (EIP)</a></li>
-        <li><a href="#段寄存器">段寄存器</a></li>
-      </ol>
-    </li>
-    <li><a href="#ia-32数据类型">IA-32数据类型</a>
-      <ol>
-        <li><a href="#基本数据类型">基本数据类型</a></li>
-        <li><a href="#浮点数据类型">浮点数据类型</a></li>
-        <li><a href="#指针类型">指针类型</a></li>
-      </ol>
-    </li>
-    <li><a href="#ia-32汇编指令">IA-32汇编指令</a>
-      <ol>
-        <li><a href="#intel与att汇编语法">Intel与AT&amp;T汇编语法</a>
+        <li><a href="#何为可执行文件">何为可执行文件？</a></li>
+        <li><a href="#可执行文件的元信息">可执行文件的元信息</a>
           <ol>
-            <li><a href="#intel语法">Intel语法</a></li>
-            <li><a href="#att语法">AT&amp;T语法</a></li>
-            <li><a href="#示例-2">示例</a></li>
+            <li><a href="#符号表">符号表</a></li>
+            <li><a href="#重定位信息">重定位信息</a></li>
+            <li><a href="#调试信息">调试信息</a></li>
           </ol>
         </li>
-        <li><a href="#数据移动指令">数据移动指令</a>
-          <ol>
-            <li><a href="#mov数据传送">MOV：数据传送</a>
-              <ol>
-                <li><a href="#立即数---寄存器">立即数 -&gt; 寄存器</a></li>
-                <li><a href="#寄存器---寄存器">寄存器 -&gt; 寄存器</a></li>
-                <li><a href="#立即数---内存">立即数 -&gt; 内存</a></li>
-                <li><a href="#寄存器---内存">寄存器 -&gt; 内存</a></li>
-                <li><a href="#内存---寄存器">内存 -&gt; 寄存器</a></li>
-              </ol>
-            </li>
-            <li><a href="#lea加载有效地址">LEA：加载有效地址</a>
-              <ol>
-                <li><a href="#计算内存地址">计算内存地址</a></li>
-                <li><a href="#执行快速数学运算">执行快速数学运算</a></li>
-              </ol>
-            </li>
-            <li><a href="#串操作">串操作</a>
-              <ol>
-                <li><a href="#rep系列前缀">REP系列前缀</a></li>
-                <li><a href="#索引增减控制指令cldstd">索引增减控制指令CLD/STD</a></li>
-                <li><a href="#取地址运算符offset">取地址运算符OFFSET</a></li>
-                <li><a href="#movsb--movsw--movsd移动字符串">MOVSB / MOVSW / MOVSD：移动字符串</a></li>
-                <li><a href="#stosb--stosw--stosd存储字符串">STOSB / STOSW / STOSD：存储字符串</a></li>
-                <li><a href="#scasb--scasw--scasd扫描字符串">SCASB / SCASW / SCASD：扫描字符串</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#算术与位运算指令">算术与位运算指令</a>
-          <ol>
-            <li><a href="#add--sub加法--减法">ADD / SUB：加法 / 减法</a></li>
-            <li><a href="#inc--dec加一--减一">INC / DEC：加一 / 减一</a></li>
-            <li><a href="#neg取补">NEG：取补</a></li>
-            <li><a href="#imul--mul有符号--无符号乘法">IMUL / MUL：有符号 / 无符号乘法</a>
-              <ol>
-                <li><a href="#单操作数imul和mul都支持">单操作数（IMUL和MUL都支持）</a></li>
-                <li><a href="#多操作数只有imul支持">多操作数（只有IMUL支持）</a></li>
-              </ol>
-            </li>
-            <li><a href="#idiv--div有符号--无符号除法">IDIV / DIV：有符号 / 无符号除法</a>
-              <ol>
-                <li><a href="#无符号的div">无符号的DIV</a></li>
-                <li><a href="#有符号的idiv">有符号的IDIV</a></li>
-              </ol>
-            </li>
-            <li><a href="#and--or--xor按位与--或--异或">AND / OR / XOR：按位与 / 或 / 异或</a></li>
-            <li><a href="#not按位取反">NOT：按位取反</a></li>
-            <li><a href="#shl--sal--shr--sar逻辑--算数-的-左移--右移">SHL / SAL / SHR / SAR：逻辑 / 算数 的 左移 / 右移</a></li>
-            <li><a href="#rol--ror循环左移--右移">ROL / ROR：循环左移 / 右移</a></li>
-          </ol>
-        </li>
-        <li><a href="#控制流指令">控制流指令</a>
-          <ol>
-            <li><a href="#比较指令">比较指令</a>
-              <ol>
-                <li><a href="#cmp减法比较">CMP：减法比较</a></li>
-                <li><a href="#testand比较">TEST：AND比较</a></li>
-              </ol>
-            </li>
-            <li><a href="#jmp无条件跳转">JMP：无条件跳转</a></li>
-            <li><a href="#jcc条件跳转">Jcc：条件跳转</a></li>
-            <li><a href="#跳转指令前缀">跳转指令前缀</a></li>
-            <li><a href="#流程控制结构示例">流程控制结构示例</a>
-              <ol>
-                <li><a href="#if-else结构">if-else结构</a></li>
-                <li><a href="#for循环结构">for循环结构</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#栈与函数调用指令">栈与函数调用指令</a>
-          <ol>
-            <li><a href="#栈">栈</a></li>
-            <li><a href="#栈帧">栈帧</a>
-              <ol>
-                <li><a href="#什么是栈帧">什么是栈帧</a></li>
-                <li><a href="#栈帧基指针ebp">栈帧基指针（EBP）</a></li>
-              </ol>
-            </li>
-            <li><a href="#基本栈操作push--pop">基本栈操作：PUSH / POP</a>
-              <ol>
-                <li><a href="#push压栈">PUSH：压栈</a></li>
-                <li><a href="#pop出栈">POP：出栈</a></li>
-              </ol>
-            </li>
-            <li><a href="#调用与返回的分类">调用与返回的分类</a>
-              <ol>
-                <li><a href="#近调用-near-call--近返回-near-return">近调用 (Near Call) / 近返回 (Near Return)</a></li>
-                <li><a href="#远调用-far-call--远返回-far-return">远调用 (Far Call) / 远返回 (Far Return)</a></li>
-              </ol>
-            </li>
-            <li><a href="#call调用函数">CALL：调用函数</a>
-              <ol>
-                <li><a href="#近调用">近调用</a></li>
-                <li><a href="#远调用">远调用</a></li>
-              </ol>
-            </li>
-            <li><a href="#ret从函数返回">RET：从函数返回</a>
-              <ol>
-                <li><a href="#近返回retretn">近返回（RET/RETN）</a></li>
-                <li><a href="#远返回retf">远返回（RETF）</a></li>
-              </ol>
-            </li>
-            <li><a href="#调用约定">调用约定</a></li>
-            <li><a href="#栈帧的创建与销毁函数指令框架">栈帧的创建与销毁（函数指令框架）</a>
-              <ol>
-                <li><a href="#函数序言-prologue">函数序言 (Prologue)</a></li>
-                <li><a href="#函数结尾-epilogue">函数结尾 (Epilogue)</a></li>
-                <li><a href="#enter--leave">ENTER / LEAVE</a></li>
-              </ol>
-            </li>
-            <li><a href="#调用流程总结">调用流程总结</a></li>
-            <li><a href="#调用流程示例">调用流程示例</a>
-              <ol>
-                <li><a href="#进入main">进入main</a></li>
-                <li><a href="#call-foo">call foo</a></li>
-                <li><a href="#进入foo">进入foo</a></li>
-                <li><a href="#foo调用bar">foo调用bar</a></li>
-                <li><a href="#返回过程">返回过程</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
+        <li><a href="#精简与非精简二进制">精简与非精简二进制</a></li>
       </ol>
     </li>
   </ol>
@@ -585,9 +438,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/">
+            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">
                 
-                    <img src="http://picture.928330.xyz/typora/b0cd314b8588e4e7b43938004c890c48.png" loading="lazy" alt="Featured image of post 逆向基础1：内存与汇编" />
+                    <img src="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png" loading="lazy" alt="Featured image of post 逆向基础2：可执行文件概述" />
                 
             </a>
         </div>
@@ -608,11 +461,11 @@
 
 
         <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/">逆向基础1：内存与汇编</a>
+            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">逆向基础2：可执行文件概述</a>
         </h2>
         
         <h3 class="article-subtitle">
-            从这里开始的第一步
+            或许应该放在基础1
         </h3>
         
 
@@ -635,7 +488,7 @@
   <path d="M18 16.496v1.504l1 1" />
 </svg>
                 <time class="article-time--published">
-                    发布时间：2025-10-07</time>
+                    发布时间：2025-10-09</time>
             </div>
         
 
@@ -671,1680 +524,228 @@
     <section class="article-content">
     
     
-    <p>早就想学了，正好学校选修了这门课，跟着老师的进度记录一下</p>
-<h1 id="体系结构">体系结构
-</h1><h2 id="x86-与-x64">x86 与 x64
-</h2><h3 id="x86focusia-32">x86（focus：IA-32）
-</h3><p>一个基于Intel8086处理器，向后兼容的指令集体系结构（ISA，Instruction Set Architecture）的总称</p>
-<p>我们通常所说的x86逆向，主要指的是其32位版本，即<strong>IA-32</strong>（Intel Architecture, 32-bit）</p>
-<p><strong>IA-32架构有三种主要操作模式：</strong></p>
-<ul>
-<li>
-<p><strong>实模式</strong></p>
-<p>16位运行环境，是早期MS-DOS等操作系统使用的模式</p>
-</li>
-<li>
-<p><strong>保护模式</strong></p>
-<p>现代操作系统所采用的模式，支持虚拟内存、分页等高级特性，为程序提供了独立的、受保护的内存空间</p>
-</li>
-<li>
-<p><strong>系统管理模式</strong></p>
-<p>用于执行固件中的特殊系统管理代码</p>
-</li>
-</ul>
-<h3 id="x64">x64
-</h3><p>也称为x86-64，是x86体系结构的64位扩展，它完全兼容IA-32，意味着32位程序可以在64位系统上运行</p>
-<h2 id="字节序">字节序
-</h2><p>字节序定义了多字节数据（如一个4字节的整数）在内存中是如何排列的</p>
-<h3 id="小端序">小端序
-</h3><p>数据的低位字节存储在内存的低地址处</p>
-<p>这是Intel x86/x64架构使用的模式，因其电路设计和数据处理效率较高</p>
-<h3 id="大端序">大端序
-</h3><p>数据的高位字节存储在内存的低地址处</p>
-<p>这种方式更符合人类的阅读习惯，常见于一些RISC架构的处理器</p>
-<h3 id="一个例子">一个例子
-</h3><p><strong>现在需要存储一个4字节的整数<code>0x12345678</code></strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>内存地址</th>
-          <th>大端序存储</th>
-          <th>小端序存储</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>低地址</strong></td>
-          <td><code>12</code></td>
-          <td><code>78</code></td>
-      </tr>
-      <tr>
-          <td><strong>↓</strong></td>
-          <td><code>34</code></td>
-          <td><code>56</code></td>
-      </tr>
-      <tr>
-          <td><strong>↓</strong></td>
-          <td><code>56</code></td>
-          <td><code>34</code></td>
-      </tr>
-      <tr>
-          <td><strong>高地址</strong></td>
-          <td><code>78</code></td>
-          <td><code>12</code></td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>在逆向分析中，内存二进制地址方向是从上至下，从左至右增大</strong></p>
-<p><strong>因此，当我们在内存窗口看到<code>78 56 34 12</code>时，须将其理解为<code>0x12345678</code></strong></p>
-<h1 id="ia-32-内存">IA-32 内存
-</h1><h2 id="内存模型">内存模型
-</h2><h3 id="平面内存模型">平面内存模型
-</h3><p>现代操作系统普遍采用的模型</p>
-<p>程序的所有部分（代码、数据、栈）都位于一个连续统一的线性地址空间中</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251005111551905" href="http://picture.928330.xyz/typora/image-20251005111551905.png">
-<img src="http://picture.928330.xyz/typora/image-20251005111551905.png" alt="image-20251005111551905"  />
-</a>
-</div>
-</p>
-<h3 id="分段内存模型">分段内存模型
-</h3><p>程序被划分为多个独立的段，比如有代码段、数据段、栈段等</p>
-<p>一个逻辑地址由<strong>段选择器</strong>和<strong>段内偏移</strong>两部分组成：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">逻辑地址</span> = <span style="color:#e06c75">段寄存器中的段选择器</span>/<span style="color:#e06c75">段选择子</span> + <span style="color:#e06c75">段内偏移量</span>
-</span></span></code></pre></div><p>段选择子是一个16位的值，它存放在段寄存器里，二进制结构如下：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="保护模式篇——段描述符与段选择子- 寂静的羽夏- 博客园" href="http://picture.928330.xyz/typora/o_2109200226344-2.png">
-<img src="http://picture.928330.xyz/typora/o_2109200226344-2.png" alt="保护模式篇——段描述符与段选择子- 寂静的羽夏- 博客园"  />
-</a>
-</div>
-</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>位段</th>
-          <th>名称</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Index</strong></td>
-          <td>描述符索引</td>
-          <td>表示该段描述符在描述符表中的序号</td>
-      </tr>
-      <tr>
-          <td><strong>TI</strong></td>
-          <td>表标志</td>
-          <td>指示去哪个描述符表查段描述符（0是GDT，1是LDT）</td>
-      </tr>
-      <tr>
-          <td><strong>RPL</strong></td>
-          <td>请求特权级</td>
-          <td>用于访问权限控制（0最高，3最低）</td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>而汇编代码里一般只写偏移量，段选择器是隐含的，CPU自动知道用哪个段寄存器</strong></p>
-<p><strong>比如<code>mov EAX, [0x0010]</code>，就相当于是<code>mov EAX, DS:[0x0010]</code></strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>汇编语句类型</th>
-          <th>默认段寄存器</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>mov eax, [offset]</code></td>
-          <td><code>DS</code></td>
-      </tr>
-      <tr>
-          <td><code>mov [offset], eax</code></td>
-          <td><code>DS</code></td>
-      </tr>
-      <tr>
-          <td>栈操作（<code>push</code> / <code>pop</code>）</td>
-          <td><code>SS</code></td>
-      </tr>
-      <tr>
-          <td>代码取指令</td>
-          <td><code>CS</code></td>
-      </tr>
-  </tbody>
-</table></div>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251005111539852" href="http://picture.928330.xyz/typora/image-20251005111539852.png">
-<img src="http://picture.928330.xyz/typora/image-20251005111539852.png" alt="image-20251005111539852"  />
-</a>
-</div>
-</p>
-<h2 id="分段内存模型的内存管理">分段内存模型的内存管理
-</h2><p>对于分段内存模型，不同操作模式（实模式/保护模式）下，内存管理方式和寻址模式存在差异</p>
-<h3 id="实模式下的内存管理">实模式下的内存管理
-</h3><h4 id="管理方式">管理方式
-</h4><p>实模式的内存管理方式非常简单，可以看作是一种特殊的分段模型</p>
-<ul>
-<li>
-<p><strong>有20位地址总线，CPU能够访问的物理内存上限为1MB的地址空间</strong></p>
-</li>
-<li>
-<p><strong>内存被划分为一系列64KB大小的段</strong></p>
-</li>
-</ul>
-<p>程序使用的地址由两部分组成：</p>
-<p>一个16位的<strong>段选择器</strong>和一个16位的<strong>偏移地址</strong></p>
-<p>通过将段选择器的值左移4位，相当于乘以16（因为地址线是20位），加上16位的偏移地址得到物理地址</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">物理地址</span> (<span style="color:#d19a66">20</span>-<span style="color:#e06c75">bit</span>) = <span style="color:#e06c75">段选择器</span> (<span style="color:#d19a66">16</span>-<span style="color:#e06c75">bit</span>)*<span style="color:#d19a66">16</span> + <span style="color:#e06c75">偏移量</span> (<span style="color:#d19a66">16</span>-<span style="color:#e06c75">bit</span>）
-</span></span></code></pre></div><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251005111518978" href="http://picture.928330.xyz/typora/image-20251005111518978.png">
-<img src="http://picture.928330.xyz/typora/image-20251005111518978.png" alt="image-20251005111518978"  />
-</a>
-</div>
-</p>
-<h4 id="示例">示例
-</h4><p>假设段寄存器<code>DS</code>的值为<code>0x1000</code>，指令要访问的偏移地址是<code>0x0123</code></p>
-<ol>
-<li>CPU取出段选择器的值：<code>0x1000</code></li>
-<li>将其左移4位：<code>0x10000</code></li>
-<li>加上偏移地址：<code>0x10000 + 0x0123</code></li>
-<li>最终得到的物理地址是<code>0x10123</code></li>
-</ol>
-<p>实模式没有内存保护机制，任何程序都可以访问全部1MB的内存空间，一个程序的错误可能会导致整个系统崩溃，也不支持虚拟内存等现代操作系统的核心功能</p>
-<h3 id="保护模式下的内存管理">保护模式下的内存管理
-</h3><h4 id="总体流程">总体流程
-</h4><p>在保护模式下，我们代码中使用的地址（逻辑地址）需要经过CPU的转换才能访问到真正的物理内存</p>
-<p>这个过程对程序是透明的</p>
-<p><strong>保护模式的地址管理必须使用分段，另外也可以选择使用分页</strong></p>
-<p>下图是完整的地址访问流程：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251005111658646" href="http://picture.928330.xyz/typora/image-20251005111658646.png">
-<img src="http://picture.928330.xyz/typora/image-20251005111658646.png" alt="image-20251005111658646"  />
-</a>
-</div>
-</p>
-<h4 id="逻辑地址--线性地址">逻辑地址 → 线性地址
-</h4><p><strong>逻辑地址的段选择器告诉CPU该去哪一个描述符表（GDT/LDT）查询得到段描述符</strong></p>
-<p><strong>段描述符</strong>里存有<strong>段基址</strong>、段界限、访问权限等内容</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">线性地址</span> = <span style="color:#e06c75">段基址</span> + <span style="color:#e06c75">偏移量</span>
-</span></span></code></pre></div><h4 id="线性地址--物理地址">线性地址 → 物理地址
-</h4><p><strong>如果没有开启分页机制</strong>**，那么：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">物理地址</span> = <span style="color:#e06c75">线性地址</span>
-</span></span></code></pre></div><p>但是现代操作系统一般都启用了分页，CPU的<strong>内存管理单元 (MMU)</strong> 会进行下一步转换</p>
-<p>MMU将32位的线性地址拆分为三部分：<strong>页目录索引</strong> (10位) + <strong>页表索引</strong> (10位) + <strong>页内偏移</strong> (12位)</p>
-<ul>
-<li><strong>页目录表</strong>：有1024个表项，每项4B，共4KB，每项指向一个页表</li>
-<li><strong>页表</strong>：也有1024个表项，每项4B，共4KB，每项指向一个物理页框</li>
-<li><strong>页框</strong>：大小固定为4KB</li>
-</ul>
-<p>先查页目录，再查页表，最终找到数据所在的物理内存页，加上页内偏移，就得到了最终的物理地址</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">物理地址</span> = <span style="color:#e06c75">物理页框基址</span> + <span style="color:#e06c75">页内偏移</span>
-</span></span></code></pre></div><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="逻辑地址、线性地址和物理地址| vosamo" href="http://picture.928330.xyz/typora/fenye.jpg">
-<img src="http://picture.928330.xyz/typora/fenye.jpg" alt="逻辑地址、线性地址和物理地址| vosamo"  />
-</a>
-</div>
-</p>
-<h4 id="示例-1">示例
-</h4><p>我们现在运行在一个 32位保护模式的系统中，分页功能已经开启，程序中有这样一条指令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">mov</span> <span style="color:#e06c75">eax</span>, [<span style="color:#d19a66">0x1234</span>]
-</span></span></code></pre></div><p>这条指令的意思是把内存中地址<code>DS:0x1234</code>处的数据读到EAX寄存器中，也就是说，这里访问的逻辑地址是：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">逻辑地址</span> = <span style="color:#e06c75">DS</span> : <span style="color:#d19a66">0x1234</span>
-</span></span></code></pre></div><p>假设段寄存器DS的内容是<code>0x0008</code>，二进制表示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">0000</span> <span style="color:#d19a66">0000</span> <span style="color:#d19a66">0000</span> <span style="color:#d19a66">1000</span><span style="color:#e06c75">b</span>
-</span></span></code></pre></div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>字段</th>
-          <th>位</th>
-          <th>值</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Index</td>
-          <td>15:3</td>
-          <td>1</td>
-          <td>第1个描述符</td>
-      </tr>
-      <tr>
-          <td>TI</td>
-          <td>2</td>
-          <td>0</td>
-          <td>从GDT中查</td>
-      </tr>
-      <tr>
-          <td>RPL</td>
-          <td>1–0</td>
-          <td>0</td>
-          <td>当前访问特权级 0</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>假设GDT[1]这个描述符里存的段信息是：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>字段</th>
-          <th>值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>段基址</td>
-          <td>0x00400000</td>
-      </tr>
-      <tr>
-          <td>段界限</td>
-          <td>0x000FFFFF</td>
-      </tr>
-      <tr>
-          <td>访问属性</td>
-          <td>可读可写数据段</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>于是：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">段基址</span> = <span style="color:#d19a66">0x00400000</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">线性地址</span> = <span style="color:#e06c75">段基址</span> + <span style="color:#e06c75">偏移量</span> = <span style="color:#d19a66">0x00400000</span> + <span style="color:#d19a66">0x00001234</span> = <span style="color:#d19a66">0x00401234</span>
-</span></span></code></pre></div><p>现在系统开启了分页，假设页目录基址寄存器CR3的值是<code>0x00100000</code>，即页目录表在物理内存<code>0x00100000</code>处</p>
-<p>把线性地址<code>0x00401234</code>拆成三段，二进制表示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">0000</span> <span style="color:#d19a66">0000</span> <span style="color:#d19a66">0100</span> <span style="color:#d19a66">0000</span> <span style="color:#d19a66">0001</span> <span style="color:#d19a66">0010</span> <span style="color:#d19a66">0011</span> <span style="color:#d19a66">0100</span>
-</span></span></code></pre></div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>部分</th>
-          <th>位数</th>
-          <th>值（二进制）</th>
-          <th>十进制</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>页目录索引</td>
-          <td>10 位</td>
-          <td>0000000001</td>
-          <td>1</td>
-      </tr>
-      <tr>
-          <td>页表索引</td>
-          <td>10 位</td>
-          <td>0000000010</td>
-          <td>2</td>
-      </tr>
-      <tr>
-          <td>页内偏移</td>
-          <td>12 位</td>
-          <td>001101000100</td>
-          <td>0x234</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>页目录表起始于<code>0x00100000</code>，每个表项占4字节，页目录索引是<code>1</code>，所以要读的表项地址：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">0x00100000</span> + <span style="color:#d19a66">1</span> * <span style="color:#d19a66">4</span> = <span style="color:#d19a66">0x00100004</span>
-</span></span></code></pre></div><p>假设这个页目录项内容是<code>0x00200003</code></p>
-<ul>
-<li>高20位：页表的物理基址，是<code>0x00200000</code></li>
-<li>低12位：标志位（Present=1, RW=1, US=0）</li>
-</ul>
-<p>页表基址<code>0x00200000</code>，页表索引是<code>2</code>，所以要读的表项地址：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">0x00200000</span> + <span style="color:#d19a66">2</span> * <span style="color:#d19a66">4</span> = <span style="color:#d19a66">0x00200008</span>
-</span></span></code></pre></div><p>假设这个页表项内容是<code>0x00A00003</code></p>
-<ul>
-<li>高20位：物理页框基址，是<code>0x00A00000</code></li>
-</ul>
-<p>最终得到物理地址：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">物理地址</span> = <span style="color:#e06c75">页框基址</span> + <span style="color:#e06c75">页内偏移</span> = <span style="color:#d19a66">0x00A00000</span> + <span style="color:#d19a66">0x00000234</span> = <span style="color:#d19a66">0x00A00234</span>
-</span></span></code></pre></div><h1 id="ia-32核心寄存器">IA-32核心寄存器
-</h1><h2 id="通用寄存器-gpr">通用寄存器 (GPR)
-</h2><p>IA-32架构有8个32位通用寄存器</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>32位</th>
-          <th>16位</th>
-          <th>8位高/低</th>
-          <th>主要功能</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>EAX</strong></td>
-          <td>AX</td>
-          <td>AH / AL</td>
-          <td><strong>累加器（Accumulator）</strong><br />用于算术运算和函数返回值</td>
-      </tr>
-      <tr>
-          <td><strong>EBX</strong></td>
-          <td>BX</td>
-          <td>BH / BL</td>
-          <td><strong>基址寄存器（Base）</strong><br />用于在内存中寻址</td>
-      </tr>
-      <tr>
-          <td><strong>ECX</strong></td>
-          <td>CX</td>
-          <td>CH / CL</td>
-          <td><strong>计数器（Counter）</strong><br />用于循环和字符串操作的计数，是<strong>无符号计数器</strong></td>
-      </tr>
-      <tr>
-          <td><strong>EDX</strong></td>
-          <td>DX</td>
-          <td>DH / DL</td>
-          <td><strong>数据寄存器（Data）</strong><br />配合EAX进行乘除法运算或存放I/O指针</td>
-      </tr>
-      <tr>
-          <td><strong>ESI</strong></td>
-          <td>SI</td>
-          <td>-</td>
-          <td><strong>源变址寄存器（Source Index）</strong><br />字符串和内存操作的源地址</td>
-      </tr>
-      <tr>
-          <td><strong>EDI</strong></td>
-          <td>DI</td>
-          <td>-</td>
-          <td><strong>目的变址寄存器（Destination Index）</strong><br />字符串和内存操作的目的地址</td>
-      </tr>
-      <tr>
-          <td><strong>ESP</strong></td>
-          <td>SP</td>
-          <td>-</td>
-          <td><strong>栈指针（Stack Pointer)</strong><br />永远指向当前栈的栈顶</td>
-      </tr>
-      <tr>
-          <td><strong>EBP</strong></td>
-          <td>BP</td>
-          <td>-</td>
-          <td><strong>基址指针（Base Pointer）</strong><br />用作当前函数栈帧的基址，用于访问局部变量和参数</td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="程序状态与控制寄存器-eflags">程序状态与控制寄存器 (EFLAGS)
-</h2><p>EFLAGS寄存器是一个32位的寄存器</p>
-<p>它的每一位（标志位）都记录了程序运行中的特定状态，主要用于条件判断和流程控制</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="Basic Execution Environment of Intel Processor 32-bit Architecture | Tachyon" href="http://picture.928330.xyz/typora/eflags.png">
-<img src="http://picture.928330.xyz/typora/eflags.png" alt="Basic Execution Environment of Intel Processor 32-bit Architecture | Tachyon"  />
-</a>
-</div>
-</p>
-<p>下面是一些常用的标志位：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>标志位</th>
-          <th>名称</th>
-          <th>描述和功能</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>ZF</strong></td>
-          <td><strong>零标志</strong><br />(Zero Flag)</td>
-          <td>若算术运算结果为0，则ZF置为1，否则为0，常用于判断相等</td>
-      </tr>
-      <tr>
-          <td><strong>OF</strong></td>
-          <td><strong>溢出标志</strong><br />(Overflow Flag)</td>
-          <td>当有符号整数运算的结果超出寄存器能表示的范围时，OF置为1</td>
-      </tr>
-      <tr>
-          <td><strong>CF</strong></td>
-          <td><strong>进位标志</strong><br />(Carry Flag)</td>
-          <td>当无符号整数运算的结果溢出（产生进位或借位）时，CF置为1</td>
-      </tr>
-      <tr>
-          <td><strong>SF</strong></td>
-          <td><strong>符号标志</strong><br />(Sign Flag)</td>
-          <td>等于运算结果的最高位（也就是符号位）<br />对于有符号数，0表示正数，1表示负数</td>
-      </tr>
-      <tr>
-          <td><strong>DF</strong></td>
-          <td><strong>方向标志</strong><br />(Direction Flag)</td>
-          <td>控制字符串操作指令（如MOVS, SCAS）的处理方向<br />若DF=0，变址寄存器（ESI, EDI）地址递增<br />若DF=1，则地址递减</td>
-      </tr>
-      <tr>
-          <td><strong>TF</strong></td>
-          <td><strong>陷阱标志</strong><br />(Trap Flag)</td>
-          <td>若置为1，CPU在执行每条指令后会产生一个单步中断</td>
-      </tr>
-      <tr>
-          <td><strong>IF</strong></td>
-          <td><strong>中断允许标志</strong><br />(Interrupt Enable Flag)</td>
-          <td>若置为1，CPU可以响应外部设备的中断请求</td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="指令指针寄存器-eip">指令指针寄存器 (EIP)
-</h2><p><strong>EIP（Extended Instruction Pointer）是一个32位的寄存器，存放着下一条将要被CPU执行的指令的地址</strong></p>
-<p>CPU总是根据CS段寄存器和EIP寄存器中的地址来读取下一条指令，<strong>每当一条指令被读取后，EIP的值会自动增加，增加的大小等于刚刚被读取指令的字节数</strong>，从而指向紧随其后的下一条指令</p>
-<p>EIP寄存器的值不能被直接修改，<strong>它的改变只能通过特定的控制流指令（如 <code>JMP</code>, <code>CALL</code>, <code>RET</code>）或者由中断、异常来完成</strong></p>
-<h2 id="段寄存器">段寄存器
-</h2><p>段寄存器是6个16位的寄存器，在保护模式的内存分段管理中，它们存放着指向各个内存段的“段选择器”，CPU通过这些段选择器在系统描述符表（GDT/LDT）中找到段的实际基地址。</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>寄存器</th>
-          <th>名称</th>
-          <th>主要功能</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>CS</strong></td>
-          <td><strong>代码段寄存器</strong><br />(Code Segment)</td>
-          <td>存放应用程序代码所在段的段选择器</td>
-      </tr>
-      <tr>
-          <td><strong>SS</strong></td>
-          <td><strong>栈段寄存器</strong><br />(Stack Segment)</td>
-          <td>存放当前程序栈所在段的段选择器</td>
-      </tr>
-      <tr>
-          <td><strong>DS</strong></td>
-          <td><strong>数据段寄存器</strong><br />(Data Segment)</td>
-          <td>存放程序主要数据所在段的段选择器</td>
-      </tr>
-      <tr>
-          <td><strong>ES/FS/GS</strong></td>
-          <td><strong>附加数据段寄存器</strong><br />(Extra Segment)</td>
-          <td>存放程序使用的附加数据段的段选择器<br />可用于特殊目的，比如通过FS定位线程环境块（TEB）等</td>
-      </tr>
-  </tbody>
-</table></div>
-<h1 id="ia-32数据类型">IA-32数据类型
-</h1><h2 id="基本数据类型">基本数据类型
-</h2><p>这些是构成更复杂数据结构的基础整数类型</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251005155825457" href="http://picture.928330.xyz/typora/image-20251005155825457.png">
-<img src="http://picture.928330.xyz/typora/image-20251005155825457.png" alt="image-20251005155825457"  />
-</a>
-</div>
-</p>
-<ul>
-<li>
-<p><strong>Byte</strong></p>
-<p>1字节（8位）的数据</p>
-</li>
-<li>
-<p><strong>Word</strong></p>
-<p>2字节（16位）的数据</p>
-</li>
-<li>
-<p><strong>Doubleword</strong></p>
-<p>4字节（32位）的数据</p>
-<p>这是IA-32架构中最常用的数据大小，与通用寄存器（如EAX）的大小一致</p>
-</li>
-<li>
-<p><strong>Quadword</strong></p>
-<p>8字节（64位）的数据</p>
-<p>虽然IA-32没有64位的通用寄存器，但在某些特定指令（如<code>RDTSC</code>）或通过组合EDX和EAX寄存器，可以处理64位数据</p>
-</li>
-<li>
-<p><strong>Double Quadword</strong></p>
-<p>16字节（128位）的数据</p>
-</li>
-</ul>
-<h2 id="浮点数据类型">浮点数据类型
-</h2><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251005160136310" href="http://picture.928330.xyz/typora/image-20251005160136310.png">
-<img src="http://picture.928330.xyz/typora/image-20251005160136310.png" alt="image-20251005160136310"  />
-</a>
-</div>
-</p>
-<ul>
-<li><strong>半精度（Half Precision）</strong>：16位浮点数</li>
-<li><strong>单精度（Single Precision）</strong>：32位浮点数</li>
-<li><strong>双精度（Double Precision）</strong>：64位浮点数</li>
-<li><strong>扩展双精度（Double Extended Precision）</strong>：80位浮点数</li>
-</ul>
-<h2 id="指针类型">指针类型
-</h2><p>指针在IA-32中用于存储内存地址，主要分为两种</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251005160342658" href="http://picture.928330.xyz/typora/image-20251005160342658.png">
-<img src="http://picture.928330.xyz/typora/image-20251005160342658.png" alt="image-20251005160342658"  />
-</a>
-</div>
-</p>
-<ul>
-<li>
-<p><strong>Near Pointer（近指针）</strong></p>
-<p>这是一个32位的偏移量</p>
-<p>它指向当前段内的某个地址，在现代操作系统的平面内存模型下，这实际上就是程序的虚拟地址</p>
-</li>
-<li>
-<p><strong>Far Pointer（远指针）</strong></p>
-<p>这是一个48位的指针，由一个16位的段选择器和一个32位的偏移量组成</p>
-<p>它用于在分段内存模型下，跨段访问数据</p>
-</li>
-</ul>
-<h1 id="ia-32汇编指令">IA-32汇编指令
-</h1><h2 id="intel与att汇编语法">Intel与AT&amp;T汇编语法
-</h2><h3 id="intel语法">Intel语法
-</h3><p><strong>这是Windows环境下的主流语法，易于阅读</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[指令]</span> [<span style="color:#e06c75">目标操作数</span>], [<span style="color:#e06c75">源操作数</span>]
-</span></span></code></pre></div><p><strong>逗号后面空格不是语法必须的</strong>，但是加空格是一个非常推荐的习惯，大多数逆向软件也遵从这个习惯</p>
-<p><span style="color:red;font-size:20px"><strong>本文档后续将统一使用Intel语法</strong></span></p>
-<h3 id="att语法">AT&amp;T语法
-</h3><p><strong>常用于Linux和GNU工具链</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">[指令]</span> [<span style="color:#e06c75">源操作数</span>], [<span style="color:#e06c75">目标操作数</span>]
-</span></span></code></pre></div><h3 id="示例-2">示例
-</h3><p>将立即数4移动到EAX寄存器</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>语法</th>
-          <th>指令</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Intel</td>
-          <td><code>mov eax, 4</code></td>
-      </tr>
-      <tr>
-          <td>AT&amp;T</td>
-          <td><code>mov $4, %eax</code></td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="数据移动指令">数据移动指令
-</h2><p>这类指令用于在寄存器、内存和立即数之间传递数据</p>
-<h3 id="mov数据传送">MOV：数据传送
-</h3><p><strong><code>MOV</code>(move)是数据传送指令，将右边操作数的值复制到左边操作数中</strong></p>
-<p>但是这两个操作数中最多只能有<strong>一个是内存操作数（带方括号的那种）</strong>，另一个必须是寄存器或立即数</p>
-<h4 id="立即数---寄存器">立即数 -&gt; 寄存器
-</h4><p>将常量<code>0x12345678</code>放入<code>ESI</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ESI</span>, <span style="color:#d19a66">0x12345678</span>
-</span></span></code></pre></div><h4 id="寄存器---寄存器">寄存器 -&gt; 寄存器
-</h4><p>将<code>ECX</code>的内容复制到<code>EAX</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">ECX</span>
-</span></span></code></pre></div><h4 id="立即数---内存">立即数 -&gt; 内存
-</h4><p>将地址为<code>EAX</code>的4字节内存设为1</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">EAX</span>], <span style="color:#d19a66">1</span>
-</span></span></code></pre></div><p><strong><code>[EAX]</code>表示取<code>EAX</code>寄存器中的值作为内存地址</strong></p>
-<p><strong><code>DWORD PTR</code>表示操作的内存数据大小是4字节（32 位）</strong></p>
-<p>当汇编器不清楚要操作内存的大小时，就需要使用修饰符来确定，以下是常用的修饰符：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>修饰符</th>
-          <th>大小</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>BYTE PTR</strong></td>
-          <td>1 字节（8 位）</td>
-          <td>访问 8 位数据</td>
-      </tr>
-      <tr>
-          <td><strong>WORD PTR</strong></td>
-          <td>2 字节（16 位）</td>
-          <td>访问 16 位数据</td>
-      </tr>
-      <tr>
-          <td><strong>DWORD PTR</strong></td>
-          <td>4 字节（32 位）</td>
-          <td>访问 32 位数据</td>
-      </tr>
-      <tr>
-          <td><strong>QWORD PTR</strong></td>
-          <td>8 字节（64 位）</td>
-          <td>访问 64 位数据</td>
-      </tr>
-      <tr>
-          <td><strong>NEAR PTR</strong></td>
-          <td>2/4 字节偏移</td>
-          <td>近指针，只包含偏移，段寄存器不变，常用于近调用</td>
-      </tr>
-      <tr>
-          <td><strong>FAR PTR</strong></td>
-          <td>段 + 偏移</td>
-          <td>远指针，包含段选择符和偏移，常用于跨段调用</td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="寄存器---内存">寄存器 -&gt; 内存
-</h4><p>将<code>EBX</code>的值写入地址为<code>EAX</code>的内存中</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> [<span style="color:#e06c75">EAX</span>], <span style="color:#e06c75">EBX</span>
-</span></span></code></pre></div><p>将<code>EAX</code>的值写入地址为<code>ESI+0x34</code>的内存中</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> [<span style="color:#e06c75">ESI</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">34</span><span style="color:#e06c75">H</span>], <span style="color:#e06c75">EAX</span> 
-</span></span></code></pre></div><p><strong>注意这里的<code>[]</code>不能拆开写！</strong></p>
-<h4 id="内存---寄存器">内存 -&gt; 寄存器
-</h4><p>将地址为<code>ECX</code>的内存中的值读入<code>EAX</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, [<span style="color:#e06c75">ECX</span>]
-</span></span></code></pre></div><p>将地址为<code>ECX+EAX</code>的内存中的值读入<code>EDX</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EDX</span>, [<span style="color:#e06c75">ECX</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">EAX</span>]  
-</span></span></code></pre></div><p>将内存中地址<code>0x50</code>处的数据读入寄存器<code>EAX</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, [<span style="color:#d19a66">0x50</span>]
-</span></span></code></pre></div><h3 id="lea加载有效地址">LEA：加载有效地址
-</h3><p><strong><code>LEA</code> (Load Effective Address) 用于计算源操作数指定的内存地址，并将地址加载到目标寄存器中</strong></p>
-<p>它与<code>MOV</code>的关键区别在于，<code>MOV</code>会访问该地址并取出其中的数据，<strong>而<code>LEA</code>只计算地址，不访问内存</strong></p>
-<p><strong>也正因如此，使用<code>LEA</code>计算时，寄存器必须加上<code>[]</code>表示取地址</strong></p>
-<h4 id="计算内存地址">计算内存地址
-</h4><p>假设<code>EAX = 0x1000</code>, 内存地址<code>0x1000</code>处的值为<code>0xABCD</code></p>
-<p><strong>使用MOV：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBX</span>, [<span style="color:#e06c75">EAX</span>]
-</span></span></code></pre></div><p><code>MOV</code>将地址<code>EAX</code>（<code>0x1000</code>）指向的数据<code>0xABCD</code>放入<code>EBX</code>，结果是<code>EBX = 0xABCD</code></p>
-<p><strong>使用LEA：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">LEA</span> <span style="color:#e06c75">EBX</span>, [<span style="color:#e06c75">EAX</span>]  
-</span></span></code></pre></div><p><code>LEA</code>将地址表达式<code>[EAX]</code>本身的值<code>0x1000</code>放入<code>EBX</code>，结果是<code>EBX = 0x1000</code></p>
-<h4 id="执行快速数学运算">执行快速数学运算
-</h4><p><code>LEA</code>可以执行一些基础的数学运算，且比使用<code>ADD</code>或<code>MUL</code>等指令更高效，因为它不影响CPU的标志位</p>
-<p><strong>计算<code>EAX = EBX + ECX * 4 + 100H</code></strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">LEA</span> <span style="color:#e06c75">EAX</span>, [<span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">ECX</span><span style="color:#56b6c2">*</span><span style="color:#d19a66">4</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">100</span><span style="color:#e06c75">H</span>]
-</span></span></code></pre></div><p><strong>注意这里的<code>[]</code>不能拆开写！</strong></p>
-<h3 id="串操作">串操作
-</h3><p>这类指令专门用于高效处理内存中的连续数据块（字符串）</p>
-<p>它们通常与 <code>REP</code> 系列前缀结合使用，以重复执行相同的操作，重复次数由 <code>ECX</code> 寄存器控制</p>
-<h4 id="rep系列前缀">REP系列前缀
-</h4><p><mark><strong>REP</strong></mark></p>
-<p><strong>全称REPeat，在执行指令前会检查<code>ECX</code>，指令会重复执行<code>ECX</code>次</strong></p>
-<p>eg：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">5</span>        ; 重复次数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">REP</span> <span style="color:#e06c75">MOVSB</span>         ; 将[<span style="color:#e06c75">ESI</span>]的字节移动到[<span style="color:#e06c75">EDI</span>]，重复<span style="color:#d19a66">5</span>次
-</span></span></code></pre></div><p><mark><strong>REPE / REPZ</strong></mark></p>
-<p><strong>全称REPeat While Equal / REPeat While Zero，当<code>ZF=1</code>且<code>ECX</code>不为0时继续重复</strong></p>
-<p>eg：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">10</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">REP</span> <span style="color:#e06c75">CMPSB</span>        ; 比较两个字符串，<span style="color:#e06c75">ZF</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>时继续，最多<span style="color:#d19a66">10</span>次
-</span></span></code></pre></div><p><mark><strong>REPNE / REPNZ</strong></mark></p>
-<p><strong>全称REPeat while Not Equal / REPeat while Not Zero，当<code>ZF=0</code>且<code>ECX</code>不为0时继续重复</strong></p>
-<p>eg：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">10</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">REPNE</span> <span style="color:#e06c75">SCASB</span>       ; 扫描字符串，<span style="color:#e06c75">ZF</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0</span>时继续，最多<span style="color:#d19a66">10</span>次
-</span></span></code></pre></div><h4 id="索引增减控制指令cldstd">索引增减控制指令CLD/STD
-</h4><p><code>EFLAGS</code>寄存器中的<code>DF</code>标志位决定了每次操作后<code>ESI</code>和<code>EDI</code>的变化方向，而<code>CLD</code>和<code>SLD</code>指令控制着<code>DF</code></p>
-<p><mark><strong>CLD指令</strong></mark></p>
-<p>全称Clear Direction Flag，<strong><code>DF = 0</code>，<code>ESI</code>和<code>EDI</code>在每次操作后递增</strong></p>
-<p><mark><strong>STD指令</strong></mark></p>
-<p>全称Set Direction Flag，<strong><code>DF = 1</code>，<code>ESI</code>和<code>EDI</code>在每次操作后递减</strong></p>
-<h4 id="取地址运算符offset">取地址运算符OFFSET
-</h4><p><strong><code>OFFSET</code>是汇编语言中的一个编译时运算符，作用是取得一个标号（变量、数组等）的内存地址（偏移量）</strong></p>
-<p>比如我在数据段（.data）定义一个变量：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>.<span style="color:#e06c75">data</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">SourceAddress</span> <span style="color:#e06c75">DB</span> <span style="color:#98c379">&#39;A&#39;</span>, <span style="color:#98c379">&#39;B&#39;</span>, <span style="color:#98c379">&#39;C&#39;</span>, <span style="color:#d19a66">0</span>
-</span></span></code></pre></div><p><strong>假设编译器把这段数据放在内存地址<code>0x00405000</code></strong></p>
-<p><strong>那么<code>OFFSET SourceAddress</code>在汇编时就会被计算为<code>0x00405000</code></strong></p>
-<div class="alert alert-tip">
-    <div class="alert-header">
-        <span class="alert-icon">
-            💡
-        </span>
-        <span class="alert-title">
-            Tip
-        </span>
-    </div>
-    <div class="alert-content">
-        <p>这里的DB被称作<strong>伪指令</strong></p>
-<p><strong>它不是CPU执行的指令，是给汇编器用的命令，告诉汇编器在程序中生成数据、定义常量或分配空间</strong></p>
-<p>类似伪指令还有：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>全称</th>
-          <th>定义单位</th>
-          <th>示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>DB</code></td>
-          <td>Define Byte</td>
-          <td>1 字节</td>
-          <td><code>DB 1, 2, 3</code></td>
-      </tr>
-      <tr>
-          <td><code>DW</code></td>
-          <td>Define Word</td>
-          <td>2 字节</td>
-          <td><code>DW 1234h</code></td>
-      </tr>
-      <tr>
-          <td><code>DD</code></td>
-          <td>Define Doubleword</td>
-          <td>4 字节</td>
-          <td><code>DD 0x12345678</code></td>
-      </tr>
-      <tr>
-          <td><code>DQ</code></td>
-          <td>Define Quadword</td>
-          <td>8 字节</td>
-          <td><code>DQ 0x1122334455667788</code></td>
-      </tr>
-  </tbody>
-</table></div></div>
-</div>
-<h4 id="movsb--movsw--movsd移动字符串">MOVSB / MOVSW / MOVSD：移动字符串
-</h4><p><strong><code>MOVS</code>（Move String）指令用于将数据从源地址<code>DS:ESI</code>复制到目标地址<code>ES:EDI</code></strong></p>
-<p>根据指令后缀，它每次可以复制1、2或4个字节</p>
-<ul>
-<li><strong><code>MOVSB</code>：移动1字节（Byte）</strong></li>
-<li><strong><code>MOVSW</code>：移动2字节（Word）</strong></li>
-<li><strong><code>MOVSD</code>：移动4字节（Double Word）</strong></li>
-</ul>
-<p>下面的代码是使用<code>REP MOVSD</code>将源地址的32字节数据复制到目标地址：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>;设置参数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ESI</span>, <span style="color:#e06c75">OFFSET</span> <span style="color:#e06c75">SourceAddress</span>      ; 将源地址加载到<span style="color:#e06c75">ESI</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EDI</span>, <span style="color:#e06c75">OFFSET</span> <span style="color:#e06c75">DestAddress</span>         ; 将目标地址加载到<span style="color:#e06c75">EDI</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">8</span>                                       ; 设置重复次数 (<span style="color:#d19a66">8</span>次<span style="color:#56b6c2">*</span><span style="color:#d19a66">4</span>字节<span style="color:#56b6c2">/</span>次<span style="color:#56b6c2">=</span><span style="color:#d19a66">32</span>字节)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>;执行复制
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">CLD</span>                                                     ; 清除方向标志位（<span style="color:#e06c75">DF</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0</span>），确保<span style="color:#e06c75">ESI和EDI递增</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">REP</span> <span style="color:#e06c75">MOVSD</span>                                        ; 重复执行<span style="color:#e06c75">MOVSD指令ECX次</span>，即<span style="color:#d19a66">8</span>次
-</span></span></code></pre></div><h4 id="stosb--stosw--stosd存储字符串">STOSB / STOSW / STOSD：存储字符串
-</h4><p><strong><code>STOS</code>（Store String）指令用于将<code>AL</code>/<code>AX</code>/<code>EAX</code>寄存器中的值存储到<code>ES:EDI</code>指向的内存地址</strong></p>
-<p>它常用于初始化一块内存区域</p>
-<ul>
-<li><strong><code>STOSB</code>：将<code>AL</code>的内容存入<code>[EDI]</code></strong></li>
-<li><strong><code>STOSW</code>：将<code>AX</code>的内容存入<code>[EDI]</code></strong></li>
-<li><strong><code>STOSD</code>：将<code>EAX</code>的内容存入<code>[EDI]</code></strong></li>
-</ul>
-<p>以下代码演示了如何将<code>EDI</code>指向的 36 字节内存块全部设置为 0</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>;设置参数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EDI</span>, <span style="color:#e06c75">ESI</span>                   ; 设置目标内存地址 (假设地址已在<span style="color:#e06c75">ESI中</span>)
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EAX</span>                  ; 将<span style="color:#e06c75">EAX清零</span>，这是我们要写入的值
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">9</span>                     ; 设置重复次数 (<span style="color:#d19a66">9</span>次<span style="color:#56b6c2">*</span><span style="color:#d19a66">4</span>字节<span style="color:#56b6c2">/</span>次<span style="color:#56b6c2">=</span><span style="color:#d19a66">36</span>字节)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>;执行写入
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">CLD</span>                                  ; 确保<span style="color:#e06c75">EDI递增</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">REP</span> <span style="color:#e06c75">STOSD</span>                      ; 重复执行<span style="color:#e06c75">STOSD指令ECX次</span>，将<span style="color:#e06c75">EAX</span>(<span style="color:#d19a66">0</span>)连续写入目标内存
-</span></span></code></pre></div><div class="alert alert-note">
-    <div class="alert-header">
-        <span class="alert-icon">
-            📝
-        </span>
-        <span class="alert-title">
-            Note
-        </span>
-    </div>
-    <div class="alert-content">
-        <p><strong><code>XOR EAX, EAX</code>效果和<code>MOV EAX, 0</code>一样，都是将寄存器值置零，但是会更加高效</strong></p>
-<p><strong>这是因为CPU看到<code>XOR reg, reg</code>这种特殊模式，会自动识别为清零优化，不会依赖旧值</strong></p>
-<p>Intel官方优化手册明确指出：</p>
-<p>“Zero idioms such as<code>XOR reg, reg</code>or<code>SUB reg, reg</code>are recognized by the processor and are handled specially — they do not create a dependency on the old register value.”</p></div>
-</div>
-<h4 id="scasb--scasw--scasd扫描字符串">SCASB / SCASW / SCASD：扫描字符串
-</h4><p><strong><code>SCAS</code>（Scan String）指令用于将<code>AL</code>/<code>AX</code>/<code>EAX</code>寄存器中的值与<code>ES:EDI</code>指向的内存值进行比较，并根据比较结果设置<code>EFLAGS</code>寄存器的标志位</strong></p>
-<ul>
-<li><strong>寄存器值等于内存值：<code>ZF = 1</code></strong></li>
-<li><strong>寄存器值不等于内存值：<code>ZF = 0</code></strong></li>
-</ul>
-<p>它常用于在字符串中搜索特定字符</p>
-<ul>
-<li><strong><code>SCASB</code>：比较<code>AL</code>和<code>[EDI]</code></strong></li>
-<li><strong><code>SCASW</code>：比较<code>AX</code>和<code>[EDI]</code></strong></li>
-<li><strong><code>SCASD</code>：比较<code>EAX</code>和<code>[EDI]</code></strong></li>
-</ul>
-<p>下面的代码展示了如何计算一个以<code>\0</code>（NULL）结尾的字符串的长度</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>;设置参数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EDI</span>, <span style="color:#e06c75">EBX</span>                   ; 假设字符串的起始地址在<span style="color:#e06c75">EBX中</span>，将其加载到<span style="color:#e06c75">EDI</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">XOR</span> <span style="color:#e06c75">AL</span>, <span style="color:#e06c75">AL</span>                        ; 将<span style="color:#e06c75">AL设置为0</span>，即我們要查找的字符串结束符<span style="color:#98c379">&#39;\0&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>                     ; 将<span style="color:#e06c75">ECX设为最大值</span>，以扫描任意长度的字符串
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>;执行扫描
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">CLD</span>                                    ; 确保<span style="color:#e06c75">EDI递增</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">REPNE</span> <span style="color:#e06c75">SCASB</span>                    ; 当<span style="color:#e06c75">AL</span><span style="color:#56b6c2">!=</span>[<span style="color:#e06c75">EDI</span>]时重复扫描，每次扫描<span style="color:#e06c75">EDI都会递增</span>，直到找到<span style="color:#98c379">&#39;\0&#39;</span>或扫描完<span style="color:#e06c75">ECX次</span>
-</span></span><span style="display:flex;"><span>                                           ; 找到<span style="color:#98c379">&#39;\0&#39;</span>后，<span style="color:#e06c75">EDI指向</span><span style="color:#98c379">&#39;\0&#39;</span>字符的下一个字节
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>;计算长度
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">NOT</span> <span style="color:#e06c75">ECX</span>                            ; 对<span style="color:#e06c75">ECX按位取反</span>，得到扫描过的字符数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">DEC</span> <span style="color:#e06c75">ECX</span>                             ; 让<span style="color:#e06c75">ECX减一</span>，即减去最后的<span style="color:#98c379">&#39;\0&#39;</span>字符，得到字符串的实际长度
-</span></span><span style="display:flex;"><span>                                           ; 最终长度存储在<span style="color:#e06c75">ECX中</span>
-</span></span></code></pre></div><div class="alert alert-note">
-    <div class="alert-header">
-        <span class="alert-icon">
-            📝
-        </span>
-        <span class="alert-title">
-            Note
-        </span>
-    </div>
-    <div class="alert-content">
-        <p><strong><code>MOV ECX, -1</code>这一步是为了什么？</strong></p>
-<p>在底层机器码中，<code>-1</code>并不会以负号形式存储，而是使用补码表示，而32位补码中<code>-1 = 0xFFFFFFFF</code></p>
-<p>所以这条指令本质上等价于：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">0xFFFFFFFF</span>
-</span></span></code></pre></div><p><strong>这样就把<code>ECX</code>设为了最大值<code>0xFFFFFFFF</code>，而<code>ECX</code>是无符号计数器，递减就从这个极大数开始，而不是<code>-1</code></strong></p>
-<p><code>SCASB</code>每执行一次，会自动让<code>ECX</code>减1，我们不知道字符串长度是多少，所以干脆从最大值开始扫</p>
-<p>看看类似的用法：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>汇编写法</th>
-          <th>实际数值</th>
-          <th>寄存器值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>MOV ECX, 0</code></td>
-          <td>0</td>
-          <td><code>0x00000000</code></td>
-      </tr>
-      <tr>
-          <td><code>MOV ECX, 1</code></td>
-          <td>1</td>
-          <td><code>0x00000001</code></td>
-      </tr>
-      <tr>
-          <td><code>MOV ECX, -1</code></td>
-          <td>-1</td>
-          <td><code>0xFFFFFFFF</code></td>
-      </tr>
-      <tr>
-          <td><code>MOV ECX, -2</code></td>
-          <td>-2</td>
-          <td><code>0xFFFFFFFE</code></td>
-      </tr>
-  </tbody>
-</table></div></div>
-</div>
-<h2 id="算术与位运算指令">算术与位运算指令
-</h2><p>这类指令用于执行基本的数学计算和位级操作</p>
-<h3 id="add--sub加法--减法">ADD / SUB：加法 / 减法
-</h3><p>执行加法或减法运算，并将结果存回目标操作数</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">ADD</span> <span style="color:#e06c75">dest</span>, <span style="color:#e06c75">src</span>              ; 结果是<span style="color:#e06c75">dest</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">dest</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">src</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">SUB</span> <span style="color:#e06c75">dest</span>, <span style="color:#e06c75">src</span>               ; 结果是<span style="color:#e06c75">dest</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">dest</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">src</span>
-</span></span></code></pre></div><h3 id="inc--dec加一--减一">INC / DEC：加一 / 减一
-</h3><p>将操作数的值增加1或减少1，比等效的 <code>ADD/SUB</code> 指令更短、更快</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">INC</span> <span style="color:#e06c75">ECX</span>                       ; 结果是<span style="color:#e06c75">ECX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ECX</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">DEC</span> <span style="color:#e06c75">EAX</span>                      ; 结果是<span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>
-</span></span></code></pre></div><h3 id="neg取补">NEG：取补
-</h3><p>通过执行按位取反后加一的操作来获得操作数的算术相反数（补码）</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">NEG</span> <span style="color:#e06c75">EBX</span>                     ; 结果是<span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#e06c75">EBX</span>
-</span></span></code></pre></div><h3 id="imul--mul有符号--无符号乘法">IMUL / MUL：有符号 / 无符号乘法
-</h3><p>执行乘法运算，根据操作数的数量，用法有所不同</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>操作数形式</th>
-          <th>结果寄存器</th>
-          <th>是否占用EDX</th>
-          <th>特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>MUL SRC</code></td>
-          <td>单操作数</td>
-          <td>EDX:EAX</td>
-          <td>是</td>
-          <td>完整64位结果，无符号</td>
-      </tr>
-      <tr>
-          <td><code>IMUL SRC</code></td>
-          <td>单操作数</td>
-          <td>EDX:EAX</td>
-          <td>是</td>
-          <td>完整64位结果，有符号</td>
-      </tr>
-      <tr>
-          <td><code>IMUL DEC, SRC</code></td>
-          <td>双操作数</td>
-          <td>ECX</td>
-          <td>否</td>
-          <td>只保留低32位，有符号</td>
-      </tr>
-      <tr>
-          <td><code>IMUL DEC, SRC, 立即数</code></td>
-          <td>三操作数</td>
-          <td>ECX</td>
-          <td>否</td>
-          <td>可立即数乘，有符号</td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="单操作数imul和mul都支持">单操作数（IMUL和MUL都支持）
-</h4><p><strong>将<code>EAX</code>与指定操作数相乘，结果是一个64位数，高32位存入<code>EDX</code>，低32位存入<code>EAX</code></strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#56b6c2">-</span><span style="color:#d19a66">2</span>       ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0xFFFFFFFE</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">3</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">IMUL</span> <span style="color:#e06c75">EBX</span>           ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">6</span>                        <span style="color:#56b6c2">-&gt;</span>           <span style="color:#e06c75">EDX</span>:<span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0xFFFFFFFF</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0xFFFFFFFA</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MUL</span> <span style="color:#e06c75">EBX</span>            ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4294967290</span>        <span style="color:#56b6c2">-&gt;</span>           <span style="color:#e06c75">EDX</span>:<span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0x00000002</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0xFFFFFFFA</span>
-</span></span></code></pre></div><h4 id="多操作数只有imul支持">多操作数（只有IMUL支持）
-</h4><p>提供更高的灵活性，<strong>，可指定目标寄存器，结果直接存入目标寄存器，不分高低位，不占用EDX</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">3</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">IMUL</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EBX</span>        ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">EBX</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">IMUL</span> <span style="color:#e06c75">ECX</span>, <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">5</span>    ; <span style="color:#e06c75">ECX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">20</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>; 也可以直接指定内存，假设 [<span style="color:#d19a66">0x123</span>] <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">3</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">IMUL</span> <span style="color:#e06c75">ECX</span>, [<span style="color:#d19a66">0x123</span>], <span style="color:#d19a66">5</span>   ; <span style="color:#e06c75">ECX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">3</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">15</span>
-</span></span></code></pre></div><h3 id="idiv--div有符号--无符号除法">IDIV / DIV：有符号 / 无符号除法
-</h3><p>执行除法运算</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>位宽</th>
-          <th>被除数寄存器</th>
-          <th>商寄存器</th>
-          <th>余数寄存器</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>8位</td>
-          <td>AX</td>
-          <td>AL</td>
-          <td>AH</td>
-      </tr>
-      <tr>
-          <td>16位</td>
-          <td>DX:AX</td>
-          <td>AX</td>
-          <td>DX</td>
-      </tr>
-      <tr>
-          <td>32位</td>
-          <td>EDX:EAX</td>
-          <td>EAX</td>
-          <td>EDX</td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="无符号的div">无符号的DIV
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">20</span>       ; 低 <span style="color:#d19a66">32</span> 位被除数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EDX</span>, <span style="color:#d19a66">0</span>        ; 高 <span style="color:#d19a66">32</span> 位被除数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">6</span>        ; 除数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">DIV</span> <span style="color:#e06c75">EBX</span>
-</span></span><span style="display:flex;"><span>; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">20</span> <span style="color:#56b6c2">/</span> <span style="color:#d19a66">6</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">3</span> (商)
-</span></span><span style="display:flex;"><span>; <span style="color:#e06c75">EDX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">20</span> <span style="color:#56b6c2">%</span> <span style="color:#d19a66">6</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span> (余数)
-</span></span></code></pre></div><h4 id="有符号的idiv">有符号的IDIV
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#56b6c2">-</span><span style="color:#d19a66">20</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EDX</span>, <span style="color:#d19a66">0</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">6</span>        ; 除数
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">IDIV</span> <span style="color:#e06c75">EBX</span>
-</span></span><span style="display:flex;"><span>; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">20</span> <span style="color:#56b6c2">/</span> <span style="color:#d19a66">6</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">3</span> (商)
-</span></span><span style="display:flex;"><span>; <span style="color:#e06c75">EDX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">20</span> <span style="color:#56b6c2">%</span> <span style="color:#d19a66">6</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">2</span> (余数)
-</span></span></code></pre></div><h3 id="and--or--xor按位与--或--异或">AND / OR / XOR：按位与 / 或 / 异或
-</h3><p>对操作数进行按位逻辑运算，<strong>结果存回第一个操作数</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>运算类型</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>AND</td>
-          <td>按位与</td>
-          <td>两位都为1时结果为1，否则为0</td>
-      </tr>
-      <tr>
-          <td>OR</td>
-          <td>按位或</td>
-          <td>两位有1时结果为1，否则为0</td>
-      </tr>
-      <tr>
-          <td>XOR</td>
-          <td>按位异或</td>
-          <td>两位不同时结果为1，相同为0</td>
-      </tr>
-  </tbody>
-</table></div>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">AND</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0x0F</span>                        ; 取低<span style="color:#d19a66">4</span>位，清除高<span style="color:#d19a66">28</span>位
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">OR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EBX</span>                            ; 将<span style="color:#e06c75">EBX中为1的位合并到EAX</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0xFFFFFFFF</span>              ; 按位取反
-</span></span></code></pre></div><p>之前提到过的<code>XOR EAX, EAX</code>是将<code>EAX</code>寄存器清零的最快方式，CPU能识别这种特殊形式并进行优化，不产生对旧值的依赖，因此比<code>MOV EAX, 0</code>更高效</p>
-<h3 id="not按位取反">NOT：按位取反
-</h3><p>将操作数的每一位反转（0变1，1变0）</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0x0F</span>                         ; 二进制<span style="color:#d19a66">0000</span> <span style="color:#d19a66">0000</span> <span style="color:#d19a66">0000</span> <span style="color:#d19a66">1111</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">NOT</span> <span style="color:#e06c75">EAX</span>                                    ; 变成<span style="color:#d19a66">1111</span> <span style="color:#d19a66">1111</span> <span style="color:#d19a66">1111</span> <span style="color:#d19a66">0000</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0xFFFFFFF0</span>
-</span></span></code></pre></div><h3 id="shl--sal--shr--sar逻辑--算数-的-左移--右移">SHL / SAL / SHR / SAR：逻辑 / 算数 的 左移 / 右移
-</h3><p>将操作数的位向左或向右移动，空出的位用0填充</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>运算</th>
-          <th>填充位</th>
-          <th>运算结果</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>SHL / SAL</td>
-          <td>左移</td>
-          <td>低位补 0</td>
-          <td>左移N位=乘以$2^N$</td>
-      </tr>
-      <tr>
-          <td>SHR</td>
-          <td>逻辑右移</td>
-          <td>高位补 0</td>
-          <td>右移N位=无符号除以$2^N$</td>
-      </tr>
-      <tr>
-          <td>SAR</td>
-          <td>算术右移</td>
-          <td>高位补符号位</td>
-          <td>右移N位=有符号除以$2^N$（保留符号）</td>
-      </tr>
-  </tbody>
-</table></div>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">3</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">SHL</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">2</span>        ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">3</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#d19a66">2</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">12</span> (<span style="color:#d19a66">3</span><span style="color:#56b6c2">*</span><span style="color:#d19a66">2</span><span style="color:#56b6c2">^</span><span style="color:#d19a66">2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">SAL</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">2</span>        ; 和<span style="color:#e06c75">SHL完全一样</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">16</span>    ; <span style="color:#d19a66">0x00000010</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">SHR</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">2</span>        ; <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">16</span> <span style="color:#56b6c2">&gt;&gt;</span> <span style="color:#d19a66">2</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4</span> (无符号除以 <span style="color:#d19a66">4</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ECX</span>, <span style="color:#56b6c2">-</span><span style="color:#d19a66">16</span>   ; <span style="color:#d19a66">0xFFFFFFF0</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">SAR</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">2</span>        ; <span style="color:#e06c75">ECX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">16</span> <span style="color:#56b6c2">&gt;&gt;</span> <span style="color:#d19a66">2</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">4</span> (保留符号)
-</span></span></code></pre></div><h3 id="rol--ror循环左移--右移">ROL / ROR：循环左移 / 右移
-</h3><p>将操作数的位向左或向右移动，移出的位会从另一端循环回来填充空位</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">AL</span>, <span style="color:#d19a66">10010011</span><span style="color:#e06c75">b</span>       ; 二进制数 <span style="color:#d19a66">10010011</span>，<span style="color:#e06c75">AL</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0x93</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">ROL</span> <span style="color:#e06c75">AL</span>, <span style="color:#d19a66">2</span>                         ; <span style="color:#e06c75">AL</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">01001110</span><span style="color:#e06c75">b</span>, 原高<span style="color:#d19a66">2</span>位“<span style="color:#d19a66">10</span>”循环到低位
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">ROR</span> <span style="color:#e06c75">AL</span>, <span style="color:#d19a66">3</span>                        ; <span style="color:#e06c75">AL</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">11001001</span><span style="color:#e06c75">b</span>, 低<span style="color:#d19a66">3</span>位“<span style="color:#d19a66">110</span>”循环到高位
-</span></span></code></pre></div><h2 id="控制流指令">控制流指令
-</h2><p>这类指令通过修改<code>EIP</code>（指令指针）寄存器的值来改变程序的执行流程，从而实现分支、循环等结构</p>
-<h3 id="比较指令">比较指令
-</h3><p>这两个指令通过执行内部运算来改变<code>EFLAGS</code>寄存器中的状态标志位，<strong>但不会修改操作数本身</strong></p>
-<p>它们为后续的条件跳转指令提供判断依据</p>
-<h4 id="cmp减法比较">CMP：减法比较
-</h4><p><strong>内部执行<code>A - B</code>的减法运算</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">5</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">CMP</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">3</span>       ; 实际执行 <span style="color:#d19a66">5</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">3</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">JG</span> <span style="color:#e06c75">greater</span>          ; 如果 <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">3</span>, 跳转
-</span></span></code></pre></div><h4 id="testand比较">TEST：AND比较
-</h4><p><strong>内部执行<code>A AND B</code>的按位与运算</strong></p>
-<p>eg1：检测寄存器是否为0</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">TEST</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EAX</span>         ; <span style="color:#e06c75">A</span> <span style="color:#e06c75">AND</span> <span style="color:#e06c75">A</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">JZ</span>  <span style="color:#e06c75">is_zero</span>                ; 如果结果为 <span style="color:#d19a66">0</span> (<span style="color:#e06c75">ZF</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>)，跳转
-</span></span></code></pre></div><p>eg2：检测某一位是否为1</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">TEST</span> <span style="color:#e06c75">AL</span>, <span style="color:#d19a66">1</span>                 ; 检查最低位是否为 <span style="color:#d19a66">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">JNZ</span> <span style="color:#e06c75">odd_number</span>      ; 若最低位为<span style="color:#d19a66">1</span>（奇数），跳转
-</span></span></code></pre></div><h3 id="jmp无条件跳转">JMP：无条件跳转
-</h3><p><code>JMP</code>（Jump）指令会立即无条件地将程序的执行点转移到指定的目标地址</p>
-<p><strong>基本语法：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">JMP</span> <span style="color:#e06c75">label</span>
-</span></span></code></pre></div><p><code>label</code>可以是同一段代码内的标签（短跳转或近跳转），也可以是其他段的地址（远跳转）</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0</span>      ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">JMP</span> <span style="color:#e06c75">skip</span>            ; 无条件跳转到 <span style="color:#e06c75">skip</span> 标签
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">5</span>      ; 这一行永远不会被执行！
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">skip</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">1</span>      ; 执行到这里
-</span></span></code></pre></div><h3 id="jcc条件跳转">Jcc：条件跳转
-</h3><p><code>Jcc</code> (Jump on Condition) 是一系列指令的统称</p>
-<p>它们在<code>CMP</code>或<code>TEST</code>指令之后，根据<code>EFLAGS</code>寄存器的状态来决定是否进行跳转</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>跳转条件（基于 EFLAGS）</th>
-          <th>含义（中文描述）</th>
-          <th>比较类型</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>JE / JZ</strong></td>
-          <td><code>ZF = 1</code></td>
-          <td>相等 / 结果为零</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JNE / JNZ</strong></td>
-          <td><code>ZF = 0</code></td>
-          <td>不相等 / 结果非零</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JG / JNLE</strong></td>
-          <td><code>ZF = 0 AND SF = OF</code></td>
-          <td>大于（有符号数）</td>
-          <td>有符号</td>
-      </tr>
-      <tr>
-          <td><strong>JGE / JNL</strong></td>
-          <td><code>SF = OF</code></td>
-          <td>大于等于（有符号数）</td>
-          <td>有符号</td>
-      </tr>
-      <tr>
-          <td><strong>JL / JNGE</strong></td>
-          <td><code>SF ≠ OF</code></td>
-          <td>小于（有符号数）</td>
-          <td>有符号</td>
-      </tr>
-      <tr>
-          <td><strong>JLE / JNG</strong></td>
-          <td><code>ZF = 1 OR SF ≠ OF</code></td>
-          <td>小于等于（有符号数）</td>
-          <td>有符号</td>
-      </tr>
-      <tr>
-          <td><strong>JA / JNBE</strong></td>
-          <td><code>CF = 0 AND ZF = 0</code></td>
-          <td>大于（无符号数）</td>
-          <td>无符号</td>
-      </tr>
-      <tr>
-          <td><strong>JAE / JNB</strong></td>
-          <td><code>CF = 0</code></td>
-          <td>大于等于（无符号数）</td>
-          <td>无符号</td>
-      </tr>
-      <tr>
-          <td><strong>JB / JNAE</strong></td>
-          <td><code>CF = 1</code></td>
-          <td>小于（无符号数）</td>
-          <td>无符号</td>
-      </tr>
-      <tr>
-          <td><strong>JBE / JNA</strong></td>
-          <td><code>CF = 1 OR ZF = 1</code></td>
-          <td>小于等于（无符号数）</td>
-          <td>无符号</td>
-      </tr>
-      <tr>
-          <td><strong>JS</strong></td>
-          <td><code>SF = 1</code></td>
-          <td>结果为负</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JNS</strong></td>
-          <td><code>SF = 0</code></td>
-          <td>结果为正或零</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JO</strong></td>
-          <td><code>OF = 1</code></td>
-          <td>溢出发生</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JNO</strong></td>
-          <td><code>OF = 0</code></td>
-          <td>无溢出</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JC</strong></td>
-          <td><code>CF = 1</code></td>
-          <td>进位（或借位）发生</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JNC</strong></td>
-          <td><code>CF = 0</code></td>
-          <td>无进位 / 无借位</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JP / JPE</strong></td>
-          <td><code>PF = 1</code></td>
-          <td>奇偶标志为偶（结果1个数为偶数）</td>
-          <td>通用</td>
-      </tr>
-      <tr>
-          <td><strong>JNP / JPO</strong></td>
-          <td><code>PF = 0</code></td>
-          <td>奇偶标志为奇</td>
-          <td>通用</td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="跳转指令前缀">跳转指令前缀
-</h3><p><strong>跳转指令前缀是汇编器用来指示跳转类型或范围的关键字</strong></p>
-<p>它不改变跳转的条件本身，只影响指令编码和偏移量大小，也就是CPU计算跳转地址时用多少字节表示偏移</p>
-<p>这本质上是告诉CPU跳转目标离它有多远，CPU会选择合适的指令长度（1-6字节）存储偏移</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>前缀</th>
-          <th>偏移量大小</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>SHORT</strong></td>
-          <td>8位有符号偏移量 (-128 ~ +127)</td>
-          <td><strong>近距离跳转</strong>，小范围循环或if/else</td>
-      </tr>
-      <tr>
-          <td><strong>NEAR</strong></td>
-          <td>16位或32位偏移量（同段跳转）</td>
-          <td><strong>目标在当前代码段内，距离较远</strong></td>
-      </tr>
-      <tr>
-          <td><strong>FAR</strong></td>
-          <td>16/32位段内偏移 + 16位段选择子</td>
-          <td><strong>跨段跳转</strong>，改变CS寄存器</td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>条件跳转（Jcc）默认使用SHORT，如果目标太远，汇编器会自动转换为NEAR</strong></p>
-<h3 id="流程控制结构示例">流程控制结构示例
-</h3><h4 id="if-else结构">if-else结构
-</h4><p>C语言：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#56b6c2">*</span><span style="color:#e06c75">esi</span> <span style="color:#56b6c2">!=</span> <span style="color:#d19a66">0</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// block A
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>}
-</span></span><span style="display:flex;"><span><span style="color:#7f848e">// block B
-</span></span></span></code></pre></div><p>汇编：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EDX</span>, [<span style="color:#e06c75">ESI</span>]      ; <span style="color:#e06c75">EDX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">esi</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">TEST</span> <span style="color:#e06c75">EDX</span>, <span style="color:#e06c75">EDX</span>       ; 比较 <span style="color:#e06c75">EDX</span> 和 <span style="color:#d19a66">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">JZ</span> <span style="color:#e06c75">SHORT</span> <span style="color:#e06c75">block_B</span>    ; 如果 <span style="color:#e06c75">EDX</span> 为 <span style="color:#d19a66">0</span>, 则跳转到 <span style="color:#e06c75">block_B</span>
-</span></span><span style="display:flex;"><span>    ;<span style="color:#e06c75">block</span> <span style="color:#e06c75">A</span> 的代码
-</span></span><span style="display:flex;"><span>    ...
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">block_B</span>:
-</span></span><span style="display:flex;"><span>    ;<span style="color:#e06c75">block</span> <span style="color:#e06c75">B</span> 的代码
-</span></span></code></pre></div><h4 id="for循环结构">for循环结构
-</h4><p>C语言：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">i</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span><span style="color:#56b6c2">&lt;</span><span style="color:#d19a66">10</span>; <span style="color:#e06c75">i</span><span style="color:#56b6c2">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">printf</span>(<span style="color:#98c379">&#34;%d</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, <span style="color:#e06c75">i</span>);
+    <p>比较简短，结合<a class="link" href="https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/"  target="_blank" rel="noopener"
+    >逆向基础1
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>看吧，之后的内容比较复杂就单独开篇了~</p>
+<h1 id="从源代码到可执行文件">从源代码到可执行文件
+</h1><h2 id="编程语言的层次">编程语言的层次
+</h2><p>计算机硬件的世界建立在二进制之上，电子器件的开与关直接对应着0和1</p>
+<p>要驱动这些硬件，就需要一种它们能直接“听懂”的语言，这便是编程语言演进的起点</p>
+<h3 id="机器语言">机器语言
+</h3><p>这是最底层的语言</p>
+<p>它由0和1组成的二进制序列构成，即机器码或原生码，CPU可以不经任何翻译直接解读并执行</p>
+<p>早期的计算机程序，例如1951年“哈维尔·德卡特伦”计算机所使用的穿孔纸带，记录的就是这种机器码</p>
+<p>然而，它完全没有可移植性，且对人类来说极其晦涩难懂，毕竟谁会去背那么多不同的一长串的0和1？</p>
+<h3 id="汇编语言">汇编语言
+</h3><p>为了改善机器语言的可读性，汇编语言应运而生，它使用助记符来代替二进制指令，因此也被称为符号语言</p>
+<p>汇编语言与机器语言几乎是一一对应的关系，在执行前需要通过<strong>汇编器</strong>转换为目标平台的机器码</p>
+<p>但尽管它的可读性大幅提升了，却依然与特定的CPU指令集架构绑定，可移植性很差</p>
+<h3 id="高级语言">高级语言
+</h3><p>高级语言是编程领域的伟大又伟大的革命</p>
+<p>它高度抽象和封装了底层硬件细节，语法结构更接近自然语言，逻辑也更贴合人类的思维习惯</p>
+<p>这使得程序员可以从繁琐的内存地址和寄存器操作中解放出来，专注于业务逻辑的实现，从而极大地提高了开发效率和代码的可读性</p>
+<p>如今我们熟知的 Java, C, C++, Python, C# 等等，都属于高级语言</p>
+<h2 id="编译与解释">编译与解释
+</h2><p>拥有了编程语言这一工具后，我们需要一个工作台来编写、调试和生成程序</p>
+<p>这个工作台就是<strong>IDE（Integrated Development Environment，集成开发环境）</strong></p>
+<p>通过IDE，我们可以将源代码转化为可执行的程序，根据生成和运行方式的不同，程序主要分为两类</p>
+<h3 id="编译型程序">编译型程序
+</h3><p>在执行前，通过编译器将全部源代码一次性翻译成目标平台的机器码，并打包成一个可执行文件</p>
+<p>运行效率非常高，跨平台性差，比如为Windows编译的程序无法直接在Linux上运行</p>
+<p>C、C++、Go都是如此</p>
+<h3 id="解释型程序">解释型程序
+</h3><p>运行时，由解释器逐行读取源代码，并即时翻译成机器码交给CPU执行</p>
+<p>跨平台性好，只要有解释器，代码就能运行，但是运行效率相对较低</p>
+<p>常用的有Python, JavaScript, Ruby</p>
+<h3 id="混合型范例">混合型范例
+</h3><p>Java！</p>
+<p>所谓“一次编译，到处运行”的Java采用了一种巧妙的混合模式，源代码首先被编译成一种平台无关的中间代码——<strong>字节码（.class文件）</strong>，然后，在不同平台上的**Java虚拟机（JVM）**会解释执行这些字节码</p>
+<p>为了提升性能，JVM还引入了JIT（Just-In-Time Compilation，即时编译）技术，它会将频繁执行的“热点代码”编译为本地机器码，从而实现接近编译型语言的运行效率，真是很有创新了</p>
+<h2 id="c程序的构建">C程序的构建
+</h2><p>作为编译型语言的典范，C/C++程序的生成过程是理解可执行文件结构的基础</p>
+<p>这个过程的最终产物，便是一个可执行文件，它主要经历<strong>编译</strong>和<strong>链接</strong>两大阶段</p>
+<h3 id="编译">编译
+</h3><p>此阶段由编译器负责，将源代码文件（<code>.c</code>）转换为包含机器码的目标文件（<code>.o</code>）</p>
+<p><strong>下面以一个简单的<code>hello.c</code>程序为例</strong></p>
+<h4 id="源码helloc">源码（hello.c）
+</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#7f848e">#include</span> <span style="color:#7f848e">&lt;stdio.h&gt;</span><span style="color:#7f848e">
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#61afef;font-weight:bold">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">printf</span>(<span style="color:#98c379">&#34;hello&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">0</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>汇编：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">ESI</span>, <span style="color:#e06c75">ESI</span>                                              ; <span style="color:#e06c75">ESI</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span> (作为计数器 <span style="color:#e06c75">i</span>)
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">LOOP_START</span>:
-</span></span><span style="display:flex;"><span>    ;调用 <span style="color:#e06c75">printf</span> 的代码
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">ESI</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">OFFSET</span> <span style="color:#e06c75">FORMAT_STRING</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">CALL</span> <span style="color:#e06c75">printf</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">ESP</span>, <span style="color:#d19a66">8</span>                    						      ; 平衡堆栈
-</span></span><span style="display:flex;"><span>    	
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">INC</span> <span style="color:#e06c75">ESI</span>            											  ; <span style="color:#e06c75">i</span><span style="color:#56b6c2">++</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">CMP</span> <span style="color:#e06c75">ESI</span>, <span style="color:#d19a66">10</span>         									  ; 比较 <span style="color:#e06c75">i</span> 和 <span style="color:#d19a66">10</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">JL</span> <span style="color:#e06c75">SHORT</span> <span style="color:#e06c75">LOOP_START</span>  						    ; 如果 <span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">10</span>, 继续循环
-</span></span></code></pre></div><h2 id="栈与函数调用指令">栈与函数调用指令
-</h2><h3 id="栈">栈
-</h3><p>在IA-32架构下，栈是连续的内存区域，用于存储临时数据、函数参数和返回地址</p>
-<ul>
-<li>
-<p><strong>栈存在于一个栈段内，由段寄存器SS指向段描述符</strong></p>
-</li>
-<li>
-<p><strong>ESP寄存器所包含的栈指针永远指向栈顶位置，所有针对栈的操作都是基于<code>SS:ESP</code>的地址引用</strong></p>
-</li>
-</ul>
-<p>IA-32 的栈通常是<strong>高地址向低地址生长</strong></p>
-<h3 id="栈帧">栈帧
-</h3><h4 id="什么是栈帧">什么是栈帧
-</h4><p>每当一个函数被调用时，都会在栈上为其分配一块专属空间，称为该函数的<strong>栈帧</strong></p>
-<p>栈帧用于存放函数的局部变量、传递给其他函数的参数以及保存调用者的上下文信息</p>
-<p>栈帧的组成内容如下：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>内容</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>局部变量</td>
-          <td>函数内部声明的变量，存放在栈帧中</td>
-      </tr>
-      <tr>
-          <td>参数</td>
-          <td>调用被调用函数时压入栈的参数</td>
-      </tr>
-      <tr>
-          <td>栈帧相关指针</td>
-          <td>用于管理函数返回与栈帧切换</td>
-      </tr>
-      <tr>
-          <td>返回指令指针</td>
-          <td><code>CALL</code>指令将EIP（下一条指令地址）压栈，函数返回后跳转到这里执行</td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="栈帧基指针ebp">栈帧基指针（EBP）
-</h4><p><code>EBP</code>在函数调用时用作栈帧的固定参考点，方便访问局部变量和函数参数</p>
-<h3 id="基本栈操作push--pop">基本栈操作：PUSH / POP
-</h3><h4 id="push压栈">PUSH：压栈
-</h4><p>将一个寄存器、内存或立即数的值压入栈顶</p>
-<p>先将栈顶指针<code>ESP</code>减去一个单位，然后将操作数存入<code>ESP</code>指向的新地址：</p>
-<ul>
-<li>
-<p><strong>栈向低地址扩展，IA-32下，一个单位4字节（32bit）：<code>ESP = ESP - 4</code></strong></p>
-</li>
-<li>
-<p><strong>将数据写入栈顶：<code>[ESP] = 操作数</code></strong></p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0x1234</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">EAX</span>   ; <span style="color:#e06c75">ESP</span> <span style="color:#56b6c2">-=</span> <span style="color:#d19a66">4</span> , [<span style="color:#e06c75">ESP</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0x1234</span>
-</span></span></code></pre></div><p><mark><strong>PUSH先减再存值</strong></mark></p>
-<h4 id="pop出栈">POP：出栈
-</h4><p>从栈顶取出数据到寄存器或内存，并恢复栈指针</p>
-<p>先将<code>ESP</code>指向地址的值取出到目标操作数，然后将<code>ESP</code>增加一个单位：</p>
-<ul>
-<li><strong>取出<code>[ESP]</code>的值到目标操作数</strong></li>
-<li><strong>栈指针上移，恢复原位置：<code>ESP = ESP + 4</code></strong></li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">POP</span> <span style="color:#e06c75">EBX</span>    ; <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> 栈顶值 , <span style="color:#e06c75">ESP</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">4</span>
-</span></span></code></pre></div><p><mark><strong>POP先取值再加</strong></mark></p>
-<h3 id="调用与返回的分类">调用与返回的分类
-</h3><p>根据目标函数与调用者是否在同一个代码段，调用和返回可以分为两类</p>
-<h4 id="近调用-near-call--近返回-near-return">近调用 (Near Call) / 近返回 (Near Return)
-</h4><p>控制流转移到<strong>当前代码段</strong>中的函数，或从当前代码段的函数返回</p>
-<p>这是最常见的调用方式，用于访问程序内部的本地函数</p>
-<h4 id="远调用-far-call--远返回-far-return">远调用 (Far Call) / 远返回 (Far Return)
-</h4><p>控制流转移到<strong>其他代码段</strong>中的函数，或从其他代码段返回</p>
-<p>这种方式通常用于访问操作系统提供的服务（API）或其他进程的函数</p>
-<h3 id="call调用函数">CALL：调用函数
-</h3><p>跳转到被调用函数，并保存返回地址以便函数执行完毕后回到调用点</p>
-<h4 id="近调用">近调用
-</h4><ol>
-<li><strong>压栈返回地址</strong>：<code>CALL</code>指令会将下一条指令的地址（EIP） 压入栈顶</li>
-<li><strong>跳转到函数入口</strong>：CPU将EIP设置为被调用函数的起始地址</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>; 假设当前 <span style="color:#e06c75">EIP</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0x00401000</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">CALL</span> <span style="color:#e06c75">my_function</span>  ; <span style="color:#d19a66">1.</span> 保存返回地址：<span style="color:#e06c75">PUSH</span> <span style="color:#d19a66">0x00401005</span> (<span style="color:#e06c75">CALL指令长度为5字节</span>)
-</span></span><span style="display:flex;"><span>                               ; <span style="color:#d19a66">2.</span> 跳转到<span style="color:#e06c75">my_function</span>：<span style="color:#e06c75">JMP</span> <span style="color:#e06c75">my_function</span>
-</span></span></code></pre></div><h4 id="远调用">远调用
-</h4><p>对于远调用，由于跨越了代码段，CPU不仅需要保存返回的地址偏移（EIP），还必须保存返回的段（CS），以便能够正确返回到调用者所在的原始代码段</p>
-<ol>
-<li><strong>压栈段寄存器CS</strong>：将当前代码段寄存器CS的值压入栈顶</li>
-<li><strong>压栈返回地址EIP</strong>：将EIP的当前值压入栈顶</li>
-<li><strong>跳转到函数入口</strong>：将目标函数的段选择器和偏移地址分别载入CS和EIP寄存器</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">CALL</span> <span style="color:#e06c75">FAR</span> <span style="color:#e06c75">PTR</span> <span style="color:#d19a66">2000</span><span style="color:#e06c75">h</span>:<span style="color:#d19a66">0100</span><span style="color:#e06c75">h</span>  ; 远调用到 <span style="color:#d19a66">2000</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0100</span>
-</span></span></code></pre></div><p><strong>这里必须使用<code>FAR PTR</code>表示是远调用，否则会被当成近调用处理</strong></p>
-<h3 id="ret从函数返回">RET：从函数返回
-</h3><p>从栈顶取出返回地址，恢复执行流到调用者</p>
-<h4 id="近返回retretn">近返回（RET/RETN）
-</h4><ol>
-<li><strong>弹出返回地址</strong>：从栈顶弹出一个32位的值到EIP寄存器</li>
-<li><strong>清理参数 (可选)</strong>：<code>RET n</code>会在弹出返回地址后，额外将ESP增加n字节，用于清理调用者压入栈的参数</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">RET</span>       ; 标准返回
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">RETN</span>     ; 近返回
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">RET</span> <span style="color:#d19a66">8</span>     ; 返回并清理栈上 <span style="color:#d19a66">8</span> 字节参数
-</span></span></code></pre></div><p>此时就可以把RET理解为：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">POP</span> <span style="color:#e06c75">EIP</span>
-</span></span></code></pre></div><h4 id="远返回retf">远返回（RETF）
-</h4><ol>
-<li><strong>弹出返回地址EIP</strong>：从栈顶弹出一个32位的值到EIP寄存器</li>
-<li><strong>弹出段寄存器CS</strong>：从栈顶弹出一个16位的值到CS寄存器</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">RETF</span> ; 远返回
-</span></span></code></pre></div><p>CPU不跟踪返回指令指针在栈上的位置，程序员必须确保在执行<code>RET</code>指令时，栈顶内容恰好是正确的返回地址</p>
-<p>如果栈上的返回地址在<code>RET</code>执行前被修改（例如通过缓冲区溢出），程序的执行流就可能被劫持，这是一个常见的安全漏洞</p>
-<h3 id="调用约定">调用约定
-</h3><p>这是函数调用双方必须遵守的一套规则，它规定了参数如何传递、返回值如何返回、以及哪一方（调用者或被调用者）负责清理栈上的参数。</p>
-<ul>
-<li>
-<p><strong>cdecl</strong></p>
-<p>C语言的默认约定，参数从右到左压栈，<strong>调用者</strong>负责清理栈</p>
-</li>
-<li>
-<p><strong>stdcall</strong></p>
-<p>Win32API常用，参数从右到左压栈，<strong>被调用者</strong>负责清理栈（通过 <code>RET n</code>）</p>
-</li>
-<li>
-<p><strong>fastcall</strong></p>
-<p><code>stdcall</code>的变种，前两个（或更多）参数通过<code>ECX</code>和<code>EDX</code>等寄存器传递，以提高速度，剩余参数压栈，被调用者负责清理</p>
-</li>
-</ul>
-<h3 id="栈帧的创建与销毁函数指令框架">栈帧的创建与销毁（函数指令框架）
-</h3><h4 id="函数序言-prologue">函数序言 (Prologue)
-</h4><p>当执行<code>CALL</code>语句之后，函数开始时建立自己的栈帧</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">EBP</span>              ; 保存调用者的栈帧基址 (旧<span style="color:#e06c75">EBP</span>)
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBP</span>, <span style="color:#e06c75">ESP</span>        ; 将当前栈顶设为新的栈帧基址
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">SUB</span> <span style="color:#e06c75">ESP</span>, <span style="color:#d19a66">20</span><span style="color:#e06c75">H</span>         ; 让栈顶向低地址处延伸，以此为局部变量分配<span style="color:#d19a66">32</span>字节空间
-</span></span></code></pre></div><p>局部变量会放在<code>EBP</code>下面（地址更小），参数会放在<code>EBP</code>上面（地址更大），也就是这样访问：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>[<span style="color:#e06c75">EBP</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">8</span>]     	   	    ; 第一个参数（返回地址占用了<span style="color:#d19a66">4</span>字节，所以从第<span style="color:#d19a66">8</span>字节开始）
-</span></span><span style="display:flex;"><span>[<span style="color:#e06c75">EBP</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">12</span>]     		   ; 第二个参数
-</span></span><span style="display:flex;"><span>[<span style="color:#e06c75">EBP</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">4</span>]     		     ; 第一个局部变量
-</span></span><span style="display:flex;"><span>[<span style="color:#e06c75">EBP</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">8</span>]     		      ; 第二个局部变量
-</span></span></code></pre></div><h4 id="函数结尾-epilogue">函数结尾 (Epilogue)
-</h4><p>函数返回前恢复调用者栈帧的标准操作</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ESP</span>, <span style="color:#e06c75">EBP</span>         ; 释放局部变量空间
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">POP</span> <span style="color:#e06c75">EBP</span>                  ; 恢复调用者的栈帧基址
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">RET</span>                          ; 返回
-</span></span></code></pre></div><h4 id="enter--leave">ENTER / LEAVE
-</h4><p>高级指令，用于简化栈帧的创建和销毁</p>
-<p><strong><code>ENTER</code>等价于函数序言，<code>LEAVE</code>等价于<code>MOV ESP, EBP; POP EBP</code></strong></p>
-<p>也就是说，一个函数应该（不是必须）写在这样的框架里：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EBP</span>, <span style="color:#e06c75">ESP</span>
-</span></span><span style="display:flex;"><span>;（函数主体，局部变量<span style="color:#56b6c2">/</span>操作）
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">ESP</span>, <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">POP</span> <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">RET</span>
-</span></span></code></pre></div><p>或者：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">ENTER</span>
-</span></span><span style="display:flex;"><span>;（函数主体，局部变量<span style="color:#56b6c2">/</span>操作）
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">LEAVE</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">RET</span>
-</span></span></code></pre></div><h3 id="调用流程总结">调用流程总结
-</h3><p>结合之前所说的一切，我们就总结出来一个函数被调用时触发的操作顺序：</p>
-<ol>
-<li><strong>调用者准备调用      （压入参数）</strong></li>
-<li><strong>执行CALL指令        （压入返回地址）</strong></li>
-<li><strong>函数序言                （压入调用者的EBP，为局部变量开辟空间）</strong></li>
-<li><strong>函数主体                （压入局部变量）</strong></li>
-</ol>
-<p>那么当一个栈帧创建完毕，应该是这样的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">参数</span>                                        ← <span style="color:#e06c75">函数调用者压入</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">返回地址</span>                                 ← <span style="color:#e06c75">call</span> <span style="color:#e06c75">自动压入</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">旧</span> <span style="color:#e06c75">EBP</span>（<span style="color:#e06c75">上一个EBP</span>）             ← <span style="color:#e06c75">push</span> <span style="color:#e06c75">ebp</span> <span style="color:#e06c75">保存调用者基址</span>    
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">局部变量</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><p>而在<code>PUSH EBP</code>之后，当前栈顶变成了栈帧的基址，也就是说帧创建完毕后，EBP和ESP位置如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">参数</span>                                       
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">返回地址</span>                                 
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">旧</span> <span style="color:#e06c75">EBP</span>（<span style="color:#e06c75">上一个EBP</span>）
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">   [EBP位置]</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">局部变量</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">   [ESP位置]</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><p>此时[EBP]存放着调用者的EBP，[ESP]存放着最后一个局部变量（如果申请的空间用满了的话）</p>
-<p>下面的图就很好展示了调用函数栈帧变化：</p>
-<p>
+</span></span></code></pre></div><p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="栈帧与调用惯例| nullwy&rsquo;s blog" href="http://picture.928330.xyz/typora/stack-frame-layout-zh.png">
-<img src="http://picture.928330.xyz/typora/stack-frame-layout-zh.png" alt="栈帧与调用惯例| nullwy&rsquo;s blog"  />
+<a data-fancybox="gallery" data-caption="image-20251010133610168" href="http://picture.928330.xyz/typora/image-20251010133610168.png">
+<img src="http://picture.928330.xyz/typora/image-20251010133610168.png" alt="image-20251010133610168"  />
 </a>
 </div>
 </p>
-<h3 id="调用流程示例">调用流程示例
-</h3><p>举个例子，假设有这样一个程序：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">main</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">call</span> <span style="color:#e06c75">foo</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ret</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">foo</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#e06c75">ebp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">mov</span>  <span style="color:#e06c75">ebp</span>, <span style="color:#e06c75">esp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">sub</span>  <span style="color:#e06c75">esp</span>, <span style="color:#d19a66">4</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">mov</span>  <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ebp</span><span style="color:#56b6c2">-</span><span style="color:#d19a66">4</span>], <span style="color:#d19a66">1</span> ;局部变量
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#d19a66">1</span> ;传入<span style="color:#e06c75">bar的参数</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">call</span> <span style="color:#e06c75">bar</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">mov</span>  <span style="color:#e06c75">esp</span>, <span style="color:#e06c75">ebp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pop</span>  <span style="color:#e06c75">ebp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ret</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">bar</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#e06c75">ebp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">mov</span>  <span style="color:#e06c75">ebp</span>, <span style="color:#e06c75">esp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">sub</span>  <span style="color:#e06c75">esp</span>, <span style="color:#d19a66">4</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">mov</span>  <span style="color:#e06c75">esp</span>, <span style="color:#e06c75">ebp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pop</span>  <span style="color:#e06c75">ebp</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ret</span>
-</span></span></code></pre></div><h4 id="进入main">进入main
-</h4><p><strong><code>EBP</code>：main的旧EBP</strong></p>
-<p><strong><code>ESP</code>：main栈顶（局部变量区底）</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>┌───────────────────────┐
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的参数</span>（<span style="color:#e06c75">也许有也许没有</span>）				   │
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的返回地址</span>                          │ ← <span style="color:#e06c75">调用者是CRT</span>（<span style="color:#e06c75">C运行时</span>）
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">调用</span> <span style="color:#e06c75">main</span> <span style="color:#e06c75">的栈帧的EBP</span>                │ ← <span style="color:#e06c75">EBP</span> <span style="color:#e06c75">指向这里</span>
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的局部变量</span>                          │
-</span></span><span style="display:flex;"><span>└───────────────────────┘
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><h4 id="call-foo">call foo
-</h4><p>main函数先把foo需要的参数压栈，之后<code>call foo</code></p>
-<p><code>call foo</code>做了两件事：</p>
-<p><strong>1.把<code>call</code>下一条指令的地址，即当前EIP（指向call指令）+call指令长度，也即foo的返回地址，压入栈</strong></p>
-<p><strong>2.让EIP跳转到foo的开始地址</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>┌───────────────────────┐
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的参数</span>                                 │
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的返回地址</span>                          │
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">调用</span> <span style="color:#e06c75">main</span> <span style="color:#e06c75">的栈帧的EBP</span>                │
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的局部变量</span>                          │
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│ → <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的参数</span>                                 │
-</span></span><span style="display:flex;"><span>├───────────────────────┤
-</span></span><span style="display:flex;"><span>│ → <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">main</span>)     │ ← <span style="color:#e06c75">ESP</span>
-</span></span><span style="display:flex;"><span>└───────────────────────┘
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><h4 id="进入foo">进入foo
-</h4><p>进入foo后，执行序言，为foo创建帧：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">push</span> <span style="color:#e06c75">ebp</span>         ; 保存 <span style="color:#e06c75">main</span> 的 <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">mov</span>  <span style="color:#e06c75">ebp</span>, <span style="color:#e06c75">esp</span>    ; 建立 <span style="color:#e06c75">foo</span> 的基址
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">sub</span>  <span style="color:#e06c75">esp</span>, <span style="color:#d19a66">4</span>      ; 为 <span style="color:#e06c75">foo</span> 的局部变量分配空间
-</span></span></code></pre></div><p><strong><code>EBP</code>：当前栈帧的固定基址</strong></p>
-<p><strong><code>[EBP]</code>：main的旧EBP</strong></p>
-<p><strong><code>[EBP+4]</code>：返回地址（返回 main）</strong></p>
-<p><strong><code>[EBP-4]</code>、<code>[EBP-8]</code>：foo的局部变量</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>┌─────────────────────────────┐
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的参数</span>                                               │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的返回地址</span>                                        │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">调用</span> <span style="color:#e06c75">main</span> <span style="color:#e06c75">的栈帧的EBP</span>                              │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">main</span> <span style="color:#e06c75">的局部变量</span>                                         │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的参数</span>                                                  │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│   <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">main</span>)                      │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│  → <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                            │ ← <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│  → <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                           │ ← <span style="color:#e06c75">ESP</span> <span style="color:#e06c75">指向这里</span>
-</span></span><span style="display:flex;"><span>└─────────────────────────────┘
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><p>之后执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span> <span style="color:#e06c75">mov</span>  <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ebp</span><span style="color:#56b6c2">-</span><span style="color:#d19a66">4</span>], <span style="color:#d19a66">1</span>
-</span></span></code></pre></div><p>给foo的局部变量空间写入值</p>
-<h4 id="foo调用bar">foo调用bar
-</h4><p>同样的流程</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#56b6c2">..</span>.                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的参数</span>                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">main</span>)                        │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                 │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的参数</span>                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">foo</span>)                           │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                   │  ← <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │ ← <span style="color:#e06c75">ESP</span>
-</span></span><span style="display:flex;"><span>└─────────────────────────────┘
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><h4 id="返回过程">返回过程
-</h4><p>首先bar执行<code>MOV ESP, EBP</code>，释放bar栈帧中存放了bar局部变量的地方</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#56b6c2">..</span>.                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的参数</span>                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">main</span>)                        │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                 │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的参数</span>                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">foo</span>)                           │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤ 
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                   │   ← <span style="color:#e06c75">EBP</span>  ← <span style="color:#e06c75">ESP</span> 
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │ （<span style="color:#e06c75">被释放</span>）
-</span></span><span style="display:flex;"><span>└─────────────────────────────┘
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><p>然后执行<code>POP EBP</code>，将ESP指向的内容（foo的EBP）给EBP，然后释放这部分空间</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#56b6c2">..</span>.                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的参数</span>                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">main</span>)                        │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                 │ ← <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的参数</span>                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">foo</span>)                           │ ← <span style="color:#e06c75">ESP</span>
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤ 
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                   │ （<span style="color:#e06c75">被释放</span>）   
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │ （<span style="color:#e06c75">被释放</span>）
-</span></span><span style="display:flex;"><span>└─────────────────────────────┘
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><p>最后执行<code>RET</code>，弹出返回地址，<code>EIP</code>跳转到foo的返回位置（main函数）</p>
-<p>如果有参数则额外<code>RET N</code>释放参数空间</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">高地址</span>
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#56b6c2">..</span>.                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的参数</span>                                                    │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">main</span>)                        │
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">main</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                 │ ← <span style="color:#e06c75">EBP</span>
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │ ← <span style="color:#e06c75">ESP</span>
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的参数</span>                                                    │（<span style="color:#e06c75">被释放</span>）
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的返回地址</span> (<span style="color:#e06c75">ret</span> <span style="color:#e06c75">to</span> <span style="color:#e06c75">foo</span>)                           │（<span style="color:#e06c75">被释放</span>）
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤ 
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">foo</span> <span style="color:#e06c75">的</span> <span style="color:#e06c75">EBP</span>                                                   │ （<span style="color:#e06c75">被释放</span>）   
-</span></span><span style="display:flex;"><span>├─────────────────────────────┤
-</span></span><span style="display:flex;"><span>│ <span style="color:#e06c75">bar</span> <span style="color:#e06c75">的局部变量</span> (<span style="color:#d19a66">4</span><span style="color:#e06c75">字节</span>)                                 │ （<span style="color:#e06c75">被释放</span>）
-</span></span><span style="display:flex;"><span>└─────────────────────────────┘
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">低地址</span>
-</span></span></code></pre></div><p>这样一来，bar的整个栈帧被销毁，ESP和EBP还原至foo栈帧</p>
-<p>foo返回也是一样</p>
-<p>下图关于参数划分的栈帧位置有些不同，不过也能辅助理解嵌套调用：</p>
+<h4 id="预处理编译为汇编-hellos">预处理、编译为汇编 (hello.s)
+</h4><p>编译器首先进行预处理（比如包含头文件），然后将C代码翻译成汇编代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#7f848e"># -S 选项: 仅编译，不进行后续的汇编和链接</span>
+</span></span><span style="display:flex;"><span>gcc -S -o hello.s hello.c
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010133737711" href="http://picture.928330.xyz/typora/image-20251010133737711.png">
+<img src="http://picture.928330.xyz/typora/image-20251010133737711.png" alt="image-20251010133737711"  />
+</a>
+</div>
+</p>
+<h4 id="汇编为目标文件helloo">汇编为目标文件（hello.o）
+</h4><p>汇编器将汇编代码转换为二进制的目标文件</p>
+<p>这个文件包含了机器码，但还不能独立运行，因为它可能引用了其他外部函数（比如<code>printf</code>就是外部函数）</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#7f848e"># -c 选项: 编译并汇编，但不链接</span>
+</span></span><span style="display:flex;"><span>gcc -c -o hello.o hello.s
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010133908624" href="http://picture.928330.xyz/typora/image-20251010133908624.png">
+<img src="http://picture.928330.xyz/typora/image-20251010133908624.png" alt="image-20251010133908624"  />
+</a>
+</div>
+</p>
+<p>看不懂呢&hellip;&hellip;因为这是二进制，没办法完全转成正常的unicode，使用od查看原始的数据：</p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="函数调用实现过程详解（栈空间解析）_函数调用栈过程-CSDN博客" href="http://picture.928330.xyz/typora/f44cf3dc1d84b6bc6cd299fb572340a6.gif">
-<img src="http://picture.928330.xyz/typora/f44cf3dc1d84b6bc6cd299fb572340a6.gif" alt="函数调用实现过程详解（栈空间解析）_函数调用栈过程-CSDN博客"  />
+<a data-fancybox="gallery" data-caption="image-20251010134108713" href="http://picture.928330.xyz/typora/image-20251010134108713.png">
+<img src="http://picture.928330.xyz/typora/image-20251010134108713.png" alt="image-20251010134108713"  />
+</a>
+</div>
+</p>
+<p>还是看不懂哈哈，其实还可以使用<code>objdump</code>命令查看，本质就是<code>.s</code>文件翻译的机器码而已</p>
+<p>用<code>-d</code>选项反汇编所有可执行节，<code>-M intel</code>指定使用intel汇编语法（概念看不懂没关系，后面都会有的）：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010134453910" href="http://picture.928330.xyz/typora/image-20251010134453910.png">
+<img src="http://picture.928330.xyz/typora/image-20251010134453910.png" alt="image-20251010134453910"  />
+</a>
+</div>
+</p>
+<h3 id="链接">链接
+</h3><p>链接器的任务是将一个或多个目标文件以及它们所需的系统库“链接”在一起，生成最终的可执行文件</p>
+<p>其核心工作是<strong>符号解析</strong>和<strong>重定位</strong>（下文会说这是啥）</p>
+<p>链接分为两种主要方式：</p>
+<h4 id="动态链接">动态链接
+</h4><p>现在最为常用的链接方式</p>
+<p><strong>只在可执行文件中记录所需库的引用信息，程序运行时，由操作系统加载共享的库文件</strong></p>
+<p>节约资源、易于更新，但是依赖外部环境</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#7f848e"># 默认进行动态链接，生成可执行文件 hello</span>
+</span></span><span style="display:flex;"><span>gcc -o hello hello.o
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010135257589" href="http://picture.928330.xyz/typora/image-20251010135257589.png">
+<img src="http://picture.928330.xyz/typora/image-20251010135257589.png" alt="image-20251010135257589"  />
+</a>
+</div>
+</p>
+<h4 id="静态链接">静态链接
+</h4><p>将所有依赖的库代码完整地复制并合并到最终的可执行文件中</p>
+<p>可独立运行，但体积大且更新困难</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#7f848e"># 使用 -static 选项进行静态链接</span>
+</span></span><span style="display:flex;"><span>gcc -static -o hello_static hello.o
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010140156961" href="http://picture.928330.xyz/typora/image-20251010140156961.png">
+<img src="http://picture.928330.xyz/typora/image-20251010140156961.png" alt="image-20251010140156961"  />
+</a>
+</div>
+</p>
+<p>对比一下就能看出它有多大：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010140247990" href="http://picture.928330.xyz/typora/image-20251010140247990.png">
+<img src="http://picture.928330.xyz/typora/image-20251010140247990.png" alt="image-20251010140247990"  />
+</a>
+</div>
+</p>
+<p>动态链接的只要一万多字节，而静态的要八十万字节！<del>林冲</del></p>
+<p><strong>我们在之后会详细说明这两种链接方式的实现</strong></p>
+<h1 id="可执行文件">可执行文件
+</h1><h2 id="何为可执行文件">何为可执行文件？
+</h2><p>在上文，编译后链接生成的这个文件，就是一个可执行文件</p>
+<p>顾名思义，他是能直接被用户执行的文件，这个名称也是一类文件的规范，它定义了链接器和加载器如何处理和执行二进制代码，规定了代码、数据、元信息等内容如何组织在一个文件中</p>
+<p>目前，主流操作系统主要使用两种格式：</p>
+<ul>
+<li><strong>Unix/Linux 系统： ELF （Executable and Linkable Format，可执行和可链接格式）</strong></li>
+</ul>
+<ul>
+<li><strong>Windows 系统：PE （Portable Executable，便携可执行文件）</strong></li>
+</ul>
+<p>之后我们会详细讲它们俩，不过不是这一篇</p>
+<h2 id="可执行文件的元信息">可执行文件的元信息
+</h2><p>可执行文件不是纯粹的机器码集合，编译器在生成目标文件时，可以选择性地嵌入丰富的元信息</p>
+<p>这些信息对于链接、调试和程序分析至关重要。元信息的存在与否，直接决定了逆向分析和调试的难易程度</p>
+<p>主要的元信息包括以下三类：</p>
+<h3 id="符号表">符号表
+</h3><p>符号表记录了源代码中的符号信息，例如函数名、全局变量名等</p>
+<p>表中每一个表项都包括：</p>
+<ul>
+<li>
+<p><strong>符号名</strong></p>
+</li>
+<li>
+<p><strong>绑定地址</strong></p>
+</li>
+<li>
+<p><strong>符号类型</strong></p>
+</li>
+<li>
+<p><strong>其他信息</strong></p>
+</li>
+</ul>
+<p>链接器（用于解析不同文件间的符号引用）和调试器（用于将地址映射回人类可读的名称）都会使用它</p>
+<p><strong>使用objdump查看符号表（<code>-t</code>）和动态符号表（<code>-T</code>）：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>objdump -tT hello
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010141137496" href="http://picture.928330.xyz/typora/image-20251010141137496.png">
+<img src="http://picture.928330.xyz/typora/image-20251010141137496.png" alt="image-20251010141137496"  />
+</a>
+</div>
+</p>
+<p><strong>使用readelf查看符号信息：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>readelf -s hello
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010141213960" href="http://picture.928330.xyz/typora/image-20251010141213960.png">
+<img src="http://picture.928330.xyz/typora/image-20251010141213960.png" alt="image-20251010141213960"  />
+</a>
+</div>
+</p>
+<h3 id="重定位信息">重定位信息
+</h3><p>在编译单个文件时，编译器并不知道函数和全局数据最终会被加载到内存的哪个确切地址，因此，它会在代码中留下标记，并生成一系列的重定位入口</p>
+<p>当链接器将所有目标文件组合时，它会根据这些入口信息，用最终的绝对地址或相对地址来“修补”这些代码，确保程序能够正确跳转和访问数据</p>
+<h3 id="调试信息">调试信息
+</h3><p>为了方便调试，编译器可以生成详细的调试信息，并将其嵌入到可执行文件中</p>
+<p>调试信息包含源代码文件名、行号信息、变量的类型与作用域等，这将二进制代码与原始的源代码关联起来</p>
+<p>调试器可以利用这些信息，让我们可以在源代码级别设置断点、查看变量值，极大地提高了调试效率</p>
+<h2 id="精简与非精简二进制">精简与非精简二进制
+</h2><p>根据是否包含上述元信息，可执行文件可分为两类：</p>
+<ul>
+<li>
+<p><strong>非精简二进制（Unstripped）</strong></p>
+<p>包含完整的元信息，体积较大，但易于调试和反汇编</p>
+</li>
+<li>
+<p><strong>精简二进制（Stripped）</strong></p>
+<p>只保留运行必需的纯代码，几乎所有元信息都被移除</p>
+</li>
+</ul>
+<p>进行精简可以显著减小文件体积，并且由于缺少符号信息，大大增加了逆向工程的难度</p>
+<p>在Linux系统中，可以使用<code>strip</code>命令来完成这个精简过程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>strip hello
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251010142239669" href="http://picture.928330.xyz/typora/image-20251010142239669.png">
+<img src="http://picture.928330.xyz/typora/image-20251010142239669.png" alt="image-20251010142239669"  />
 </a>
 </div>
 </p>
@@ -2428,18 +829,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">
+    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%801%E5%86%85%E5%AD%98%E4%B8%8E%E6%B1%87%E7%BC%96/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png"/>
+                    <img src="http://picture.928330.xyz/typora/b0cd314b8588e4e7b43938004c890c48.png" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/b0cd314b8588e4e7b43938004c890c48.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">逆向基础2：可执行文件概述</h2>
+            <h2 class="article-title">逆向基础1：内存与汇编</h2>
         </div>
     </a>
 </article>
