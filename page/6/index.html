@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
+    <head>
+	<meta name="generator" content="Hugo 0.151.0"><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="靡不有初，鲜克有终">
-<title>Posts</title>
+<title>Pager 6 - kakahuote</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/post/'>
+<link rel='canonical' href='https://blog.928330.xyz/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="Posts">
+<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="kakahuote">
 <meta property='og:description' content="靡不有初，鲜克有终">
-<meta property='og:url' content='https://blog.928330.xyz/post/'>
+<meta property='og:url' content='https://blog.928330.xyz/'>
 <meta property='og:site_name' content='kakahuote'>
 <meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-10-16T15:28:26&#43;08:00 '/>
-<meta name="twitter:title" content="Posts">
-<meta name="twitter:description" content="靡不有初，鲜克有终"><link rel="alternate" type="application/rss&#43;xml" href="https://blog.928330.xyz/post/index.xml">
+<meta name="twitter:title" content="kakahuote">
+<meta name="twitter:description" content="靡不有初，鲜克有终"><link rel="alternate" type="application/rss&#43;xml" href="https://blog.928330.xyz/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -246,7 +247,7 @@
         
         
         
-        <li >
+        <li  class='current' >
             <a href='/' >
                 
                 
@@ -510,152 +511,495 @@
 
 
             <main class="main full-width">
-    <header>
-        <h3 class="section-title">
-            
-                章节
-            
-        </h3>
+    
+    
+    
+    
 
-        <div class="section-card">
-            <div class="section-details">
-                <h3 class="section-count">26 个页面</h3>
-                <h1 class="section-term">Posts</h1>
-                
-            </div>
+    
+    <div class="elegant-welcome">
+      <div class="welcome-content" id="welcome-content">
+        
+        <div class="welcome-decoration left">
+          <div class="decoration-dash"></div>
+          <div class="decoration-dot"></div>
         </div>
+        
+        <div class="welcome-main">
+          <div class="welcome-emoji" id="welcome-emoji">👋</div>
+          <div class="welcome-text">
+            <span class="welcome-greeting" id="welcome-greeting">欢迎来到</span>
+            <div class="welcome-name">
+              <span class="name-text" id="name-text">Kakahuote's Blog</span>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="welcome-bg-text-container" id="welcome-bg-text-container">
+          <span class="bg-text" id="bg-text-1">欢</span>
+          <span class="bg-text" id="bg-text-2">迎</span>
+          <span class="bg-text" id="bg-text-3">来</span>
+          <span class="bg-text" id="bg-text-4">到</span>
+        </div>
+        
+        
+        <div class="welcome-decoration right">
+          <div class="decoration-dot"></div>
+          <div class="decoration-dash"></div>
+        </div>
+        
+        
+        <div class="click-effects" id="click-effects"></div>
+      </div>
+    </div>
+
+    <script>
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        const welcomeContent = document.getElementById('welcome-content');
+        const welcomeEmoji = document.getElementById('welcome-emoji');
+        const decorationDashes = document.querySelectorAll('.decoration-dash');
+        const decorationDots = document.querySelectorAll('.decoration-dot');
+        const clickEffects = document.getElementById('click-effects');
+        
+        let isInitialState = true;
+        let clickCount = 0;
+        let isTransitioning = false; 
+        
+        
+        const emotionEmojis = [
+          
+          ['😊', '😄', '😉', '🤗', '😍', '🥰', '😇', '🤩', '😌', '😋', '😎', '🤠', '👋', '🙋‍♂️', '💁‍♂️', '🤝'],
+          
+          
+          ['🤔', '🤨', '🧐', '🤓', '😏', '😶', '😐', '😑', '😯', '😦', '😧', '😮', '🤭', '🤫', '🤐', '😶'],
+          
+          
+          ['😒', '😕', '😟', '😔', '😞', '😣', '😖', '😫', '😩', '😤', '😠', '😡', '🤬', '😈', '👿', '💀'],
+          
+          
+          ['😢', '😭', '😿', '😾', '😤', '😡', '🤬', '😈', '👿', '💀', '☠️', '👻', '💩', '🤡', '👺', '👹'],
+          
+          
+          ['😅', '😂', '🤣', '😆', '😁', '😃', '😀', '🙂', '😌', '😋', '😊', '😄', '😉', '🤗', '😍', '🥰']
+        ];
+        
+        
+        const gestureEmojis = [
+          '👆', '👈', '👉', '👇', '👌', '✌️', '🤞', '🤟', '🤘', '🤙', '👍', '👊', '✊', '🤝', '🙏',
+          '👏', '🤲', '👐', '🙌', '🤚', '🖐️', '✋', '🖖', '🤌', '🤏'
+        ];
+        
+        
+        let secondEmoji = gestureEmojis[Math.floor(Math.random() * gestureEmojis.length)];
+        
+        let currentEmotionStage = 0;
+        let animationTriggered = false; 
+        
+        
+        function triggerWelcomeAnimation() {
+          console.log('触发欢迎横幅动画');
+          if (animationTriggered) {
+            console.log('动画已经触发过，跳过');
+            return;
+          }
+          animationTriggered = true;
+          
+          const welcomeGreeting = document.getElementById('welcome-greeting');
+          const nameText = document.getElementById('name-text');
+          const bgTextContainer = document.getElementById('welcome-bg-text-container');
+          const bgTexts = document.querySelectorAll('.bg-text');
+          
+          
+          welcomeGreeting.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          welcomeGreeting.style.opacity = '0';
+          welcomeGreeting.style.transform = 'scale(0.8)';
+          
+          
+          console.log('开始背景大字动画');
+          bgTextContainer.style.display = 'block';
+          
+          
+          bgTexts.forEach((text, index) => {
+            console.log(`设置背景大字 ${index + 1}:`, text);
+            
+            
+            const positions = [
+              { left: '10%', top: '25%' },  
+              { left: '20%', top: '75%' },  
+              { left: '80%', top: '20%' },  
+              { left: '90%', top: '80%' }   
+            ];
+            
+            
+            text.style.left = '50%';
+            text.style.top = '50%';
+            text.style.transform = 'translate(-50%, -50%) scale(1)';
+            text.style.opacity = '0';
+            text.style.transition = 'none'; 
+            
+            
+            text.offsetHeight;
+          });
+          
+          
+          requestAnimationFrame(() => {
+            bgTexts.forEach((text, index) => {
+              const positions = [
+                { left: '10%', top: '25%' },  
+                { left: '20%', top: '75%' },  
+                { left: '80%', top: '20%' },  
+                { left: '90%', top: '80%' }   
+              ];
+              
+              
+              text.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+              text.style.left = positions[index].left;
+              text.style.top = positions[index].top;
+              text.style.transform = 'translate(-50%, -50%) scale(1.2)';
+              text.style.opacity = '0.15';
+            });
+          });
+          
+          
+          setTimeout(() => {
+            nameText.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            nameText.style.fontSize = '2.5rem';
+            nameText.style.marginTop = '-2.5rem';
+            
+            
+            const welcomeMain = document.querySelector('.welcome-main');
+            welcomeMain.style.flexDirection = 'row';
+            welcomeMain.style.alignItems = 'center';
+            welcomeMain.style.gap = '2rem';
+          }, 800);
+        }
+        
+        
+        const effectTypes = [
+          
+          { type: 'star', symbol: '⭐', class: 'effect-star' },
+          { type: 'sparkle', symbol: '✨', class: 'effect-sparkle' },
+          { type: 'diamond', symbol: '💎', class: 'effect-diamond' },
+          { type: 'crown', symbol: '👑', class: 'effect-crown' },
+          { type: 'gem', symbol: '💍', class: 'effect-gem' },
+          
+          
+          { type: 'fire', symbol: '🔥', class: 'effect-fire' },
+          { type: 'lightning', symbol: '⚡', class: 'effect-lightning' },
+          { type: 'snowflake', symbol: '❄️', class: 'effect-snowflake' },
+          { type: 'sun', symbol: '☀️', class: 'effect-sun' },
+          { type: 'moon', symbol: '🌙', class: 'effect-moon' },
+          { type: 'rainbow', symbol: '🌈', class: 'effect-rainbow' },
+          { type: 'flower', symbol: '🌸', class: 'effect-flower' },
+          { type: 'leaf', symbol: '🍃', class: 'effect-leaf' },
+          { type: 'tree', symbol: '🌳', class: 'effect-tree' },
+          
+          
+          { type: 'butterfly', symbol: '🦋', class: 'effect-butterfly' },
+          { type: 'bird', symbol: '🐦', class: 'effect-bird' },
+          { type: 'fish', symbol: '🐠', class: 'effect-fish' },
+          { type: 'dragon', symbol: '🐉', class: 'effect-dragon' },
+          { type: 'unicorn', symbol: '🦄', class: 'effect-unicorn' },
+          { type: 'phoenix', symbol: '🦅', class: 'effect-phoenix' },
+          
+          
+          { type: 'rocket', symbol: '🚀', class: 'effect-rocket' },
+          { type: 'satellite', symbol: '🛰️', class: 'effect-satellite' },
+          { type: 'ufo', symbol: '🛸', class: 'effect-ufo' },
+          { type: 'robot', symbol: '🤖', class: 'effect-robot' },
+          { type: 'alien', symbol: '👽', class: 'effect-alien' },
+          
+          
+          { type: 'pizza', symbol: '🍕', class: 'effect-pizza' },
+          { type: 'hamburger', symbol: '🍔', class: 'effect-hamburger' },
+          { type: 'icecream', symbol: '🍦', class: 'effect-icecream' },
+          { type: 'cake', symbol: '🎂', class: 'effect-cake' },
+          { type: 'candy', symbol: '🍬', class: 'effect-candy' },
+          
+          
+          { type: 'trophy', symbol: '🏆', class: 'effect-trophy' },
+          { type: 'medal', symbol: '🥇', class: 'effect-medal' },
+          { type: 'ball', symbol: '⚽', class: 'effect-ball' },
+          { type: 'basketball', symbol: '🏀', class: 'effect-basketball' },
+          { type: 'tennis', symbol: '🎾', class: 'effect-tennis' },
+          
+          
+          { type: 'musical_note', symbol: '🎵', class: 'effect-musical-note' },
+          { type: 'guitar', symbol: '🎸', class: 'effect-guitar' },
+          { type: 'piano', symbol: '🎹', class: 'effect-piano' },
+          { type: 'microphone', symbol: '🎤', class: 'effect-microphone' },
+          { type: 'headphones', symbol: '🎧', class: 'effect-headphones' },
+          
+          
+          { type: 'game_die', symbol: '🎲', class: 'effect-game-die' },
+          { type: 'joystick', symbol: '🕹️', class: 'effect-joystick' },
+          { type: 'controller', symbol: '🎮', class: 'effect-controller' },
+          { type: 'puzzle', symbol: '🧩', class: 'effect-puzzle' },
+          { type: 'chess', symbol: '♟️', class: 'effect-chess' },
+          
+          
+          { type: 'sparkles', symbol: '✨', class: 'effect-sparkles' },
+          { type: 'crystal_ball', symbol: '🔮', class: 'effect-crystal-ball' },
+          { type: 'magic_wand', symbol: '🪄', class: 'effect-magic-wand' },
+          { type: 'fairy', symbol: '🧚', class: 'effect-fairy' },
+          { type: 'wizard', symbol: '🧙‍♂️', class: 'effect-wizard' }
+        ];
+        
+        
+        function createClickEffect() {
+          const effect = effectTypes[Math.floor(Math.random() * effectTypes.length)];
+          const effectElement = document.createElement('div');
+          effectElement.className = `click-effect ${effect.class}`;
+          effectElement.textContent = effect.symbol;
+          
+          
+          const isLeft = Math.random() > 0.5;
+          let x, y;
+          
+          if (isLeft) {
+            
+            x = Math.random() * 20 + 5; 
+          } else {
+            
+            x = Math.random() * 20 + 75; 
+          }
+          
+          
+          const verticalZone = Math.random();
+          if (verticalZone < 0.4) {
+            
+            y = Math.random() * 30 + 10;
+          } else {
+            
+            y = Math.random() * 30 + 60;
+          }
+          
+          effectElement.style.left = `${x}%`;
+          effectElement.style.top = `${y}%`;
+          
+          clickEffects.appendChild(effectElement);
+          
+          
+          setTimeout(() => {
+            effectElement.remove();
+          }, 2000);
+        }
+        
+        
+        function transitionEmoji(fromEmoji, toEmoji, callback) {
+          if (isTransitioning) return;
+          isTransitioning = true;
+          
+          
+          welcomeEmoji.classList.add('emoji-bounce-shake');
+          
+          setTimeout(() => {
+            
+            welcomeEmoji.classList.remove('emoji-bounce-shake');
+            welcomeEmoji.classList.add('emoji-spin-transition');
+            welcomeEmoji.textContent = toEmoji;
+            
+            
+            setTimeout(() => {
+              welcomeEmoji.classList.remove('emoji-spin-transition');
+              welcomeEmoji.classList.add('emoji-normalize');
+              
+              setTimeout(() => {
+                welcomeEmoji.classList.remove('emoji-normalize');
+                isTransitioning = false;
+                if (callback) callback();
+              }, 300);
+            }, 500);
+          }, 400);
+        }
+        
+        
+        setTimeout(() => {
+          if (isInitialState) {
+            
+            transitionEmoji('👋', secondEmoji, () => {
+              welcomeContent.classList.add('hint-click');
+            });
+            
+            
+            triggerWelcomeAnimation();
+          }
+        }, 2000);
+        
+        
+        welcomeContent.addEventListener('click', function() {
+          
+          this.classList.remove('hint-click');
+          isInitialState = false;
+          
+          
+          if (welcomeEmoji.textContent === '👆') {
+            this.classList.add('hint-shake');
+            setTimeout(() => {
+              this.classList.remove('hint-shake');
+            }, 600);
+          } else {
+            
+            this.classList.add('clicked');
+            setTimeout(() => {
+              this.classList.remove('clicked');
+            }, 600);
+          }
+          
+          
+          decorationDots.forEach((dot, index) => {
+            setTimeout(() => {
+              dot.style.animation = 'dotPulse 0.6s ease-in-out';
+              setTimeout(() => {
+                dot.style.animation = 'dotFloat 4s ease-in-out infinite';
+              }, 600);
+            }, index * 150);
+          });
+          
+          decorationDashes.forEach((dash, index) => {
+            setTimeout(() => {
+              dash.style.animation = 'dashExpand 0.6s ease-in-out';
+              setTimeout(() => {
+                dash.style.animation = 'dashFloat 4s ease-in-out infinite';
+              }, 600);
+            }, index * 150);
+          });
+          
+          
+          for (let i = 0; i < 4; i++) {
+            setTimeout(() => {
+              createClickEffect();
+            }, i * 120);
+          }
+          
+          
+          clickCount++;
+          
+          
+          if (clickCount <= 15) {
+            currentEmotionStage = 0; 
+          } else if (clickCount <= 30) {
+            currentEmotionStage = 1; 
+          } else if (clickCount <= 45) {
+            currentEmotionStage = 2; 
+          } else if (clickCount <= 60) {
+            currentEmotionStage = 3; 
+          } else {
+            currentEmotionStage = 4; 
+            if (clickCount > 75) {
+              clickCount = 0; 
+            }
+          }
+          
+          const currentEmotions = emotionEmojis[currentEmotionStage];
+          const randomEmoji = currentEmotions[Math.floor(Math.random() * currentEmotions.length)];
+          
+          
+          transitionEmoji(welcomeEmoji.textContent, randomEmoji);
+          
+          
+        });
+        
+        
+        welcomeContent.addEventListener('mouseenter', function() {
+          if (isInitialState) {
+            
+            this.style.cursor = '';
+          }
+        });
+      });
+    </script>
+
+    <section class="article-list">
+        
+            
+<article class="has-image">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+                
+                    <img src="http://picture.928330.xyz/typora/DeWatermark.ai_1756040226707.jpeg" loading="lazy" alt="Featured image of post Vim编辑器完全使用教程" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" >
+                工具使用
+            </a>
+        
     </header>
     
-    <section class="article-list--compact">
+
+    <div class="article-title-wrapper">
+
+
+        <h2 class="article-title">
+            <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">Vim编辑器完全使用教程</a>
+        </h2>
         
-            <article>
-    <a href="/p/apache%E5%85%A5%E9%97%A8/">
-        <div class="article-details">
-            <h2 class="article-title">Apache入门</h2>
-            <footer class="article-time">
-                <time datetime='2025-08-23T19:26:25&#43;08:00'>
-                    发布时间：2025-08-23</time>
-            </footer>
-        </div>
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/66d1339d8d7af.jpg" loading="lazy" alt="Featured image of post Apache入门" />
-                
+        <h3 class="article-subtitle">
+            你应该放下一切，立刻学习宇宙第一编辑器Vim😎
+        </h3>
+        
+
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">
+                    发布时间：2025-05-08</time>
             </div>
         
-    </a>
 
-    
-    
-    <div class="article-subtitle-archive">
-        还是nginx好用
-    </div>
-    
-
-</article>
         
-            <article>
-    <a href="/p/latex%E4%B8%8D%E5%A4%AA%E7%B2%BE%E9%80%9A%E7%9A%84%E6%95%99%E7%A8%8B/">
-        <div class="article-details">
-            <h2 class="article-title">LaTeX：不太精通的教程</h2>
-            <footer class="article-time">
-                <time datetime='2025-08-19T21:20:24&#43;08:00'>
-                    发布时间：2025-08-19</time>
-            </footer>
+
+        <div class="article-lastmod">
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+               <time>
+                   更新时间：2025-08-24
+               </time>
+           </div>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--published">
+                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
+            </time>
         </div>
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/LaTeX_logo.svg.jpg" loading="lazy" alt="Featured image of post LaTeX：不太精通的教程" />
-                
-            </div>
-        
-    </a>
-
-    
-    
-    <div class="article-subtitle-archive">
-        总会用到的
-    </div>
+    </footer>
     
 
-</article>
-        
-            <article>
-    <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
-        <div class="article-details">
-            <h2 class="article-title">美亚杯2022个人赛取证总结</h2>
-            <footer class="article-time">
-                <time datetime='2025-08-15T21:32:09&#43;08:00'>
-                    发布时间：2025-08-15</time>
-            </footer>
-        </div>
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" loading="lazy" alt="Featured image of post 美亚杯2022个人赛取证总结" />
-                
-            </div>
-        
-    </a>
+    
+</div>
 
-    
-    
-    <div class="article-subtitle-archive">
-        四个小时还是太短了
-    </div>
-    
-
-</article>
-        
-            <article>
-    <a href="/p/%E4%B8%80%E6%96%87%E5%BC%84%E6%87%82%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/">
-        <div class="article-details">
-            <h2 class="article-title">一文弄懂字符集与编码</h2>
-            <footer class="article-time">
-                <time datetime='2025-08-13T14:32:41&#43;08:00'>
-                    发布时间：2025-08-13</time>
-            </footer>
-        </div>
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/unicode-101-introduction.social.jpg" loading="lazy" alt="Featured image of post 一文弄懂字符集与编码" />
-                
-            </div>
-        
-    </a>
-
-    
-    
-    <div class="article-subtitle-archive">
-        这是一个关于计算机和字符的故事
-    </div>
-    
-
-</article>
-        
-            <article>
-    <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/">
-        <div class="article-details">
-            <h2 class="article-title">Linux命令（文件管理篇）</h2>
-            <footer class="article-time">
-                <time datetime='2025-08-06T13:08:02&#43;08:00'>
-                    发布时间：2025-08-06</time>
-            </footer>
-        </div>
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/fb86b7621fba4d5ef41dce013ca5a72e.jpg" loading="lazy" alt="Featured image of post Linux命令（文件管理篇）" />
-                
-            </div>
-        
-    </a>
-
-    
-    
-    <div class="article-subtitle-archive">
-        Linux中与文件管理有关的命令及基本知识
-    </div>
-    
-
+</header>
 </article>
         
     </section>
@@ -665,19 +1009,7 @@
 
         
             
-                    <a class='page-link' href='/post/'>1</a>
-                
-            
-            
-                    <a class='page-link' href='/post/page/2/'>2</a>
-                
-            
-            
-                <span class='page-link current'>3</span>
-                
-            
-            
-                    <a class='page-link' href='/post/page/4/'>4</a>
+                    <a class='page-link' href='/'>1</a>
                 
             
             
@@ -688,7 +1020,19 @@
                 
             
             
-                    <a class='page-link' href='/post/page/6/'>6</a>
+                    
+                
+            
+            
+                    
+                
+            
+            
+                    <a class='page-link' href='/page/5/'>5</a>
+                
+            
+            
+                <span class='page-link current'>6</span>
                 
             
     </nav>
@@ -716,7 +1060,6 @@
         <span>...当然还有kakahuote🤓👆</span>
     </section>
 </footer>
-
             </main>
         </div>
         <script 

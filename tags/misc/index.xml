@@ -7,7 +7,1560 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Fri, 19 Sep 2025 13:40:06 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 16 Oct 2025 15:28:26 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>美亚杯2023个人赛取证总结</title>
+        <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
+        <pubDate>Thu, 16 Oct 2025 12:49:45 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/113644svdcd71dd4fdd7sc.jpg" alt="Featured image of post 美亚杯2023个人赛取证总结" /&gt;&lt;h1 id=&#34;案件基本情况&#34;&gt;案件基本情况
+&lt;/h1&gt;&lt;h2 id=&#34;案情&#34;&gt;案情
+&lt;/h2&gt;&lt;p&gt;2023月8月的一天，香港警方在调查一起网络诈骗案件时，发现有三名本地男子，分別为李大輝（李大辉），浩賢(浩贤)和Elvis CHUI，并确信这三名被捕男子均为大学同学。怀疑三人背后涉及一个庞大的电信诈骗集团。于是将这三名本地男子拘捕，扣押了三人相关的电子设备并进行分析。
+现在你被委派处理这件案件，请依据以下资料分析上述三人是否涉嫌犯罪，并还原事件经过。&lt;/p&gt;
+&lt;h2 id=&#34;检材资料&#34;&gt;检材资料
+&lt;/h2&gt;&lt;p&gt;镜像挂载密码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3hqGFfT#B*Yjd74t@f%9fDqs6D^$wVjAvxZkA79*4UV*kVRcq^Zu6Xp87W*p#X3XD%*ER!nHzzTnSEMwy8NEGX6A*%P&amp;amp;#rBUkxypAPKwX4mP3WZuHnYKRc7sA33hd@qS
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;1.李大輝的安卓手机镜像 (Android.bin)
+2.李大輝的macOS系统镜像(Mac OS.img)
+3.来自李大輝计算机的一个文件($MFT Record Nr_ 107115, SeqNr_2.txt)
+4.浩賢的个人虚拟机文件(Server.zip)
+5.浩賢的Windows 10系统虚拟机文件(Windows10.zip)
+6.浩賢的iOS手机系统文件(IOS.zip)
+7.来自Elvis Chui计算机的一个网络封包文件(網路.pcapng)
+8.来自Elvis Chui计算机的镜像文件 (Windows Artifacts.e01)
+9.来自Elvis Chui计算机的数据库文件(SQLITE.zip)
+10.Elvis Chui的Windows7虚拟机文件(Windows7.zip)&lt;/p&gt;
+&lt;h1 id=&#34;手机&#34;&gt;手机
+&lt;/h1&gt;&lt;h2 id=&#34;1-填空题-李大辉所用手机移动运营商公司的名称是什么提示请所有字母都用大写英文-1分&#34;&gt;1. [填空题] 李大辉所用手机移动运营商公司的名称是什么？提示:请所有字母都用大写英文 (1分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013123326517&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013123326517.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013123326517.png&#34; alt=&#34;image-20251013123326517&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LGE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;找错了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;LGE指的是LG Electronics（乐金电子/LG电子） 这个公司，它曾是主要的Android智能手机制造商，但在2021年，LG宣布退出全球手机业务，停止新的手机开发与销售&lt;/p&gt;
+&lt;p&gt;总之这是手机制造商，而不是机移动运营商&lt;/p&gt;
+&lt;p&gt;真正的运营商应该查看SIM卡：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015183451356&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015183451356.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015183451356.png&#34; alt=&#34;image-20251015183451356&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个Mobile Duck是指中国移动香港（China Mobile Hong Kong, CMHK）旗下的 “鸭聊佳（Mobile Duck / 鴨聊佳） 预付费 / 储值卡服务品牌&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;MOBILE&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;DUCK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-单选题-李大辉的手机安装了什么即时通讯软件-1分&#34;&gt;2. [单选题] 李大辉的手机安装了什么即时通讯软件？ (1分)
+&lt;/h2&gt;&lt;p&gt;A. WhatsApp B. LINE C. 微信 D. Signal E. QQ&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013123530313&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013123530313.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013123530313.png&#34; alt=&#34;image-20251013123530313&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不是单选吗&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;AC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;错了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;whatsapp有数据，而微信没有数据，那就说明只有whatsapp被使用了&amp;hellip;&amp;hellip;吗?&lt;/p&gt;
+&lt;p&gt;挺奇怪的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;A&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-填空题-李大辉的手机安装了什么反追踪软件提示-所有答案字母都用小写字母并用xxx_xxx_xxxxxxx_xxxxxx_xxxx格式作答-1分&#34;&gt;3. [填空题] 李大辉的手机安装了什么反追踪软件？提示: 所有答案字母都用小写字母并用xxx_xxx_xxxxxxx_xxxxxx_xxxx格式作答 (1分)
+&lt;/h2&gt;&lt;p&gt;不知道&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;官方答案是&lt;code&gt;air_tag_tracker_detect_lite&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是什么，完全没看见他在哪里出现过，也没找到任何题解思路，呃呃了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;air_tag_tracker_detect_lite&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-单选题-李大辉的手机是什么时间成功登入whatsapp-2分&#34;&gt;4. [单选题] 李大辉的手机是什么时间成功登入WhatsApp？ (2分)
+&lt;/h2&gt;&lt;p&gt;A. 2022-08-18_21:52:30 B. 2022-08-19_21:56:23 C. 2022-08-18_21:56:37 D. 2022-08-19_06:59:07 E. 2022-08-19_07:01:17&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013124956491&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013124956491.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013124956491.png&#34; alt=&#34;image-20251013124956491&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;距离C最近&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5-填空题-李大辉登入whatsapp时的认证短码是什么提示-请以阿拉伯数字作答-1分&#34;&gt;5. [填空题] 李大辉登入WHATSAPP时的认证短码是什么？提示: 请以阿拉伯数字作答 (1分)
+&lt;/h2&gt;&lt;p&gt;同上题图&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;304-313
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6-单选题-李大辉到美丽好化妆品公司的入职时间是何时2分&#34;&gt;6. [单选题] 李大辉到美丽好化妆品公司的入职时间是何时？(2分)
+&lt;/h2&gt;&lt;p&gt;A. 2016-04-16 B. 2016-06-28 C. 2017-05-25 D. 2017-07-25 E. 2017-08-18&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013125311356&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013125311356.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013125311356.png&#34; alt=&#34;image-20251013125311356&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013125300379&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013125300379.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013125300379.png&#34; alt=&#34;image-20251013125300379&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-单选题-李大辉曾于什么时间使用了图像编辑软件-2分&#34;&gt;7. [单选题] 李大辉曾于什么时间使用了图像编辑软件？ (2分)
+&lt;/h2&gt;&lt;p&gt;A. 2022-09-10 B. 2022-09-12 C. 2022-10-05 D. 2022-11-10 E. 2022-11-13&lt;/p&gt;
+&lt;p&gt;不知道&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;在&lt;code&gt;Android.bin/分区57/media/0/DCIM&lt;/code&gt;下有一张图片：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015184408315&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015184408315.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015184408315.png&#34; alt=&#34;image-20251015184408315&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;可以看到修改时间和创建时间是不一样的，说明是被修改了&lt;/p&gt;
+&lt;p&gt;但是答案没有&lt;code&gt;2022-10-11&lt;/code&gt;这个选项，怀疑是D选项把月和日写反了&lt;/p&gt;
+&lt;h1 id=&#34;vpn&#34;&gt;VPN
+&lt;/h1&gt;&lt;h2 id=&#34;8-填空题-这个访问服务器使用了哪个端口提示-请用阿拉伯数字作答-1分&#34;&gt;8. [填空题] 这个访问服务器使用了哪个端口？提示: 请用阿拉伯数字作答 (1分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013184332683&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013184332683.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013184332683.png&#34; alt=&#34;image-20251013184332683&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013184345940&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013184345940.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013184345940.png&#34; alt=&#34;image-20251013184345940&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;明显是自己访问的自己，或许是在测试&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;943
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*在&lt;code&gt;usr/local/openvpn_as/etc/db&lt;/code&gt;下能找到&lt;code&gt;config_local.db&lt;/code&gt;配置文件：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015184824207&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015184824207.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015184824207.png&#34; alt=&#34;image-20251015184824207&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;项号&lt;/th&gt;
+          &lt;th&gt;键名&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;1 run_api.active_profile Default&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;运行使用的 API 配置文件为 Default&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;1 webui.edit_profile Default&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Web 管理界面使用的配置文件（Default）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 host.name 218.255.242.114&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;服务器的公网 IP 地址或主机名（客户端连接时会显示这个地址）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 admin_ui.https.ip_address ens33&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;管理后台（Web Admin UI）绑定的网络接口（ens33）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 admin_ui.https.port 943&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;管理后台 HTTPS 端口（默认 943）&lt;br /&gt;可通过 &lt;code&gt;https://&amp;lt;IP&amp;gt;:943/admin&lt;/code&gt; 登录&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 cs.https.ip_address ens33&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;“Client Service” Web UI 绑定接口&lt;br /&gt;用户从浏览器访问 &lt;code&gt;https://&amp;lt;IP&amp;gt;:943/&lt;/code&gt; 下载配置时用&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 cs.https.port 943&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;同样监听在 943 端口&lt;br /&gt;Admin 与 Client 共用端口&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.daemon.0.listen.ip_address ens33&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;VPN 守护进程监听的网卡接口&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.daemon.0.server.ip_address all&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;表示该 VPN 服务器允许所有 IP 客户端连接（不做源限制）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.daemon.0.listen.port 443&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;OpenVPN 服务监听的端口（默认 TCP/UDP 443，用于穿透防火墙）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.client.routing.reroute_gw true&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;客户端连接后将默认网关重定向到 VPN（即所有流量走 VPN）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.client.routing.reroute_dns true&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;客户端连接后 DNS 请求也通过 VPN&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.routing.private_access nat&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;VPN 内部子网与外部网络通过 NAT 转换&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.daemon.tcp.port 443&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;TCP 模式的 OpenVPN 守护进程使用 443 端口&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.daemon.tcp.n_daemons 4&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;开启 4 个 TCP 守护线程（提升并发性能）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.daemon.udp.n_daemons 4&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;开启 4 个 UDP 守护线程&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.routing.private_network.0 192.168.112.0/24&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;VPN 内部虚拟网段（分配给客户端的 IP 范围）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.daemon.protocols both&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;同时支持 TCP 和 UDP&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.routing.gateway_access true&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;允许客户端访问服务器所在网段&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.server.daemon.ovpndco true&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;启用 OpenVPN Data Channel Offload（优化性能）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;2 vpn.client.routing.inter_client true&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;允许客户端之间互相访问（默认是隔离的）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;这里就能看出来端口号了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;943
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9-填空题-user1账户最近连接到这个访问服务器时使用的ip地址是多少提示-用ipv4-格式回答-1分&#34;&gt;9. [填空题] “User1”账户最近连接到这个访问服务器时使用的IP地址是多少？提示: 用IPV4 格式回答 (1分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013191348858&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013191348858.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013191348858.png&#34; alt=&#34;image-20251013191348858&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;果然找到了openvpnas.log，一共两个，导出搜索&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013191445410&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013191445410.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013191445410.png&#34; alt=&#34;image-20251013191445410&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;203.198.117.194
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;又做错了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我找的是openvpnas.log.1，答案在openvpnas.log，因为它更早，题目问的是最近连接&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015214840324&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015214840324.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015214840324.png&#34; alt=&#34;image-20251015214840324&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;192.166.244.167
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;10-多选题-哪些文件可以找出这个访问服务器的ubuntu版本1分&#34;&gt;10. [多选题] 哪些文件可以找出这个访问服务器的Ubuntu版本？(1分)
+&lt;/h2&gt;&lt;p&gt;A. lsb-release B. issue.net C. profile D. console&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013184830073&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013184830073.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013184830073.png&#34; alt=&#34;image-20251013184830073&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013184900928&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013184900928.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013184900928.png&#34; alt=&#34;image-20251013184900928&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;AB
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;11-多选题-哪些文件有助于分辨这是一个存储服务器1分&#34;&gt;11. [多选题] 哪些文件有助于分辨这是一个存储服务器？(1分)
+&lt;/h2&gt;&lt;p&gt;A. auth.log B. sys.log C. bash_history D. idconfig&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013185102641&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013185102641.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013185102641.png&#34; alt=&#34;image-20251013185102641&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;但是C里面什么也没有，所以应该是&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;AB
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12-单选题-这个访问服务器所在时区是哪个时区2分&#34;&gt;12. [单选题] 这个访问服务器所在时区是哪个时区？(2分)
+&lt;/h2&gt;&lt;p&gt;A. UTC +9 B. UTC +8 C. UTC -7 D. UTC&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013190119434&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013190119434.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013190119434.png&#34; alt=&#34;image-20251013190119434&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13-填空题-这个访问服务器的openvpn帐户密码是多少提示请用大写字母与阿拉伯数字作答-2分&#34;&gt;13. [填空题] 这个访问服务器的“openvpn”帐户密码是多少？提示:请用大写字母与阿拉伯数字作答 (2分)
+&lt;/h2&gt;&lt;p&gt;见第八题&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;TLFAG6l6DSSC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14-单选题-在这个访问服务器中user1账户之间的连接所使用的加密算法密码是什么2分&#34;&gt;14. [单选题] 在这个访问服务器中，“User1”账户之间的连接所使用的加密算法（密码）是什么？(2分)
+&lt;/h2&gt;&lt;p&gt;A. Blowfish-CBC B. 3DES-CBC C. AES-128-GCM D. AES-256-CBC&lt;/p&gt;
+&lt;p&gt;在openvpnas.log.1里面搜索四个选项，发现CD都能搜得到&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013193857126&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013193857126.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013193857126.png&#34; alt=&#34;image-20251013193857126&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013193929275&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013193929275.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013193929275.png&#34; alt=&#34;image-20251013193929275&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;又做错了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;User1的OpenVPN设置文件是&lt;code&gt;user1.ovpn&lt;/code&gt;，路径不好确定，直接搜名称，或者后缀&lt;code&gt;.opvn&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;里面就定义了使用的加密算法：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015220135220&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015220135220.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015220135220.png&#34; alt=&#34;image-20251015220135220&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;流量&#34;&gt;流量
+&lt;/h1&gt;&lt;h2 id=&#34;15-填空题-给出正在进行nmap扫瞄的计算机互联网协议地址提示-以ipv4格式给出答案-1分&#34;&gt;15. [填空题] 给出正在进行Nmap扫瞄的计算机互联网协议地址？提示: 以IPV4格式给出答案 (1分)
+&lt;/h2&gt;&lt;p&gt;参考文章：&lt;a class=&#34;link&#34; href=&#34;http://www.huiyao.love/2023/10/07/nmap%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%8F%8A%E5%85%B6%E7%94%A8%E6%B3%95%E8%AF%A6%E7%BB%86/#toc-8&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;nmap流量特征及其用法详细
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013200141084&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013200141084.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013200141084.png&#34; alt=&#34;image-20251013200141084&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;192.168.186.132
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;16-填空题-有多少个nmap扫瞄正在同时进行提示请给出阿拉伯数字作答-1分&#34;&gt;16. [填空题] 有多少个Nmap扫瞄正在同时进行？提示:请给出阿拉伯数字作答 (1分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013200207956&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013200207956.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013200207956.png&#34; alt=&#34;image-20251013200207956&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;TCP扫描里面时不时穿插UDP扫描，应该是至少有两个，具体怎么判断不清楚&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;通过icmp协议查找&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在wireshark过滤icmp，可以看见有两组request和reply，在网络抓包中，这一对请求‑回应就构成了一次完整的探测事件，通过目标ip也能看出确实是之前看到的两次扫描的ip&lt;/p&gt;
+&lt;p&gt;不过，许多主机或防火墙直接丢弃ICMP Echo Request/Reply，导致看不到reply，会误判为未响应或扫描未完成，所以这种方法似乎是不太可靠的&lt;/p&gt;
+&lt;p&gt;但放在这题也能用吧&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015221612964&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015221612964.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015221612964.png&#34; alt=&#34;image-20251015221612964&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;17-单选题-当计算机正在扫瞄8888namp相关的指令是什么1分&#34;&gt;17. [单选题] 当计算机正在扫瞄8.8.8.8，namp相关的指令是什么？(1分)
+&lt;/h2&gt;&lt;p&gt;A. nmap -sT 8.8.8.8 B. nmap -sU 8.8.8.8 C. nmap -sn -PR 8.8.8.8 D. nmap -sn -PU 8.8.8.8&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013200033327&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013200033327.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013200033327.png&#34; alt=&#34;image-20251013200033327&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;18-单选题-当计算机正在扫瞄453332156namp相关的指令是什么1分&#34;&gt;18. [单选题] 当计算机正在扫瞄45.33.32.156，namp相关的指令是什么？(1分)
+&lt;/h2&gt;&lt;p&gt;A. nmap -sT 45.33.32.156 B. nmap -sU 45.33.32.156 C. nmap -sn -45.33.32.156 D. nmap -sn -45.33.32.156&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013200007566&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013200007566.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013200007566.png&#34; alt=&#34;image-20251013200007566&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;19-单选题-国强被指派设定一个dhcp服务器该服务器需借出最后100个的ip地址以下哪个ip地址会是被借出的ip地址1分&#34;&gt;19. [单选题] 国强被指派设定一个DHCP服务器，该服务器需借出最后100个的IP地址，以下哪个IP地址会是被借出的IP地址？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 10.1.4.255&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 10.1.4.100&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 10.1.4.254&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 10.1.4.1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;和检材应该没什么关系&lt;/p&gt;
+&lt;p&gt;最后100个IP地址：从&lt;code&gt;10.1.4.155&lt;/code&gt;到&lt;code&gt;10.1.4.254&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;A. 10.1.4.255 → 广播地址，不可分配&lt;/p&gt;
+&lt;p&gt;B. 10.1.4.100 → 不在最后 100 个&lt;/p&gt;
+&lt;p&gt;C. 10.1.4.254 → 在最后 100 个 ✅&lt;/p&gt;
+&lt;p&gt;D. 10.1.4.1 → 网络第一个可用地址，不在最后 100 个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;20-单选题-以下那个协议是属于tcpip协议1分&#34;&gt;20. [单选题] 以下那个协议是属于TCP/IP协议？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;i.DHCP&lt;/strong&gt;  	 **ii.HTTP 	**  &lt;strong&gt;iii.RTP&lt;/strong&gt; 	  &lt;strong&gt;iv.Telnet&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**A. i &amp;amp; iii **&lt;/p&gt;
+&lt;p&gt;**B. ii &amp;amp; iv **&lt;/p&gt;
+&lt;p&gt;**C. 所有皆是 (All answers belong to TCP/IP protocol) **&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 所有皆否(All answers don’t belong to TCP/IP protocol)&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;DHCP&lt;/strong&gt; → TCP/IP 协议族下的应用层协议，用于动态分配 IP 地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP&lt;/strong&gt; → TCP/IP 协议族下的应用层协议，用于网页通信&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RTP&lt;/strong&gt; → 实时传输协议，通常运行在 UDP 之上，也是 TCP/IP 协议族下的应用层协议&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Telnet&lt;/strong&gt; → TCP/IP 协议族下的应用层协议，用于远程登录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所以全部都是&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;21-单选题-浩贤为一间公司的网络管理员他需要把一个路由器作出以下设定现在浩贤把路由器作以下设定志伟是浩贤的主管他发现浩贤的设定错误浩贤应作怎样的更正2分&#34;&gt;21. [单选题] 浩贤为一间公司的网络管理员，他需要把一个路由器作出以下设定，现在浩贤把路由器作以下设定，志伟是浩贤的主管，他发现浩贤的设定错误，浩贤应作怎样的更正？(2分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. &amp;lsquo;access-list 123 permit tcp any eq ftp any ’ 更正为(change) &amp;lsquo;access-list 123 permit udp any eq ftp any ’&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. &amp;lsquo;access-list 122 permit tcp host 192.168.26.3 eq www any ’ 更正为(change) &amp;lsquo;access-list 122 permit udp host 192.168.26.3 eq www any ’&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 删除(Delete)‘access-list 120 deny tcp any any’ 与’access-list 119 deny udp any any’&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 删除(Delete)&amp;lsquo;access-list 123 permit tcp any eq ftp any ’&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：FTP 是 TCP 协议（21/20端口），而不是 UDP，将 TCP 改为 UDP 是错误的，会导致 FTP 被阻挡&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B&lt;/strong&gt;：WWW（HTTP）是 &lt;strong&gt;TCP 协议&lt;/strong&gt;（端口 80），改成 UDP 是错误的，会阻止 HTTP&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C&lt;/strong&gt;：如果这两条 ACL 阻止了所有 TCP 和 UDP 流量，会导致网络服务全部阻断，删除这些 deny 语句可以恢复正常访问&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D&lt;/strong&gt;：这是允许 FTP 的规则，不应删除，否则 FTP 无法访问&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22-单选题-根据以下ping指令的结果你会估计192168186132是哪一个操作系统2分&#34;&gt;22. [单选题] 根据以下ping指令的结果，你会估计192.168.186.132是哪一个操作系统？(2分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Ping 192.168.186.132 (使用32字节的数据):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;回复自 192.168.186.132 F=32 d)&amp;lt;1ms TTL=64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;回复自 192.168.186.132 F55=32 didl&amp;lt;1ms TTL=64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;回复自192.168.186.132: F15=32 Mii) &amp;lt; 1ms TTL=64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;回复自 192.168.186.132: F5=32 Bi)&amp;lt;1ms TTL=64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Ping 192.168.186.132 with 32 bytes of data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reply from 192.168.186.132: byte=32 time &amp;lt;1ms TTL=64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reply from 192.168.186.132: byte=32 time &amp;lt;1ms TTL=64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reply from 192.168.186.132: byte=32 time &amp;lt;1ms TTL=64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reply from 192.168.186.132: byte=32 time &amp;lt;1ms TTL=64)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;**A. Linux **&lt;/p&gt;
+&lt;p&gt;**B. Windows XP **&lt;/p&gt;
+&lt;p&gt;**C. Windows 7 **&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. iOS 12.4 (Cisco Routers)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;要判断操作系统，需要看ping 的 ICMP 响应特征，通常包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TTL 值（Time To Live）&lt;/li&gt;
+&lt;li&gt;ICMP 包大小（默认数据长度）&lt;/li&gt;
+&lt;li&gt;是否支持分片、是否返回“Destination unreachable”等信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不同操作系统的默认 TTL 值大致如下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;操作系统&lt;/th&gt;
+          &lt;th&gt;默认 TTL 值&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Linux&lt;/td&gt;
+          &lt;td&gt;64&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Windows XP&lt;/td&gt;
+          &lt;td&gt;128&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Windows 7/10&lt;/td&gt;
+          &lt;td&gt;128&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;iOS / Cisco&lt;/td&gt;
+          &lt;td&gt;64 / 255&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;题中TTL是64&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;23-单选题-当使用nmap扫瞄目标后nmap内出现以下信息应用哪一个指令找出开放的端口2分&#34;&gt;23. [单选题] 当使用nmap扫瞄目标后，nmap内出现以下信息，应用哪一个指令找出开放的端口？(2分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. nmap -sT&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. nmap -sN&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. nmap -sX&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. nmap -Pn&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;要列出开放的 TCP 端口，最直接的是做 TCP connect 扫描（&lt;code&gt;-sT&lt;/code&gt;），它会完成三次握手并报告哪些端口被接受（开放）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;24单选题-以下哪一个nmap指令可以减低被侦测的可能性2分&#34;&gt;24.[单选题] 以下哪一个Nmap指令可以减低被侦测的可能性？(2分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. nmap -sT -O -T5&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. nmap -sT -O -T0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. nmap -sU&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. nmap -A &amp;ndash;host-timeout 99-T1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在选项里 &lt;code&gt;-T0&lt;/code&gt;（极慢、最谨慎）能最大程度降低被检测的可能性（慢速发送、间隔大，躲避速率/阈值检测）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;mac-os&#34;&gt;Mac OS
+&lt;/h1&gt;&lt;h2 id=&#34;25-单选题-apple计算机的硬盘可以使用以下分区方案1分&#34;&gt;25. [单选题] Apple计算机的硬盘可以使用以下分区方案：(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. Apple Partition Map&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. GUID Partition Table&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Master Boot Record&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. All of the above&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Apple 计算机的硬盘支持的分区方案有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Apple Partition Map (APM)&lt;/strong&gt; → 老式 Mac（PowerPC）使用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GUID Partition Table (GPT)&lt;/strong&gt; → Intel Mac 以及现代 macOS 使用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Master Boot Record (MBR)&lt;/strong&gt; → 兼容 Windows 或旧式 BIOS 系统&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;26单选题mac-osimg文件中可以找到多少个符号链接1分&#34;&gt;26.[单选题]‘Mac OS.img’文件中可以找到多少个符号链接？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 3&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不知道怎么看，因为火眼扫不出来，从这之后除了27题都不会做，直接跳到windows部分了&lt;/p&gt;
+&lt;p&gt;它只是一个可挂载的移动存储设备分区，缺少完整的系统，所以火眼不能自动分析&lt;/p&gt;
+&lt;p&gt;果然离开工具啥也不是了，之后想办法补补，比如Xways这样的手动分析，唉唉&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;这一题还是不知道怎么做&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;27-单选题-在mac-osimg-档中使用了哪种分区方案2分&#34;&gt;27. [单选题] 在’Mac OS.img’ 档中使用了哪种分区方案？(2分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. Apple Partition Map&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. GUID Partition Table&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Master Boot Record&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. HFS+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个还是能看出来的，有HFS+ Private Data，也不能是别的了&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015225546891&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015225546891.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015225546891.png&#34; alt=&#34;image-20251015225546891&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;错了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;唉，还以为能做出一题来&lt;/p&gt;
+&lt;p&gt;将img文件用Xways打开，能看见具体的分区方案：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015233427264&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015233427264.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015233427264.png&#34; alt=&#34;image-20251015233427264&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这题说实话是我傻波一了，问的是分区方案不是分区系统，纯眼瞎&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;28-单选题-mac-osimg-档的文件系统的正确描述是什么1分&#34;&gt;28. [单选题] ‘Mac OS.img’ 档的文件系统的正确描述是什么？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. HFS+（已启用日志记录）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. HFS+（已启用区分大小写）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. HFS+（已启用日志记录和区分大小写）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. APFS (已启用区分大小写）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在xway的专业工具 -&amp;gt; 技术细节报告能看见开启了日志记录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016000419007&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016000419007.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016000419007.png&#34; alt=&#34;image-20251016000419007&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不过区分大小写不知道怎么判断&lt;/p&gt;
+&lt;h2 id=&#34;29-填空题-从文件carrtfd中删除了哪个文件提示答案需包括副文件名并以全小写字母作答例如-answerdocx-1分&#34;&gt;29. [填空题] 从文件“Car.rtfd”中删除了哪个文件？提示:答案需包括副文件名，并以全小写字母作答，例如 answer.docx (1分)
+&lt;/h2&gt;&lt;p&gt;*&lt;strong&gt;用文件系统日志的内容对比当前有的东西：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016001536234&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016001536234.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016001536234.png&#34; alt=&#34;image-20251016001536234&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016001548235&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016001548235.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016001548235.png&#34; alt=&#34;image-20251016001548235&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;少了yeah.jpg&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yeah.jpg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;30-填空题-请提供mac-osimg-映像文件被fsck命令检查的具体时间1分&#34;&gt;30. [填空题] 请提供’Mac OS.img’ 映像文件被“fsck”命令检查的具体时间。(1分)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;31-单选题-在-img-档中删除了多少个文件1分&#34;&gt;31. [单选题] 在 .img 档中删除了多少个文件？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 3&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 4&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;查看回收站&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.Trashes&lt;/code&gt;是macOS的回收站目录，里面有四个文件，但&lt;code&gt;.DS_Store&lt;/code&gt;是配置文件，所以实际只有三个：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016002639111&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016002639111.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016002639111.png&#34; alt=&#34;image-20251016002639111&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;但还要加上之前发现的被删掉的&lt;code&gt;yeah.jpg&lt;/code&gt;，所以一共是4个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;windows&#34;&gt;windows
+&lt;/h1&gt;&lt;h2 id=&#34;32-填空题-elvis-chui-总共登入过该计算机多少次根据-window-artifactse01-内的windows-注册表记录-1分&#34;&gt;32. [填空题] Elvis Chui 总共登入过该计算机多少次？根据 ‘Window Artifacts.E01’ 内的Windows 注册表记录 (1分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251013235206378&#34; href=&#34;http://picture.928330.xyz/typora/image-20251013235206378.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251013235206378.png&#34; alt=&#34;image-20251013235206378&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;11
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;33-单选题-该计算机的操作系统是在哪一个时区1分&#34;&gt;33. [单选题] 该计算机的操作系统是在哪一个时区？(1分)
+&lt;/h2&gt;&lt;p&gt;A. UTC +4&lt;/p&gt;
+&lt;p&gt;B. UTC +8&lt;/p&gt;
+&lt;p&gt;C. UTC -8&lt;/p&gt;
+&lt;p&gt;D. UTC -4&lt;/p&gt;
+&lt;p&gt;注册表&lt;code&gt;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\TimeZoneInformation&lt;/code&gt;里是时区信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014154621744&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014154621744.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014154621744.png&#34; alt=&#34;image-20251014154621744&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;34-单选题-该计算机的操作系统于何时安装以计算机系统时区回答-1分&#34;&gt;34. [单选题] 该计算机的操作系统于何时安装？(以计算机系统时区回答) (1分)
+&lt;/h2&gt;&lt;p&gt;A. 2023-07-13 19:18:14 B. 2023-07-13 11:18:14 C. 2023-07-13 03:18:14 D. 2023-07-12 19:18:14&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014154711318&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014154711318.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014154711318.png&#34; alt=&#34;image-20251014154711318&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;35-多选题-哪几个程序会于操作系统启动时自动执行1分&#34;&gt;35. *[多选题] 哪(几)个程序会于操作系统启动时自动执行？(1分)
+&lt;/h2&gt;&lt;p&gt;A. Avast B. Steam C. OneDrive D. QQ&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014154816042&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014154816042.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014154816042.png&#34; alt=&#34;image-20251014154816042&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ABC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;36-单选题-该计算机内安装了以下哪一个程序1分&#34;&gt;36. [单选题] 该计算机内安装了以下哪一个程序？(1分)
+&lt;/h2&gt;&lt;p&gt;A. QQ B. WPS Office C. Opera D. Kaspersky&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014154923427&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014154923427.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014154923427.png&#34; alt=&#34;image-20251014154923427&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;37-填空题-计算机内的onedrive程序版本是什么1分&#34;&gt;37. [填空题] 计算机内的OneDrive程序版本是什么？(1分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014155006672&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014155006672.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014155006672.png&#34; alt=&#34;image-20251014155006672&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;21.220.1024.0005
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;38-填空题-计算机有一个正在连接的网络接口该接口连接dhcp服务器的ip地址是多少提示-以-ipv4格式回答-1分&#34;&gt;38. [填空题] 计算机有一个正在连接的网络接口，该接口连接DHCP服务器的IP地址是多少？提示: 以 IPV4格式回答 (1分)
+&lt;/h2&gt;&lt;p&gt;虚拟机使用&lt;code&gt;ipconfig /all&lt;/code&gt;能看见只有Ethemet0网卡在工作，但是看不见DHCP服务器的地址，在火眼能找到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014160019700&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014160019700.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014160019700.png&#34; alt=&#34;image-20251014160019700&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;192.168.88.254
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;39-单选题-该计算机何时连接过一只u盘以计算机系统时区回答-1分&#34;&gt;39. [单选题] 该计算机何时连接过一只U盘？(以计算机系统时区回答) (1分)
+&lt;/h2&gt;&lt;p&gt;A. 2023-07-13 11:48:26 B. 2023-07-13 03:48:29 C. 2023-07-12 19:48:29 D. 2023-07-13 11:48:29&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014160332613&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014160332613.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014160332613.png&#34; alt=&#34;image-20251014160332613&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;与选项D最接近&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;40-多选题-elvis-chui-将哪几个文本文件放在回收站中3分&#34;&gt;40. [多选题] Elvis Chui 将哪几个文本文件放在回收站中？(3分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. $+D10I76A74P.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. Holiday schedule 2023-07-16.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Holiday schedule 2023-07-13.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. Minute on 2023-07-01.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. Minute on 2023-07-10.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014160627797&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014160627797.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014160627797.png&#34; alt=&#34;image-20251014160627797&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;41-单选题-elvis-chui在什么时间删除了第一个文本文件以计算机系统时区回答-3分&#34;&gt;41. [单选题] Elvis Chui在什么时间删除了第一个文本文件？(以计算机系统时区回答) (3分)
+&lt;/h2&gt;&lt;p&gt;A. 2023-07-13 11:50:15 B. 2023-07-13 03:49:45 C. 2023-07-13 03:50:15 D. 2023-07-13 11:49:45&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014161045017&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014161045017.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014161045017.png&#34; alt=&#34;image-20251014161045017&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42-填空题-elvis-chui删除的第一个文本文件的文件名是什么提示-请用小写字母回答及需列明文件格式如文件名字内有空格位置请用_标示例如-go_to_schooldocx-2分&#34;&gt;42. [填空题] Elvis Chui删除的第一个文本文件的文件名是什么？提示: 请用小写字母回答及需列明文件格式。如文件名字内有空格位置，请用_标示。例如: go_to_school.docx (2分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Holiday_schedule_2023-07-16.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;43-单选题-elvis-chui删除的第一个文本文件在什么时间创建以计算机系统时区回答-2分&#34;&gt;43. [单选题] Elvis Chui删除的第一个文本文件在什么时间创建？(以计算机系统时区回答) (2分)
+&lt;/h2&gt;&lt;p&gt;A. 2023-07-13_11:42:39 B. 2023-07-13_11:50:49 C. 2023-07-13_11:49:45 D. 2023-07-13_11:45:22&lt;/p&gt;
+&lt;p&gt;还原看属性：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014161328275&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014161328275.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014161328275.png&#34; alt=&#34;image-20251014161328275&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;44填空题-elvis-chui计划于2023年7月15日20点5分有什么活动提示-答案请与文件内的文字与大细阶相同-1分&#34;&gt;44.[填空题] Elvis Chui计划于2023年7月15日20点5分有什么活动？提示: 答案请与文件内的文字与大细阶相同 (1分
+&lt;/h2&gt;&lt;p&gt;回收站里面还有一个十五号的txt，还原里面有日程：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014161427630&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014161427630.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014161427630.png&#34; alt=&#34;image-20251014161427630&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Moive
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;45-填空题-该计算机执行steamexe总共多少次提示-请用阿拉伯数字作答-1分&#34;&gt;45. [填空题] 该计算机执行STEAM.EXE总共多少次？提示: 请用阿拉伯数字作答 (1分)
+&lt;/h2&gt;&lt;p&gt;没找到&amp;hellip;&lt;/p&gt;
+&lt;p&gt;之前长安杯的经验是错误的，应该在火眼的预执行文件里找：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014163110325&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014163110325.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014163110325.png&#34; alt=&#34;image-20251014163110325&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;7
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;web知识&#34;&gt;Web知识
+&lt;/h1&gt;&lt;h2 id=&#34;46-单选题-一个名为account的数据库表拥有5个列以下哪一个指令会产生错误讯息-提示-1数据库是拥有正常默认的系统表格-2错误信息是关于超出上限的错误-1分&#34;&gt;46. [单选题] 一个名为“Account”的数据库表拥有5个&amp;quot;列&amp;quot;，以下哪一个指令会产生错误讯息？ (提示: 1.数据库是拥有正常默认的系统表格 2.错误信息是关于&amp;quot;超出上限&amp;quot;的错误) (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. SELECT * from Account WHERE name=‘Alex’ OR ‘1’=1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. SELECT * FROM Account WHERE name=‘Bill’ UNION SELECT NULL, NULL, NULL, NULL&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. SELECT * from Account WHERE name=‘Candy’ ORDER BY 6&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. SELECT name FROM sys.tables&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;C选项&lt;code&gt;order by 6&lt;/code&gt;但表只有五列，超出了上限，B也报错但不是超出上限错误&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;47-单选题-当客户端收到一个页面请求的http状态代码为304时以下哪种情况最有可能发生1分&#34;&gt;47. [单选题] 当客户端收到一个页面请求的HTTP状态代码为304时，以下哪种情况最有可能发生？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 页面将显示错误&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 页面将从浏览器缓存中加载&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 浏览器将显示“访问被拒绝”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 服务器将复位向客户端到另一个资源&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;HTTP状态码&lt;code&gt;304 Not Modified&lt;/code&gt; (未修改) 是服务器对客户端的条件请求的回应，它告诉浏览器，自上次请求以来，其缓存的资源版本没有发生任何变化&lt;/p&gt;
+&lt;p&gt;因此浏览器不需要从服务器重新下载资源，而是可以直接使用本地缓存中的版本，这样可以节省带宽并加快页面加载速度&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;48-单选题-在html注入攻击中以下哪种情况最有可能出现1分&#34;&gt;48. [单选题] 在HTML注入攻击中，以下哪种情况最有可能出现？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. &lt;code&gt;&amp;lt;form action=&amp;quot;http://1.2.3.4/login.htm&amp;quot;&amp;gt;Password:&amp;lt;input type=&amp;quot;password&amp;quot; name=&amp;quot;pword&amp;quot;&amp;gt; &amp;lt;/form&amp;gt;&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. &lt;code&gt;&amp;lt;embed src=&amp;quot;http://demo.com/demo.swf&amp;quot;&amp;gt; &amp;lt;/embed&amp;gt;&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. &lt;code&gt;&amp;lt;script&amp;gt;alert(‘Correct’)&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. &lt;code&gt;&amp;lt;?php include(“inc/&amp;quot; .$_GET[‘file’]；?&amp;gt;&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;HTML注入攻击的核心是向易受攻击的页面中插入恶意的HTML代码，以改变页面的外观或功能&lt;/p&gt;
+&lt;p&gt;A注入了一个伪造的登录表单来钓鱼&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;49-单选题-如何预防html注入攻击1分&#34;&gt;49. [单选题] 如何预防HTML注入攻击？(1分)
+&lt;/h2&gt;&lt;p&gt;**A. 密钥管理 **&lt;/p&gt;
+&lt;p&gt;**B. 同源策略执行 **&lt;/p&gt;
+&lt;p&gt;**C. 会话验证 **&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 输入过滤&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;HTML注入的根本原因是应用程序未经验证或未正确处理就将用户输入的数据包含在输出的HTML页面中，比如评论之类的地方，过滤用户输入就能防御了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;50-单选题-同源策略在浏览器内存中提供web应用程序安全的目的是什么3分&#34;&gt;50. [单选题] 同源策略在浏览器内存中提供Web应用程序安全的目的是什么？(3分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 防止客户端访问恶意网站&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 禁止Web会话运行外部脚本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 控制来自不同服务器的代码之间的交互&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 阻止浏览器运行危险或有害的脚本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;同源策略规定一个源的脚本只能读取和操作来自同一源的资源，主要目的就是隔离来自不同源的文档或脚本，防止恶意脚本读取或篡改其他源的敏感数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;51-填空题-编写nmap命令以显示以下结果2分&#34;&gt;51. [填空题] 编写Nmap命令以显示以下结果。(2分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Starting Nmap 7.94 (https://nmap.org) at 2023-07-11 18:26 中国标准时间
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Nmap scan report for www.baidu.com (220.181.38.149)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host is up (0.044s latency).
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Other addresses for www.baidu.com (not scanned): 220.181.38.150
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Not shown: 998 filtered tcp ports (no-response)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PORT          STATE            SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;80/tcp           open                http
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|  http-robots.txt: 10 disallowed entries
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|  /baidu /s? /ulink? /link? /home/news/data/  /bh /shifen/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_/homepage/  /cpro /
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;443/tcp     open             https
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|  http-robots.txt: 10 disallowed entries
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|  /baidu /s? /ulink? /link? /home/news/data/  /bh /shifen/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_/homepage/  /cpro /
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Nmap done: 1 IP address (1 host up) scanned in 6.01 seconds
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出显示了&lt;code&gt;http-robots.txt&lt;/code&gt;的内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap --script http-robots.txt www.baidu.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;52-填空题-除了使用nmap还有其他方法可以验证上述结果其中一种方法是使用web浏览器浏览url编写url以显示上述结果答案不要包含http2分&#34;&gt;52. [填空题] 除了使用Nmap，还有其他方法可以验证上述结果，其中一种方法是使用Web浏览器浏览URL，编写URL以显示上述结果。（答案不要包含“http://”）(2分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;www.baidu.com/robots.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;ios&#34;&gt;ios
+&lt;/h1&gt;&lt;h2 id=&#34;53-单选题-根据--comappleiosstorekituiserviceplist---这部电话是什么型号1分&#34;&gt;53. [单选题] 根据 ’ com.apple.ios.StoreKitUIService.plist ’ , 这部电话是什么型号？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. SAMSUNG S23&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. iPhone X&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. iPhone XR&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. iPhone XS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. iPhone 13&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不知道为什么火眼不能查看完整的&lt;code&gt;.plist&lt;/code&gt;文件，这里使用plisteditor查看：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014171714997&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014171714997.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014171714997.png&#34; alt=&#34;image-20251014171714997&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个款硬件网上能搜到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014171447026&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014171447026.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014171447026.png&#34; alt=&#34;image-20251014171447026&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;54-单选题-根据comappleiosstorekituiserviceplist上述电话的文件系统是什么1分&#34;&gt;54. [单选题] 根据com.apple.ios.StoreKitUIService.plist，上述电话的文件系统是什么？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. FAT32&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. NTFS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. HFS+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. APFS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. EXT4&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;现代iOS设备从iOS 10起就使用APFS文件系统，尤其是iPhone XR/iPhone 8之后的设备&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;55-多选题-根据chatstoragesqlite哪些对话已锁定3分&#34;&gt;55. [多选题] 根据ChatStorage.sqlite，哪些对话已锁定？(3分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 447380449879@.whatsapp.net&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 79096209701@.whatsapp.net&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 923109725619@.whatsapp.net&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 85256026169@.whatsapp.net&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. status@broadcast&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不知道怎么做&lt;/p&gt;
+&lt;h2 id=&#34;56-填空题-根据chatstoragesqlite有多少段录音对话提示-请以阿拉伯数字作答-2分&#34;&gt;56. [填空题] 根据ChatStorage.sqlite，有多少段录音对话？提示: 请以阿拉伯数字作答 (2分)
+&lt;/h2&gt;&lt;p&gt;只能一个表一个表看，也不知道找的对不对：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014210024757&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014210024757.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014210024757.png&#34; alt=&#34;image-20251014210024757&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;48
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;57-单选题-apple-cocoa-core-data-timestamp-是由什么时间开始1分&#34;&gt;57. [单选题] Apple Cocoa Core Data timestamp 是由什么时间开始？(1分)
+&lt;/h2&gt;&lt;p&gt;A. 2001年1月1日 B. 1970年1月1日 C. 2006年1月1日 D. 1960年1月1日&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014213201294&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014213201294.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014213201294.png&#34; alt=&#34;image-20251014213201294&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;58填空题-根据photossqlite数据库中有多少段视频可能涉及whatsapp提示-请以阿拉伯数字作答-2分&#34;&gt;58.[填空题] 根据Photos.sqlite数据库中，有多少段视频可能涉及WhatsApp？提示: 请以阿拉伯数字作答 (2分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014215912545&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014215912545.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014215912545.png&#34; alt=&#34;image-20251014215912545&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;7
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;59-多选题-根据photossqlite数据库中下列哪个选项对img_0008heic的描述是错的3分&#34;&gt;59. [多选题] 根据Photos.sqlite数据库中，下列哪个选项对IMG_0008.HEIC的描述是错的？(3分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 由第三方软件拍摄&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 经过修改&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 由后镜拍摄&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 用ISO200拍摄&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. 没有储存经纬度&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在ZASSET表找到这一条数据：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014215037380&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014215037380.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014215037380.png&#34; alt=&#34;image-20251014215037380&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;值&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZORIGINALCOLORSPACE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Display P3&lt;/td&gt;
+          &lt;td&gt;色彩空间信息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZFILENAME&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;IMG_0008.HEIC&lt;/td&gt;
+          &lt;td&gt;文件名&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZUNIFORMTYPEIDENTIFIER&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;public.heic&lt;/td&gt;
+          &lt;td&gt;文件类型&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZLATITUDE / ZLONGITUDE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;114.17077 / 22.27827833333333&lt;/td&gt;
+          &lt;td&gt;经纬度&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZADJUSTMENTTIMESTAMP / ZHASADJUSTMENTS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;706011358 / 1&lt;/td&gt;
+          &lt;td&gt;有调整/修改&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZDERIVEDCAMERACAPTUREDEVICE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;拍摄设备标识（0 一般表示 iPhone 后置摄像头）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZCAMERAPROCESSINGADJUSTMENTSTATE&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;后处理状态&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ZISO&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;未提供&lt;/td&gt;
+          &lt;td&gt;ISO 信息缺失&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ADE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;60-填空题-根据--smsiosdb--的资料全局唯一标识符guid-dd31c26f-1d72-de0f-431e-ef98f104402d显示的信息是什么提示答案需要与信息一样答案包括中文字阿拉伯数字与符号-1分&#34;&gt;60. [填空题] 根据 ’ sms(ios).db ’ 的资料，全局唯一标识符(GUID): DD31C26F-1D72-DE0F-431E-EF98F104402D显示的信息是什么？提示:答案需要与信息一样(答案包括中文字、阿拉伯数字与符号) (1分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014220511564&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014220511564.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014220511564.png&#34; alt=&#34;image-20251014220511564&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;你的 Uber 驗證碼為 3666. 請勿分享此驗證碼. 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;61-多选题-根据--comburbninstagramplist--及--comfacebookfacebookplist--手机安装了实时通讯软件facebook及instagram的那个版本1分&#34;&gt;61. [多选题] 根据 ’ com.burbn.instagram.plist ’ 及 ’ com.facebook.Facebook.plist ’ 手机安装了实时通讯软件Facebook及Instagram的那个版本？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. Instagram (Version 278.0.0.19.115)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. Facebook (Version 410.0.0.41.116)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Instagram (Version 279.0.0.23.112)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. Facebook (Version 410.0.0.26.115)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. Instagram (Version 278.0.0.25.115)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;F. Facebook (Version 410.0.0.57.116)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;com.burbn.instagram.plist&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014221517037&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014221517037.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014221517037.png&#34; alt=&#34;image-20251014221517037&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;com.facebook.Facebook.plist&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014221358039&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014221358039.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014221358039.png&#34; alt=&#34;image-20251014221358039&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;AB
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;62-填空题-根据--chatstorageiossqlite---用户数据peter-chow-85262012141在什么日期和时间以utc-8时区曾经通过实时通讯软件送出一个信息内容为-i-am-already-home-提示以utc-8时区作答并以yyyy-mm-dd_hhmmss格式作答-例如2023-01-01_100101-答案无需输入utc-8-2分&#34;&gt;62. [填空题] 根据 ’ ChatStorage(ios).sqlite ’ , 用户数据Peter Chow (85262012141)在什么日期和时间(以UTC +8时区)曾经通过实时通讯软件送出一个信息(内容为: I am already home)? 提示:以UTC +8时区作答,并以YYYY-MM-DD_HH:MM:SS格式作答 例如:2023-01-01_10:01:01 (答案无需输入UTC +8) (2分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014223815692&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014223815692.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014223815692.png&#34; alt=&#34;image-20251014223815692&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;发送时间：&lt;code&gt;702012111.6379331&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;基准时间：&lt;code&gt;2001-01-01 00:00:00&lt;/code&gt; -&amp;gt; &lt;code&gt;978278400&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;时间戳相加转换：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2023-04-01_11:21:51
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;63-填空题-根据影片img_0687mov的原数据找出影片拍摄时间提示以utc-8时区作答并以yyyy-mm-dd_hhmmss格式作答-例如2023-01-01_100101-答案无需输入utc-8-1分&#34;&gt;63. [填空题] 根据影片IMG_0687.MOV的原数据，找出影片拍摄时间？提示:以UTC +8时区作答,并以YYYY-MM-DD_HH:MM:SS格式作答 例如:2023-01-01_10:01:01 (答案无需输入UTC +8) (1分)
+&lt;/h2&gt;&lt;p&gt;IMG_0687.MOV在哪呢？？&lt;/p&gt;
+&lt;h2 id=&#34;64-单选题-根据--callhistoryiosstoredata-哪份表格显示了通话记录2分&#34;&gt;64. [单选题] 根据 ’ CallHistory(ios).storedata &amp;lsquo;，哪份表格显示了通话记录？(2分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. ZCALLBPROPERTIES&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. ZCALLRECORD&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Z_2REMOTEPARTICIPANTHANDLES&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. Z_METADATA&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. Z_MODELCACHE&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;F. Z_PRIMARYKEY&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014224859460&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014224859460.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014224859460.png&#34; alt=&#34;image-20251014224859460&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014224912684&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014224912684.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014224912684.png&#34; alt=&#34;image-20251014224912684&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;65-填空题-根据--comapplesharingdplist-这部手机的隔空投送的身份标识号airdrop-id是什么提示请以阿拉伯数字与小写字母作答-3分&#34;&gt;65. [填空题] 根据 ’ com.apple.sharingd.plist &amp;lsquo;，这部手机的隔空投送的身份标识号(AirDrop ID)是什么？提示:请以阿拉伯数字与小写字母作答 (3分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014225538877&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014225538877.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014225538877.png&#34; alt=&#34;image-20251014225538877&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;![](http://picture.928330.xyz/typora/image-20251014225538877.png)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;66-填空题-根据--accounts3sqlite-这部手机的苹果使用者账号-apple-id-是什么提示请以电邮格式作答例jack2023hotmailcom-2分&#34;&gt;66. [填空题] 根据 ’ Accounts3.sqlite &amp;lsquo;，这部手机的苹果使用者账号 (Apple ID) 是什么？提示:请以电邮格式作答(例:jack2023@hotmail.com) (2分)
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251014225948432&#34; href=&#34;http://picture.928330.xyz/typora/image-20251014225948432.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251014225948432.png&#34; alt=&#34;image-20251014225948432&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;就这个出现的最多&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;foratcd2023@gmail.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;组网运维&#34;&gt;组网运维
+&lt;/h1&gt;&lt;h2 id=&#34;67-单选题-哪一行代码的是负责更新在github使用中的-journal-文件的更新历史记录1分&#34;&gt;67. [单选题] 哪一行代码的是负责更新在GitHub使用中的 .journal 文件的更新历史记录？(1分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; git config --global user.name &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;mikesezto&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; git config --global user.email &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;smike@general.org&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; which-truth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt; rm .journal
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt; git add .journal
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt; git commit -m &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Remove sensitive data&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt; git push
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt; git clone --mirror http://github.com/smike/which-truth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;13&lt;/span&gt; java -jar bfg.jar --delete-files .journal which-truth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;14&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;cd&lt;/span&gt; which-truth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;15&lt;/span&gt; git reflog expire --expire&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;now --all
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;16&lt;/span&gt; git gc --prune&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;now --aggressive
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;17&lt;/span&gt; git push --force
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;A. 08&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 13&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 16&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 17&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个脚本的目的是从git的所有历史记录中彻底删除&lt;code&gt;.journal&lt;/code&gt;文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;line 13&lt;/code&gt;使用BFG Repo-Cleaner工具在本地重写了Git历史，清除了所有关于&lt;code&gt;.journal&lt;/code&gt;文件的痕迹，然而，此时远程的GitHub仓库仍然保留着旧的历史记录&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;line 17&lt;/code&gt;命令&lt;code&gt;git push --force&lt;/code&gt;的作用是将本地被修改过的历史记录强制推送到GitHub，覆盖掉远程服务器上旧的历史记录，执行了这一步github上正在使用的历史记录才会被真正更新&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;68-单选题-下列哪一行aws-s3-bucket授权策略中的设置有问题1分&#34;&gt;68. [单选题] 下列哪一行AWS S3 Bucket授权策略中的设置有问题？(1分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;2020-11-12&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;   &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#56b6c2&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;       &lt;span style=&#34;color:#56b6c2&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;         &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Sid&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;PublicReadGetObject&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;         &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;         &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Principal&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;         &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;s3:GetObject&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;         &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;arn:aws:s3:::company-sensitive-14dnid23nfief/*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;     &lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;   &lt;span style=&#34;color:#56b6c2&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;A. 2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 7&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 8&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 9&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;line 7&lt;/code&gt;的&lt;code&gt;&amp;quot;Principal&amp;quot;: &amp;quot;*&amp;quot;&lt;/code&gt;有问题，&lt;code&gt;Principal&lt;/code&gt;定义了谁可以访问这个资源，而&lt;code&gt;*&lt;/code&gt;是一个通配符，代表任何人，包括互联网上匿名的任意用户&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;69-单选题-以下哪项是多重身份验证-mfa-的示例1分&#34;&gt;69. [单选题] 以下哪项是多重身份验证 (MFA) 的示例？(1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. PIN 码和软件令牌&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 指纹和视网膜扫描&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 用户名和密码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 一次性短信代码和硬件令牌&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;多重身份验证 (MFA) 要求用户提供至少两种不同类型的验证因素。验证因素通常分为三类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;知识因素 (Something you know): 密码、PIN 码&lt;/li&gt;
+&lt;li&gt;拥有因素 (Something you have): 手机（用于接收短信）、硬件令牌、软件令牌 App&lt;/li&gt;
+&lt;li&gt;生物特征因素 (Something you are): 指纹、面部识别、视网膜扫描&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; PIN 码 (知识) + 软件令牌 (拥有) = 两种不同类型的因素，这是 MFA&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; 指纹 (生物特征) + 视网膜扫描 (生物特征) = 属于同一种类型的因素&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; 用户名和密码都属于知识因素&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D:&lt;/strong&gt; 短信代码 (拥有) + 硬件令牌 (拥有) = 属于同一种类型的因素&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;70-单选题-aws用家在户口网络进行设定而这些设定会记录用户或第三者的活动第-11-行代码中的设定可以找到哪些用户或第三者的活动信息2分&#34;&gt;70. [单选题] AWS用家在户口网络进行设定，而这些设定会记录用户或第三者的活动。第 11 行代码中的设定可以找到哪些用户或第三者的活动信息？(2分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;  sudo yum install python-pip -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;  sudo pip install opencanary
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;  sudo opencanaryd --copyconfig
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;  opencanaryd --start
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;  sudo yun install jq -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;  jq -r .src_host /var/tmp/opencanary.log | grep -V ^$ | sort | uniq &amp;gt; -/sources.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;  jq -r .logdata.USERNAME /var/tmp/opencanary.log | grep -V null | sort | uniq &amp;gt; -/usernames.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;line &lt;span style=&#34;color:#d19a66&#34;&gt;13&lt;/span&gt;  jq -r .logdata.PASSWORD /var/tmp/opencanary.log | grep -V null | sort | uniq &amp;gt; -/passwords.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;A. User Name 用户的名称&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. User Source 用户的来源&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Attacker Name 攻击者的名称&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. Attacker Source 攻击者的来源&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;opencanary&lt;/code&gt;是一个蜜罐工具，通过模拟易受攻击的服务来诱捕攻击者并记录他们的活动&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;line 11&lt;/code&gt;的命令&lt;code&gt;jq -r .src_host /var/tmp/opencanary.log ...&lt;/code&gt;正在处理&lt;code&gt;opencanary&lt;/code&gt;的日志文件，&lt;code&gt;jq -r .src_host&lt;/code&gt;的作用是从JSON格式的日志中提取&lt;code&gt;src_host&lt;/code&gt;字段的值，&lt;code&gt;src_host&lt;/code&gt;代表&amp;quot;source host&amp;quot;，即源主机的IP地址&lt;/p&gt;
+&lt;p&gt;由于这是蜜罐的日志，记录的活动来源很可能就是攻击者的IP地址，因此，该命令提取的是攻击者的来源信息&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;71-单选题-aws用户设置了一个vpcip地址范围为10000-100024下列哪个-ip-地址用于-dns2分&#34;&gt;71. [单选题] AWS用户设置了一个VPC，IP地址范围为10.0.0.0-10.0.0.24。下列哪个 IP 地址用于 DNS？(2分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 10.0.0.0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 10.0.0.1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 10.0.0.2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 10.0.0.3&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在任何AWS VPC 的子网 (Subnet) 中，AWS都会保留前四个和最后一个IP地址用于特定目的&lt;/p&gt;
+&lt;p&gt;对于一个CIDR块（例如 &lt;code&gt;10.0.0.0/24&lt;/code&gt;），保留规则如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;10.0.0.0&lt;/code&gt;: 网络地址&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10.0.0.1&lt;/code&gt;: 预留给VPC路由器&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10.0.0.2&lt;/code&gt;: 预留给亚马逊提供的DNS服务器&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10.0.0.3&lt;/code&gt;: 预留给未来使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10.0.0.255&lt;/code&gt;: 网络广播地址，AWS不支持，因此也被保留&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;72-单选题-以下哪种类型的云服务用于操作系统和网络-1分&#34;&gt;72. [单选题] 以下哪种类型的云服务用于操作系统和网络？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 软件即服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 平台即服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 基础架构即服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 数据即服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;基础架构即服务 (Infrastructure as a Service, IaaS) 提供了最核心的计算资源，如虚拟机、存储和网络。用户可以在这个基础上部署和运行自己的软件，包括操作系统和应用程序&lt;/p&gt;
+&lt;p&gt;平台即服务 (PaaS) 通常已经包含了操作系统和网络，用户只管理应用程序和数据&lt;/p&gt;
+&lt;p&gt;软件即服务 (SaaS) 提供的是完整的应用程序，用户无需关心任何底层技术&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;73-单选题-以下哪项是bastionhost的特点-2分&#34;&gt;73. [单选题] 以下哪项是Bastionhost的特点？ (2分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 包含敏感信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 无法访问内部系统&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 限制暴露的服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 没有连接到互联网&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;堡垒机 (Bastion Host) 是一个位于网络边界（例如公网和私有网络之间）的、经过高度安全加固的服务器，它作为访问内部网络的唯一入口点&lt;/p&gt;
+&lt;p&gt;为了最大限度地减少被攻击的风险（即减小攻击面），堡垒机的一个核心安全原则就是尽可能少地开放服务和端口，通常只开放必要的管理服务，如SSH (端口 22) 或RDP (端口 3389)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;74-单选题-在linux系统中哪个命令可以用于创建文件系统-1分&#34;&gt;74. [单选题] 在Linux系统中，哪个命令可以用于创建文件系统？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. mount /dev/sda3 /mnt/usb&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. mkfs-ext4 /dev/sda2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. mkfs-ext3 /sys/sda1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. pvcreate /dev/sda&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. genfstab -U -p /mnt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mkfs&lt;/code&gt;是&amp;quot;make filesystem&amp;quot;的缩写，是用于在磁盘分区上创建文件系统的命令&lt;/p&gt;
+&lt;p&gt;选项B的&lt;code&gt;mkfs-ext4&lt;/code&gt;是专门用于创建ext4文件系统的变体&lt;/p&gt;
+&lt;p&gt;选项A的&lt;code&gt;mount&lt;/code&gt;命令用于挂载文件系统&lt;/p&gt;
+&lt;p&gt;选项C的路径&lt;code&gt;/sys/sda1&lt;/code&gt;是错误的，设备文件应在&lt;code&gt;/dev&lt;/code&gt;目录下&lt;/p&gt;
+&lt;p&gt;选项D的&lt;code&gt;pvcreate&lt;/code&gt;用于创建LVM物理卷。选项E的&lt;code&gt;genfstab&lt;/code&gt;用于生成&lt;code&gt;/etc/fstab&lt;/code&gt;文件内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;75-单选题-link实际上是指向linux系统中另一个文件或文件夹的指标以下哪个命令可以产生以下结果-2分&#34;&gt;75. [单选题] &amp;lsquo;Link’实际上是指向LINUX系统中另一个文件或文件夹的指标。以下哪个命令可以产生以下结果？ (2分)
+&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ls -ilas
+|total 0
+|9731253 0 drwxr-xr-x 1 user users 4096 Jul 14 13:31 .
+|1725961 0 drwxr-xr-x 1 user users 4096 Jul 14 13:29 ..
+|90371467 0 -rw-r--r-- 2 user users 90 Jul 14 13:30 testing.txt
+|90371467 0 -rw-r--r-- 2 user users 90 Jul 14 13:30 shotcut-testing.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;A. link -s testing.txt shotcut-testing.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. ln -s shotcut.txt testing.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. ln testing.txt shotcut-testing.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. ln -s testing.txt shotcut-testing.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. ln shotcut.txt testing.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;输出结果中最关键的一列是第一列的inode号，文件&lt;code&gt;testing.txt&lt;/code&gt;和&lt;code&gt;shotcut-testing.txt&lt;/code&gt;拥有完全相同的inode号(&lt;code&gt;90371467&lt;/code&gt;)，并且它们的链接计数为&lt;code&gt;2&lt;/code&gt;，这表明它们之间是硬链接(hard link)关系&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ln&lt;/code&gt;命令在不带&lt;code&gt;-s&lt;/code&gt;参数时创建的就是硬链接，命令&lt;code&gt;ln testing.txt shotcut-testing.txt&lt;/code&gt;的含义是为源文件&lt;code&gt;testing.txt&lt;/code&gt;创建一个名为&lt;code&gt;shotcut-testing.txt&lt;/code&gt;的硬链接&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;76-单选题-以下哪个命令用于linux系统中创建分区-1分&#34;&gt;76. [单选题] 以下哪个命令用于Linux系统中创建分区？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. gdisk /dev/sde&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. mke2fs /dev/sdb1 -t ext4&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. mount /dev/sdc1 /mnt/fs_home&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. fdisk -lu&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. lvcreate -l +200 /dev/vg00/log/vol-00&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在Linux中，&lt;code&gt;fdisk&lt;/code&gt;和&lt;code&gt;gdisk&lt;/code&gt;是用于管理磁盘分区的主要工具&lt;/p&gt;
+&lt;p&gt;选项A的&lt;code&gt;gdisk /dev/sde&lt;/code&gt;会启动一个交互式程序，允许用户在&lt;code&gt;/dev/sde&lt;/code&gt;磁盘上创建、删除和修改分区&lt;/p&gt;
+&lt;p&gt;选项B的&lt;code&gt;mke2fs&lt;/code&gt;用于格式化分区&lt;/p&gt;
+&lt;p&gt;选项C的&lt;code&gt;mount&lt;/code&gt;用于挂载分区&lt;/p&gt;
+&lt;p&gt;选项D的&lt;code&gt;fdisk -lu&lt;/code&gt;用于列出分区&lt;/p&gt;
+&lt;p&gt;选项E的&lt;code&gt;lvcreate&lt;/code&gt;用于创建LVM逻辑卷&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;77-单选题-一个系统管理员要扩展运行在lvm系统中的服务器存储以下哪个命令可以用于扩展lvm中的逻辑卷-1分&#34;&gt;77. [单选题] 一个系统管理员要扩展运行在LVM系统中的服务器存储。以下哪个命令可以用于扩展LVM中的逻辑卷？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. lvdisplay /dev/vg02/vol-01&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. lvcreate -n /dev/vg02 -l 200&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. lvextend -n /dev/vg02 -l +200&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. lvscan -l +200 /dev/vg02/vol-01&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. lvresize -l +200 /dev/vg02/vol-01&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lvextend&lt;/code&gt;和&lt;code&gt;lvresize&lt;/code&gt;命令都可以用来扩展逻辑卷&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lvresize -l +200 /dev/vg02/vol-01&lt;/code&gt;命令的含义是在逻辑卷&lt;code&gt;/dev/vg02/vol-01&lt;/code&gt;现有大小的基础上增加200个逻辑扩展单元(LE)的容量，而选项C的&lt;code&gt;lvextend&lt;/code&gt;语法错误，&lt;code&gt;-n&lt;/code&gt;用于指定名称&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;E
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;78-单选题-一个系统管理员编写了一个bash代码来构建一个raid系统将要实现什么类型的raid-2分&#34;&gt;78. [单选题] 一个系统管理员编写了一个bash代码来构建一个RAID系统，将要实现什么类型的RAID？ (2分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;hd1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/dev/sda1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;hd2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/dev/sdb1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;hd3&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/dev/sdc1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;hd4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/dev/sdd1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mdadm --build /dev/md1 --level&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; --raid-devices&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$hd1&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$hd2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mdadm --build /dev/md2 --level&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; --raid-devices&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$hd3&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$hd4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mdadm --build /dev/md3 --level&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; --raid-devices&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; /dev/md2 /dev/md1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;A. RAID 0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. RAID 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. RAID 1+0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. RAID 0+1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. 这个代码不起作用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;脚本首先创建了两个RAID 1阵列（&lt;code&gt;/dev/md1&lt;/code&gt;和&lt;code&gt;/dev/md2&lt;/code&gt;），然后使用这两个RAID 1阵列作为组件，创建了一个RAID 0阵列(&lt;code&gt;/dev/md3&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;79-单选题-以下是运行在linux服务器中的服务清单以下哪个命令可以关闭bluetoothservice服务-3分&#34;&gt;79. [单选题] 以下是运行在LINUX服务器中的服务清单。以下哪个命令可以关闭“bluetooth.service”服务？ (3分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|● vm-production-xabonline.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| State: running
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| Jobs: &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; queued
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| Failed: &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; units
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| Since: Fri 2023-05-19 08:37:06 UTC; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; months &lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt; days ago
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| CGroup:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ├─init.scope
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ └─ &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; /sbin/init
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ├─system.slice
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ ├─bluetooth.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ │ └─ &lt;span style=&#34;color:#d19a66&#34;&gt;737&lt;/span&gt; /usr/lib/bluetooth/bluetoothd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ ├─dbus.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ ├─docker.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ │ └─ &lt;span style=&#34;color:#d19a66&#34;&gt;853&lt;/span&gt; /usr/bin/dockerd -H fd://
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ ├─libvirtd.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ │ └─ &lt;span style=&#34;color:#d19a66&#34;&gt;2975&lt;/span&gt; /usr/bin/libvirtd --timeout &lt;span style=&#34;color:#d19a66&#34;&gt;120&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ ├─polkit.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ └─virtlogd.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| │ └─ &lt;span style=&#34;color:#d19a66&#34;&gt;3176&lt;/span&gt; /usr/bin/virtlogd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| └─user.slice
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| └─user-1000.slice
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;A. systemctl kill bluetooth.service&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. systemctl disable bluetooth.service&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. systemctl down bluetooth.service&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. systemctl stop bluetooth.service&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. systemctl rm bluetooth.service&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;无需多言&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;80-单选题-cron服务在linux系统中充当作业调度程序现在准备启动和关闭一个web服务器httpdservice上午8时30分启动--下午6时06分关闭周一至周五以下哪个crontab设置适用于这种情况-1分&#34;&gt;80. [单选题] cron服务在LINUX系统中充当作业调度程序。现在准备启动和关闭一个Web服务器（httpd.service），上午8时30分（启动）- 下午6时06分（关闭）；周一至周五，以下哪个crontab设置适用于这种情况？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. &lt;code&gt;30 8 * 1-5 * /usr/bin/systemctl start httpd.service&lt;/code&gt; 及 &lt;code&gt;06 18 * 1-5 * /usr/bin/systemctl stop httpd.service&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. &lt;code&gt;30 8 * * 1-5 /usr/bin/systemctl start httpd.service&lt;/code&gt; 及 &lt;code&gt;06 18 * * 1-5 /usr/bin/systemctl stop httpd.service&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. &lt;code&gt;30 8 1-5 * */usr/bin/systemctl start httpd.service&lt;/code&gt; 及 &lt;code&gt;06 18 1-5 * */usr/bin/systemctl stop httpd.service&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. &lt;code&gt;30 8 * * * /usr/bin/systemctl start httpd.service&lt;/code&gt; 及 &lt;code&gt;06 18 * * * /usr/bin/systemctl stop httpd.service&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. 以上都不是&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Crontab的五个时间字段分别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分钟(0-59)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;小时(0-23)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;日期(1-31)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;月份(1-12)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;星期(0-7，0和7都代表周日)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;周一至周五&amp;quot;用&lt;code&gt;1-5&lt;/code&gt;表示&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;上午8时30分&amp;quot;是&lt;code&gt;30 8&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;下午6时06分&amp;quot;是&lt;code&gt;06 18&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;81-单选题-以下哪个linux命令可以显示目录中的所有文件包括隐藏文件-1分&#34;&gt;81. [单选题] 以下哪个Linux命令可以显示目录中的所有文件，包括隐藏文件？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. ls -ls&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. ls -asl&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. ls -lAs | wc&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. ls -als | grep ssh&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. None&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;带-a的就行，D选项grep干坏事了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;82-单选题-如果您想要检查linux系统上可用的剩余磁盘空间量您会使用以下哪个命令-1分&#34;&gt;82. [单选题] 如果您想要检查Linux系统上可用的剩余磁盘空间量，您会使用以下哪个命令？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. df -vh&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. df -sh&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. dl -vh&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. dd -sh&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. dt -vh&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;83-单选题-dockerfile是一个文本文档用于在docker架构中生成哪个组件-1分&#34;&gt;83. [单选题] Dockerfile是一个文本文档，用于在Docker架构中生成哪个组件？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. docker engine&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. image&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. container&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. volumes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. docker network&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;84-单选题-在linux系统中哪个不是内存区-1分&#34;&gt;84. [单选题] 在Linux系统中，哪个不是内存区？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. &lt;code&gt;[heap]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. &lt;code&gt;[stack]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. &lt;code&gt;[paging]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. &lt;code&gt;[vvar]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. &lt;code&gt;[vdso]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[heap]&lt;/code&gt;(堆)、&lt;code&gt;[stack]&lt;/code&gt;(栈)、&lt;code&gt;[vvar]&lt;/code&gt;和&lt;code&gt;[vdso]&lt;/code&gt;都是Linux进程内存空间中实际存在的区域&lt;/p&gt;
+&lt;p&gt;而Paging(分页)是一种内存管理技术和机制，用于实现虚拟内存&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;85-单选题-以下命令中哪个命令可以对export-logs输出进行排序-1分&#34;&gt;85. [单选题] 以下命令中，哪个命令可以对&amp;quot;export-logs&amp;quot;输出进行排序? (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. &lt;code&gt;export-logs&amp;lt;sort&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. &lt;code&gt;export-logs&amp;gt;sort&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. &lt;code&gt;export-logs&amp;amp;sort&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. &lt;code&gt;export-logs|sort&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. &lt;code&gt;export-logs&amp;lt;&amp;gt;sort&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;管道符使用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;86-多选题-哪些文件会影响linux主机的名称解析功能-1分&#34;&gt;86. [多选题] 哪些文件会影响Linux主机的名称解析功能？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. /etc/resolv.conf&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. /etc/hosts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. /etc/default/names&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. /etc/nsswitch.conf&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. /etc/inet/hosts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A. 定义DNS服务器的地址&lt;/p&gt;
+&lt;p&gt;B. 提供了IP地址到主机名的静态映射，优先级通常高于DNS&lt;/p&gt;
+&lt;p&gt;D. 配置文件，定义了系统进行名称解析时查询的顺序（例如，先查&lt;code&gt;files&lt;/code&gt;即&lt;code&gt;/etc/hosts&lt;/code&gt;，再查&lt;code&gt;dns&lt;/code&gt;）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ABD
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;87-单选题-哪个系统文件包含了一般的端口关联的服务和协议-1分&#34;&gt;87. [单选题] 哪个系统文件包含了一般的端口、关联的服务和协议？ (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. /etc/services&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. /etc/sysconfig/network-scripts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. /etc/services.conf&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. /etc/inet/hosts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;E. Noneofthechoices&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;win10&#34;&gt;Win10
+&lt;/h1&gt;&lt;h2 id=&#34;88-填空题-在-windows-10-中-usersqqqqqdownloads视频文件mixkit-two-women-laying-together-925-mediummp4在mft-中分成多少个data-cluster-储存提示-请以阿拉伯数字作答-1分&#34;&gt;88 [填空题] 在 Windows 10 中 \Users\qqqqq\Downloads，视频文件(mixkit-two-women-laying-together-925-medium.mp4)在MFT 中分成多少个Data Cluster 储存？提示: 请以阿拉伯数字作答 (1分)
+&lt;/h2&gt;&lt;p&gt;windows默认NTFS格式化时簇大小是4KB，即4096字节&lt;/p&gt;
+&lt;p&gt;这个文件大小6.22MB，6525158字节&lt;/p&gt;
+&lt;p&gt;6525158 ÷ 4096 ≈ 1593.35，向上取整 → 1594&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1594
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;89-单选题-在-windows-10-中-usersqqqqqdownloads-mixkit-two-woman-laying-together-925-mediummp4-的last-access-时间是多少-1分&#34;&gt;89. [单选题] 在 Windows 10 中 \Users\qqqqq\Downloads\ mixkit-two-woman-laying-together-925-medium.mp4 的last Access 时间是多少? (1分)
+&lt;/h2&gt;&lt;p&gt;A. 2023/07/10 18:31:32&lt;/p&gt;
+&lt;p&gt;B. 2023/07/10 18:31:01&lt;/p&gt;
+&lt;p&gt;C. 2023/07/10 19:31:22&lt;/p&gt;
+&lt;p&gt;D. 2023/07/11 19:31:22&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015001456168&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015001456168.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015001456168.png&#34; alt=&#34;image-20251015001456168&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;win7&#34;&gt;win7
+&lt;/h1&gt;&lt;h2 id=&#34;90-在-windows-7-中-usersallendesktop有1个mp3-文件-例unlock-me-149058mp3用户使用什么程序打开该mp3-文件-提示请以小写字母作答-1分&#34;&gt;90. 在 Windows 7 中 \Users\Allen\Desktop，有1个MP3 文件 (例:unlock-me-149058.mp3)，用户使用什么程序打开该MP3 文件? 提示:请以小写字母作答 (1分)
+&lt;/h2&gt;&lt;p&gt;随便点开一个mp3文件：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015003639989&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015003639989.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015003639989.png&#34; alt=&#34;image-20251015003639989&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;potplayer
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;91-单选题-在-windows-7-中--usersallendesktop-有1个mp3-文件-unlock-me-149058mp3该文件的zone-identiflier为33代表哪一个security-zone-1分&#34;&gt;91. [单选题] 在 Windows 7 中 ’ \Users\Allen\Desktop ‘有1个MP3 文件 (unlock-me-149058.mp3)，该文件的Zone identiflier为’3’。&amp;lsquo;3’代表哪一个security Zone? (1分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. Local Machine Zone&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. Internet Zone&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Restricted Zone&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. Trust Site Zone&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在Windows中，Zone Identifier（安全区域标识）用于标记文件来源的安全区域&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Zone ID&lt;/th&gt;
+          &lt;th&gt;来源 / 安全区域 (Security Zone)&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;本地计算机（Local Machine）&lt;/td&gt;
+          &lt;td&gt;文件来自本地磁盘&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;本地 Intranet&lt;/td&gt;
+          &lt;td&gt;内部网络资源&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;受信任的站点（Trusted Sites）&lt;/td&gt;
+          &lt;td&gt;浏览器信任列表中的网站&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;Internet&lt;/td&gt;
+          &lt;td&gt;来自互联网下载的文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;受限制的站点（Restricted Sites）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;92-单选题-在-windows-7-中-usersallendesktop有1个mp3-文件-unlock-me-149058mp3该文件从哪个网站下载-1分&#34;&gt;92. [单选题] 在 Windows 7 中 \Users\Allen\Desktop有1个MP3 文件 (unlock-me-149058.mp3)，该文件从哪个网站下载? (1分)
+&lt;/h2&gt;&lt;p&gt;A. &lt;code&gt;www.Pixbay.com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;B. &lt;code&gt;free-mp3-download.net/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;C. &lt;code&gt;https://mp3juices.nu&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;D. &lt;code&gt;mygomp3.com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在浏览器历史记录把四个选项全搜了一遍，愣是一个也没有&lt;/p&gt;
+&lt;p&gt;看到下载记录，原来是A选项把网站名称打错了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015124822048&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015124822048.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015124822048.png&#34; alt=&#34;image-20251015124822048&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;虽然没有找到下载题目的记录，但也只能是这个了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;正确做法是在缓存里找：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251015004022498&#34; href=&#34;http://picture.928330.xyz/typora/image-20251015004022498.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251015004022498.png&#34; alt=&#34;image-20251015004022498&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;93-单选题-在-windows-7-中-usersallendownloads-内有mp3文件-miraclemp3-更改名称时间-2分&#34;&gt;93. [单选题] 在 Windows 7 中 \Users\Allen\Downloads 内有mp3文件 (miracle.mp3), 更改名称时间? (2分)
+&lt;/h2&gt;&lt;p&gt;A. 2023-07-13 02:55:20&lt;/p&gt;
+&lt;p&gt;B. 2023-07-15 10:55:20&lt;/p&gt;
+&lt;p&gt;C. 2023-07-12 10:58:04&lt;/p&gt;
+&lt;p&gt;D. 2023-07-13 10:55:20&lt;/p&gt;
+&lt;p&gt;不知道怎么看&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;这个需要解析NTFS看记录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;每一次的NTFS元数据变更，都会记录在&lt;code&gt;$LogFile&lt;/code&gt;中，实际上也就是记录MFT的变化&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;操作类型&lt;/th&gt;
+          &lt;th&gt;日志内容举例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;创建文件&lt;/td&gt;
+          &lt;td&gt;在 &lt;code&gt;$MFT&lt;/code&gt; 中新增条目&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;删除文件&lt;/td&gt;
+          &lt;td&gt;标记 &lt;code&gt;$MFT&lt;/code&gt; 记录为删除&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;移动文件&lt;/td&gt;
+          &lt;td&gt;更新目录索引 (&lt;code&gt;$INDEX_ALLOCATION&lt;/code&gt;)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;修改属性&lt;/td&gt;
+          &lt;td&gt;更新 &lt;code&gt;$STANDARD_INFORMATION&lt;/code&gt; 或 &lt;code&gt;$FILE_NAME&lt;/code&gt; 属性&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;火眼耗时任务里面有这一项，执行之后能直接查看所有的记录，其中就能找到&lt;code&gt;miracle.mp3&lt;/code&gt;相关记录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016121453846&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016121453846.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016121453846.png&#34; alt=&#34;image-20251016121453846&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;94-填空题-在-windows-7-中-usersallendownloads-内有mp3文件-miraclemp3-mp3文件更改名称前的名称是什么-提示-请以与记录相同的名称与文件格式作答-1分&#34;&gt;94. [填空题] 在 Windows 7 中 \Users\Allen\Downloads 内有mp3文件 (miracle.mp3), mp3文件更改名称前的名称是什么? 提示: 请以与记录相同的名称与文件格式作答 (1分)
+&lt;/h2&gt;&lt;p&gt;同上&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a-small-miracle-132333.mp3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;95-单选题-在-windows-7中有多少个文件曾被potplayer-播放-1分&#34;&gt;95. [单选题] 在 Windows 7中有多少个文件曾被potplayer 播放? (1分)
+&lt;/h2&gt;&lt;p&gt;A. 7&lt;/p&gt;
+&lt;p&gt;B. 8&lt;/p&gt;
+&lt;p&gt;C. 9&lt;/p&gt;
+&lt;p&gt;D. 10&lt;/p&gt;
+&lt;p&gt;不知道&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;可以在&lt;code&gt;Windows 7 x64.vmdk/分区2/Users/Allen/AppData/Roaming/Microsoft/Windows/Recent&lt;/code&gt;文件夹下找到最近打开的文件，里面每一个快捷方式就代表一个项目&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;桌面上的八个MP4文件在这里面都能找到，当他们都是用potplayer打开的吧&lt;/p&gt;
+&lt;p&gt;另外，在最近访问的项目里面还能找到一个从没在recent里面出现过的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016123743262&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016123743262.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016123743262.png&#34; alt=&#34;image-20251016123743262&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这个文件也是真实存在的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016123836579&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016123836579.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016123836579.png&#34; alt=&#34;image-20251016123836579&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;并且时间晚于potplayer的安装时间，按道理说应该也能通过potplayer打开，这么看应该是9个&lt;/p&gt;
+&lt;p&gt;可答案是8&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;96-填空题-在-windows-7中-potplayer最后播放的文件名-提示-请以与记录相同的名称包括小写字母阿拉伯数字与符号与文件格式作答-1分&#34;&gt;96. [填空题] 在 Windows 7中, potplayer最后播放的文件名? 提示: 请以与记录相同的名称(包括小写字母、阿拉伯数字与符号)与文件格式作答 (1分)
+&lt;/h2&gt;&lt;p&gt;不知道&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;这个随便点开一个mp3文件，用potplayer打开，就能在播放清单里面看见（见90题图）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不过为什么清单里面就是最后一个呢？&lt;/p&gt;
+&lt;p&gt;另外，当时在做90题的时候，我点开的就是unlock这个mp3，还以为播放清单是根据我点开的顺序创建的&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unlock-me-149058.mp3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;脚本&#34;&gt;脚本
+&lt;/h1&gt;&lt;h2 id=&#34;97-单选题-事件应急小组正在处理一起网络事件以下哪一个指令是设定取证服务器以作取得内存内容的初步步骤-3分&#34;&gt;97. [单选题] 事件应急小组正在处理一起网络事件。以下哪一个指令是设定取证服务器以作取得内存内容的初步步骤? (3分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. &lt;code&gt;nc -l 4444 &amp;gt;mem126.lime.gz&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. &lt;code&gt;insmod lime.ko “pathtcp:4444 format=lime digest=sha256 compress=1”&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. &lt;code&gt;scp -I ~/DFIRSciAWTest.pem lime.ko ec2-duckman@3.137.169.127:~/scp -I ~/DFIRSciAWTest.pem /usr/bin/nc ec2-duckman@3.137.169.127:~/&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. &lt;code&gt;ssh duckman@&amp;lt;target_server_ip&amp;gt; &amp;quot;sudo dd if=/dev/mem | gzip -1 -&amp;quot; &amp;gt; memory_dump.gz&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;选项项&lt;code&gt;A&lt;/code&gt;使用&lt;code&gt;netcat&lt;/code&gt;(nc)命令在取证服务器上监听(listen)&lt;code&gt;4444&lt;/code&gt;端口，并将接收到的所有数据流重定向保存到文件&lt;code&gt;mem126.lime.gz&lt;/code&gt;中。这是接收内存镜像的标准准备步骤&lt;/p&gt;
+&lt;p&gt;选项&lt;code&gt;B&lt;/code&gt;是在目标端执行的命令，它加载LiME内核模块以抓取内存，并通过TCP协议将数据发送到指定端口(4444)&lt;/p&gt;
+&lt;p&gt;选项&lt;code&gt;C&lt;/code&gt;是使用&lt;code&gt;scp&lt;/code&gt;将取证工具(lime.ko和nc)上传到目标端，这是一个准备步骤，但不是接收数据的步骤&lt;/p&gt;
+&lt;p&gt;选项&lt;code&gt;D&lt;/code&gt;是通过&lt;code&gt;ssh&lt;/code&gt;在目标端执行&lt;code&gt;dd&lt;/code&gt;命令来抓取内存&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;98-单选题-基于两个sqlite数据库文件cus_202308102034json和date_202308101120json编译一个sqlite脚本找出谁前往目的地莫斯科-3分&#34;&gt;98. [单选题] 基于两个SQLite数据库文件“cus_202308102034.json”和“date_202308101120.json”，编译一个SQLite脚本找出谁前往目的地“莫斯科&amp;rdquo;。 (3分)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. &lt;code&gt;SELECT c.customer_name, c.destination, datetime(d.arrival_timestamp_HK, &#39;unixepoch&#39;, &#39;localtime&#39;) AS arrival_time_hk FROM cus c INNER JOIN date d ON c.destination = d.Destination WHERE c.destination = &#39;Moscow&#39;&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. &lt;code&gt;SELECT cus.customer_name, cus.destination, datetime(date.arrival_timestamp_HK, &#39;unixepoch&#39;, &#39;localtime&#39;) AS arrival_time_hk FROM cus INNER JOIN date ON customer_id = date.id WHERE cus.destination = &#39;Moscow&#39; AND date.Destination = &#39;Moscow&#39; AND date.arrival_timestamp_HK IS NOT NULL AND datetime(date.arrival_timestamp_HK, &#39;unixepoch&#39;, &#39;localtime&#39;)&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. &lt;code&gt;SELECT cus.customer_name, cus.destination, date.arrival_timestampFROM cus INNER JOIN date ON cus.destination = date.destination WHERE cus.destination = &#39;Moscow&#39; AND date.Destination = &#39;Moscow&#39;&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. &lt;code&gt;SELECT cus.customer_name, cus.destination, datetime(date.arrival_timestamp_HK, &#39;unixepoch&#39;, &#39;localtime&#39;) AS arrival_time_hk FROM cus INNER JOIN date ON cus.destination = date.Destination WHERE cus.destination = &#39;Moscow&#39; AND date.Destination = &#39;Moscow&#39; AND date.arrival_timestamp_HK IS NOT NULL AND datetime(date.arrival_timestamp_HK, &#39;unixepoch&#39;, &#39;localtime&#39;)&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;选项&lt;code&gt;B&lt;/code&gt;和&lt;code&gt;D&lt;/code&gt;的&lt;code&gt;WHERE&lt;/code&gt;子句中包含了&lt;code&gt;AND datetime(...)&lt;/code&gt;，这是一个无效的语法，因为它没有进行任何比较&lt;/p&gt;
+&lt;p&gt;选项&lt;code&gt;C&lt;/code&gt;的&lt;code&gt;WHERE&lt;/code&gt;子句&lt;code&gt;cus.destination = date.destination&lt;/code&gt;是多余的，因为这已经在&lt;code&gt;JOIN&lt;/code&gt;条件中定义了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;99-填空题-写一个powershell脚本以提取正在连接到window-11计算机的可移动设备的记录提取相关的数据如装置名称制造商装置详情硬件编号并用write-host指令显示数据-2分&#34;&gt;99. [填空题] 写一个Powershell脚本以提取正在连接到Window 11计算机的可移动设备的记录，提取相关的数据如装置名称、制造商、装置详情、硬件编号，并用“Write-Host”指令显示数据。 (2分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 获取所有被识别为可移动的即插即用设备&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$removableDevices&lt;/span&gt; = &lt;span style=&#34;color:#e5c07b&#34;&gt;Get-PnpDevice&lt;/span&gt; | &lt;span style=&#34;color:#e5c07b&#34;&gt;Where-Object&lt;/span&gt; { &lt;span style=&#34;color:#e06c75&#34;&gt;$_&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Removable&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-eq&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$true&lt;/span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 遍历找到的每个设备并显示其信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;foreach&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;$device&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;$removableDevices&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;Write-Host&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Device Name: &lt;/span&gt;$(&lt;span style=&#34;color:#e06c75&#34;&gt;$device&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;FriendlyName&lt;/span&gt;)&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;Write-Host&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Manufacturer: &lt;/span&gt;$(&lt;span style=&#34;color:#e06c75&#34;&gt;$device&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Manufacturer&lt;/span&gt;)&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;Write-Host&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Description: &lt;/span&gt;$(&lt;span style=&#34;color:#e06c75&#34;&gt;$device&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Description&lt;/span&gt;)&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;# HardwareID可能是一个数组，所以我们用逗号将其连接成一个字符串&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;$hardwareIds&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;$device&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;HardwareID&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;-join&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;, &amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;Write-Host&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Hardware ID(s): &lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;$hardwareIds&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;100填空题-编写一个powershell脚本从windows-server-2012-r2获取具有管理员权限的所有使用者活动使用where-object命令来进一步过滤事件如果事件的第9个属性与内建的administrator账户的安全标识符sid匹配则确保只选择与管理员活动相关的事件-3分&#34;&gt;100.[填空题] 编写一个PowerShell脚本从Windows Server 2012 R2获取具有管理员权限的所有使用者活动。使用&amp;quot;Where-Object&amp;quot;命令来进一步过滤事件，如果事件的第9个属性与内建的Administrator账户的安全标识符（SID）匹配，则确保只选择与管理员活动相关的事件。 (3分)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 从安全日志中获取所有成功的登录事件 (Event ID 4624)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 然后通过管道传递给Where-Object进行过滤&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;Get-WinEvent&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;-FilterHashtable&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;@&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;LogName&lt;/span&gt;=&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;Security&amp;#39;&lt;/span&gt;; &lt;span style=&#34;color:#e06c75&#34;&gt;ID&lt;/span&gt;=&lt;span style=&#34;color:#d19a66&#34;&gt;4624&lt;/span&gt;} | &lt;span style=&#34;color:#e5c07b&#34;&gt;Where-Object&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;# 检查事件的第9个属性(在数组中索引为8)的值&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;# 并使用-like操作符匹配内建管理员账户的SID模式(以-500结尾)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;$_&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;Properties&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;].&lt;span style=&#34;color:#e06c75&#34;&gt;Value&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-like&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;S-1-5-*-500&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>獬豸杯2025取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Sat, 13 Sep 2025 01:35:34 +0800</pubDate>
@@ -2568,12 +4121,12 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
-        <title>美亚杯2022取证总结</title>
-        <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
+        <title>美亚杯2022个人赛取证总结</title>
+        <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Fri, 15 Aug 2025 21:32:09 +0800</pubDate>
         
-        <guid>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
-        <description>&lt;img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" alt="Featured image of post 美亚杯2022取证总结" /&gt;&lt;p&gt;最诡异的一集，资格赛恐怖如斯&lt;/p&gt;
+        <guid>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" alt="Featured image of post 美亚杯2022个人赛取证总结" /&gt;&lt;p&gt;最诡异的一集，资格赛恐怖如斯&lt;/p&gt;
 &lt;p&gt;过程中要数次用到数据库，最好可以使用navicat&lt;/p&gt;
 &lt;p&gt;检材分卷压缩，一共九卷，解压之后使用Veracrypt挂载就能得到题目&lt;/p&gt;
 &lt;h1 id=&#34;王晓琳手机1-14&#34;&gt;王晓琳手机(1-14)
