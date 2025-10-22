@@ -10,7 +10,7 @@
 <meta property='og:description' content="windows的可执行文件格式">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-12T23:25:42&#43;08:00'/><meta property='article:modified_time' content='2025-10-13T01:17:05&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-12T23:25:42&#43;08:00'/><meta property='article:modified_time' content='2025-10-22T01:14:21&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg' />
 <meta name="twitter:title" content="逆向基础4：PE文件">
 <meta name="twitter:description" content="windows的可执行文件格式"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg' />
@@ -409,14 +409,14 @@
             <li><a href="#导入表目录">导入表目录</a></li>
             <li><a href="#导入表结构">导入表结构</a></li>
             <li><a href="#导入名称表int与导入地址表iat">导入名称表（INT）与导入地址表（IAT）</a></li>
-            <li><a href="#示例">示例</a>
-              <ol>
-                <li><a href="#找到导入表">找到导入表</a></li>
-              </ol>
-            </li>
+            <li><a href="#示例分析notepadexe的导入表">示例：分析notepad.exe的导入表</a></li>
           </ol>
         </li>
-        <li><a href="#导出表">导出表</a></li>
+        <li><a href="#导出表">导出表</a>
+          <ol>
+            <li><a href="#示例分析kernel32dll的导出表">示例：分析kernel32.dll的导出表</a></li>
+          </ol>
+        </li>
         <li><a href="#基址重定位">基址重定位</a>
           <ol>
             <li><a href="#为什么需要重定位">为什么需要重定位</a></li>
@@ -505,7 +505,7 @@
 
 
                <time>
-                   更新时间：2025-10-13
+                   更新时间：2025-10-22
                </time>
            </div>
         <div>
@@ -972,10 +972,8 @@
 </a>
 </div>
 </p>
-<h3 id="示例">示例
-</h3><p>我们用PEview</p>
-<h4 id="找到导入表">找到导入表
-</h4><div class="alert alert-note">
+<h3 id="示例分析notepadexe的导入表">示例：分析notepad.exe的导入表
+</h3><div class="alert alert-note">
     <div class="alert-header">
         <span class="alert-icon">
             📝
@@ -1014,7 +1012,7 @@
 </li>
 </ul></div>
 </div>
-<p>现在<code>OptionalHeader</code>中找到导入表的RVA为<code>0x2A5AC</code></p>
+<p>先在<code>OptionalHeader</code>中找到导入表的RVA为<code>0x2A5AC</code></p>
 <p>（这个就是可选头末尾数组的第二项<code>_IMAGE_DATA_DIRECTORY</code>，存放了导入表的RVA和大小）</p>
 <p>
 <div class="post-img-view">
@@ -1106,6 +1104,95 @@
 </a>
 </div>
 </p>
+<h3 id="示例分析kernel32dll的导出表">示例：分析kernel32.dll的导出表
+</h3><p>先找到导出表的位置</p>
+<p>在可选头末尾数组的第一项找到导出表存放的RVA和大小：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019143357325" href="http://picture.928330.xyz/typora/image-20251019143357325.png">
+<img src="http://picture.928330.xyz/typora/image-20251019143357325.png" alt="image-20251019143357325"  />
+</a>
+</div>
+</p>
+<p>在<code>.text</code>节能看到<code>RVA+SizeOfRawData</code>已经远大于导出表的<code>RVA+Size</code>，说明导出表就存放在<code>.text</code>中：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019144055513" href="http://picture.928330.xyz/typora/image-20251019144055513.png">
+<img src="http://picture.928330.xyz/typora/image-20251019144055513.png" alt="image-20251019144055513"  />
+</a>
+</div>
+</p>
+<p>根据<code>PointerToRawData</code>，能找出第一个<code>IMAGE_EXPORT_DIRECTORY</code>项的RAW为<code>0x262C - 0x1000 + 0x0400= 0x1A2C</code></p>
+<p>在<code>.text</code>节里面找到导出表，可以看见第一个字段的文件地址就是<code>0x1A2C</code>：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019150408138" href="http://picture.928330.xyz/typora/image-20251019150408138.png">
+<img src="http://picture.928330.xyz/typora/image-20251019150408138.png" alt="image-20251019150408138"  />
+</a>
+</div>
+</p>
+<p>根据导出表开头的RVA数据，可以计算出各个部分内容的RAW：</p>
+<p>DLL NAME：<code>0x4B8E- 0x1000 + 0x0400= 0x3F8E</code></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019151548499" href="http://picture.928330.xyz/typora/image-20251019151548499.png">
+<img src="http://picture.928330.xyz/typora/image-20251019151548499.png" alt="image-20251019151548499"  />
+</a>
+</div>
+</p>
+<p>EXPORT Address Table：<code>0x2654 - 0x1000 + 0x0400= 0x1A54</code></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019151848234" href="http://picture.928330.xyz/typora/image-20251019151848234.png">
+<img src="http://picture.928330.xyz/typora/image-20251019151848234.png" alt="image-20251019151848234"  />
+</a>
+</div>
+</p>
+<p>EXPORT Name Pointer Table：<code>0x3538 - 0x1000 + 0x0400= 0x2938</code></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019151904687" href="http://picture.928330.xyz/typora/image-20251019151904687.png">
+<img src="http://picture.928330.xyz/typora/image-20251019151904687.png" alt="image-20251019151904687"  />
+</a>
+</div>
+</p>
+<p>EXPORT Ordinal Table：<code>0x441C - 0x1000 + 0x0400= 0x381C</code></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019151917756" href="http://picture.928330.xyz/typora/image-20251019151917756.png">
+<img src="http://picture.928330.xyz/typora/image-20251019151917756.png" alt="image-20251019151917756"  />
+</a>
+</div>
+</p>
+<p>现在根据这些表我们找一下函数<code>CreatProcessA</code>的入口地址</p>
+<p>第一步是在ENT表中找到该函数的索引，逐个匹配，最终在第62项找到<code>CreatProcessA</code>：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019152331199" href="http://picture.928330.xyz/typora/image-20251019152331199.png">
+<img src="http://picture.928330.xyz/typora/image-20251019152331199.png" alt="image-20251019152331199"  />
+</a>
+</div>
+</p>
+<p>记下62这个索引值</p>
+<p>接着来到序号表，这里每项大小是<code>0x0002</code>，取出第62项的值：<code>0x381C + 62 * 0x0002 = 0x38E0</code></p>
+<p>这里的表是按顺序来的，所以也是62：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019152558857" href="http://picture.928330.xyz/typora/image-20251019152558857.png">
+<img src="http://picture.928330.xyz/typora/image-20251019152558857.png" alt="image-20251019152558857"  />
+</a>
+</div>
+</p>
+<p>最后来到EAT表，这里每项大小是<code>0x0004</code>，取出第62项：<code>0x1A54 + 62 * 0x0004 = 0x1BDC</code></p>
+<p>其中存放的RVA就是函数<code>CreatProcessA</code>的RVA<code>0x236B</code>：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019152918944" href="http://picture.928330.xyz/typora/image-20251019152918944.png">
+<img src="http://picture.928330.xyz/typora/image-20251019152918944.png" alt="image-20251019152918944"  />
+</a>
+</div>
+</p>
+<p>通过这个RVA计算RAW：<code>0x236B - 0x1000 + 0x0400 = 0x176B</code></p>
 <h2 id="基址重定位">基址重定位
 </h2><h3 id="为什么需要重定位">为什么需要重定位
 </h3><p>当加载器准备将一个DLL加载到其首选的ImageBase地址时，如果该地址已经被其他模块占用，会发生什么？</p>
@@ -1198,7 +1285,7 @@
 
 
         <span>
-            最后更新于 2025-10-13
+            最后更新于 2025-10-22
         </span>
     </section></footer>
 
@@ -1274,7 +1361,7 @@
             
                 
 <article class="has-image">
-    <a href="/p/raid/">
+    <a href="/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/">
         
         
             <div class="article-image">
@@ -1285,7 +1372,7 @@
         
 
         <div class="article-details">
-            <h2 class="article-title">RAID</h2>
+            <h2 class="article-title">RAID与它的重组</h2>
         </div>
     </a>
 </article>

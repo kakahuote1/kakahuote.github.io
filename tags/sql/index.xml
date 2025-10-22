@@ -224,7 +224,8 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Firstname&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;Surname&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;xx&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ID&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;从过程中也不难看出，其实确定字段列数和显示顺序可以一起做&lt;/strong&gt;
-&lt;strong&gt;从union select 1开始，一直增加select后的位数，直到报错为止&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;从union select 1开始，一直增加select后的位数，直到报错为止&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;4获取当前数据库&#34;&gt;4.获取当前数据库
 &lt;/h3&gt;&lt;p&gt;知道了回显位，我们就可以把回显位替换成想要的数据&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;mark&gt;这里一定要写全，有多少字段，select后面就要有多少相应的字段&lt;/mark&gt;&lt;/strong&gt;：&lt;/p&gt;
@@ -837,7 +838,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;注意：&lt;/p&gt;
 &lt;p&gt;这里使用的是&lt;code&gt;/&lt;/code&gt;，因为&lt;code&gt;\&lt;/code&gt;是转义字符，而&lt;code&gt;/&lt;/code&gt;在字符串里面没有任何含义&lt;/p&gt;
-&lt;p&gt;也可以使用&lt;code&gt;\\&lt;/code&gt;，给&lt;code&gt;\&lt;/code&gt;转义，让它被当做普通字符处理&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;也可以使用&lt;code&gt;\\&lt;/code&gt;，给&lt;code&gt;\&lt;/code&gt;转义，让它被当做普通字符处理&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;普通文件写入&#34;&gt;普通文件写入
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;利用&lt;code&gt;into outfile&lt;/code&gt;可以实现任意内容写入指定位置的文件：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;lt;? evilcode ?&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;into&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;outfile&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;D:\\1.txt&amp;#34;&lt;/span&gt;;
@@ -1646,7 +1648,8 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如果是数据库管理员，就代表有写的权限，可以在服务器上面写入一句话木马&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;如果是数据库管理员，就代表有写的权限，可以在服务器上面写入一句话木马&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;查看数据库密码&#34;&gt;查看数据库密码
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;mark&gt;&amp;ndash;password：自动寻找有没有常见的用户名和密码列&lt;/mark&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;可以看成是一系列操作（找到password表和dump）的自动化&lt;/strong&gt;：&lt;/p&gt;

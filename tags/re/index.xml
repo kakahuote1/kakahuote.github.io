@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Mon, 13 Oct 2025 01:17:05 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/re/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 22 Oct 2025 01:14:21 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/re/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>逆向基础4：PE文件</title>
         <link>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/</link>
         <pubDate>Sun, 12 Oct 2025 23:25:42 +0800</pubDate>
@@ -460,10 +460,8 @@
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
-&lt;h3 id=&#34;示例&#34;&gt;示例
-&lt;/h3&gt;&lt;p&gt;我们用PEview&lt;/p&gt;
-&lt;h4 id=&#34;找到导入表&#34;&gt;找到导入表
-&lt;/h4&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+&lt;h3 id=&#34;示例分析notepadexe的导入表&#34;&gt;示例：分析notepad.exe的导入表
+&lt;/h3&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
     &lt;div class=&#34;alert-header&#34;&gt;
         &lt;span class=&#34;alert-icon&#34;&gt;
             📝
@@ -502,7 +500,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;现在&lt;code&gt;OptionalHeader&lt;/code&gt;中找到导入表的RVA为&lt;code&gt;0x2A5AC&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;先在&lt;code&gt;OptionalHeader&lt;/code&gt;中找到导入表的RVA为&lt;code&gt;0x2A5AC&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;（这个就是可选头末尾数组的第二项&lt;code&gt;_IMAGE_DATA_DIRECTORY&lt;/code&gt;，存放了导入表的RVA和大小）&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -594,6 +592,95 @@
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;h3 id=&#34;示例分析kernel32dll的导出表&#34;&gt;示例：分析kernel32.dll的导出表
+&lt;/h3&gt;&lt;p&gt;先找到导出表的位置&lt;/p&gt;
+&lt;p&gt;在可选头末尾数组的第一项找到导出表存放的RVA和大小：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019143357325&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019143357325.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019143357325.png&#34; alt=&#34;image-20251019143357325&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;.text&lt;/code&gt;节能看到&lt;code&gt;RVA+SizeOfRawData&lt;/code&gt;已经远大于导出表的&lt;code&gt;RVA+Size&lt;/code&gt;，说明导出表就存放在&lt;code&gt;.text&lt;/code&gt;中：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019144055513&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019144055513.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019144055513.png&#34; alt=&#34;image-20251019144055513&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;根据&lt;code&gt;PointerToRawData&lt;/code&gt;，能找出第一个&lt;code&gt;IMAGE_EXPORT_DIRECTORY&lt;/code&gt;项的RAW为&lt;code&gt;0x262C - 0x1000 + 0x0400= 0x1A2C&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;.text&lt;/code&gt;节里面找到导出表，可以看见第一个字段的文件地址就是&lt;code&gt;0x1A2C&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019150408138&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019150408138.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019150408138.png&#34; alt=&#34;image-20251019150408138&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;根据导出表开头的RVA数据，可以计算出各个部分内容的RAW：&lt;/p&gt;
+&lt;p&gt;DLL NAME：&lt;code&gt;0x4B8E- 0x1000 + 0x0400= 0x3F8E&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019151548499&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019151548499.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019151548499.png&#34; alt=&#34;image-20251019151548499&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;EXPORT Address Table：&lt;code&gt;0x2654 - 0x1000 + 0x0400= 0x1A54&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019151848234&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019151848234.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019151848234.png&#34; alt=&#34;image-20251019151848234&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;EXPORT Name Pointer Table：&lt;code&gt;0x3538 - 0x1000 + 0x0400= 0x2938&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019151904687&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019151904687.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019151904687.png&#34; alt=&#34;image-20251019151904687&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;EXPORT Ordinal Table：&lt;code&gt;0x441C - 0x1000 + 0x0400= 0x381C&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019151917756&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019151917756.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019151917756.png&#34; alt=&#34;image-20251019151917756&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;现在根据这些表我们找一下函数&lt;code&gt;CreatProcessA&lt;/code&gt;的入口地址&lt;/p&gt;
+&lt;p&gt;第一步是在ENT表中找到该函数的索引，逐个匹配，最终在第62项找到&lt;code&gt;CreatProcessA&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019152331199&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019152331199.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019152331199.png&#34; alt=&#34;image-20251019152331199&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;记下62这个索引值&lt;/p&gt;
+&lt;p&gt;接着来到序号表，这里每项大小是&lt;code&gt;0x0002&lt;/code&gt;，取出第62项的值：&lt;code&gt;0x381C + 62 * 0x0002 = 0x38E0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这里的表是按顺序来的，所以也是62：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019152558857&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019152558857.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019152558857.png&#34; alt=&#34;image-20251019152558857&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;最后来到EAT表，这里每项大小是&lt;code&gt;0x0004&lt;/code&gt;，取出第62项：&lt;code&gt;0x1A54 + 62 * 0x0004 = 0x1BDC&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中存放的RVA就是函数&lt;code&gt;CreatProcessA&lt;/code&gt;的RVA&lt;code&gt;0x236B&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019152918944&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019152918944.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019152918944.png&#34; alt=&#34;image-20251019152918944&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;通过这个RVA计算RAW：&lt;code&gt;0x236B - 0x1000 + 0x0400 = 0x176B&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;基址重定位&#34;&gt;基址重定位
 &lt;/h2&gt;&lt;h3 id=&#34;为什么需要重定位&#34;&gt;为什么需要重定位
 &lt;/h3&gt;&lt;p&gt;当加载器准备将一个DLL加载到其首选的ImageBase地址时，如果该地址已经被其他模块占用，会发生什么？&lt;/p&gt;

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据处理最高的山">
-<title>快速入门SQL</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="饮水机，以及饮水机">
+<title>RAID与它的重组</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/'>
+<link rel='canonical' href='https://blog.928330.xyz/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="快速入门SQL">
-<meta property='og:description' content="数据处理最高的山">
-<meta property='og:url' content='https://blog.928330.xyz/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/'>
+<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="RAID与它的重组">
+<meta property='og:description' content="饮水机，以及饮水机">
+<meta property='og:url' content='https://blog.928330.xyz/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SQL' /><meta property='article:published_time' content='2025-06-03T01:14:02&#43;08:00'/><meta property='article:modified_time' content='2025-08-24T21:42:35&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/SQL-logo.png' />
-<meta name="twitter:title" content="快速入门SQL">
-<meta name="twitter:description" content="数据处理最高的山"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://picture.928330.xyz/typora/SQL-logo.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-10-20T22:52:36&#43;08:00'/><meta property='article:modified_time' content='2025-10-22T01:14:21&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg' />
+<meta name="twitter:title" content="RAID与它的重组">
+<meta name="twitter:description" content="饮水机，以及饮水机"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -376,221 +376,77 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#什么是raid">什么是RAID</a></li>
+    <li><a href="#raid级别">RAID级别</a>
       <ol>
-        <li><a href="#模式">模式</a>
+        <li><a href="#raid0条带化">RAID0：条带化</a></li>
+        <li><a href="#raid1镜像">RAID1：镜像</a></li>
+        <li><a href="#raid2位级条带化汉明码校验">RAID2：位级条带化+汉明码校验</a></li>
+        <li><a href="#raid3块级条带化专用校验盘">RAID3：块级条带化+专用校验盘</a></li>
+        <li><a href="#raid4块级条带化专用校验盘">RAID4：块级条带化+专用校验盘</a></li>
+        <li><a href="#raid5分布式奇偶校验">RAID5：分布式奇偶校验</a>
           <ol>
-            <li><a href="#定义模式">定义模式</a></li>
-            <li><a href="#删除模式">删除模式</a></li>
-          </ol>
-        </li>
-        <li><a href="#基本表">基本表</a>
-          <ol>
-            <li><a href="#定义基本元素">定义基本元素</a>
+            <li><a href="#循环方向">循环方向</a>
               <ol>
-                <li><a href="#数据类型">数据类型</a></li>
-                <li><a href="#列级完整性约束条件">列级完整性约束条件</a></li>
-                <li><a href="#表级完整性约束条件">表级完整性约束条件</a></li>
+                <li><a href="#左循环">左循环</a></li>
+                <li><a href="#右循环">右循环</a></li>
               </ol>
             </li>
-            <li><a href="#特殊完整性约束条件断言">特殊完整性约束条件——断言</a>
+            <li><a href="#同步性对称性">同步性（对称性）</a>
               <ol>
-                <li><a href="#创建断言">创建断言</a></li>
-                <li><a href="#删除断言">删除断言</a></li>
-              </ol>
-            </li>
-            <li><a href="#特殊完整性约束条件触发器">特殊完整性约束条件——触发器</a>
-              <ol>
-                <li><a href="#定义触发器">定义触发器</a></li>
-                <li><a href="#激活触发器">激活触发器</a></li>
-                <li><a href="#删除触发器">删除触发器</a></li>
-              </ol>
-            </li>
-            <li><a href="#定义基本表">定义基本表</a></li>
-            <li><a href="#在模式中定义表">在模式中定义表</a>
-              <ol>
-                <li><a href="#创建表的时候指出模式">创建表的时候指出模式</a></li>
-                <li><a href="#创建模式时直接定义表">创建模式时直接定义表</a></li>
-                <li><a href="#事先设置所属的模式">事先设置所属的模式</a></li>
-              </ol>
-            </li>
-            <li><a href="#修改基本表">修改基本表</a>
-              <ol>
-                <li><a href="#增加新的属性列">增加新的属性列</a></li>
-                <li><a href="#增加列级完整性约束条件">增加列级完整性约束条件</a></li>
-                <li><a href="#增加表级完整性约束条件">增加表级完整性约束条件</a></li>
-                <li><a href="#删除列">删除列</a></li>
-                <li><a href="#删除指定的完整性约束条件">删除指定的完整性约束条件</a></li>
-                <li><a href="#修改列">修改列</a></li>
-              </ol>
-            </li>
-            <li><a href="#删除基本表">删除基本表</a></li>
-          </ol>
-        </li>
-        <li><a href="#索引">索引</a>
-          <ol>
-            <li><a href="#建立索引">建立索引</a>
-              <ol>
-                <li><a href="#建立唯一索引">建立唯一索引</a></li>
-                <li><a href="#建立聚簇索引">建立聚簇索引</a></li>
-                <li><a href="#重命名索引">重命名索引</a></li>
-                <li><a href="#删除索引">删除索引</a></li>
+                <li><a href="#异步不对称">异步（不对称）</a></li>
+                <li><a href="#同步对称">同步（对称）</a></li>
               </ol>
             </li>
           </ol>
         </li>
-        <li><a href="#查询数据select语句">查询数据&ndash;SELECT语句</a>
+        <li><a href="#raid6双分布式奇偶校验">RAID6：双分布式奇偶校验</a></li>
+        <li><a href="#raid10-10">RAID10 (1+0)</a></li>
+        <li><a href="#raid50-50">RAID50 (5+0)</a></li>
+        <li><a href="#raid60-60">RAID60 (6+0)</a></li>
+      </ol>
+    </li>
+    <li><a href="#raid的实现模式">RAID的实现模式</a>
+      <ol>
+        <li><a href="#软件raid">软件RAID</a></li>
+        <li><a href="#硬件raid">硬件RAID</a></li>
+      </ol>
+    </li>
+    <li><a href="#raid重组">RAID重组</a>
+      <ol>
+        <li><a href="#2023美亚">2023美亚</a>
           <ol>
-            <li><a href="#一般格式">一般格式</a></li>
-            <li><a href="#select-目标列表达式">SELECT 目标列表达式</a>
+            <li><a href="#usf">USF</a>
               <ol>
-                <li><a href="#查询指定的列">查询指定的列</a></li>
-                <li><a href="#查询全部的列">查询全部的列</a></li>
-                <li><a href="#查询计算后的值">查询计算后的值</a></li>
-                <li><a href="#改变查询结果的列标题">改变查询结果的列标题</a></li>
-                <li><a href="#去除查询结果的重复行">去除查询结果的重复行</a></li>
+                <li><a href="#自动重组">自动重组</a></li>
+                <li><a href="#手动重组">手动重组</a></li>
+                <li><a href="#导出磁盘">导出磁盘</a></li>
               </ol>
             </li>
-            <li><a href="#聚集函数">聚集函数</a>
+            <li><a href="#美亚计算机取证大师">美亚计算机取证大师</a>
               <ol>
-                <li><a href="#统计元组个数">统计元组个数</a></li>
-                <li><a href="#统计某一列值的个数">统计某一列值的个数</a></li>
-                <li><a href="#计算某一列值的平均数该列必须为数值型">计算某一列值的平均数（该列必须为数值型）</a></li>
-                <li><a href="#计算某一列值的总和该列必须为数值型">计算某一列值的总和（该列必须为数值型）</a></li>
-                <li><a href="#计算某一列值的最大值最小值">计算某一列值的最大值/最小值</a></li>
+                <li><a href="#自动重组-1">自动重组</a></li>
+                <li><a href="#导出镜像">导出镜像</a></li>
               </ol>
             </li>
-            <li><a href="#where-条件表达式">WHERE 条件表达式</a>
+            <li><a href="#弘连火眼证据分析">弘连火眼证据分析</a>
               <ol>
-                <li><a href="#比较大小">比较大小</a></li>
-                <li><a href="#确定范围">确定范围</a></li>
-                <li><a href="#确定集合">确定集合</a></li>
-                <li><a href="#字符匹配">字符匹配</a></li>
-                <li><a href="#空值查询">空值查询</a></li>
-                <li><a href="#多重条件查询">多重条件查询</a></li>
+                <li><a href="#自动重组--导出镜像">自动重组 + 导出镜像</a></li>
+                <li><a href="#手动重组-1">手动重组</a></li>
               </ol>
             </li>
-            <li><a href="#group-by-列名-having-条件表达式">GROUP BY 列名 HAVING 条件表达式</a>
+            <li><a href="#r-studio">R-Studio</a>
               <ol>
-                <li><a href="#group-by-列名">GROUP BY 列名</a></li>
-                <li><a href="#group-by-列名-having-筛选条件">GROUP BY 列名 HAVING 筛选条件</a></li>
+                <li><a href="#自动重组-2">自动重组</a></li>
+                <li><a href="#手动重组-2">手动重组</a></li>
               </ol>
             </li>
-            <li><a href="#order-by-次序">ORDER BY 次序</a></li>
-            <li><a href="#连接查询">连接查询</a>
-              <ol>
-                <li><a href="#两表连接查询">两表连接查询</a></li>
-                <li><a href="#单表连接查询">单表连接查询</a></li>
-                <li><a href="#外连接查询">外连接查询</a></li>
-                <li><a href="#多表连接查询">多表连接查询</a></li>
-              </ol>
-            </li>
-            <li><a href="#嵌套查询">嵌套查询</a>
-              <ol>
-                <li><a href="#集合判断in子查询">集合判断IN子查询</a></li>
-                <li><a href="#比较运算符子查询">比较运算符子查询</a></li>
-                <li><a href="#anyall子查询">ANY/ALL子查询</a></li>
-                <li><a href="#exists子查询">EXISTS子查询</a></li>
-              </ol>
-            </li>
-            <li><a href="#集合查询">集合查询</a>
-              <ol>
-                <li><a href="#union并操作满足前者或满足后者">UNION并操作（满足前者或满足后者）</a></li>
-                <li><a href="#intersect交操作前后都满足">INTERSECT交操作（前后都满足）</a></li>
-                <li><a href="#except差操作满足前者不满足后者">EXCEPT差操作（满足前者，不满足后者）</a></li>
-              </ol>
-            </li>
-            <li><a href="#基于派生表的查询">基于派生表的查询</a></li>
+            <li><a href="#导出镜像-1">导出镜像</a></li>
           </ol>
         </li>
-        <li><a href="#插入数据insert语句">插入数据&ndash;INSERT语句</a>
+        <li><a href="#2019美亚">2019美亚</a>
           <ol>
-            <li><a href="#插入元组">插入元组</a>
-              <ol>
-                <li><a href="#一般格式-1">一般格式</a></li>
-                <li><a href="#假设现在有tab1表有c1到c4四列其中c4列是字符串常量"><span><strong>假设现在有TAB1表，有C1到C4四列，其中C4列是字符串常量：</strong></span></a></li>
-                <li><a href="#情况1明确给出新增元组要在哪些属性上赋值插入数据包含全部属性列">情况1：明确给出新增元组要在哪些属性上赋值（插入数据包含全部属性列）</a></li>
-                <li><a href="#情况2明确给出新增元组要在哪些属性上赋值插入数据只包含部分属性列">情况2：明确给出新增元组要在哪些属性上赋值（插入数据只包含部分属性列）</a></li>
-                <li><a href="#情况3仅指出要在tab1表上插入元组插入数据包含全部属性列">情况3：仅指出要在TAB1表上插入元组（插入数据包含全部属性列）</a></li>
-                <li><a href="#情况4仅指出要在tab1表上插入元组插入数据只包含部分属性列">情况4：仅指出要在TAB1表上插入元组（插入数据只包含部分属性列）</a></li>
-              </ol>
-            </li>
-            <li><a href="#插入子查询结果">插入子查询结果</a>
-              <ol>
-                <li><a href="#一般格式-2">一般格式</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#修改数据update语句">修改数据&ndash;UPDATE语句</a>
-          <ol>
-            <li>
-              <ol>
-                <li><a href="#一般格式-3">一般格式</a></li>
-                <li><a href="#情况1修改某一个元组的值">情况1：修改某一个元组的值</a></li>
-                <li><a href="#情况2修改多个元组的值">情况2：修改多个元组的值</a></li>
-                <li><a href="#情况3带子查询的修改语句">情况3：带子查询的修改语句</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#删除语句delete语句">删除语句&ndash;DELETE语句</a>
-          <ol>
-            <li>
-              <ol>
-                <li><a href="#一般格式-4">一般格式</a></li>
-                <li><a href="#情况1删除某一个元组的值">情况1：删除某一个元组的值</a></li>
-                <li><a href="#情况2修改多个元组的值-1">情况2：修改多个元组的值</a></li>
-                <li><a href="#情况3带子查询的修改语句-1">情况3：带子查询的修改语句</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#view-视图">VIEW 视图</a>
-          <ol>
-            <li><a href="#建立视图">建立视图</a>
-              <ol>
-                <li><a href="#一般格式-5">一般格式</a></li>
-                <li><a href="#情况1建立完全视图">情况1：建立完全视图</a></li>
-                <li><a href="#情况2建立带有增删改条件的视图">情况2：建立带有增删改条件的视图</a></li>
-                <li><a href="#情况3由视图新建视图">情况3：由视图新建视图</a></li>
-                <li><a href="#情况4带有派生数据的视图">情况4：带有派生数据的视图</a></li>
-                <li><a href="#情况5带有聚集函数和group-by的分组视图">情况5：带有聚集函数和GROUP BY的分组视图</a></li>
-              </ol>
-            </li>
-            <li><a href="#删除视图">删除视图</a></li>
-            <li><a href="#查询和更新视图">查询和更新视图</a></li>
-          </ol>
-        </li>
-        <li><a href="#空值">空值</a>
-          <ol>
-            <li><a href="#判断属性为空值">判断属性为空值</a></li>
-            <li><a href="#空值的运算">空值的运算</a>
-              <ol>
-                <li><a href="#算数运算">算数运算</a></li>
-                <li><a href="#比较运算">比较运算</a></li>
-                <li><a href="#在查询语句中的处理">在查询语句中的处理</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#数据库安全">数据库安全</a>
-          <ol>
-            <li><a href="#授权">授权</a>
-              <ol>
-                <li><a href="#授予用户权限">授予用户权限</a></li>
-                <li><a href="#收回用户权限">收回用户权限</a></li>
-              </ol>
-            </li>
-            <li><a href="#创建数据库模式的权限">创建数据库模式的权限</a></li>
-            <li><a href="#数据库角色">数据库角色</a>
-              <ol>
-                <li><a href="#创建角色">创建角色</a></li>
-                <li><a href="#给角色添加角色用户">给角色添加角色/用户</a></li>
-                <li><a href="#给角色授权">给角色授权</a></li>
-                <li><a href="#收回角色权限">收回角色权限</a></li>
-              </ol>
-            </li>
+            <li><a href="#ftk--美亚取证大师">FTK + 美亚取证大师</a></li>
           </ol>
         </li>
       </ol>
@@ -609,9 +465,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">
+            <a href="/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/">
                 
-                    <img src="http://picture.928330.xyz/typora/SQL-logo.png" loading="lazy" alt="Featured image of post 快速入门SQL" />
+                    <img src="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg" loading="lazy" alt="Featured image of post RAID与它的重组" />
                 
             </a>
         </div>
@@ -632,11 +488,11 @@
 
 
         <h2 class="article-title">
-            <a href="/p/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8sql/">快速入门SQL</a>
+            <a href="/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/">RAID与它的重组</a>
         </h2>
         
         <h3 class="article-subtitle">
-            数据处理最高的山
+            饮水机，以及饮水机
         </h3>
         
 
@@ -659,7 +515,7 @@
   <path d="M18 16.496v1.504l1 1" />
 </svg>
                 <time class="article-time--published">
-                    发布时间：2025-06-03</time>
+                    发布时间：2025-10-20</time>
             </div>
         
 
@@ -675,7 +531,7 @@
 
 
                <time>
-                   更新时间：2025-08-24
+                   更新时间：2025-10-22
                </time>
            </div>
         <div>
@@ -695,845 +551,1108 @@
     <section class="article-content">
     
     
-    <h2 id="模式">模式
-</h2><h3 id="定义模式">定义模式
-</h3><p><mark><strong>CREATE SCHEMA 模式名 AUTHORIZATION 用户名</strong></mark></p>
-<p>eg:为用户ZHANG定义一个S-T模式：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">SCHEMA</span> <span style="color:#98c379">&#34;S-T&#34;</span> <span style="color:#c678dd">AUTHORIZATION</span> <span style="color:#e06c75">ZHANG</span>
-</span></span></code></pre></div><p>eg:为用户ZHANG定义一个未命名的模式：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">SCHEMA</span> <span style="color:#c678dd">AUTHORIZATION</span> <span style="color:#e06c75">ZHANG</span>
-</span></span></code></pre></div><p><strong>未定义模式名称的时候，默认模式为用户名</strong></p>
-<h3 id="删除模式">删除模式
-</h3><p><mark><strong>DROP SCHEAM 模式名</strong></mark></p>
-<p><strong>普通</strong>：用于删除空的模式，如果模式下面有对象（表、视图）等，拒绝删除</p>
-<p><mark><strong>DROP SCHEAM 模式名 CASCADE</strong></mark></p>
-<p><strong>级联</strong>：把模式里面的对象一并删除</p>
-<p><mark><strong>DROP SCHEAM 模式名 RESTRICT</strong></mark></p>
-<p><strong>限制</strong>：会把对象转移到公共模式保留并删除模式，但如果对象和模式有联系，则拒绝删除模式</p>
-<h2 id="基本表">基本表
-</h2><h3 id="定义基本元素">定义基本元素
-</h3><h4 id="数据类型">数据类型
-</h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: center">数据类型</th>
-          <th style="text-align: center">表示内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">CHAR(n)</td>
-          <td style="text-align: center">长度为n的字符型</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">VARCHAR(n)</td>
-          <td style="text-align: center">最大长度为n的<strong>变长</strong>字符型</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">NUMBER(n)</td>
-          <td style="text-align: center">长度为n的数字型</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">INT</td>
-          <td style="text-align: center">长整型(4B)</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">SMALLINT</td>
-          <td style="text-align: center">短整型(4B)</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">BIGINT</td>
-          <td style="text-align: center">大整型(8B)</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">FLOAT(n)</td>
-          <td style="text-align: center">精度至少为n位的浮点数</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">DATE</td>
-          <td style="text-align: center">日期，格式为<strong>YYYY-MM-DD</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: center">TIME</td>
-          <td style="text-align: center">时间，格式为<strong>HH:MM:SS</strong></td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="列级完整性约束条件">列级完整性约束条件
-</h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: center">约束条件</th>
-          <th style="text-align: center">意义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">PRIMARY KEY</td>
-          <td style="text-align: center">主码（元素唯一不能重复）：当<strong>只有一个主码</strong>时，可直接在对应的属性列标注</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">NOT NULL</td>
-          <td style="text-align: center">非空：表示该属性列不能取空值</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">UNIQUE</td>
-          <td style="text-align: center">唯一值：表示该属性列只能取唯一值</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">CHECK</td>
-          <td style="text-align: center">检查：检查该列是否满足某个条件，比如CHECK(某属性&gt;20)</td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="表级完整性约束条件">表级完整性约束条件
-</h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: center">约束条件</th>
-          <th style="text-align: center">意义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">PRIMARY KEY(列名1,&hellip;,列名n)</td>
-          <td style="text-align: center">多个主码：当<strong>主码由多个属性构成</strong>时，<br />必须作为表级完整性定义</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">FOREIGN KEY(列名1) REFERENCES 被参照表(列名1)</td>
-          <td style="text-align: center">外码：被参照的列必须是 <strong>PRIMARY KEY</strong> <br />或 <strong>UNIQUE 约束</strong> 的列，<br />本表所有值来<strong>源于被参照的列</strong></td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="特殊完整性约束条件断言">特殊完整性约束条件——断言
-</h3><p><span style="color:red;font-size:18px"><strong>相较于列级的CHECK语句，断言能指定更一般的约束</strong></SPAN></p>
-<h4 id="创建断言">创建断言
-</h4><p><strong><mark>CREATE ASSERTION 断言名 CHECK字句;</mark></strong></p>
-<p>eg.限制A课程最多60人选修：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">ASSERTION</span> <span style="color:#e06c75">ASSE</span> <span style="color:#c678dd">CHECK</span>(<span style="color:#d19a66">60</span><span style="color:#56b6c2">&gt;=</span>
-</span></span><span style="display:flex;"><span>                            					     <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">COUNT</span>(<span style="color:#56b6c2">*</span>) 
-</span></span><span style="display:flex;"><span>                                                     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">TAB2</span> 
-</span></span><span style="display:flex;"><span>                                                     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">NUM</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">NUM</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">TAB2</span>.<span style="color:#c678dd">CLASS</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;A&#34;</span>);  <span style="color:#7f848e">-- 此处具体操作原理往后看
-</span></span></span></code></pre></div><h4 id="删除断言">删除断言
-</h4><p><strong><mark>DROP ASSERTION 断言名;</mark></strong></p>
-<h3 id="特殊完整性约束条件触发器">特殊完整性约束条件——触发器
-</h3><p><span style="color:red;font-size:18px"><strong>触发器是用户定义在关系表上的一类由事件驱动的特殊过程</strong></span></p>
-<p><strong>表的拥有者才能在表上创建触发器</strong></p>
-<p><strong>触发器只能定义在基本表上，不能定义在视图上</strong></p>
-<h4 id="定义触发器">定义触发器
-</h4><p><mark><strong>CREATE TRIGGER 触发器名</strong></mark></p>
-<p><mark><strong>{BEFORE|AFTER} 触发事件 ON 表名</strong></mark></p>
-<p><mark><strong>REFERENCING NEW|OLD ROW AS 变量</strong></mark></p>
-<p><mark><strong>FOR EACH {ROW|STATEMENT}</strong></mark></p>
-<p><mark><strong>[WHEN 触发条件]触发动作体</strong></mark></p>
-<p><strong>触发事件</strong>：INSERT DELETE UPDATE 或者他们的组合</p>
-<pre><code>	 还可以UPDATE OF&lt;触发列1,...&gt;，即进一步指明修改哪些列时激活触发器
-</code></pre>
-<p><strong>BEFORE/AFTER</strong>：触发时机，表示在触发事件的操作执行之前激活触发器</p>
-<p><strong>ROW/STATEMENT</strong>：指明是行级/语句级触发器，行级有多少行就触发多少次，语句级只触发一次</p>
-<p><strong>触发条件</strong>：只有触发条件为真时才执行动作体，省略WHEN则立即执行动作体</p>
-<p><strong>触发动作体</strong>：行级可以使用NEW/OLD引用事件之后的新值和事件之前的旧值，语句级不行</p>
-<p>eg.对TAB1的Grade属性修改时，若增加了10%，则将操作记录在TAB2(Name,OldGrade,NewGrade)中</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e06c75">CERATE</span> <span style="color:#c678dd">TRIGGER</span> <span style="color:#e06c75">TAB1_T</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AFTER</span> <span style="color:#c678dd">UPDATE</span> <span style="color:#c678dd">OF</span> <span style="color:#e06c75">Grade</span> <span style="color:#c678dd">ON</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">REFERENCING</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">OLD</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">OldTuple</span>,
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">NEW</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">NewTuple</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FOR</span> <span style="color:#c678dd">EACH</span> <span style="color:#c678dd">ROW</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHEN</span>(<span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span><span style="color:#56b6c2">&gt;=</span><span style="color:#d19a66">1</span>.<span style="color:#d19a66">1</span><span style="color:#56b6c2">*</span><span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">INSERT</span> <span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Name</span>,<span style="color:#e06c75">OldGrade</span>,<span style="color:#e06c75">NewGrade</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">VALUES</span>(<span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Name</span>,<span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>,<span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span>);
-</span></span></code></pre></div><p>如果触发器内有多个语句，要定义新的定界符（不常用的），并使用BEGIN和END包裹：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#7f848e">-- 1. 将定界符从 ; 改为 //
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">DELIMITER</span> <span style="color:#56b6c2">//</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#7f848e">-- 2. 定义包含多条语句的触发器
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">TRIGGER</span> <span style="color:#e06c75">TAB1_T</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AFTER</span> <span style="color:#c678dd">UPDATE</span> <span style="color:#c678dd">OF</span> <span style="color:#e06c75">Grade</span> <span style="color:#c678dd">ON</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">REFERENCING</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">OLD</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">OldTuple</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">NEW</span> <span style="color:#c678dd">row</span> <span style="color:#c678dd">AS</span> <span style="color:#e06c75">NewTuple</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FOR</span> <span style="color:#c678dd">EACH</span> <span style="color:#c678dd">ROW</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">BEGIN</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">-- 检查条件
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">IF</span> (<span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span> <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">1</span>.<span style="color:#d19a66">1</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>) <span style="color:#c678dd">THEN</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">-- 这是块内的第一条语句，用 ; 结尾
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">INSERT</span> <span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Name</span>, <span style="color:#e06c75">OldGrade</span>, <span style="color:#e06c75">NewGrade</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">VALUES</span>(<span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Name</span>, <span style="color:#e06c75">OldTuple</span>.<span style="color:#e06c75">Grade</span>, <span style="color:#e06c75">NewTuple</span>.<span style="color:#e06c75">Grade</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">END</span> <span style="color:#c678dd">IF</span>; <span style="color:#7f848e">-- IF语句也需要用 ; 结尾
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">-- 3. 使用新的定界符 // 来结束整个 CREATE TRIGGER 命令
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">END</span> <span style="color:#56b6c2">//</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#7f848e">-- 4. 将定界符改回默认的 ;
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">DELIMITER</span> ;
-</span></span></code></pre></div><h4 id="激活触发器">激活触发器
-</h4><p><mark><strong>多个触发器执行顺序：</strong></mark></p>
-<p><mark><strong>执行BEFORE触发器 -&gt; 激活触发器的SQL语句 -&gt; 执行AFTER触发器</strong></mark></p>
-<h4 id="删除触发器">删除触发器
-</h4><p><strong><mark>DROP TRIGGER 触发器名 ON 表名;</mark></strong></p>
-<h3 id="定义基本表">定义基本表
-</h3><p><mark><strong>CREATE TABLE 表名</strong></mark>
-<mark><strong>(列名1 数据类型 列级完整性约束条件,</strong></mark>
-<mark><strong>列名n 数据类型 列级完整性约束条件,</strong></mark>
-<mark><strong>表级完整性约束条件1,</strong></mark>
-<mark><strong>表级完整性约束条件n</strong></mark>
-<mark><strong>);</strong></mark></p>
-<p>eg:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#e06c75">Ch</span> <span style="color:#e5c07b">VARCHAR</span>(<span style="color:#d19a66">10</span>),
-</span></span><span style="display:flex;"><span> <span style="color:#e06c75">Nu</span> <span style="color:#e5c07b">NUMBER</span>(<span style="color:#d19a66">10</span>),
-</span></span><span style="display:flex;"><span> <span style="color:#e06c75">Grade</span> <span style="color:#e5c07b">INT</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">NULL</span>,
-</span></span><span style="display:flex;"><span> <span style="color:#c678dd">PRIMARY</span> <span style="color:#c678dd">KEY</span>(<span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">Nu</span>),     <span style="color:#7f848e">-- 多个主码
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span> <span style="color:#c678dd">FOREIGN</span> <span style="color:#c678dd">KEY</span>(<span style="color:#e06c75">Ch</span>) <span style="color:#c678dd">REFERENCES</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Ch</span>)
-</span></span><span style="display:flex;"><span>);
-</span></span></code></pre></div><h3 id="在模式中定义表">在模式中定义表
-</h3><p><strong>一个模式包含很多基本表，有三种方式在模式里面定义基本表</strong></p>
-<h4 id="创建表的时候指出模式">创建表的时候指出模式
-</h4><p><mark><strong>CREATE TABLE 模式名.表名();</strong></mark></p>
-<h4 id="创建模式时直接定义表">创建模式时直接定义表
-</h4><p><strong><mark>CREATE SCHEMA 模式名 AUTHORIZATION 用户名 CREATE TABLE 表名();</mark></strong></p>
-<h4 id="事先设置所属的模式">事先设置所属的模式
-</h4><p><strong><mark>SET SCHEMA &lsquo;my_schema&rsquo;</mark></strong></p>
-<p>eg.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#c678dd">SCHEMA</span> <span style="color:#98c379">&#39;my_schema&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">my_table</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">id</span> <span style="color:#e5c07b">INT</span> <span style="color:#c678dd">PRIMARY</span> <span style="color:#c678dd">KEY</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">name</span> <span style="color:#e5c07b">VARCHAR</span>(<span style="color:#d19a66">100</span>)
-</span></span><span style="display:flex;"><span>);
-</span></span></code></pre></div><p><strong>my_table 将被创建在 my_schema 模式下</strong></p>
-<h3 id="修改基本表">修改基本表
-</h3><p><strong>同样的，修改表时想要指定模式里面的表，就使用“模式名.表名”的方式指定表名</strong></p>
-<h4 id="增加新的属性列">增加新的属性列
-</h4><p><strong><mark>ALTER TABLE 表名 ADD 新列名 数据类型 完整性约束条件;</mark></strong></p>
-<p>eg.向TAB1里增加时间列Time：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">ADD</span> <span style="color:#e06c75">Time</span> <span style="color:#e5c07b">DATE</span>;
-</span></span></code></pre></div><p>当然，还能在ADD后面加上修饰词COLUMN，这样会更容易理解是在添加列，<strong>对功能没有影响</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">COLUMN</span> <span style="color:#e06c75">Time</span> <span style="color:#e5c07b">DATE</span>;
-</span></span><span style="display:flex;"><span>                                    <span style="color:#56b6c2">~~~~~~</span>
-</span></span></code></pre></div><h4 id="增加列级完整性约束条件">增加列级完整性约束条件
-</h4><p><strong><mark>ALTER TABLE SC ADD 列级完整性约束条件;</mark></strong></p>
-<p>eg.向TAB1里增加Grade列必须取唯一值的条件：（Grade必须要已经存在）</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">ADD</span> <span style="color:#c678dd">UNIQUE</span>(<span style="color:#e06c75">Grade</span>);
-</span></span></code></pre></div><h4 id="增加表级完整性约束条件">增加表级完整性约束条件
-</h4><p><strong><mark>ALTER TABLE SC ADD 表级完整性约束条件;</mark></strong></p>
-<p>eg.向TAB1里增加Ch为外码的条件，参照表是TAB2：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">ADD</span> <span style="color:#c678dd">FOREIGN</span> <span style="color:#c678dd">KEY</span>(<span style="color:#e06c75">Ch</span>) <span style="color:#c678dd">REFERENCES</span> <span style="color:#e06c75">TAB2</span>(<span style="color:#e06c75">Ch</span>);
-</span></span></code></pre></div><h4 id="删除列">删除列
-</h4><p><strong><mark>ALTER TABLE 表名 DROP CASCADE;</mark></strong></p>
-<p><strong>级联</strong>：引用了该列的其他对象（例如视图）一起删除</p>
-<p><strong><mark>ALTER TABLE 表名 DROP RESTRICT;</mark></strong></p>
-<p><strong>限制</strong>：若该列被其他对象引用，则拒绝删除</p>
-<h4 id="删除指定的完整性约束条件">删除指定的完整性约束条件
-</h4><p><strong><mark>ALTER TABLE 表名 DROP CONSTRAINT 完整性约束名 CASCADE/RESTRICT;</mark></strong></p>
-<h4 id="修改列">修改列
-</h4><p><strong><mark>ALTER TABLE 表名 ALTER COLUMN 列名 数据类型;</mark></strong></p>
-<p>eg.把Grade由INT型修改成字符型：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">TABLE</span> 表名 <span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">COLUMN</span> 列名 数据类型；
-</span></span></code></pre></div><h3 id="删除基本表">删除基本表
-</h3><p><mark><strong>DROP TABLE 表名 CASCADE;</strong></mark></p>
-<p><strong>级联</strong>：把表相关的依赖对象（比如视图）一并删除</p>
-<p><mark><strong>DROP TABLE 表名 RESTRICT;</strong></mark></p>
-<p><strong>限制</strong>：如果此表被其他表依赖（外码）或者有视图等，拒绝被删除</p>
-<h2 id="索引">索引
-</h2><h3 id="建立索引">建立索引
-</h3><h4 id="建立唯一索引">建立唯一索引
-</h4><p><strong><mark>CREATE UNIQUE INDEX 索引名 ON 表名(列名1 次序,列名n 次序);</mark></strong></p>
-<p><strong>唯一索引</strong> 是关于<strong>数据值是否唯一</strong>的，它强制数据的唯一性，并帮助快速查找特定值</p>
-<p>eg.为表TAB1按照学号升序和时间降序建立唯一的索引：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">UNIQUE</span> <span style="color:#c678dd">INDEX</span> <span style="color:#e06c75">NewIndex</span> <span style="color:#c678dd">ON</span> <span style="color:#e06c75">TAB1</span>(<span style="color:#e06c75">Nu</span> <span style="color:#c678dd">ASC</span>,<span style="color:#e06c75">Time</span> <span style="color:#c678dd">DESC</span>);
-</span></span></code></pre></div><p><strong>ASC</strong>：asceding，<strong>升序</strong>
-<strong>DESC</strong>：descending，<strong>降序</strong></p>
-<h4 id="建立聚簇索引">建立聚簇索引
-</h4><p><strong><mark>CREATE CLUSTER INDEX 索引名 ON 表名(列名1 次序,列名n 次序);</mark></strong></p>
-<p><strong>聚簇索引</strong> 是关于<strong>数据如何物理存储</strong>的，它把数据和索引紧密地绑定在一起，让查找和范围查询非常快</p>
-<h4 id="重命名索引">重命名索引
-</h4><p><strong><mark>ALTER INDEX 旧索引名 RENAME TO 新索引名;</mark></strong></p>
-<p>eg.把TAB1表的NewIndex索引重命名为OldIndex：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">ALTER</span> <span style="color:#c678dd">INDEX</span> <span style="color:#e06c75">NewIndex</span> <span style="color:#c678dd">RENAME</span> <span style="color:#c678dd">TO</span> <span style="color:#e06c75">OldIndex</span>;
-</span></span></code></pre></div><h4 id="删除索引">删除索引
-</h4><p><strong><mark>DROP INDEX 索引名;</mark></strong></p>
-<h2 id="查询数据select语句">查询数据&ndash;SELECT语句
-</h2><h3 id="一般格式">一般格式
-</h3><p><mark><strong>SELECT ALL/DISTINCT 目标列表达式</strong></mark></p>
-<p><mark><strong>FROM 表名/视图名</strong></mark></p>
-<p><mark><strong>WHERE 条件表达式</strong></mark></p>
-<p><mark><strong>GROUP BY 列名 HAVING 条件表达式</strong></mark></p>
-<p><mark><strong>ORDER BY 列名 次序;</strong></mark></p>
-<h3 id="select-目标列表达式">SELECT 目标列表达式
-</h3><h4 id="查询指定的列">查询指定的列
-</h4><p><strong><mark>SELECT 列名1，列名n</mark></strong></p>
-<p>eg.查询TAB1的Ch列和Nu列：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">Nu</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span></code></pre></div><h4 id="查询全部的列">查询全部的列
-</h4><p><strong><mark>SELECT *</mark></strong></p>
-<p>eg.查询TAB1的全部记录：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span></code></pre></div><h4 id="查询计算后的值">查询计算后的值
-</h4><p><strong><mark>SELECT 表达式</mark></strong></p>
-<p><strong>表达式可以是算术表达式（+、-&hellip;)，字符串常量，函数等等</strong></p>
-<p>eg.查询TAB1里面所有Grade减去2的值：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span><span style="color:#56b6c2">-</span><span style="color:#d19a66">2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span></code></pre></div><h4 id="改变查询结果的列标题">改变查询结果的列标题
-</h4><p><strong><mark>SELECT 列名 别名</mark></strong></p>
-<p>eg.查询TAB1里面的Ch列和Nu列，在结果里面使用Chinese和Num显示</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span> <span style="color:#e06c75">Chinese</span>,<span style="color:#e06c75">Nu</span> <span style="color:#e5c07b">Number</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span></code></pre></div><h4 id="去除查询结果的重复行">去除查询结果的重复行
-</h4><p><strong><mark>SELECT DISTINCT 列名</mark></strong></p>
-<p><strong>如果没有使用DISTINCT，默认为ALL</strong></p>
-<h3 id="聚集函数">聚集函数
-</h3><p><span style="color:red;font-size:18px"><strong>聚集函数只处理非空值</strong></span></p>
-<p><span style="color:red;font-size:18px"><strong>聚集函数只能用于SELECT语句和CROUP BY中的HAVING子句</strong></span></p>
-<h4 id="统计元组个数">统计元组个数
-</h4><p><mark><strong>COUNT(*)</strong></mark></p>
-<p><strong>某个元组的一个或者部分取空值的时候，不影响统计结果</strong></p>
-<p>eg.查询TAB1里面的总数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">COUNT</span>(<span style="color:#56b6c2">*</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span></code></pre></div><h4 id="统计某一列值的个数">统计某一列值的个数
-</h4><p><strong><mark>COUNT(DISTINCT/ALL 列名)</mark></strong></p>
-<p><strong>指定DISTINCT会去重，NULL不计入总数</strong></p>
-<h4 id="计算某一列值的平均数该列必须为数值型">计算某一列值的平均数（该列必须为数值型）
-</h4><p><strong><mark>AVG(DISTINCT/ALL 列名)</mark></strong></p>
-<p>eg.查询TAB1里面的Grade平均值：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">AVG</span>(<span style="color:#c678dd">ALL</span> <span style="color:#e06c75">Grade</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span></code></pre></div><h4 id="计算某一列值的总和该列必须为数值型">计算某一列值的总和（该列必须为数值型）
-</h4><p><strong><mark>SUM(DISTINCT/ALL 列名)</mark></strong></p>
-<h4 id="计算某一列值的最大值最小值">计算某一列值的最大值/最小值
-</h4><p><strong><mark>MAX/MIN(DISTINCT/ALL 列名)</mark></strong></p>
-<h3 id="where-条件表达式">WHERE 条件表达式
-</h3><h4 id="比较大小">比较大小
-</h4><p><strong><mark>WHERE 列名 运算式</mark></strong></p>
-<p><strong><mark>常用运算符：=	&gt;	&lt;	&gt;=	&lt;=	!=/&lt;&gt;	!&gt;	!&laquo;/mark&gt;</strong></p>
-<p>eg.查询TAB1里面所有三年级（Grade=3）的学生的姓名：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>;
-</span></span></code></pre></div><p>eg.查询TAB1里面所有学号2300开头学生（Nu&gt;23000）的学生的年级：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;</span><span style="color:#d19a66">23000</span>;
-</span></span></code></pre></div><h4 id="确定范围">确定范围
-</h4><p><mark><strong>WHERE 列名 BETWEEN 最小值 AND 最大值</strong></mark></p>
-<p><mark><strong>WHERE 列名 NOT BETWEEN 最小值 AND 最大值</strong></mark></p>
-<p>eg.查询TAB1里面年级在1到3之间的学生的姓名：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span> <span style="color:#c678dd">BETWEEN</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">AND</span> <span style="color:#d19a66">3</span>;
-</span></span></code></pre></div><p>eg.查询学号不在23000到24000之间的学生的姓名：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#e06c75">Nu</span> <span style="color:#c678dd">BETWEEN</span> <span style="color:#d19a66">23000</span> <span style="color:#c678dd">AND</span> <span style="color:#d19a66">24000</span>;
-</span></span></code></pre></div><h4 id="确定集合">确定集合
-</h4><p><mark><strong>WHERE 列名 IN (&lsquo;列值1&rsquo;,&lsquo;列值n&rsquo;)</strong></mark></p>
-<p><mark><strong>WHERE 列名 NOT IN (&lsquo;列值1&rsquo;,&lsquo;列值n&rsquo;)</strong></mark></p>
-<p>eg.查询学号不是23001也不是23002的学生年级：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">IN</span> (<span style="color:#98c379">&#39;23001&#39;</span>,<span style="color:#98c379">&#39;23002&#39;</span>);
-</span></span></code></pre></div><p><strong>相当于多重条件查询的=语句</strong></p>
-<h4 id="字符匹配">字符匹配
-</h4><p><strong><span style="color:orange">百分号 % </span>	表示任意长度的字符串(类似正则.*)，比如<code>a%b</code>就是以a开头，b结尾的任意长度字符串</strong></p>
-<p><strong><span style="color:orange">下划线 _ </span>	  表示单个字符，比如<code>a_ _ _b</code>（不用空格，这里方便看）是以a开头b结尾的长度为5的字符串</strong></p>
-<p><span style="color:red"><strong>在ASCII码表里，一个汉字长度为2，需要两个下划线</strong></span></p>
-<p><strong><span style="color:orange">反斜杠 \ </span> 	  表示转义，跟在 % 和 _ 前面（<code>\%</code> 、<code>\_</code>）让他们变成普通字符而非通配符</strong></p>
-<p><span style="color:red"><strong>使用 ESCAPE &lsquo;符号&rsquo; 设置转义字符，但一般使用反斜杠</strong> </span></p>
-<p><span style="color:red"><strong>根据环境决定要不要加上ESCAPE（有的数据库默认由\转义）</strong></span></p>
-<p><mark><strong>WHERE 列名 LIKE &lsquo;字符串&rsquo; ESCAPE &lsquo;\&rsquo;</strong></mark></p>
-<p><mark><strong>WHERE 列名 NOT LIKE &lsquo;字符串&rsquo; ESCAPE &lsquo;\&rsquo;</strong></mark></p>
-<p>eg.查询TAB1中姓名满足a%i_e的学生的年级：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Ch</span> <span style="color:#c678dd">LIKE</span> <span style="color:#98c379">&#39;a%i_e&#39;</span>;
-</span></span></code></pre></div><h4 id="空值查询">空值查询
-</h4><p><mark><strong>WHERE 列名 IS NULL</strong></mark></p>
-<p><mark><strong>WHERE 列名 IS NOT NULL</strong></mark></p>
-<p>eg.查询TAB1中缺少学号的学生的年级：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NULL</span>;
-</span></span></code></pre></div><h4 id="多重条件查询">多重条件查询
-</h4><p><mark><strong>WHERE 条件表达式1 AND 条件表达式2</strong></mark></p>
-<p><mark><strong>WHERE 条件表达式1 OR 条件表达式2</strong></mark></p>
-<p><strong>可以把AND和OR组合使用，其中AND优先级大于OR</strong></p>
-<h3 id="group-by-列名-having-条件表达式">GROUP BY 列名 HAVING 条件表达式
-</h3><p><span style="color:red;font-size:18px"><strong>用于将查询结果按某一列或多列的值分组，值相等的为一组</strong></span>
-<span style="color:red;font-size:18px"><strong>目的是细化聚集函数的作用对象，分组后聚集函数将作用于每一个组，每一组都有一个函数值</strong></span></p>
-<h4 id="group-by-列名">GROUP BY 列名
-</h4><p>eg.求TAB1表里面各个年级和对应的人数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>,<span style="color:#c678dd">COUNT</span>(<span style="color:#e06c75">Ch</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">Grade</span>;
-</span></span></code></pre></div><p><strong>以Grade分组，在每一组中求取Ch的数量</strong></p>
-<h4 id="group-by-列名-having-筛选条件">GROUP BY 列名 HAVING 筛选条件
-</h4><p><mark><strong>HAVING用于从组中选择满足条件的组</strong></mark>
-<strong><mark>WHERE用于从基本表或视图中选择满足条件的元组（注意：WHERE子句不可以接聚集函数）</mark></strong></p>
-<p>eg.求TAB1表里面各个年级和对应的人数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>,<span style="color:#c678dd">COUNT</span>(<span style="color:#e06c75">Ch</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> .<span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">Grade</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">HAVING</span> <span style="color:#e06c75">GRADE</span><span style="color:#56b6c2">&gt;=</span><span style="color:#d19a66">2</span>;
-</span></span></code></pre></div><p><strong>以Grade分组，在每一组中求取Ch的数量</strong></p>
-<h3 id="order-by-次序">ORDER BY 次序
-</h3><p><mark><strong>ORDER BY 列名1 列名n ASC</strong></mark></p>
-<p><mark><strong>ORDER BY 列名1 列名n DESC</strong></mark></p>
-<p><strong>如果不设置，默认升序（ASC）</strong></p>
-<p>eg.查询TAB1中学生的年级，按照降序排列：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Grade</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">ORDER</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">GRADE</span> <span style="color:#c678dd">DESC</span>;
-</span></span></code></pre></div><h3 id="连接查询">连接查询
-</h3><h4 id="两表连接查询">两表连接查询
-</h4><p><strong><mark>WHERE 表名1.列名1 比较运算符 表名2.列名2</mark></strong></p>
-<p><strong>当列名在参与连接的各表中唯一时，可省去表名前缀</strong></p>
-<p>eg.查询TAB1和TAB2中所有数据，并在一个查询结果里面展示</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#56b6c2">*</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>.<span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>;
-</span></span></code></pre></div><p><strong>若想获得自然连接，则列举全部属性列，并去掉一个相同的属性列即可。可以将上述SELECT语句改写如下：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">Grade</span>,<span style="color:#e06c75">Cla</span>,<span style="color:#e06c75">Hom</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>  <span style="color:#7f848e">-- 去掉了其中一个Nu
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>;
-</span></span></code></pre></div><p>eg.在TAB1和TAB2里查询选了英语课，并且是三年级的学生的学号:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#98c379">&#34;tab2&#34;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;ENGLISH&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">GRADE</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>;
-</span></span></code></pre></div><h4 id="单表连接查询">单表连接查询
-</h4><p><span style="color:red;font-size:15px"><strong>通过取两个别名，对同一个表进行自连接</strong></span></p>
-<p>eg.查询cla和cla2相同的学生学号：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">FIRST</span>.<span style="color:#56b6c2">*</span>,<span style="color:#c678dd">SECOND</span>.<span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span> <span style="color:#c678dd">FIRST</span>,<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">tab2</span> <span style="color:#c678dd">SECOND</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">FIRST</span>.<span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#c678dd">SECOND</span>.<span style="color:#e06c75">CLA2</span>;
-</span></span></code></pre></div><h4 id="外连接查询">外连接查询
-</h4><p><strong>左外连接保留左表的所有记录，并尽可能地匹配右表中的记录</strong>
-<strong>右外连接保留右表的所有记录，并尽可能地匹配左表中的记录</strong></p>
-<p><span style="color:red;font-size:15px"><strong>将悬浮元组保留在结果关系中，没有属性值的位置填上NULL</strong></span></p>
-<p><strong><mark>SELECT 列名 FROM 表名1 LEFT OUTER JOIN 表名2 ON(连接条件)</mark></strong></p>
-<p><strong><mark>SELECT 列名 FROM 表名1 RIGHT OUTER JOIN 表名2 ON(连接条件)</mark></strong></p>
-<p>eg.以TAB1为主体，列出每个学生选课cla的结果</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Ch</span>,<span style="color:#e06c75">CLA</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span> <span style="color:#c678dd">LEFT</span> <span style="color:#c678dd">OUTER</span> <span style="color:#c678dd">JOIN</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span> <span style="color:#c678dd">ON</span>(<span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>.<span style="color:#e06c75">Nu</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>.<span style="color:#e06c75">Nu</span>);
-</span></span></code></pre></div><p><strong>此时会保留TAB1里面的所有记录，匹配对应的TAB2记录</strong></p>
-<h4 id="多表连接查询">多表连接查询
-</h4><p><strong><mark>WHERE 表名1.列名1 = 表名2.列名2 AND 表名2.列名2 = 表名3.列名3</mark></strong></p>
-<p><strong>多表连接一般是先进行两个表的连接操作，再将其连接结果与第三个表执行连接</strong></p>
-<h3 id="嵌套查询">嵌套查询
-</h3><p><strong><span style="color:orange">查询块</span>：SELECT-FROM-WHERE</strong>
-<strong><span style="color:orange">嵌套查询</span>：将一个查询块嵌套在另一个查询块的WHERE子句或者HAVING子句</strong>
-<strong>上层的查询块称为外层查询/父查询；下层的查询块称为内层查询/子查询</strong>
-<span style="color:red;font-size:18px"><strong>子查询的SELECT语句中不能使用ORDERBY子句，ORDERBY子句只能对最终查询结果排序</strong></span></p>
-<h4 id="集合判断in子查询">集合判断IN子查询
-</h4><p><mark><strong>WHERE 列名 IN (子查询)</strong></mark></p>
-<p>eg.查询alice的年级：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">GRADE</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CH</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;alice&#39;</span>;
-</span></span></code></pre></div><p>查询结果为alice在三年级，再查找三年级的其他学生：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">CH</span>,<span style="color:#e06c75">NU</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">GRADE</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>;
-</span></span></code></pre></div><p>上面两个查询结合为嵌套查询：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">CH</span>,<span style="color:#e06c75">NU</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">GRADE</span> <span style="color:#c678dd">IN</span>
-</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">GRADE</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CH</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;alice&#39;</span>
-</span></span><span style="display:flex;"><span>    );
-</span></span></code></pre></div><p><strong>本例的子查询条件不依赖于父查询，这类子查询称为不相关子查询</strong></p>
-<h4 id="比较运算符子查询">比较运算符子查询
-</h4><p><strong><mark>WHERE 列名 比较运算符 (子查询)</mark></strong></p>
-<p><strong>当明确知道子查询结果是单个值而不是集合的时候使用</strong></p>
-<p>eg．在SC表中，找出每个学生（Sno）超过他自己选修课程平均成绩（Grade）的课程号（Cno)</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span>, <span style="color:#e06c75">Cno</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">x</span>    <span style="color:#7f848e">-- x是表 SC 的别名，又称为元组变量，可以用来表示 SC 的一个元组
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span> <span style="color:#56b6c2">&gt;=</span>
-</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">AVG</span>(<span style="color:#e06c75">Grade</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">y</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">y</span>.<span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">x</span>.<span style="color:#e06c75">Sno</span>);
-</span></span></code></pre></div><p><strong>这里必须加上WHERE y.Sno=x.Sno这个条件，此时内外对应的sno才会相同，否则求的不是单个学生的平均成绩，而是所有学生的平均成绩</strong></p>
-<p><strong>本例的子查询条件依赖于父查询，这类子查询称为相关子查询，整个查询称为相关嵌套查询</strong></p>
-<h4 id="anyall子查询">ANY/ALL子查询
-</h4><p><strong>WHERE 列名 比较运算符 ANY/ALL (子查询)</strong></p>
+    <p>取证常考知识点，不得不品的一环啊</p>
+<p>参考资料：</p>
+<p><a class="link" href="https://zh.wikipedia.org/wiki/RAID"  target="_blank" rel="noopener"
+    >RAID&ndash;维基百科
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p><a class="link" href="https://blog.csdn.net/m0_37867238/article/details/143604850"  target="_blank" rel="noopener"
+    >历年美亚杯RAID重组解析汇总&ndash;小谢取证
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p><a class="link" href="https://forensics.xidian.edu.cn/wiki/"  target="_blank" rel="noopener"
+    >XDforensics-Wiki
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p><a class="link" href="https://www.cnblogs.com/0xl4k1d/p/15449572.html"  target="_blank" rel="noopener"
+    >Raid重组复习&ndash;0xL4k1d
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p><a class="link" href="https://blog.csdn.net/melonbo/article/details/150591869"  target="_blank" rel="noopener"
+    >深入UFSExplorer：自定义RAID配置指南&ndash;M百问
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p><a class="link" href="https://mercer5.github.io/2021/10/31/raid%E9%87%8D%E7%BB%84/"  target="_blank" rel="noopener"
+    >raid重组-mercer
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<h1 id="什么是raid">什么是RAID
+</h1><p><strong>RAID，全称Redundant Array of Independent Disks，独立磁盘冗余阵列</strong>是一种将多个独立的物理磁盘驱动器组合成一个逻辑单元的存储技术</p>
+<p>对于操作系统而言，这个由多块磁盘组成的RAID阵列看起来就像一个单一的大容量硬盘</p>
+<p>那么，RAID技术有什么好的？</p>
+<ul>
+<li>
+<p><strong>数据容错</strong></p>
+<p>因为在多个磁盘上有存储数据的副本或校验信息，RAID可以有效防止因单块磁盘故障而导致的数据丢失</p>
+<p>当一块磁盘损坏时，系统可以利用其余磁盘上的冗余数据进行恢复，这抵御故障并继续运行</p>
+</li>
+<li>
+<p><strong>性能提升</strong></p>
+<p>通过将数据分割成小块并同时读写到多个磁盘上，数据传输速率高，读写性能远超单个磁盘</p>
+<p><strong>这种方式也被称为条带化存储，每个条带包含一段连续的数据，同一条逻辑行的数据块分布在不同磁盘上</strong></p>
+<p>条带这个东西不太好用文字理解，举个例子</p>
+<p>假设有两块硬盘DiskA、DiskB，要存储的数据是字符串<code>ABCDEFGH</code>：</p>
+<p><strong>未条带化</strong>（普通存储）：</p>
+<ul>
+<li>DiskA：<code>ABCDEFGH</code></li>
+<li>DiskB：空</li>
+</ul>
+<p>读取的时候只能A读，B不工作</p>
+<p><strong>条带化存储</strong>（条带大小2字节）：</p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
-          <th>谓词</th>
-          <th>语义</th>
-          <th>与聚集函数或 IN 的等价转换</th>
+          <th>条带号</th>
+          <th>DiskA</th>
+          <th>DiskB</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>&gt;ANY</td>
-          <td>大于子查询结果中的某个值</td>
-          <td>&gt;MIN</td>
+          <td>1</td>
+          <td>A</td>
+          <td>B</td>
       </tr>
       <tr>
-          <td>&gt;ALL</td>
-          <td>大于子查询结果中的所有值</td>
-          <td>&gt;MAX</td>
+          <td>2</td>
+          <td>C</td>
+          <td>D</td>
       </tr>
       <tr>
-          <td>&lt;ANY</td>
-          <td>小于子查询结果中的某个值</td>
-          <td>&lt;MAX</td>
+          <td>3</td>
+          <td>E</td>
+          <td>F</td>
       </tr>
       <tr>
-          <td>&lt;ALL</td>
-          <td>小于子查询结果中的所有值</td>
-          <td>&lt;MIN</td>
-      </tr>
-      <tr>
-          <td>&gt;=ANY</td>
-          <td>大于等于子查询结果中的某个值</td>
-          <td>&gt;=MIN</td>
-      </tr>
-      <tr>
-          <td>&gt;=ALL</td>
-          <td>大于等于子查询结果中的所有值</td>
-          <td>&gt;=MAX</td>
-      </tr>
-      <tr>
-          <td>&lt;=ANY</td>
-          <td>小于等于子查询结果中的某个值</td>
-          <td>&lt;=MAX</td>
-      </tr>
-      <tr>
-          <td>&lt;=ALL</td>
-          <td>小于等于子查询结果中的所有值</td>
-          <td>&lt;=MIN</td>
-      </tr>
-      <tr>
-          <td>=ANY</td>
-          <td>等于子查询结果中的某个值</td>
-          <td>IN</td>
-      </tr>
-      <tr>
-          <td>=ALL</td>
-          <td>等于子查询结果中的所有值（通常无实际意义）</td>
-          <td>&ndash;</td>
-      </tr>
-      <tr>
-          <td>!=(或&lt;&gt;)ANY</td>
-          <td>不等于子查询结果中的某个值</td>
-          <td>&ndash;</td>
-      </tr>
-      <tr>
-          <td>!=(或&lt;&gt;)ALL</td>
-          <td>不等于子查询结果中的任何值</td>
-          <td>NOT IN</td>
+          <td>4</td>
+          <td>G</td>
+          <td>H</td>
       </tr>
   </tbody>
 </table></div>
-<p>eg.查询TAB1里面三年级学生学号大于23000的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Ch</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;=</span><span style="color:#c678dd">ANY</span>
-</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Nu</span>
-</span></span><span style="display:flex;"><span>	 <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#98c379">&#34;tab1&#34;</span> 
-</span></span><span style="display:flex;"><span>	 <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Grade</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">3</span>
-</span></span><span style="display:flex;"><span>	);
-</span></span></code></pre></div><h4 id="exists子查询">EXISTS子查询
-</h4><p><span style="color:red;font-size:15px"><strong>EXISTS代表存在量词，对应的为NOT EXISTS</strong></span></p>
-<p><span style="color:red;font-size:15px"><strong>EXISTS谓词的子查询不返回数据，只返回逻辑&rsquo;true&rsquo;和&rsquo;false&rsquo;</strong></span></p>
-<p>eg1.在SC表中查询至少选修了1号学生选修的全部课程（Cno）的学生的学号（Sno)</p>
-<p><strong>查询学号为 x 的学生，对所有的课程 y，只要 1 号学生选修了课程 y，则 x 也选修了 y。</strong></p>
-<p><strong>令 p 表示&quot;学生 1 号选修了课程 y&quot;</strong></p>
-<p><strong>令 q 表示&quot;学生 x 选修了课程 y&quot;</strong></p>
-<p><strong>则上述查询可以表示为(∀y)p→q</strong></p>
-<p><strong>通过等价转换，可得(∀y)p→q ≡ ¬(∃y(¬(p→q))) ≡ ¬(∃y(¬(¬p∨q))) ≡ ¬∃y(p∧¬q)</strong></p>
-<p><strong>最终用 SQL 实现的表达式 ¬∃y(p∧¬q)，语义：不存在这样的课程 y，学生 1 号选修了 y，而学生 x 没有选修</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">DISTINCT</span> <span style="color:#e06c75">Sno</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">SCX</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
-</span></span><span style="display:flex;"><span>    (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>                            <span style="color:#7f848e">-- 由EXISTS引I出的子查询，其目标列表达式通常都用*
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">SCY</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">SCY</span>.<span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;1&#39;</span> <span style="color:#c678dd">AND</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
-</span></span><span style="display:flex;"><span>         (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> <span style="color:#e06c75">SCZ</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">SCZ</span>.<span style="color:#e06c75">Sno</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">SCX</span>.<span style="color:#e06c75">Sno</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">SCZ</span>.<span style="color:#e06c75">Cno</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">SCY</span>.<span style="color:#e06c75">Cno</span>)   <span style="color:#7f848e">-- 保证内外指向相同的学生
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    );
-</span></span></code></pre></div><p>eg2.基于 SC 表，查询选修了全部课程（Course 表）的学生姓名（Student 表）</p>
-<p><strong>令 p 表示&quot;课程 x 被学生 y 选修了&quot;，则有(∀x)p ≡ ¬(∃x(¬p))，语义：查询没有任何课程是其不选修的学生 y</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sname</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">Student</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
-</span></span><span style="display:flex;"><span>    (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">Course</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">EXISTS</span>
-</span></span><span style="display:flex;"><span>         (<span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">Student</span>.<span style="color:#e06c75">Sno</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">Cno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">Course</span>.<span style="color:#e06c75">Cno</span>)
-</span></span><span style="display:flex;"><span>    );
-</span></span></code></pre></div><h3 id="集合查询">集合查询
-</h3><p><span style="color:red;font-size:18px"><strong>多个SELECT语句的结果可以进行集合的并（UNION)、交（INTERSECT)、差（EXCEPT）</strong></span>
-<span style="color:red;font-size:18px"><strong>参加集合操作的各查询结果的列数必须相同，对应项的数据类型也必须相同</strong></span></p>
-<h4 id="union并操作满足前者或满足后者">UNION并操作（满足前者或满足后者）
-</h4><p><mark><strong>UNION合并查询结果时，系统会自动去掉重复元组，若需保留，则采用UNIONALL</strong></mark></p>
-<p>eg.在TAB2中查询学号大于等于23003的学生和选择了MATH科目的学生</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;=</span><span style="color:#d19a66">23003</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">UNION</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span>;
-</span></span></code></pre></div><h4 id="intersect交操作前后都满足">INTERSECT交操作（前后都满足）
-</h4><p>eg.在TAB2中查询选了MATH又选了history的学生</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;history&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;history&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTERSECT</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span>;
-</span></span></code></pre></div><h4 id="except差操作满足前者不满足后者">EXCEPT差操作（满足前者，不满足后者）
-</h4><p>eg.在TAB2中查询学号大于23002的学生和选修了MATH的学生的差集</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Nu</span><span style="color:#56b6c2">&gt;</span><span style="color:#d19a66">23002</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">EXCEPT</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">CLA</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">CLA2</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;MATH&#39;</span>;
-</span></span></code></pre></div><h3 id="基于派生表的查询">基于派生表的查询
-</h3><p><span style="color:red;font-size:18px"><strong>子查询出现在FROM子句时，子查询将生成临时的派生表，成为主查询的查询对象</strong></span></p>
-<p><strong><mark>FROM (子查询) AS 别名 (属性列名1,属性列名2)</mark></strong></p>
-<p><strong>如果子查询中没有聚集函数，派生表可以不指定属性列，子查询SELECT子句后面的列名为其默认属性</strong>
-<strong>AS可以省略，但必须为派生表关系指定一个别名</strong></p>
-<p>eg1.找出每个学生超过他自己选修课程平均成绩的课程号</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span>, <span style="color:#e06c75">Cno</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span>, 
-</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span>, <span style="color:#c678dd">Avg</span>(<span style="color:#e06c75">Grade</span>) 
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> 
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">Sno</span>
-</span></span><span style="display:flex;"><span>    ) 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span> <span style="color:#e06c75">Avg_sc</span>(<span style="color:#e06c75">avg_sno</span>, <span style="color:#e06c75">avg_grade</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">SC</span>.<span style="color:#e06c75">Sno</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Avg_sc</span>.<span style="color:#e06c75">avg_sno</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">SC</span>.<span style="color:#e06c75">Grade</span><span style="color:#56b6c2">&gt;</span> <span style="color:#56b6c2">=</span><span style="color:#e06c75">Avg_sc</span>.<span style="color:#e06c75">avg_grade</span>;
-</span></span></code></pre></div><p>eg2.查询所有选修了1号课程的学生姓名</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sname</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">Student</span>, 
-</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">Sno</span> 
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">SC</span> 
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Cno</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;1&#39;</span>
-</span></span><span style="display:flex;"><span>    )
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span> <span style="color:#e06c75">SC1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Student</span>.<span style="color:#e06c75">Sno</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">SC1</span>.<span style="color:#e06c75">Sno</span>;
-</span></span></code></pre></div><h2 id="插入数据insert语句">插入数据&ndash;INSERT语句
-</h2><h3 id="插入元组">插入元组
-</h3><h4 id="一般格式-1">一般格式
-</h4><p><mark><strong>INSERT</strong></mark></p>
-<p><mark><strong>INTO 表名(列名1,列名n)</strong></mark></p>
-<p><mark><strong>VALUES(常量1,常量n);</strong></mark>    //字符串常量要用单引号&rsquo;&lsquo;括起来</p>
-<h4 id="假设现在有tab1表有c1到c4四列其中c4列是字符串常量"><span style="font-size:20px;color:red"><strong>假设现在有TAB1表，有C1到C4四列，其中C4列是字符串常量：</strong></span>
-</h4><h4 id="情况1明确给出新增元组要在哪些属性上赋值插入数据包含全部属性列">情况1：明确给出新增元组要在哪些属性上赋值（插入数据包含全部属性列）
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>,<span style="color:#e06c75">C4</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span>,<span style="color:#98c379">&#39;4&#39;</span>);
-</span></span></code></pre></div><h4 id="情况2明确给出新增元组要在哪些属性上赋值插入数据只包含部分属性列">情况2：明确给出新增元组要在哪些属性上赋值（插入数据只包含部分属性列）
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span>)
-</span></span></code></pre></div><p><strong>这种情况下C4列会被赋值NULL，如果C4有约束条件NOT NULL则会报错</strong></p>
-<h4 id="情况3仅指出要在tab1表上插入元组插入数据包含全部属性列">情况3：仅指出要在TAB1表上插入元组（插入数据包含全部属性列）
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span><span style="color:#98c379">&#39;4&#39;</span>);
-</span></span></code></pre></div><p><strong>这种情况表示要在全部属性列上赋值，插入数据顺序必须和列的顺序对应</strong></p>
-<h4 id="情况4仅指出要在tab1表上插入元组插入数据只包含部分属性列">情况4：仅指出要在TAB1表上插入元组（插入数据只包含部分属性列）
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">VALUES</span>(<span style="color:#d19a66">1</span>,<span style="color:#d19a66">2</span>,<span style="color:#d19a66">3</span>,<span style="color:#c678dd">NULL</span>);
-</span></span></code></pre></div><p><strong>这种情况必须明确未赋值的属性列为NULL</strong></p>
-<h3 id="插入子查询结果">插入子查询结果
-</h3><h4 id="一般格式-2">一般格式
-</h4><p><mark><strong>INSERT</strong></mark></p>
-<p><mark><strong>INTO TAB1(属性列1,属性列2)</strong></mark></p>
-<p><mark><strong>子查询;</strong></mark></p>
-<p>eg.假设现有TAB1表（如上），并按C1列分组求C2列的平均值，并存入TAB2表（其中TAB2表的C1列存放
-C1，avg_C2列存放C2列的均值)</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">INSERT</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">INTO</span> <span style="color:#e06c75">TAB2</span> (<span style="color:#e06c75">C1</span>, <span style="color:#e06c75">avg_C2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>, <span style="color:#c678dd">AVG</span>(<span style="color:#e06c75">C2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">FROMTAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">C1</span>;
-</span></span></code></pre></div><h2 id="修改数据update语句">修改数据&ndash;UPDATE语句
-</h2><h4 id="一般格式-3">一般格式
-</h4><p><mark><strong>UPDATE 表名</strong></mark></p>
-<p>==<strong>SET 列名1=表达式1,列名n=表达式n</strong><mark></p>
-<p></mark><strong>WHERE 条件;</strong>==</p>
-<p><strong>WHERE语句若省略，则表示修改表中所有元组</strong></p>
-<h4 id="情况1修改某一个元组的值">情况1：修改某一个元组的值
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">UPDATE</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#e06c75">C4</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;0&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>;
-</span></span></code></pre></div><h4 id="情况2修改多个元组的值">情况2：修改多个元组的值
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">UPDATE</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#e06c75">C3</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">C3</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">1</span>;
-</span></span></code></pre></div><h4 id="情况3带子查询的修改语句">情况3：带子查询的修改语句
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">UPDATE</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SET</span> <span style="color:#e06c75">C4</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;0&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span> <span style="color:#c678dd">IN</span>
-</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">avg_C2</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span>
-</span></span><span style="display:flex;"><span>    );
-</span></span></code></pre></div><h2 id="删除语句delete语句">删除语句&ndash;DELETE语句
-</h2><h4 id="一般格式-4">一般格式
-</h4><p><mark><strong>DELETE</strong></mark></p>
-<p><mark><strong>FROM 表名</strong></mark></p>
-<p><mark><strong>WHERE 条件;</strong></mark></p>
-<p><strong>WHERE语句若省略，则表示删除表中所有元组</strong></p>
-<h4 id="情况1删除某一个元组的值">情况1：删除某一个元组的值
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">DELETE</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>;
-</span></span></code></pre></div><h4 id="情况2修改多个元组的值-1">情况2：修改多个元组的值
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">DELETE</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span></code></pre></div><h4 id="情况3带子查询的修改语句-1">情况3：带子查询的修改语句
-</h4><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">DELETE</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span> <span style="color:#c678dd">IN</span>
-</span></span><span style="display:flex;"><span>	(<span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB2</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">avg_C2</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span>
-</span></span><span style="display:flex;"><span>    );
-</span></span></code></pre></div><h2 id="view-视图">VIEW 视图
-</h2><h3 id="建立视图">建立视图
-</h3><h4 id="一般格式-5">一般格式
-</h4><p><mark><strong>CREATE VIEW 视图名 (列名1,列名n)</strong></mark></p>
-<p><mark><strong>AS 子查询</strong></mark></p>
-<p><mark><strong>WITH CHECK OPTION;</strong></mark></p>
-<p><strong>若省略视图名后的列名，则该视图由子查询中SELECT的目标列字段组成</strong></p>
-<p><strong>若添加WITH句，则表示对视图进行增删改时要满足子查询中的条件表达式</strong></p>
-<p><strong><span style="color:RED">在以下情况中必须明确指定组成视图的列名：</span></strong>
-<strong>1.某个目标列不是单纯的列名，而是聚集函数或列表达式</strong>
-<strong>2.多表连接时选出了几个同名列作为视图的字段</strong>
-<strong>3.需要在视图中为某个列启用新的更合适的名字</strong></p>
-<p><strong><span style="color:orange">行列子集视图</span>：由单个基本表导出，仅去掉了基本表的某些行和某些列，但保留了主码</strong></p>
-<p><strong>若某些视图是建立在另一个表的全部属性列上的（视图与基本表的各列是一一对应的）那么当修改基本表的结构时，基本表和视图的映像关系会被破坏。这种情况最好在修改基本表后删除该视图，然后重建该视图</strong></p>
-<h4 id="情况1建立完全视图">情况1：建立完全视图
-</h4><p>eg1.建立C1为1时TAB1的视图</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>,<span style="color:#e06c75">C4</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C1</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>;
-</span></span></code></pre></div><h4 id="情况2建立带有增删改条件的视图">情况2：建立带有增删改条件的视图
-</h4><p>eg2.建立C4为4时TAB1的视图，并且以后每次增删改时都要满足C4=4</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>,<span style="color:#e06c75">C4</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C4</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;4&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WITH</span> <span style="color:#c678dd">CHECK</span> <span style="color:#c678dd">OPTION</span>;
-</span></span></code></pre></div><h4 id="情况3由视图新建视图">情况3：由视图新建视图
-</h4><p>eg3.建立在一个或多个已定义的视图上</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB3</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#e06c75">C2</span>,<span style="color:#e06c75">C3</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">V_TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">C2</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span>;
-</span></span></code></pre></div><h4 id="情况4带有派生数据的视图">情况4：带有派生数据的视图
-</h4><p><strong>减少冗余数据，定义基本表时一般只存放基本数据。当需要使用计算得出的派生数据时，可以设置在视图</strong>
-<strong>中的派生属性列上，也称为虚拟列。带虚拟列的视图也称为带表达式的视图</strong></p>
-<p>eg4.建立有派生数据的视图</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB4</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">new_C2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#d19a66">10</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">C2</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span></code></pre></div><h4 id="情况5带有聚集函数和group-by的分组视图">情况5：带有聚集函数和GROUP BY的分组视图
-</h4><p>eg5.建立包含聚集函数的分组视图</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">CREATE</span> <span style="color:#c678dd">VIEW</span> <span style="color:#e06c75">V_TAB5</span>(<span style="color:#e06c75">C1</span>,<span style="color:#e06c75">avg_C2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">AS</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#e06c75">C1</span>,<span style="color:#c678dd">AVG</span>(<span style="color:#e06c75">C2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">TAB1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">GROUP</span> <span style="color:#c678dd">BY</span> <span style="color:#e06c75">C1</span>;
-</span></span></code></pre></div><h3 id="删除视图">删除视图
-</h3><p><strong><mark>DROP VIEW 视图名 CASCADE;</mark></strong></p>
-<p><strong>如果使用了CASCADE级联删除语句，则将把该视图导出的所有视图一并删除</strong></p>
-<h3 id="查询和更新视图">查询和更新视图
-</h3><p><strong>视图定义后，对视图进行查询和更新的语句和语法与基本表相同</strong>
-<strong>视图的查询与更新最终都会转换为对基本表的查询和更新，这一过程也被称为视图消解</strong>
-<strong>一般来说，行列子集视图的查询和更新都可以顺利转换，其他则不一定</strong></p>
-<h2 id="空值">空值
-</h2><h3 id="判断属性为空值">判断属性为空值
-</h3><p><strong>这部分和WHERE语句里面空值判断一样啦</strong></p>
-<p><mark><strong>属性 IS NULL;</strong></mark></p>
-<p><mark><strong>属性 IS NOT NULL;</strong></mark></p>
-<p>eg.查找TAB1中名字为空的学生：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">STUDY</span>.<span style="color:#e06c75">TAB1</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">Ch</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NULL</span>;
-</span></span></code></pre></div><h3 id="空值的运算">空值的运算
-</h3><h4 id="算数运算">算数运算
-</h4><p><span style="color:red"><strong>空值与另一个值的算术运算结果为空值</strong></span></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">+</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 NULL
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">10</span> <span style="color:#56b6c2">/</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 NULL
-</span></span></span></code></pre></div><h4 id="比较运算">比较运算
-</h4><p><span style="color:red"><strong>空值与另一个值的比较运算结果为 UNKNOWN</strong></span></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 UNKNOWN
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">&lt;&gt;</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 UNKNOWN
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">SELECT</span> <span style="color:#d19a66">5</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#c678dd">NULL</span>; <span style="color:#7f848e">-- 结果为 UNKNOWN
-</span></span></span></code></pre></div><h4 id="在查询语句中的处理">在查询语句中的处理
-</h4><p><span style="color:red"><strong>在查询语句中，只有使WHERE和HAVING子句的选择条件为TRUE的元组才会被选出作为输出结果（即不包括UNKNOWN的情况)</strong></span></p>
-<p>eg1:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">employees</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">salary</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">50000</span> <span style="color:#c678dd">AND</span> <span style="color:#e06c75">commission</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NOT</span> <span style="color:#c678dd">NULL</span>;
-</span></span></code></pre></div><p><strong>这个查询会返回所有工资大于 50000 且佣金不为 NULL 的员工记录</strong></p>
-<p>eg2:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">employees</span> 
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">commission</span> <span style="color:#56b6c2">&lt;&gt;</span> <span style="color:#d19a66">0</span>; 
-</span></span></code></pre></div><p><strong>查询过程中commission可能为NULL，这部分运算后产生UNKNOWN，对应元组会被忽略</strong></p>
-<p><strong>要让所有都能被输出，最好做如下改动：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">SELECT</span> <span style="color:#56b6c2">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">FROM</span> <span style="color:#e06c75">employees</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">WHERE</span> <span style="color:#e06c75">commission</span> <span style="color:#56b6c2">&lt;&gt;</span> <span style="color:#d19a66">0</span> <span style="color:#c678dd">OR</span> <span style="color:#e06c75">commission</span> <span style="color:#c678dd">IS</span> <span style="color:#c678dd">NULL</span>;
-</span></span></code></pre></div><h2 id="数据库安全">数据库安全
-</h2><h3 id="授权">授权
-</h3><h4 id="授予用户权限">授予用户权限
-</h4><p><strong><mark>GRANT 权限 ON 对象类型 对象名 TO 用户名 [WITH GRANT OPTION];</mark></strong></p>
-<p><span style="color:orange"><strong>权限：</strong></span>查询权限 SELECT，全部操作权限 ALL PRIVILEGES</p>
-<p><span style="color:orange"><strong>对象类型：</strong></span>TABLE/VIEW</p>
-<p><span style="color:orange"><strong>对象名：</strong></span>表和视图的名称</p>
-<p><span style="color:orange"><strong>用户名：</strong></span>可以指定用户，也可以全体用户PUBLIC</p>
-<p><strong>如果没有WITH GRANT OPTION语句，那么用户不能传播这个权限</strong></p>
-<p><strong>SQL不允许循环授权，被授权者不能把权限传递给授权者或其祖先</strong></p>
-<p>eg.假设我们有一个名为employees的表，现在想让用户user_A只能查询这张表</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">GRANT</span> <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">ON</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">employees</span> <span style="color:#c678dd">TO</span> <span style="color:#e06c75">user_A</span>;
-</span></span></code></pre></div><p>如果要让A还能把权限授权给别人：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">GRANT</span> <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">ON</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">employees</span> <span style="color:#c678dd">TO</span> <span style="color:#e06c75">user_A</span> <span style="color:#c678dd">WITH</span> <span style="color:#c678dd">GRANT</span> <span style="color:#c678dd">OPTION</span>;
-</span></span></code></pre></div><h4 id="收回用户权限">收回用户权限
-</h4><p><strong><mark>REVOKE 权限 ON 对象类型 对象名 FROM 用户名 [CASCADE/RESTRICT];</mark></strong></p>
-<p><strong>CASCADE</strong>：级联回收，把用户传播出去的权限一并收回</p>
-<p><strong>RESTRICT</strong>：受限回收，如果用户传播过该权限，回收会失败（默认行为）</p>
-<p>eg.收回user_A的权限</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#c678dd">REVOKE</span> <span style="color:#c678dd">SELECT</span> <span style="color:#c678dd">ON</span> <span style="color:#c678dd">TABLE</span> <span style="color:#e06c75">employees</span> <span style="color:#c678dd">FROM</span> <span style="color:#e06c75">user_A</span>;
-</span></span></code></pre></div><h3 id="创建数据库模式的权限">创建数据库模式的权限
-</h3><p><span style="color:red;font-size:18px"><strong>对创建数据库模式一类的数据库对象的授权在数据库管理员创建用户的时候实现</strong></span></p>
-<p><strong><mark>CREATE USER 用户名 [WITH DBA|RESOURCE|CONNECT];</mark></strong></p>
-<p><strong>DBA</strong>：可以创建新用户、模式、表、视图等，还可以把这些权限授予其他用户</p>
-<p><strong>RESOURCE</strong>：可以创建表、视图，但是不能创建新的模式和用户</p>
-<p><strong>CONNECT</strong>：只能登录数据库，或者被授予权限后操作</p>
-<h3 id="数据库角色">数据库角色
-</h3><p><span style="color:red;font-size:18px"><strong>角色是权限的集合，可以为一组相同权限的用户创建同一个角色，使用角色管理权限，简化授权过程</strong></span></p>
-<h4 id="创建角色">创建角色
-</h4><p><strong><mark>CREATE ROLE 角色名;</mark></strong></p>
-<h4 id="给角色添加角色用户">给角色添加角色/用户
-</h4><p><strong><mark>GRANT 角色 TO 某角色/某用户 [WITH ADMIN OPTION];</mark></strong></p>
-<h4 id="给角色授权">给角色授权
-</h4><p><strong><mark>GRANT 权限 ON 对象类型 对象名 TO 角色；</mark></strong></p>
-<h4 id="收回角色权限">收回角色权限
-</h4><p><strong><mark>REVOKE 权限 ON 对象类型 对象名 FROM 角色;</mark></strong></p>
+<p>也就是说第一个条带=<code>A</code>（DiskA） +   <code>B</code>（DiskB），大小就是<code>AB</code>（两个字节），后面的也以此类推</p>
+<p>同一个条带的上下两部分数据存储在了AB两块磁盘的同一个位置</p>
+<p>每次读取数据时，<strong>按照条带来读，无需切换硬盘</strong>，和普通的两个盘分别存储有本质区别</p>
+<p>这样读取的时候两块盘可以同时工作，速度几乎翻倍！这就是最简单的RAID0的工作原理</p>
+</li>
+</ul>
+<h1 id="raid级别">RAID级别
+</h1><p>ok啊，终于进入正题了</p>
+<p>根据不同的数据组织方式和冗余策略，形成有不同的RAID级别</p>
+<p>找资料的时候看见一张特好玩的图：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="用饮水机比喻 轻松理解RAID技术 " href="http://picture.928330.xyz/typora/ChMljV2ElGeIV8OBAABvKCcoLWMAAP3MgO2JJAAAG9A622.jpg">
+<img src="http://picture.928330.xyz/typora/ChMljV2ElGeIV8OBAABvKCcoLWMAAP3MgO2JJAAAG9A622.jpg" alt="用饮水机比喻 轻松理解RAID技术 "  />
+</a>
+</div>
+</p>
+<p>等看完下面的内容就懂了，虽然不太准确，但还是挺形象的hhh</p>
+<div class="alert alert-tip">
+    <div class="alert-header">
+        <span class="alert-icon">
+            💡
+        </span>
+        <span class="alert-title">
+            Tip
+        </span>
+    </div>
+    <div class="alert-content">
+        <p>图里前三个并不是RAID的概念，而是数据存取/服务部署的概念，最好了解一下</p>
+<ul>
+<li>
+<p><strong>Standalone（单机部署/单盘存取）</strong></p>
+<p>只能从一块硬盘获取数据，如果硬盘挂掉，那么数据就不可用</p>
+<p>对于服务，则是只把服务部署在一个主机，服务坏了就坏了</p>
+</li>
+<li>
+<p><strong>Hotswap（热插拔）</strong></p>
+<p>热插拔是指在系统运行过程中，可以直接插入或拔出硬件设备，而不需要关机或重启系统</p>
+<p>而**热备技术（HotSpare，简称HS）**就是依靠它实现：一块硬盘工作，另一块硬盘作为热备，当主盘故障时系统自动切换到备用盘</p>
+<p>服务部署也是同理，以一个服务作为热备，随时顶替</p>
+</li>
+<li>
+<p><strong>Cluster（集群）</strong></p>
+<p>同一数据存储在多个硬盘里/同一服务部署在多台主机上，形成集群，一个坏了另一个还能用</p>
+<p>和HS不一样的是会切换硬盘/主机</p>
+</li>
+</ul>
+<p>嗯，图里的这种幽默也由此可见一斑了</p></div>
+</div>
+<h2 id="raid0条带化">RAID0：条带化
+</h2><p>2个以上硬盘并联</p>
+<p>将数据分块，无冗余地并行写入阵列中的所有磁盘，空间利用率高高的，就是磁盘本身的容量</p>
+<p>读写性能极高，是所有RAID级别中理论速度最快的</p>
+<p>但也因为没有任何数据冗余，任何一块磁盘损坏都会导致所有数据的丢失</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RAID_0.svg/250px-RAID_0.svg.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RAID_0.svg/250px-RAID_0.svg.png" alt="img"  />
+</a>
+</div>
+</p>
+<h2 id="raid1镜像">RAID1：镜像
+</h2><p>将数据完整地复制到另一块或多块磁盘上，形成互为镜像的副本，提供了很高的数据安全性</p>
+<p>但其磁盘空间利用率只有一半，并且写入性能相比单盘没有提升（没有使用条带化），是比较不行的冗余方式</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/250px-RAID_1.svg.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/250px-RAID_1.svg.png" alt="img"  />
+</a>
+</div>
+</p>
+<h2 id="raid2位级条带化汉明码校验">RAID2：位级条带化+汉明码校验
+</h2><p>在<strong>位</strong>级别上对数据进行条带化，并使用专门的磁盘存储汉明码进行错误校验，实时纠正单位数据错误</p>
+<p>这种方式实现复杂，可用空间是(N-P)*S，其中N是总盘数，P是校验盘数，S是盘容量</p>
+<p>校验盘的数量P与数据盘的数量有关，关系有点复杂，就不展开了</p>
+<p>随着现代硬盘自带纠错功能，该级别已被市场淘汰了</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/RAID2_arch.svg/500px-RAID2_arch.svg.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/RAID2_arch.svg/500px-RAID2_arch.svg.png" alt="img"  />
+</a>
+</div>
+</p>
+<h2 id="raid3块级条带化专用校验盘">RAID3：块级条带化+专用校验盘
+</h2><p>在<strong>字节</strong>级别上进行数据条带化，使用一块专用的磁盘来存储所有数据的奇偶校验信息，可用空间是(N-1)*S</p>
+<p>至少使用三块硬盘，如果只有两块就和RAID1一样了</p>
+<p>由于数据按字节分布在所有数据盘上，任何读写操作都需要所有磁盘协同工作，这使其不适合处理大量随机的小型读写请求，适合大块连续数据的读写，例如未压缩视频编辑</p>
+<p>但由于所有校验操作都集中在一块专用盘上，导致高并发随机写入的性能被大幅限制，因此也已很少使用</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/RAID_3.svg/330px-RAID_3.svg.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/RAID_3.svg/330px-RAID_3.svg.png" alt="img"  />
+</a>
+</div>
+</p>
+<h2 id="raid4块级条带化专用校验盘">RAID4：块级条带化+专用校验盘
+</h2><p>在<strong>块</strong>级别上对数据进行条带化，并同样使用一块专用磁盘存储奇偶校验信息，所以可用空间也是(N-1)*S</p>
+<p>至少使用三块盘，理由和RAID3一样</p>
+<p>相比RAID3，改善了小文件的读取性能，因为读取请求可以由单个数据盘独立完成</p>
+<p>但写入操作时，这块专用的校验盘依然制约了性能，核心问题并未得到解决</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RAID_4.svg/330px-RAID_4.svg.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RAID_4.svg/330px-RAID_4.svg.png" alt="img"  />
+</a>
+</div>
+</p>
+<h2 id="raid5分布式奇偶校验">RAID5：分布式奇偶校验
+</h2><p>在<strong>块</strong>级别上条带化数据，将奇偶校验信息交错地分布到所有磁盘上，性能、容量和安全性之间有很好的平衡</p>
+<p>因为奇偶校验信息占据的空间刚好是一块盘，所以可用空间也是(N-1)*S</p>
+<p>至少使用三块硬盘，如果只有两块的话就无法存储完整的条带信息了</p>
+<p>它可以在单块磁盘损坏时不丢失数据，因为后续的读取可以通过阵列中剩余的数据和奇偶校验块计算出来</p>
+<p>但由于奇偶校验计算是在整个条带上进行的，其每个写入操作都需要重新计算校验值，性能会有一定损失</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/RAID_5.svg/330px-RAID_5.svg.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/RAID_5.svg/330px-RAID_5.svg.png" alt="img"  />
+</a>
+</div>
+</p>
+<p><strong>由于RAID5是非常常用的类型，也是电子取证重点考察的部分，我们重点讲一下它</strong></p>
+<p>RAID5的核心在于其校验数据的分布式存储，其校验原理基于异或运算(XOR，用符号<code>^</code>代指)</p>
+<p>例如，RAID5存储方式下有A1, A2, A3三个数据块，其校验块Ap的计算方式为<code>Ap = A1 ^ A2 ^ A3</code>，如果其中一个数据块（如A2）丢失，可以通过<code>A2 = A1 ^ A3 ^ Ap</code>来恢复</p>
+<p>而校验块在磁盘间的分布规律，即所谓“循环方式”，是重组中最关键的一环</p>
+<p>它由两个东西决定：<strong>循环方向</strong>和<strong>同步性（对称性）</strong></p>
+<h3 id="循环方向">循环方向
+</h3><p><strong>决定RAID5每条条带的奇偶校验块（P）在不同磁盘上的分布方式</strong></p>
+<h4 id="左循环">左循环
+</h4><p>校验块<code>P0, P1, P2...</code>从阵列的<strong>最后一个盘</strong>开始，<strong>从右向左</strong>依次移动</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条带号</th>
+          <th>Disk0</th>
+          <th>Disk1</th>
+          <th>Disk2</th>
+          <th>Disk3</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>P0</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td></td>
+          <td></td>
+          <td>P1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td></td>
+          <td>P2</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>P3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>P4</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td>P5</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="右循环">右循环
+</h4><p>校验块<code>P0, P1, P2...</code>从阵列的<strong>第一个盘</strong>开始，<strong>从左向右</strong>依次移动</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条带号</th>
+          <th>Disk0</th>
+          <th>Disk1</th>
+          <th>Disk2</th>
+          <th>Disk3</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>P0</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td></td>
+          <td>P1</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td></td>
+          <td></td>
+          <td>P2</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>P3</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>P4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td></td>
+          <td>P5</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="同步性对称性">同步性（对称性）
+</h3><p><strong>决定写数据和校验时，磁盘是否按固定顺序同时参与写入</strong></p>
+<p>下面内容我们默认使用左循环的方式，填入D0~D8这九个数据块</p>
+<h4 id="异步不对称">异步（不对称）
+</h4><p><strong>下一个数据条带的起始数据块总是从0号盘开始写入，不考虑上一行校验块的位置</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条带号</th>
+          <th>Disk0</th>
+          <th>Disk1</th>
+          <th>Disk2</th>
+          <th>Disk3</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>D0</td>
+          <td>D1</td>
+          <td>D2</td>
+          <td>P0</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>D3</td>
+          <td>D4</td>
+          <td>P1</td>
+          <td>D5</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>D6</td>
+          <td>P2</td>
+          <td>D7</td>
+          <td>D8</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>P3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>P4</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td>P5</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>其实就是每行从0依次由低到高填入</p>
+<h4 id="同步对称">同步（对称）
+</h4><p><strong>下一个数据条带的起始数据块紧跟在当前条带校验块所在的磁盘之后，如果校验块在最后一个盘，则起始数据块回到0号盘</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条带号</th>
+          <th>Disk0</th>
+          <th>Disk1</th>
+          <th>Disk2</th>
+          <th>Disk3</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>D0</td>
+          <td>D1</td>
+          <td>D2</td>
+          <td>P0</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>D4</td>
+          <td>D5</td>
+          <td>P1</td>
+          <td>D3</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>D8</td>
+          <td>P2</td>
+          <td>D6</td>
+          <td>D7</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>P3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>P4</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td>P5</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>先判断下一个条带的校验块位于哪个磁盘，然后将数据写入校验块所在的磁盘的下一个磁盘</p>
+<p>之后向高号盘写入，直至该条带内编号最大的数据块写满后，再回到同条带内的0号盘写入，直至写满条带</p>
+<p>比如条带三，因为校验块是Disk1，数据写入顺序就是D6（Disk2）-&gt; D7（Disk3）-&gt; D8（Disk0）</p>
+<p><strong>至此，我们就掌握了完整的RAID5写入标准数据与校验数据的方式</strong></p>
+<h2 id="raid6双分布式奇偶校验">RAID6：双分布式奇偶校验
+</h2><p>在RAID5的基础上增加了第二个独立的校验块，并将两种校验信息都交错分布在所有磁盘上</p>
+<p>有两组独立的校验信息，占用的总空间等于两块磁盘的容量，所以可用空间是(N-2)*S</p>
+<p>至少需要4块磁盘，可以容忍两块磁盘同时损坏</p>
+<p>但也因为要进行两次校验计算，RAID6的写入性能，尤其是小数据块的随机写入，通常低于RAID5</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/RAID_6.svg/330px-RAID_6.svg.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/RAID_6.svg/330px-RAID_6.svg.png" alt="img"  />
+</a>
+</div>
+</p>
+<h2 id="raid10-10">RAID10 (1+0)
+</h2><p>先将磁盘两两配对做RAID1（镜像），然后再将这些镜像对组合成一个RAID0（条带化）</p>
+<p>兼具RAID1的高可靠性和RAID0的高性能，只要每个镜像对中至少有一块磁盘正常，数据就不会丢失</p>
+<p>但成本高，且磁盘利用率和RAID1一样，只有50%</p>
+<p>eg：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条带号</th>
+          <th>Disk0</th>
+          <th>Disk1</th>
+          <th>Disk2</th>
+          <th>Disk3</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>D0</td>
+          <td>D0</td>
+          <td>D1</td>
+          <td>D1</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>D2</td>
+          <td>D2</td>
+          <td>D3</td>
+          <td>D3</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>Disk0/1是镜像组1，Disk2/3是镜像组2</p>
+<p>使用RAID0对镜像组条带化后，多组镜像同时读写</p>
+<h2 id="raid50-50">RAID50 (5+0)
+</h2><p>先将磁盘分组构建多个RAID5阵列，再将这些RAID5阵列组合成一个RAID0</p>
+<p>每个子RAID5组都允许坏一块盘，提供了比单个RAID5更高的性能和更好的容错能力</p>
+<p>可用空间是K*(M-1)*S，K是RAID5子阵列的数量，M是每个子阵列中的磁盘数量</p>
+<p>eg：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条带号</th>
+          <th>Disk0</th>
+          <th>Disk1</th>
+          <th>Disk2</th>
+          <th>Disk3</th>
+          <th>Disk4</th>
+          <th>Disk5</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>D0</td>
+          <td>D1</td>
+          <td>P0</td>
+          <td>D3</td>
+          <td>D4</td>
+          <td>P1</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>D5</td>
+          <td>P2</td>
+          <td>D6</td>
+          <td>D7</td>
+          <td>P3</td>
+          <td>D8</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>前3块盘是RAID5组1，后3块盘是RAID5组2</p>
+<p>RAID0跨两组条带化后，多组并行，提高性能</p>
+<h2 id="raid60-60">RAID60 (6+0)
+</h2><p>先将磁盘分组构建多个RAID6阵列，再将这些RAID6阵列组合成一个RAID0</p>
+<p>每个子RAID6组都允许坏两块盘，提供了极高的性能和顶级的容错能力</p>
+<p>可用空间是K*(M-2)*S</p>
+<p>eg：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>条带号</th>
+          <th>Disk0</th>
+          <th>Disk1</th>
+          <th>Disk2</th>
+          <th>Disk3</th>
+          <th>Disk4</th>
+          <th>Disk5</th>
+          <th>Disk6</th>
+          <th>Disk7</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>D0</td>
+          <td>D1</td>
+          <td>P0</td>
+          <td>Q0</td>
+          <td>D4</td>
+          <td>D5</td>
+          <td>P1</td>
+          <td>Q1</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>D2</td>
+          <td>P2</td>
+          <td>Q2</td>
+          <td>D3</td>
+          <td>D6</td>
+          <td>P3</td>
+          <td>Q3</td>
+          <td>D7</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>每组4块盘，RAID0跨两组条带化，提升性能</p>
+<p><strong>上面三种方式和RAID0组合都是为了在高容错的基础上提高读写效率</strong></p>
+<h1 id="raid的实现模式">RAID的实现模式
+</h1><h2 id="软件raid">软件RAID
+</h2><p>所有数据和校验运算都由CPU负责，成本低廉，无需额外硬件，但会占用CPU资源，影响系统性能</p>
+<p>例如操作系统内置的RAID功能，或者主板芯片组提供的RAID功能，都是软件RAID</p>
+<p>不过主板损坏后，可能难以找到同款主板来重建RAID</p>
+<h2 id="硬件raid">硬件RAID
+</h2><p>通过一块专用的RAID控制器卡来实现，该卡上有自己的处理器（称作ROC, RAID-on-Chip）、缓存和BIOS，独立处理所有RAID运算，对主CPU透明</p>
+<p>性能高，不占用主机CPU资源，通常有缓存和备用电池以防掉电数据丢失，可靠性高，易于迁移，但成本较高</p>
+<h1 id="raid重组">RAID重组
+</h1><p>选几个</p>
+<h2 id="2023美亚">2023美亚
+</h2><p>检材给了三个镜像：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928164412452" href="http://picture.928330.xyz/typora/image-20250928164412452.png">
+<img src="http://picture.928330.xyz/typora/image-20250928164412452.png" alt="image-20250928164412452"  />
+</a>
+</div>
+</p>
+<h3 id="usf">USF
+</h3><p>这个工具强到离谱，速度快而且非常自动化，非常推荐使用</p>
+<h4 id="自动重组">自动重组
+</h4><p>打开三个镜像：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928164318386" href="http://picture.928330.xyz/typora/image-20250928164318386.png">
+<img src="http://picture.928330.xyz/typora/image-20250928164318386.png" alt="image-20250928164318386"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928164522254" href="http://picture.928330.xyz/typora/image-20250928164522254.png">
+<img src="http://picture.928330.xyz/typora/image-20250928164522254.png" alt="image-20250928164522254"  />
+</a>
+</div>
+</p>
+<p>在左侧显示已经添加后，点击reflash刷新，可以看已经自动重组完成了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928170957861" href="http://picture.928330.xyz/typora/image-20250928170957861.png">
+<img src="http://picture.928330.xyz/typora/image-20250928170957861.png" alt="image-20250928170957861"  />
+</a>
+</div>
+</p>
+<p>其中三个NAS磁盘都被划分成了一模一样的三个分区：</p>
+<ul>
+<li>
+<p><strong>Mirror component (Ext2/3/4) partition</strong></p>
+<p>RAID1阵列的组件，用于存放NAS的操作系统</p>
+</li>
+<li>
+<p><strong>SWAP partition</strong></p>
+<p>用作Linux系统的交换分区（虚拟内存），在NAS中，这个分区通常也会被设置为一个RAID1阵列</p>
+</li>
+<li>
+<p><strong>RAID5 component partition</strong></p>
+<p>RAID5阵列的组件</p>
+</li>
+</ul>
+<p>这三块5.40GB硬盘组成的RAID5阵列，可用容量为<code>(3-1) * 5.40 GB = 10.80 GB</code>，也就是组好的SG7:2的大小</p>
+<p>而下面重组完成的卷大小是10GB，非常合理</p>
+<p>右键对应的RAID分区，选择查看信息，可以看到具体的RAID情况：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250930162538750" href="http://picture.928330.xyz/typora/image-20250930162538750.png">
+<img src="http://picture.928330.xyz/typora/image-20250930162538750.png" alt="image-20250930162538750"  />
+</a>
+</div>
+</p>
+<p>查看重组后的RAID5信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928173043903" href="http://picture.928330.xyz/typora/image-20250928173043903.png">
+<img src="http://picture.928330.xyz/typora/image-20250928173043903.png" alt="image-20250928173043903"  />
+</a>
+</div>
+</p>
+<p>在USF里面也能直接查看文件系统：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928212805098" href="http://picture.928330.xyz/typora/image-20250928212805098.png">
+<img src="http://picture.928330.xyz/typora/image-20250928212805098.png" alt="image-20250928212805098"  />
+</a>
+</div>
+</p>
+<h4 id="手动重组">手动重组
+</h4><p>除了自动分析，也能使用手动分析重组功能：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928214055410" href="http://picture.928330.xyz/typora/image-20250928214055410.png">
+<img src="http://picture.928330.xyz/typora/image-20250928214055410.png" alt="image-20250928214055410"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928220053871" href="http://picture.928330.xyz/typora/image-20250928220053871.png">
+<img src="http://picture.928330.xyz/typora/image-20250928220053871.png" alt="image-20250928220053871"  />
+</a>
+</div>
+</p>
+<p>关于手动重组，看这篇文章：<a class="link" href="https://www.cnblogs.com/0xl4k1d/p/15449572.html"  target="_blank" rel="noopener"
+    >Raid重组复习&ndash;0xL4k1d
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a></p>
+<p>其中步骤有些许复杂，后文就不展开了</p>
+<h4 id="导出磁盘">导出磁盘
+</h4><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928182313789" href="http://picture.928330.xyz/typora/image-20250928182313789.png">
+<img src="http://picture.928330.xyz/typora/image-20250928182313789.png" alt="image-20250928182313789"  />
+</a>
+</div>
+</p>
+<p>选择一比一复制：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928182328076" href="http://picture.928330.xyz/typora/image-20250928182328076.png">
+<img src="http://picture.928330.xyz/typora/image-20250928182328076.png" alt="image-20250928182328076"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928183645001" href="http://picture.928330.xyz/typora/image-20250928183645001.png">
+<img src="http://picture.928330.xyz/typora/image-20250928183645001.png" alt="image-20250928183645001"  />
+</a>
+</div>
+</p>
+<p>火眼可以正常解析：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225553541" href="http://picture.928330.xyz/typora/image-20250929225553541.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225553541.png" alt="image-20250929225553541"  />
+</a>
+</div>
+</p>
+<p>但不知道为什么不能进行火眼仿真</p>
+<h3 id="美亚计算机取证大师">美亚计算机取证大师
+</h3><p>似乎没有手动的选项，不过能自动是最好了:p</p>
+<h4 id="自动重组-1">自动重组
+</h4><p>新建案例（注意这里选择添加磁盘镜像进行分析，而不是直接选择RAID重组）：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928200854922" href="http://picture.928330.xyz/typora/image-20250928200854922.png">
+<img src="http://picture.928330.xyz/typora/image-20250928200854922.png" alt="image-20250928200854922"  />
+</a>
+</div>
+</p>
+<p>点击下一步后会自动识别出有动态磁盘，选择继续分析：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928200925018" href="http://picture.928330.xyz/typora/image-20250928200925018.png">
+<img src="http://picture.928330.xyz/typora/image-20250928200925018.png" alt="image-20250928200925018"  />
+</a>
+</div>
+</p>
+<p>进入案件后，在证据文件这里找到RAID5，已经自动识别出来了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928201454170" href="http://picture.928330.xyz/typora/image-20250928201454170.png">
+<img src="http://picture.928330.xyz/typora/image-20250928201454170.png" alt="image-20250928201454170"  />
+</a>
+</div>
+</p>
+<p>右键选择扫描磁盘结构：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928201526150" href="http://picture.928330.xyz/typora/image-20250928201526150.png">
+<img src="http://picture.928330.xyz/typora/image-20250928201526150.png" alt="image-20250928201526150"  />
+</a>
+</div>
+</p>
+<p>扫完之后会多出来两个卷，就是存储了内容的卷了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928221327512" href="http://picture.928330.xyz/typora/image-20250928221327512.png">
+<img src="http://picture.928330.xyz/typora/image-20250928221327512.png" alt="image-20250928221327512"  />
+</a>
+</div>
+</p>
+<p>点击卷就能查看文件系统：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928212858092" href="http://picture.928330.xyz/typora/image-20250928212858092.png">
+<img src="http://picture.928330.xyz/typora/image-20250928212858092.png" alt="image-20250928212858092"  />
+</a>
+</div>
+</p>
+<p>看别人说其实还需要右键RAID5，选择RAID重组：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928201616532" href="http://picture.928330.xyz/typora/image-20250928201616532.png">
+<img src="http://picture.928330.xyz/typora/image-20250928201616532.png" alt="image-20250928201616532"  />
+</a>
+</div>
+</p>
+<div class="alert alert-note">
+    <div class="alert-header">
+        <span class="alert-icon">
+            📝
+        </span>
+        <span class="alert-title">
+            Note
+        </span>
+    </div>
+    <div class="alert-content">
+        <p>这里也能看见三个盘的起始的偏移量都是4832886784字节，条带大小是128扇区，符合RAID5的规范</p>
+<p>但回顾之前使用USF的分析结果，那边说偏移量是9439232扇区，64KB</p>
+<p><strong>其实这里涉及到计算：一个扇区的大小是512字节</strong></p>
+<p>（以防你是跳着看的：<a class="link" href="#%e6%89%87%e5%8c%ba%ef%bc%88Sector%ef%bc%89" >扇区
+    
+</a>）</p>
+<p>由此能计算出他们其实是一样的：</p>
+<p><strong>偏移量 = 9439232扇区*512字节 = 4832886784字节</strong></p>
+<p><strong>条带大小 = 128扇区*512字节 = 65536字节 = 64K字节</strong></p></div>
+</div>
+<p>据说重组后才能看到文件系统，不过我做的过程里只需要扫描磁盘结构之后就能看到了，不知道这一步是什么意思，可能是方便之后导出镜像？</p>
+<p>总之以后注意一下，遇到问题再重组一下</p>
+<h4 id="导出镜像">导出镜像
+</h4><p>右键RAID5选择制作镜像文件：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928220633293" href="http://picture.928330.xyz/typora/image-20250928220633293.png">
+<img src="http://picture.928330.xyz/typora/image-20250928220633293.png" alt="image-20250928220633293"  />
+</a>
+</div>
+</p>
+<p>这里可以选择镜像文件的格式：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250928201947883" href="http://picture.928330.xyz/typora/image-20250928201947883.png">
+<img src="http://picture.928330.xyz/typora/image-20250928201947883.png" alt="image-20250928201947883"  />
+</a>
+</div>
+</p>
+<p>导出后还会附赠一个说明文档：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225504653" href="http://picture.928330.xyz/typora/image-20250929225504653.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225504653.png" alt="image-20250929225504653"  />
+</a>
+</div>
+</p>
+<p>火眼能够正常解析：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225516891" href="http://picture.928330.xyz/typora/image-20250929225516891.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225516891.png" alt="image-20250929225516891"  />
+</a>
+</div>
+</p>
+<h3 id="弘连火眼证据分析">弘连火眼证据分析
+</h3><h4 id="自动重组--导出镜像">自动重组 + 导出镜像
+</h4><p>需要在工具箱里面下载使用：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929214704136" href="http://picture.928330.xyz/typora/image-20250929214704136.png">
+<img src="http://picture.928330.xyz/typora/image-20250929214704136.png" alt="image-20250929214704136"  />
+</a>
+</div>
+</p>
+<p>使用信息查询能快速分析RAID的各种信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250930155819686" href="http://picture.928330.xyz/typora/image-20250930155819686.png">
+<img src="http://picture.928330.xyz/typora/image-20250930155819686.png" alt="image-20250930155819686"  />
+</a>
+</div>
+</p>
+<p>这里也是使用扇区来表示偏移量的</p>
+<p>使用重组功能，勾选自动解析，就能自动重组了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929214819769" href="http://picture.928330.xyz/typora/image-20250929214819769.png">
+<img src="http://picture.928330.xyz/typora/image-20250929214819769.png" alt="image-20250929214819769"  />
+</a>
+</div>
+</p>
+<p>导出的文件是<code>.001</code>格式，会放在一个火眼生成的虚拟驱动器里：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929215206710" href="http://picture.928330.xyz/typora/image-20250929215206710.png">
+<img src="http://picture.928330.xyz/typora/image-20250929215206710.png" alt="image-20250929215206710"  />
+</a>
+</div>
+</p>
+<p>这个文件也是能被正常解析的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225407141" href="http://picture.928330.xyz/typora/image-20250929225407141.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225407141.png" alt="image-20250929225407141"  />
+</a>
+</div>
+</p>
+<p>比较坑的是生成的虚拟驱动器想要关掉很麻烦，火眼没有这个功能，windows的磁盘管理也看不见这个驱动器</p>
+<p>试了好几次，我的步骤是：</p>
+<p><strong>1.手动删除生成的镜像（剪切也行，反正别让他在里面，让这个虚拟驱动器里面没有东西）</strong></p>
+<p><strong>2.在重组页面点击“清空”，把拖进去重组的镜像都删除</strong></p>
+<p><strong>3.再次点击生成文件，此时提示找不到信息，虚拟驱动器也随之消失了</strong></p>
+<p>据客服所说，关掉RAID重组工具页面就会自动卸载，不过我没试过</p>
+<h4 id="手动重组-1">手动重组
+</h4><p>没什么好说的，就是自己填写各个必要的数据：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251020220835767" href="http://picture.928330.xyz/typora/image-20251020220835767.png">
+<img src="http://picture.928330.xyz/typora/image-20251020220835767.png" alt="image-20251020220835767"  />
+</a>
+</div>
+</p>
+<h3 id="r-studio">R-Studio
+</h3><p>一定要是Technician80+版本的才支持e01格式</p>
+<p><del>为什么把它放最后呢，因为实在太慢了</del></p>
+<h4 id="自动重组-2">自动重组
+</h4><p>点击打开镜像，把三个镜像都导进去：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251020212018162" href="http://picture.928330.xyz/typora/image-20251020212018162.png">
+<img src="http://picture.928330.xyz/typora/image-20251020212018162.png" alt="image-20251020212018162"  />
+</a>
+</div>
+</p>
+<p>可以看见自动重组出来了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251020212049472" href="http://picture.928330.xyz/typora/image-20251020212049472.png">
+<img src="http://picture.928330.xyz/typora/image-20251020212049472.png" alt="image-20251020212049472"  />
+</a>
+</div>
+</p>
+<h4 id="手动重组-2">手动重组
+</h4><p>在RAID选择“创建虚拟块RAID和自动检测”</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251020214758785" href="http://picture.928330.xyz/typora/image-20251020214758785.png">
+<img src="http://picture.928330.xyz/typora/image-20251020214758785.png" alt="image-20251020214758785"  />
+</a>
+</div>
+</p>
+<p>右键要重组的镜像，选择添加到RAID块</p>
+<p>这里因为我上一步创建了两个，所以有两个选项，把他们都添加进同一个块就行：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251020215437607" href="http://picture.928330.xyz/typora/image-20251020215437607.png">
+<img src="http://picture.928330.xyz/typora/image-20251020215437607.png" alt="image-20251020215437607"  />
+</a>
+</div>
+</p>
+<p>全部导入是这样的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251020220436155" href="http://picture.928330.xyz/typora/image-20251020220436155.png">
+<img src="http://picture.928330.xyz/typora/image-20251020220436155.png" alt="image-20251020220436155"  />
+</a>
+</div>
+</p>
+<p>右侧就是需要我们编辑的东西：RAID类型、块顺序、行数、数据块大小、偏移</p>
+<p>当然也可以点击自动检测（就在参数那儿呢），不过过程非常非常漫长，不知道为什么明明自动重组那么快的</p>
+<h3 id="导出镜像-1">导出镜像
+</h3><p>右键重组好的镜像，选择创建镜像：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251021235927296" href="http://picture.928330.xyz/typora/image-20251021235927296.png">
+<img src="http://picture.928330.xyz/typora/image-20251021235927296.png" alt="image-20251021235927296"  />
+</a>
+</div>
+</p>
+<p>选择导出的类型以及位置，推荐btb类型的（默认是一个压缩文件形式）：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251022000116743" href="http://picture.928330.xyz/typora/image-20251022000116743.png">
+<img src="http://picture.928330.xyz/typora/image-20251022000116743.png" alt="image-20251022000116743"  />
+</a>
+</div>
+</p>
+<p>导出要花个几分钟，能被正常解析，没问题：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251022003156065" href="http://picture.928330.xyz/typora/image-20251022003156065.png">
+<img src="http://picture.928330.xyz/typora/image-20251022003156065.png" alt="image-20251022003156065"  />
+</a>
+</div>
+</p>
+<h2 id="2019美亚">2019美亚
+</h2><p>给出的是四个机械硬盘镜像</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250930103649432" href="http://picture.928330.xyz/typora/image-20250930103649432.png">
+<img src="http://picture.928330.xyz/typora/image-20250930103649432.png" alt="image-20250930103649432"  />
+</a>
+</div>
+</p>
+<h3 id="ftk--美亚取证大师">FTK + 美亚取证大师
+</h3><p>没找到其他办法，可能是因为这是硬RAID？</p>
+<p>使用FTK挂载这四个镜像（选择每个盘的.E01就可以，后面的会自动识别的）：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929010420615" href="http://picture.928330.xyz/typora/image-20250929010420615.png">
+<img src="http://picture.928330.xyz/typora/image-20250929010420615.png" alt="image-20250929010420615"  />
+</a>
+</div>
+</p>
+<p>挂载完成后可以在检材目录下看见一个<code>.adcf</code>文件：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929225647571" href="http://picture.928330.xyz/typora/image-20250929225647571.png">
+<img src="http://picture.928330.xyz/typora/image-20250929225647571.png" alt="image-20250929225647571"  />
+</a>
+</div>
+</p>
+<p><strong>这个<code>.adcf</code>文件是FTK创建的缓存/差异文件</strong></p>
+<p>使用<code>writable</code>(可写入)模式时，为了保护原文件不被修改，FTK会把所有写入操作都记录在这个文件中</p>
+<p>挂载过程里你可能可能看见这样的错误提示：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251002013300975" href="http://picture.928330.xyz/typora/image-20251002013300975.png">
+<img src="http://picture.928330.xyz/typora/image-20251002013300975.png" alt="image-20251002013300975"  />
+</a>
+</div>
+</p>
+<p>错误提示表明这个已经存在的<code>HDD1.E01.adcf</code>文件已经损坏，删掉再挂载即可，会生成一个新的</p>
+<p>不知道为什么，挂载之后在文件管理器可以看见，但在磁盘管理看不见这两个驱动器：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929012450186" href="http://picture.928330.xyz/typora/image-20250929012450186.png">
+<img src="http://picture.928330.xyz/typora/image-20250929012450186.png" alt="image-20250929012450186"  />
+</a>
+</div>
+</p>
+<p>无伤大雅，美亚是可以识别到的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929004556468" href="http://picture.928330.xyz/typora/image-20250929004556468.png">
+<img src="http://picture.928330.xyz/typora/image-20250929004556468.png" alt="image-20250929004556468"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929004610756" href="http://picture.928330.xyz/typora/image-20250929004610756.png">
+<img src="http://picture.928330.xyz/typora/image-20250929004610756.png" alt="image-20250929004610756"  />
+</a>
+</div>
+</p>
+<p>全都勾选后，自动计算序列，要一点时间：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929010516351" href="http://picture.928330.xyz/typora/image-20250929010516351.png">
+<img src="http://picture.928330.xyz/typora/image-20250929010516351.png" alt="image-20250929010516351"  />
+</a>
+</div>
+</p>
+<p>只有一种可能啊，那就是正确的了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929011513915" href="http://picture.928330.xyz/typora/image-20250929011513915.png">
+<img src="http://picture.928330.xyz/typora/image-20250929011513915.png" alt="image-20250929011513915"  />
+</a>
+</div>
+</p>
+<p>双击应用这个序列：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929011801653" href="http://picture.928330.xyz/typora/image-20250929011801653.png">
+<img src="http://picture.928330.xyz/typora/image-20250929011801653.png" alt="image-20250929011801653"  />
+</a>
+</div>
+</p>
+<p>已经还原了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20250929012403125" href="http://picture.928330.xyz/typora/image-20250929012403125.png">
+<img src="http://picture.928330.xyz/typora/image-20250929012403125.png" alt="image-20250929012403125"  />
+</a>
+</div>
+</p>
+<p>这几个磁盘都很大，或许是挂载之后让美亚重组更方便了，才能如此迅速扫出来</p>
 
 </section>
 
@@ -1542,7 +1661,9 @@ C1，avg_C2列存放C2列的均值)</p>
     
     <section class="article-tags">
         
-            <a href="/tags/sql/">SQL</a>
+            <a href="/tags/forensics/">Forensics</a>
+        
+            <a href="/tags/linux/">Linux</a>
         
     </section>
 
@@ -1557,7 +1678,7 @@ C1，avg_C2列存放C2列的均值)</p>
 
 
         <span>
-            最后更新于 2025-08-24
+            最后更新于 2025-10-22
         </span>
     </section></footer>
 
@@ -1576,18 +1697,18 @@ C1，avg_C2列存放C2列的均值)</p>
             
                 
 <article class="has-image">
-    <a href="/p/sql%E6%B3%A8%E5%85%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/">
+    <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/bbe3473c5e7044490ec526dc455a0a8c.jpeg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/bbe3473c5e7044490ec526dc455a0a8c.jpeg"/>
+                    <img src="http://picture.928330.xyz/typora/fcc033dfd187d8eb0d29169a672d75ce.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/fcc033dfd187d8eb0d29169a672d75ce.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">SQL注入：从入门到入土</h2>
+            <h2 class="article-title">Linux命令（文件写入与查看篇）</h2>
         </div>
     </a>
 </article>
@@ -1595,18 +1716,18 @@ C1，avg_C2列存放C2列的均值)</p>
             
                 
 <article class="has-image">
-    <a href="/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/">
+    <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/fb86b7621fba4d5ef41dce013ca5a72e.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/fb86b7621fba4d5ef41dce013ca5a72e.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">RAID与它的重组</h2>
+            <h2 class="article-title">Linux命令（文件管理篇）</h2>
         </div>
     </a>
 </article>
@@ -1614,18 +1735,18 @@ C1，avg_C2列存放C2列的均值)</p>
             
                 
 <article class="has-image">
-    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">逆向基础4：PE文件</h2>
+            <h2 class="article-title">windows相关知识总结（下）</h2>
         </div>
     </a>
 </article>
@@ -1633,18 +1754,18 @@ C1，avg_C2列存放C2列的均值)</p>
             
                 
 <article class="has-image">
-    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">
+    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">逆向基础3：ELF文件</h2>
+            <h2 class="article-title">windows相关知识总结（上）</h2>
         </div>
     </a>
 </article>
@@ -1652,18 +1773,18 @@ C1，avg_C2列存放C2列的均值)</p>
             
                 
 <article class="has-image">
-    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">
+    <a href="/p/%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%9C%E8%A5%BF/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png"/>
+                    <img src="http://picture.928330.xyz/typora/image-20251022010316720.png" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/image-20251022010316720.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">逆向基础2：可执行文件概述</h2>
+            <h2 class="article-title">磁盘相关的东西</h2>
         </div>
     </a>
 </article>

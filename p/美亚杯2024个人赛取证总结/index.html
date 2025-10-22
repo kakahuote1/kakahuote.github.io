@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="饮水机，以及一些磁盘管理知识">
-<title>RAID</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="感觉不错">
+<title>美亚杯2024个人赛取证总结</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/p/raid/'>
+<link rel='canonical' href='https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="RAID">
-<meta property='og:description' content="饮水机，以及一些磁盘管理知识">
-<meta property='og:url' content='https://blog.928330.xyz/p/raid/'>
+<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="美亚杯2024个人赛取证总结">
+<meta property='og:description' content="感觉不错">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2025-09-28T22:52:36&#43;08:00'/><meta property='article:modified_time' content='2025-10-07T15:03:18&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg' />
-<meta name="twitter:title" content="RAID">
-<meta name="twitter:description" content="饮水机，以及一些磁盘管理知识"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='forensics' /><meta property='article:tag' content='misc' /><meta property='article:published_time' content='2025-10-22T14:30:45&#43;08:00'/><meta property='article:modified_time' content='2025-10-22T18:14:57&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/20241009133922.png' />
+<meta name="twitter:title" content="美亚杯2024个人赛取证总结">
+<meta name="twitter:description" content="感觉不错"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/20241009133922.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -376,150 +376,158 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#什么是raid">什么是RAID</a></li>
-    <li><a href="#前置知识">前置知识</a>
+    <li><a href="#案件基本情况">案件基本情况</a>
       <ol>
-        <li><a href="#物理盘physical-diskpd">物理盘（Physical Disk，PD）</a></li>
-        <li><a href="#虚拟盘virtual-disk-vd-">虚拟盘（Virtual Disk ，VD ）</a></li>
-        <li><a href="#逻辑盘logical-disk-ld">逻辑盘（Logical Disk ，LD）</a></li>
-        <li><a href="#磁盘组disk-group">磁盘组（Disk Group）</a></li>
-        <li><a href="#扇区sector">扇区（Sector）</a>
-          <ol>
-            <li><a href="#物理扇区">物理扇区</a>
-              <ol>
-                <li><a href="#糟糕的问题">糟糕的问题</a></li>
-              </ol>
-            </li>
-            <li><a href="#逻辑扇区">逻辑扇区</a></li>
-            <li><a href="#硬盘扇区格式标准">硬盘扇区格式标准</a>
-              <ol>
-                <li><a href="#512n512-native512原生">512n（512 Native，512原生）</a></li>
-                <li><a href="#512e512-emulation512模拟">512e（512 Emulation，512模拟）</a></li>
-                <li><a href="#4kn4k-native4k原生">4Kn（4K Native，4K原生）</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#linux系统的物理盘与逻辑盘表示">Linux系统的物理盘与逻辑盘表示</a>
-          <ol>
-            <li><a href="#设备命名规则">设备命名规则</a>
-              <ol>
-                <li><a href="#sd-通用硬盘">sd (通用硬盘)</a></li>
-                <li><a href="#hdide硬盘">hd（IDE硬盘）</a></li>
-                <li><a href="#vd虚拟化硬盘">vd（虚拟化硬盘）</a></li>
-                <li><a href="#nvmenvme固态硬盘">nvme（NVMe固态硬盘）</a></li>
-                <li><a href="#mmcblkemmc--sd卡">mmcblk（eMMC / SD卡）</a></li>
-              </ol>
-            </li>
-            <li><a href="#分区编号的规则">分区编号的规则</a>
-              <ol>
-                <li><a href="#mbr-master-boot-record主引导记录">MBR (Master Boot Record，主引导记录)</a></li>
-                <li><a href="#gpt-guid-partition-tableguid分区表">GPT (GUID Partition Table，GUID分区表)</a></li>
-              </ol>
-            </li>
-            <li><a href="#实例">实例</a></li>
-          </ol>
-        </li>
-        <li><a href="#文件系统">文件系统</a>
-          <ol>
-            <li><a href="#格式化">格式化</a>
-              <ol>
-                <li><a href="#快速格式化">快速格式化</a></li>
-                <li><a href="#完全格式化">完全格式化</a></li>
-              </ol>
-            </li>
-            <li><a href="#常见的文件系统类型">常见的文件系统类型</a>
-              <ol>
-                <li><a href="#fat">FAT</a></li>
-                <li><a href="#ntfs">NTFS</a></li>
-                <li><a href="#refs">ReFS</a></li>
-                <li><a href="#ext">ext</a></li>
-                <li><a href="#btrfs">Btrfs</a></li>
-                <li><a href="#xfs">XFS</a></li>
-                <li><a href="#tmpfs">tmpfs</a></li>
-                <li><a href="#devtmpfs">devtmpfs</a></li>
-                <li><a href="#hfs-与-apfs">HFS+ 与 APFS</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#卷volume">卷（Volume）</a></li>
-        <li><a href="#windows物理磁盘的管理模式">Windows物理磁盘的管理模式</a>
-          <ol>
-            <li><a href="#基础磁盘-basic-disk">基础磁盘 (Basic Disk)</a></li>
-            <li><a href="#动态磁盘-dynamic-disk">动态磁盘 (Dynamic Disk)</a></li>
-          </ol>
-        </li>
-        <li><a href="#驱动器drive">驱动器（Drive）</a></li>
-        <li><a href="#挂载mount">挂载（Mount）</a>
-          <ol>
-            <li><a href="#windows挂载">windows挂载</a></li>
-            <li><a href="#linux挂载">Linux挂载</a></li>
-          </ol>
-        </li>
+        <li><a href="#案情">案情</a></li>
+        <li><a href="#检材资料">检材资料</a></li>
       </ol>
     </li>
-    <li><a href="#raid级别">RAID级别</a>
+    <li><a href="#emma-的手机">Emma 的手机</a>
       <ol>
-        <li><a href="#raid0条带化">RAID0：条带化</a></li>
-        <li><a href="#raid1镜像">RAID1：镜像</a></li>
-        <li><a href="#raid2位级条带化汉明码校验">RAID2：位级条带化+汉明码校验</a></li>
-        <li><a href="#raid3块级条带化专用校验盘">RAID3：块级条带化+专用校验盘</a></li>
-        <li><a href="#raid4块级条带化专用校验盘">RAID4：块级条带化+专用校验盘</a></li>
-        <li><a href="#raid5分布式奇偶校验">RAID5：分布式奇偶校验</a>
-          <ol>
-            <li><a href="#循环方向">循环方向</a>
-              <ol>
-                <li><a href="#左循环">左循环</a></li>
-                <li><a href="#右循环">右循环</a></li>
-              </ol>
-            </li>
-            <li><a href="#同步性对称性">同步性（对称性）</a>
-              <ol>
-                <li><a href="#异步不对称">异步（不对称）</a></li>
-                <li><a href="#同步对称">同步（对称）</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#raid6双分布式奇偶校验">RAID6：双分布式奇偶校验</a></li>
-        <li><a href="#raid10-10">RAID10 (1+0)</a></li>
-        <li><a href="#raid50-50">RAID50 (5+0)</a></li>
-        <li><a href="#raid60-60">RAID60 (6+0)</a></li>
+        <li><a href="#1emma-和-clara-的微信聊天记录-emma-最后到警署报案并拍摄写有报案编号的卡片-拍摄时的经纬值是多少">1.Emma 和 Clara 的微信聊天记录, Emma 最后到警署报案并拍摄写有报案编号的卡片, 拍摄时的经纬值是多少?</a></li>
+        <li><a href="#22024-年-8-月-30-日下午-2-点后-emma-共致电-clara-多少次">2.2024 年 8 月 30 日下午 2 点后 Emma 共致电 Clara 多少次?</a></li>
+        <li><a href="#3根据-emma-和-clara-的微信聊天记录-clara-失踪前曾告诉-emma-会到哪里">3.根据 Emma 和 Clara 的微信聊天记录, Clara 失踪前曾告诉 Emma 会到哪里?</a></li>
+        <li><a href="#4emma-的-iphone-xr-内微信应用程序的版本是多少">4.Emma 的 iPhone XR 内微信应用程序的版本是多少?</a></li>
+        <li><a href="#5emma-手机中下列哪个选项是正确的">5.Emma 手机中下列哪个选项是正确的?</a></li>
+        <li><a href="#6emma-手机中-apple-id-的注册电子邮箱是多少">6.Emma 手机中 Apple ID 的注册电子邮箱是多少?</a></li>
+        <li><a href="#7在-2024-年-emma-手机上曾记录的电话卡集成电路卡标识符iccid是多少">7.在 2024 年, Emma 手机上曾记录的电话卡集成电路卡标识符(ICCID)是多少?</a></li>
+        <li><a href="#8emma-手机的蓝牙设备名称elk-bledom的通用唯一标识符uuid是什么">8.Emma 手机的蓝牙设备名称&quot;ELK-BLEDOM&quot;的通用唯一标识符(UUID)是什么?</a></li>
       </ol>
     </li>
-    <li><a href="#raid的实现模式">RAID的实现模式</a>
+    <li><a href="#剧情-1">剧情 1</a>
       <ol>
-        <li><a href="#软件raid">软件RAID</a></li>
-        <li><a href="#硬件raid">硬件RAID</a></li>
+        <li><a href="#9emma-手机内-safari-浏览记录中网页--的网站标题是什么">9.Emma 手机内 Safari 浏览记录中网页 https://racing.hkjc.com/ 的网站标题是什么?</a></li>
+        <li><a href="#10emma-向-clara-透露什么原因令-emma-欠下巨债">10.Emma 向 Clara 透露什么原因令 Emma 欠下巨债?</a></li>
+        <li><a href="#11收债人要求-emma-还款数量">11.收债人要求 Emma 还款数量?</a></li>
+        <li><a href="#12emma-发送了多少张-png-图片给-clara-证明自己正被人追债">12.Emma 发送了多少张 .PNG 图片给 Clara, 证明自己正被人追债?</a></li>
+        <li><a href="#13emma-用来浏览虚拟货币的网址">13.Emma 用来浏览虚拟货币的网址?</a></li>
+        <li><a href="#14参考浏览器记录-有多少网址与bet365有关">14.参考浏览器记录, 有多少网址与&quot;bet365&quot;有关?</a></li>
       </ol>
     </li>
-    <li><a href="#raid重组">RAID重组</a>
+    <li><a href="#剧情-2">剧情 2</a>
       <ol>
-        <li><a href="#2023美亚">2023美亚</a>
+        <li><a href="#15emma-用了哪些恢复短语recovery-phrase进入-david-的虚拟货币账户">15.Emma 用了哪些恢复短语(Recovery Phrase)进入 David 的虚拟货币账户?</a></li>
+        <li><a href="#16emma-从-david-处窃取的虚拟货币的名称是什么">16.Emma 从 David 处窃取的虚拟货币的名称是什么?</a></li>
+        <li><a href="#17clara-偷拍的照片中-david-的虚拟货币余额是多少">17.Clara 偷拍的照片中, David 的虚拟货币余额是多少?</a></li>
+        <li><a href="#18emma-在偷窃-david-的虚拟货币前-emma-曾向-clara-透露有什么事发生在-emma-身上">18.Emma 在偷窃 David 的虚拟货币前, Emma 曾向 Clara 透露有什么事发生在 Emma 身上?</a></li>
+      </ol>
+    </li>
+    <li><a href="#剧情-3">剧情 3</a>
+      <ol>
+        <li><a href="#19emma-的-iphone-xr-中img_0008heic的图像与相片名字为的5005jpg看似为同一张相片-在数码法理鉴证分析下-以下哪样描述是正确">19.Emma 的 iPhone XR 中&quot;IMG_0008.HEIC&quot;的图像与相片名字为的&quot;5005.JPG&quot;看似为同一张相片, 在数码法理鉴证分析下, 以下哪样描述是正确?</a></li>
+        <li><a href="#20emma-的-iphone-xr-中img_0009heic的图像显示拍摄参数怎样">20.Emma 的 iPhone XR 中&quot;IMG_0009.HEIC&quot;的图像显示拍摄参数怎样</a></li>
+        <li><a href="#21emma-的-iphone-xr-中相片文件img_0009heic提供了什么电子证据信息">21.Emma 的 iPhone XR 中相片文件&quot;IMG_0009.HEIC&quot;提供了什么电子证据信息?</a></li>
+        <li><a href="#22emma-的-iphone-xr-内以下哪张照片是实况照片live-photos">22.Emma 的 iPhone XR 内以下哪张照片是实况照片(Live Photos)?</a></li>
+        <li><a href="#23手机里有多少张照片是用手机后置摄像镜头拍摄的">23.手机里有多少张照片是用手机后置摄像镜头拍摄的?</a></li>
+        <li><a href="#24参考通讯记录-meslocalid-为-224-的是什么类的文件">24.参考通讯记录, MesLocalID 为 224 的是什么类的文件?</a></li>
+      </ol>
+    </li>
+    <li><a href="#clara-的手机">Clara 的手机</a>
+      <ol>
+        <li><a href="#25clara-手机的-android-操作系统版本是">25.Clara 手机的 Android 操作系统版本是?</a></li>
+        <li><a href="#26clara-手机的版本号build-number是什么">26.Clara 手机的版本号(Build Number)是什么?</a></li>
+        <li><a href="#27clara-手机的-imei-号码是多少">27.Clara 手机的 IMEI 号码是多少?</a></li>
+        <li><a href="#28emma-的微信账号是">28.Emma 的微信账号是?</a></li>
+        <li><a href="#29clara-的第一封电子邮件记录的日期">29.Clara 的第一封电子邮件记录的日期?</a></li>
+        <li><a href="#30在通讯录中david的联系人信息还包括什么">30.在通讯录中&quot;David&quot;的联系人信息还包括什么?</a></li>
+        <li><a href="#31david-和-clara-之间通话次数">31.David 和 Clara 之间通话次数?</a></li>
+        <li><a href="#32clara-在-chrome-浏览器搜索中哪天使用了关键词popmart-炒价">32.Clara 在 Chrome 浏览器搜索中哪天使用了关键词&quot;popmart 炒价&rdquo;?</a></li>
+        <li><a href="#332024-年-7-月-30-日共收到多少封电子邮件">33.2024 年 7 月 30 日共收到多少封电子邮件?</a></li>
+        <li><a href="#34clara-的-gmail-账号是">34.Clara 的 Gmail 账号是?</a></li>
+        <li><a href="#35clara-的手机安装了哪个版本的-whatsapp">35.Clara 的手机安装了哪个版本的 WhatsApp?</a></li>
+        <li><a href="#36clara-的-whatsapp-账号">36.Clara 的 WhatsApp 账号?</a></li>
+        <li><a href="#37clara-的手机在什么时候安装了小红书-app">37.Clara 的手机在什么时候安装了小红书 APP?</a></li>
+        <li><a href="#382024-年-8-月-21-日-david-的虚拟货币钱包里有多少-idfc">38.2024 年 8 月 21 日 David 的虚拟货币钱包里有多少 IDFC?</a></li>
+        <li><a href="#39clara-注册的微信账号验证码是多少">39.Clara 注册的微信账号验证码是多少?</a></li>
+        <li><a href="#40david-为庆祝结婚周年纪念预订了哪家酒店">40.David 为庆祝结婚周年纪念预订了哪家酒店?</a></li>
+        <li><a href="#41哪个数据库文件存储了微信消息">41.哪个数据库文件存储了微信消息?</a></li>
+        <li><a href="#42哪个数据库文件db存储了-whatsapp-讯息">42.哪个数据库文件(.db)存储了 WhatsApp 讯息?</a></li>
+        <li><a href="#43clara-在-2024-年-8-月-29-日拍了多少张照片">43.Clara 在 2024 年 8 月 29 日拍了多少张照片?</a></li>
+        <li><a href="#44emma-在-2024-年-8-月-6-日通过微信发送了多少张照片给-clara">44.Emma 在 2024 年 8 月 6 日通过微信发送了多少张照片给 Clara?</a></li>
+        <li><a href="#45照片20240829_144717jpg的拍摄相机型号是什么">45.照片&quot;20240829_144717.jpg&quot;的拍摄相机型号是什么?</a></li>
+        <li><a href="#4620240821_121435jpg的储存路径是什么">46.&ldquo;20240821_121435.jpg&quot;的储存路径是什么?</a>
           <ol>
-            <li><a href="#usf">USF</a>
-              <ol>
-                <li><a href="#自动重组">自动重组</a></li>
-                <li><a href="#手动重组">手动重组</a></li>
-                <li><a href="#导出磁盘">导出磁盘</a></li>
-              </ol>
-            </li>
-            <li><a href="#r-studio">R-Studio</a></li>
-            <li><a href="#美亚计算机取证大师">美亚计算机取证大师</a>
-              <ol>
-                <li><a href="#自动重组-1">自动重组</a></li>
-                <li><a href="#导出镜像">导出镜像</a></li>
-              </ol>
-            </li>
-            <li><a href="#弘连火眼证据分析">弘连火眼证据分析</a></li>
+            <li><a href="#media目录">media目录</a></li>
           </ol>
         </li>
-        <li><a href="#2019">2019</a>
-          <ol>
-            <li><a href="#ftk--美亚取证大师">FTK + 美亚取证大师</a></li>
-          </ol>
-        </li>
+        <li><a href="#472024-年-8-月-20-日有多少张截图">47.2024 年 8 月 20 日有多少张截图?</a></li>
+        <li><a href="#482024-年-8-月-22-日被删除微信消息的类型是">48.2024 年 8 月 22 日被删除微信消息的类型是?</a></li>
+      </ol>
+    </li>
+    <li><a href="#david-的手机">David 的手机</a>
+      <ol>
+        <li><a href="#49根据contentsdb-david-手机接收了通讯软件-telegram-的验证短信-该验证码是多少">49.根据&quot;Contents.db&rdquo;, David 手机接收了通讯软件 Telegram 的验证短信, 该验证码是多少?</a></li>
+        <li><a href="#50david-把手机设置为个人热点-请找出个人热点的密码">50.David 把手机设置为个人热点, 请找出个人热点的密码.</a></li>
+        <li><a href="#51david-手机曾连接名为mtr-free-wi-fi的wifi">51.David 手机曾连接名为&quot;MTR Free Wi-Fi&quot;的WiFi.</a></li>
+        <li><a href="#52根据comtencentmm_preferencesxml-david-的手机最后登录微信的微信-id-是">52.根据&quot;com.tencent.mm_preferences.xml&quot;, David 的手机最后登录微信的微信 ID 是?</a></li>
+        <li><a href="#53请指出哪一张图片是于-2024-年-8-月-28-日利用屏幕截取的">53.请指出哪一张图片是于 2024 年 8 月 28 日利用屏幕截取的.</a></li>
+        <li><a href="#54根据contentsdb-david-手机的型号model是">54.根据&quot;Contents.db&quot;, David 手机的型号(Model)是?</a></li>
+        <li><a href="#55-参考contentsdb-david-所使用的手机-sim-卡的序号">55. 参考&quot;Contents.db&quot;, David 所使用的手机 SIM 卡的序号?</a></li>
+        <li><a href="#56-david-手机安装了应用程序-metamask-根据persist-root中-metamask-钱包内有多少个账号">56. David 手机安装了应用程序 MetaMask. 根据&quot;persist-root&quot;中, MetaMask 钱包内有多少个账号?</a></li>
+        <li><a href="#57根据persist-root中-何时从应用程序-metamask-发送虚拟货币至以下地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c">57.根据&quot;persist-root&quot;中, 何时从应用程序 MetaMask 发送虚拟货币至以下地址: 0X10A4F01B80203591CCEE76081A4489AE1CD1281C</a></li>
+        <li><a href="#58david-曾利用手机应用程序-metamask-三次发送虚拟货币失败-根据persist-root-发送虚拟货币失败的原因是什么">58.David 曾利用手机应用程序 MetaMask 三次发送虚拟货币失败. 根据&quot;persist-root&quot;, 发送虚拟货币失败的原因是什么?</a></li>
+      </ol>
+    </li>
+    <li><a href="#内存取证">内存取证</a>
+      <ol>
+        <li><a href="#59以下哪一个不是程序firefoxexe的-pid">59.以下哪一个不是程序&quot;firefox.exe&quot;的 PID?</a></li>
+        <li><a href="#60汇出-pid-为-724-的程序-其哈希值sha-256是">60.汇出 PID 为 724 的程序, 其哈希值(SHA-256)是?</a></li>
+        <li><a href="#61哪一个是执行-pid-为-724-的程序的-sid">61.哪一个是执行 PID 为 724 的程序的 SID?、</a></li>
+        <li><a href="#62账户-david-tenth-的-nt-lan-manager-的哈希值ntlm-hash">62.账户 David Tenth 的 NT LAN Manager 的哈希值(NTLM Hash)?</a></li>
+      </ol>
+    </li>
+    <li><a href="#david-的-u-盘部分">David 的 U 盘部分</a>
+      <ol>
+        <li><a href="#63david-的-u-盘文件系统的格式">63.David 的 U 盘文件系统的格式?</a></li>
+        <li><a href="#64david-的-u-盘文件系统中-每簇定义了多少字节">64.David 的 U 盘文件系统中, 每簇定义了多少字节?</a></li>
+        <li><a href="#65david-的-u-盘中有多少个已删除的文件">65.David 的 U 盘中有多少个已删除的文件?</a></li>
+        <li><a href="#66已删除的文件的-run-list-的-run-offset-是多少">66.已删除的文件的 Run List 的 Run Offset 是多少?</a></li>
+        <li><a href="#67已删除文件的第一个-datarun-的十六进制值小端序是多少">67.已删除文件的第一个 DataRun 的十六进制值(小端序)是多少?</a></li>
+        <li><a href="#68已删除的文件的实际大小字节是多少">68.已删除的文件的实际大小(字节)是多少?</a></li>
+        <li><a href="#69已删除文件的第一个-datarun-的-offset-是多少">69.已删除文件的第一个 DataRun 的 Offset 是多少?</a></li>
+        <li><a href="#70已删除的文件的第一个-datarun-的-length-是多少">70.已删除的文件的第一个 DataRun 的 Length 是多少?</a></li>
+        <li><a href="#71已删除文件的图像文件像素值是多少">71.已删除文件的图像文件像素值是多少?</a></li>
+        <li><a href="#72已删除图像文件是用哪个品牌和型号的手机拍摄">72.已删除图像文件是用哪个品牌和型号的手机拍摄?</a></li>
+      </ol>
+    </li>
+    <li><a href="#剧情-4">剧情 4</a>
+      <ol>
+        <li><a href="#73使用-x64dbg-的字符串搜索功能-在bitlockerexe中查找哪个字符串最有可能与显示的登录状态有关">73.使用 x64dbg 的字符串搜索功能, 在&quot;Bitlocker.exe&quot;中查找哪个字符串最有可能与显示的登录状态有关?</a></li>
+        <li><a href="#74当找到控制登录成功的逻辑代码时-如何修改汇编代码来绕过检查-达到任意输入-都成功登录的效果">74.当找到控制登录成功的逻辑代码时, 如何修改汇编代码来绕过检查, 达到任意输入, 都成功登录的效果?</a></li>
+        <li><a href="#75bitlockerexe的正确用户登录名称是">75.&ldquo;Bitlocker.exe&quot;的正确用户登录名称是?</a></li>
+        <li><a href="#76bitlockerexe的正确登录密码是">76.&ldquo;Bitlocker.exe&quot;的正确登录密码是?</a></li>
+        <li><a href="#77当bitlockerexe程序尝试显示登录结果成功或失败时-使用了哪一种途径来决定显示的消息">77.当&quot;Bitlocker.exe&quot;程序尝试显示登录结果（成功或失败）时, 使用了哪一种途径来决定显示的消息?</a></li>
+        <li><a href="#78决定能否解密-bitlocker-key-的字节的内存偏移量相对于基址是什么">78.决定能否解密 Bitlocker Key 的字节的内存偏移量(相对于基址)是什么?</a></li>
+        <li><a href="#79决定能否解密-bitlocker-key-的内存偏移量后-应该如何利用它来进行解密">79.决定能否解密 BitLocker Key 的内存偏移量后, 应该如何利用它来进行解密?</a></li>
+        <li><a href="#80-解密后的-bitlocker-key-是">80. 解密后的 Bitlocker Key 是?</a></li>
+      </ol>
+    </li>
+    <li><a href="#david-的笔记本电脑">David 的笔记本电脑</a>
+      <ol>
+        <li><a href="#81分区格式是">81.分区格式是?</a></li>
+        <li><a href="#82该-e01-成功提取的日期和时间是">82.该 e01 成功提取的日期和时间是?</a></li>
+        <li><a href="#83最后登录的用户是谁">83.最后登录的用户是谁?</a></li>
+        <li><a href="#84用户配置的时区是">84.用户配置的时区是?</a></li>
+        <li><a href="#85david-的笔记本电脑曾经连接了多少个设备">85.David 的笔记本电脑曾经连接了多少个设备?</a></li>
+        <li><a href="#86david-的笔记本电脑上的-firefox-浏览器安装了哪些扩展工具">86.David 的笔记本电脑上的 Firefox 浏览器安装了哪些扩展工具?</a></li>
+        <li><a href="#87根据用户配置文件中的-lnk-文件-最后访问的文件名称是">87.根据用户配置文件中的 .lnk 文件, 最后访问的文件名称是?</a></li>
+        <li><a href="#88david-的笔记本电脑曾經连接了多少个不同的-wifi">88.David 的笔记本电脑曾經连接了多少个不同的 WiFi?</a></li>
+        <li><a href="#89承上题-该wifi网络的名称ssid是">89.承上题, 该WiFi网络的名称(SSID)是?</a></li>
+        <li><a href="#90该电脑的-windows-操作系统的安装日期是什么">90.该电脑的 Windows 操作系统的安装日期是什么?</a></li>
+      </ol>
+    </li>
+    <li><a href="#案件综合分析">案件综合分析</a>
+      <ol>
+        <li><a href="#91下列那个网站能够找到区块链-binance-smart-chain-的交易记录">91.下列那个网站能够找到区块链 Binance Smart Chain 的交易记录?</a></li>
+        <li><a href="#92emma-用什么方法盜取-david-的-idfc">92.Emma 用什么方法盜取 David 的 IDFC?</a></li>
+        <li><a href="#93david-在什么日期时间发现-idfc-被盗">93.David 在什么日期时间发现 IDFC 被盗?</a></li>
+        <li><a href="#94emma-为什么盗取-david-的-idfc">94.Emma 为什么盗取 David 的 IDFC?</a></li>
+        <li><a href="#95分析-idfc-的交易记录-emma-盜取了-david-虚拟货币钱包内哪个地址的-idfc">95.分析 IDFC 的交易记录, Emma 盜取了 David 虚拟货币钱包内哪个地址的 IDFC?</a></li>
+        <li><a href="#96emma-总共盗取了-david-多少-idfc">96.Emma 总共盗取了 David 多少 IDFC?</a></li>
+        <li><a href="#97下列哪些地址是由相同的恢复短语recovery-seed所生成">97.下列哪些地址是由相同的恢复短语(Recovery Seed)所生成?</a></li>
+        <li><a href="#98根据-idfc-的交易记录作分析-总共有多少次-idfc-交易流入地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c">98.根据 IDFC 的交易记录作分析, 总共有多少次 IDFC 交易流入地址 0x10a4f01b80203591ccee76081a4489ae1cd1281c?</a></li>
+        <li><a href="#99在-david-计算机的-d-盘内有一张图片-根据图片上的信息-找出-david-另一个虚拟货币钱包的恢复短语-下列哪一个单词是在此恢复短语内">99.在 David 计算机的 D 盘内有一张图片, 根据图片上的信息, 找出 David 另一个虚拟货币钱包的恢复短语, 下列哪一个单词是在此恢复短语内?</a></li>
+        <li><a href="#100-在-idfc-的交易记录中-下列哪些地址由上述恢复短语所生成">100. 在 IDFC 的交易记录中, 下列哪些地址由上述恢复短语所生成?</a></li>
       </ol>
     </li>
   </ol>
@@ -536,9 +544,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/raid/">
+            <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
                 
-                    <img src="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg" loading="lazy" alt="Featured image of post RAID" />
+                    <img src="http://picture.928330.xyz/typora/20241009133922.png" loading="lazy" alt="Featured image of post 美亚杯2024个人赛取证总结" />
                 
             </a>
         </div>
@@ -548,8 +556,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
-                技术学习
+            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/" >
+                比赛复盘
             </a>
         
     </header>
@@ -559,11 +567,11 @@
 
 
         <h2 class="article-title">
-            <a href="/p/raid/">RAID</a>
+            <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">美亚杯2024个人赛取证总结</a>
         </h2>
         
         <h3 class="article-subtitle">
-            饮水机，以及一些磁盘管理知识
+            感觉不错
         </h3>
         
 
@@ -586,7 +594,7 @@
   <path d="M18 16.496v1.504l1 1" />
 </svg>
                 <time class="article-time--published">
-                    发布时间：2025-09-28</time>
+                    发布时间：2025-10-22</time>
             </div>
         
 
@@ -602,7 +610,7 @@
 
 
                <time>
-                   更新时间：2025-10-07
+                   更新时间：2025-10-22
                </time>
            </div>
         <div>
@@ -622,10 +630,234 @@
     <section class="article-content">
     
     
-    <p><strong>本来是只想写写RAID题目的，但有太多概念不清楚了，不知不觉有点写过头了&hellip;&hellip;</strong></p>
-<p>参考资料：</p>
-<p><a class="link" href="https://zh.wikipedia.org/wiki/RAID"  target="_blank" rel="noopener"
-    >RAID&ndash;维基百科
+    <p>听说这一届美亚杯个人赛不能上网搜索了，那么本次做题过程中也会断网</p>
+<h1 id="案件基本情况">案件基本情况
+</h1><h2 id="案情">案情
+</h2><p>于2024月8月某日，警方接获一名本地女子Emma报案·指她的姊姊CIara失联多天，希望报告一宗失踪人囗的案件。现在你被委派处理这宗案件。于处理该案件期间，你在Emma的同意下提取了她手机的资料，并且协助警方对CIara及其丈夫David的电子装备进行取证工作。请分析以下的资料，还原事件经过</p>
+<h2 id="检材资料">检材资料
+</h2><p>镜像挂载密码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>eS2%u@q#hake2#Z@6LWpQ8^T(R7cg95m\Bv+y;$=/dqxYnEusFf)tb&gt;:HKHwy+e%cR\r=9j:GsK)AV52/3hXfdv8#u7a6JQ^pz&gt;&lt;YPNkq*!&amp;
+</span></span></code></pre></div><p>（1）Emma的iOS手机镜像档案(Emma_MobiIe-lmage.zip)</p>
+<p>（2）CIara的安卓手机镜像档案(Clara-Smartphone.bin)</p>
+<p>（3）David的Windows系统计算器镜像档案（David-Laptop-64GB.e01）</p>
+<p>（4）David的8GBU盘镜像档案(David-USB-8GB.e01)</p>
+<p>（5）David的安卓手机镜像档案(David-Smartphone-1.zip)</p>
+<p>（6）David的Windows系统计算器内存档案(RAM_Capture_David_Laptop.raw)</p>
+<h1 id="emma-的手机">Emma 的手机
+</h1><p>Emma 已经几天没有收到她姐姐 Clara 的消息了, 报警失踪, 她焦虑地将手机提交给警察, 希望能找到线索.</p>
+<p>警察将手机交给你进行电子数据取证. 你成功提取了Emma手机的镜像 <code>Emma_Mobile.zip</code>.</p>
+<p>请根据取证结果回答以下问题.</p>
+<h2 id="1emma-和-clara-的微信聊天记录-emma-最后到警署报案并拍摄写有报案编号的卡片-拍摄时的经纬值是多少">1.Emma 和 Clara 的微信聊天记录, Emma 最后到警署报案并拍摄写有报案编号的卡片, 拍摄时的经纬值是多少?
+</h2><p><strong>A. 22.451721666667, 114.171853333333</strong></p>
+<p><strong>B. 22.451553333333, 114.172845</strong></p>
+<p><strong>C. 22.451928333333, 114.170503333333</strong></p>
+<p><strong>D. 22.451638333333, 114.16993</strong></p>
+<p>似乎是因为这个镜像不是标准的格式，火眼不能正常识别出来</p>
+<p>不过好在火眼能对其中的数据库什么的进行解析，虽然没有自动取证，但是也能看见具体的东西</p>
+<p>图片里面能找到题目说的这个卡片：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251016164642076" href="http://picture.928330.xyz/typora/image-20251016164642076.png">
+<img src="http://picture.928330.xyz/typora/image-20251016164642076.png" alt="image-20251016164642076"  />
+</a>
+</div>
+</p>
+<p>但是解析exif却并未找到任何关于GPS的信息</p>
+<p>尝试搜索四个选项，也没有对应的信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251016170715382" href="http://picture.928330.xyz/typora/image-20251016170715382.png">
+<img src="http://picture.928330.xyz/typora/image-20251016170715382.png" alt="image-20251016170715382"  />
+</a>
+</div>
+</p>
+<p>实际后面做题也找到了经纬度，不过数据库中图片并不是用,pic结尾的，所以直接看不出来：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017215119245" href="http://picture.928330.xyz/typora/image-20251017215119245.png">
+<img src="http://picture.928330.xyz/typora/image-20251017215119245.png" alt="image-20251017215119245"  />
+</a>
+</div>
+</p>
+<p>根据时间戳，警局报案的照片是下午<code>2024-08-30 18:03:30</code>，因此在这之前的就不可能，能排除前面两个：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017215911973" href="http://picture.928330.xyz/typora/image-20251017215911973.png">
+<img src="http://picture.928330.xyz/typora/image-20251017215911973.png" alt="image-20251017215911973"  />
+</a>
+</div>
+</p>
+<p>也就是从AB里面选一个，不过怎么区分呢</p>
+<p>在做第二十四题的时候，我发现pic的文件名称数字和MesLocalID是一样的，我们先把224条信息复制出来：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&lt;msg&gt;&lt;img hdlength=&#34;0&#34; length=&#34;139561&#34; aeskey=&#34;b3f5f12230235d3dfe4f90e4984c8ebf&#34; encryver=&#34;1&#34; md5=&#34;44c089af8c9a1414edb8ee6026be3307&#34; originsourcemd5=&#34;0bbe83bda8f3e13735e9009078a231f0&#34; filekey=&#34;wxid_t7zgo57j9m0j22_314_1725012210&#34; uploadcontinuecount=&#34;0&#34; imgsourceurl=&#34;&#34; hevc_mid_size=&#34;139561&#34; cdnbigimgurl=&#34;&#34; cdnmidimgurl=&#34;3052020100044b30490201000204a695112702030f525902044b7d9b2b020466d198f2042432353830663531302d623137372d343463312d623732642d6566396562313331663331610204011d0a020201000400&#34; cdnthumburl=&#34;3052020100044b30490201000204a695112702030f525902044b7d9b2b020466d198f2042432353830663531302d623137372d343463312d623732642d6566396562313331663331610204011d0a020201000400&#34; cdnthumblength=&#34;3971&#34; cdnthumbwidth=&#34;90&#34; cdnthumbheight=&#34;120&#34; cdnthumbaeskey=&#34;b3f5f12230235d3dfe4f90e4984c8ebf&#34;/&gt;&lt;appinfo&gt;&lt;appid&gt;&lt;/appid&gt;&lt;appname&gt;&lt;/appname&gt;&lt;version&gt;0&lt;/version&gt;&lt;isforceupdate&gt;1&lt;/isforceupdate&gt;&lt;mediatagname&gt;&lt;/mediatagname&gt;&lt;messageext&gt;&lt;/messageext&gt;&lt;messageaction&gt;&lt;/messageaction&gt;&lt;/appinfo&gt;&lt;MMAsset&gt;&lt;m_assetUrlForSystem&gt;&lt;![CDATA[F58B98FE-8010-44B7-8BF7-F23AF15DCFCA/L0/001]]&gt;&lt;/m_assetUrlForSystem&gt;&lt;m_isNeedOriginImage&gt;0&lt;/m_isNeedOriginImage&gt;&lt;m_isFailedFromIcloud&gt;0&lt;/m_isFailedFromIcloud&gt;&lt;m_isLoadingFromIcloud&gt;0&lt;/m_isLoadingFromIcloud&gt;&lt;/MMAsset&gt;&lt;/msg&gt;
+</span></span></code></pre></div><p>其中有一串CDATA：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CDATA[F58B98FE-8010-44B7-8BF7-F23AF15DCFCA/L0/001]
+</span></span></code></pre></div><p>这个东西在Photo.sqlite见了很多次了，直接就能找到对应的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017223136483" href="http://picture.928330.xyz/typora/image-20251017223136483.png">
+<img src="http://picture.928330.xyz/typora/image-20251017223136483.png" alt="image-20251017223136483"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="22024-年-8-月-30-日下午-2-点后-emma-共致电-clara-多少次">2.2024 年 8 月 30 日下午 2 点后 Emma 共致电 Clara 多少次?
+</h2><p>A. 85</p>
+<p>B. 86</p>
+<p>C. 87</p>
+<p>D. 88</p>
+<p>在数据库CallHistory的ZCALLRECORD表找到通话记录：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017133426332" href="http://picture.928330.xyz/typora/image-20251017133426332.png">
+<img src="http://picture.928330.xyz/typora/image-20251017133426332.png" alt="image-20251017133426332"  />
+</a>
+</div>
+</p>
+<p>从这一条开始一直到结尾都是在题目范围内：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017133559971" href="http://picture.928330.xyz/typora/image-20251017133559971.png">
+<img src="http://picture.928330.xyz/typora/image-20251017133559971.png" alt="image-20251017133559971"  />
+</a>
+</div>
+</p>
+<p>一共105-18+1=88条</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="3根据-emma-和-clara-的微信聊天记录-clara-失踪前曾告诉-emma-会到哪里">3.根据 Emma 和 Clara 的微信聊天记录, Clara 失踪前曾告诉 Emma 会到哪里?
+</h2><p><strong>A. 到酒店和丈夫David庆祝结婚周年</strong></p>
+<p><strong>B. 吃自助餐</strong></p>
+<p><strong>C. 约了朋友见面</strong></p>
+<p><strong>D. 去旅行</strong></p>
+<p>一个个翻数据库也不容易找到聊天记录，因为他不是标准的EnMiromsg命名，这里记录一下我找的过程</p>
+<p>首先可以在group.com.tencent.xin.plist这个文件中找到微信id：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017135946499" href="http://picture.928330.xyz/typora/image-20251017135946499.png">
+<img src="http://picture.928330.xyz/typora/image-20251017135946499.png" alt="image-20251017135946499"  />
+</a>
+</div>
+</p>
+<p>一般来说，聊天记录数据库里面会记录聊天者的id，我们全局搜索一下，就算找不到也能有个方向：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017140113010" href="http://picture.928330.xyz/typora/image-20251017140113010.png">
+<img src="http://picture.928330.xyz/typora/image-20251017140113010.png" alt="image-20251017140113010"  />
+</a>
+</div>
+</p>
+<p>找到了，并且对应数据库message_2里面就是存有聊天记录的：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017140238138" href="http://picture.928330.xyz/typora/image-20251017140238138.png">
+<img src="http://picture.928330.xyz/typora/image-20251017140238138.png" alt="image-20251017140238138"  />
+</a>
+</div>
+</p>
+<p>可以看到在Emma询问未回答（也就是失踪了）之前，说过要和David去酒店</p>
+<p>前文也有提到是结婚纪念日：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017140509049" href="http://picture.928330.xyz/typora/image-20251017140509049.png">
+<img src="http://picture.928330.xyz/typora/image-20251017140509049.png" alt="image-20251017140509049"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><p>这里Emma还说偷了David的加密货币，也许是后文伏笔</p>
+<h2 id="4emma-的-iphone-xr-内微信应用程序的版本是多少">4.Emma 的 iPhone XR 内微信应用程序的版本是多少?
+</h2><p>Manifest.plist中存有应用信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017144950380" href="http://picture.928330.xyz/typora/image-20251017144950380.png">
+<img src="http://picture.928330.xyz/typora/image-20251017144950380.png" alt="image-20251017144950380"  />
+</a>
+</div>
+</p>
+<p>火眼也能识别出来：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017145136133" href="http://picture.928330.xyz/typora/image-20251017145136133.png">
+<img src="http://picture.928330.xyz/typora/image-20251017145136133.png" alt="image-20251017145136133"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>8.0.50
+</span></span></code></pre></div><h2 id="5emma-手机中下列哪个选项是正确的">5.Emma 手机中下列哪个选项是正确的?
+</h2><p><strong>A. iOS 版本为 17.6.1</strong></p>
+<p><strong>B. IMEI 为 356414106484705</strong></p>
+<p><strong>C. Apple ID 为 <a class="link" href="mailto:Emma1761@gmail.com" >Emma1761@gmail.com
+    
+</a></strong></p>
+<p><strong>D. 手机曾经安装 Metamask 应用程序</strong></p>
+<p>A：IOS版本是17.5.1</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017141337271" href="http://picture.928330.xyz/typora/image-20251017141337271.png">
+<img src="http://picture.928330.xyz/typora/image-20251017141337271.png" alt="image-20251017141337271"  />
+</a>
+</div>
+</p>
+<p>B：在com.apple.commcenter.plist里面能找到一个类似的，但也和选项对得上</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017144242427" href="http://picture.928330.xyz/typora/image-20251017144242427.png">
+<img src="http://picture.928330.xyz/typora/image-20251017144242427.png" alt="image-20251017144242427"  />
+</a>
+</div>
+</p>
+<p>C：ID应该是emmaemma.851231@gmail.com</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017142841177" href="http://picture.928330.xyz/typora/image-20251017142841177.png">
+<img src="http://picture.928330.xyz/typora/image-20251017142841177.png" alt="image-20251017142841177"  />
+</a>
+</div>
+</p>
+<p>D：确实找到了这个应用</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017142741700" href="http://picture.928330.xyz/typora/image-20251017142741700.png">
+<img src="http://picture.928330.xyz/typora/image-20251017142741700.png" alt="image-20251017142741700"  />
+</a>
+</div>
+</p>
+<p>应该是多选</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>BD
+</span></span></code></pre></div><h2 id="6emma-手机中-apple-id-的注册电子邮箱是多少">6.Emma 手机中 Apple ID 的注册电子邮箱是多少?
+</h2><p>同上题C</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>emmaemma.851231@gmail.com
+</span></span></code></pre></div><h2 id="7在-2024-年-emma-手机上曾记录的电话卡集成电路卡标识符iccid是多少">7.在 2024 年, Emma 手机上曾记录的电话卡集成电路卡标识符(ICCID)是多少?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017145301914" href="http://picture.928330.xyz/typora/image-20251017145301914.png">
+<img src="http://picture.928330.xyz/typora/image-20251017145301914.png" alt="image-20251017145301914"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>8985200000826445829
+</span></span></code></pre></div><h2 id="8emma-手机的蓝牙设备名称elk-bledom的通用唯一标识符uuid是什么">8.Emma 手机的蓝牙设备名称&quot;ELK-BLEDOM&quot;的通用唯一标识符(UUID)是什么?
+</h2><p>火眼能识别出来，却只有mac地址，没有UUID：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017145401478" href="http://picture.928330.xyz/typora/image-20251017145401478.png">
+<img src="http://picture.928330.xyz/typora/image-20251017145401478.png" alt="image-20251017145401478"  />
+</a>
+</div>
+</p>
+<p>到源文件这个数据库找就能找到：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017145454131" href="http://picture.928330.xyz/typora/image-20251017145454131.png">
+<img src="http://picture.928330.xyz/typora/image-20251017145454131.png" alt="image-20251017145454131"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>8D13F23C-E73C-6A98-AA4F-16C8D7A5F826
+</span></span></code></pre></div><h1 id="剧情-1">剧情 1
+</h1><p>你发现了一些线索, Emma 看起来也很可疑, 她似乎背负了大量债务.</p>
+<h2 id="9emma-手机内-safari-浏览记录中网页--的网站标题是什么">9.Emma 手机内 Safari 浏览记录中网页 <a class="link" href="https://racing.hkjc.com/"  target="_blank" rel="noopener"
+    >https://racing.hkjc.com/
     
     <span style="white-space: nowrap;"><svg width=".7em"
         height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
@@ -634,1483 +866,1389 @@
             fill="currentColor">
     </svg></span>
     
-</a></p>
-<p><a class="link" href="https://blog.csdn.net/m0_37867238/article/details/143604850"  target="_blank" rel="noopener"
-    >历年美亚杯RAID重组解析汇总&ndash;小谢取证
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p><a class="link" href="https://forensics.xidian.edu.cn/wiki/"  target="_blank" rel="noopener"
-    >XDforensics-Wiki
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p><a class="link" href="https://www.cnblogs.com/0xl4k1d/p/15449572.html"  target="_blank" rel="noopener"
-    >Raid重组复习&ndash;0xL4k1d
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p><a class="link" href="https://blog.csdn.net/melonbo/article/details/150591869"  target="_blank" rel="noopener"
-    >深入UFSExplorer：自定义RAID配置指南&ndash;M百问
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p><a class="link" href="https://mercer5.github.io/2021/10/31/raid%E9%87%8D%E7%BB%84/"  target="_blank" rel="noopener"
-    >raid重组-mercer
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<h1 id="什么是raid">什么是RAID
-</h1><p><strong>RAID，全称Redundant Array of Independent Disks，独立磁盘冗余阵列</strong>是一种将多个独立的物理磁盘驱动器组合成一个逻辑单元的存储技术</p>
-<p>对于操作系统而言，这个由多块磁盘组成的RAID阵列看起来就像一个单一的大容量硬盘</p>
-<p>那么，RAID技术有什么好的？</p>
+</a> 的网站标题是什么?
+</h2><p><strong>A. 香港马会奖券有限公司</strong></p>
+<p><strong>B. 六合彩 - Google 搜索</strong></p>
+<p><strong>C. 快易钱:网上贷款财务公司 | 足不出户现金即日到手</strong></p>
+<p><strong>D. 赛马信息 - 香港赛马会</strong></p>
+<p>哈哈，我就知道她也不是好东西</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017152608503" href="http://picture.928330.xyz/typora/image-20251017152608503.png">
+<img src="http://picture.928330.xyz/typora/image-20251017152608503.png" alt="image-20251017152608503"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="10emma-向-clara-透露什么原因令-emma-欠下巨债">10.Emma 向 Clara 透露什么原因令 Emma 欠下巨债?
+</h2><p><strong>A. 投资孖展</strong></p>
+<p><strong>B. 虚拟货币失利</strong></p>
+<p><strong>C. 网上赌博</strong></p>
+<p><strong>D. 以上皆是</strong></p>
+<p>之前的聊天记录：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017152802448" href="http://picture.928330.xyz/typora/image-20251017152802448.png">
+<img src="http://picture.928330.xyz/typora/image-20251017152802448.png" alt="image-20251017152802448"  />
+</a>
+</div>
+</p>
+<p>好家伙，真是什么都干</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><p><strong>孖展</strong>：粤语在香港常用词，意思是融资或借钱买股票</p>
+<h2 id="11收债人要求-emma-还款数量">11.收债人要求 Emma 还款数量?
+</h2><p>A. 港币$786,990</p>
+<p>B. 港币$878,990</p>
+<p>C. 港币$786,980</p>
+<p>D. 港币$745,330</p>
+<p>短信中能找到：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017153226831" href="http://picture.928330.xyz/typora/image-20251017153226831.png">
+<img src="http://picture.928330.xyz/typora/image-20251017153226831.png" alt="image-20251017153226831"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="12emma-发送了多少张-png-图片给-clara-证明自己正被人追债">12.Emma 发送了多少张 .PNG 图片给 Clara, 证明自己正被人追债?
+</h2><p>A. 6</p>
+<p>B. 7</p>
+<p>C. 8</p>
+<p>D. 9</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017153531501" href="http://picture.928330.xyz/typora/image-20251017153531501.png">
+<img src="http://picture.928330.xyz/typora/image-20251017153531501.png" alt="image-20251017153531501"  />
+</a>
+</div>
+</p>
+<p>一共七张，这些图片在检材里面也都能找到</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="13emma-用来浏览虚拟货币的网址">13.Emma 用来浏览虚拟货币的网址?
+</h2><p>A. Google.com</p>
+<p>B. Facebook.com</p>
+<p>C. IntellaX.io</p>
+<p>D. Yahoo.com</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017153649840" href="http://picture.928330.xyz/typora/image-20251017153649840.png">
+<img src="http://picture.928330.xyz/typora/image-20251017153649840.png" alt="image-20251017153649840"  />
+</a>
+</div>
+</p>
+<p>虽然不知道这个是什么虚拟货币，不过有wallet应该就找对了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="14参考浏览器记录-有多少网址与bet365有关">14.参考浏览器记录, 有多少网址与&quot;bet365&quot;有关?
+</h2><p>A. 3</p>
+<p>B. 13</p>
+<p>C. 9</p>
+<p>D. 12</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017153808491" href="http://picture.928330.xyz/typora/image-20251017153808491.png">
+<img src="http://picture.928330.xyz/typora/image-20251017153808491.png" alt="image-20251017153808491"  />
+</a>
+</div>
+</p>
+<p>应该是三个</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h1 id="剧情-2">剧情 2
+</h1><p>你还发现了一些与不当使用他人加密钱包相关的痕迹.</p>
+<h2 id="15emma-用了哪些恢复短语recovery-phrase进入-david-的虚拟货币账户">15.Emma 用了哪些恢复短语(Recovery Phrase)进入 David 的虚拟货币账户?
+</h2><p>A. stock, avocado, grab, clay</p>
+<p>B. light, sadness, segment, ancient</p>
+<p>C. toe, talk, elder, oil</p>
+<p>D. 以上皆是</p>
+<p>对话记录有提到，并且发了图片：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017211953063" href="http://picture.928330.xyz/typora/image-20251017211953063.png">
+<img src="http://picture.928330.xyz/typora/image-20251017211953063.png" alt="image-20251017211953063"  />
+</a>
+</div>
+</p>
+<p>图片：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017211606522" href="http://picture.928330.xyz/typora/image-20251017211606522.png">
+<img src="http://picture.928330.xyz/typora/image-20251017211606522.png" alt="image-20251017211606522"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="16emma-从-david-处窃取的虚拟货币的名称是什么">16.Emma 从 David 处窃取的虚拟货币的名称是什么?
+</h2><p>A. IDFC</p>
+<p>B. ICAC</p>
+<p>C. INIC</p>
+<p>D. IFCC</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017211638574" href="http://picture.928330.xyz/typora/image-20251017211638574.png">
+<img src="http://picture.928330.xyz/typora/image-20251017211638574.png" alt="image-20251017211638574"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="17clara-偷拍的照片中-david-的虚拟货币余额是多少">17.Clara 偷拍的照片中, David 的虚拟货币余额是多少?
+</h2><p>A. 3266378.99</p>
+<p>B. 1044749.22</p>
+<p>C. 5022915.66</p>
+<p>D. 7822468.44</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="18emma-在偷窃-david-的虚拟货币前-emma-曾向-clara-透露有什么事发生在-emma-身上">18.Emma 在偷窃 David 的虚拟货币前, Emma 曾向 Clara 透露有什么事发生在 Emma 身上?
+</h2><p>A. 中彩票</p>
+<p>B. 欠债</p>
+<p>C. 升职</p>
+<p>D. 失业</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h1 id="剧情-3">剧情 3
+</h1><p>你查看了 Emma 手机中的一些照片数字信息, 以获取更多与失踪案件的信息.</p>
+<h2 id="19emma-的-iphone-xr-中img_0008heic的图像与相片名字为的5005jpg看似为同一张相片-在数码法理鉴证分析下-以下哪样描述是正确">19.Emma 的 iPhone XR 中&quot;IMG_0008.HEIC&quot;的图像与相片名字为的&quot;5005.JPG&quot;看似为同一张相片, 在数码法理鉴证分析下, 以下哪样描述是正确?
+</h2><p><strong>A. 储存在不同的.db檔案里</strong></p>
+<p><strong>B. 有不同哈希值</strong></p>
+<p><strong>C. IMG_0008.HEIC 为原图, &ldquo;5005.JPG&quot;为并非原图</strong></p>
+<p><strong>D. IMG_0008.HEIC 和名字&quot;5005.JPG&quot;是同一张相片</strong></p>
+<p>开始没想明白哪里有题目的图片，明明检材里面的都是<code>.pic</code>结尾的，后面找到了Photo.sqlite，里面存了所有图片的信息</p>
+<p>然后也没找到5005.JPG，先放着吧</p>
+<p>*<strong>理论题，考察鉴证分析的知识(?)，下面是学长给的解答</strong></p>
+<p>A：错，就算存在不同的数据库，也不能描述他们是同一张图片</p>
+<p>B：对</p>
+<p>C：对</p>
+<p>D：错，因为哈希值不同，不认为是同一张</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>BC
+</span></span></code></pre></div><h2 id="20emma-的-iphone-xr-中img_0009heic的图像显示拍摄参数怎样">20.Emma 的 iPhone XR 中&quot;IMG_0009.HEIC&quot;的图像显示拍摄参数怎样
+</h2><p>A. iPhone XR back camera 4.25mm f/1.8</p>
+<p>B. iPhone XR back camera 4.25mm f/2.8</p>
+<p>C. iPhone XR back camera 4.25mm f/2</p>
+<p>D. iPhone XR back camera 4.25mm f/1.6</p>
+<p>在表ZASSET里面找到对应的Z_PK：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017214013826" href="http://picture.928330.xyz/typora/image-20251017214013826.png">
+<img src="http://picture.928330.xyz/typora/image-20251017214013826.png" alt="image-20251017214013826"  />
+</a>
+</div>
+</p>
+<p>在ZEXTENDEDATTRIBUTES表找到对应的信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017214216184" href="http://picture.928330.xyz/typora/image-20251017214216184.png">
+<img src="http://picture.928330.xyz/typora/image-20251017214216184.png" alt="image-20251017214216184"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="21emma-的-iphone-xr-中相片文件img_0009heic提供了什么电子证据信息">21.Emma 的 iPhone XR 中相片文件&quot;IMG_0009.HEIC&quot;提供了什么电子证据信息?
+</h2><p><strong>A. 此相片是由隔空投送 (Airdrop)得来</strong></p>
+<p><strong>B. 此相片由iPhone XR拍摄</strong></p>
+<p><strong>C. 此相片的拍摄时间为2024-08-05 13:38:15(UTC+8)</strong></p>
+<p><strong>D. 此相片的拍摄时间为2024-08-06 08:30:52(UTC+8)</strong></p>
+<p>同上题表：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017214431465" href="http://picture.928330.xyz/typora/image-20251017214431465.png">
+<img src="http://picture.928330.xyz/typora/image-20251017214431465.png" alt="image-20251017214431465"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017214420774" href="http://picture.928330.xyz/typora/image-20251017214420774.png">
+<img src="http://picture.928330.xyz/typora/image-20251017214420774.png" alt="image-20251017214420774"  />
+</a>
+</div>
+</p>
+<p>A选项不知道在哪找，没找到就当他没有吧</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>BC
+</span></span></code></pre></div><h2 id="22emma-的-iphone-xr-内以下哪张照片是实况照片live-photos">22.Emma 的 iPhone XR 内以下哪张照片是实况照片(Live Photos)?
+</h2><p>A. IMG_0002.HEIC</p>
+<p>B. IMG_0005.HEIC</p>
+<p>C. IMG_0004.HEIC</p>
+<p>D. IMG_0006.HEIC</p>
+<p>不知道怎么判断，不过色彩好像只有5不一样，可能是它</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017221524583" href="http://picture.928330.xyz/typora/image-20251017221524583.png">
+<img src="http://picture.928330.xyz/typora/image-20251017221524583.png" alt="image-20251017221524583"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><p>*<strong>错了</strong></p>
+<p>iPhone中的实况照片扩展名为<code>.HEIC</code>，B和D都是<code>.PNG</code>，并且数据库里面就没有存他们的<code>.HEIC</code>格式，所以按道理说是送分题&hellip;&hellip;</p>
+<p>此外还要注意<code>ZVIDEOCPDURATIONVALUE</code> (视频片段长度) 字段不为0，这题并未涉及</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>AC
+</span></span></code></pre></div><h2 id="23手机里有多少张照片是用手机后置摄像镜头拍摄的">23.手机里有多少张照片是用手机后置摄像镜头拍摄的?
+</h2><p>A. 5</p>
+<p>B. 6</p>
+<p>C. 7</p>
+<p>D. 8</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017214652189" href="http://picture.928330.xyz/typora/image-20251017214652189.png">
+<img src="http://picture.928330.xyz/typora/image-20251017214652189.png" alt="image-20251017214652189"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="24参考通讯记录-meslocalid-为-224-的是什么类的文件">24.参考通讯记录, MesLocalID 为 224 的是什么类的文件?
+</h2><p>A. 相片</p>
+<p>B. 影片</p>
+<p>C. 文件</p>
+<p>D. 报表</p>
+<p>就是之前那张Recovery字段图片：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017222203895" href="http://picture.928330.xyz/typora/image-20251017222203895.png">
+<img src="http://picture.928330.xyz/typora/image-20251017222203895.png" alt="image-20251017222203895"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><p>到这里我发现pic的文件名称数字和这个MesLocalID是一样的，也就是说可以通过这个找到第一题真正的图片！具体思路见第一题</p>
+<h1 id="clara-的手机">Clara 的手机
+</h1><p>依据你在 Emma 的手机上找到的照片, 你告诉调查员 Clara 最后的位置是在湾仔的一家酒店.</p>
+<p>根据你提供的信息, 调查员发现 Clara 在酒店去世, Clara 的手机在她的附近, 你对 Clara 的手机进行取证.</p>
+<p>请根据取证结果, 参考 Clara_Smartphone.bin 回答以下问题.</p>
+<h2 id="25clara-手机的-android-操作系统版本是">25.Clara 手机的 Android 操作系统版本是?
+</h2><p>A. 8.0.0</p>
+<p>B. 9.0.0</p>
+<p>C. 8.1.0</p>
+<p>D. 7.0.0</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017223402548" href="http://picture.928330.xyz/typora/image-20251017223402548.png">
+<img src="http://picture.928330.xyz/typora/image-20251017223402548.png" alt="image-20251017223402548"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><p>经典LG，我看是23年的接着用的</p>
+<h2 id="26clara-手机的版本号build-number是什么">26.Clara 手机的版本号(Build Number)是什么?
+</h2><p>火眼扫不出，去他识别的源文件build.prop看一下：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017223605697" href="http://picture.928330.xyz/typora/image-20251017223605697.png">
+<img src="http://picture.928330.xyz/typora/image-20251017223605697.png" alt="image-20251017223605697"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>OPR1.170623.026
+</span></span></code></pre></div><h2 id="27clara-手机的-imei-号码是多少">27.Clara 手机的 IMEI 号码是多少?
+</h2><p>索引搜索到一个fish_xml文件：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017231012664" href="http://picture.928330.xyz/typora/image-20251017231012664.png">
+<img src="http://picture.928330.xyz/typora/image-20251017231012664.png" alt="image-20251017231012664"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017231042906" href="http://picture.928330.xyz/typora/image-20251017231042906.png">
+<img src="http://picture.928330.xyz/typora/image-20251017231042906.png" alt="image-20251017231042906"  />
+</a>
+</div>
+</p>
+<p>到底是不是这个呢，我也不清楚</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>351537092934716
+</span></span></code></pre></div><p>答案是对的，记一下这个文件名称吧，说不定过几年又考了</p>
+<h2 id="28emma-的微信账号是">28.Emma 的微信账号是?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017225647672" href="http://picture.928330.xyz/typora/image-20251017225647672.png">
+<img src="http://picture.928330.xyz/typora/image-20251017225647672.png" alt="image-20251017225647672"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>wxid_ltrpgdhvilso22
+</span></span></code></pre></div><h2 id="29clara-的第一封电子邮件记录的日期">29.Clara 的第一封电子邮件记录的日期?
+</h2><p>A. 2024-07-10</p>
+<p>B. 2024-07-18</p>
+<p>C. 2024-07-23</p>
+<p>D. 2024-07-30</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017225750961" href="http://picture.928330.xyz/typora/image-20251017225750961.png">
+<img src="http://picture.928330.xyz/typora/image-20251017225750961.png" alt="image-20251017225750961"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="30在通讯录中david的联系人信息还包括什么">30.在通讯录中&quot;David&quot;的联系人信息还包括什么?
+</h2><p>A. 出生日期</p>
+<p>B. LinkedIn</p>
+<p>C. 电子邮件</p>
+<p>D. 地址</p>
+<p>从火眼识别的结果跳转到源表：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017232157237" href="http://picture.928330.xyz/typora/image-20251017232157237.png">
+<img src="http://picture.928330.xyz/typora/image-20251017232157237.png" alt="image-20251017232157237"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017230611650" href="http://picture.928330.xyz/typora/image-20251017230611650.png">
+<img src="http://picture.928330.xyz/typora/image-20251017230611650.png" alt="image-20251017230611650"  />
+</a>
+</div>
+</p>
+<p>并没有找到什么，我猜这个表可能是横着看的，David之下Emma之上应该就是David的东西，但又只有whatsapp的账号</p>
+<p>这表真不懂怎么看，只能填一个出现了的</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><p>*<strong>这个数据库需要结合两张表分析</strong></p>
+<p>在raw contacts表里面能看见david对应id有2和3</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019015110272" href="http://picture.928330.xyz/typora/image-20251019015110272.png">
+<img src="http://picture.928330.xyz/typora/image-20251019015110272.png" alt="image-20251019015110272"  />
+</a>
+</div>
+</p>
+<p>回到data表，里面有一列是raw contact id，其中2和3对应的就是david的信息了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019015312492" href="http://picture.928330.xyz/typora/image-20251019015312492.png">
+<img src="http://picture.928330.xyz/typora/image-20251019015312492.png" alt="image-20251019015312492"  />
+</a>
+</div>
+</p>
+<p>很显然就是linked</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="31david-和-clara-之间通话次数">31.David 和 Clara 之间通话次数?
+</h2><p>A. 0</p>
+<p>B. 8</p>
+<p>C. 10</p>
+<p>D. 24</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017231113924" href="http://picture.928330.xyz/typora/image-20251017231113924.png">
+<img src="http://picture.928330.xyz/typora/image-20251017231113924.png" alt="image-20251017231113924"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><p>这里也能看见和Emma通话了88次，不过里面并不是都未接，和之前题目算出来的不一样，可能是火眼解析有问题，也可能数据库未同步，之前的方法是不会错的（</p>
+<h2 id="32clara-在-chrome-浏览器搜索中哪天使用了关键词popmart-炒价">32.Clara 在 Chrome 浏览器搜索中哪天使用了关键词&quot;popmart 炒价&rdquo;?
+</h2><p>A. 2024-08-10</p>
+<p>B. 2024-08-15</p>
+<p>C. 2024-08-20</p>
+<p>D. 2024-08-25</p>
+<p>搜索popmart搜不出来，手动翻了一下才知道搜的是pop mart，无语</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017231736832" href="http://picture.928330.xyz/typora/image-20251017231736832.png">
+<img src="http://picture.928330.xyz/typora/image-20251017231736832.png" alt="image-20251017231736832"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="332024-年-7-月-30-日共收到多少封电子邮件">33.2024 年 7 月 30 日共收到多少封电子邮件?
+</h2><p>A. 2</p>
+<p>B. 3</p>
+<p>C. 4</p>
+<p>D. 5</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017231833143" href="http://picture.928330.xyz/typora/image-20251017231833143.png">
+<img src="http://picture.928330.xyz/typora/image-20251017231833143.png" alt="image-20251017231833143"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="34clara-的-gmail-账号是">34.Clara 的 Gmail 账号是?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017231852301" href="http://picture.928330.xyz/typora/image-20251017231852301.png">
+<img src="http://picture.928330.xyz/typora/image-20251017231852301.png" alt="image-20251017231852301"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>clara.ccc0807@gmail.com
+</span></span></code></pre></div><h2 id="35clara-的手机安装了哪个版本的-whatsapp">35.Clara 的手机安装了哪个版本的 WhatsApp?
+</h2><p>A. 241676000</p>
+<p>B. 241676001</p>
+<p>C. 241676004</p>
+<p>D. 241676007</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017231934907" href="http://picture.928330.xyz/typora/image-20251017231934907.png">
+<img src="http://picture.928330.xyz/typora/image-20251017231934907.png" alt="image-20251017231934907"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="36clara-的-whatsapp-账号">36.Clara 的 WhatsApp 账号?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017232000365" href="http://picture.928330.xyz/typora/image-20251017232000365.png">
+<img src="http://picture.928330.xyz/typora/image-20251017232000365.png" alt="image-20251017232000365"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>85263791704@s.whatsapp.net
+</span></span></code></pre></div><h2 id="37clara-的手机在什么时候安装了小红书-app">37.Clara 的手机在什么时候安装了小红书 APP?
+</h2><p>A. 2024-07-10</p>
+<p>B. 2024-07-16</p>
+<p>C. 2024-07-20</p>
+<p>D. 2024-07-30</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017232333457" href="http://picture.928330.xyz/typora/image-20251017232333457.png">
+<img src="http://picture.928330.xyz/typora/image-20251017232333457.png" alt="image-20251017232333457"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="382024-年-8-月-21-日-david-的虚拟货币钱包里有多少-idfc">38.2024 年 8 月 21 日 David 的虚拟货币钱包里有多少 IDFC?
+</h2><p>A. 5022915.66</p>
+<p>B. 3212695.22</p>
+<p>C. 210355633.91</p>
+<p>D. 以上皆不是</p>
+<p>找半天没找到这天有任何记录，也许就是之前问过的吧</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><p>*<strong>的确如此</strong></p>
+<h2 id="39clara-注册的微信账号验证码是多少">39.Clara 注册的微信账号验证码是多少?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017232928401" href="http://picture.928330.xyz/typora/image-20251017232928401.png">
+<img src="http://picture.928330.xyz/typora/image-20251017232928401.png" alt="image-20251017232928401"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>945-025
+</span></span></code></pre></div><h2 id="40david-为庆祝结婚周年纪念预订了哪家酒店">40.David 为庆祝结婚周年纪念预订了哪家酒店?
+</h2><p>聊天记录可以看到：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017233002561" href="http://picture.928330.xyz/typora/image-20251017233002561.png">
+<img src="http://picture.928330.xyz/typora/image-20251017233002561.png" alt="image-20251017233002561"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Conrad Hong Kong
+</span></span></code></pre></div><h2 id="41哪个数据库文件存储了微信消息">41.哪个数据库文件存储了微信消息?
+</h2><p>点击一条微信消息跳转至源文件就行，也是老朋友了：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017233029970" href="http://picture.928330.xyz/typora/image-20251017233029970.png">
+<img src="http://picture.928330.xyz/typora/image-20251017233029970.png" alt="image-20251017233029970"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>EnMicroMsg.db
+</span></span></code></pre></div><h2 id="42哪个数据库文件db存储了-whatsapp-讯息">42.哪个数据库文件(.db)存储了 WhatsApp 讯息?
+</h2><p>同上题做法</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017233122539" href="http://picture.928330.xyz/typora/image-20251017233122539.png">
+<img src="http://picture.928330.xyz/typora/image-20251017233122539.png" alt="image-20251017233122539"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>msgstore.db
+</span></span></code></pre></div><h2 id="43clara-在-2024-年-8-月-29-日拍了多少张照片">43.Clara 在 2024 年 8 月 29 日拍了多少张照片?
+</h2><p>A. 0</p>
+<p>B. 3</p>
+<p>C. 4</p>
+<p>D. 5</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017234038554" href="http://picture.928330.xyz/typora/image-20251017234038554.png">
+<img src="http://picture.928330.xyz/typora/image-20251017234038554.png" alt="image-20251017234038554"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="44emma-在-2024-年-8-月-6-日通过微信发送了多少张照片给-clara">44.Emma 在 2024 年 8 月 6 日通过微信发送了多少张照片给 Clara?
+</h2><p>A. 0</p>
+<p>B. 1</p>
+<p>C. 5</p>
+<p>D. 12</p>
+<p>微信里一张也没有，之前Emma手机聊天记录也是如此</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="45照片20240829_144717jpg的拍摄相机型号是什么">45.照片&quot;20240829_144717.jpg&quot;的拍摄相机型号是什么?
+</h2><p>使用Irfanview查看exif信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017234957151" href="http://picture.928330.xyz/typora/image-20251017234957151.png">
+<img src="http://picture.928330.xyz/typora/image-20251017234957151.png" alt="image-20251017234957151"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>LG-H930
+</span></span></code></pre></div><h2 id="4620240821_121435jpg的储存路径是什么">46.&ldquo;20240821_121435.jpg&quot;的储存路径是什么?
+</h2><p>A. /media/0/DCIM/Camera</p>
+<p>B. /media/1/DCIM/Camera</p>
+<p>C. /media/00/DCIM/Camera</p>
+<p>D. /media/11/DCIM/Camera</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="" href="http://picture.928330.xyz/typora/image-20251017235059412.png">
+<img src="http://picture.928330.xyz/typora/image-20251017235059412.png" alt=""  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h3 id="media目录">media目录
+</h3><p>在 <strong>Android 系统</strong> 中，<code>/media</code> 是系统的<strong>外部存储挂载点目录之一</strong></p>
+<p>不过，它的使用方式在不同 Android 版本中略有不同</p>
 <ul>
 <li>
-<p><strong>数据容错</strong></p>
-<p>因为在多个磁盘上有存储数据的副本或校验信息，RAID可以有效防止因单块磁盘故障而导致的数据丢失</p>
-<p>当一块磁盘损坏时，系统可以利用其余磁盘上的冗余数据进行恢复，这抵御故障并继续运行</p>
+<p>早期 Android 版本（4.x 以前）中可能更直接地使用 <code>/mnt</code> 目录</p>
 </li>
 <li>
-<p><strong>性能提升</strong></p>
-<p>通过将数据分割成小块并同时读写到多个磁盘上，数据传输速率高，读写性能远超单个磁盘</p>
-<p><strong>这种方式也被称为条带化存储，每个条带包含一段连续的数据，同一条逻辑行的数据块分布在不同磁盘上</strong></p>
-<p>条带这个东西不太好用文字理解，举个例子</p>
-<p>假设有两块硬盘DiskA、DiskB，要存储的数据是字符串<code>ABCDEFGH</code>：</p>
-<p><strong>未条带化</strong>（普通存储）：</p>
-<ul>
-<li>DiskA：<code>ABCDEFGH</code></li>
-<li>DiskB：空</li>
+<p>在后期（Android 5.0+），系统逐步转向使用 <code>/storage</code> 作为主要的挂载入口</p>
+</li>
 </ul>
-<p>读取的时候只能A读，B不工作</p>
-<p><strong>条带化存储</strong>（条带大小2字节）：</p>
+<p>在多用户系统中，Android 会为每个用户创建独立的“虚拟外部存储空间”：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">media</span>/<span style="color:#d19a66">0</span>/         → <span style="color:#e06c75">主用户</span>（<span style="color:#e06c75">user</span> <span style="color:#d19a66">0</span>）<span style="color:#e06c75">的外部存储</span>
+</span></span><span style="display:flex;"><span>/<span style="color:#e06c75">media</span>/<span style="color:#d19a66">10</span>/        → <span style="color:#e06c75">第二个用户</span>（<span style="color:#e06c75">user</span> <span style="color:#d19a66">10</span>）<span style="color:#e06c75">的外部存储</span>
+</span></span></code></pre></div><p>这些路径通常是符号链接，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">media</span>/<span style="color:#d19a66">0</span> <span style="color:#56b6c2">-&gt;</span> /<span style="color:#e06c75">storage</span>/<span style="color:#e06c75">emulated</span>/<span style="color:#d19a66">0</span>
+</span></span></code></pre></div><p>而 <code>/storage/emulated/0</code> 实际上对应设备的<strong>内部共享存储区域</strong>（即用户看到的“内部 SD 卡”）。</p>
+<p>当插入 SD 卡或 USB 存储设备（例如通过 OTG），系统可能会创建：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">media</span>/&lt;<span style="color:#e06c75">UUID</span>&gt;/
+</span></span></code></pre></div><p>或：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">mnt</span>/<span style="color:#e06c75">media_rw</span>/&lt;<span style="color:#e06c75">UUID</span>&gt;/
+</span></span></code></pre></div><p>其中 <code>&lt;UUID&gt;</code> 是文件系统的卷标 ID，用于区分多个设备</p>
+<h2 id="472024-年-8-月-20-日有多少张截图">47.2024 年 8 月 20 日有多少张截图?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017235212936" href="http://picture.928330.xyz/typora/image-20251017235212936.png">
+<img src="http://picture.928330.xyz/typora/image-20251017235212936.png" alt="image-20251017235212936"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4
+</span></span></code></pre></div><h2 id="482024-年-8-月-22-日被删除微信消息的类型是">48.2024 年 8 月 22 日被删除微信消息的类型是?
+</h2><p>A. 照片</p>
+<p>B. 视频</p>
+<p>C. 文本</p>
+<p>D. 以上都不是</p>
+<p>火眼并没有解析出来</p>
+<p>根据聊天记录，可以发现这话之间明显是不连贯的，应该是recovery的内容：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017235701595" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png" alt="image-20251017235701595"  />
+</a>
+</div>
+</p>
+<p>回到Emma手机的聊天记录，可以发现是有一个图片消息的，应该就是Emma手机里那张记录了Recovery字段的图片：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017235721344" href="http://picture.928330.xyz/typora/image-20251017235721344.png">
+<img src="http://picture.928330.xyz/typora/image-20251017235721344.png" alt="image-20251017235721344"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h1 id="david-的手机">David 的手机
+</h1><p>你在查看 Clara 的手机镜像后, 确定 Clara 是 David 的妻子, 调查员通过查询酒店预订记录确认了这一点.</p>
+<p>他们现在定位 David 的住所, 以进行进一步调查.</p>
+<p>你首先分析 David 的手机, 参考 David_Smartphone_1.zip.</p>
+<h2 id="49根据contentsdb-david-手机接收了通讯软件-telegram-的验证短信-该验证码是多少">49.根据&quot;Contents.db&rdquo;, David 手机接收了通讯软件 Telegram 的验证短信, 该验证码是多少?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251017235945439" href="http://picture.928330.xyz/typora/image-20251017235945439.png">
+<img src="http://picture.928330.xyz/typora/image-20251017235945439.png" alt="image-20251017235945439"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>84298
+</span></span></code></pre></div><h2 id="50david-把手机设置为个人热点-请找出个人热点的密码">50.David 把手机设置为个人热点, 请找出个人热点的密码.
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018000019366" href="http://picture.928330.xyz/typora/image-20251018000019366.png">
+<img src="http://picture.928330.xyz/typora/image-20251018000019366.png" alt="image-20251018000019366"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>wdfj5674
+</span></span></code></pre></div><h2 id="51david-手机曾连接名为mtr-free-wi-fi的wifi">51.David 手机曾连接名为&quot;MTR Free Wi-Fi&quot;的WiFi.
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018000449843" href="http://picture.928330.xyz/typora/image-20251018000449843.png">
+<img src="http://picture.928330.xyz/typora/image-20251018000449843.png" alt="image-20251018000449843"  />
+</a>
+</div>
+</p>
+<p>居然是判断题</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>√
+</span></span></code></pre></div><h2 id="52根据comtencentmm_preferencesxml-david-的手机最后登录微信的微信-id-是">52.根据&quot;com.tencent.mm_preferences.xml&quot;, David 的手机最后登录微信的微信 ID 是?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018000824655" href="http://picture.928330.xyz/typora/image-20251018000824655.png">
+<img src="http://picture.928330.xyz/typora/image-20251018000824655.png" alt="image-20251018000824655"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>wxid_rni3m2o8ngxe22
+</span></span></code></pre></div><h2 id="53请指出哪一张图片是于-2024-年-8-月-28-日利用屏幕截取的">53.请指出哪一张图片是于 2024 年 8 月 28 日利用屏幕截取的.
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018000937174" href="http://picture.928330.xyz/typora/image-20251018000937174.png">
+<img src="http://picture.928330.xyz/typora/image-20251018000937174.png" alt="image-20251018000937174"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018000915317" href="http://picture.928330.xyz/typora/image-20251018000915317.png">
+<img src="http://picture.928330.xyz/typora/image-20251018000915317.png" alt="image-20251018000915317"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Screenshot_20240828-153836_Gmail.jpg
+</span></span></code></pre></div><h2 id="54根据contentsdb-david-手机的型号model是">54.根据&quot;Contents.db&quot;, David 手机的型号(Model)是?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018001007768" href="http://picture.928330.xyz/typora/image-20251018001007768.png">
+<img src="http://picture.928330.xyz/typora/image-20251018001007768.png" alt="image-20251018001007768"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>SM-G9500
+</span></span></code></pre></div><h2 id="55-参考contentsdb-david-所使用的手机-sim-卡的序号">55. 参考&quot;Contents.db&quot;, David 所使用的手机 SIM 卡的序号?
+</h2><p>同上题</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>8985200000827530728
+</span></span></code></pre></div><h2 id="56-david-手机安装了应用程序-metamask-根据persist-root中-metamask-钱包内有多少个账号">56. David 手机安装了应用程序 MetaMask. 根据&quot;persist-root&quot;中, MetaMask 钱包内有多少个账号?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018002516227" href="http://picture.928330.xyz/typora/image-20251018002516227.png">
+<img src="http://picture.928330.xyz/typora/image-20251018002516227.png" alt="image-20251018002516227"  />
+</a>
+</div>
+</p>
+<p>一共四个地址</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4
+</span></span></code></pre></div><h2 id="57根据persist-root中-何时从应用程序-metamask-发送虚拟货币至以下地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c">57.根据&quot;persist-root&quot;中, 何时从应用程序 MetaMask 发送虚拟货币至以下地址: 0X10A4F01B80203591CCEE76081A4489AE1CD1281C
+</h2><p>A. 2024-08-11 1249(GMT+8)</p>
+<p>B. 2024-08-14 1658 (GMT+8)</p>
+<p>C. 2024-08-14 1659 (GMT+8)</p>
+<p>D. 2024-08-16 1724 (GMT+8)</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018002626922" href="http://picture.928330.xyz/typora/image-20251018002626922.png">
+<img src="http://picture.928330.xyz/typora/image-20251018002626922.png" alt="image-20251018002626922"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018002917071" href="http://picture.928330.xyz/typora/image-20251018002917071.png">
+<img src="http://picture.928330.xyz/typora/image-20251018002917071.png" alt="image-20251018002917071"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="58david-曾利用手机应用程序-metamask-三次发送虚拟货币失败-根据persist-root-发送虚拟货币失败的原因是什么">58.David 曾利用手机应用程序 MetaMask 三次发送虚拟货币失败. 根据&quot;persist-root&quot;, 发送虚拟货币失败的原因是什么?
+</h2><p>A. 网络连接问题</p>
+<p>B. 应用程序权限被拒</p>
+<p>C. 接收地址错误</p>
+<p>D. 手续费不足</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018003129746" href="http://picture.928330.xyz/typora/image-20251018003129746.png">
+<img src="http://picture.928330.xyz/typora/image-20251018003129746.png" alt="image-20251018003129746"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h1 id="内存取证">内存取证
+</h1><p>你根据易失性(Volatility Level)优先次序, 进行内存取证分析 David 的笔记本电脑.</p>
+<p>参考 RAM_Capture_David_Laptop.RAW.</p>
+<h2 id="59以下哪一个不是程序firefoxexe的-pid">59.以下哪一个不是程序&quot;firefox.exe&quot;的 PID?
+</h2><p>A. 9240</p>
+<p>B. 8732</p>
+<p>C. 5260</p>
+<p>D. 3108</p>
+<p>这里使用lovelymem这个软件，测试一下它内存取证功能性，顺便涨涨熟练度</p>
+<p>（lovelymem会挂载镜像在本地盘，一般是M盘，不过不知道为什么我打不开，荣誉感能打开部分题目会比较方便）</p>
+<p>直接分析进程：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018113609594" href="http://picture.928330.xyz/typora/image-20251018113609594.png">
+<img src="http://picture.928330.xyz/typora/image-20251018113609594.png" alt="image-20251018113609594"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="60汇出-pid-为-724-的程序-其哈希值sha-256是">60.汇出 PID 为 724 的程序, 其哈希值(SHA-256)是?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018114144539" href="http://picture.928330.xyz/typora/image-20251018114144539.png">
+<img src="http://picture.928330.xyz/typora/image-20251018114144539.png" alt="image-20251018114144539"  />
+</a>
+</div>
+</p>
+<p>导出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>-o F:<span style="color:#98c379">\导</span>出<span style="color:#98c379">\2</span>024美亚个人 windows.pslist.PsList --pid <span style="color:#d19a66">724</span> --dump
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018200656407" href="http://picture.928330.xyz/typora/image-20251018200656407.png">
+<img src="http://picture.928330.xyz/typora/image-20251018200656407.png" alt="image-20251018200656407"  />
+</a>
+</div>
+</p>
+<p>不用管csv的问题，进程导出是成功的</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>89cf04b53119d36654bc5e7eeb5d0829a84238ee03faa9a03948f5bf4be44583
+</span></span></code></pre></div><h2 id="61哪一个是执行-pid-为-724-的程序的-sid">61.哪一个是执行 PID 为 724 的程序的 SID?、
+</h2><p>A. S-1-1-0</p>
+<p>B. S-1-2-0</p>
+<p>C. S-1-5-21-1103701427-1706751984-2965915307-1001</p>
+<p>D. S-1-5-21-1103701427-1706751984-2965915307-513</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018201016449" href="http://picture.928330.xyz/typora/image-20251018201016449.png">
+<img src="http://picture.928330.xyz/typora/image-20251018201016449.png" alt="image-20251018201016449"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="62账户-david-tenth-的-nt-lan-manager-的哈希值ntlm-hash">62.账户 David Tenth 的 NT LAN Manager 的哈希值(NTLM Hash)?
+</h2><p>选择密码哈希转储：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018201552343" href="http://picture.928330.xyz/typora/image-20251018201552343.png">
+<img src="http://picture.928330.xyz/typora/image-20251018201552343.png" alt="image-20251018201552343"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>e14a21fefc5dd81275bb87228586cffc
+</span></span></code></pre></div><h1 id="david-的-u-盘部分">David 的 U 盘部分
+</h1><p>在取证中, 你发现 D 盘被 BitLocker 加密.</p>
+<p>U 盘上可能有一些线索, 你对 U 盘进行了取证.</p>
+<p>参考 David_USB_8GB.e01.</p>
+<h2 id="63david-的-u-盘文件系统的格式">63.David 的 U 盘文件系统的格式?
+</h2><p>A. NTFS</p>
+<p>B. FAT32</p>
+<p>C. exFAT</p>
+<p>D. ReFS</p>
+<p>在Xways挂载之后，转换成镜像磁盘查看技术细节报告：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018194558831" href="http://picture.928330.xyz/typora/image-20251018194558831.png">
+<img src="http://picture.928330.xyz/typora/image-20251018194558831.png" alt="image-20251018194558831"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="64david-的-u-盘文件系统中-每簇定义了多少字节">64.David 的 U 盘文件系统中, 每簇定义了多少字节?
+</h2><p>A. 128</p>
+<p>B. 256</p>
+<p>C. 512</p>
+<p>D. 1024</p>
+<p>同上题</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="65david-的-u-盘中有多少个已删除的文件">65.David 的 U 盘中有多少个已删除的文件?
+</h2><p>A. 1</p>
+<p>B. 2</p>
+<p>C. 3</p>
+<p>D. 4</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018200003060" href="http://picture.928330.xyz/typora/image-20251018200003060.png">
+<img src="http://picture.928330.xyz/typora/image-20251018200003060.png" alt="image-20251018200003060"  />
+</a>
+</div>
+</p>
+<p>Xways也能看出来:</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018195402931" href="http://picture.928330.xyz/typora/image-20251018195402931.png">
+<img src="http://picture.928330.xyz/typora/image-20251018195402931.png" alt="image-20251018195402931"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="66已删除的文件的-run-list-的-run-offset-是多少">66.已删除的文件的 Run List 的 Run Offset 是多少?
+</h2><p>A. 16</p>
+<p>B. 32</p>
+<p>C. 64</p>
+<p>D. 128</p>
+<p>题目看不懂</p>
+<p>*<strong>考察NTFS的知识点</strong></p>
+<p>有稍微学过，但是没学到这个（），之后补一下</p>
+<p>在NTFS文件系统中，文件的数据存储在簇中，而簇号不一定连续，因此NTFS使用Run List（运行列表）来记录“文件的哪些簇属于该文件”</p>
+<p>Run List位于$MFT记录的Data Attribute(0x80)结构中</p>
+<p>这里使用MFT brower软件，它可以直接识别磁盘镜像中NTFS的结构：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019124315945" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png" alt="image-20251019124315945"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="67已删除文件的第一个-datarun-的十六进制值小端序是多少">67.已删除文件的第一个 DataRun 的十六进制值(小端序)是多少?
+</h2><p>A. 0x4C3F0DB522</p>
+<p>B. 0x4C3F0D22B5</p>
+<p>C. 0x224C3F0DB5</p>
+<p>D. 0x3F4C0DB522</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019130045129" href="http://picture.928330.xyz/typora/image-20251019130045129.png">
+<img src="http://picture.928330.xyz/typora/image-20251019130045129.png" alt="image-20251019130045129"  />
+</a>
+</div>
+</p>
+<p>上题的偏移量是相对于Data Attribute(0x80)而言，也就是从标识符开头的位置偏移64个字节，MFTbrowser也会自动解析出来</p>
+<p>存储使用小端序，也就是低位数据在低位地址，读的时候需要调整过来</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="68已删除的文件的实际大小字节是多少">68.已删除的文件的实际大小(字节)是多少?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018202018998" href="http://picture.928330.xyz/typora/image-20251018202018998.png">
+<img src="http://picture.928330.xyz/typora/image-20251018202018998.png" alt="image-20251018202018998"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#d19a66">1796178</span>
+</span></span></code></pre></div><p>*<strong>MFT中也有记录</strong></p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019125450127" href="http://picture.928330.xyz/typora/image-20251019125450127.png">
+<img src="http://picture.928330.xyz/typora/image-20251019125450127.png" alt="image-20251019125450127"  />
+</a>
+</div>
+</p>
+<h2 id="69已删除文件的第一个-datarun-的-offset-是多少">69.已删除文件的第一个 DataRun 的 Offset 是多少?
+</h2><p>每个DataRun由三个部分组成：</p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
-          <th>条带号</th>
-          <th>DiskA</th>
-          <th>DiskB</th>
+          <th>部分</th>
+          <th>名称</th>
+          <th>含义</th>
+          <th>字节数</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>1</td>
-          <td>A</td>
-          <td>B</td>
+          <td>第 1 字节</td>
+          <td>Header (头字节)</td>
+          <td>指出下面两个字段的长度</td>
+          <td>固定 1 字节</td>
       </tr>
       <tr>
-          <td>2</td>
-          <td>C</td>
-          <td>D</td>
+          <td>第 2 部分</td>
+          <td>Length 字段</td>
+          <td>表示该段连续簇的数量</td>
+          <td>由 header 的低 4 位决定</td>
       </tr>
       <tr>
-          <td>3</td>
-          <td>E</td>
-          <td>F</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>G</td>
-          <td>H</td>
+          <td>第 3 部分</td>
+          <td>Offset 字段</td>
+          <td>表示该段起始簇号的相对偏移量</td>
+          <td>由 header 的高 4 位决定</td>
       </tr>
   </tbody>
 </table></div>
-<p>也就是说第一个条带=<code>A</code>（DiskA） +   <code>B</code>（DiskB），大小就是<code>AB</code>（两个字节），后面的也以此类推</p>
-<p>同一个条带的上下两部分数据存储在了AB两块磁盘的同一个位置</p>
-<p>每次读取数据时，<strong>按照条带来读，无需切换硬盘</strong>，和普通的两个盘分别存储有本质区别</p>
-<p>这样读取的时候两块盘可以同时工作，速度几乎翻倍！这就是最简单的RAID0的工作原理</p>
-</li>
-</ul>
-<h1 id="前置知识">前置知识
-</h1><p>不想看的可以跳转：<a class="link" href="#RAID%e7%ba%a7%e5%88%ab" >RAID级别
-    
-</a></p>
-<h2 id="物理盘physical-diskpd">物理盘（Physical Disk，PD）
-</h2><p>是实际存在的硬件存储设备，如HDD（Hard Disk Drive，机械硬盘）、SSD（Solid State Drive，固态硬盘）</p>
-<p><strong>HDD是依靠旋转的磁盘和机械磁头读写数据的传统硬盘</strong>，有真实的机械运动，因此读写速度受机械臂移动和盘片旋转限制，随机访问慢，并且不耐摔，但大容量成本低，所以通常用作大容量备份或冷存储</p>
-<p><strong>SSD则完全没有机械部件，数据存储在电子闪存中</strong>，读写几乎即时，随机访问和顺序访问速度都很快，是耐摔王，但价格高，写入次数有限，需要通过固件和控制器管理寿命，通常作系统盘和高速应用</p>
-<h2 id="虚拟盘virtual-disk-vd-">虚拟盘（Virtual Disk ，VD ）
-</h2><p>是通过软件技术模拟出来的磁盘存储设备，没有物理结构，但在系统层面像真实磁盘</p>
-<p>常见以下几类：</p>
-<ul>
-<li>
-<p><strong>本地虚拟盘</strong></p>
-<p>在单台计算机上由操作系统或软件创建的虚拟盘，例如VHD、VMDK之类的，用于虚拟机</p>
-</li>
-<li>
-<p><strong>网络存储虚拟盘</strong></p>
-<p>通过网络提供的虚拟盘，可以被多台设备访问，比如：</p>
-<ul>
-<li>
-<p><strong>NAS（Network Attached Storage）</strong></p>
-<p>文件级存储，通过网络共享文件，常用于家庭或企业文件共享</p>
-</li>
-<li>
-<p><strong>SAN（Storage Area Network）</strong></p>
-<p>块级存储，通过高速网络提供虚拟磁盘给服务器使用，多用于企业数据库或虚拟机存储</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>云存储虚拟盘</strong></p>
-<p>云服务商提供的块存储或对象存储虚拟盘，把我们的文件放在远程服务器上，这些服务器内部可能是HDD 或SSD，经过虚拟化后提供我们一个虚拟盘，通过网络访问就像访问本地盘一样，例如百度网盘</p>
-</li>
-</ul>
-<p><strong>网络存储虚拟盘更像企业内部自建硬盘，使用局域网（LAN）</strong></p>
-<p><strong>而云存储虚拟盘是互联网远程虚拟盘，使用互联网（WAN），用户只是远程使用而已</strong></p>
-<h2 id="逻辑盘logical-disk-ld">逻辑盘（Logical Disk ，LD）
-</h2><p>是在物理盘上通过软件划分出来的具有逻辑结构的存储区域，依赖物理盘，也叫做分区</p>
-<p>一个物理盘可划分为多个逻辑盘，如Windows的C、D盘，Linux的/dev/sda1、/dev/sda2分区</p>
-<p><strong>为什么要分区？</strong></p>
-<ul>
-<li>
-<p><strong>隔离数据</strong></p>
-<p>可以将操作系统文件与用户数据分开放置。如果系统分区损坏需要重装，用户数据分区可以不受影响</p>
-</li>
-<li>
-<p><strong>使用不同文件系统</strong></p>
-<p>可以在同一块硬盘上为不同的分区创建不同的文件系统，以满足不同需求</p>
-<p>例如，一个ext4分区给Linux用，一个NTFS分区用于和Windows共享数据</p>
-</li>
-<li>
-<p><strong>专用空间</strong></p>
-<p>创建专门的分区用作交换空间，作为物理内存的补充</p>
-<p>将频繁读写的文件（如日志）放在独立分区，可以减少磁盘碎片，方便备份和管理</p>
-</li>
-</ul>
-<h2 id="磁盘组disk-group">磁盘组（Disk Group）
-</h2><p>是将多块物理盘组合成一个组，RAID阵列就是磁盘组</p>
-<h2 id="扇区sector">扇区（Sector）
-</h2><h3 id="物理扇区">物理扇区
-</h3><p><strong>是硬盘硬件上可以独立寻址和进行读写操作的最小物理区域</strong></p>
-<p>由于物理层面的原因，没有硬盘能做到一个bit一个bit对数据进行操作</p>
-<p>对于<strong>机械硬盘</strong>，它指的是盘片上磁道的一个特定弧段，硬盘的磁头在执行一次读写命令时，至少要处理这么大一块物理区域</p>
-<p>对于<strong>固态硬盘</strong>，它对应于NAND闪存芯片中的一个物理页或块的一部分，是SSD主控能够操作的最小数据单元</p>
-<p><strong>一个物理扇区并不完全用来存储用户数据，它还包含了其余内容，用于确保数据能被准确定位和可靠读写：</strong></p>
-<ul>
-<li><strong>间隙</strong>：用于分隔不同的扇区</li>
-<li><strong>同步标记</strong>：帮助磁头在高速旋转中同步数据读取的时机</li>
-<li><strong>地址标记</strong>：记录这个扇区的唯一物理地址（哪个磁头、哪个柱面、哪个扇区）</li>
-<li><strong>纠错码（ECC）</strong>：这是一段根据数据内容计算出来的校验码，在读取数据时，硬盘会重新计算ECC并与存储的ECC进行比对，以发现并纠位错误</li>
-</ul>
-<p>这样方便了管理，也产生了空间开销</p>
-<p>随着硬盘容量的急剧增大，使用512字节的物理扇区变得越来越低效，现在很多硬盘物理扇区扩大到了4096字节（4KB），被称为先进格式化（Advanced Format，AF），相当于把8个小扇区的管理开销合并为1个大扇区的开销，空间利用率显著提高，并且更大的扇区意味着可以分配更多的空间给ECC码，从而设计出更好的纠错算法</p>
-<h4 id="糟糕的问题">糟糕的问题
-</h4><p>当我们要写入HDD的数据不足512B的时候，硬盘也会先把包含目标字节的整个扇区512B读入缓存，在缓存中修改要写入的那些字节，之后重新计算ECC，最后把整个512B扇区写回磁盘</p>
-<p>也就是说，硬盘把所有<strong>不是512B整数倍</strong>的<strong>写</strong>过程，都变成了<strong>读-改-写</strong>的过程！这会造成性能的浪费！</p>
-<p>而对于SSD，这个情况更加严重：</p>
-<p>SSD最小写单元是页，通常是4KB，但它最小的可擦除单元却是按照块计算，通常是128KB</p>
-<div class="alert alert-tip">
-    <div class="alert-header">
-        <span class="alert-icon">
-            💡
-        </span>
-        <span class="alert-title">
-            Tip
-        </span>
-    </div>
-    <div class="alert-content">
-        <p>NAND闪存写入页之前页必须是干净的，也就是所有位都是1，不能直接覆盖，而擦除必须整块擦除</p>
-<p>如果把块设置成和页一样大，可擦除最小单位变成4KB，坏块产生概率更高，还会加速磨损</p>
-<p>如果把页设置成和块一样大，写入最小单位变成128KB，小文件写入会严重浪费，性能下降</p>
-<p>所以现在的设置是理论最优喔</p></div>
-</div>
-<p>当写入数据不是4KB的整数倍的时候会变成读-改-写，这还好，如果要写的页已经写过，无法覆盖，那就必须擦除，而擦除所带来的改就是整个块的改动，有几百KB，甚至达到MB的级别！</p>
-<p>这就是所谓的“<strong>写放大</strong>”问题，而它几乎是不可避免的</p>
-<h3 id="逻辑扇区">逻辑扇区
-</h3><p><strong>类似逻辑地址，逻辑扇区是一个抽象概念，是硬盘让操作系统和用户看到的假设出来的东西</strong></p>
-<p>操作系统使用一种名为<strong>逻辑块地址 (Logical Block Addressing, LBA)</strong> 的方式来访问硬盘</p>
-<p>在这种模式下，整个硬盘被看作一个从0开始编号的、连续线性的逻辑扇区数组，操作系统无需关心数据具体存放在哪个盘片、哪个磁头、哪个柱面上，只需要关心线性的LBA地址就可以了，这极大地简化了软件开发</p>
-<p>比如，当操作系统需要读取数据时，它只用发出简单的指令：给我LBA地址为12345的数据，就会自动取出第12346个扇区（注意扇区编号从0开始的）</p>
-<p>并且，这还保证了新硬件能够兼容旧的操作系统，比如从HDD变为SSD，或改变内部存储结构，只要硬盘的固件能够正确地将操作系统发来的LBA地址请求翻译成对内部物理存储单元的操作即可</p>
-<p><strong>逻辑扇区大小可以与物理扇区不同</strong>，接着往下看</p>
-<h3 id="硬盘扇区格式标准">硬盘扇区格式标准
-</h3><h4 id="512n512-native512原生">512n（512 Native，512原生）
-</h4><p>最传统的标准，即硬盘的物理扇区大小和逻辑扇区大小都是512字节</p>
-<p>所见即所得，操作系统看到的逻辑结构与硬盘的物理结构完全一致，不存在转换和模拟</p>
-<h4 id="512e512-emulation512模拟">512e（512 Emulation，512模拟）
-</h4><p>这是当前最主流的标准，硬盘的物理扇区大小是4096字节 (4KB)，但它对外伪装成512字节的逻辑扇区与操作系统沟通，来保证对旧软件和操作系统的向后兼容性</p>
-<p>在windows的cmd，使用下面的命令可以查看C盘扇区大小：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fsutil fsinfo ntfsinfo C:
-</span></span></code></pre></div><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250930163549065" href="http://picture.928330.xyz/typora/image-20250930163549065.png">
-<img src="http://picture.928330.xyz/typora/image-20250930163549065.png" alt="image-20250930163549065"  />
-</a>
-</div>
-</p>
-<p>但这样也会导致问题：当操作系统尝试写入一个未与底层4KB物理扇区边界对齐的512字节逻辑扇区时，就会触发一次之前说过的读-改-写操作，这被称为<strong>未对齐写入</strong>，也会导致性能下降</p>
-<h4 id="4kn4k-native4k原生">4Kn（4K Native，4K原生）
-</h4><p>最现代的标准，硬盘的物理扇区大小和逻辑扇区大小都是4096字节</p>
-<h2 id="linux系统的物理盘与逻辑盘表示">Linux系统的物理盘与逻辑盘表示
-</h2><p>在Linux的设计哲学中，有一个核心思想是“一切皆文件”，这意味着硬件设备，如硬盘、键盘、鼠标等，都会在文件系统中以一个特殊文件的形式存在</p>
-<p>这些设备文件都集中存放在<code>/dev</code>目录（也就是device的意思）下，通过读写这些文件，就可以与对应的硬件设备进行交互</p>
-<h3 id="设备命名规则">设备命名规则
-</h3><p>一般格式：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">dev</span>/[<span style="color:#e06c75">设备类型</span>][<span style="color:#e06c75">磁盘序号</span>][<span style="color:#e06c75">分区号</span>]
-</span></span></code></pre></div><h4 id="sd-通用硬盘">sd (通用硬盘)
-</h4><p>这是最常见的前缀，源于 &ldquo;SCSI disk&rdquo;</p>
-<p>它被广泛用于表示几乎所有类型的现代硬盘，包括SATA硬盘、SAS硬盘，甚至U盘和通过USB连接的移动硬盘</p>
-<p><strong>其命名方式为：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">dev</span>/<span style="color:#e06c75">sd</span>&lt;<span style="color:#e06c75">X</span>&gt;&lt;<span style="color:#e06c75">N</span>&gt;
-</span></span></code></pre></div><ul>
-<li><code>&lt;X&gt;</code>：表示<strong>磁盘序号的字母</strong> (<code>a</code>，<code>b</code>，<code>c</code>…)，按内核检测到的顺序分配</li>
-<li><code>&lt;N&gt;</code>：表示该磁盘上的<strong>分区号</strong> (<code>1</code>，<code>2</code>，<code>3</code>…)，此部分是可选的，没有则代表整块硬盘</li>
-</ul>
-<p><strong>eg：</strong></p>
-<ul>
-<li><code>/dev/sda</code>：表示系统中第一块被识别的<code>sd</code>类型物理硬盘</li>
-<li><code>/dev/sdb2</code>：表示第二块<code>sd</code>类型硬盘上的第2个分区</li>
-</ul>
-<h4 id="hdide硬盘">hd（IDE硬盘）
-</h4><p>是&quot;Hard disk&quot;的缩写，这是早期用于表示IDE/PATA接口硬盘的前缀，在现代系统中已非常少见</p>
-<p><strong>其命名方式基本和sd相同：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">dev</span>/<span style="color:#e06c75">hd</span>&lt;<span style="color:#e06c75">X</span>&gt;&lt;<span style="color:#e06c75">N</span>&gt;
-</span></span></code></pre></div><ul>
-<li><code>&lt;X&gt;</code>：表示<strong>磁盘序号的字母</strong> (<code>a</code>，<code>b</code>，<code>c</code>…)，按内核检测到的顺序分配</li>
-<li><code>&lt;N&gt;</code>：表示该磁盘上的<strong>分区号</strong> (<code>1</code>，<code>2</code>，<code>3</code>…)，此部分是可选的，没有则代表整块硬盘</li>
-</ul>
-<p><strong>eg：</strong></p>
-<ul>
-<li><code>/dev/hda</code>：表示第一块IDE硬盘</li>
-<li><code>/dev/hdb2</code>：表示第二块IDE硬盘上的第2个分区</li>
-</ul>
-<h4 id="vd虚拟化硬盘">vd（虚拟化硬盘）
-</h4><p>是&quot;Virtual disk&quot;的缩写，常见于KVM等虚拟化环境中，代表分配给虚拟机的虚拟硬盘</p>
-<p><strong>其命名方式也和sd大差不差：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">dev</span>/<span style="color:#e06c75">vd</span>&lt;<span style="color:#e06c75">X</span>&gt;&lt;<span style="color:#e06c75">N</span>&gt;
-</span></span></code></pre></div><ul>
-<li><code>&lt;X&gt;</code>：表示<strong>磁盘序号的字母</strong> (<code>a</code>，<code>b</code>，<code>c</code>…)，按内核检测到的顺序分配</li>
-<li><code>&lt;N&gt;</code>：表示该磁盘上的<strong>分区号</strong> (<code>1</code>，<code>2</code>，<code>3</code>…)，此部分是可选的，没有则代表整块硬盘</li>
-</ul>
-<p><strong>eg：</strong></p>
-<ul>
-<li><code>/dev/vda</code>：表示分配给当前虚拟机的第一块虚拟硬盘</li>
-<li><code>/dev/vdb1</code>：表示第二块虚拟硬盘上的第1个分区</li>
-</ul>
-<h4 id="nvmenvme固态硬盘">nvme（NVMe固态硬盘）
-</h4><p>表示通过**NVMe (Non-Volatile Memory Express，非易失性存储器快速通道）**协议连接的高速固态硬盘</p>
-<p><strong>其命名方式有些特殊：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">dev</span>/<span style="color:#e06c75">nvme</span>&lt;<span style="color:#e06c75">X</span>&gt;<span style="color:#e06c75">n</span>&lt;<span style="color:#e06c75">Y</span>&gt;<span style="color:#e06c75">p</span>&lt;<span style="color:#e06c75">Z</span>&gt;
-</span></span></code></pre></div><ul>
-<li><code>&lt;X&gt;</code>：表示NVMe<strong>控制器</strong>的序号，从<code>0</code>开始</li>
-<li><code>n&lt;Y&gt;</code>：表示控制器下的<strong>命名空间</strong>（可以理解为磁盘），从<code>1</code>开始</li>
-<li><code>p&lt;Z&gt;</code>：表示该磁盘上的<strong>分区号</strong>，从<code>1</code>开始</li>
-</ul>
-<p><strong>eg：</strong></p>
-<ul>
-<li><code>/dev/nvme0n1</code>：表示第0个控制器上的第1块NVMe磁盘</li>
-<li><code>/dev/nvme1n2p2</code>：表示第1个控制器上的第2块NVMe磁盘上的第2个分区</li>
-</ul>
-<h4 id="mmcblkemmc--sd卡">mmcblk（eMMC / SD卡）
-</h4><p>用于表示嵌入式设备中的存储，如eMMC闪存或SD/TF卡</p>
-<p><strong>其命名方式也有点不同：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>/<span style="color:#e06c75">dev</span>/<span style="color:#e06c75">mmcblk</span>&lt;<span style="color:#e06c75">X</span>&gt;<span style="color:#e06c75">p</span>&lt;<span style="color:#e06c75">Y</span>&gt;
-</span></span></code></pre></div><ul>
-<li><code>&lt;X&gt;</code>：表示eMMC/SD卡<strong>设备</strong>的序号，从<code>0</code>开始</li>
-<li><code>p&lt;Y&gt;</code>：表示该设备上的<strong>分区号</strong>，从<code>1</code>开始</li>
-</ul>
-<p><strong>示例：</strong></p>
-<ul>
-<li><code>/dev/mmcblk0</code>：表示系统中第一张被识别的SD卡或eMMC芯片</li>
-<li><code>/dev/mmcblk1p1</code>：表第二张卡上的第1个分区</li>
-</ul>
-<h3 id="分区编号的规则">分区编号的规则
-</h3><p>分区号<code>N</code>的分配方式并总是从1开始就一直向后排，它与硬盘的分区表格式有关，主要有两种：MBR和GPT</p>
-<h4 id="mbr-master-boot-record主引导记录">MBR (Master Boot Record，主引导记录)
-</h4><p>这是一种较老的分区方案，限制一块MBR硬盘最多只能有4个主分区</p>
-<p>为了突破4个分区的限制，可以将其中一个主分区设置为<strong>扩展分区</strong>，然后在扩展分区内部可以创建多个<strong>逻辑分区</strong></p>
-<p>因此，分区编号<code>1</code>到<code>4</code>总是留给主分区或扩展分区，逻辑分区的编号则从<code>5</code>开始</p>
-<p>所以，如果我们看到一块硬盘的分区是<code>/dev/sda1</code>、<code>/dev/sda2</code>、<code>/dev/sda5</code>，这通常意味着<code>sda1</code>和<code>sda2</code>是主分区，而 <code>sda5</code> 是扩展分区里的第一个逻辑分区</p>
-<h4 id="gpt-guid-partition-tableguid分区表">GPT (GUID Partition Table，GUID分区表)
-</h4><p>这是一种更现代、更灵活的分区方案，是当前的主流标准，理论上支持无限个分区（但操作系统通常限制为128个）</p>
-<p>没有主分区、扩展分区、逻辑分区的复杂概念，所有分区地位平等</p>
-<p>分区编号就是简单地从<code>1</code>开始连续递增，如<code>/dev/sda1</code>、<code>/dev/sda2</code>、<code>/dev/sda3</code>&hellip;</p>
-<h3 id="实例">实例
-</h3><p>在linux里使用<code>lsblk</code> (list block devices，列出块设备) 命令可以清晰地看到系统中的磁盘和分区结构</p>
-<p>假设一台Linux服务器有两块SATA硬盘，<code>lsblk</code>的输出如下（我现有的linux机分盘都很少，杜撰一个吧）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">NAME</span>   <span style="color:#e06c75">MAJ</span>:<span style="color:#e06c75">MIN</span> <span style="color:#e06c75">RM</span>   <span style="color:#e06c75">SIZE</span> <span style="color:#e06c75">RO</span> <span style="color:#e06c75">TYPE</span> <span style="color:#e06c75">MOUNTPOINT</span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">sda</span>      <span style="color:#d19a66">8</span>:<span style="color:#d19a66">0</span>    <span style="color:#d19a66">0</span> <span style="color:#d19a66">238.5</span><span style="color:#e06c75">G</span>  <span style="color:#d19a66">0</span> <span style="color:#e06c75">disk</span>                                <span style="color:#7f848e">// 第一块物理硬盘，总容量为238.5G
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>├─<span style="color:#e06c75">sda1</span>   <span style="color:#d19a66">8</span>:<span style="color:#d19a66">1</span>    <span style="color:#d19a66">0</span>   <span style="color:#d19a66">512</span><span style="color:#e06c75">M</span>  <span style="color:#d19a66">0</span> <span style="color:#e06c75">part</span> /<span style="color:#e06c75">boot</span>/<span style="color:#e06c75">efi</span>			  <span style="color:#7f848e">// sda上的第一个分区，大小为512M，被挂载到了/boot/efi目录
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>└─<span style="color:#e06c75">sda2</span>   <span style="color:#d19a66">8</span>:<span style="color:#d19a66">2</span>    <span style="color:#d19a66">0</span>   <span style="color:#d19a66">238</span><span style="color:#e06c75">G</span>  <span style="color:#d19a66">0</span> <span style="color:#e06c75">part</span> /							<span style="color:#7f848e">// sda上的第二个分区，大小为238G，被挂载为根目录/
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">sdb</span>      <span style="color:#d19a66">8</span>:<span style="color:#d19a66">16</span>   <span style="color:#d19a66">0</span> <span style="color:#d19a66">931.5</span><span style="color:#e06c75">G</span>  <span style="color:#d19a66">0</span> <span style="color:#e06c75">disk</span> 							  <span style="color:#7f848e">// 第二块物理硬盘，总容量为931.5G
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>└─<span style="color:#e06c75">sdb1</span>   <span style="color:#d19a66">8</span>:<span style="color:#d19a66">17</span>   <span style="color:#d19a66">0</span> <span style="color:#d19a66">931.5</span><span style="color:#e06c75">G</span>  <span style="color:#d19a66">0</span> <span style="color:#e06c75">part</span> /<span style="color:#c678dd">data</span>				  <span style="color:#7f848e">// sdb上的第一个分区，大小为931.5G，被挂载到了/data目录
-</span></span></span></code></pre></div><div class="table-wrapper"><table>
+<p>头字节的高低 4 位含义如下：</p>
+<div class="table-wrapper"><table>
   <thead>
       <tr>
-          <th>列名</th>
+          <th>位</th>
           <th>含义</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><strong>NAME</strong></td>
-          <td>设备名，例如<code>sda</code>，<code>sda1</code>等</td>
+          <td>低 4 位（低半字节）</td>
+          <td>表示 Length 字段的字节数</td>
       </tr>
       <tr>
-          <td><strong>MAJ:MIN</strong></td>
-          <td>主设备号:次设备号，用于Linux内核识别设备</td>
-      </tr>
-      <tr>
-          <td><strong>RM</strong></td>
-          <td>是否为可移动设备（1是可移动，如U盘或光驱，0是固定磁盘）</td>
-      </tr>
-      <tr>
-          <td><strong>SIZE</strong></td>
-          <td>设备或分区的大小</td>
-      </tr>
-      <tr>
-          <td><strong>RO</strong></td>
-          <td>是否为只读（1是只读，0是可读写）</td>
-      </tr>
-      <tr>
-          <td><strong>TYPE</strong></td>
-          <td>设备类型</td>
-      </tr>
-      <tr>
-          <td><strong>MOUNTPOINT</strong></td>
-          <td>当前挂载点路径，没有挂载则为空</td>
+          <td>高 4 位（高半字节）</td>
+          <td>表示 Offset 字段的字节数</td>
       </tr>
   </tbody>
 </table></div>
-<h2 id="文件系统">文件系统
-</h2><p>当我们有了一个分区后，它还只是一片空白的存储空间，我们还需要一种规则来组织和管理将要存入其中的数据，这种规则就是文件系统，<strong>文件系统本质上是操作系统的一部分</strong></p>
-<p>在windows的cmd下，可以使用下面命令查看所有卷的文件系统：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wmic logicaldisk get name,filesystem
+<p>我们来看题中datarun的结构：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>22 B5 0D 3F 4C
+</span></span></code></pre></div><ul>
+<li>Header = <code>0x22</code> → Length 字节数 = 2，Offset 字节数 = 2</li>
+<li>Length（小端） = <code>B5 0D</code> = <strong>3509 簇</strong></li>
+<li>Offset（小端、有符号） = <code>3F 4C</code> = <strong>19519</strong>（相对偏移）</li>
+</ul>
+<p>在MFTbrowser中点击datarun，右上角的信息窗口会列举出详细信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019130136787" href="http://picture.928330.xyz/typora/image-20251019130136787.png">
+<img src="http://picture.928330.xyz/typora/image-20251019130136787.png" alt="image-20251019130136787"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>19519
+</span></span></code></pre></div><h2 id="70已删除的文件的第一个-datarun-的-length-是多少">70.已删除的文件的第一个 DataRun 的 Length 是多少?
+</h2><p>见上题</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>3509
+</span></span></code></pre></div><h2 id="71已删除文件的图像文件像素值是多少">71.已删除文件的图像文件像素值是多少?
+</h2><p>A. 1000 x 2000</p>
+<p>B. 2000 x 3000</p>
+<p>C. 3000 x 4000</p>
+<p>D. 4000 x 5000</p>
+<p>同68题图</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="72已删除图像文件是用哪个品牌和型号的手机拍摄">72.已删除图像文件是用哪个品牌和型号的手机拍摄?
+</h2><p>A. SAMSUNG SM-A425</p>
+<p>B. SAMSUNG SM-A4580</p>
+<p>C. SAMSUNG SM-A4260</p>
+<p>D. SAMSUNG SM-A5G</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018201922319" href="http://picture.928330.xyz/typora/image-20251018201922319.png">
+<img src="http://picture.928330.xyz/typora/image-20251018201922319.png" alt="image-20251018201922319"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h1 id="剧情-4">剧情 4
+</h1><p>在U盘中, 你还发现了一个 exe 文件, 但它被锁定, 可能需要进行反编译以便进一步检查.</p>
+<h2 id="73使用-x64dbg-的字符串搜索功能-在bitlockerexe中查找哪个字符串最有可能与显示的登录状态有关">73.使用 x64dbg 的字符串搜索功能, 在&quot;Bitlocker.exe&quot;中查找哪个字符串最有可能与显示的登录状态有关?
+</h2><p>A. Welcome</p>
+<p>B. Invalid input</p>
+<p>C. Login Successful!</p>
+<p>D. Access Denied</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018204259893" href="http://picture.928330.xyz/typora/image-20251018204259893.png">
+<img src="http://picture.928330.xyz/typora/image-20251018204259893.png" alt="image-20251018204259893"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="74当找到控制登录成功的逻辑代码时-如何修改汇编代码来绕过检查-达到任意输入-都成功登录的效果">74.当找到控制登录成功的逻辑代码时, 如何修改汇编代码来绕过检查, 达到任意输入, 都成功登录的效果?
+</h2><p>A. 修改 CMP 指令, 使其总是比较相等</p>
+<p>B. 修改 CMP 指令后的跳转指令 JNE 为 nop, 使跳转指令失效</p>
+<p>C. 修改 MOV 指令, 使其移动错误的数据</p>
+<p>D. 修改 TEST 指令后的跳转指令 JNE 为 NOP, 使跳转指令失效</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018204429948" href="http://picture.928330.xyz/typora/image-20251018204429948.png">
+<img src="http://picture.928330.xyz/typora/image-20251018204429948.png" alt="image-20251018204429948"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="75bitlockerexe的正确用户登录名称是">75.&ldquo;Bitlocker.exe&quot;的正确用户登录名称是?
+</h2><p>找半天比较跳转函数，原来就在上面，没写在别的地方：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018205329317" href="http://picture.928330.xyz/typora/image-20251018205329317.png">
+<img src="http://picture.928330.xyz/typora/image-20251018205329317.png" alt="image-20251018205329317"  />
+</a>
+</div>
+</p>
+<p>登录测试成功：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="" href="http://picture.928330.xyz/typora/image-20251018205329317.png">
+<img src="http://picture.928330.xyz/typora/image-20251018205329317.png" alt=""  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>david1337
+</span></span></code></pre></div><h2 id="76bitlockerexe的正确登录密码是">76.&ldquo;Bitlocker.exe&quot;的正确登录密码是?
+</h2><p>同上题</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>1337david
+</span></span></code></pre></div><h2 id="77当bitlockerexe程序尝试显示登录结果成功或失败时-使用了哪一种途径来决定显示的消息">77.当&quot;Bitlocker.exe&quot;程序尝试显示登录结果（成功或失败）时, 使用了哪一种途径来决定显示的消息?
+</h2><p>A. 通过检查每个寄存器的值来决定跳转到不同的汇编代码区段</p>
+<p>B. 通过调用硬编码的内存地址来显示特定的消息框</p>
+<p>C. 通过堆栈中的返回地址来确定要显示的消息</p>
+<p>D. 通过逐位操作来修改显示消息的字符串内容</p>
+<p>看下登陆成功这一段：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018205839478" href="http://picture.928330.xyz/typora/image-20251018205839478.png">
+<img src="http://picture.928330.xyz/typora/image-20251018205839478.png" alt="image-20251018205839478"  />
+</a>
+</div>
+</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">xor r9d,r9d                             | UINT uType
+lea r8,qword ptr ds:[7FF6ACD064C0]      | LPCTSTR lpCaption = &#34;login successful&#34;
+lea rdx,qword ptr ds:[7FF6ACD064E0]     | LPCTSTR lpText = &#34;Great! You have finished the first step. Keep going to find the bitlocker key.&#34;
+xor ecx,ecx                             | HWND hWnd
+call qword ptr ds:[&lt;MessageBoxA&gt;]       | MessageBoxA
+</code></pre><p>lea只计算地址，也就是把存有登录信息字符串的地址加载到寄存器</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="78决定能否解密-bitlocker-key-的字节的内存偏移量相对于基址是什么">78.决定能否解密 Bitlocker Key 的字节的内存偏移量(相对于基址)是什么?
+</h2><p>A. 0xA0B2</p>
+<p>B. 0x808C</p>
+<p>C. 0xA0C8</p>
+<p>D. 0xA0E0</p>
+<p>这题就不太看得懂了，使用ida看吧还是，反编译一下比较好</p>
+<p>基址能在.text中看见，也就是PE文件头的内容，这个用PEview之类的应该也行：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018211122485" href="http://picture.928330.xyz/typora/image-20251018211122485.png">
+<img src="http://picture.928330.xyz/typora/image-20251018211122485.png" alt="image-20251018211122485"  />
+</a>
+</div>
+</p>
+<p>字符串搜索bitlocker key，可以发现是有一个弹窗的，但是不知道如何触发，F5反汇编这段代码：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018211454308" href="http://picture.928330.xyz/typora/image-20251018211454308.png">
+<img src="http://picture.928330.xyz/typora/image-20251018211454308.png" alt="image-20251018211454308"  />
+</a>
+</div>
+</p>
+<p>这就很清楚了，判断<code>byte_14000808C</code>的值，如果是0就弹出登入成功，1就弹出bitloker key</p>
+<p>这个就是决定能否解密的关键，相对于基址<code>140000000</code>的偏移量是<code>808C</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="79决定能否解密-bitlocker-key-的内存偏移量后-应该如何利用它来进行解密">79.决定能否解密 BitLocker Key 的内存偏移量后, 应该如何利用它来进行解密?
+</h2><p>A. 将该偏移量处的值改为 1 (true), 以启用解密过程</p>
+<p>B. 将该偏移量处的值改为 0 (false), 以重新初始化加密过程</p>
+<p>C. 将该偏移量的内容保存到档中以作解密过程中的key</p>
+<p>D. 清空该偏移量的内存并强制退出程序</p>
+<p>上题分析过了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="80-解密后的-bitlocker-key-是">80. 解密后的 Bitlocker Key 是?
+</h2><p>A. 299255-418649-198198-616891-099682-482306-642609-483527</p>
+<p>B. 745823-918273-564738-290183-475920-182736-594827-162839</p>
+<p>C. 539823-847291-094857-194756-382910-472918-482937-120984</p>
+<p>D. 829384-192837-475910-298374-019283-847362-564738-293847</p>
+<p>在hex视图改掉这个值：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018214341186" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png" alt="image-20251018214341186"  />
+</a>
+</div>
+</p>
+<p>保存修改为新文件，输入账户密码：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018214638029" href="http://picture.928330.xyz/typora/image-20251018214638029.png">
+<img src="http://picture.928330.xyz/typora/image-20251018214638029.png" alt="image-20251018214638029"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h1 id="david-的笔记本电脑">David 的笔记本电脑
+</h1><p>到目前为止, 你已经获得了 BitLocker 密钥以解密 D 盘, 通过对 David 笔记本电脑 D 盘的分析, 并发现了一些重要信息.</p>
+<p>你现在将继续调查未加密的 C 盘.</p>
+<p>参考 David_Laptop_64GB.e01.</p>
+<h2 id="81分区格式是">81.分区格式是?
+</h2><p>A. MBR</p>
+<p>B. GPT</p>
+<p>C. RAW</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018215419121" href="http://picture.928330.xyz/typora/image-20251018215419121.png">
+<img src="http://picture.928330.xyz/typora/image-20251018215419121.png" alt="image-20251018215419121"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="82该-e01-成功提取的日期和时间是">82.该 e01 成功提取的日期和时间是?
+</h2><p>A. 2024-09-05 15:55:28</p>
+<p>B. 2024-09-02 11:52:31</p>
+<p>C. 2024-09-03 14:37:28</p>
+<p>D. 2024-09-03 12:16:49</p>
+<p>e01是记录了创建时间等信息的格式，拖入Xways左侧证据栏右键看属性，在这之前记得创建新案件：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018220758247" href="http://picture.928330.xyz/typora/image-20251018220758247.png">
+<img src="http://picture.928330.xyz/typora/image-20251018220758247.png" alt="image-20251018220758247"  />
+</a>
+</div>
+</p>
+<p>不是这怎么没有一个选项是对的</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>?
+</span></span></code></pre></div><h2 id="83最后登录的用户是谁">83.最后登录的用户是谁?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251018221026566" href="http://picture.928330.xyz/typora/image-20251018221026566.png">
+<img src="http://picture.928330.xyz/typora/image-20251018221026566.png" alt="image-20251018221026566"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>David Tenth
+</span></span></code></pre></div><h2 id="84用户配置的时区是">84.用户配置的时区是?
+</h2><p>A. Australian Central Time</p>
+<p>B. China Standard Time</p>
+<p>C. New Zealand Standard Time</p>
+<p>D. Nepal Time</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019003410187" href="http://picture.928330.xyz/typora/image-20251019003410187.png">
+<img src="http://picture.928330.xyz/typora/image-20251019003410187.png" alt="image-20251019003410187"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="85david-的笔记本电脑曾经连接了多少个设备">85.David 的笔记本电脑曾经连接了多少个设备?
+</h2><p>A. 1</p>
+<p>B. 2</p>
+<p>C. 3</p>
+<p>D. 4</p>
+<p>可以看到有三种：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019130926106" href="http://picture.928330.xyz/typora/image-20251019130926106.png">
+<img src="http://picture.928330.xyz/typora/image-20251019130926106.png" alt="image-20251019130926106"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="86david-的笔记本电脑上的-firefox-浏览器安装了哪些扩展工具">86.David 的笔记本电脑上的 Firefox 浏览器安装了哪些扩展工具?
+</h2><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019003536562" href="http://picture.928330.xyz/typora/image-20251019003536562.png">
+<img src="http://picture.928330.xyz/typora/image-20251019003536562.png" alt="image-20251019003536562"  />
+</a>
+</div>
+</p>
+<p>装了这么多，但是仿真起来看又只有一个：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019003652418" href="http://picture.928330.xyz/typora/image-20251019003652418.png">
+<img src="http://picture.928330.xyz/typora/image-20251019003652418.png" alt="image-20251019003652418"  />
+</a>
+</div>
+</p>
+<p>还是以仿真为准吧：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>MetaMask
+</span></span></code></pre></div><p>*<strong>实际上火狐自带一些原生的插件</strong></p>
+<p>这些原声的一般都以@mozilla.org结尾，比如：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019004245651" href="http://picture.928330.xyz/typora/image-20251019004245651.png">
+<img src="http://picture.928330.xyz/typora/image-20251019004245651.png" alt="image-20251019004245651"  />
+</a>
+</div>
+</p>
+<p>而自己下载的就没有：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019003751459" href="http://picture.928330.xyz/typora/image-20251019003751459.png">
+<img src="http://picture.928330.xyz/typora/image-20251019003751459.png" alt="image-20251019003751459"  />
+</a>
+</div>
+</p>
+<p>不过Add-ons Search Detection这个插件看不见安装目录，只有源文件，答案里面是没有的</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>MetaMask
+</span></span></code></pre></div><p>*<strong>Add-ons Search Detection的确是原生插件</strong></p>
+<p>在GitHub的说明文件中明确指出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>This add-on will collect information about search engines. … etld_change: indicates a eTLD change … extension or server: whether the eTLD change has been done by an extension (add-on) or server.
+</span></span></code></pre></div><p>说明它用于监控浏览器中搜索引擎或被扩展改变搜索引擎的情况</p>
+<h2 id="87根据用户配置文件中的-lnk-文件-最后访问的文件名称是">87.根据用户配置文件中的 .lnk 文件, 最后访问的文件名称是?
+</h2><p>A. 下載</p>
+<p>B. export-token</p>
+<p>C. RAM_Capture_DaviD</p>
+<p>D. 本機磁碟(E) (2)</p>
+<p>在recent目录下查看最近打开的文件，他们是.lnk结尾的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>David_Laptop_64GB.e01/分区6/Users/David Tenth/AppData/Roaming/Microsoft/Windows/Recent
 </span></span></code></pre></div><p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251001235258602" href="http://picture.928330.xyz/typora/image-20251001235258602.png">
-<img src="http://picture.928330.xyz/typora/image-20251001235258602.png" alt="image-20251001235258602"  />
+<a data-fancybox="gallery" data-caption="image-20251019004500937" href="http://picture.928330.xyz/typora/image-20251019004500937.png">
+<img src="http://picture.928330.xyz/typora/image-20251019004500937.png" alt="image-20251019004500937"  />
 </a>
 </div>
 </p>
-<p>在linux则可以使用下面的命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>df -T
-</span></span></code></pre></div><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251001235356981" href="http://picture.928330.xyz/typora/image-20251001235356981.png">
-<img src="http://picture.928330.xyz/typora/image-20251001235356981.png" alt="image-20251001235356981"  />
-</a>
-</div>
-</p>
-<h3 id="格式化">格式化
-</h3><p>在一个分区上创建文件系统的过程，就叫做<strong>格式化（Format）</strong></p>
-<p><strong>从技术上讲，格式化的核心就是在指定的分区上创建一套全新空白的文件系统</strong>，就像拿到一本空白的笔记本，在第一页画好目录的表格，为之后写内容做好组织规划</p>
-<p>不过为什么我们日常的体验是“格式化=擦除数据”呢？</p>
-<p>这完全取决于我们执行的是哪一种格式化，格式化主要分为两种：<strong>快速格式化</strong>和<strong>完全格式化</strong></p>
-<h4 id="快速格式化">快速格式化
-</h4><p><strong>操作系统只会擦除文件系统的索引区域，然后写入一套新的空白的索引，不会处理真正存储内容的数据区域</strong></p>
-<p>对操作系统来说，既然目录已经是空白的了，那它就认为这个分区上没有任何文件，因此硬盘看起来是空的</p>
-<p>但实际上，之前的所有数据都还原封不动地在磁盘上，只是失去了能够找到它们的索引信息</p>
-<p>也正因如此，数据恢复可能性非常高，数据恢复软件会跳过被删除的目录，直接扫描整个硬盘的数据区域，根据文件头信息和数据结构来重建出原始文件</p>
-<h4 id="完全格式化">完全格式化
-</h4><p><strong>既删除目录，也擦除所有内容</strong></p>
-<p>执行完全格式化，操作系统会做两件事：</p>
-<ol>
-<li>执行一次快速格式化，创建新的空白文件系统。</li>
-<li>从头到尾扫描整个分区，并向每一个扇区的每一个bit写入0</li>
-</ol>
-<p>这样一来，所有旧数据都会被毫无意义的0数据彻底覆盖掉。硬盘被真正地清空了，完全不能恢复</p>
-<h3 id="常见的文件系统类型">常见的文件系统类型
-</h3><h4 id="fat">FAT
-</h4><p><strong>全称File Allocation Table，文件分配表</strong></p>
-<p>结构简单，兼容性极佳，几乎所有主流操作系统和电子设备都支持，常用于U盘、SD卡、移动硬盘，作为跨平台数据交换的媒介</p>
-<p>FAT文件系统关键结构就是FAT，即文件分配表，作用就是记录磁盘上每个簇的使用情况和文件存储位置，簇是磁盘上最小的数据分配单位，由若干扇区组成</p>
-<p>FAT的分区大小=最大簇数×每簇大小，最大簇数由每个簇编号占用的位数决定，通常写在名字里，比如FAT12就是每个簇用12位表示，最大簇数2¹²=4096个，而每簇大小不太固定</p>
-<ul>
-<li>
-<p><strong>FAT16</strong></p>
-<p>非常早期的版本，在DOS和Windows 95时代流行，已经基本被淘汰</p>
-<p>最大仅支持2GB的分区（在某些系统中可达4GB）</p>
-</li>
-<li>
-<p><strong>FAT32</strong></p>
-<p>是FAT16的改进版本，但它依旧无法管理大于4GB的单个文件，并且最大分区支持也有限（Windows上限制为32GB，理论上可达2TB）</p>
-</li>
-<li>
-<p><strong>exFAT (Extended File Allocation Table)</strong></p>
-<p>由微软推出，专为解决FAT32的缺点</p>
-<p>它打破了4GB单文件和分区大小的限制，同时针对闪存介质的特性进行了优化，减少了不必要的写入操作</p>
-</li>
-</ul>
-<h4 id="ntfs">NTFS
-</h4><p><strong>全称New Technology File System，新技术文件系统</strong></p>
-<p>是Windows系统的标准文件系统，支持大文件和大分区，并提供文件权限管理、加密、日志、压缩等强大功能，可靠性和安全性高</p>
-<p>感兴趣可以看看我的另一篇博客：<a class="link" href="https://blog.928330.xyz/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/#ntfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"  target="_blank" rel="noopener"
-    >NTFS系统
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<h4 id="refs">ReFS
-</h4><p><strong>全称Resilient File System，弹性文件系统</strong></p>
-<p>是微软为Windows Server系统推出的、旨在替代NTFS的新一代文件系统，但它的核心设计目标不是替代桌面版的NTFS，而是为数据中心和大规模存储提供更高的数据完整性和可用性</p>
-<p>它通过对元数据和可选的用户数据进行校验和来主动检测和修复数据损坏，其写入时复制（Copy-on-Write）机制确保了在写入过程中发生意外时，旧数据不会被破坏，极大地增强了数据恢复能力</p>
-<p>常用于Windows Server的存储空间和Hyper-V虚拟化场景</p>
-<h4 id="ext">ext
-</h4><p><strong>全称Extended File System，扩展文件系统</strong></p>
-<p>Linux系统的标准文件系统，用于几乎所有的Linux发行版，从桌面到服务器，<strong>以及安卓手机的内部存储</strong></p>
-<ul>
-<li>
-<p><strong>ext2</strong></p>
-<p>经典的早期版本，性能良好，但与FAT类似，缺少日志功能，在服务器等场景下可靠性不足</p>
-</li>
-<li>
-<p><strong>ext3</strong></p>
-<p>它在ext2的基础上加入了日志功能，在不改变底层结构的情况下，极大地提升了文件系统的可靠性，成为了许多Linux发行版的长期默认选项</p>
-</li>
-<li>
-<p><strong>ext4</strong></p>
-<p>当前的主流标准，它在前代基础上引入了多项重要改进，如Extents（优化大文件的存储方式，减少碎片并提升性能）、支持更大的文件和卷、更快的自检速度等，使其更现代化、性能更强</p>
-</li>
-</ul>
-<h4 id="btrfs">Btrfs
-</h4><p><strong>全称B-tree File System</strong></p>
-<p>是Linux的新一代文件系统，旨在替代ext系列文件系统，尤其适合企业级存储和虚拟化环境</p>
-<p>Btrfs内置了快照、校验和、数据压缩、写时复制以及多磁盘管理等功能，它非常灵活，允许动态地添加、删除设备和调整卷大小，目前已成为一些Linux发行版（如Fedora, openSUSE）的默认文件系统</p>
-<h4 id="xfs">XFS
-</h4><p><strong>全称Extended Filesystem X，扩展文件系统X</strong></p>
-<p>是一种高性能日志文件系统，最初由硅谷图形公司SGI为其IRIX操作系统开发，后来被Linux采用</p>
-<p>XFS的结构设计使其在文件数量和大小增长时，性能下降幅度很小，特别适合处理大文件和高并发读写场景</p>
-<p>因其稳定性和高吞吐量的特性，XFS成为了许多企业级Linux发行版（如Red Hat Enterprise Linux及其衍生版CentOS）的默认文件系统，尤其适用于数据库、媒体服务器和科学计算等场景</p>
-<h4 id="tmpfs">tmpfs
-</h4><p><strong>全称Temporary File System，临时文件系统</strong></p>
-<p>是Linux下的一种虚拟文件系统，完全驻留在内存中，用于存放临时文件</p>
-<p>数据不持久，重启后丢失，支持动态调整大小，常用于<code>/tmp</code>、<code>/run</code>等目录</p>
-<h4 id="devtmpfs">devtmpfs
-</h4><p><strong>全称Device Temporary File System，设备临时文件系统</strong></p>
-<p>是Linux内核专门为<code>/dev</code>目录提供的虚拟文件系统，用于管理设备节点</p>
-<p>在内存中动态生成，不占用硬盘，系统启动早期即可挂载，方便设备驱动初始化</p>
-<h4 id="hfs-与-apfs">HFS+ 与 APFS
-</h4><p><strong>HFS+全称Hierarchical File System Plus，分层文件系统增强版</strong></p>
-<p><strong>APFS全称Apple File System，苹果文件系统</strong></p>
-<p>他们都是苹果macOS系统的文件系统，HFS+是长期的标准，而APFS（Apple File System）是从2017年开始推出的新一代文件系统，专门为固态硬盘和闪存优化，性能和可靠性更强</p>
-<h2 id="卷volume">卷（Volume）
-</h2><p><strong>卷是将分区格式化后, 创建了文件系统, 能够被系统所识别和访问的存储区域</strong></p>
-<p>在最简单的情况下，一个卷和一个分区是一一对应的，比如在一块硬盘上划分了C、D两个分区，那么就有两个对应的卷</p>
-<p>但一个卷也可以跨越多个分区，甚至多块物理硬盘，例如RAID阵列，在操作系统看来就是一个跨越了多块物理盘的巨大逻辑卷</p>
-<h2 id="windows物理磁盘的管理模式">Windows物理磁盘的管理模式
-</h2><h3 id="基础磁盘-basic-disk">基础磁盘 (Basic Disk)
-</h3><p>这是Windows系统默认的磁盘类型，当我们初始化一块新硬盘时，系统默认会将其设置为基础磁盘</p>
-<p>它使用我们之前讨论过的传统分区表（MBR或GPT）来组织磁盘</p>
-<p>基础磁盘上的一个分区（或简单卷）不能跨越到多个物理磁盘上，每个分区都完全包含在一块物理硬盘的内部</p>
-<h3 id="动态磁盘-dynamic-disk">动态磁盘 (Dynamic Disk)
-</h3><p>这是Windows提供的一种更高级的磁盘管理模式，它提供了基础磁盘所不具备的许多高级功能</p>
-<p>动态磁盘不使用传统的分区表来定义卷，而是使用一个逻辑磁盘管理器（LDM，Logical Disk Manager）的数据库来跟踪所有动态卷的信息，这个数据库会被复制到系统中每一个动态磁盘上，以实现冗余</p>
-<p><strong>动态磁盘允许创建跨越多个物理硬盘的卷（这实际上就是一种软件RAID的实现，后面会讲到）</strong></p>
-<ul>
-<li>
-<p><strong>简单卷</strong></p>
-<p>功能上等同于基础磁盘上的一个分区，但它只能在动态磁盘上创建</p>
-</li>
-<li>
-<p><strong>跨区卷</strong></p>
-<p>将来自多个物理磁盘上的未分配空间合并成一个巨大的卷</p>
-<p>数据会先写满第一块盘的空间，然后再接着写到下一块盘，类似JBOD（Just a Bunch of Disks）概念</p>
-</li>
-<li>
-<p><strong>带区卷</strong></p>
-<p>将数据条带化地同时写入到多个物理磁盘上，以提高读写性能，等同于软件RAID0</p>
-</li>
-<li>
-<p><strong>镜像卷</strong></p>
-<p>将数据完全一致地写入到两块物理磁盘上，实现数据冗余，等同于软件RAID1</p>
-</li>
-<li>
-<p><strong>RAID-5 卷</strong></p>
-<p>将数据和奇偶校验信息条带化地分布到三个或更多的物理磁盘上，等同于软件RAID5</p>
-</li>
-</ul>
-<p>它无需昂贵的硬件RAID卡，就能在操作系统层面实现RAID功能，管理非常灵活</p>
-<p>但不好的是兼容性差，因为这是微软的专有技术，Linux和macOS系统通常无法原生识别动态磁盘卷</p>
-<p>此外，从动态磁盘转换回基础磁盘，需要删除磁盘上的所有卷，会导致数据丢失</p>
-<h2 id="驱动器drive">驱动器（Drive）
-</h2><p>驱动器是指可以存储和访问数据的存储单元，它可以是分区、卷或者磁盘</p>
-<p><strong>物理驱动器</strong>：真实存在的硬盘或固态盘</p>
-<p><strong>逻辑驱动器</strong>：操作系统识别后的分区或者卷</p>
-<p><strong>虚拟驱动器</strong>：通过工具在内存中创建的模拟磁盘，操作系统可像对待真实磁盘一样访问</p>
-<ul>
-<li>
-<p><strong>Windows</strong></p>
-<p><strong>每一个驱动器都会有一个驱动器号</strong>，是Windows系统为方便用户访问而给卷分配的标识符，例如<code>C:</code>、<code>D:</code></p>
-<p>我们完整看到的驱动器号过程应该是这样的：</p>
-<p><strong>物理硬盘 → 分区 → 文件系统  → 卷 → 挂载 → 驱动器</strong></p>
-<p>比如我们插入U盘，系统会识别分区，然后作为卷挂载，它是实打实的新的硬盘空间</p>
-<p>而当用FTKImager这样的工具挂载镜像时，软件会在内存中创建一个虚拟磁盘，Windows会识别其中的卷，并给它分配一个驱动器号，之后就能在“我的电脑”里看到一个新盘符，空间来源就是镜像文件</p>
-</li>
-<li>
-<p><strong>Linux</strong></p>
-<p>驱动器不会用盘符标识，<strong>而是通过设备文件和挂载点来管理</strong>，比如<code>/dev/sda1</code>挂载到<code>/home</code></p>
-</li>
-</ul>
-<h2 id="挂载mount">挂载（Mount）
-</h2><p><strong>挂载是将存储设备（磁盘、分区、镜像、容器等）接入文件系统，从而让用户和程序能够访问其内容的过程</strong></p>
-<p>挂载前，设备的内容是孤立的，操作系统无法通过普通路径访问</p>
-<p>挂载后，就可以通过某个路径访问设备里的数据了</p>
-<p><strong>而挂载点就是操作系统用来访问挂载设备的路径或位置</strong>，在Linux通常是一个空目录，比如 <code>/mnt/usb</code>、<code>/media/cdrom</code>，而Windows默认挂载方式是分配驱动器号，也可以挂载到空目录</p>
-<h3 id="windows挂载">windows挂载
-</h3><p>插入U盘、使用软件挂载镜像应该都很熟悉了，这里正好借着我添加移动硬盘的过程来说一下：</p>
-<p>首先win+x组合键调出功能栏，打开磁盘管理</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="88david-的笔记本电脑曾經连接了多少个不同的-wifi">88.David 的笔记本电脑曾經连接了多少个不同的 WiFi?
+</h2><p>A. 1</p>
+<p>B. 2</p>
+<p>C. 3</p>
+<p>D. 4</p>
+<p>连接过的wifi只有一个：</p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251002005926909" href="http://picture.928330.xyz/typora/image-20251002005926909.png">
-<img src="http://picture.928330.xyz/typora/image-20251002005926909.png" alt="image-20251002005926909"  />
+<a data-fancybox="gallery" data-caption="image-20251019004748962" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png" alt="image-20251019004748962"  />
 </a>
 </div>
 </p>
-<p>新的硬盘会显示未分配空间，是灰色的（我的分配好了），在这上面右键，选择新建简单卷：</p>
+<p>在wifi连接记录里面能看到的都是同一个wifi，网络适配器、网卡guid等都是一样的：</p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251002012039643" href="http://picture.928330.xyz/typora/image-20251002012039643.png">
-<img src="http://picture.928330.xyz/typora/image-20251002012039643.png" alt="image-20251002012039643"  />
+<a data-fancybox="gallery" data-caption="image-20251019004638268" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png" alt="image-20251019004638268"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="89承上题-该wifi网络的名称ssid是">89.承上题, 该WiFi网络的名称(SSID)是?
+</h2><div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ErrorError5G
+</span></span></code></pre></div><p>奇怪的是连接记录里面有部分是用密码作为SSID的</p>
+<h2 id="90该电脑的-windows-操作系统的安装日期是什么">90.该电脑的 Windows 操作系统的安装日期是什么?
+</h2><p>A. 2024-07-31 09:55:37 UTC+8</p>
+<p>B. 2024-08-01 13:10:15 UTC+8</p>
+<p>C. 2024-07-31 10:18:26 UTC+8</p>
+<p>D. 2024-08-01 14:43:55 UTC+8</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019005152484" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png" alt="image-20251019005152484"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h1 id="案件综合分析">案件综合分析
+</h1><p>通过对 David 笔记本电脑的电子数据取证和痕迹分析, 你了解到 David 是一名加密货币专家.</p>
+<p>假设加密货币 International Digital Forensics Coin (IDFC) 面值是 1 IDFC = 1 HKD.</p>
+<p>IDFC Token Address: 0x56E7A6dd8aA1c78ba77944C94c43054978E89b7b</p>
+<p>区块链: Binance Smart Chain</p>
+<h2 id="91下列那个网站能够找到区块链-binance-smart-chain-的交易记录">91.下列那个网站能够找到区块链 Binance Smart Chain 的交易记录?
+</h2><p>A. binance.com</p>
+<p>B. bscscan.com</p>
+<p>C. etherscan.io</p>
+<p>D. blockchain.com</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019005537464" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png" alt="image-20251019005537464"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="92emma-用什么方法盜取-david-的-idfc">92.Emma 用什么方法盜取 David 的 IDFC?
+</h2><p>A. Emma 经 Clara 盗取了 David 虚拟货币钱包的私匙</p>
+<p>B. Emma 经 Clara 盗取了 David 虚拟货币钱包的公匙</p>
+<p>C. Emma 经 Clara 盗取了 David 虚拟货币钱包的回复匙</p>
+<p>D. Emma 盗取了 David 电话</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="93david-在什么日期时间发现-idfc-被盗">93.David 在什么日期时间发现 IDFC 被盗?
+</h2><p>A. 2024-8-22 18:06</p>
+<p>B. 2024-8-28 09:14</p>
+<p>C. 2024-8-28 09:57</p>
+<p>D. 2024-8-29 15:52</p>
+<p>看Clara的聊天记录：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019005658240" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png" alt="image-20251019005658240"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><h2 id="94emma-为什么盗取-david-的-idfc">94.Emma 为什么盗取 David 的 IDFC?
+</h2><p>A. Emma为了买名贵手表</p>
+<p>B. Emma为了赌钱</p>
+<p>C. Emma为了炒卖虚拟货币</p>
+<p>D. Emma为了还财务公司的欠债</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D
+</span></span></code></pre></div><h2 id="95分析-idfc-的交易记录-emma-盜取了-david-虚拟货币钱包内哪个地址的-idfc">95.分析 IDFC 的交易记录, Emma 盜取了 David 虚拟货币钱包内哪个地址的 IDFC?
+</h2><p>A. 0x10a4f01b80203591ccee76081a4489ae1cd1281c</p>
+<p>B. 0x152c90200be61a540875f2a752c328bd19dbfb87</p>
+<p>C. 0x59eb2c55eefdd4d8af2886c9fd8fc6f465c3e220</p>
+<p>D. 0x70544880875fe907cee383873ca58da23378caa5</p>
+<p>在浏览器能看见下载了一个csv文件，是和虚拟货币有关的，能找到：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019132416556" href="http://picture.928330.xyz/typora/image-20251019132416556.png">
+<img src="http://picture.928330.xyz/typora/image-20251019132416556.png" alt="image-20251019132416556"  />
+</a>
+</div>
+</p>
+<p>打开看看：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019133227324" href="http://picture.928330.xyz/typora/image-20251019133227324.png">
+<img src="http://picture.928330.xyz/typora/image-20251019133227324.png" alt="image-20251019133227324"  />
+</a>
+</div>
+</p>
+<p>26日下午6点clara发了回复短语，28日上午9点david发现钱被偷，也就是这期间是作案时期</p>
+<p>而表格中记录的是UTC标准时间，需要加上八小时才是当地时间，也就是只有三条记录符合：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019134638118" href="http://picture.928330.xyz/typora/image-20251019134638118.png">
+<img src="http://picture.928330.xyz/typora/image-20251019134638118.png" alt="image-20251019134638118"  />
+</a>
+</div>
+</p>
+<p>只有最后一条在四个选项中</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="96emma-总共盗取了-david-多少-idfc">96.Emma 总共盗取了 David 多少 IDFC?
+</h2><p>A. 90,000 IDFC</p>
+<p>B. 170,000 IDFC</p>
+<p>C. 9,300,000 IDFC</p>
+<p>D. 9,390,000 IDFC</p>
+<p>见上题</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A
+</span></span></code></pre></div><h2 id="97下列哪些地址是由相同的恢复短语recovery-seed所生成">97.下列哪些地址是由相同的恢复短语(Recovery Seed)所生成?
+</h2><p>A. 0x10a4f01b80203591ccee76081a4489ae1cd1281c</p>
+<p>B. 0x152c90200be61a540875f2a752c328bd19dbfb87</p>
+<p>C. 0x59eb2c55eefdd4d8af2886c9fd8fc6f465c3e220</p>
+<p>D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042</p>
+<p>不知道怎么写，可能要联网，但是比赛又不让联网，很奇怪了</p>
+<h2 id="98根据-idfc-的交易记录作分析-总共有多少次-idfc-交易流入地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c">98.根据 IDFC 的交易记录作分析, 总共有多少次 IDFC 交易流入地址 0x10a4f01b80203591ccee76081a4489ae1cd1281c?
+</h2><p>A. 0</p>
+<p>B. 1</p>
+<p>C. 2</p>
+<p>D. 3</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019135858537" href="http://picture.928330.xyz/typora/image-20251019135858537.png">
+<img src="http://picture.928330.xyz/typora/image-20251019135858537.png" alt="image-20251019135858537"  />
+</a>
+</div>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C
+</span></span></code></pre></div><h2 id="99在-david-计算机的-d-盘内有一张图片-根据图片上的信息-找出-david-另一个虚拟货币钱包的恢复短语-下列哪一个单词是在此恢复短语内">99.在 David 计算机的 D 盘内有一张图片, 根据图片上的信息, 找出 David 另一个虚拟货币钱包的恢复短语, 下列哪一个单词是在此恢复短语内?
+</h2><p>A. fall</p>
+<p>B. bread</p>
+<p>C. brain</p>
+<p>D. dove</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251019012546771" href="http://picture.928330.xyz/typora/image-20251019012546771.png">
+<img src="http://picture.928330.xyz/typora/image-20251019012546771.png" alt="image-20251019012546771"  />
+</a>
+</div>
+</p>
+<p>图里面有个单词被遮挡了，不过看起来虽然和BC很像，但又不太可能是，猜一个吧</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B
+</span></span></code></pre></div><p>*<strong>错了</strong></p>
+<p>居然要在内存里面暴力搜索，这完全没提示啊</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251022162838049" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png" alt="image-20251022162838049"  />
 </a>
 </div>
 </p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251002012052615" href="http://picture.928330.xyz/typora/image-20251002012052615.png">
-<img src="http://picture.928330.xyz/typora/image-20251002012052615.png" alt="image-20251002012052615"  />
-</a>
-</div>
-</p>
-<p>一直下一步默认，其中会让你选择驱动器符号和填写磁盘名称，按自己的喜好来就行</p>
-<h3 id="linux挂载">Linux挂载
-</h3><p><strong>命令行挂载</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mount /dev/sdb1 /mnt/usb
-</span></span></code></pre></div><p><code>/dev/sdb1</code>是要挂载的目标，<code>/mnt/usb</code>是挂载点</p>
-<p><strong>查看挂载信息</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mount        <span style="color:#7f848e"># 查看当前所有挂载</span>
-</span></span><span style="display:flex;"><span>df -h        <span style="color:#7f848e"># 查看挂载的设备及占用空间</span>
-</span></span></code></pre></div><p><strong>卸载设备</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>umount /mnt/usb   <span style="color:#7f848e"># 或 umount /dev/sdb1</span>
-</span></span></code></pre></div><p>Linux的文件系统是树结构，所有挂载都是挂在这个树上</p>
-<h1 id="raid级别">RAID级别
-</h1><p>ok啊，终于进入正题了</p>
-<p>根据不同的数据组织方式和冗余策略，形成有不同的RAID级别</p>
-<p>找资料的时候看见一张特好玩的图：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="用饮水机比喻 轻松理解RAID技术 " href="http://picture.928330.xyz/typora/ChMljV2ElGeIV8OBAABvKCcoLWMAAP3MgO2JJAAAG9A622.jpg">
-<img src="http://picture.928330.xyz/typora/ChMljV2ElGeIV8OBAABvKCcoLWMAAP3MgO2JJAAAG9A622.jpg" alt="用饮水机比喻 轻松理解RAID技术 "  />
-</a>
-</div>
-</p>
-<p>等看完下面的内容就懂了，虽然不太准确，但还是挺形象的hhh</p>
-<div class="alert alert-tip">
-    <div class="alert-header">
-        <span class="alert-icon">
-            💡
-        </span>
-        <span class="alert-title">
-            Tip
-        </span>
-    </div>
-    <div class="alert-content">
-        <p>图里前三个并不是RAID的概念，而是数据存取/服务部署的概念，最好了解一下</p>
-<ul>
-<li>
-<p><strong>Standalone（单机部署/单盘存取）</strong></p>
-<p>只能从一块硬盘获取数据，如果硬盘挂掉，那么数据就不可用</p>
-<p>对于服务，则是只把服务部署在一个主机，服务坏了就坏了</p>
-</li>
-<li>
-<p><strong>Hotswap（热插拔）</strong></p>
-<p>热插拔是指在系统运行过程中，可以直接插入或拔出硬件设备，而不需要关机或重启系统</p>
-<p>而**热备技术（HotSpare，简称HS）**就是依靠它实现：一块硬盘工作，另一块硬盘作为热备，当主盘故障时系统自动切换到备用盘</p>
-<p>服务部署也是同理，以一个服务作为热备，随时顶替</p>
-</li>
-<li>
-<p><strong>Cluster（集群）</strong></p>
-<p>同一数据存储在多个硬盘里/同一服务部署在多台主机上，形成集群，一个坏了另一个还能用</p>
-<p>和HS不一样的是会切换硬盘/主机</p>
-</li>
-</ul>
-<p>嗯，图里的这种幽默也由此可见一斑了</p></div>
-</div>
-<h2 id="raid0条带化">RAID0：条带化
-</h2><p>2个以上硬盘并联</p>
-<p>将数据分块，无冗余地并行写入阵列中的所有磁盘，空间利用率高高的，就是磁盘本身的容量</p>
-<p>读写性能极高，是所有RAID级别中理论速度最快的</p>
-<p>但也因为没有任何数据冗余，任何一块磁盘损坏都会导致所有数据的丢失</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RAID_0.svg/250px-RAID_0.svg.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RAID_0.svg/250px-RAID_0.svg.png" alt="img"  />
-</a>
-</div>
-</p>
-<h2 id="raid1镜像">RAID1：镜像
-</h2><p>将数据完整地复制到另一块或多块磁盘上，形成互为镜像的副本，提供了很高的数据安全性</p>
-<p>但其磁盘空间利用率只有一半，并且写入性能相比单盘没有提升（没有使用条带化），是比较不行的冗余方式</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/250px-RAID_1.svg.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/250px-RAID_1.svg.png" alt="img"  />
-</a>
-</div>
-</p>
-<h2 id="raid2位级条带化汉明码校验">RAID2：位级条带化+汉明码校验
-</h2><p>在<strong>位</strong>级别上对数据进行条带化，并使用专门的磁盘存储汉明码进行错误校验，实时纠正单位数据错误</p>
-<p>这种方式实现复杂，可用空间是(N-P)*S，其中N是总盘数，P是校验盘数，S是盘容量</p>
-<p>校验盘的数量P与数据盘的数量有关，关系有点复杂，就不展开了</p>
-<p>随着现代硬盘自带纠错功能，该级别已被市场淘汰了</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/RAID2_arch.svg/500px-RAID2_arch.svg.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/RAID2_arch.svg/500px-RAID2_arch.svg.png" alt="img"  />
-</a>
-</div>
-</p>
-<h2 id="raid3块级条带化专用校验盘">RAID3：块级条带化+专用校验盘
-</h2><p>在<strong>字节</strong>级别上进行数据条带化，使用一块专用的磁盘来存储所有数据的奇偶校验信息，可用空间是(N-1)*S</p>
-<p>至少使用三块硬盘，如果只有两块就和RAID1一样了</p>
-<p>由于数据按字节分布在所有数据盘上，任何读写操作都需要所有磁盘协同工作，这使其不适合处理大量随机的小型读写请求，适合大块连续数据的读写，例如未压缩视频编辑</p>
-<p>但由于所有校验操作都集中在一块专用盘上，导致高并发随机写入的性能被大幅限制，因此也已很少使用</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/RAID_3.svg/330px-RAID_3.svg.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/RAID_3.svg/330px-RAID_3.svg.png" alt="img"  />
-</a>
-</div>
-</p>
-<h2 id="raid4块级条带化专用校验盘">RAID4：块级条带化+专用校验盘
-</h2><p>在<strong>块</strong>级别上对数据进行条带化，并同样使用一块专用磁盘存储奇偶校验信息，所以可用空间也是(N-1)*S</p>
-<p>至少使用三块盘，理由和RAID3一样</p>
-<p>相比RAID3，改善了小文件的读取性能，因为读取请求可以由单个数据盘独立完成</p>
-<p>但写入操作时，这块专用的校验盘依然制约了性能，核心问题并未得到解决</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RAID_4.svg/330px-RAID_4.svg.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RAID_4.svg/330px-RAID_4.svg.png" alt="img"  />
-</a>
-</div>
-</p>
-<h2 id="raid5分布式奇偶校验">RAID5：分布式奇偶校验
-</h2><p>在<strong>块</strong>级别上条带化数据，将奇偶校验信息交错地分布到所有磁盘上，性能、容量和安全性之间有很好的平衡</p>
-<p>因为奇偶校验信息占据的空间刚好是一块盘，所以可用空间也是(N-1)*S</p>
-<p>至少使用三块硬盘，如果只有两块的话就无法存储完整的条带信息了</p>
-<p>它可以在单块磁盘损坏时不丢失数据，因为后续的读取可以通过阵列中剩余的数据和奇偶校验块计算出来</p>
-<p>但由于奇偶校验计算是在整个条带上进行的，其每个写入操作都需要重新计算校验值，性能会有一定损失</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/RAID_5.svg/330px-RAID_5.svg.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/RAID_5.svg/330px-RAID_5.svg.png" alt="img"  />
-</a>
-</div>
-</p>
-<p><strong>由于RAID5是非常常用的类型，也是电子取证重点考察的部分，我们重点讲一下它</strong></p>
-<p>RAID5的核心在于其校验数据的分布式存储，其校验原理基于异或运算(XOR，用符号<code>^</code>代指)</p>
-<p>例如，RAID5存储方式下有A1, A2, A3三个数据块，其校验块Ap的计算方式为<code>Ap = A1 ^ A2 ^ A3</code>，如果其中一个数据块（如A2）丢失，可以通过<code>A2 = A1 ^ A3 ^ Ap</code>来恢复</p>
-<p>而校验块在磁盘间的分布规律，即所谓“循环方式”，是重组中最关键的一环</p>
-<p>它由两个东西决定：<strong>循环方向</strong>和<strong>同步性（对称性）</strong></p>
-<h3 id="循环方向">循环方向
-</h3><p><strong>决定RAID5每条条带的奇偶校验块（P）在不同磁盘上的分布方式</strong></p>
-<h4 id="左循环">左循环
-</h4><p>校验块<code>P0, P1, P2...</code>从阵列的<strong>最后一个盘</strong>开始，<strong>从右向左</strong>依次移动</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>条带号</th>
-          <th>Disk0</th>
-          <th>Disk1</th>
-          <th>Disk2</th>
-          <th>Disk3</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>P0</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td></td>
-          <td></td>
-          <td>P1</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td></td>
-          <td>P2</td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>P3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>P4</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td></td>
-          <td></td>
-          <td>P5</td>
-          <td></td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="右循环">右循环
-</h4><p>校验块<code>P0, P1, P2...</code>从阵列的<strong>第一个盘</strong>开始，<strong>从左向右</strong>依次移动</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>条带号</th>
-          <th>Disk0</th>
-          <th>Disk1</th>
-          <th>Disk2</th>
-          <th>Disk3</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0</td>
-          <td>P0</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td></td>
-          <td>P1</td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td></td>
-          <td></td>
-          <td>P2</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>P3</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>P4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td></td>
-          <td>P5</td>
-          <td></td>
-          <td></td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="同步性对称性">同步性（对称性）
-</h3><p><strong>决定写数据和校验时，磁盘是否按固定顺序同时参与写入</strong></p>
-<p>下面内容我们默认使用左循环的方式，填入D0~D8这九个数据块</p>
-<h4 id="异步不对称">异步（不对称）
-</h4><p><strong>下一个数据条带的起始数据块总是从0号盘开始写入，不考虑上一行校验块的位置</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>条带号</th>
-          <th>Disk0</th>
-          <th>Disk1</th>
-          <th>Disk2</th>
-          <th>Disk3</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0</td>
-          <td>D0</td>
-          <td>D1</td>
-          <td>D2</td>
-          <td>P0</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td>D3</td>
-          <td>D4</td>
-          <td>P1</td>
-          <td>D5</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>D6</td>
-          <td>P2</td>
-          <td>D7</td>
-          <td>D8</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>P3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>P4</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td></td>
-          <td></td>
-          <td>P5</td>
-          <td></td>
-      </tr>
-  </tbody>
-</table></div>
-<p>其实就是每行从0依次由低到高填入</p>
-<h4 id="同步对称">同步（对称）
-</h4><p><strong>下一个数据条带的起始数据块紧跟在当前条带校验块所在的磁盘之后，如果校验块在最后一个盘，则起始数据块回到0号盘</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>条带号</th>
-          <th>Disk0</th>
-          <th>Disk1</th>
-          <th>Disk2</th>
-          <th>Disk3</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0</td>
-          <td>D0</td>
-          <td>D1</td>
-          <td>D2</td>
-          <td>P0</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td>D4</td>
-          <td>D5</td>
-          <td>P1</td>
-          <td>D3</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>D8</td>
-          <td>P2</td>
-          <td>D6</td>
-          <td>D7</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>P3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>P4</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td></td>
-          <td></td>
-          <td>P5</td>
-          <td></td>
-      </tr>
-  </tbody>
-</table></div>
-<p>先判断下一个条带的校验块位于哪个磁盘，然后将数据写入校验块所在的磁盘的下一个磁盘</p>
-<p>之后向高号盘写入，直至该条带内编号最大的数据块写满后，再回到同条带内的0号盘写入，直至写满条带</p>
-<p>比如条带三，因为校验块是Disk1，数据写入顺序就是D6（Disk2）-&gt; D7（Disk3）-&gt; D8（Disk0）</p>
-<p><strong>至此，我们就掌握了完整的RAID5写入标准数据与校验数据的方式</strong></p>
-<h2 id="raid6双分布式奇偶校验">RAID6：双分布式奇偶校验
-</h2><p>在RAID5的基础上增加了第二个独立的校验块，并将两种校验信息都交错分布在所有磁盘上</p>
-<p>有两组独立的校验信息，占用的总空间等于两块磁盘的容量，所以可用空间是(N-2)*S</p>
-<p>至少需要4块磁盘，可以容忍两块磁盘同时损坏</p>
-<p>但也因为要进行两次校验计算，RAID6的写入性能，尤其是小数据块的随机写入，通常低于RAID5</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/RAID_6.svg/330px-RAID_6.svg.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/RAID_6.svg/330px-RAID_6.svg.png" alt="img"  />
-</a>
-</div>
-</p>
-<h2 id="raid10-10">RAID10 (1+0)
-</h2><p>先将磁盘两两配对做RAID1（镜像），然后再将这些镜像对组合成一个RAID0（条带化）</p>
-<p>兼具RAID1的高可靠性和RAID0的高性能，只要每个镜像对中至少有一块磁盘正常，数据就不会丢失</p>
-<p>但成本高，且磁盘利用率和RAID1一样，只有50%</p>
-<p>eg：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>条带号</th>
-          <th>Disk0</th>
-          <th>Disk1</th>
-          <th>Disk2</th>
-          <th>Disk3</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>D0</td>
-          <td>D0</td>
-          <td>D1</td>
-          <td>D1</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>D2</td>
-          <td>D2</td>
-          <td>D3</td>
-          <td>D3</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>Disk0/1是镜像组1，Disk2/3是镜像组2</p>
-<p>使用RAID0对镜像组条带化后，多组镜像同时读写</p>
-<h2 id="raid50-50">RAID50 (5+0)
-</h2><p>先将磁盘分组构建多个RAID5阵列，再将这些RAID5阵列组合成一个RAID0</p>
-<p>每个子RAID5组都允许坏一块盘，提供了比单个RAID5更高的性能和更好的容错能力</p>
-<p>可用空间是K*(M-1)*S，K是RAID5子阵列的数量，M是每个子阵列中的磁盘数量</p>
-<p>eg：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>条带号</th>
-          <th>Disk0</th>
-          <th>Disk1</th>
-          <th>Disk2</th>
-          <th>Disk3</th>
-          <th>Disk4</th>
-          <th>Disk5</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>D0</td>
-          <td>D1</td>
-          <td>P0</td>
-          <td>D3</td>
-          <td>D4</td>
-          <td>P1</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>D5</td>
-          <td>P2</td>
-          <td>D6</td>
-          <td>D7</td>
-          <td>P3</td>
-          <td>D8</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>前3块盘是RAID5组1，后3块盘是RAID5组2</p>
-<p>RAID0跨两组条带化后，多组并行，提高性能</p>
-<h2 id="raid60-60">RAID60 (6+0)
-</h2><p>先将磁盘分组构建多个RAID6阵列，再将这些RAID6阵列组合成一个RAID0</p>
-<p>每个子RAID6组都允许坏两块盘，提供了极高的性能和顶级的容错能力</p>
-<p>可用空间是K*(M-2)*S</p>
-<p>eg：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>条带号</th>
-          <th>Disk0</th>
-          <th>Disk1</th>
-          <th>Disk2</th>
-          <th>Disk3</th>
-          <th>Disk4</th>
-          <th>Disk5</th>
-          <th>Disk6</th>
-          <th>Disk7</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>D0</td>
-          <td>D1</td>
-          <td>P0</td>
-          <td>Q0</td>
-          <td>D4</td>
-          <td>D5</td>
-          <td>P1</td>
-          <td>Q1</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>D2</td>
-          <td>P2</td>
-          <td>Q2</td>
-          <td>D3</td>
-          <td>D6</td>
-          <td>P3</td>
-          <td>Q3</td>
-          <td>D7</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>每组4块盘，RAID0跨两组条带化，提升性能</p>
-<p><strong>上面三种方式和RAID0组合都是为了在高容错的基础上提高读写效率</strong></p>
-<h1 id="raid的实现模式">RAID的实现模式
-</h1><h2 id="软件raid">软件RAID
-</h2><p>所有数据和校验运算都由CPU负责，成本低廉，无需额外硬件，但会占用CPU资源，影响系统性能</p>
-<p>例如操作系统内置的RAID功能，或者主板芯片组提供的RAID功能，都是软件RAID</p>
-<p>不过主板损坏后，可能难以找到同款主板来重建RAID</p>
-<h2 id="硬件raid">硬件RAID
-</h2><p>通过一块专用的RAID控制器卡来实现，该卡上有自己的处理器（称作ROC, RAID-on-Chip）、缓存和BIOS，独立处理所有RAID运算，对主CPU透明</p>
-<p>性能高，不占用主机CPU资源，通常有缓存和备用电池以防掉电数据丢失，可靠性高，易于迁移，但成本较高</p>
-<h1 id="raid重组">RAID重组
-</h1><p>要成功手动重组一个RAID阵列，必须确定以下三个东西：</p>
-<ol>
-<li><strong>RAID类型</strong></li>
-<li><strong>条带大小</strong></li>
-<li><strong>循环方式</strong></li>
-</ol>
-<h2 id="2023美亚">2023美亚
-</h2><p>检材给了三个镜像：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928164412452" href="http://picture.928330.xyz/typora/image-20250928164412452.png">
-<img src="http://picture.928330.xyz/typora/image-20250928164412452.png" alt="image-20250928164412452"  />
-</a>
-</div>
-</p>
-<h3 id="usf">USF
-</h3><p>这个工具强到离谱，速度快而且非常自动化，非常推荐使用</p>
-<h4 id="自动重组">自动重组
-</h4><p>打开三个镜像：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928164318386" href="http://picture.928330.xyz/typora/image-20250928164318386.png">
-<img src="http://picture.928330.xyz/typora/image-20250928164318386.png" alt="image-20250928164318386"  />
+<a data-fancybox="gallery" data-caption="image-20251022162857838" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png" alt="image-20251022162857838"  />
 </a>
 </div>
 </p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928164522254" href="http://picture.928330.xyz/typora/image-20250928164522254.png">
-<img src="http://picture.928330.xyz/typora/image-20250928164522254.png" alt="image-20250928164522254"  />
-</a>
-</div>
-</p>
-<p>在左侧显示已经添加后，点击reflash刷新，可以看已经自动重组完成了：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928170957861" href="http://picture.928330.xyz/typora/image-20250928170957861.png">
-<img src="http://picture.928330.xyz/typora/image-20250928170957861.png" alt="image-20250928170957861"  />
-</a>
-</div>
-</p>
-<p>其中三个NAS磁盘都被划分成了一模一样的三个分区：</p>
-<ul>
-<li>
-<p><strong>Mirror component (Ext2/3/4) partition</strong></p>
-<p>RAID1阵列的组件，用于存放NAS的操作系统</p>
-</li>
-<li>
-<p><strong>SWAP partition</strong></p>
-<p>用作Linux系统的交换分区（虚拟内存），在NAS中，这个分区通常也会被设置为一个RAID1阵列</p>
-</li>
-<li>
-<p><strong>RAID5 component partition</strong></p>
-<p>RAID5阵列的组件</p>
-</li>
-</ul>
-<p>这三块5.40GB硬盘组成的RAID5阵列，可用容量为<code>(3-1) * 5.40 GB = 10.80 GB</code>，也就是组好的SG7:2的大小</p>
-<p>而下面重组完成的卷大小是10GB，非常合理</p>
-<p>右键对应的RAID分区，选择查看信息，可以看到具体的RAID情况：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250930162538750" href="http://picture.928330.xyz/typora/image-20250930162538750.png">
-<img src="http://picture.928330.xyz/typora/image-20250930162538750.png" alt="image-20250930162538750"  />
-</a>
-</div>
-</p>
-<p>查看重组后的RAID5信息：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928173043903" href="http://picture.928330.xyz/typora/image-20250928173043903.png">
-<img src="http://picture.928330.xyz/typora/image-20250928173043903.png" alt="image-20250928173043903"  />
-</a>
-</div>
-</p>
-<p>在USF里面也能直接查看文件系统：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928212805098" href="http://picture.928330.xyz/typora/image-20250928212805098.png">
-<img src="http://picture.928330.xyz/typora/image-20250928212805098.png" alt="image-20250928212805098"  />
-</a>
-</div>
-</p>
-<h4 id="手动重组">手动重组
-</h4><p>除了自动分析，也能使用手动分析重组功能：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928214055410" href="http://picture.928330.xyz/typora/image-20250928214055410.png">
-<img src="http://picture.928330.xyz/typora/image-20250928214055410.png" alt="image-20250928214055410"  />
+<a data-fancybox="gallery" data-caption="image-20251022163222740" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png" alt="image-20251022163222740"  />
 </a>
 </div>
 </p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928220053871" href="http://picture.928330.xyz/typora/image-20250928220053871.png">
-<img src="http://picture.928330.xyz/typora/image-20250928220053871.png" alt="image-20250928220053871"  />
-</a>
-</div>
-</p>
-<h4 id="导出磁盘">导出磁盘
-</h4><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928182313789" href="http://picture.928330.xyz/typora/image-20250928182313789.png">
-<img src="http://picture.928330.xyz/typora/image-20250928182313789.png" alt="image-20250928182313789"  />
-</a>
-</div>
-</p>
-<p>选择一比一复制：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928182328076" href="http://picture.928330.xyz/typora/image-20250928182328076.png">
-<img src="http://picture.928330.xyz/typora/image-20250928182328076.png" alt="image-20250928182328076"  />
+<a data-fancybox="gallery" data-caption="image-20251022163242554" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png" alt="image-20251022163242554"  />
 </a>
 </div>
 </p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928183645001" href="http://picture.928330.xyz/typora/image-20250928183645001.png">
-<img src="http://picture.928330.xyz/typora/image-20250928183645001.png" alt="image-20250928183645001"  />
+<a data-fancybox="gallery" data-caption="image-20251022163525402" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png" alt="image-20251022163525402"  />
 </a>
 </div>
 </p>
-<p>火眼可以正常解析：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929225553541" href="http://picture.928330.xyz/typora/image-20250929225553541.png">
-<img src="http://picture.928330.xyz/typora/image-20250929225553541.png" alt="image-20250929225553541"  />
-</a>
-</div>
-</p>
-<p>但不知道为什么不能进行火眼仿真</p>
-<h3 id="r-studio">R-Studio
-</h3><p>点击打开镜像，把三个镜像都导进去，然后再使用右上角的RAID功能：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928204440006" href="http://picture.928330.xyz/typora/image-20250928204440006.png">
-<img src="http://picture.928330.xyz/typora/image-20250928204440006.png" alt="image-20250928204440006"  />
-</a>
-</div>
-</p>
-<p>到这一步不知道为什么实在卡的不行，暂时缓一下，下次重启电脑后再更新（</p>
-<h3 id="美亚计算机取证大师">美亚计算机取证大师
-</h3><h4 id="自动重组-1">自动重组
-</h4><p>新建案例（注意这里选择添加磁盘镜像进行分析，而不是直接选择RAID重组）：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928200854922" href="http://picture.928330.xyz/typora/image-20250928200854922.png">
-<img src="http://picture.928330.xyz/typora/image-20250928200854922.png" alt="image-20250928200854922"  />
-</a>
-</div>
-</p>
-<p>点击下一步后会自动识别出有动态磁盘，选择继续分析：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928200925018" href="http://picture.928330.xyz/typora/image-20250928200925018.png">
-<img src="http://picture.928330.xyz/typora/image-20250928200925018.png" alt="image-20250928200925018"  />
-</a>
-</div>
-</p>
-<p>进入案件后，在证据文件这里找到RAID5，已经自动识别出来了：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928201454170" href="http://picture.928330.xyz/typora/image-20250928201454170.png">
-<img src="http://picture.928330.xyz/typora/image-20250928201454170.png" alt="image-20250928201454170"  />
-</a>
-</div>
-</p>
-<p>右键选择扫描磁盘结构：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928201526150" href="http://picture.928330.xyz/typora/image-20250928201526150.png">
-<img src="http://picture.928330.xyz/typora/image-20250928201526150.png" alt="image-20250928201526150"  />
-</a>
-</div>
-</p>
-<p>扫完之后会多出来两个卷，就是存储了内容的卷了：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928221327512" href="http://picture.928330.xyz/typora/image-20250928221327512.png">
-<img src="http://picture.928330.xyz/typora/image-20250928221327512.png" alt="image-20250928221327512"  />
-</a>
-</div>
-</p>
-<p>点击卷就能查看文件系统：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928212858092" href="http://picture.928330.xyz/typora/image-20250928212858092.png">
-<img src="http://picture.928330.xyz/typora/image-20250928212858092.png" alt="image-20250928212858092"  />
-</a>
-</div>
-</p>
-<p>看别人说其实还需要右键RAID5，选择RAID重组：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928201616532" href="http://picture.928330.xyz/typora/image-20250928201616532.png">
-<img src="http://picture.928330.xyz/typora/image-20250928201616532.png" alt="image-20250928201616532"  />
-</a>
-</div>
-</p>
-<div class="alert alert-note">
-    <div class="alert-header">
-        <span class="alert-icon">
-            📝
-        </span>
-        <span class="alert-title">
-            Note
-        </span>
-    </div>
-    <div class="alert-content">
-        <p>这里也能看见三个盘的起始的偏移量都是4832886784字节，条带大小是128扇区，符合RAID5的规范</p>
-<p>但回顾之前使用USF的分析结果，那边说偏移量是9439232扇区，64KB</p>
-<p><strong>其实这里涉及到计算：一个扇区的大小是512字节</strong></p>
-<p>（以防你是跳着看的：<a class="link" href="#%e6%89%87%e5%8c%ba%ef%bc%88Sector%ef%bc%89" >扇区
-    
-</a>）</p>
-<p>由此能计算出他们其实是一样的：</p>
-<p><strong>偏移量 = 9439232扇区*512字节 = 4832886784字节</strong></p>
-<p><strong>条带大小 = 128扇区*512字节 = 65536字节 = 64K字节</strong></p></div>
-</div>
-<p>据说重组后才能看到文件系统，不过我做的过程里只需要扫描磁盘结构之后就能看到了，不知道这一步是什么意思，可能是方便之后导出镜像？</p>
-<p>总之以后注意一下，遇到问题再重组一下</p>
-<h4 id="导出镜像">导出镜像
-</h4><p>右键RAID5选择制作镜像文件：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928220633293" href="http://picture.928330.xyz/typora/image-20250928220633293.png">
-<img src="http://picture.928330.xyz/typora/image-20250928220633293.png" alt="image-20250928220633293"  />
-</a>
-</div>
-</p>
-<p>这里可以选择镜像文件的格式：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250928201947883" href="http://picture.928330.xyz/typora/image-20250928201947883.png">
-<img src="http://picture.928330.xyz/typora/image-20250928201947883.png" alt="image-20250928201947883"  />
-</a>
-</div>
-</p>
-<p>导出后还会附赠一个说明文档：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929225504653" href="http://picture.928330.xyz/typora/image-20250929225504653.png">
-<img src="http://picture.928330.xyz/typora/image-20250929225504653.png" alt="image-20250929225504653"  />
-</a>
-</div>
-</p>
-<p>火眼能够正常解析：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929225516891" href="http://picture.928330.xyz/typora/image-20250929225516891.png">
-<img src="http://picture.928330.xyz/typora/image-20250929225516891.png" alt="image-20250929225516891"  />
-</a>
-</div>
-</p>
-<h3 id="弘连火眼证据分析">弘连火眼证据分析
-</h3><p>需要在工具箱里面下载使用：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929214704136" href="http://picture.928330.xyz/typora/image-20250929214704136.png">
-<img src="http://picture.928330.xyz/typora/image-20250929214704136.png" alt="image-20250929214704136"  />
-</a>
-</div>
-</p>
-<p>使用信息查询能快速分析RAID的各种信息：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250930155819686" href="http://picture.928330.xyz/typora/image-20250930155819686.png">
-<img src="http://picture.928330.xyz/typora/image-20250930155819686.png" alt="image-20250930155819686"  />
-</a>
-</div>
-</p>
-<p>这里也是使用扇区来表示偏移量的</p>
-<p>使用重组功能，勾选自动解析，就能自动重组了：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929214819769" href="http://picture.928330.xyz/typora/image-20250929214819769.png">
-<img src="http://picture.928330.xyz/typora/image-20250929214819769.png" alt="image-20250929214819769"  />
-</a>
-</div>
-</p>
-<p>导出的文件是<code>.001</code>格式，会放在一个火眼生成的虚拟驱动器里：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929215206710" href="http://picture.928330.xyz/typora/image-20250929215206710.png">
-<img src="http://picture.928330.xyz/typora/image-20250929215206710.png" alt="image-20250929215206710"  />
-</a>
-</div>
-</p>
-<p>这个文件也是能被正常解析的：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929225407141" href="http://picture.928330.xyz/typora/image-20250929225407141.png">
-<img src="http://picture.928330.xyz/typora/image-20250929225407141.png" alt="image-20250929225407141"  />
-</a>
-</div>
-</p>
-<p>比较坑的是生成的虚拟驱动器想要关掉很麻烦，火眼没有这个功能，windows的磁盘管理也看不见这个驱动器</p>
-<p>试了好几次，我的步骤是：</p>
-<p><strong>1.手动删除生成的镜像（剪切也行，反正别让他在里面，让这个虚拟驱动器里面没有东西）</strong></p>
-<p><strong>2.在重组页面点击“清空”，把拖进去重组的镜像都删除</strong></p>
-<p><strong>3.再次点击生成文件，此时提示找不到信息，虚拟驱动器也随之消失了</strong></p>
-<p>据客服所说，关掉RAID重组工具页面就会自动卸载，不过我没试过</p>
-<h2 id="2019">2019
-</h2><p>给出的是四个机械硬盘镜像</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250930103649432" href="http://picture.928330.xyz/typora/image-20250930103649432.png">
-<img src="http://picture.928330.xyz/typora/image-20250930103649432.png" alt="image-20250930103649432"  />
-</a>
-</div>
-</p>
-<h3 id="ftk--美亚取证大师">FTK + 美亚取证大师
-</h3><p>没找到其他办法，可能是因为这是硬RAID？</p>
-<p>使用FTK挂载这四个镜像（选择每个盘的.E01就可以，后面的会自动识别的）：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929010420615" href="http://picture.928330.xyz/typora/image-20250929010420615.png">
-<img src="http://picture.928330.xyz/typora/image-20250929010420615.png" alt="image-20250929010420615"  />
-</a>
-</div>
-</p>
-<p>挂载完成后可以在检材目录下看见一个<code>.adcf</code>文件：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929225647571" href="http://picture.928330.xyz/typora/image-20250929225647571.png">
-<img src="http://picture.928330.xyz/typora/image-20250929225647571.png" alt="image-20250929225647571"  />
-</a>
-</div>
-</p>
-<p><strong>这个<code>.adcf</code>文件是FTK创建的缓存/差异文件</strong></p>
-<p>使用<code>writable</code>(可写入)模式时，为了保护原文件不被修改，FTK会把所有写入操作都记录在这个文件中</p>
-<p>挂载过程里你可能可能看见这样的错误提示：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251002013300975" href="http://picture.928330.xyz/typora/image-20251002013300975.png">
-<img src="http://picture.928330.xyz/typora/image-20251002013300975.png" alt="image-20251002013300975"  />
-</a>
-</div>
-</p>
-<p>错误提示表明这个已经存在的<code>HDD1.E01.adcf</code>文件已经损坏，删掉再挂载即可，会生成一个新的</p>
-<p>不知道为什么，挂载之后在文件管理器可以看见，但在磁盘管理看不见这两个驱动器：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929012450186" href="http://picture.928330.xyz/typora/image-20250929012450186.png">
-<img src="http://picture.928330.xyz/typora/image-20250929012450186.png" alt="image-20250929012450186"  />
-</a>
-</div>
-</p>
-<p>无伤大雅，美亚是可以识别到的：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929004556468" href="http://picture.928330.xyz/typora/image-20250929004556468.png">
-<img src="http://picture.928330.xyz/typora/image-20250929004556468.png" alt="image-20250929004556468"  />
-</a>
-</div>
-</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929004610756" href="http://picture.928330.xyz/typora/image-20250929004610756.png">
-<img src="http://picture.928330.xyz/typora/image-20250929004610756.png" alt="image-20250929004610756"  />
-</a>
-</div>
-</p>
-<p>全都勾选后，自动计算序列，要一点时间：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929010516351" href="http://picture.928330.xyz/typora/image-20250929010516351.png">
-<img src="http://picture.928330.xyz/typora/image-20250929010516351.png" alt="image-20250929010516351"  />
-</a>
-</div>
-</p>
-<p>只有一种可能啊，那就是正确的了：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929011513915" href="http://picture.928330.xyz/typora/image-20250929011513915.png">
-<img src="http://picture.928330.xyz/typora/image-20250929011513915.png" alt="image-20250929011513915"  />
-</a>
-</div>
-</p>
-<p>双击应用这个序列：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929011801653" href="http://picture.928330.xyz/typora/image-20250929011801653.png">
-<img src="http://picture.928330.xyz/typora/image-20250929011801653.png" alt="image-20250929011801653"  />
-</a>
-</div>
-</p>
-<p>已经还原了：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20250929012403125" href="http://picture.928330.xyz/typora/image-20250929012403125.png">
-<img src="http://picture.928330.xyz/typora/image-20250929012403125.png" alt="image-20250929012403125"  />
-</a>
-</div>
-</p>
-<p>这几个磁盘都很大，或许是挂载之后让美亚重组更方便了，才能如此迅速扫出来</p>
+<h2 id="100-在-idfc-的交易记录中-下列哪些地址由上述恢复短语所生成">100. 在 IDFC 的交易记录中, 下列哪些地址由上述恢复短语所生成?
+</h2><p>A. 0xb2e3dbea311511ec5bda3e85e061f15366f888a6</p>
+<p>B. 0xe90ad3f80e39e83b533eef3ed23c641ec51089c6</p>
+<p>C. 0x90f73497E4446f6Cf9881213C32D6af66d799fE5</p>
+<p>D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042</p>
+<p>同样不知道怎么写</p>
 
 </section>
 
@@ -2121,9 +2259,7 @@
         
             <a href="/tags/forensics/">Forensics</a>
         
-            <a href="/tags/windows/">Windows</a>
-        
-            <a href="/tags/linux/">Linux</a>
+            <a href="/tags/misc/">Misc</a>
         
     </section>
 
@@ -2138,7 +2274,7 @@
 
 
         <span>
-            最后更新于 2025-10-07
+            最后更新于 2025-10-22
         </span>
     </section></footer>
 
@@ -2157,18 +2293,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8B/">
+    <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/e9431f0af289cbee8312463acd321a66.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/113644svdcd71dd4fdd7sc.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/113644svdcd71dd4fdd7sc.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">windows相关知识总结（下）</h2>
+            <h2 class="article-title">美亚杯2023个人赛取证总结</h2>
         </div>
     </a>
 </article>
@@ -2176,18 +2312,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/windows%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%8A/">
+    <a href="/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2025%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/4e5de5bb8148393ec0630865e61fb90f.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/06846724f28c56ddac00bf19256bf4b0.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/06846724f28c56ddac00bf19256bf4b0.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">windows相关知识总结（上）</h2>
+            <h2 class="article-title">獬豸杯2025取证总结</h2>
         </div>
     </a>
 </article>
@@ -2195,18 +2331,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%AF%87/">
+    <a href="/p/%E7%8D%AC%E8%B1%B8%E6%9D%AF2024%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/fcc033dfd187d8eb0d29169a672d75ce.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/fcc033dfd187d8eb0d29169a672d75ce.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/b35ad24065e047f6a4dc4b3474ddeb4b.png" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/b35ad24065e047f6a4dc4b3474ddeb4b.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Linux命令（文件写入与查看篇）</h2>
+            <h2 class="article-title">獬豸杯2024取证总结</h2>
         </div>
     </a>
 </article>
@@ -2214,18 +2350,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/linux%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%AF%87/">
+    <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2022%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/fb86b7621fba4d5ef41dce013ca5a72e.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/fb86b7621fba4d5ef41dce013ca5a72e.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/638b75a2d7286.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/638b75a2d7286.jpg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Linux命令（文件管理篇）</h2>
+            <h2 class="article-title">美亚杯2022个人赛取证总结</h2>
         </div>
     </a>
 </article>
@@ -2233,18 +2369,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/">
+    <a href="/p/%E9%95%BF%E5%AE%89%E6%9D%AF2020%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
         
         
             <div class="article-image">
                 
-                    <img src="http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg"/>
+                    <img src="http://picture.928330.xyz/typora/f99f347d5c5b4907bc54e0e6b9b714e8.png" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/f99f347d5c5b4907bc54e0e6b9b714e8.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">逆向基础4：PE文件</h2>
+            <h2 class="article-title">长安杯2020取证总结</h2>
         </div>
     </a>
 </article>

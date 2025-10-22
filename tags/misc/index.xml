@@ -7,7 +7,1634 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 16 Oct 2025 15:28:26 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 22 Oct 2025 18:14:57 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>美亚杯2024个人赛取证总结</title>
+        <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
+        <pubDate>Wed, 22 Oct 2025 14:30:45 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/20241009133922.png" alt="Featured image of post 美亚杯2024个人赛取证总结" /&gt;&lt;p&gt;听说这一届美亚杯个人赛不能上网搜索了，那么本次做题过程中也会断网&lt;/p&gt;
+&lt;h1 id=&#34;案件基本情况&#34;&gt;案件基本情况
+&lt;/h1&gt;&lt;h2 id=&#34;案情&#34;&gt;案情
+&lt;/h2&gt;&lt;p&gt;于2024月8月某日，警方接获一名本地女子Emma报案·指她的姊姊CIara失联多天，希望报告一宗失踪人囗的案件。现在你被委派处理这宗案件。于处理该案件期间，你在Emma的同意下提取了她手机的资料，并且协助警方对CIara及其丈夫David的电子装备进行取证工作。请分析以下的资料，还原事件经过&lt;/p&gt;
+&lt;h2 id=&#34;检材资料&#34;&gt;检材资料
+&lt;/h2&gt;&lt;p&gt;镜像挂载密码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;eS2%u@q#hake2#Z@6LWpQ8^T(R7cg95m\Bv+y;$=/dqxYnEusFf)tb&amp;gt;:HKHwy+e%cR\r=9j:GsK)AV52/3hXfdv8#u7a6JQ^pz&amp;gt;&amp;lt;YPNkq*!&amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;（1）Emma的iOS手机镜像档案(Emma_MobiIe-lmage.zip)&lt;/p&gt;
+&lt;p&gt;（2）CIara的安卓手机镜像档案(Clara-Smartphone.bin)&lt;/p&gt;
+&lt;p&gt;（3）David的Windows系统计算器镜像档案（David-Laptop-64GB.e01）&lt;/p&gt;
+&lt;p&gt;（4）David的8GBU盘镜像档案(David-USB-8GB.e01)&lt;/p&gt;
+&lt;p&gt;（5）David的安卓手机镜像档案(David-Smartphone-1.zip)&lt;/p&gt;
+&lt;p&gt;（6）David的Windows系统计算器内存档案(RAM_Capture_David_Laptop.raw)&lt;/p&gt;
+&lt;h1 id=&#34;emma-的手机&#34;&gt;Emma 的手机
+&lt;/h1&gt;&lt;p&gt;Emma 已经几天没有收到她姐姐 Clara 的消息了, 报警失踪, 她焦虑地将手机提交给警察, 希望能找到线索.&lt;/p&gt;
+&lt;p&gt;警察将手机交给你进行电子数据取证. 你成功提取了Emma手机的镜像 &lt;code&gt;Emma_Mobile.zip&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;请根据取证结果回答以下问题.&lt;/p&gt;
+&lt;h2 id=&#34;1emma-和-clara-的微信聊天记录-emma-最后到警署报案并拍摄写有报案编号的卡片-拍摄时的经纬值是多少&#34;&gt;1.Emma 和 Clara 的微信聊天记录, Emma 最后到警署报案并拍摄写有报案编号的卡片, 拍摄时的经纬值是多少?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 22.451721666667, 114.171853333333&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 22.451553333333, 114.172845&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 22.451928333333, 114.170503333333&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 22.451638333333, 114.16993&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;似乎是因为这个镜像不是标准的格式，火眼不能正常识别出来&lt;/p&gt;
+&lt;p&gt;不过好在火眼能对其中的数据库什么的进行解析，虽然没有自动取证，但是也能看见具体的东西&lt;/p&gt;
+&lt;p&gt;图片里面能找到题目说的这个卡片：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016164642076&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016164642076.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016164642076.png&#34; alt=&#34;image-20251016164642076&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;但是解析exif却并未找到任何关于GPS的信息&lt;/p&gt;
+&lt;p&gt;尝试搜索四个选项，也没有对应的信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251016170715382&#34; href=&#34;http://picture.928330.xyz/typora/image-20251016170715382.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251016170715382.png&#34; alt=&#34;image-20251016170715382&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;实际后面做题也找到了经纬度，不过数据库中图片并不是用,pic结尾的，所以直接看不出来：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017215119245&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017215119245.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017215119245.png&#34; alt=&#34;image-20251017215119245&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;根据时间戳，警局报案的照片是下午&lt;code&gt;2024-08-30 18:03:30&lt;/code&gt;，因此在这之前的就不可能，能排除前面两个：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017215911973&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017215911973.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017215911973.png&#34; alt=&#34;image-20251017215911973&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;也就是从AB里面选一个，不过怎么区分呢&lt;/p&gt;
+&lt;p&gt;在做第二十四题的时候，我发现pic的文件名称数字和MesLocalID是一样的，我们先把224条信息复制出来：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;msg&amp;gt;&amp;lt;img hdlength=&amp;#34;0&amp;#34; length=&amp;#34;139561&amp;#34; aeskey=&amp;#34;b3f5f12230235d3dfe4f90e4984c8ebf&amp;#34; encryver=&amp;#34;1&amp;#34; md5=&amp;#34;44c089af8c9a1414edb8ee6026be3307&amp;#34; originsourcemd5=&amp;#34;0bbe83bda8f3e13735e9009078a231f0&amp;#34; filekey=&amp;#34;wxid_t7zgo57j9m0j22_314_1725012210&amp;#34; uploadcontinuecount=&amp;#34;0&amp;#34; imgsourceurl=&amp;#34;&amp;#34; hevc_mid_size=&amp;#34;139561&amp;#34; cdnbigimgurl=&amp;#34;&amp;#34; cdnmidimgurl=&amp;#34;3052020100044b30490201000204a695112702030f525902044b7d9b2b020466d198f2042432353830663531302d623137372d343463312d623732642d6566396562313331663331610204011d0a020201000400&amp;#34; cdnthumburl=&amp;#34;3052020100044b30490201000204a695112702030f525902044b7d9b2b020466d198f2042432353830663531302d623137372d343463312d623732642d6566396562313331663331610204011d0a020201000400&amp;#34; cdnthumblength=&amp;#34;3971&amp;#34; cdnthumbwidth=&amp;#34;90&amp;#34; cdnthumbheight=&amp;#34;120&amp;#34; cdnthumbaeskey=&amp;#34;b3f5f12230235d3dfe4f90e4984c8ebf&amp;#34;/&amp;gt;&amp;lt;appinfo&amp;gt;&amp;lt;appid&amp;gt;&amp;lt;/appid&amp;gt;&amp;lt;appname&amp;gt;&amp;lt;/appname&amp;gt;&amp;lt;version&amp;gt;0&amp;lt;/version&amp;gt;&amp;lt;isforceupdate&amp;gt;1&amp;lt;/isforceupdate&amp;gt;&amp;lt;mediatagname&amp;gt;&amp;lt;/mediatagname&amp;gt;&amp;lt;messageext&amp;gt;&amp;lt;/messageext&amp;gt;&amp;lt;messageaction&amp;gt;&amp;lt;/messageaction&amp;gt;&amp;lt;/appinfo&amp;gt;&amp;lt;MMAsset&amp;gt;&amp;lt;m_assetUrlForSystem&amp;gt;&amp;lt;![CDATA[F58B98FE-8010-44B7-8BF7-F23AF15DCFCA/L0/001]]&amp;gt;&amp;lt;/m_assetUrlForSystem&amp;gt;&amp;lt;m_isNeedOriginImage&amp;gt;0&amp;lt;/m_isNeedOriginImage&amp;gt;&amp;lt;m_isFailedFromIcloud&amp;gt;0&amp;lt;/m_isFailedFromIcloud&amp;gt;&amp;lt;m_isLoadingFromIcloud&amp;gt;0&amp;lt;/m_isLoadingFromIcloud&amp;gt;&amp;lt;/MMAsset&amp;gt;&amp;lt;/msg&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中有一串CDATA：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CDATA[F58B98FE-8010-44B7-8BF7-F23AF15DCFCA/L0/001]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个东西在Photo.sqlite见了很多次了，直接就能找到对应的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017223136483&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017223136483.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017223136483.png&#34; alt=&#34;image-20251017223136483&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22024-年-8-月-30-日下午-2-点后-emma-共致电-clara-多少次&#34;&gt;2.2024 年 8 月 30 日下午 2 点后 Emma 共致电 Clara 多少次?
+&lt;/h2&gt;&lt;p&gt;A. 85&lt;/p&gt;
+&lt;p&gt;B. 86&lt;/p&gt;
+&lt;p&gt;C. 87&lt;/p&gt;
+&lt;p&gt;D. 88&lt;/p&gt;
+&lt;p&gt;在数据库CallHistory的ZCALLRECORD表找到通话记录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017133426332&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017133426332.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017133426332.png&#34; alt=&#34;image-20251017133426332&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;从这一条开始一直到结尾都是在题目范围内：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017133559971&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017133559971.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017133559971.png&#34; alt=&#34;image-20251017133559971&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;一共105-18+1=88条&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3根据-emma-和-clara-的微信聊天记录-clara-失踪前曾告诉-emma-会到哪里&#34;&gt;3.根据 Emma 和 Clara 的微信聊天记录, Clara 失踪前曾告诉 Emma 会到哪里?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 到酒店和丈夫David庆祝结婚周年&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 吃自助餐&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 约了朋友见面&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 去旅行&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个个翻数据库也不容易找到聊天记录，因为他不是标准的EnMiromsg命名，这里记录一下我找的过程&lt;/p&gt;
+&lt;p&gt;首先可以在group.com.tencent.xin.plist这个文件中找到微信id：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017135946499&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017135946499.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017135946499.png&#34; alt=&#34;image-20251017135946499&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;一般来说，聊天记录数据库里面会记录聊天者的id，我们全局搜索一下，就算找不到也能有个方向：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017140113010&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017140113010.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017140113010.png&#34; alt=&#34;image-20251017140113010&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;找到了，并且对应数据库message_2里面就是存有聊天记录的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017140238138&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017140238138.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017140238138.png&#34; alt=&#34;image-20251017140238138&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;可以看到在Emma询问未回答（也就是失踪了）之前，说过要和David去酒店&lt;/p&gt;
+&lt;p&gt;前文也有提到是结婚纪念日：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017140509049&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017140509049.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017140509049.png&#34; alt=&#34;image-20251017140509049&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里Emma还说偷了David的加密货币，也许是后文伏笔&lt;/p&gt;
+&lt;h2 id=&#34;4emma-的-iphone-xr-内微信应用程序的版本是多少&#34;&gt;4.Emma 的 iPhone XR 内微信应用程序的版本是多少?
+&lt;/h2&gt;&lt;p&gt;Manifest.plist中存有应用信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017144950380&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017144950380.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017144950380.png&#34; alt=&#34;image-20251017144950380&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;火眼也能识别出来：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017145136133&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017145136133.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017145136133.png&#34; alt=&#34;image-20251017145136133&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8.0.50
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5emma-手机中下列哪个选项是正确的&#34;&gt;5.Emma 手机中下列哪个选项是正确的?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. iOS 版本为 17.6.1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. IMEI 为 356414106484705&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. Apple ID 为 &lt;a class=&#34;link&#34; href=&#34;mailto:Emma1761@gmail.com&#34; &gt;Emma1761@gmail.com
+    
+&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 手机曾经安装 Metamask 应用程序&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A：IOS版本是17.5.1&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017141337271&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017141337271.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017141337271.png&#34; alt=&#34;image-20251017141337271&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;B：在com.apple.commcenter.plist里面能找到一个类似的，但也和选项对得上&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017144242427&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017144242427.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017144242427.png&#34; alt=&#34;image-20251017144242427&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;C：ID应该是emmaemma.851231@gmail.com&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017142841177&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017142841177.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017142841177.png&#34; alt=&#34;image-20251017142841177&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;D：确实找到了这个应用&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017142741700&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017142741700.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017142741700.png&#34; alt=&#34;image-20251017142741700&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;应该是多选&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BD
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6emma-手机中-apple-id-的注册电子邮箱是多少&#34;&gt;6.Emma 手机中 Apple ID 的注册电子邮箱是多少?
+&lt;/h2&gt;&lt;p&gt;同上题C&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;emmaemma.851231@gmail.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7在-2024-年-emma-手机上曾记录的电话卡集成电路卡标识符iccid是多少&#34;&gt;7.在 2024 年, Emma 手机上曾记录的电话卡集成电路卡标识符(ICCID)是多少?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017145301914&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017145301914.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017145301914.png&#34; alt=&#34;image-20251017145301914&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8985200000826445829
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8emma-手机的蓝牙设备名称elk-bledom的通用唯一标识符uuid是什么&#34;&gt;8.Emma 手机的蓝牙设备名称&amp;quot;ELK-BLEDOM&amp;quot;的通用唯一标识符(UUID)是什么?
+&lt;/h2&gt;&lt;p&gt;火眼能识别出来，却只有mac地址，没有UUID：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017145401478&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017145401478.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017145401478.png&#34; alt=&#34;image-20251017145401478&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;到源文件这个数据库找就能找到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017145454131&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017145454131.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017145454131.png&#34; alt=&#34;image-20251017145454131&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8D13F23C-E73C-6A98-AA4F-16C8D7A5F826
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;剧情-1&#34;&gt;剧情 1
+&lt;/h1&gt;&lt;p&gt;你发现了一些线索, Emma 看起来也很可疑, 她似乎背负了大量债务.&lt;/p&gt;
+&lt;h2 id=&#34;9emma-手机内-safari-浏览记录中网页--的网站标题是什么&#34;&gt;9.Emma 手机内 Safari 浏览记录中网页 &lt;a class=&#34;link&#34; href=&#34;https://racing.hkjc.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://racing.hkjc.com/
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt; 的网站标题是什么?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 香港马会奖券有限公司&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 六合彩 - Google 搜索&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 快易钱:网上贷款财务公司 | 足不出户现金即日到手&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 赛马信息 - 香港赛马会&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;哈哈，我就知道她也不是好东西&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017152608503&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017152608503.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017152608503.png&#34; alt=&#34;image-20251017152608503&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;10emma-向-clara-透露什么原因令-emma-欠下巨债&#34;&gt;10.Emma 向 Clara 透露什么原因令 Emma 欠下巨债?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 投资孖展&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 虚拟货币失利&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 网上赌博&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 以上皆是&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;之前的聊天记录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017152802448&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017152802448.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017152802448.png&#34; alt=&#34;image-20251017152802448&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;好家伙，真是什么都干&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;孖展&lt;/strong&gt;：粤语在香港常用词，意思是融资或借钱买股票&lt;/p&gt;
+&lt;h2 id=&#34;11收债人要求-emma-还款数量&#34;&gt;11.收债人要求 Emma 还款数量?
+&lt;/h2&gt;&lt;p&gt;A. 港币$786,990&lt;/p&gt;
+&lt;p&gt;B. 港币$878,990&lt;/p&gt;
+&lt;p&gt;C. 港币$786,980&lt;/p&gt;
+&lt;p&gt;D. 港币$745,330&lt;/p&gt;
+&lt;p&gt;短信中能找到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017153226831&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017153226831.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017153226831.png&#34; alt=&#34;image-20251017153226831&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12emma-发送了多少张-png-图片给-clara-证明自己正被人追债&#34;&gt;12.Emma 发送了多少张 .PNG 图片给 Clara, 证明自己正被人追债?
+&lt;/h2&gt;&lt;p&gt;A. 6&lt;/p&gt;
+&lt;p&gt;B. 7&lt;/p&gt;
+&lt;p&gt;C. 8&lt;/p&gt;
+&lt;p&gt;D. 9&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017153531501&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017153531501.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017153531501.png&#34; alt=&#34;image-20251017153531501&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;一共七张，这些图片在检材里面也都能找到&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13emma-用来浏览虚拟货币的网址&#34;&gt;13.Emma 用来浏览虚拟货币的网址?
+&lt;/h2&gt;&lt;p&gt;A. Google.com&lt;/p&gt;
+&lt;p&gt;B. Facebook.com&lt;/p&gt;
+&lt;p&gt;C. IntellaX.io&lt;/p&gt;
+&lt;p&gt;D. Yahoo.com&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017153649840&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017153649840.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017153649840.png&#34; alt=&#34;image-20251017153649840&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;虽然不知道这个是什么虚拟货币，不过有wallet应该就找对了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14参考浏览器记录-有多少网址与bet365有关&#34;&gt;14.参考浏览器记录, 有多少网址与&amp;quot;bet365&amp;quot;有关?
+&lt;/h2&gt;&lt;p&gt;A. 3&lt;/p&gt;
+&lt;p&gt;B. 13&lt;/p&gt;
+&lt;p&gt;C. 9&lt;/p&gt;
+&lt;p&gt;D. 12&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017153808491&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017153808491.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017153808491.png&#34; alt=&#34;image-20251017153808491&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;应该是三个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;剧情-2&#34;&gt;剧情 2
+&lt;/h1&gt;&lt;p&gt;你还发现了一些与不当使用他人加密钱包相关的痕迹.&lt;/p&gt;
+&lt;h2 id=&#34;15emma-用了哪些恢复短语recovery-phrase进入-david-的虚拟货币账户&#34;&gt;15.Emma 用了哪些恢复短语(Recovery Phrase)进入 David 的虚拟货币账户?
+&lt;/h2&gt;&lt;p&gt;A. stock, avocado, grab, clay&lt;/p&gt;
+&lt;p&gt;B. light, sadness, segment, ancient&lt;/p&gt;
+&lt;p&gt;C. toe, talk, elder, oil&lt;/p&gt;
+&lt;p&gt;D. 以上皆是&lt;/p&gt;
+&lt;p&gt;对话记录有提到，并且发了图片：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017211953063&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017211953063.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017211953063.png&#34; alt=&#34;image-20251017211953063&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;图片：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017211606522&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017211606522.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017211606522.png&#34; alt=&#34;image-20251017211606522&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;16emma-从-david-处窃取的虚拟货币的名称是什么&#34;&gt;16.Emma 从 David 处窃取的虚拟货币的名称是什么?
+&lt;/h2&gt;&lt;p&gt;A. IDFC&lt;/p&gt;
+&lt;p&gt;B. ICAC&lt;/p&gt;
+&lt;p&gt;C. INIC&lt;/p&gt;
+&lt;p&gt;D. IFCC&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017211638574&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017211638574.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017211638574.png&#34; alt=&#34;image-20251017211638574&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;17clara-偷拍的照片中-david-的虚拟货币余额是多少&#34;&gt;17.Clara 偷拍的照片中, David 的虚拟货币余额是多少?
+&lt;/h2&gt;&lt;p&gt;A. 3266378.99&lt;/p&gt;
+&lt;p&gt;B. 1044749.22&lt;/p&gt;
+&lt;p&gt;C. 5022915.66&lt;/p&gt;
+&lt;p&gt;D. 7822468.44&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;18emma-在偷窃-david-的虚拟货币前-emma-曾向-clara-透露有什么事发生在-emma-身上&#34;&gt;18.Emma 在偷窃 David 的虚拟货币前, Emma 曾向 Clara 透露有什么事发生在 Emma 身上?
+&lt;/h2&gt;&lt;p&gt;A. 中彩票&lt;/p&gt;
+&lt;p&gt;B. 欠债&lt;/p&gt;
+&lt;p&gt;C. 升职&lt;/p&gt;
+&lt;p&gt;D. 失业&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;剧情-3&#34;&gt;剧情 3
+&lt;/h1&gt;&lt;p&gt;你查看了 Emma 手机中的一些照片数字信息, 以获取更多与失踪案件的信息.&lt;/p&gt;
+&lt;h2 id=&#34;19emma-的-iphone-xr-中img_0008heic的图像与相片名字为的5005jpg看似为同一张相片-在数码法理鉴证分析下-以下哪样描述是正确&#34;&gt;19.Emma 的 iPhone XR 中&amp;quot;IMG_0008.HEIC&amp;quot;的图像与相片名字为的&amp;quot;5005.JPG&amp;quot;看似为同一张相片, 在数码法理鉴证分析下, 以下哪样描述是正确?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 储存在不同的.db檔案里&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 有不同哈希值&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. IMG_0008.HEIC 为原图, &amp;ldquo;5005.JPG&amp;quot;为并非原图&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. IMG_0008.HEIC 和名字&amp;quot;5005.JPG&amp;quot;是同一张相片&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;开始没想明白哪里有题目的图片，明明检材里面的都是&lt;code&gt;.pic&lt;/code&gt;结尾的，后面找到了Photo.sqlite，里面存了所有图片的信息&lt;/p&gt;
+&lt;p&gt;然后也没找到5005.JPG，先放着吧&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;理论题，考察鉴证分析的知识(?)，下面是学长给的解答&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A：错，就算存在不同的数据库，也不能描述他们是同一张图片&lt;/p&gt;
+&lt;p&gt;B：对&lt;/p&gt;
+&lt;p&gt;C：对&lt;/p&gt;
+&lt;p&gt;D：错，因为哈希值不同，不认为是同一张&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;20emma-的-iphone-xr-中img_0009heic的图像显示拍摄参数怎样&#34;&gt;20.Emma 的 iPhone XR 中&amp;quot;IMG_0009.HEIC&amp;quot;的图像显示拍摄参数怎样
+&lt;/h2&gt;&lt;p&gt;A. iPhone XR back camera 4.25mm f/1.8&lt;/p&gt;
+&lt;p&gt;B. iPhone XR back camera 4.25mm f/2.8&lt;/p&gt;
+&lt;p&gt;C. iPhone XR back camera 4.25mm f/2&lt;/p&gt;
+&lt;p&gt;D. iPhone XR back camera 4.25mm f/1.6&lt;/p&gt;
+&lt;p&gt;在表ZASSET里面找到对应的Z_PK：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017214013826&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017214013826.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017214013826.png&#34; alt=&#34;image-20251017214013826&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;在ZEXTENDEDATTRIBUTES表找到对应的信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017214216184&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017214216184.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017214216184.png&#34; alt=&#34;image-20251017214216184&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;21emma-的-iphone-xr-中相片文件img_0009heic提供了什么电子证据信息&#34;&gt;21.Emma 的 iPhone XR 中相片文件&amp;quot;IMG_0009.HEIC&amp;quot;提供了什么电子证据信息?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. 此相片是由隔空投送 (Airdrop)得来&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 此相片由iPhone XR拍摄&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C. 此相片的拍摄时间为2024-08-05 13:38:15(UTC+8)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;D. 此相片的拍摄时间为2024-08-06 08:30:52(UTC+8)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;同上题表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017214431465&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017214431465.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017214431465.png&#34; alt=&#34;image-20251017214431465&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017214420774&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017214420774.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017214420774.png&#34; alt=&#34;image-20251017214420774&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;A选项不知道在哪找，没找到就当他没有吧&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22emma-的-iphone-xr-内以下哪张照片是实况照片live-photos&#34;&gt;22.Emma 的 iPhone XR 内以下哪张照片是实况照片(Live Photos)?
+&lt;/h2&gt;&lt;p&gt;A. IMG_0002.HEIC&lt;/p&gt;
+&lt;p&gt;B. IMG_0005.HEIC&lt;/p&gt;
+&lt;p&gt;C. IMG_0004.HEIC&lt;/p&gt;
+&lt;p&gt;D. IMG_0006.HEIC&lt;/p&gt;
+&lt;p&gt;不知道怎么判断，不过色彩好像只有5不一样，可能是它&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017221524583&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017221524583.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017221524583.png&#34; alt=&#34;image-20251017221524583&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;错了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;iPhone中的实况照片扩展名为&lt;code&gt;.HEIC&lt;/code&gt;，B和D都是&lt;code&gt;.PNG&lt;/code&gt;，并且数据库里面就没有存他们的&lt;code&gt;.HEIC&lt;/code&gt;格式，所以按道理说是送分题&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;此外还要注意&lt;code&gt;ZVIDEOCPDURATIONVALUE&lt;/code&gt; (视频片段长度) 字段不为0，这题并未涉及&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;AC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;23手机里有多少张照片是用手机后置摄像镜头拍摄的&#34;&gt;23.手机里有多少张照片是用手机后置摄像镜头拍摄的?
+&lt;/h2&gt;&lt;p&gt;A. 5&lt;/p&gt;
+&lt;p&gt;B. 6&lt;/p&gt;
+&lt;p&gt;C. 7&lt;/p&gt;
+&lt;p&gt;D. 8&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017214652189&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017214652189.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017214652189.png&#34; alt=&#34;image-20251017214652189&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;24参考通讯记录-meslocalid-为-224-的是什么类的文件&#34;&gt;24.参考通讯记录, MesLocalID 为 224 的是什么类的文件?
+&lt;/h2&gt;&lt;p&gt;A. 相片&lt;/p&gt;
+&lt;p&gt;B. 影片&lt;/p&gt;
+&lt;p&gt;C. 文件&lt;/p&gt;
+&lt;p&gt;D. 报表&lt;/p&gt;
+&lt;p&gt;就是之前那张Recovery字段图片：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017222203895&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017222203895.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017222203895.png&#34; alt=&#34;image-20251017222203895&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;到这里我发现pic的文件名称数字和这个MesLocalID是一样的，也就是说可以通过这个找到第一题真正的图片！具体思路见第一题&lt;/p&gt;
+&lt;h1 id=&#34;clara-的手机&#34;&gt;Clara 的手机
+&lt;/h1&gt;&lt;p&gt;依据你在 Emma 的手机上找到的照片, 你告诉调查员 Clara 最后的位置是在湾仔的一家酒店.&lt;/p&gt;
+&lt;p&gt;根据你提供的信息, 调查员发现 Clara 在酒店去世, Clara 的手机在她的附近, 你对 Clara 的手机进行取证.&lt;/p&gt;
+&lt;p&gt;请根据取证结果, 参考 Clara_Smartphone.bin 回答以下问题.&lt;/p&gt;
+&lt;h2 id=&#34;25clara-手机的-android-操作系统版本是&#34;&gt;25.Clara 手机的 Android 操作系统版本是?
+&lt;/h2&gt;&lt;p&gt;A. 8.0.0&lt;/p&gt;
+&lt;p&gt;B. 9.0.0&lt;/p&gt;
+&lt;p&gt;C. 8.1.0&lt;/p&gt;
+&lt;p&gt;D. 7.0.0&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017223402548&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017223402548.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017223402548.png&#34; alt=&#34;image-20251017223402548&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;经典LG，我看是23年的接着用的&lt;/p&gt;
+&lt;h2 id=&#34;26clara-手机的版本号build-number是什么&#34;&gt;26.Clara 手机的版本号(Build Number)是什么?
+&lt;/h2&gt;&lt;p&gt;火眼扫不出，去他识别的源文件build.prop看一下：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017223605697&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017223605697.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017223605697.png&#34; alt=&#34;image-20251017223605697&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;OPR1.170623.026
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;27clara-手机的-imei-号码是多少&#34;&gt;27.Clara 手机的 IMEI 号码是多少?
+&lt;/h2&gt;&lt;p&gt;索引搜索到一个fish_xml文件：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017231012664&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017231012664.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017231012664.png&#34; alt=&#34;image-20251017231012664&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017231042906&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017231042906.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017231042906.png&#34; alt=&#34;image-20251017231042906&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;到底是不是这个呢，我也不清楚&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;351537092934716
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;答案是对的，记一下这个文件名称吧，说不定过几年又考了&lt;/p&gt;
+&lt;h2 id=&#34;28emma-的微信账号是&#34;&gt;28.Emma 的微信账号是?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017225647672&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017225647672.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017225647672.png&#34; alt=&#34;image-20251017225647672&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wxid_ltrpgdhvilso22
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;29clara-的第一封电子邮件记录的日期&#34;&gt;29.Clara 的第一封电子邮件记录的日期?
+&lt;/h2&gt;&lt;p&gt;A. 2024-07-10&lt;/p&gt;
+&lt;p&gt;B. 2024-07-18&lt;/p&gt;
+&lt;p&gt;C. 2024-07-23&lt;/p&gt;
+&lt;p&gt;D. 2024-07-30&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017225750961&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017225750961.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017225750961.png&#34; alt=&#34;image-20251017225750961&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;30在通讯录中david的联系人信息还包括什么&#34;&gt;30.在通讯录中&amp;quot;David&amp;quot;的联系人信息还包括什么?
+&lt;/h2&gt;&lt;p&gt;A. 出生日期&lt;/p&gt;
+&lt;p&gt;B. LinkedIn&lt;/p&gt;
+&lt;p&gt;C. 电子邮件&lt;/p&gt;
+&lt;p&gt;D. 地址&lt;/p&gt;
+&lt;p&gt;从火眼识别的结果跳转到源表：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017232157237&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017232157237.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017232157237.png&#34; alt=&#34;image-20251017232157237&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017230611650&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017230611650.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017230611650.png&#34; alt=&#34;image-20251017230611650&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;并没有找到什么，我猜这个表可能是横着看的，David之下Emma之上应该就是David的东西，但又只有whatsapp的账号&lt;/p&gt;
+&lt;p&gt;这表真不懂怎么看，只能填一个出现了的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;这个数据库需要结合两张表分析&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在raw contacts表里面能看见david对应id有2和3&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019015110272&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019015110272.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019015110272.png&#34; alt=&#34;image-20251019015110272&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;回到data表，里面有一列是raw contact id，其中2和3对应的就是david的信息了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019015312492&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019015312492.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019015312492.png&#34; alt=&#34;image-20251019015312492&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;很显然就是linked&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;31david-和-clara-之间通话次数&#34;&gt;31.David 和 Clara 之间通话次数?
+&lt;/h2&gt;&lt;p&gt;A. 0&lt;/p&gt;
+&lt;p&gt;B. 8&lt;/p&gt;
+&lt;p&gt;C. 10&lt;/p&gt;
+&lt;p&gt;D. 24&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017231113924&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017231113924.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017231113924.png&#34; alt=&#34;image-20251017231113924&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里也能看见和Emma通话了88次，不过里面并不是都未接，和之前题目算出来的不一样，可能是火眼解析有问题，也可能数据库未同步，之前的方法是不会错的（&lt;/p&gt;
+&lt;h2 id=&#34;32clara-在-chrome-浏览器搜索中哪天使用了关键词popmart-炒价&#34;&gt;32.Clara 在 Chrome 浏览器搜索中哪天使用了关键词&amp;quot;popmart 炒价&amp;rdquo;?
+&lt;/h2&gt;&lt;p&gt;A. 2024-08-10&lt;/p&gt;
+&lt;p&gt;B. 2024-08-15&lt;/p&gt;
+&lt;p&gt;C. 2024-08-20&lt;/p&gt;
+&lt;p&gt;D. 2024-08-25&lt;/p&gt;
+&lt;p&gt;搜索popmart搜不出来，手动翻了一下才知道搜的是pop mart，无语&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017231736832&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017231736832.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017231736832.png&#34; alt=&#34;image-20251017231736832&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;332024-年-7-月-30-日共收到多少封电子邮件&#34;&gt;33.2024 年 7 月 30 日共收到多少封电子邮件?
+&lt;/h2&gt;&lt;p&gt;A. 2&lt;/p&gt;
+&lt;p&gt;B. 3&lt;/p&gt;
+&lt;p&gt;C. 4&lt;/p&gt;
+&lt;p&gt;D. 5&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017231833143&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017231833143.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017231833143.png&#34; alt=&#34;image-20251017231833143&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;34clara-的-gmail-账号是&#34;&gt;34.Clara 的 Gmail 账号是?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017231852301&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017231852301.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017231852301.png&#34; alt=&#34;image-20251017231852301&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clara.ccc0807@gmail.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;35clara-的手机安装了哪个版本的-whatsapp&#34;&gt;35.Clara 的手机安装了哪个版本的 WhatsApp?
+&lt;/h2&gt;&lt;p&gt;A. 241676000&lt;/p&gt;
+&lt;p&gt;B. 241676001&lt;/p&gt;
+&lt;p&gt;C. 241676004&lt;/p&gt;
+&lt;p&gt;D. 241676007&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017231934907&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017231934907.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017231934907.png&#34; alt=&#34;image-20251017231934907&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;36clara-的-whatsapp-账号&#34;&gt;36.Clara 的 WhatsApp 账号?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017232000365&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017232000365.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017232000365.png&#34; alt=&#34;image-20251017232000365&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;85263791704@s.whatsapp.net
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;37clara-的手机在什么时候安装了小红书-app&#34;&gt;37.Clara 的手机在什么时候安装了小红书 APP?
+&lt;/h2&gt;&lt;p&gt;A. 2024-07-10&lt;/p&gt;
+&lt;p&gt;B. 2024-07-16&lt;/p&gt;
+&lt;p&gt;C. 2024-07-20&lt;/p&gt;
+&lt;p&gt;D. 2024-07-30&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017232333457&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017232333457.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017232333457.png&#34; alt=&#34;image-20251017232333457&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;382024-年-8-月-21-日-david-的虚拟货币钱包里有多少-idfc&#34;&gt;38.2024 年 8 月 21 日 David 的虚拟货币钱包里有多少 IDFC?
+&lt;/h2&gt;&lt;p&gt;A. 5022915.66&lt;/p&gt;
+&lt;p&gt;B. 3212695.22&lt;/p&gt;
+&lt;p&gt;C. 210355633.91&lt;/p&gt;
+&lt;p&gt;D. 以上皆不是&lt;/p&gt;
+&lt;p&gt;找半天没找到这天有任何记录，也许就是之前问过的吧&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;的确如此&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;39clara-注册的微信账号验证码是多少&#34;&gt;39.Clara 注册的微信账号验证码是多少?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017232928401&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017232928401.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017232928401.png&#34; alt=&#34;image-20251017232928401&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;945-025
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;40david-为庆祝结婚周年纪念预订了哪家酒店&#34;&gt;40.David 为庆祝结婚周年纪念预订了哪家酒店?
+&lt;/h2&gt;&lt;p&gt;聊天记录可以看到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017233002561&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017233002561.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017233002561.png&#34; alt=&#34;image-20251017233002561&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Conrad Hong Kong
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;41哪个数据库文件存储了微信消息&#34;&gt;41.哪个数据库文件存储了微信消息?
+&lt;/h2&gt;&lt;p&gt;点击一条微信消息跳转至源文件就行，也是老朋友了：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017233029970&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017233029970.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017233029970.png&#34; alt=&#34;image-20251017233029970&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;EnMicroMsg.db
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42哪个数据库文件db存储了-whatsapp-讯息&#34;&gt;42.哪个数据库文件(.db)存储了 WhatsApp 讯息?
+&lt;/h2&gt;&lt;p&gt;同上题做法&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017233122539&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017233122539.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017233122539.png&#34; alt=&#34;image-20251017233122539&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;msgstore.db
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;43clara-在-2024-年-8-月-29-日拍了多少张照片&#34;&gt;43.Clara 在 2024 年 8 月 29 日拍了多少张照片?
+&lt;/h2&gt;&lt;p&gt;A. 0&lt;/p&gt;
+&lt;p&gt;B. 3&lt;/p&gt;
+&lt;p&gt;C. 4&lt;/p&gt;
+&lt;p&gt;D. 5&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017234038554&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017234038554.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017234038554.png&#34; alt=&#34;image-20251017234038554&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;44emma-在-2024-年-8-月-6-日通过微信发送了多少张照片给-clara&#34;&gt;44.Emma 在 2024 年 8 月 6 日通过微信发送了多少张照片给 Clara?
+&lt;/h2&gt;&lt;p&gt;A. 0&lt;/p&gt;
+&lt;p&gt;B. 1&lt;/p&gt;
+&lt;p&gt;C. 5&lt;/p&gt;
+&lt;p&gt;D. 12&lt;/p&gt;
+&lt;p&gt;微信里一张也没有，之前Emma手机聊天记录也是如此&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;45照片20240829_144717jpg的拍摄相机型号是什么&#34;&gt;45.照片&amp;quot;20240829_144717.jpg&amp;quot;的拍摄相机型号是什么?
+&lt;/h2&gt;&lt;p&gt;使用Irfanview查看exif信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017234957151&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017234957151.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017234957151.png&#34; alt=&#34;image-20251017234957151&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LG-H930
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4620240821_121435jpg的储存路径是什么&#34;&gt;46.&amp;ldquo;20240821_121435.jpg&amp;quot;的储存路径是什么?
+&lt;/h2&gt;&lt;p&gt;A. /media/0/DCIM/Camera&lt;/p&gt;
+&lt;p&gt;B. /media/1/DCIM/Camera&lt;/p&gt;
+&lt;p&gt;C. /media/00/DCIM/Camera&lt;/p&gt;
+&lt;p&gt;D. /media/11/DCIM/Camera&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017235059412.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017235059412.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;media目录&#34;&gt;media目录
+&lt;/h3&gt;&lt;p&gt;在 &lt;strong&gt;Android 系统&lt;/strong&gt; 中，&lt;code&gt;/media&lt;/code&gt; 是系统的&lt;strong&gt;外部存储挂载点目录之一&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不过，它的使用方式在不同 Android 版本中略有不同&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;早期 Android 版本（4.x 以前）中可能更直接地使用 &lt;code&gt;/mnt&lt;/code&gt; 目录&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在后期（Android 5.0+），系统逐步转向使用 &lt;code&gt;/storage&lt;/code&gt; 作为主要的挂载入口&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在多用户系统中，Android 会为每个用户创建独立的“虚拟外部存储空间”：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;media&lt;/span&gt;/&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;/         → &lt;span style=&#34;color:#e06c75&#34;&gt;主用户&lt;/span&gt;（&lt;span style=&#34;color:#e06c75&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;）&lt;span style=&#34;color:#e06c75&#34;&gt;的外部存储&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;media&lt;/span&gt;/&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;/        → &lt;span style=&#34;color:#e06c75&#34;&gt;第二个用户&lt;/span&gt;（&lt;span style=&#34;color:#e06c75&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;）&lt;span style=&#34;color:#e06c75&#34;&gt;的外部存储&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这些路径通常是符号链接，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;media&lt;/span&gt;/&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt; /&lt;span style=&#34;color:#e06c75&#34;&gt;storage&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;emulated&lt;/span&gt;/&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;而 &lt;code&gt;/storage/emulated/0&lt;/code&gt; 实际上对应设备的&lt;strong&gt;内部共享存储区域&lt;/strong&gt;（即用户看到的“内部 SD 卡”）。&lt;/p&gt;
+&lt;p&gt;当插入 SD 卡或 USB 存储设备（例如通过 OTG），系统可能会创建：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;media&lt;/span&gt;/&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;UUID&lt;/span&gt;&amp;gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;mnt&lt;/span&gt;/&lt;span style=&#34;color:#e06c75&#34;&gt;media_rw&lt;/span&gt;/&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;UUID&lt;/span&gt;&amp;gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中 &lt;code&gt;&amp;lt;UUID&amp;gt;&lt;/code&gt; 是文件系统的卷标 ID，用于区分多个设备&lt;/p&gt;
+&lt;h2 id=&#34;472024-年-8-月-20-日有多少张截图&#34;&gt;47.2024 年 8 月 20 日有多少张截图?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235212936&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017235212936.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017235212936.png&#34; alt=&#34;image-20251017235212936&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;482024-年-8-月-22-日被删除微信消息的类型是&#34;&gt;48.2024 年 8 月 22 日被删除微信消息的类型是?
+&lt;/h2&gt;&lt;p&gt;A. 照片&lt;/p&gt;
+&lt;p&gt;B. 视频&lt;/p&gt;
+&lt;p&gt;C. 文本&lt;/p&gt;
+&lt;p&gt;D. 以上都不是&lt;/p&gt;
+&lt;p&gt;火眼并没有解析出来&lt;/p&gt;
+&lt;p&gt;根据聊天记录，可以发现这话之间明显是不连贯的，应该是recovery的内容：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235701595&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png&#34; alt=&#34;image-20251017235701595&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;回到Emma手机的聊天记录，可以发现是有一个图片消息的，应该就是Emma手机里那张记录了Recovery字段的图片：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235721344&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017235721344.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017235721344.png&#34; alt=&#34;image-20251017235721344&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;david-的手机&#34;&gt;David 的手机
+&lt;/h1&gt;&lt;p&gt;你在查看 Clara 的手机镜像后, 确定 Clara 是 David 的妻子, 调查员通过查询酒店预订记录确认了这一点.&lt;/p&gt;
+&lt;p&gt;他们现在定位 David 的住所, 以进行进一步调查.&lt;/p&gt;
+&lt;p&gt;你首先分析 David 的手机, 参考 David_Smartphone_1.zip.&lt;/p&gt;
+&lt;h2 id=&#34;49根据contentsdb-david-手机接收了通讯软件-telegram-的验证短信-该验证码是多少&#34;&gt;49.根据&amp;quot;Contents.db&amp;rdquo;, David 手机接收了通讯软件 Telegram 的验证短信, 该验证码是多少?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235945439&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017235945439.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017235945439.png&#34; alt=&#34;image-20251017235945439&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;84298
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;50david-把手机设置为个人热点-请找出个人热点的密码&#34;&gt;50.David 把手机设置为个人热点, 请找出个人热点的密码.
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018000019366&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018000019366.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018000019366.png&#34; alt=&#34;image-20251018000019366&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wdfj5674
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;51david-手机曾连接名为mtr-free-wi-fi的wifi&#34;&gt;51.David 手机曾连接名为&amp;quot;MTR Free Wi-Fi&amp;quot;的WiFi.
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018000449843&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018000449843.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018000449843.png&#34; alt=&#34;image-20251018000449843&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;居然是判断题&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;√
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;52根据comtencentmm_preferencesxml-david-的手机最后登录微信的微信-id-是&#34;&gt;52.根据&amp;quot;com.tencent.mm_preferences.xml&amp;quot;, David 的手机最后登录微信的微信 ID 是?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018000824655&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018000824655.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018000824655.png&#34; alt=&#34;image-20251018000824655&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wxid_rni3m2o8ngxe22
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;53请指出哪一张图片是于-2024-年-8-月-28-日利用屏幕截取的&#34;&gt;53.请指出哪一张图片是于 2024 年 8 月 28 日利用屏幕截取的.
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018000937174&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018000937174.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018000937174.png&#34; alt=&#34;image-20251018000937174&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018000915317&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018000915317.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018000915317.png&#34; alt=&#34;image-20251018000915317&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Screenshot_20240828-153836_Gmail.jpg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;54根据contentsdb-david-手机的型号model是&#34;&gt;54.根据&amp;quot;Contents.db&amp;quot;, David 手机的型号(Model)是?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018001007768&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018001007768.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018001007768.png&#34; alt=&#34;image-20251018001007768&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SM-G9500
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;55-参考contentsdb-david-所使用的手机-sim-卡的序号&#34;&gt;55. 参考&amp;quot;Contents.db&amp;quot;, David 所使用的手机 SIM 卡的序号?
+&lt;/h2&gt;&lt;p&gt;同上题&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8985200000827530728
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;56-david-手机安装了应用程序-metamask-根据persist-root中-metamask-钱包内有多少个账号&#34;&gt;56. David 手机安装了应用程序 MetaMask. 根据&amp;quot;persist-root&amp;quot;中, MetaMask 钱包内有多少个账号?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018002516227&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018002516227.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018002516227.png&#34; alt=&#34;image-20251018002516227&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;一共四个地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;57根据persist-root中-何时从应用程序-metamask-发送虚拟货币至以下地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c&#34;&gt;57.根据&amp;quot;persist-root&amp;quot;中, 何时从应用程序 MetaMask 发送虚拟货币至以下地址: 0X10A4F01B80203591CCEE76081A4489AE1CD1281C
+&lt;/h2&gt;&lt;p&gt;A. 2024-08-11 1249(GMT+8)&lt;/p&gt;
+&lt;p&gt;B. 2024-08-14 1658 (GMT+8)&lt;/p&gt;
+&lt;p&gt;C. 2024-08-14 1659 (GMT+8)&lt;/p&gt;
+&lt;p&gt;D. 2024-08-16 1724 (GMT+8)&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018002626922&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018002626922.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018002626922.png&#34; alt=&#34;image-20251018002626922&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018002917071&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018002917071.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018002917071.png&#34; alt=&#34;image-20251018002917071&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;58david-曾利用手机应用程序-metamask-三次发送虚拟货币失败-根据persist-root-发送虚拟货币失败的原因是什么&#34;&gt;58.David 曾利用手机应用程序 MetaMask 三次发送虚拟货币失败. 根据&amp;quot;persist-root&amp;quot;, 发送虚拟货币失败的原因是什么?
+&lt;/h2&gt;&lt;p&gt;A. 网络连接问题&lt;/p&gt;
+&lt;p&gt;B. 应用程序权限被拒&lt;/p&gt;
+&lt;p&gt;C. 接收地址错误&lt;/p&gt;
+&lt;p&gt;D. 手续费不足&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018003129746&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018003129746.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018003129746.png&#34; alt=&#34;image-20251018003129746&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;内存取证&#34;&gt;内存取证
+&lt;/h1&gt;&lt;p&gt;你根据易失性(Volatility Level)优先次序, 进行内存取证分析 David 的笔记本电脑.&lt;/p&gt;
+&lt;p&gt;参考 RAM_Capture_David_Laptop.RAW.&lt;/p&gt;
+&lt;h2 id=&#34;59以下哪一个不是程序firefoxexe的-pid&#34;&gt;59.以下哪一个不是程序&amp;quot;firefox.exe&amp;quot;的 PID?
+&lt;/h2&gt;&lt;p&gt;A. 9240&lt;/p&gt;
+&lt;p&gt;B. 8732&lt;/p&gt;
+&lt;p&gt;C. 5260&lt;/p&gt;
+&lt;p&gt;D. 3108&lt;/p&gt;
+&lt;p&gt;这里使用lovelymem这个软件，测试一下它内存取证功能性，顺便涨涨熟练度&lt;/p&gt;
+&lt;p&gt;（lovelymem会挂载镜像在本地盘，一般是M盘，不过不知道为什么我打不开，荣誉感能打开部分题目会比较方便）&lt;/p&gt;
+&lt;p&gt;直接分析进程：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018113609594&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018113609594.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018113609594.png&#34; alt=&#34;image-20251018113609594&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;60汇出-pid-为-724-的程序-其哈希值sha-256是&#34;&gt;60.汇出 PID 为 724 的程序, 其哈希值(SHA-256)是?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018114144539&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018114144539.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018114144539.png&#34; alt=&#34;image-20251018114144539&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;导出：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-o F:&lt;span style=&#34;color:#98c379&#34;&gt;\导&lt;/span&gt;出&lt;span style=&#34;color:#98c379&#34;&gt;\2&lt;/span&gt;024美亚个人 windows.pslist.PsList --pid &lt;span style=&#34;color:#d19a66&#34;&gt;724&lt;/span&gt; --dump
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018200656407&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018200656407.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018200656407.png&#34; alt=&#34;image-20251018200656407&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不用管csv的问题，进程导出是成功的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;89cf04b53119d36654bc5e7eeb5d0829a84238ee03faa9a03948f5bf4be44583
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;61哪一个是执行-pid-为-724-的程序的-sid&#34;&gt;61.哪一个是执行 PID 为 724 的程序的 SID?、
+&lt;/h2&gt;&lt;p&gt;A. S-1-1-0&lt;/p&gt;
+&lt;p&gt;B. S-1-2-0&lt;/p&gt;
+&lt;p&gt;C. S-1-5-21-1103701427-1706751984-2965915307-1001&lt;/p&gt;
+&lt;p&gt;D. S-1-5-21-1103701427-1706751984-2965915307-513&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018201016449&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018201016449.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018201016449.png&#34; alt=&#34;image-20251018201016449&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;62账户-david-tenth-的-nt-lan-manager-的哈希值ntlm-hash&#34;&gt;62.账户 David Tenth 的 NT LAN Manager 的哈希值(NTLM Hash)?
+&lt;/h2&gt;&lt;p&gt;选择密码哈希转储：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018201552343&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018201552343.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018201552343.png&#34; alt=&#34;image-20251018201552343&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;e14a21fefc5dd81275bb87228586cffc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;david-的-u-盘部分&#34;&gt;David 的 U 盘部分
+&lt;/h1&gt;&lt;p&gt;在取证中, 你发现 D 盘被 BitLocker 加密.&lt;/p&gt;
+&lt;p&gt;U 盘上可能有一些线索, 你对 U 盘进行了取证.&lt;/p&gt;
+&lt;p&gt;参考 David_USB_8GB.e01.&lt;/p&gt;
+&lt;h2 id=&#34;63david-的-u-盘文件系统的格式&#34;&gt;63.David 的 U 盘文件系统的格式?
+&lt;/h2&gt;&lt;p&gt;A. NTFS&lt;/p&gt;
+&lt;p&gt;B. FAT32&lt;/p&gt;
+&lt;p&gt;C. exFAT&lt;/p&gt;
+&lt;p&gt;D. ReFS&lt;/p&gt;
+&lt;p&gt;在Xways挂载之后，转换成镜像磁盘查看技术细节报告：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018194558831&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018194558831.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018194558831.png&#34; alt=&#34;image-20251018194558831&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;64david-的-u-盘文件系统中-每簇定义了多少字节&#34;&gt;64.David 的 U 盘文件系统中, 每簇定义了多少字节?
+&lt;/h2&gt;&lt;p&gt;A. 128&lt;/p&gt;
+&lt;p&gt;B. 256&lt;/p&gt;
+&lt;p&gt;C. 512&lt;/p&gt;
+&lt;p&gt;D. 1024&lt;/p&gt;
+&lt;p&gt;同上题&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;65david-的-u-盘中有多少个已删除的文件&#34;&gt;65.David 的 U 盘中有多少个已删除的文件?
+&lt;/h2&gt;&lt;p&gt;A. 1&lt;/p&gt;
+&lt;p&gt;B. 2&lt;/p&gt;
+&lt;p&gt;C. 3&lt;/p&gt;
+&lt;p&gt;D. 4&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018200003060&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018200003060.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018200003060.png&#34; alt=&#34;image-20251018200003060&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;Xways也能看出来:&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018195402931&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018195402931.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018195402931.png&#34; alt=&#34;image-20251018195402931&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;66已删除的文件的-run-list-的-run-offset-是多少&#34;&gt;66.已删除的文件的 Run List 的 Run Offset 是多少?
+&lt;/h2&gt;&lt;p&gt;A. 16&lt;/p&gt;
+&lt;p&gt;B. 32&lt;/p&gt;
+&lt;p&gt;C. 64&lt;/p&gt;
+&lt;p&gt;D. 128&lt;/p&gt;
+&lt;p&gt;题目看不懂&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;考察NTFS的知识点&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;有稍微学过，但是没学到这个（），之后补一下&lt;/p&gt;
+&lt;p&gt;在NTFS文件系统中，文件的数据存储在簇中，而簇号不一定连续，因此NTFS使用Run List（运行列表）来记录“文件的哪些簇属于该文件”&lt;/p&gt;
+&lt;p&gt;Run List位于$MFT记录的Data Attribute(0x80)结构中&lt;/p&gt;
+&lt;p&gt;这里使用MFT brower软件，它可以直接识别磁盘镜像中NTFS的结构：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019124315945&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png&#34; alt=&#34;image-20251019124315945&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;67已删除文件的第一个-datarun-的十六进制值小端序是多少&#34;&gt;67.已删除文件的第一个 DataRun 的十六进制值(小端序)是多少?
+&lt;/h2&gt;&lt;p&gt;A. 0x4C3F0DB522&lt;/p&gt;
+&lt;p&gt;B. 0x4C3F0D22B5&lt;/p&gt;
+&lt;p&gt;C. 0x224C3F0DB5&lt;/p&gt;
+&lt;p&gt;D. 0x3F4C0DB522&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019130045129&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019130045129.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019130045129.png&#34; alt=&#34;image-20251019130045129&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;上题的偏移量是相对于Data Attribute(0x80)而言，也就是从标识符开头的位置偏移64个字节，MFTbrowser也会自动解析出来&lt;/p&gt;
+&lt;p&gt;存储使用小端序，也就是低位数据在低位地址，读的时候需要调整过来&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;68已删除的文件的实际大小字节是多少&#34;&gt;68.已删除的文件的实际大小(字节)是多少?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018202018998&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018202018998.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018202018998.png&#34; alt=&#34;image-20251018202018998&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1796178&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;MFT中也有记录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019125450127&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019125450127.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019125450127.png&#34; alt=&#34;image-20251019125450127&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;69已删除文件的第一个-datarun-的-offset-是多少&#34;&gt;69.已删除文件的第一个 DataRun 的 Offset 是多少?
+&lt;/h2&gt;&lt;p&gt;每个DataRun由三个部分组成：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;部分&lt;/th&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+          &lt;th&gt;字节数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;第 1 字节&lt;/td&gt;
+          &lt;td&gt;Header (头字节)&lt;/td&gt;
+          &lt;td&gt;指出下面两个字段的长度&lt;/td&gt;
+          &lt;td&gt;固定 1 字节&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;第 2 部分&lt;/td&gt;
+          &lt;td&gt;Length 字段&lt;/td&gt;
+          &lt;td&gt;表示该段连续簇的数量&lt;/td&gt;
+          &lt;td&gt;由 header 的低 4 位决定&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;第 3 部分&lt;/td&gt;
+          &lt;td&gt;Offset 字段&lt;/td&gt;
+          &lt;td&gt;表示该段起始簇号的相对偏移量&lt;/td&gt;
+          &lt;td&gt;由 header 的高 4 位决定&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;头字节的高低 4 位含义如下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;位&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;低 4 位（低半字节）&lt;/td&gt;
+          &lt;td&gt;表示 Length 字段的字节数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;高 4 位（高半字节）&lt;/td&gt;
+          &lt;td&gt;表示 Offset 字段的字节数&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;我们来看题中datarun的结构：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;22 B5 0D 3F 4C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Header = &lt;code&gt;0x22&lt;/code&gt; → Length 字节数 = 2，Offset 字节数 = 2&lt;/li&gt;
+&lt;li&gt;Length（小端） = &lt;code&gt;B5 0D&lt;/code&gt; = &lt;strong&gt;3509 簇&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Offset（小端、有符号） = &lt;code&gt;3F 4C&lt;/code&gt; = &lt;strong&gt;19519&lt;/strong&gt;（相对偏移）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在MFTbrowser中点击datarun，右上角的信息窗口会列举出详细信息：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019130136787&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019130136787.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019130136787.png&#34; alt=&#34;image-20251019130136787&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;19519
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;70已删除的文件的第一个-datarun-的-length-是多少&#34;&gt;70.已删除的文件的第一个 DataRun 的 Length 是多少?
+&lt;/h2&gt;&lt;p&gt;见上题&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3509
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;71已删除文件的图像文件像素值是多少&#34;&gt;71.已删除文件的图像文件像素值是多少?
+&lt;/h2&gt;&lt;p&gt;A. 1000 x 2000&lt;/p&gt;
+&lt;p&gt;B. 2000 x 3000&lt;/p&gt;
+&lt;p&gt;C. 3000 x 4000&lt;/p&gt;
+&lt;p&gt;D. 4000 x 5000&lt;/p&gt;
+&lt;p&gt;同68题图&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;72已删除图像文件是用哪个品牌和型号的手机拍摄&#34;&gt;72.已删除图像文件是用哪个品牌和型号的手机拍摄?
+&lt;/h2&gt;&lt;p&gt;A. SAMSUNG SM-A425&lt;/p&gt;
+&lt;p&gt;B. SAMSUNG SM-A4580&lt;/p&gt;
+&lt;p&gt;C. SAMSUNG SM-A4260&lt;/p&gt;
+&lt;p&gt;D. SAMSUNG SM-A5G&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018201922319&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018201922319.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018201922319.png&#34; alt=&#34;image-20251018201922319&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;剧情-4&#34;&gt;剧情 4
+&lt;/h1&gt;&lt;p&gt;在U盘中, 你还发现了一个 exe 文件, 但它被锁定, 可能需要进行反编译以便进一步检查.&lt;/p&gt;
+&lt;h2 id=&#34;73使用-x64dbg-的字符串搜索功能-在bitlockerexe中查找哪个字符串最有可能与显示的登录状态有关&#34;&gt;73.使用 x64dbg 的字符串搜索功能, 在&amp;quot;Bitlocker.exe&amp;quot;中查找哪个字符串最有可能与显示的登录状态有关?
+&lt;/h2&gt;&lt;p&gt;A. Welcome&lt;/p&gt;
+&lt;p&gt;B. Invalid input&lt;/p&gt;
+&lt;p&gt;C. Login Successful!&lt;/p&gt;
+&lt;p&gt;D. Access Denied&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018204259893&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018204259893.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018204259893.png&#34; alt=&#34;image-20251018204259893&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;74当找到控制登录成功的逻辑代码时-如何修改汇编代码来绕过检查-达到任意输入-都成功登录的效果&#34;&gt;74.当找到控制登录成功的逻辑代码时, 如何修改汇编代码来绕过检查, 达到任意输入, 都成功登录的效果?
+&lt;/h2&gt;&lt;p&gt;A. 修改 CMP 指令, 使其总是比较相等&lt;/p&gt;
+&lt;p&gt;B. 修改 CMP 指令后的跳转指令 JNE 为 nop, 使跳转指令失效&lt;/p&gt;
+&lt;p&gt;C. 修改 MOV 指令, 使其移动错误的数据&lt;/p&gt;
+&lt;p&gt;D. 修改 TEST 指令后的跳转指令 JNE 为 NOP, 使跳转指令失效&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018204429948&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018204429948.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018204429948.png&#34; alt=&#34;image-20251018204429948&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;75bitlockerexe的正确用户登录名称是&#34;&gt;75.&amp;ldquo;Bitlocker.exe&amp;quot;的正确用户登录名称是?
+&lt;/h2&gt;&lt;p&gt;找半天比较跳转函数，原来就在上面，没写在别的地方：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018205329317&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018205329317.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018205329317.png&#34; alt=&#34;image-20251018205329317&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;登录测试成功：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018205329317.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018205329317.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;david1337
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;76bitlockerexe的正确登录密码是&#34;&gt;76.&amp;ldquo;Bitlocker.exe&amp;quot;的正确登录密码是?
+&lt;/h2&gt;&lt;p&gt;同上题&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1337david
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;77当bitlockerexe程序尝试显示登录结果成功或失败时-使用了哪一种途径来决定显示的消息&#34;&gt;77.当&amp;quot;Bitlocker.exe&amp;quot;程序尝试显示登录结果（成功或失败）时, 使用了哪一种途径来决定显示的消息?
+&lt;/h2&gt;&lt;p&gt;A. 通过检查每个寄存器的值来决定跳转到不同的汇编代码区段&lt;/p&gt;
+&lt;p&gt;B. 通过调用硬编码的内存地址来显示特定的消息框&lt;/p&gt;
+&lt;p&gt;C. 通过堆栈中的返回地址来确定要显示的消息&lt;/p&gt;
+&lt;p&gt;D. 通过逐位操作来修改显示消息的字符串内容&lt;/p&gt;
+&lt;p&gt;看下登陆成功这一段：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018205839478&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018205839478.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018205839478.png&#34; alt=&#34;image-20251018205839478&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;xor r9d,r9d                             | UINT uType
+lea r8,qword ptr ds:[7FF6ACD064C0]      | LPCTSTR lpCaption = &amp;#34;login successful&amp;#34;
+lea rdx,qword ptr ds:[7FF6ACD064E0]     | LPCTSTR lpText = &amp;#34;Great! You have finished the first step. Keep going to find the bitlocker key.&amp;#34;
+xor ecx,ecx                             | HWND hWnd
+call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;lea只计算地址，也就是把存有登录信息字符串的地址加载到寄存器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;78决定能否解密-bitlocker-key-的字节的内存偏移量相对于基址是什么&#34;&gt;78.决定能否解密 Bitlocker Key 的字节的内存偏移量(相对于基址)是什么?
+&lt;/h2&gt;&lt;p&gt;A. 0xA0B2&lt;/p&gt;
+&lt;p&gt;B. 0x808C&lt;/p&gt;
+&lt;p&gt;C. 0xA0C8&lt;/p&gt;
+&lt;p&gt;D. 0xA0E0&lt;/p&gt;
+&lt;p&gt;这题就不太看得懂了，使用ida看吧还是，反编译一下比较好&lt;/p&gt;
+&lt;p&gt;基址能在.text中看见，也就是PE文件头的内容，这个用PEview之类的应该也行：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018211122485&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018211122485.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018211122485.png&#34; alt=&#34;image-20251018211122485&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;字符串搜索bitlocker key，可以发现是有一个弹窗的，但是不知道如何触发，F5反汇编这段代码：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018211454308&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018211454308.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018211454308.png&#34; alt=&#34;image-20251018211454308&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这就很清楚了，判断&lt;code&gt;byte_14000808C&lt;/code&gt;的值，如果是0就弹出登入成功，1就弹出bitloker key&lt;/p&gt;
+&lt;p&gt;这个就是决定能否解密的关键，相对于基址&lt;code&gt;140000000&lt;/code&gt;的偏移量是&lt;code&gt;808C&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;79决定能否解密-bitlocker-key-的内存偏移量后-应该如何利用它来进行解密&#34;&gt;79.决定能否解密 BitLocker Key 的内存偏移量后, 应该如何利用它来进行解密?
+&lt;/h2&gt;&lt;p&gt;A. 将该偏移量处的值改为 1 (true), 以启用解密过程&lt;/p&gt;
+&lt;p&gt;B. 将该偏移量处的值改为 0 (false), 以重新初始化加密过程&lt;/p&gt;
+&lt;p&gt;C. 将该偏移量的内容保存到档中以作解密过程中的key&lt;/p&gt;
+&lt;p&gt;D. 清空该偏移量的内存并强制退出程序&lt;/p&gt;
+&lt;p&gt;上题分析过了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;80-解密后的-bitlocker-key-是&#34;&gt;80. 解密后的 Bitlocker Key 是?
+&lt;/h2&gt;&lt;p&gt;A. 299255-418649-198198-616891-099682-482306-642609-483527&lt;/p&gt;
+&lt;p&gt;B. 745823-918273-564738-290183-475920-182736-594827-162839&lt;/p&gt;
+&lt;p&gt;C. 539823-847291-094857-194756-382910-472918-482937-120984&lt;/p&gt;
+&lt;p&gt;D. 829384-192837-475910-298374-019283-847362-564738-293847&lt;/p&gt;
+&lt;p&gt;在hex视图改掉这个值：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018214341186&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png&#34; alt=&#34;image-20251018214341186&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;保存修改为新文件，输入账户密码：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018214638029&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018214638029.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018214638029.png&#34; alt=&#34;image-20251018214638029&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;david-的笔记本电脑&#34;&gt;David 的笔记本电脑
+&lt;/h1&gt;&lt;p&gt;到目前为止, 你已经获得了 BitLocker 密钥以解密 D 盘, 通过对 David 笔记本电脑 D 盘的分析, 并发现了一些重要信息.&lt;/p&gt;
+&lt;p&gt;你现在将继续调查未加密的 C 盘.&lt;/p&gt;
+&lt;p&gt;参考 David_Laptop_64GB.e01.&lt;/p&gt;
+&lt;h2 id=&#34;81分区格式是&#34;&gt;81.分区格式是?
+&lt;/h2&gt;&lt;p&gt;A. MBR&lt;/p&gt;
+&lt;p&gt;B. GPT&lt;/p&gt;
+&lt;p&gt;C. RAW&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018215419121&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018215419121.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018215419121.png&#34; alt=&#34;image-20251018215419121&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;82该-e01-成功提取的日期和时间是&#34;&gt;82.该 e01 成功提取的日期和时间是?
+&lt;/h2&gt;&lt;p&gt;A. 2024-09-05 15:55:28&lt;/p&gt;
+&lt;p&gt;B. 2024-09-02 11:52:31&lt;/p&gt;
+&lt;p&gt;C. 2024-09-03 14:37:28&lt;/p&gt;
+&lt;p&gt;D. 2024-09-03 12:16:49&lt;/p&gt;
+&lt;p&gt;e01是记录了创建时间等信息的格式，拖入Xways左侧证据栏右键看属性，在这之前记得创建新案件：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018220758247&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018220758247.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018220758247.png&#34; alt=&#34;image-20251018220758247&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不是这怎么没有一个选项是对的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;?
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;83最后登录的用户是谁&#34;&gt;83.最后登录的用户是谁?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018221026566&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018221026566.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018221026566.png&#34; alt=&#34;image-20251018221026566&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;David Tenth
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;84用户配置的时区是&#34;&gt;84.用户配置的时区是?
+&lt;/h2&gt;&lt;p&gt;A. Australian Central Time&lt;/p&gt;
+&lt;p&gt;B. China Standard Time&lt;/p&gt;
+&lt;p&gt;C. New Zealand Standard Time&lt;/p&gt;
+&lt;p&gt;D. Nepal Time&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019003410187&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019003410187.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019003410187.png&#34; alt=&#34;image-20251019003410187&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;85david-的笔记本电脑曾经连接了多少个设备&#34;&gt;85.David 的笔记本电脑曾经连接了多少个设备?
+&lt;/h2&gt;&lt;p&gt;A. 1&lt;/p&gt;
+&lt;p&gt;B. 2&lt;/p&gt;
+&lt;p&gt;C. 3&lt;/p&gt;
+&lt;p&gt;D. 4&lt;/p&gt;
+&lt;p&gt;可以看到有三种：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019130926106&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019130926106.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019130926106.png&#34; alt=&#34;image-20251019130926106&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;86david-的笔记本电脑上的-firefox-浏览器安装了哪些扩展工具&#34;&gt;86.David 的笔记本电脑上的 Firefox 浏览器安装了哪些扩展工具?
+&lt;/h2&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019003536562&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019003536562.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019003536562.png&#34; alt=&#34;image-20251019003536562&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;装了这么多，但是仿真起来看又只有一个：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019003652418&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019003652418.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019003652418.png&#34; alt=&#34;image-20251019003652418&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;还是以仿真为准吧：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MetaMask
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;实际上火狐自带一些原生的插件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这些原声的一般都以@mozilla.org结尾，比如：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004245651&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019004245651.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019004245651.png&#34; alt=&#34;image-20251019004245651&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;而自己下载的就没有：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019003751459&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019003751459.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019003751459.png&#34; alt=&#34;image-20251019003751459&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;不过Add-ons Search Detection这个插件看不见安装目录，只有源文件，答案里面是没有的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MetaMask
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;Add-ons Search Detection的确是原生插件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在GitHub的说明文件中明确指出：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;This add-on will collect information about search engines. … etld_change: indicates a eTLD change … extension or server: whether the eTLD change has been done by an extension (add-on) or server.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明它用于监控浏览器中搜索引擎或被扩展改变搜索引擎的情况&lt;/p&gt;
+&lt;h2 id=&#34;87根据用户配置文件中的-lnk-文件-最后访问的文件名称是&#34;&gt;87.根据用户配置文件中的 .lnk 文件, 最后访问的文件名称是?
+&lt;/h2&gt;&lt;p&gt;A. 下載&lt;/p&gt;
+&lt;p&gt;B. export-token&lt;/p&gt;
+&lt;p&gt;C. RAM_Capture_DaviD&lt;/p&gt;
+&lt;p&gt;D. 本機磁碟(E) (2)&lt;/p&gt;
+&lt;p&gt;在recent目录下查看最近打开的文件，他们是.lnk结尾的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;David_Laptop_64GB.e01/分区6/Users/David Tenth/AppData/Roaming/Microsoft/Windows/Recent
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004500937&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019004500937.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019004500937.png&#34; alt=&#34;image-20251019004500937&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;88david-的笔记本电脑曾經连接了多少个不同的-wifi&#34;&gt;88.David 的笔记本电脑曾經连接了多少个不同的 WiFi?
+&lt;/h2&gt;&lt;p&gt;A. 1&lt;/p&gt;
+&lt;p&gt;B. 2&lt;/p&gt;
+&lt;p&gt;C. 3&lt;/p&gt;
+&lt;p&gt;D. 4&lt;/p&gt;
+&lt;p&gt;连接过的wifi只有一个：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004748962&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png&#34; alt=&#34;image-20251019004748962&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;在wifi连接记录里面能看到的都是同一个wifi，网络适配器、网卡guid等都是一样的：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004638268&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png&#34; alt=&#34;image-20251019004638268&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;89承上题-该wifi网络的名称ssid是&#34;&gt;89.承上题, 该WiFi网络的名称(SSID)是?
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ErrorError5G
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;奇怪的是连接记录里面有部分是用密码作为SSID的&lt;/p&gt;
+&lt;h2 id=&#34;90该电脑的-windows-操作系统的安装日期是什么&#34;&gt;90.该电脑的 Windows 操作系统的安装日期是什么?
+&lt;/h2&gt;&lt;p&gt;A. 2024-07-31 09:55:37 UTC+8&lt;/p&gt;
+&lt;p&gt;B. 2024-08-01 13:10:15 UTC+8&lt;/p&gt;
+&lt;p&gt;C. 2024-07-31 10:18:26 UTC+8&lt;/p&gt;
+&lt;p&gt;D. 2024-08-01 14:43:55 UTC+8&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005152484&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png&#34; alt=&#34;image-20251019005152484&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;案件综合分析&#34;&gt;案件综合分析
+&lt;/h1&gt;&lt;p&gt;通过对 David 笔记本电脑的电子数据取证和痕迹分析, 你了解到 David 是一名加密货币专家.&lt;/p&gt;
+&lt;p&gt;假设加密货币 International Digital Forensics Coin (IDFC) 面值是 1 IDFC = 1 HKD.&lt;/p&gt;
+&lt;p&gt;IDFC Token Address: 0x56E7A6dd8aA1c78ba77944C94c43054978E89b7b&lt;/p&gt;
+&lt;p&gt;区块链: Binance Smart Chain&lt;/p&gt;
+&lt;h2 id=&#34;91下列那个网站能够找到区块链-binance-smart-chain-的交易记录&#34;&gt;91.下列那个网站能够找到区块链 Binance Smart Chain 的交易记录?
+&lt;/h2&gt;&lt;p&gt;A. binance.com&lt;/p&gt;
+&lt;p&gt;B. bscscan.com&lt;/p&gt;
+&lt;p&gt;C. etherscan.io&lt;/p&gt;
+&lt;p&gt;D. blockchain.com&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005537464&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png&#34; alt=&#34;image-20251019005537464&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;92emma-用什么方法盜取-david-的-idfc&#34;&gt;92.Emma 用什么方法盜取 David 的 IDFC?
+&lt;/h2&gt;&lt;p&gt;A. Emma 经 Clara 盗取了 David 虚拟货币钱包的私匙&lt;/p&gt;
+&lt;p&gt;B. Emma 经 Clara 盗取了 David 虚拟货币钱包的公匙&lt;/p&gt;
+&lt;p&gt;C. Emma 经 Clara 盗取了 David 虚拟货币钱包的回复匙&lt;/p&gt;
+&lt;p&gt;D. Emma 盗取了 David 电话&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;93david-在什么日期时间发现-idfc-被盗&#34;&gt;93.David 在什么日期时间发现 IDFC 被盗?
+&lt;/h2&gt;&lt;p&gt;A. 2024-8-22 18:06&lt;/p&gt;
+&lt;p&gt;B. 2024-8-28 09:14&lt;/p&gt;
+&lt;p&gt;C. 2024-8-28 09:57&lt;/p&gt;
+&lt;p&gt;D. 2024-8-29 15:52&lt;/p&gt;
+&lt;p&gt;看Clara的聊天记录：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005658240&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png&#34; alt=&#34;image-20251019005658240&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;94emma-为什么盗取-david-的-idfc&#34;&gt;94.Emma 为什么盗取 David 的 IDFC?
+&lt;/h2&gt;&lt;p&gt;A. Emma为了买名贵手表&lt;/p&gt;
+&lt;p&gt;B. Emma为了赌钱&lt;/p&gt;
+&lt;p&gt;C. Emma为了炒卖虚拟货币&lt;/p&gt;
+&lt;p&gt;D. Emma为了还财务公司的欠债&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;95分析-idfc-的交易记录-emma-盜取了-david-虚拟货币钱包内哪个地址的-idfc&#34;&gt;95.分析 IDFC 的交易记录, Emma 盜取了 David 虚拟货币钱包内哪个地址的 IDFC?
+&lt;/h2&gt;&lt;p&gt;A. 0x10a4f01b80203591ccee76081a4489ae1cd1281c&lt;/p&gt;
+&lt;p&gt;B. 0x152c90200be61a540875f2a752c328bd19dbfb87&lt;/p&gt;
+&lt;p&gt;C. 0x59eb2c55eefdd4d8af2886c9fd8fc6f465c3e220&lt;/p&gt;
+&lt;p&gt;D. 0x70544880875fe907cee383873ca58da23378caa5&lt;/p&gt;
+&lt;p&gt;在浏览器能看见下载了一个csv文件，是和虚拟货币有关的，能找到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019132416556&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019132416556.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019132416556.png&#34; alt=&#34;image-20251019132416556&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;打开看看：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019133227324&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019133227324.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019133227324.png&#34; alt=&#34;image-20251019133227324&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;26日下午6点clara发了回复短语，28日上午9点david发现钱被偷，也就是这期间是作案时期&lt;/p&gt;
+&lt;p&gt;而表格中记录的是UTC标准时间，需要加上八小时才是当地时间，也就是只有三条记录符合：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019134638118&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019134638118.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019134638118.png&#34; alt=&#34;image-20251019134638118&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;只有最后一条在四个选项中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;96emma-总共盗取了-david-多少-idfc&#34;&gt;96.Emma 总共盗取了 David 多少 IDFC?
+&lt;/h2&gt;&lt;p&gt;A. 90,000 IDFC&lt;/p&gt;
+&lt;p&gt;B. 170,000 IDFC&lt;/p&gt;
+&lt;p&gt;C. 9,300,000 IDFC&lt;/p&gt;
+&lt;p&gt;D. 9,390,000 IDFC&lt;/p&gt;
+&lt;p&gt;见上题&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;97下列哪些地址是由相同的恢复短语recovery-seed所生成&#34;&gt;97.下列哪些地址是由相同的恢复短语(Recovery Seed)所生成?
+&lt;/h2&gt;&lt;p&gt;A. 0x10a4f01b80203591ccee76081a4489ae1cd1281c&lt;/p&gt;
+&lt;p&gt;B. 0x152c90200be61a540875f2a752c328bd19dbfb87&lt;/p&gt;
+&lt;p&gt;C. 0x59eb2c55eefdd4d8af2886c9fd8fc6f465c3e220&lt;/p&gt;
+&lt;p&gt;D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042&lt;/p&gt;
+&lt;p&gt;不知道怎么写，可能要联网，但是比赛又不让联网，很奇怪了&lt;/p&gt;
+&lt;h2 id=&#34;98根据-idfc-的交易记录作分析-总共有多少次-idfc-交易流入地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c&#34;&gt;98.根据 IDFC 的交易记录作分析, 总共有多少次 IDFC 交易流入地址 0x10a4f01b80203591ccee76081a4489ae1cd1281c?
+&lt;/h2&gt;&lt;p&gt;A. 0&lt;/p&gt;
+&lt;p&gt;B. 1&lt;/p&gt;
+&lt;p&gt;C. 2&lt;/p&gt;
+&lt;p&gt;D. 3&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019135858537&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019135858537.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019135858537.png&#34; alt=&#34;image-20251019135858537&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;99在-david-计算机的-d-盘内有一张图片-根据图片上的信息-找出-david-另一个虚拟货币钱包的恢复短语-下列哪一个单词是在此恢复短语内&#34;&gt;99.在 David 计算机的 D 盘内有一张图片, 根据图片上的信息, 找出 David 另一个虚拟货币钱包的恢复短语, 下列哪一个单词是在此恢复短语内?
+&lt;/h2&gt;&lt;p&gt;A. fall&lt;/p&gt;
+&lt;p&gt;B. bread&lt;/p&gt;
+&lt;p&gt;C. brain&lt;/p&gt;
+&lt;p&gt;D. dove&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019012546771&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019012546771.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019012546771.png&#34; alt=&#34;image-20251019012546771&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;图里面有个单词被遮挡了，不过看起来虽然和BC很像，但又不太可能是，猜一个吧&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;错了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;居然要在内存里面暴力搜索，这完全没提示啊&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162838049&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png&#34; alt=&#34;image-20251022162838049&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162857838&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png&#34; alt=&#34;image-20251022162857838&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163222740&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png&#34; alt=&#34;image-20251022163222740&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163242554&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png&#34; alt=&#34;image-20251022163242554&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163525402&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png&#34;&gt;
+&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png&#34; alt=&#34;image-20251022163525402&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;100-在-idfc-的交易记录中-下列哪些地址由上述恢复短语所生成&#34;&gt;100. 在 IDFC 的交易记录中, 下列哪些地址由上述恢复短语所生成?
+&lt;/h2&gt;&lt;p&gt;A. 0xb2e3dbea311511ec5bda3e85e061f15366f888a6&lt;/p&gt;
+&lt;p&gt;B. 0xe90ad3f80e39e83b533eef3ed23c641ec51089c6&lt;/p&gt;
+&lt;p&gt;C. 0x90f73497E4446f6Cf9881213C32D6af66d799fE5&lt;/p&gt;
+&lt;p&gt;D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042&lt;/p&gt;
+&lt;p&gt;同样不知道怎么写&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>美亚杯2023个人赛取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Thu, 16 Oct 2025 12:49:45 +0800</pubDate>
@@ -20,16 +1647,16 @@
 &lt;h2 id=&#34;检材资料&#34;&gt;检材资料
 &lt;/h2&gt;&lt;p&gt;镜像挂载密码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3hqGFfT#B*Yjd74t@f%9fDqs6D^$wVjAvxZkA79*4UV*kVRcq^Zu6Xp87W*p#X3XD%*ER!nHzzTnSEMwy8NEGX6A*%P&amp;amp;#rBUkxypAPKwX4mP3WZuHnYKRc7sA33hd@qS
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;1.李大輝的安卓手机镜像 (Android.bin)
-2.李大輝的macOS系统镜像(Mac OS.img)
-3.来自李大輝计算机的一个文件($MFT Record Nr_ 107115, SeqNr_2.txt)
-4.浩賢的个人虚拟机文件(Server.zip)
-5.浩賢的Windows 10系统虚拟机文件(Windows10.zip)
-6.浩賢的iOS手机系统文件(IOS.zip)
-7.来自Elvis Chui计算机的一个网络封包文件(網路.pcapng)
-8.来自Elvis Chui计算机的镜像文件 (Windows Artifacts.e01)
-9.来自Elvis Chui计算机的数据库文件(SQLITE.zip)
-10.Elvis Chui的Windows7虚拟机文件(Windows7.zip)&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;1.李大輝的安卓手机镜像 (Android.bin)&lt;/p&gt;
+&lt;p&gt;2.李大輝的macOS系统镜像(Mac OS.img)&lt;/p&gt;
+&lt;p&gt;3.来自李大輝计算机的一个文件($MFT Record Nr_ 107115, SeqNr_2.txt)&lt;/p&gt;
+&lt;p&gt;4.浩賢的个人虚拟机文件(Server.zip)&lt;/p&gt;
+&lt;p&gt;5.浩賢的Windows 10系统虚拟机文件(Windows10.zip)&lt;/p&gt;
+&lt;p&gt;6.浩賢的iOS手机系统文件(IOS.zip)&lt;/p&gt;
+&lt;p&gt;7.来自Elvis Chui计算机的一个网络封包文件(網路.pcapng)&lt;/p&gt;
+&lt;p&gt;8.来自Elvis Chui计算机的镜像文件 (Windows Artifacts.e01)&lt;/p&gt;
+&lt;p&gt;9.来自Elvis Chui计算机的数据库文件(SQLITE.zip)&lt;/p&gt;
+&lt;p&gt;10.Elvis Chui的Windows7虚拟机文件(Windows7.zip)&lt;/p&gt;
 &lt;h1 id=&#34;手机&#34;&gt;手机
 &lt;/h1&gt;&lt;h2 id=&#34;1-填空题-李大辉所用手机移动运营商公司的名称是什么提示请所有字母都用大写英文-1分&#34;&gt;1. [填空题] 李大辉所用手机移动运营商公司的名称是什么？提示:请所有字母都用大写英文 (1分)
 &lt;/h2&gt;&lt;p&gt;
@@ -545,8 +2172,23 @@
 &lt;p&gt;不知道怎么看，因为火眼扫不出来，从这之后除了27题都不会做，直接跳到windows部分了&lt;/p&gt;
 &lt;p&gt;它只是一个可挂载的移动存储设备分区，缺少完整的系统，所以火眼不能自动分析&lt;/p&gt;
 &lt;p&gt;果然离开工具啥也不是了，之后想办法补补，比如Xways这样的手动分析，唉唉&lt;/p&gt;
-&lt;p&gt;*&lt;strong&gt;这一题还是不知道怎么做&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;27-单选题-在mac-osimg-档中使用了哪种分区方案2分&#34;&gt;27. [单选题] 在’Mac OS.img’ 档中使用了哪种分区方案？(2分)
+&lt;p&gt;*&lt;strong&gt;直接在文件系统找&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;mac os有两种方式创建链接，一个是别名(alias)，另一个是符号链接&lt;/p&gt;
+&lt;p&gt;不过很奇怪，这一题似乎问的是别名，在文件系统就能找到：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018192843189&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018192843189.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018192843189.png&#34; alt=&#34;image-20251018192843189&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;最好的办法还是仿真，不过这个镜像是残缺的不能仿真&lt;/p&gt;
+&lt;p&gt;因为我不太懂mac的命令（不过应该和linux大差不差），下面就给几个可能的示例吧&lt;/p&gt;
+&lt;p&gt;查找符号链接：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls -l &lt;span style=&#34;color:#c678dd&#34;&gt;$(&lt;/span&gt;find /Users -type l 2&amp;gt;/dev/null&lt;span style=&#34;color:#c678dd&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看别名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find /Users -type f -exec file &lt;span style=&#34;color:#56b6c2&#34;&gt;{}&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;\;&lt;/span&gt; | grep &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Mac OS X alias&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;27-单选题-在mac-osimg-档中使用了哪种分区方案2分&#34;&gt;27. [单选题] 在’Mac OS.img’ 档中使用了哪种分区方案？(2分)
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A. Apple Partition Map&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;B. GUID Partition Table&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;C. Master Boot Record&lt;/strong&gt;&lt;/p&gt;
@@ -1002,8 +2644,9 @@
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;p&gt;发送时间：&lt;code&gt;702012111.6379331&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;基准时间：&lt;code&gt;2001-01-01 00:00:00&lt;/code&gt; -&amp;gt; &lt;code&gt;978278400&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;时间戳相加转换：&lt;/p&gt;
+&lt;p&gt;基准时间：&lt;code&gt;2001-01-01 00:00:00&lt;/code&gt; -&amp;gt; &lt;code&gt;978307200&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;注意这里用的是UTC+0的标准去转换时间戳，不要用成别的了&lt;/p&gt;
+&lt;p&gt;时间戳相加结果是&lt;code&gt;1680319311.637933&lt;/code&gt;，然后转换到UTC+8：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2023-04-01_11:21:51
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;63-填空题-根据影片img_0687mov的原数据找出影片拍摄时间提示以utc-8时区作答并以yyyy-mm-dd_hhmmss格式作答-例如2023-01-01_100101-答案无需输入utc-8-1分&#34;&gt;63. [填空题] 根据影片IMG_0687.MOV的原数据，找出影片拍摄时间？提示:以UTC +8时区作答,并以YYYY-MM-DD_HH:MM:SS格式作答 例如:2023-01-01_10:01:01 (答案无需输入UTC +8) (1分)
 &lt;/h2&gt;&lt;p&gt;IMG_0687.MOV在哪呢？？&lt;/p&gt;
@@ -8191,7 +9834,8 @@ Unicode 希望支持所有语言的所有字符变化（比如加不同的重音
 &lt;blockquote&gt;
 &lt;p&gt;本来应该是有im5db这个数据库的，我的分析结果里面没有，其他六个都有，也许是因为后缀的原因？&lt;/p&gt;
 &lt;p&gt;所以直接沿着下面这个路径找了：&lt;/p&gt;
-&lt;p&gt;/Documents/IM5_CN/9031bc3c805ac5e55ecaa151092c2c4b/IM5_storage/1399634813467579522/im5db&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;/Documents/IM5_CN/9031bc3c805ac5e55ecaa151092c2c4b/IM5_storage/1399634813467579522/im5db&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;查看message表的content字段：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
