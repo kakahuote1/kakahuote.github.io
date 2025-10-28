@@ -7,6 +7,657 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright><atom:link href="https://blog.928330.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>逆向基础5：混淆技术</title>
+        <link>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Sun, 26 Oct 2025 19:56:22 +0800</pubDate>
+        
+        <guid>https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;img src="http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg" alt="Featured image of post 逆向基础5：混淆技术" /&gt;&lt;p&gt;经过前几节课，跟着破解了几个crack，我也觉得我成逆向大神了&amp;hellip;&amp;hellip;吗？&lt;/p&gt;
+&lt;p&gt;破解软件哪有那么容易，尤其是商用的，更不可能将自己的代码就这样暴露在大众面前，肯定会想方设法提高逆向工程的难度！&lt;/p&gt;
+&lt;p&gt;之前我们提到过，删掉ELF的节表就能很好的做到这一点，但是那毕竟只在linux上，有没有更普遍的做法呢？&lt;/p&gt;
+&lt;p&gt;这就是这篇文章要说的技术 —— &lt;strong&gt;代码混淆（Obfuscation）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;所谓知己知彼，百战不殆，只有知道混淆是什么后，才知道如何去对抗和破解它&lt;/p&gt;
+&lt;h1 id=&#34;混淆的基本原理&#34;&gt;混淆的基本原理
+&lt;/h1&gt;&lt;h2 id=&#34;混淆是什么&#34;&gt;混淆是什么？
+&lt;/h2&gt;&lt;p&gt;混淆是一种程序变换技术，其目的是通过重构代码，在保持程序原有功能（语义）等价的前提下，增加代码的复杂性，使其更难以被逆向分析和理解&lt;/p&gt;
+&lt;p&gt;这个过程可以被视为一个转换：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251026203141655&#34; href=&#34;http://picture.928330.xyz/typora/image-20251026203141655.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251026203141655.png&#34; alt=&#34;image-20251026203141655&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;混淆可以在多个不同层次上进行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;源代码级&lt;/strong&gt;：对高级语言代码（如C、Java）进行变量重命名、逻辑变换等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中间代码/字节码级&lt;/strong&gt;：针对.NET或Java的字节码进行混淆&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;汇编/二进制级&lt;/strong&gt;：直接对编译后的机器码或汇编代码进行修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有些不理解？让我们来看一个具体的汇编混淆片段（为了方便观看，前面就加上行号了）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;01 XOR EBX, EAX
+02 XOR EAX, EBX
+03 XOR EBX, EAX
+04 INC EAX
+05 NEG EBX
+06 ADD EBX, 0A6098326H
+07 CMP EAX, ESP
+08 MOV EAX, 59F67CD5H
+09 XOR EAX, 0FFFFFFFFH
+10 SUB EBX, EAX
+11 RCL EAX, CL
+12 PUSH 0F9CBE47AH
+13 ADD DWORD PTR [ESP], 6341B86H
+14 SBB EAX, EBP
+15 SUB DWORD PTR [ESP], EBX
+16 PUSHFD
+17 PUSHAD
+18 POP EAX
+19 ADD ESP, 20H
+20 TEST EBX, EAX
+21 POP EAX
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;哇，真是写了好多啊，那这么长的代码，实现了什么强大的功能呢？&lt;/p&gt;
+&lt;p&gt;我们一步一步看：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;寄存器交换：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;; 初始状态: EAX = N, EBX = M
+01 XOR EBX, EAX         ; EBX = M ^ N
+02 XOR EAX, EBX         ; EAX = N ^ (M ^ N) = M (即 EBX 的初始值)
+03 XOR EBX, EAX         ; EBX = (M ^ N) ^ M = N (即 EAX 的初始值)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是一个不使用第三个寄存器来交换&lt;code&gt;EAX&lt;/code&gt;和&lt;code&gt;EBX&lt;/code&gt;内容的技巧，看着虽然有些复杂，但也还合理&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;垃圾指令：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;04 INC EAX              ; EAX = EAX + 1
+05 NEG EBX              ; EBX = -N (对N取补)
+06 ADD EBX, 0A6098326H  ; EBX = -N + 0A6098326H
+07 CMP EAX, ESP         ; 比较 EAX 和 ESP
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;嗯？有些不对劲了&lt;/p&gt;
+&lt;p&gt;行&lt;code&gt;04&lt;/code&gt;修改了&lt;code&gt;EAX&lt;/code&gt; —— 但是&lt;code&gt;EAX&lt;/code&gt;的值在后面的第&lt;code&gt;08&lt;/code&gt;行被完全覆盖了，所以这次&lt;code&gt;INC&lt;/code&gt;没有任何意义！它完全可以不存在，也就是一条垃圾指令！&lt;/p&gt;
+&lt;p&gt;行&lt;code&gt;05&lt;/code&gt;和&lt;code&gt;06&lt;/code&gt;是对&lt;code&gt;EBX&lt;/code&gt;的值&lt;code&gt;N&lt;/code&gt;的取补计算&lt;/p&gt;
+&lt;p&gt;行&lt;code&gt;07&lt;/code&gt;的&lt;code&gt;CMP&lt;/code&gt;会设置&lt;code&gt;EFLAGS&lt;/code&gt;标志寄存器，但这些标志位在被任何条件跳转指令使用之前，就被第&lt;code&gt;09&lt;/code&gt;行的 &lt;code&gt;XOR&lt;/code&gt;指令给覆盖了（它也会修改标志位），所以这也是一条垃圾指令！&lt;/p&gt;
+&lt;p&gt;好吧好吧，反正这部分结束之后，&lt;code&gt;EBX&lt;/code&gt;的值变成了&lt;code&gt;-N + 0A6098326H&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;常量展开：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;08 MOV EAX, 59F67CD5H   ; EAX = 59F67CD5H
+09 XOR EAX, 0FFFFFFFFH   ; EAX = NOT 59F67CD5H = 0A609832AH
+10 SUB EBX, EAX          ; EBX = EBX - EAX
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;行&lt;code&gt;08&lt;/code&gt;和&lt;code&gt;09&lt;/code&gt;没有直接使用&lt;code&gt;MOV EAX, 0A609832AH&lt;/code&gt;修改EAX，而是通过两步计算（&lt;code&gt;XOR 0xFFFFFFFF&lt;/code&gt;等同于&lt;code&gt;NOT&lt;/code&gt;，即按位取反）来得到这个值，增加了分析难度，这种方法叫做常量展开&lt;/p&gt;
+&lt;p&gt;行&lt;code&gt;10&lt;/code&gt;用&lt;code&gt;EBX&lt;/code&gt;减去&lt;code&gt;EAX&lt;/code&gt;：&lt;code&gt;EBX = (-N + 0A6098326H) - 0A609832AH = -N - 4&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这是一个重要的中间结果, &lt;code&gt;EBX&lt;/code&gt;的值变成了&lt;code&gt;-N - 4&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;基于栈的混淆：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;11 RCL EAX, CL          ; [垃圾指令]
+12 PUSH 0F9CBE47AH      ; 压入一个常量
+13 ADD DWORD PTR [ESP], 6341B86H ; 0F9CBE47AH + 6341B86H = 0
+14 SBB EAX, EBP          ; [垃圾指令]
+15 SUB DWORD PTR [ESP], EBX ; [ESP] = 0 - EBX
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;行&lt;code&gt;11&lt;/code&gt;和&lt;code&gt;14&lt;/code&gt;都是垃圾指令，因为&lt;code&gt;EAX&lt;/code&gt;的值在第&lt;code&gt;18&lt;/code&gt;行被&lt;code&gt;POP&lt;/code&gt;覆盖了&lt;/p&gt;
+&lt;p&gt;行&lt;code&gt;12&lt;/code&gt;和&lt;code&gt;13&lt;/code&gt;再次使用了常量展，它们的目的仅仅是&lt;code&gt;PUSH 0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;行&lt;code&gt;15&lt;/code&gt;从栈顶的值中减去&lt;code&gt;EBX&lt;/code&gt;，也就是：&lt;code&gt;[ESP] = 0 - (-N - 4) = N + 4&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;此时，&lt;code&gt;N + 4&lt;/code&gt;这个值在栈顶，没有在代码表面&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;复杂的空操作：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;16 PUSHFD                ; 压入 EFLAGS (4 字节)
+17 PUSHAD                ; 压入所有通用寄存器 (8 * 4 = 32 字节)
+18 POP EAX               ; 弹出 4 字节 (PUSHAD 压入的 EAX)
+19 ADD ESP, 20H          ; 弹出 32 字节 (20H = 32)
+20 TEST EBX, EAX         ; [垃圾指令]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;行&lt;code&gt;16&lt;/code&gt;和&lt;code&gt;17&lt;/code&gt;一共向栈上压入了&lt;code&gt;4 + 32 = 36&lt;/code&gt;字节的数据，行&lt;code&gt;18&lt;/code&gt;和&lt;code&gt;19&lt;/code&gt;一共从栈上弹出了&lt;code&gt;4 + 32 = 36&lt;/code&gt; 字节的数据&lt;/p&gt;
+&lt;p&gt;这四条指令 &lt;code&gt;(16, 17, 18, 19)&lt;/code&gt; 组合起来，是什么也没做！同时，它还搅乱了&lt;code&gt;EAX&lt;/code&gt;寄存器，真是太坏了&lt;/p&gt;
+&lt;p&gt;行&lt;code&gt;20&lt;/code&gt;也是垃圾指令，它设置的标志位并没有被使用&lt;/p&gt;
+&lt;p&gt;所以，这四行完全就是纯废话&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;获取最终结果：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;21 POP EAX               ; 弹出栈顶的值到 EAX
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;结果是&lt;code&gt;EAX = N + 4&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;也就是说，这一长串令人眼花缭乱的代码，其等价语义仅仅是：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;ADD EAX, 4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;真是神乎其技，对吧？&lt;del&gt;哎呦，恶心死了&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;这个例子里面体现了哪些混淆的方法呢，我们来看看：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;基于模式的混淆&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;把常见的逻辑替换成了绕人的写法，比如&lt;code&gt;XOR&lt;/code&gt;交换&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;常量展开&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用计算代替常量&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;0A609832AH&lt;/code&gt;，必须一步步分析才知道最后的结果&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;无关代码插入&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;大量的垃圾指令，完全没有意义的操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;基于栈的混淆&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;运算结果暂存在栈上，光看寄存器或者内存什么都看不出来&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用不常用指令&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;RCL&lt;/code&gt;、&lt;code&gt;SBB&lt;/code&gt;、&lt;code&gt;PUSHFD&lt;/code&gt;、&lt;code&gt;PUSHAD&lt;/code&gt;，这几个指令除了RCL，我都没有写在逆向基础的第一章&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些混淆方法后面我们一个个说&lt;/p&gt;
+&lt;h2 id=&#34;理论上的安全性&#34;&gt;理论上的安全性
+&lt;/h2&gt;&lt;p&gt;理论上，一个完美的混淆器应该具有所谓的**虚拟黑盒（Virtual Black-Box, VBB）**属性&lt;/p&gt;
+&lt;p&gt;这意味着，一个源程序$P$被混淆后得到的程序$P&amp;rsquo;$所能提取到的任何信息，都应该同样能通过“黑盒”访问（即只观察输入和输出）得到&lt;/p&gt;
+&lt;p&gt;换句话说，对于攻击者而言，拥有$P&amp;rsquo;$的代码文本并不比只拥有$P$的执行权限能获得更多信息&lt;/p&gt;
+&lt;p&gt;一个完美的混淆器应满足三个条件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;功能性&lt;/strong&gt;：混淆后的程序$P&amp;rsquo;$与原程序$P$功能完全相同&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多项式减速&lt;/strong&gt;：$P&amp;rsquo;$的执行时间和空间开销相比$P$最多呈多项式级增长&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;虚拟黑盒属性&lt;/strong&gt;：如上所述，拥有$P&amp;rsquo;$代码的攻击者无法比只拥有$P$的访问权的攻击者推断出更多信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;现状与应用&#34;&gt;现状与应用
+&lt;/h2&gt;&lt;p&gt;但理论终究是理论而已&lt;/p&gt;
+&lt;p&gt;2001年已有研究证明，能够满足上述所有条件的完美混淆器是不存在的！&lt;/p&gt;
+&lt;p&gt;因此，在现实世界中，混淆的目标并非实现理论上的绝对不可分析，而是使逆向分析付出的成本要大于通过逆向可能获得的收益，也就是努力让破解软件的人放弃&lt;/p&gt;
+&lt;p&gt;混淆技术被广泛应用在以下领域：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;恶意软件&lt;/strong&gt;：病毒、木马等用于对抗安全软件的分析和检测&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;软件知识产权保护&lt;/strong&gt;：保护商业软件的核心算法不被窃取&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;软件防篡改&lt;/strong&gt;：增加攻击者修改程序逻辑（如绕过付费验证）的难度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+++&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;下面我们正式来介绍混淆方法&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;数据混淆&#34;&gt;数据混淆
+&lt;/h1&gt;&lt;p&gt;数据混淆侧重于隐藏程序中使用的数据，如常量、字符串、变量等&lt;/p&gt;
+&lt;h2 id=&#34;常量展开&#34;&gt;常量展开
+&lt;/h2&gt;&lt;h3 id=&#34;defend&#34;&gt;defend
+&lt;/h3&gt;&lt;p&gt;常量展开是一种与编译器优化相反的技术，它将代码中一个明文常量替换为一组计算过程，而这个过程的最终结果等于该常量&lt;/p&gt;
+&lt;p&gt;也就是说，攻击者不能通过简单的查看某一个明文值来得到最终的结果，必须对大块的代码进行分析&lt;/p&gt;
+&lt;p&gt;之前例子我们已经见过：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;PUSH 0F9CBE47AH      ; 压入一个立即数
+ADD DWORD PTR [ESP], 6341B86H ; 栈顶值变为 0F9CBE47AH + 6341B86H = 0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这就是把&lt;code&gt;0&lt;/code&gt;这个值隐性地加入了逻辑中&lt;/p&gt;
+&lt;p&gt;更高级的常量展开不会将计算指令紧挨着放在一起，而是将它们交错在大量不相关的垃圾指令之间：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;MOV EAX, 0F9CBE47AH
+; ... (大量垃圾指令)
+XOR EBX, EBX
+CMP ECX, 5
+; ... (更多垃圾指令)
+PUSH EAX
+ADD DWORD PTR [ESP], 6341B86H
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;分析器很难将&lt;code&gt;PUSH&lt;/code&gt;和&lt;code&gt;ADD&lt;/code&gt;两条指令关联起来，从而无法轻易识别出&lt;code&gt;0&lt;/code&gt;这个常量&lt;/p&gt;
+&lt;h3 id=&#34;attack&#34;&gt;attack
+&lt;/h3&gt;&lt;p&gt;如何破解这种混淆呢？&lt;/p&gt;
+&lt;p&gt;最简单的方法是动态分析，在调试器中运行到该代码块之后，直接看栈顶或目标寄存器的值就行&lt;/p&gt;
+&lt;p&gt;如果是静态分析，大多数工具会将寄存器和内存视为符号变量，而不是具体数值&lt;/p&gt;
+&lt;p&gt;比如，当它们分析&lt;code&gt;MOV EAX, 0F9CBE47AH&lt;/code&gt;时，&lt;code&gt;EAX&lt;/code&gt;的值会被记为类似这样的形式：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;sym_EAX = 0F9CBE47AH
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;之后到&lt;code&gt;ADD DWORD PTR [ESP], 6341B86H&lt;/code&gt;时，会自动计算出：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;sym_ESP_val = 0F9CBE47AH + 6341B86H = 0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;也就是在静态的时候把变量全部计算出来&lt;/p&gt;
+&lt;p&gt;同时，静态分析工具还能追踪特定寄存器或内存位置的值，这可以跨越垃圾指令，找出所有修改该值的指令，并最终计算出结果&lt;/p&gt;
+&lt;h2 id=&#34;基于模式的混淆&#34;&gt;基于模式的混淆
+&lt;/h2&gt;&lt;h3 id=&#34;defend-1&#34;&gt;defend
+&lt;/h3&gt;&lt;p&gt;这种技术将一条或多条指令，替换为另一组功能上等价、但形式上更复杂的指令序列&lt;/p&gt;
+&lt;p&gt;其实也就是所谓的把简单问题复杂化&lt;/p&gt;
+&lt;p&gt;模式的混淆可以在高级语言，也能在汇编语言，下面给出一些示例&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;高级语言层面：&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;原始运算&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;等价混淆运算&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-x&lt;/td&gt;
+          &lt;td&gt;~x + 1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$x + 1$&lt;/td&gt;
+          &lt;td&gt;$-(\sim x)$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$x - 1$&lt;/td&gt;
+          &lt;td&gt;$\sim(-x)$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;rotate left (x, y)&lt;/td&gt;
+          &lt;td&gt;$(x&amp;laquo;y)$&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;汇编语言层面：&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;原始指令&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;等价混淆指令&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;PUSH REG32&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;SUB ESP, 4&lt;/code&gt;、&lt;code&gt;MOV DWORD PTR [ESP], REG32&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;PUSH REG32&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;LEA ESP, [ESP-4]&lt;/code&gt;、&lt;code&gt;MOV DWORD PTR [ESP], REG32&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;MOV EDX, IMM32&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CALL $+5&lt;/code&gt;、&lt;code&gt;POP EDX&lt;/code&gt;、&lt;code&gt;XOR EDX, (Mask ^ IMM32)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;MOV EDX, OFFSET LBL&lt;/code&gt;  &lt;code&gt;JMP EDX&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;PUSH (OFFSET LBL ^ Mask)&lt;/code&gt;、&lt;code&gt;POP EDX&lt;/code&gt;、&lt;code&gt;XOR EDX, Mask&lt;/code&gt;、&lt;code&gt;JMP EDX&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;汇编层面的模式替换更难，因为它不仅要保证通用寄存器的结果等价，还必须考虑对标志位寄存器的副作用是否等价，但汇编层面的模式替换往往比高级语言层面的更有效，怎么办呢？&lt;/p&gt;
+&lt;p&gt;于是，自动化的混淆器诞生了&lt;/p&gt;
+&lt;p&gt;高级混淆器拥有一个庞大的等价指令模板库，例如对于&lt;code&gt;ADD EAX, 1&lt;/code&gt;，它可能有10种不同的实现方式&lt;/p&gt;
+&lt;p&gt;在混淆时，它会随机从库中挑选一个模板，这意味着同一个原始函数在两次不同混淆后，其二进制代码可能是完全不同的，并且这个库还能随时更新，这使得基于签名的模式匹配完全失效&lt;/p&gt;
+&lt;h3 id=&#34;attack-1&#34;&gt;attack
+&lt;/h3&gt;&lt;p&gt;反编译器对于破解这种混淆非常有效，因为它们的核心功能是语义分析，不关心具体指令的实现&lt;/p&gt;
+&lt;p&gt;比如，随便汇编的&lt;code&gt;PUSH&lt;/code&gt;怎么玩，反编译器只关心在函数&lt;code&gt;X&lt;/code&gt;的第&lt;code&gt;Y&lt;/code&gt;行，&lt;code&gt;REG32&lt;/code&gt;被放到了栈顶&lt;/p&gt;
+&lt;p&gt;这样一来，就算模式被替换了，反编译生成的伪C代码很可能是一样的&lt;/p&gt;
+&lt;div class=&#34;alert alert-tip&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            💡
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Tip
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;由于各种技术原因，反编译器并不是在还原真实的源代码，而是在猜测性地重建一种“看起来像C的高层语义表示”，它未必是标准C、未必可编译、也未必与原代码逐字等价，所以叫伪C代码（pseudocode）&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;此外，某些脚本或插件可以在汇编层面模拟编译器的优化器，它会检查一个小的指令窗口（例如3-5条指令），如果发现&lt;code&gt;SUB ESP, 4; MOV [ESP], EAX&lt;/code&gt;这样的模式，就自动将其折叠（或注释）为&lt;code&gt;PUSH EAX&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;当然，这种方法在上面也说过，很容易被针对&lt;/p&gt;
+&lt;h2 id=&#34;数据编码&#34;&gt;数据编码
+&lt;/h2&gt;&lt;p&gt;这是一种更高级的混淆方式&lt;/p&gt;
+&lt;h3 id=&#34;普通编码&#34;&gt;普通编码
+&lt;/h3&gt;&lt;h4 id=&#34;defend-2&#34;&gt;defend
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;编码&lt;/strong&gt;：设定一个编码函数 $y = f(x)$。在程序中不存储原始数据 $x_0$，而是存储编码后的数据 $f(x_0)$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解码&lt;/strong&gt;：在运行时，当需要使用 $x_0$ 时，再通过 $f(x_0)$ 将其恢复（解码）为 $x_0$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对编码函数$f$的要求是，它必须是难以逆向的，即从 $y_0$ 难以推断 $x_0$，或者从多组 $(x, y)$ 难以推断出 $f$​&lt;/p&gt;
+&lt;p&gt;比如，程序中的数据（特别是字符串、API名、常量）是以加密形式存储在&lt;code&gt;.data&lt;/code&gt;或&lt;code&gt;.rdata&lt;/code&gt;段中的&lt;/p&gt;
+&lt;p&gt;一个经典的同态混淆是&lt;strong&gt;MBA (Mixed Boolean-Arithmetic)&lt;/strong&gt; ，它将一个简单的算术运算（如&lt;code&gt;z = x + y&lt;/code&gt;）替换为一个极其复杂的、但代数上等价的混合布尔-算术表达式&lt;/p&gt;
+&lt;p&gt;例如，&lt;code&gt;z = x + y&lt;/code&gt;可以被替换为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;z&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更可能是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;z&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; ( ( (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;~&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; (&lt;span style=&#34;color:#56b6c2&#34;&gt;~&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;) ) &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; ( (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;) ) &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样，攻击者面对的就是一个由&lt;code&gt;XOR&lt;/code&gt;、&lt;code&gt;OR&lt;/code&gt;、&lt;code&gt;AND&lt;/code&gt;、&lt;code&gt;ADD&lt;/code&gt;等等指令组成的巨大公式，极难将其还原&lt;/p&gt;
+&lt;p&gt;这个看上去有点像模式混淆，但是他们其实是不一样的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;模式混淆改的是指令形貌，属于语法层&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;数据编码改的是算式，属于语义层&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;反编译器对前者通常是秒杀，但对后者需要做数学&lt;/p&gt;
+&lt;h4 id=&#34;attack-2&#34;&gt;attack
+&lt;/h4&gt;&lt;p&gt;这种编码方式有一个致命的缺点：&lt;strong&gt;数据使用的时候，会被解密成明文&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;那么，只要攻击者在调试器中对存储加密数据的内存地址设置一个内存断点，当程序读取该数据（准备解密）时，只需单步跟踪，就一定能看见解密的过程，U直到解密完成，即可在内存或寄存器中看到明文&lt;/p&gt;
+&lt;p&gt;或者也能在某个函数执行前，转储一次进程内存，执行函数后，再转储一次，比较两次快照的差异，往往能直接发现解密到内存中的明文数据，不过这种方法很容易被**用后即焚（使用完解密数据后立刻清除）**防御住&lt;/p&gt;
+&lt;h3 id=&#34;同态编码&#34;&gt;同态编码
+&lt;/h3&gt;&lt;h4 id=&#34;defend-3&#34;&gt;defend
+&lt;/h4&gt;&lt;p&gt;正如之前所说的，一般的数据编码方案需要在每次使用数据前都进行动态解码，这会带来开销和风险&lt;/p&gt;
+&lt;p&gt;一个好的方案是，我们能&lt;strong&gt;直接在编码后的数据上实施运算&lt;/strong&gt; —— 这就是&lt;strong&gt;同态&lt;/strong&gt;的概念&lt;/p&gt;
+&lt;p&gt;在抽象代数中，同态是两个群 $G$（源代数）和 $H$（目标代数）之间的一个映射 $f$，它保留了运算结构&lt;/p&gt;
+&lt;p&gt;例如，如果 $G$ 和 $H$ 分别支持 $+_g$ 和 $+_h$ 运算，则 $f(x +_g y) = f(x) +_h f(y)$&lt;/p&gt;
+&lt;p&gt;在混淆中，这意味着我们可以对编码后的数据 $f(x)$ 和 $f(y)$ 执行某个操作，其结果等同于对原始数据 $x$ 和 $y$​​ 执行操作后再编码的结果&lt;/p&gt;
+&lt;p&gt;最简单的例子就是异或：$f(x)=x⊕k$&lt;/p&gt;
+&lt;h4 id=&#34;attack-3&#34;&gt;attack
+&lt;/h4&gt;&lt;p&gt;同态编码比较难破解，可以采用黑盒方式&lt;/p&gt;
+&lt;p&gt;固定&lt;code&gt;y&lt;/code&gt;，然后输入&lt;code&gt;x=1, 2, 3...&lt;/code&gt;，观察输出，通过多轮测试和归纳，可以猜出原始操作&lt;/p&gt;
+&lt;p&gt;不过编码混淆的基础就是不容易猜出函数，所以真的很难破解啊&lt;/p&gt;
+&lt;h1 id=&#34;控制流混淆&#34;&gt;控制流混淆
+&lt;/h1&gt;&lt;p&gt;控制流混淆（Control Flow Obfuscation，CFO）的目标是打破静态分析工具对程序执行流程的假设&lt;/p&gt;
+&lt;p&gt;静态代码分析工具通常依赖以下假设：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;CALL&lt;/code&gt;指令只用于函数调用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CALL&lt;/code&gt;会返回到紧随其后的下一条指令&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RET&lt;/code&gt;指令代表函数的边界和返回&lt;/li&gt;
+&lt;li&gt;条件跳转的两侧分支均可能被执行，且分支目标都是代码而非数据&lt;/li&gt;
+&lt;li&gt;间接跳转的目标是容易确定的（例如&lt;code&gt;switch&lt;/code&gt;结构或函数指针）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CFO的所有技术都是为了打破上述一个或多个假设，给分析器制造麻烦&lt;/p&gt;
+&lt;h2 id=&#34;插入无效代码花指令&#34;&gt;插入无效代码（花指令）
+&lt;/h2&gt;&lt;p&gt;这是最常见的混淆手段之一，分为死代码和垃圾代码&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+    &lt;div class=&#34;alert-header&#34;&gt;
+        &lt;span class=&#34;alert-icon&#34;&gt;
+            📝
+        &lt;/span&gt;
+        &lt;span class=&#34;alert-title&#34;&gt;
+            Note
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert-content&#34;&gt;
+        &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ctf-wiki.org/reverse/obfuscate/junk-code/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CTFwiki
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;：&lt;/p&gt;
+&lt;p&gt;“花指令（junk code）是一种专门用来迷惑反编译器的指令片段，这些指令片段不会影响程序的原有功能，但会使得反汇编器的结果出现偏差，从而使破解者分析失败。比较经典的花指令技巧有利用 &lt;code&gt;jmp&lt;/code&gt; 、&lt;code&gt;call&lt;/code&gt;、&lt;code&gt;ret&lt;/code&gt; 指令改变执行流，从而使得反汇编器解析出与运行时不相符的错误代码”&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;死代码&#34;&gt;死代码
+&lt;/h3&gt;&lt;h4 id=&#34;defend-4&#34;&gt;defend
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;死代码是指那些会被执行、但其执行结果对程序的最终状态没有任何影响的指令&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这侧重于数据混淆&lt;/p&gt;
+&lt;p&gt;为了插入死代码，混淆器需要进行活跃变量分析（这是静态分析的内容），找出在某个程序点上哪些寄存器或变量是死的，也就是即它们的值在被再次赋值前不会被使用，然后插入修改这些死寄存器的指令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;f&lt;/span&gt;() { 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;;  &lt;span style=&#34;color:#7f848e&#34;&gt;// &amp;lt;-- 死代码, x 的值在被使用前就被第3行覆盖了
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;  &lt;span style=&#34;color:#7f848e&#34;&gt;// &amp;lt;-- 死代码, y 从未被使用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;;  &lt;span style=&#34;color:#7f848e&#34;&gt;// &amp;lt;-- x 在此变为“活”的
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;attack-4&#34;&gt;attack
+&lt;/h4&gt;&lt;p&gt;既然他们能用活跃变量分析插入死代码，那么攻击者也可以同样利用活跃变量分析去除死代码&lt;/p&gt;
+&lt;p&gt;以上面的例子来说，大部分静态分析工具可以计算出在&lt;code&gt;x = 1&lt;/code&gt;之后，&lt;code&gt;x&lt;/code&gt;在被&lt;code&gt;x = 3&lt;/code&gt;覆盖之前从未被读取过，因此 &lt;code&gt;x=1&lt;/code&gt;是死代码，可以安全移除，或标记为死代码&lt;/p&gt;
+&lt;h3 id=&#34;垃圾代码&#34;&gt;垃圾代码
+&lt;/h3&gt;&lt;h4 id=&#34;defend-5&#34;&gt;defend
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;垃圾代码是指那些永远不会被执行到的代码块，侧重于控制流混淆&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;之前说过，静态分析工具会假设条件跳转的两侧分支均可能被执行，插入垃圾代码就会大大增加负担&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg1：简单的无条件跳转&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;    JMP real_code
+    ; --- 垃圾代码开始 ---
+    ADD EAX, 1
+    XOR EBX, EBX
+    PUSH EAX
+    ; --- 垃圾代码结束 ---
+real_code:
+    POP EAX             ; 有效代码
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;eg2：伪装的条件跳转&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通过数据混淆，将无条件跳转伪装成条件跳转&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;    PUSH EAX            ; 保存 EAX
+    XOR EAX, EAX        ; EAX = 0, 同时设置 ZF = 1
+    JZ real_code        ; ZF 永远为 1，所以这条 JZ 永远会跳转
+    
+    ; --- 垃圾代码开始 ---
+    MOV EAX, 0xDEADBEEF
+    CALL some_func
+    ; --- 垃圾代码结束 ---
+
+real_code:
+    POP EAX             ; 恢复 EAX
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;eg3：无效的条件跳转&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;    JZ target_1         ;
+    JMP target_2        ;
+
+target_1:
+    NOP                 ; target_1 只是一个空指令
+target_2:
+    ; --- 真正的有效代码 ---
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;静态分析器可能会认为&lt;code&gt;target_1&lt;/code&gt;和&lt;code&gt;target_2&lt;/code&gt;都是有效的分支，但实际上&lt;code&gt;target_1&lt;/code&gt;什么用也没有&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg4：反汇编去同步&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是一种高级的垃圾代码插入技术，它利用了反汇编器和 CPU实际执行之间的差异&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;它会在一个&lt;code&gt;JMP&lt;/code&gt;指令后，插入一些看起来像指令、但实际上是数据的字节：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;start:
+    jmp real_code           ; 直接跳过下面这串“数据”
+    db 0x55, 0x8B, 0xEC, 0x83, 0xEC, 0x10
+    ; 看上去像标准 prologue + 写入 0xDEADBEEF
+real_code:
+    ; 真正执行的代码从这里开始
+    mov eax, 1
+    ret
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果是线性扫描式反汇编（从某个起点地址开始，按地址递增顺序一条条解码指令），就会把db的这串数据解码，而这串数据的意义刚好是：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;55          push ebp
+8B EC       mov  ebp, esp
+83 EC 10    sub  esp, 0x10
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这就是一个函数前言，而许多反汇编器和函数识别器会用前言/后言模式来猜测“这里是不是函数的开头”&lt;/p&gt;
+&lt;p&gt;一旦在线扫过程中遇到类似&lt;code&gt;55 8B EC&lt;/code&gt;的序列，就倾向于标记为函数起点，并继续把后面字节当代码解下去，这就掉进陷阱了&lt;/p&gt;
+&lt;h4 id=&#34;attack-5&#34;&gt;attack
+&lt;/h4&gt;&lt;p&gt;他们欺骗了静态分析器，关我动态分析什么事？&lt;/p&gt;
+&lt;p&gt;攻击者可以利用二进制插桩工具来追踪程序的实际执行路径，运行程序后，所有从未被执行到的代码块都可以被认为是垃圾代码&lt;/p&gt;
+&lt;p&gt;这种方法需要尽可能多样的数据输入，来避免有所遗漏，所以也不是很有效，比较通常的还是人工分析&lt;/p&gt;
+&lt;h2 id=&#34;不透明谓词&#34;&gt;不透明谓词
+&lt;/h2&gt;&lt;p&gt;这是插入垃圾代码的升级版&lt;/p&gt;
+&lt;p&gt;不透明谓词是一种特殊的条件表达式，其结果在混淆时是确定的，但对于静态分析器来说却非常难推导&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$P^T$：一个永远为True的不透明谓词&lt;/li&gt;
+&lt;li&gt;$P^F$：一个永远为False的不透明谓词&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过使用不透明谓词作为分支条件，混淆器可以向程序的控制流图（CFG）中插入伪分支&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原始代码：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Block&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;A&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Block&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;B&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;使用 $P^T$ 混淆后：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Block&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;A&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;IF&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;P&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;GOTO&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Block&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;B&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;ELSE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;GOTO&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Block_B_Buggy&lt;/span&gt;  ; 这是一个包含垃圾代码的伪造块
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分析器会看到两个分支，但实际上只有&lt;code&gt;Block B&lt;/code&gt;永远会被执行，以此增加分析的负担&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251026203004768&#34; href=&#34;http://picture.928330.xyz/typora/image-20251026203004768.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251026203004768.png&#34; alt=&#34;image-20251026203004768&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;基于数学的谓词&#34;&gt;基于数学的谓词
+&lt;/h3&gt;&lt;h4 id=&#34;defend-6&#34;&gt;defend
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;这种方法的核心是利用一个数学恒等式或数论属性来构造一个条件表达式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个表达式在混淆时被设计为永远为真 ($P^T$) 或永远为假 ($P^F$​)，但其形式对于静态分析器或人类分析师来说并不直观&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个简单的$P^T$：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; ((&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;任何实整数的平方永远大于等于零，这对于分析器来说比较容易识别&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个高级的$P^T$：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; ((&lt;span style=&#34;color:#d19a66&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;x * 2&lt;/code&gt;总是偶数，&lt;code&gt;偶数 + 1&lt;/code&gt;总是奇数，任何奇数对2取模永远不等于0&lt;/p&gt;
+&lt;h4 id=&#34;attack-6&#34;&gt;attack
+&lt;/h4&gt;&lt;p&gt;可以使用SMT（satisfiability modulo theories，模理论可满足性）求解器，比如大名鼎鼎的Z3，将谓词喂进去，并询问是否存在一个x，使得该表达式为False，如果&lt;code&gt;Z3&lt;/code&gt;回答不可满足，则证明该谓词是 $P^T$&lt;/p&gt;
+&lt;p&gt;也可以在调试器中，使用不同的输入运行代码成千上万次，如果&lt;code&gt;if&lt;/code&gt;语句的&lt;code&gt;True&lt;/code&gt;分支每次都被命中，而&lt;code&gt;False&lt;/code&gt;分支被命中了0次，那么它有极高的概率是一个$P^T$，这种方法被称为动态探测，是更为廉价暴力的手段&lt;/p&gt;
+&lt;h3 id=&#34;基于环境的谓词&#34;&gt;基于环境的谓词
+&lt;/h3&gt;&lt;h4 id=&#34;defend-7&#34;&gt;defend
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;这种方法的核心是谓词的结果不依赖于程序内部的计算，而是依赖于外部环境的一个恒定状态&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;GetModuleHandleA&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;kernel32.dll&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;NULL&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;kernel32.dll&lt;/code&gt;是所有Windows用户模式进程的基础核心库，它必然已经被加载到进程空间中，因此，这个 API 调用永远不会返回&lt;code&gt;NULL&lt;/code&gt;，也就是说这个谓词在任何Windows进程中都是$P^T$​&lt;/p&gt;
+&lt;p&gt;而静态分析器不知道&lt;code&gt;GetModuleHandleA&lt;/code&gt;的返回值，它必须假设这个API既可能成功也可能失败，这会迫使分析器在控制流图中保留两个分支，而&lt;code&gt;False&lt;/code&gt;分支会是永远不会被执行的垃圾代码&lt;/p&gt;
+&lt;h4 id=&#34;attack-7&#34;&gt;attack
+&lt;/h4&gt;&lt;p&gt;可以使用hook或者patch来拦截这个API调用，当检测到输入是&lt;code&gt;&amp;quot;kernel32.dll&amp;quot;&lt;/code&gt;时，强行修改其返回值为&lt;code&gt;NULL&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;或者根据经验判断，通过谓词签名库匹配固定的环境谓词模式，然后标记它&lt;/p&gt;
+&lt;h3 id=&#34;基于指针别名的谓词&#34;&gt;基于指针别名的谓词
+&lt;/h3&gt;&lt;h4 id=&#34;defend-8&#34;&gt;defend
+&lt;/h4&gt;&lt;p&gt;这种方法的核心是利用指针别名（即两个或多个不同的指针变量指向了同一块内存地址）来构造谓词&lt;/p&gt;
+&lt;p&gt;比如现在有一个$P^T$:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;q&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;混淆器会通过两条表面上完全不同、但结果相同的复杂计算路径来分别初始化&lt;code&gt;p&lt;/code&gt;和&lt;code&gt;q&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;arr&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;20&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;int&lt;/span&gt;* &lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt; = &amp;amp;&lt;span style=&#34;color:#e06c75&#34;&gt;arr&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;]; (&lt;span style=&#34;color:#e06c75&#34;&gt;路径1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;int&lt;/span&gt;* &lt;span style=&#34;color:#e06c75&#34;&gt;q&lt;/span&gt; = &amp;amp;&lt;span style=&#34;color:#e06c75&#34;&gt;arr&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;]; (&lt;span style=&#34;color:#e06c75&#34;&gt;路径2&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;开始&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;// ... (插入 50 行垃圾指令) ...
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;q&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;q&lt;/span&gt; + &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;; (&lt;span style=&#34;color:#e06c75&#34;&gt;路径2&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;继续&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;// ... (插入 50 行垃圾指令) ...
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;q&lt;/span&gt; = &lt;span style=&#34;color:#e06c75&#34;&gt;q&lt;/span&gt; + &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;; (&lt;span style=&#34;color:#e06c75&#34;&gt;路径2&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;结束&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;q&lt;/span&gt;) { &lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;. } (&lt;span style=&#34;color:#e06c75&#34;&gt;恒为真&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;静态分析器很难在数百行垃圾指令的干扰下，静态地跟踪&lt;code&gt;q&lt;/code&gt;的值并推导出&lt;code&gt;&amp;amp;arr[0] + 5 + 5&lt;/code&gt;等于&lt;code&gt;&amp;amp;arr[10]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;因此，它必须假设&lt;code&gt;p == q&lt;/code&gt;和&lt;code&gt;p != q&lt;/code&gt;两种情况都可能发生&lt;/p&gt;
+&lt;h4 id=&#34;attack-8&#34;&gt;attack
+&lt;/h4&gt;&lt;p&gt;使用代码切片技术，从&lt;code&gt;if (p == q)&lt;/code&gt;开始向上回溯代码，只提取那些对&lt;code&gt;p&lt;/code&gt;或&lt;code&gt;q&lt;/code&gt;的值有影响的指令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;p&lt;/code&gt;的切片可能是：&lt;code&gt;mov eax, OFFSET arr; add eax, 40; mov p, eax&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt;的切片可能是：&lt;code&gt;mov ebx, OFFSET arr; add ebx, 20; add ebx, 20; mov q, ebx&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结果就是所有的垃圾指令都被过滤掉了，通过这个简化的切片，可以轻而易举地看出&lt;code&gt;p&lt;/code&gt;和&lt;code&gt;q&lt;/code&gt;相等&lt;/p&gt;
+&lt;p&gt;另外，就上例来说，静态分析工具也可以将arr的基址看做是一个符号，然后顺着指令分析，但不做运算，得到最后的表达式，再喂给SMT求解器他们结果是否相等&lt;/p&gt;
+&lt;h2 id=&#34;破坏代码局部性&#34;&gt;破坏代码局部性
+&lt;/h2&gt;&lt;h3 id=&#34;defend-9&#34;&gt;defend
+&lt;/h3&gt;&lt;h4 id=&#34;跳转重排&#34;&gt;跳转重排
+&lt;/h4&gt;&lt;p&gt;通过向基本块中引入无意义的&lt;code&gt;JMP&lt;/code&gt;指令，将原本在逻辑上和物理上都连续的代码块打散，破坏其局部性&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原始代码：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;start:
+    push offset caption
+    push 0
+    push offset digtxt
+    call MessageBoxA
+    ...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;混淆后：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;start:
+    push 0
+    jmp instr_1
+instr_2:
+    call MessageBoxA
+    jmp instr_5
+instr_3:
+    push 0
+    jmp instr_2
+instr_4:
+    push offset digtxt
+    jmp instr_3
+instr_1:
+    push offset caption
+    jmp instr_4
+instr_5:
+    ...
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;函数内联与外联&#34;&gt;函数内联与外联
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;函数内联 (Inlining)&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;将子函数$P$的代码直接合并到调用者$Q$的代码中，如果$P$被多次调用，会导致代码体积显著膨胀&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;函数外联 (Outlining)&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;将函数$Q$中任意一段代码（特别是逻辑上不相关的部分）提取出来，构成一个新的函数$R$，然后在$Q$​​​的原位置替换为一个&lt;code&gt;CALL R&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;基本块重排&#34;&gt;基本块重排
+&lt;/h4&gt;&lt;p&gt;将一个函数的所有基本块打乱，并在物理上随机散布到程序的&lt;code&gt;.text&lt;/code&gt;段中，甚至插入到其他函数的缝隙中，然后通过&lt;code&gt;JMP&lt;/code&gt;将它们重新链接起来&lt;/p&gt;
+&lt;h4 id=&#34;函数克隆&#34;&gt;函数克隆
+&lt;/h4&gt;&lt;p&gt;复制一个函数$f$，得到 $f&amp;rsquo;$，他们的的功能完全一样，但可能使用了不同的指令模板（也就是基于模式的混淆）&lt;/p&gt;
+&lt;p&gt;混淆器将程序中一半对$f$的调用替换为对 $f&amp;rsquo;$的调用，迫使攻击者浪费一倍的时间去分析两个不同的函数，最后才发现它们是等价的&lt;/p&gt;
+&lt;h3 id=&#34;attack-9&#34;&gt;attack
+&lt;/h3&gt;&lt;p&gt;实际上，破坏代码局部性只能对人工分析造成较大阻碍&lt;/p&gt;
+&lt;p&gt;分析工具都不应该关心基本块的物理位置，只应该关心它们之间的逻辑关系，通过跟随这些跳转，可以100%还原出原始的控制流图，这就让前面三种混淆完全无效了，相信用过IDA的一定能体会到这种图的便利&lt;/p&gt;
+&lt;p&gt;而对抗函数克隆，可以使用模糊哈希，这些工具比较两个函数的的CFG结构、常量、API调用等，如果相似度极高，就可以判定它们是克隆函数&lt;/p&gt;
+&lt;h2 id=&#34;控制流间接化&#34;&gt;控制流间接化
+&lt;/h2&gt;&lt;h3 id=&#34;defend-10&#34;&gt;defend
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;使用动态计算的分支地址，或者模拟&lt;code&gt;JMP&lt;/code&gt;和&lt;code&gt;CALL&lt;/code&gt;指令，来隐藏真实的控制流&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg1：使用&lt;code&gt;RET&lt;/code&gt;模拟&lt;code&gt;JMP&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;JMP &amp;lt;target&amp;gt;&lt;/code&gt;可以被等价替换为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;PUSH &amp;lt;target&amp;gt;     ;
+RET               ;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这会打破静态分析器“&lt;code&gt;RET&lt;/code&gt;代表函数返回”的假设&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg：：使用&lt;code&gt;CALL&lt;/code&gt;模拟&lt;code&gt;JMP&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;    CALL real_code      ;
+    ; --- 垃圾代码 ---   
+    ...
+real_code:
+    ADD ESP, 4          ;
+    ; --- 真正的有效代码 ---
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里的&lt;code&gt;CALL&lt;/code&gt;只是起到了&lt;code&gt;PUSH &amp;lt;返回地址&amp;gt;&lt;/code&gt;和&lt;code&gt;JMP real_code&lt;/code&gt;的作用&lt;/p&gt;
+&lt;p&gt;而&lt;code&gt;real_code&lt;/code&gt;开头的&lt;code&gt;ADD ESP, 4&lt;/code&gt;则抛弃了压入栈的返回地址（垃圾代码的地址），从而实现了&lt;code&gt;JMP&lt;/code&gt;的效果&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg3：修改栈上的返回地址&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;    CALL FunctionA      ;
+original_ret_addr:
+    ; --- 垃圾代码 ---   
+actual_ret_addr:
+    NOP                 ;
+    ; --- 真正的有效代码 ---
+    ...
+
+FunctionA:
+    ; 假设垃圾代码长度为 9 字节
+    ADD DWORD PTR [ESP], 9 ; 关键！修改栈顶的返回地址
+    RET                 ;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;CALL FunctionA&lt;/code&gt;时，压入栈的返回地址是&lt;code&gt;original_ret_addr&lt;/code&gt;，但&lt;code&gt;FunctionA&lt;/code&gt;内部通过&lt;code&gt;[ESP]&lt;/code&gt;（即指向返回地址的指针）修改了它，将其改为了&lt;code&gt;actual_ret_addr&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其实也就是上一种的变种&lt;/p&gt;
+&lt;h3 id=&#34;attack-10&#34;&gt;attack
+&lt;/h3&gt;&lt;p&gt;对于&lt;code&gt;PUSH &amp;lt;target&amp;gt;; RET&lt;/code&gt;，IDA等现代工具已经可以很好地识别&lt;/p&gt;
+&lt;p&gt;它们会分析&lt;code&gt;RET&lt;/code&gt;指令时&lt;code&gt;ESP&lt;/code&gt;指向的值，如果它不是一个&lt;code&gt;CALL&lt;/code&gt;指令的返回地址，而是一个&lt;code&gt;PUSH&lt;/code&gt;压入的常量，IDA会自动将其标记为&lt;code&gt;JMP&lt;/code&gt;（显示为&lt;code&gt;retn_0&lt;/code&gt;并添加注释）&lt;/p&gt;
+&lt;h2 id=&#34;控制流图扁平化&#34;&gt;控制流图扁平化
+&lt;/h2&gt;&lt;h3 id=&#34;defend-11&#34;&gt;defend
+&lt;/h3&gt;&lt;p&gt;这是最复杂的控制流混淆技术之一&lt;/p&gt;
+&lt;p&gt;它将一个函数内所有控制结构（如 &lt;code&gt;if-else&lt;/code&gt;、&lt;code&gt;while&lt;/code&gt;、&lt;code&gt;for&lt;/code&gt;）全部“拍平”，用一个单一的分发器结构来替代&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分发器&lt;/strong&gt;：这通常是一个巨大的&lt;code&gt;switch&lt;/code&gt;结构&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;状态变量&lt;/strong&gt;：引入一个 &lt;code&gt;swVar&lt;/code&gt; 变量&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;代码块拆分&lt;/strong&gt;：原始函数的所有基本块被拆分，并放入&lt;code&gt;switch&lt;/code&gt;的不同&lt;code&gt;case&lt;/code&gt;中&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;每个基本块的末尾不再是&lt;code&gt;JMP&lt;/code&gt;或&lt;code&gt;JZ&lt;/code&gt;，而是负责更新&lt;code&gt;swVar&lt;/code&gt;，将其设置为下一个应该执行的基本块的 ID&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eg：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原始代码：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;--&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;use&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251026203050831&#34; href=&#34;http://picture.928330.xyz/typora/image-20251026203050831.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251026203050831.png&#34; alt=&#34;image-20251026203050831&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CFG扁平化混淆后 (伪代码)：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 状态变量，初始为 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;goto&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dispatcher&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;dispatcher&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;switch&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;// 对应原始的 S1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 下一个去 S2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;goto&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dispatcher&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;// 对应原始的 S2 (while)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#56b6c2&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// (while 循环结束，去 S6)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// (while 循环体，去 S3)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;goto&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dispatcher&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;// 对应原始的 S3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#56b6c2&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// (if 为 false，去 S5)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// (if 为 true，去 S4)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;goto&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dispatcher&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;// 对应原始的 S4 (if-true)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 回到 S2 (while 头部)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;goto&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dispatcher&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;// 对应原始的 S5 (if-false)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;--&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 回到 S2 (while 头部)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;goto&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dispatcher&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#7f848e&#34;&gt;// 对应原始的 S6 (use(b))
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;use&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;break&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// 结束
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251026203105731&#34; href=&#34;http://picture.928330.xyz/typora/image-20251026203105731.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251026203105731.png&#34; alt=&#34;image-20251026203105731&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;这种混淆彻底摧毁了原始的&lt;code&gt;while&lt;/code&gt;和&lt;code&gt;if&lt;/code&gt;逻辑结构，静态分析器和攻击者只能看到一堆基本块和一个&lt;code&gt;switch&lt;/code&gt;，基本块之间的逻辑关系被隐藏在对&lt;code&gt;swVar&lt;/code&gt;的控制操作中&lt;/p&gt;
+&lt;p&gt;更有甚者，&lt;code&gt;swVar&lt;/code&gt;的更新不再是简单的赋值，它可能是一个复杂的MBA表达式，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;swVar&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; ((&lt;span style=&#34;color:#e06c75&#34;&gt;swVar_old&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0xABCDEF&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0x123456&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0xDEADBEEF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;同时，&lt;code&gt;case&lt;/code&gt;标签也不是&lt;code&gt;1,2,3...&lt;/code&gt;，而是&lt;code&gt;0xABC, 0xDEF, 0x123...&lt;/code&gt;，这使得分析师必须先逆向出状态转换函数，才能重建CFG&lt;/p&gt;
+&lt;h3 id=&#34;attack-11&#34;&gt;attack
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;进行静态CFG重建：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定位分发器&lt;code&gt;switch&lt;/code&gt;和状态变量&lt;code&gt;swVar&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;分析每个&lt;code&gt;case&lt;/code&gt;块&lt;/li&gt;
+&lt;li&gt;忽略块内的所有业务逻辑，只看块末尾对&lt;code&gt;swVar&lt;/code&gt;的写入&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;case 3:&lt;/code&gt; &amp;hellip; &lt;code&gt;swVar = 4;&lt;/code&gt;这条指令就是一条从&lt;code&gt;Block 3&lt;/code&gt;到&lt;code&gt;Block 4&lt;/code&gt;的有向边&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;case 2:&lt;/code&gt; &amp;hellip; &lt;code&gt;if (cond) swVar = 6; else swVar = 3;&lt;/code&gt;这是从&lt;code&gt;Block 2&lt;/code&gt;出发的两条边，分别指向&lt;code&gt;Block 6&lt;/code&gt;和&lt;code&gt;Block 3&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过这个方法，可以100%自动化地重建原始的CFG&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>美亚杯2024个人赛取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Wed, 22 Oct 2025 14:30:45 +0800</pubDate>
@@ -814,8 +1465,8 @@
 &lt;p&gt;根据聊天记录，可以发现这话之间明显是不连贯的，应该是recovery的内容：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235701595&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png&#34; alt=&#34;image-20251017235701595&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235701595&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017235701595.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017235701595.png&#34; alt=&#34;image-20251017235701595&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1060,8 +1711,8 @@
 &lt;p&gt;这里使用MFT brower软件，它可以直接识别磁盘镜像中NTFS的结构：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019124315945&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png&#34; alt=&#34;image-20251019124315945&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019124315945&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019124315945.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019124315945.png&#34; alt=&#34;image-20251019124315945&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1297,8 +1948,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;在hex视图改掉这个值：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018214341186&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png&#34; alt=&#34;image-20251018214341186&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018214341186&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018214341186.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018214341186.png&#34; alt=&#34;image-20251018214341186&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1442,16 +2093,16 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;连接过的wifi只有一个：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004748962&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png&#34; alt=&#34;image-20251019004748962&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004748962&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019004748962.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019004748962.png&#34; alt=&#34;image-20251019004748962&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;p&gt;在wifi连接记录里面能看到的都是同一个wifi，网络适配器、网卡guid等都是一样的：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004638268&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png&#34; alt=&#34;image-20251019004638268&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004638268&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019004638268.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019004638268.png&#34; alt=&#34;image-20251019004638268&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1466,8 +2117,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;D. 2024-08-01 14:43:55 UTC+8&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005152484&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png&#34; alt=&#34;image-20251019005152484&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005152484&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019005152484.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019005152484.png&#34; alt=&#34;image-20251019005152484&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1484,8 +2135,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;D. blockchain.com&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005537464&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png&#34; alt=&#34;image-20251019005537464&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005537464&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019005537464.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019005537464.png&#34; alt=&#34;image-20251019005537464&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1504,8 +2155,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;看Clara的聊天记录：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005658240&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png&#34; alt=&#34;image-20251019005658240&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005658240&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019005658240.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019005658240.png&#34; alt=&#34;image-20251019005658240&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1561,7 +2212,28 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;C. 0x59eb2c55eefdd4d8af2886c9fd8fc6f465c3e220&lt;/p&gt;
 &lt;p&gt;D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042&lt;/p&gt;
 &lt;p&gt;不知道怎么写，可能要联网，但是比赛又不让联网，很奇怪了&lt;/p&gt;
-&lt;h2 id=&#34;98根据-idfc-的交易记录作分析-总共有多少次-idfc-交易流入地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c&#34;&gt;98.根据 IDFC 的交易记录作分析, 总共有多少次 IDFC 交易流入地址 0x10a4f01b80203591ccee76081a4489ae1cd1281c?
+&lt;p&gt;*&lt;strong&gt;原来是老考点了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在线计算address网址：https://iancoleman.io/bip39/&lt;/p&gt;
+&lt;p&gt;github离线项目地址：https://github.com/iancoleman/bip39&lt;/p&gt;
+&lt;p&gt;需要输入助记符，以及设置钱币类型（这个类型是在Emma还是David设备里面能找到，我不太清楚）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;stock avocado grab clay light sadness segment ancient toe talk elder oil
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251023133402995&#34; href=&#34;http://picture.928330.xyz/typora/image-20251023133402995.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251023133402995.png&#34; alt=&#34;image-20251023133402995&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;导出的地址能看见ABC三个选项：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251023133645021&#34; href=&#34;http://picture.928330.xyz/typora/image-20251023133645021.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251023133645021.png&#34; alt=&#34;image-20251023133645021&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ABC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;98根据-idfc-的交易记录作分析-总共有多少次-idfc-交易流入地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c&#34;&gt;98.根据 IDFC 的交易记录作分析, 总共有多少次 IDFC 交易流入地址 0x10a4f01b80203591ccee76081a4489ae1cd1281c?
 &lt;/h2&gt;&lt;p&gt;A. 0&lt;/p&gt;
 &lt;p&gt;B. 1&lt;/p&gt;
 &lt;p&gt;C. 2&lt;/p&gt;
@@ -1589,49 +2261,72 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;图里面有个单词被遮挡了，不过看起来虽然和BC很像，但又不太可能是，猜一个吧&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;错了&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;居然要在内存里面暴力搜索，这完全没提示啊&lt;/p&gt;
+&lt;p&gt;居然要在内存镜像里面暴力搜索，这完全没提示啊&lt;/p&gt;
+&lt;p&gt;内存镜像检材已经删了，先给出答案吧，能搜出来下面这些助记词：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;infant fragile garlic bracket stove blade stick dove aerobic spin term educate
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;ufs导出bitlocker加密盘&#34;&gt;UFS导出bitlocker加密盘
+&lt;/h3&gt;&lt;p&gt;做题过程中尝试的一种方法，虽然应该没什么用，但有必要记录一下&lt;/p&gt;
+&lt;p&gt;首先把包含加密分区的镜像导入UFS，右键加密分区，选择解密：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162838049&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png&#34; alt=&#34;image-20251022162838049&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162838049&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022162838049.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022162838049.png&#34; alt=&#34;image-20251022162838049&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;接下来有两个选项：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User password (用户密码):&lt;/strong&gt; 启用BitLocker时为该驱动器设置的解锁密码&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Recovery Key (恢复密钥):&lt;/strong&gt; 48位的数字密钥，在启用BitLocker时会自动生成&lt;/p&gt;
+&lt;p&gt;这里我们拿到的是恢复秘钥：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162857838&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png&#34; alt=&#34;image-20251022162857838&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162857838&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022162857838.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022162857838.png&#34; alt=&#34;image-20251022162857838&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;解密成功之后，会得到一个新的磁盘，右键另存：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163222740&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png&#34; alt=&#34;image-20251022163222740&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163222740&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022163222740.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022163222740.png&#34; alt=&#34;image-20251022163222740&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;选择镜像制作方式，推荐bit2bit：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163242554&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png&#34; alt=&#34;image-20251022163242554&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163242554&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022163242554.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022163242554.png&#34; alt=&#34;image-20251022163242554&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;选择保存位置，其余选项可以不用动，点击start：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163525402&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png&#34; alt=&#34;image-20251022163525402&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163525402&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022163525402.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022163525402.png&#34; alt=&#34;image-20251022163525402&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;这样就得到了解密后的分区的&lt;code&gt;.dsk&lt;/code&gt;文件&lt;/p&gt;
 &lt;h2 id=&#34;100-在-idfc-的交易记录中-下列哪些地址由上述恢复短语所生成&#34;&gt;100. 在 IDFC 的交易记录中, 下列哪些地址由上述恢复短语所生成?
 &lt;/h2&gt;&lt;p&gt;A. 0xb2e3dbea311511ec5bda3e85e061f15366f888a6&lt;/p&gt;
 &lt;p&gt;B. 0xe90ad3f80e39e83b533eef3ed23c641ec51089c6&lt;/p&gt;
 &lt;p&gt;C. 0x90f73497E4446f6Cf9881213C32D6af66d799fE5&lt;/p&gt;
 &lt;p&gt;D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042&lt;/p&gt;
 &lt;p&gt;同样不知道怎么写&lt;/p&gt;
-</description>
+&lt;p&gt;*&lt;strong&gt;做法同98题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251023134157060&#34; href=&#34;http://picture.928330.xyz/typora/image-20251023134157060.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251023134157060.png&#34; alt=&#34;image-20251023134157060&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CD
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
         <title>RAID与它的重组</title>
@@ -1640,6 +2335,17 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
         
         <guid>https://blog.928330.xyz/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/</guid>
         <description>&lt;img src="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg" alt="Featured image of post RAID与它的重组" /&gt;&lt;p&gt;取证常考知识点，不得不品的一环啊&lt;/p&gt;
+&lt;p&gt;如果对磁盘存储这些的概念不是很熟悉，建议看看：&lt;a class=&#34;link&#34; href=&#34;https://blog.928330.xyz/p/%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%9C%E8%A5%BF/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;磁盘相关的东西
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;参考资料：&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zh.wikipedia.org/wiki/RAID&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;RAID&amp;ndash;维基百科
@@ -8557,9 +9263,9 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dd &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/dev/sda &lt;span style=&#34;color:#e06c75&#34;&gt;of&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;image.dd &lt;span style=&#34;color:#e06c75&#34;&gt;bs&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;4M &lt;span style=&#34;color:#e06c75&#34;&gt;conv&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;noerror,sync
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;意思是把整块硬盘&lt;code&gt;/dev/sda&lt;/code&gt;按照4MB为单位复制到&lt;code&gt;image.dd&lt;/code&gt;文件里，如果遇到坏扇区，不报错不中止，而是用0填充，保证镜像完整且和原盘大小一致&lt;/p&gt;
 &lt;p&gt;几乎所有主流取证工具都支持创建和导出为&lt;code&gt;.dd&lt;/code&gt;，非常的常见&lt;/p&gt;
-&lt;h4 id=&#34;img--raw--bin&#34;&gt;.img / .raw / .bin
-&lt;/h4&gt;&lt;p&gt;这些都是描述性的扩展名，&lt;code&gt;img&lt;/code&gt;代表 &amp;ldquo;镜像&amp;rdquo;，&lt;code&gt;raw&lt;/code&gt;代表 &amp;ldquo;原始&amp;rdquo;，&lt;code&gt;bin&lt;/code&gt;代表 &amp;ldquo;二进制文件&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;它们在功能和结构上与&lt;code&gt;.dd&lt;/code&gt;文件完全相同，都是指原始的、逐位的副本，只是使用场景和工具不同叫法也不同&lt;/p&gt;
+&lt;h4 id=&#34;img--raw--bin--dsk-等等&#34;&gt;.img / .raw / .bin / .dsk 等等
+&lt;/h4&gt;&lt;p&gt;这些都是描述性的扩展名，&lt;code&gt;img&lt;/code&gt;代表&amp;quot;镜像&amp;quot;，&lt;code&gt;raw&lt;/code&gt;代表&amp;quot;原始&amp;quot;，&lt;code&gt;bin&lt;/code&gt;代表&amp;quot;二进制文件&amp;quot;，&lt;code&gt;.dsk&lt;/code&gt;则是&amp;quot;磁盘镜像&amp;quot;&lt;/p&gt;
+&lt;p&gt;它们在功能和结构上与&lt;code&gt;.dd&lt;/code&gt;文件完全相同，都是指原始逐位的副本，只是使用场景和工具不同叫法不同罢了，后缀名完全不影响分析（不过有些软件还是会限制扩展名，尽管扩展名并未对数据造成任何修改）&lt;/p&gt;
 &lt;p&gt;这些扩展名实际能用于很多场景，遇见了不确定的话就一个个尝试吧，能分析出来就行&lt;/p&gt;
 &lt;h3 id=&#34;封装镜像&#34;&gt;封装镜像
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;本质上也包含了原始磁盘或分区的bit-by-bit数据，但是采用了封装数据 + 元数据（采集者、采集时间、硬盘序列号、哈希值）的形式&lt;/strong&gt;&lt;/p&gt;
@@ -8567,7 +9273,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;h4 id=&#34;e01-ex01&#34;&gt;.E01, .Ex01
 &lt;/h4&gt;&lt;p&gt;由EnCase Forensic开发的证据文件格式，已成为事实上的行业标准，也就是说法庭认可度最高！&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;.Ex01&lt;/code&gt;是其更新的“专家见证”格式，支持更强的AES-256加密和更大的文件大小&lt;/p&gt;
-&lt;p&gt;它主要通过EnCase Forensic软件制作，同时，绝大多数第三方取证工具也都支持直接采集为 &lt;code&gt;.E01&lt;/code&gt; 格式以保证兼容性&lt;/p&gt;
+&lt;p&gt;它主要通过EnCase Forensic软件制作，同时，绝大多数第三方取证工具也都支持直接采集为&lt;code&gt;.E01&lt;/code&gt;格式以保证兼容性&lt;/p&gt;
+&lt;p&gt;想要查看里面具体信息，可以在Xways中创建案例，添加检材之后右键看属性&lt;/p&gt;
 &lt;h4 id=&#34;aff--aff4af4&#34;&gt;.aff / .aff4(.af4)
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.aff&lt;/code&gt;，全称是高级取证格式 (Advanced Forensic Format)&lt;/strong&gt;，它是一个开源项目，旨在克服&lt;code&gt;.dd&lt;/code&gt;格式无元数据和&lt;code&gt;.E01&lt;/code&gt;格式专有的缺点&lt;/p&gt;
 &lt;p&gt;而&lt;code&gt;.aff4&lt;/code&gt;是&lt;code&gt;.aff&lt;/code&gt;的第四代版本，是一个经过大幅重新设计的格式，可以存储多种数据流，包括磁盘映像、内存映像、逻辑文件，甚至是网络流量，也被简写成&lt;code&gt;.af4&lt;/code&gt;&lt;/p&gt;
@@ -8580,6 +9287,7 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;当单个大镜像被分割存储时，会看到一组序列文件：&lt;/p&gt;
 &lt;p&gt;可能是&lt;code&gt;disk_part1.dd&lt;/code&gt;、&lt;code&gt;disk_part2.dd&lt;/code&gt;、 &lt;code&gt;disk_part3.dd&lt;/code&gt;这样的原始文件分卷&lt;/p&gt;
 &lt;p&gt;也能是&lt;code&gt;case.E01&lt;/code&gt;、&lt;code&gt;case.E02&lt;/code&gt;、&lt;code&gt;case.E03&lt;/code&gt;，或者&lt;code&gt;case001.E01&lt;/code&gt;、&lt;code&gt;case002.E01&lt;/code&gt;、&lt;code&gt;case003.E01&lt;/code&gt;这样的封装镜像分卷&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;比较特殊的是，使用通用文件分割工具（如WinRAR、7-Zip等）处理原始镜像生成的分片镜像会以数字作为后缀名，比如&lt;code&gt;.001&lt;/code&gt;、&lt;code&gt;.002&lt;/code&gt;这样的序列&lt;/strong&gt;，看成是&lt;code&gt;.dd&lt;/code&gt;这样的另一种表达方式就行了&lt;/p&gt;
 &lt;p&gt;它们必须放在一起才能被完整加载，也就是之前提到的“多镜像文件”这一栏&lt;/p&gt;
 &lt;h2 id=&#34;物理磁盘与磁盘阵列&#34;&gt;物理磁盘与磁盘阵列
 &lt;/h2&gt;&lt;h3 id=&#34;物理磁盘&#34;&gt;物理磁盘
@@ -8588,8 +9296,19 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;也有可能是使用FTK等工具挂载镜像成为系统盘&lt;/p&gt;
 &lt;h3 id=&#34;磁盘阵列-raid&#34;&gt;磁盘阵列 (RAID)
 &lt;/h3&gt;&lt;p&gt;RAID（Redundant Array of Independent/Inexpensive Disks，独立冗余磁盘阵列）是一种将多块物理磁盘组合成一个逻辑磁盘的技术，用于提升容错能力，抗数据丢失&lt;/p&gt;
-&lt;p&gt;遇到这类检材，一般是考察RAID的磁盘重组，也就是把分散的块组合成可以&lt;/p&gt;
+&lt;p&gt;遇到这类检材，一般是考察RAID的磁盘重组，也就是把分散的块组合成可以访问的正常存储空间&lt;/p&gt;
 &lt;p&gt;这部分内容有点多，后面单开一篇学习&lt;/p&gt;
+&lt;p&gt;移步：&lt;a class=&#34;link&#34; href=&#34;https://blog.928330.xyz/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;RAID与它的重组
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;逻辑镜像&#34;&gt;逻辑镜像
 &lt;/h1&gt;&lt;p&gt;与获取整个磁盘不同，这类检材只包含从源系统中选择性提取的部分数据（特定文件和文件夹）&lt;/p&gt;
 &lt;h2 id=&#34;l01--lx01&#34;&gt;.L01 / .Lx01
@@ -8599,15 +9318,18 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;/h2&gt;&lt;p&gt;嗯，就是之前提到过的那个&lt;/p&gt;
 &lt;p&gt;使用FTK软件时，选择获取逻辑证据，然后添加特定的文件/文件夹就能创建&lt;code&gt;.ad1&lt;/code&gt;文件&lt;/p&gt;
 &lt;h2 id=&#34;zip--tar--rar&#34;&gt;.zip / .tar / .rar
-&lt;/h2&gt;&lt;p&gt;其实就是手动打包一系列要分析的文件，不使用专业软件而已&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;其实就是手动打包一系列要分析的文件，不使用专业软件制作而已&lt;/p&gt;
+&lt;p&gt;不过要注意有的时候压缩包内的只是分类的文件集合（比如24年美亚杯），还是需要自己手动查看&lt;/p&gt;
+&lt;p&gt;如果是零散的文件，专业软件无法正常处理，可以尝试使用开源的autopsy进行初步的分析&lt;/p&gt;
 &lt;h1 id=&#34;系统备份&#34;&gt;系统备份
 &lt;/h1&gt;&lt;h2 id=&#34;tib--tibx&#34;&gt;.tib / .tibx
 &lt;/h2&gt;&lt;p&gt;由Acronis True Image软件创建的备份镜像格式&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;.tib&lt;/code&gt;是旧版格式，而&lt;code&gt;.tibx&lt;/code&gt;是较新版本引入的格式，提供了更强的性能和可靠性&lt;/p&gt;
 &lt;p&gt;这类文件包含了整个磁盘或分区的完整快照，可以通过Acronis软件进行恢复或挂载浏览&lt;/p&gt;
-&lt;h2 id=&#34;gho&#34;&gt;.gho
+&lt;h2 id=&#34;gho--s01&#34;&gt;.gho &amp;amp; .s01
 &lt;/h2&gt;&lt;p&gt;来自Symantec Ghost软件的磁盘克隆镜像&lt;/p&gt;
 &lt;p&gt;在21世纪初非常流行，现在虽然少见，但在一些旧的系统备份中仍可能遇到&lt;/p&gt;
+&lt;p&gt;当Ghost镜像被分割存储时，它会生成一个主&lt;code&gt;.gho&lt;/code&gt;文件和一系列&lt;code&gt;.s01&lt;/code&gt;、&lt;code&gt;.s02&lt;/code&gt;&amp;hellip; 的分卷文件&lt;/p&gt;
 &lt;h2 id=&#34;bkf&#34;&gt;.bkf
 &lt;/h2&gt;&lt;p&gt;由旧版Windows（如 XP, Server 2003）自带的NTBackup工具创建的备份文件&lt;/p&gt;
 &lt;p&gt;它主要用于备份文件和系统状态，而不是完整的磁盘镜像&lt;/p&gt;
@@ -8638,13 +9360,20 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;主要通过&lt;code&gt;qemu-img&lt;/code&gt;命令行工具创建，比如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img create -f qcow2 image.qcow2 20G
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;意思是创建一个大小为20GB、格式为qcow2的虚拟磁盘文件&lt;code&gt;image.qcow2&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;iso&#34;&gt;.iso
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.iso&lt;/code&gt;是光盘（CD/DVD/Blu-ray）的标准镜像格式&lt;/strong&gt;，它包含了光盘的完整文件系统&lt;/p&gt;
+&lt;p&gt;不过火眼似乎对&lt;code&gt;.iso&lt;/code&gt;的直接解析不太支持&lt;/p&gt;
 &lt;h2 id=&#34;dmg--sparseimage&#34;&gt;.dmg / .sparseimage
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.dmg&lt;/code&gt;全称Apple Disk Image&lt;/strong&gt;，是macOS下标准的磁盘映像格式，用于软件分发和数据归档，类似于Windows下的ISO（不过ISO没办法被火眼解析，真是很奇怪了）&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.dmg&lt;/code&gt;全称Apple Disk Image&lt;/strong&gt;，是macOS下标准的磁盘映像格式，用于软件分发和数据归档，就类似于Windows下的&lt;code&gt;.iso&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;**&lt;code&gt;.sparseimage&lt;/code&gt;**是&lt;code&gt;.dmg&lt;/code&gt;的一种稀疏捆绑磁盘映像，它的特点是文件大小会根据实际存储数据的增多而动态增长，而不是一开始就占用全部分配空间，非常节省存储，类似growable的&lt;code&gt;.vmdk&lt;/code&gt;文件&lt;/p&gt;
 &lt;p&gt;这两种格式都是通过macOS系统自带的磁盘工具应用程序创建&lt;/p&gt;
-&lt;h2 id=&#34;zvhd2&#34;&gt;.zvhd2
-&lt;/h2&gt;&lt;p&gt;这是Parallels Desktop虚拟机软件使用的专有虚拟磁盘格式&lt;/p&gt;
-&lt;p&gt;Parallels是一款在macOS上运行Windows和其他操作系统的流行软件，虚拟机硬盘会以&lt;code&gt;.zvhd2&lt;/code&gt;格式存储&lt;/p&gt;
+&lt;h2 id=&#34;hdd--hds--zvhd2&#34;&gt;.hdd / .hds / .zvhd2
+&lt;/h2&gt;&lt;p&gt;这些都是Parallels Desktop虚拟机软件使用的虚拟磁盘格式&lt;/p&gt;
+&lt;p&gt;Parallels是一款在macOS上运行Windows和其他操作系统的流行软件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;.hdd&lt;/code&gt;&lt;/strong&gt;：是Parallels较早版本使用的格式，它本身是一个包，内部可能包含&lt;code&gt;.hds&lt;/code&gt;磁盘分片文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;.zvhd2&lt;/code&gt;&lt;/strong&gt;：是较新版本Parallels使用的专有虚拟磁盘格式，性能和压缩更好&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;xva&#34;&gt;.xva
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;全称Xen Virtual Appliance&lt;/strong&gt;，是Citrix XenServer/XCP-ng虚拟化平台的虚拟机导出格式&lt;/p&gt;
 &lt;p&gt;它不仅仅是一个磁盘镜像，而是一个包含了虚拟机完整配置（CPU、内存、网络）和所有虚拟磁盘（VHD格式）的归档包（实际上是一个TAR归档文件），用于虚拟机的备份和迁移&lt;/p&gt;

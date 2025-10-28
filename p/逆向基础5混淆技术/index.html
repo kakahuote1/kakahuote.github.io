@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="linux的可执行文件格式">
-<title>逆向基础3：ELF文件</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代码变得难看了">
+<title>逆向基础5：混淆技术</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/'>
+<link rel='canonical' href='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="逆向基础3：ELF文件">
-<meta property='og:description' content="linux的可执行文件格式">
-<meta property='og:url' content='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/'>
+<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="逆向基础5：混淆技术">
+<meta property='og:description' content="代码变得难看了">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-11T09:45:23&#43;08:00'/><meta property='article:modified_time' content='2025-10-13T01:17:05&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg' />
-<meta name="twitter:title" content="逆向基础3：ELF文件">
-<meta name="twitter:description" content="linux的可执行文件格式"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-26T19:56:22&#43;08:00'/><meta property='article:modified_time' content='2025-10-28T14:13:53&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg' />
+<meta name="twitter:title" content="逆向基础5：混淆技术">
+<meta name="twitter:description" content="代码变得难看了"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -376,74 +376,110 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#三种形态">三种形态</a>
+    <li><a href="#混淆的基本原理">混淆的基本原理</a>
       <ol>
-        <li><a href="#可重定位文件o">可重定位文件（.o）</a></li>
-        <li><a href="#可执行文件">可执行文件</a></li>
-        <li><a href="#共享对象文件-so">共享对象文件 （.so）</a></li>
+        <li><a href="#混淆是什么">混淆是什么？</a></li>
+        <li><a href="#理论上的安全性">理论上的安全性</a></li>
+        <li><a href="#现状与应用">现状与应用</a></li>
       </ol>
     </li>
-    <li><a href="#链接与执行">链接与执行</a>
+    <li><a href="#数据混淆">数据混淆</a>
       <ol>
-        <li><a href="#链接视图">链接视图</a></li>
-        <li><a href="#执行视图">执行视图</a></li>
-      </ol>
-    </li>
-    <li><a href="#elf文件核心结构">ELF文件核心结构</a>
-      <ol>
-        <li><a href="#elf头">ELF头</a></li>
-        <li><a href="#节头表与重要节区">节头表与重要节区</a></li>
-        <li><a href="#程序头表与段">程序头表与段</a></li>
-        <li><a href="#节与段到底是什么啊">节与段到底是什么啊</a>
+        <li><a href="#常量展开">常量展开</a>
           <ol>
-            <li><a href="#节">节</a></li>
-            <li><a href="#段">段</a></li>
-            <li><a href="#如此羁绊">如此羁绊</a></li>
+            <li><a href="#defend">defend</a></li>
+            <li><a href="#attack">attack</a></li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#程序的链接与装载">程序的链接与装载</a>
-      <ol>
-        <li><a href="#代码的两种形态">代码的两种形态</a>
+        <li><a href="#基于模式的混淆">基于模式的混淆</a>
           <ol>
-            <li><a href="#绝对代码absolute-code">绝对代码（Absolute Code）</a></li>
-            <li><a href="#位置无关代码pic-position-independent-code">位置无关代码（PIC, Position-Independent Code）</a></li>
+            <li><a href="#defend-1">defend</a></li>
+            <li><a href="#attack-1">attack</a></li>
           </ol>
         </li>
-        <li><a href="#静态链接">静态链接</a></li>
-        <li><a href="#重定位">重定位</a>
+        <li><a href="#数据编码">数据编码</a>
           <ol>
-            <li><a href="#重定位的作用">重定位的作用</a></li>
-            <li><a href="#重定位入口">重定位入口</a></li>
-            <li><a href="#重定位地址计算">重定位地址计算</a></li>
-          </ol>
-        </li>
-        <li><a href="#动态链接">动态链接</a>
-          <ol>
-            <li><a href="#启动过程">启动过程</a></li>
-            <li><a href="#延迟绑定">延迟绑定</a>
+            <li><a href="#普通编码">普通编码</a>
               <ol>
-                <li><a href="#过程链接表-plt">过程链接表 (PLT)</a></li>
-                <li><a href="#全局偏移量表-got">全局偏移量表 (GOT)</a></li>
-                <li><a href="#绑定过程">绑定过程</a></li>
+                <li><a href="#defend-2">defend</a></li>
+                <li><a href="#attack-2">attack</a></li>
+              </ol>
+            </li>
+            <li><a href="#同态编码">同态编码</a>
+              <ol>
+                <li><a href="#defend-3">defend</a></li>
+                <li><a href="#attack-3">attack</a></li>
               </ol>
             </li>
           </ol>
         </li>
       </ol>
     </li>
-    <li><a href="#程序的装载">程序的装载</a>
+    <li><a href="#控制流混淆">控制流混淆</a>
       <ol>
-        <li><a href="#shell调用">Shell调用</a></li>
-        <li><a href="#execve系统调用">execve系统调用</a></li>
-        <li><a href="#格式识别">格式识别</a></li>
-        <li><a href="#规划内存布局">规划内存布局</a></li>
-        <li><a href="#准备工作">准备工作</a></li>
-        <li><a href="#映射段到内存">映射段到内存</a></li>
-        <li><a href="#设置入口点">设置入口点</a></li>
-        <li><a href="#返回用户态">返回用户态</a></li>
-        <li><a href="#启动程序执行">启动程序执行</a></li>
+        <li><a href="#插入无效代码花指令">插入无效代码（花指令）</a>
+          <ol>
+            <li><a href="#死代码">死代码</a>
+              <ol>
+                <li><a href="#defend-4">defend</a></li>
+                <li><a href="#attack-4">attack</a></li>
+              </ol>
+            </li>
+            <li><a href="#垃圾代码">垃圾代码</a>
+              <ol>
+                <li><a href="#defend-5">defend</a></li>
+                <li><a href="#attack-5">attack</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#不透明谓词">不透明谓词</a>
+          <ol>
+            <li><a href="#基于数学的谓词">基于数学的谓词</a>
+              <ol>
+                <li><a href="#defend-6">defend</a></li>
+                <li><a href="#attack-6">attack</a></li>
+              </ol>
+            </li>
+            <li><a href="#基于环境的谓词">基于环境的谓词</a>
+              <ol>
+                <li><a href="#defend-7">defend</a></li>
+                <li><a href="#attack-7">attack</a></li>
+              </ol>
+            </li>
+            <li><a href="#基于指针别名的谓词">基于指针别名的谓词</a>
+              <ol>
+                <li><a href="#defend-8">defend</a></li>
+                <li><a href="#attack-8">attack</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#破坏代码局部性">破坏代码局部性</a>
+          <ol>
+            <li><a href="#defend-9">defend</a>
+              <ol>
+                <li><a href="#跳转重排">跳转重排</a></li>
+                <li><a href="#函数内联与外联">函数内联与外联</a></li>
+                <li><a href="#基本块重排">基本块重排</a></li>
+                <li><a href="#函数克隆">函数克隆</a></li>
+              </ol>
+            </li>
+            <li><a href="#attack-9">attack</a></li>
+          </ol>
+        </li>
+        <li><a href="#控制流间接化">控制流间接化</a>
+          <ol>
+            <li><a href="#defend-10">defend</a></li>
+            <li><a href="#attack-10">attack</a></li>
+          </ol>
+        </li>
+        <li><a href="#控制流图扁平化">控制流图扁平化</a>
+          <ol>
+            <li><a href="#defend-11">defend</a></li>
+            <li><a href="#attack-11">attack</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -460,9 +496,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">
+            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/">
                 
-                    <img src="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg" loading="lazy" alt="Featured image of post 逆向基础3：ELF文件" />
+                    <img src="http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg" loading="lazy" alt="Featured image of post 逆向基础5：混淆技术" />
                 
             </a>
         </div>
@@ -483,11 +519,11 @@
 
 
         <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">逆向基础3：ELF文件</a>
+            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/">逆向基础5：混淆技术</a>
         </h2>
         
         <h3 class="article-subtitle">
-            linux的可执行文件格式
+            代码变得难看了
         </h3>
         
 
@@ -510,7 +546,7 @@
   <path d="M18 16.496v1.504l1 1" />
 </svg>
                 <time class="article-time--published">
-                    发布时间：2025-10-11</time>
+                    发布时间：2025-10-26</time>
             </div>
         
 
@@ -526,7 +562,7 @@
 
 
                <time>
-                   更新时间：2025-10-13
+                   更新时间：2025-10-28
                </time>
            </div>
         <div>
@@ -546,508 +582,312 @@
     <section class="article-content">
     
     
-    <p>终于讲到了，久闻ELF大名，真的很有意思</p>
-<p>在几乎所有的现代Unix-like操作系统（比如Linux）中，从可执行程序、共享库到目标文件，背后都有一个共同的标准——那就是<strong>ELF （Executable and Linkable Format，可执行和可链接格式）</strong></p>
-<p>ELF格式的文件也常简称<strong>对象文件</strong>，对象文件参与程序的链接和执行</p>
-<p>参考文章：</p>
-<p><a class="link" href="https://www.laumy.tech/1091.html/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5/"  target="_blank" rel="noopener"
-    >静态链接与动态链接
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p><a class="link" href="https://www.cnblogs.com/linhaostudy/p/8855238.html"  target="_blank" rel="noopener"
-    >ELF文件结构描述 
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<p><a class="link" href="https://yjy123123.github.io/2021/12/06/%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90/"  target="_blank" rel="noopener"
-    >延迟绑定过程分析
-    
-    <span style="white-space: nowrap;"><svg width=".7em"
-        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
-        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
-            fill="currentColor">
-    </svg></span>
-    
-</a></p>
-<h1 id="三种形态">三种形态
-</h1><p>根据在程序生命周期中所处的阶段，ELF文件主要表现为三种形式：</p>
-<h2 id="可重定位文件o">可重定位文件（.o）
-</h2><p>由编译器和汇编器生成，包含了代码和数据</p>
-<p>它可以与其他目标文件链接，以创建可执行文件或共享库</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span><span style="color:#7f848e"># 从 test.c 生成可重定位文件 test.o</span>
-</span></span><span style="display:flex;"><span>gcc -c test.c -o test.o
-</span></span></code></pre></div><h2 id="可执行文件">可执行文件
-</h2><p>包含了执行一个程序所需的全部信息，它指定了如何创建一个进程映像</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span><span style="color:#7f848e"># 从 test.o 链接生成可执行文件 test</span>
-</span></span><span style="display:flex;"><span>gcc test.o -o <span style="color:#e5c07b">test</span>
-</span></span></code></pre></div><h2 id="共享对象文件-so">共享对象文件 （.so）
-</h2><p>这就是我们常说的动态链接库，它有两个用法：</p>
-<ul>
-<li>
-<p>链接器能将它与其他<code>.o</code>和<code>.so</code>文件链接，生成新的对象文件</p>
-</li>
-<li>
-<p>动态链接器在程序运行时能将多个它与可执行文件结合，共同创建进程映像</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span><span style="color:#7f848e"># 生成位置无关代码的目标文件</span>
-</span></span><span style="display:flex;"><span>gcc -c -fPIC shared.c -o shared.o
-</span></span><span style="display:flex;"><span><span style="color:#7f848e"># 链接生成共享库</span>
-</span></span><span style="display:flex;"><span>gcc -shared -o libshared.so shared.o
-</span></span></code></pre></div><h1 id="链接与执行">链接与执行
-</h1><p>ELF格式的一个核心设计思想是为同一个文件提供两种不同的解析视图，以满足不同工具的需求</p>
-<h2 id="链接视图">链接视图
-</h2><p>供链接器使用</p>
-<p>文件被看作是一系列**节（Section）**的集合，链接器通过解析节头表来处理和合并这些节</p>
+    <p>经过前几节课，跟着破解了几个crack，我也觉得我成逆向大神了&hellip;&hellip;吗？</p>
+<p>破解软件哪有那么容易，尤其是商用的，更不可能将自己的代码就这样暴露在大众面前，肯定会想方设法提高逆向工程的难度！</p>
+<p>之前我们提到过，删掉ELF的节表就能很好的做到这一点，但是那毕竟只在linux上，有没有更普遍的做法呢？</p>
+<p>这就是这篇文章要说的技术 —— <strong>代码混淆（Obfuscation）</strong></p>
+<p>所谓知己知彼，百战不殆，只有知道混淆是什么后，才知道如何去对抗和破解它</p>
+<h1 id="混淆的基本原理">混淆的基本原理
+</h1><h2 id="混淆是什么">混淆是什么？
+</h2><p>混淆是一种程序变换技术，其目的是通过重构代码，在保持程序原有功能（语义）等价的前提下，增加代码的复杂性，使其更难以被逆向分析和理解</p>
+<p>这个过程可以被视为一个转换：</p>
 <p>
 <div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251010153927970" href="http://picture.928330.xyz/typora/image-20251010153927970.png">
-<img src="http://picture.928330.xyz/typora/image-20251010153927970.png" alt="image-20251010153927970"  />
+<a data-fancybox="gallery" data-caption="image-20251026203141655" href="http://picture.928330.xyz/typora/image-20251026203141655.png">
+<img src="http://picture.928330.xyz/typora/image-20251026203141655.png" alt="image-20251026203141655"  />
 </a>
 </div>
 </p>
-<h2 id="执行视图">执行视图
-</h2><p>供加载器（操作系统内核的一部分）使用</p>
-<p>文件被看作是一系列**段（Segment）**的集合，加载器通过解析程序头表来将段加载到内存并创建进程</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251010153944253" href="http://picture.928330.xyz/typora/image-20251010153944253.png">
-<img src="http://picture.928330.xyz/typora/image-20251010153944253.png" alt="image-20251010153944253"  />
-</a>
-</div>
-</p>
-<p>下面我们会分别解释它们是什么</p>
-<h1 id="elf文件核心结构">ELF文件核心结构
-</h1><h2 id="elf头">ELF头
-</h2><p>位于文件的最开始（即偏移量是0），是整个文件的索引名片，包含了最基本的信息：</p>
+<p>混淆可以在多个不同层次上进行：</p>
+<ul>
+<li><strong>源代码级</strong>：对高级语言代码（如C、Java）进行变量重命名、逻辑变换等</li>
+<li><strong>中间代码/字节码级</strong>：针对.NET或Java的字节码进行混淆</li>
+<li><strong>汇编/二进制级</strong>：直接对编译后的机器码或汇编代码进行修改</li>
+</ul>
+<p>有些不理解？让我们来看一个具体的汇编混淆片段（为了方便观看，前面就加上行号了）：</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">01 XOR EBX, EAX
+02 XOR EAX, EBX
+03 XOR EBX, EAX
+04 INC EAX
+05 NEG EBX
+06 ADD EBX, 0A6098326H
+07 CMP EAX, ESP
+08 MOV EAX, 59F67CD5H
+09 XOR EAX, 0FFFFFFFFH
+10 SUB EBX, EAX
+11 RCL EAX, CL
+12 PUSH 0F9CBE47AH
+13 ADD DWORD PTR [ESP], 6341B86H
+14 SBB EAX, EBP
+15 SUB DWORD PTR [ESP], EBX
+16 PUSHFD
+17 PUSHAD
+18 POP EAX
+19 ADD ESP, 20H
+20 TEST EBX, EAX
+21 POP EAX
+</code></pre><p>哇，真是写了好多啊，那这么长的代码，实现了什么强大的功能呢？</p>
+<p>我们一步一步看：</p>
+<p><strong>寄存器交换：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">; 初始状态: EAX = N, EBX = M
+01 XOR EBX, EAX         ; EBX = M ^ N
+02 XOR EAX, EBX         ; EAX = N ^ (M ^ N) = M (即 EBX 的初始值)
+03 XOR EBX, EAX         ; EBX = (M ^ N) ^ M = N (即 EAX 的初始值)
+</code></pre><p>这是一个不使用第三个寄存器来交换<code>EAX</code>和<code>EBX</code>内容的技巧，看着虽然有些复杂，但也还合理</p>
+<p><strong>垃圾指令：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">04 INC EAX              ; EAX = EAX + 1
+05 NEG EBX              ; EBX = -N (对N取补)
+06 ADD EBX, 0A6098326H  ; EBX = -N + 0A6098326H
+07 CMP EAX, ESP         ; 比较 EAX 和 ESP
+</code></pre><p>嗯？有些不对劲了</p>
+<p>行<code>04</code>修改了<code>EAX</code> —— 但是<code>EAX</code>的值在后面的第<code>08</code>行被完全覆盖了，所以这次<code>INC</code>没有任何意义！它完全可以不存在，也就是一条垃圾指令！</p>
+<p>行<code>05</code>和<code>06</code>是对<code>EBX</code>的值<code>N</code>的取补计算</p>
+<p>行<code>07</code>的<code>CMP</code>会设置<code>EFLAGS</code>标志寄存器，但这些标志位在被任何条件跳转指令使用之前，就被第<code>09</code>行的 <code>XOR</code>指令给覆盖了（它也会修改标志位），所以这也是一条垃圾指令！</p>
+<p>好吧好吧，反正这部分结束之后，<code>EBX</code>的值变成了<code>-N + 0A6098326H</code></p>
+<p><strong>常量展开：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">08 MOV EAX, 59F67CD5H   ; EAX = 59F67CD5H
+09 XOR EAX, 0FFFFFFFFH   ; EAX = NOT 59F67CD5H = 0A609832AH
+10 SUB EBX, EAX          ; EBX = EBX - EAX
+</code></pre><p>行<code>08</code>和<code>09</code>没有直接使用<code>MOV EAX, 0A609832AH</code>修改EAX，而是通过两步计算（<code>XOR 0xFFFFFFFF</code>等同于<code>NOT</code>，即按位取反）来得到这个值，增加了分析难度，这种方法叫做常量展开</p>
+<p>行<code>10</code>用<code>EBX</code>减去<code>EAX</code>：<code>EBX = (-N + 0A6098326H) - 0A609832AH = -N - 4</code></p>
+<p>这是一个重要的中间结果, <code>EBX</code>的值变成了<code>-N - 4</code></p>
+<p><strong>基于栈的混淆：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">11 RCL EAX, CL          ; [垃圾指令]
+12 PUSH 0F9CBE47AH      ; 压入一个常量
+13 ADD DWORD PTR [ESP], 6341B86H ; 0F9CBE47AH + 6341B86H = 0
+14 SBB EAX, EBP          ; [垃圾指令]
+15 SUB DWORD PTR [ESP], EBX ; [ESP] = 0 - EBX
+</code></pre><p>行<code>11</code>和<code>14</code>都是垃圾指令，因为<code>EAX</code>的值在第<code>18</code>行被<code>POP</code>覆盖了</p>
+<p>行<code>12</code>和<code>13</code>再次使用了常量展，它们的目的仅仅是<code>PUSH 0</code></p>
+<p>行<code>15</code>从栈顶的值中减去<code>EBX</code>，也就是：<code>[ESP] = 0 - (-N - 4) = N + 4</code></p>
+<p>此时，<code>N + 4</code>这个值在栈顶，没有在代码表面</p>
+<p><strong>复杂的空操作：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">16 PUSHFD                ; 压入 EFLAGS (4 字节)
+17 PUSHAD                ; 压入所有通用寄存器 (8 * 4 = 32 字节)
+18 POP EAX               ; 弹出 4 字节 (PUSHAD 压入的 EAX)
+19 ADD ESP, 20H          ; 弹出 32 字节 (20H = 32)
+20 TEST EBX, EAX         ; [垃圾指令]
+</code></pre><p>行<code>16</code>和<code>17</code>一共向栈上压入了<code>4 + 32 = 36</code>字节的数据，行<code>18</code>和<code>19</code>一共从栈上弹出了<code>4 + 32 = 36</code> 字节的数据</p>
+<p>这四条指令 <code>(16, 17, 18, 19)</code> 组合起来，是什么也没做！同时，它还搅乱了<code>EAX</code>寄存器，真是太坏了</p>
+<p>行<code>20</code>也是垃圾指令，它设置的标志位并没有被使用</p>
+<p>所以，这四行完全就是纯废话</p>
+<p><strong>获取最终结果：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">21 POP EAX               ; 弹出栈顶的值到 EAX
+</code></pre><p>结果是<code>EAX = N + 4</code></p>
+<p><strong>也就是说，这一长串令人眼花缭乱的代码，其等价语义仅仅是：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">ADD EAX, 4
+</code></pre><p>真是神乎其技，对吧？<del>哎呦，恶心死了</del></p>
+<p>这个例子里面体现了哪些混淆的方法呢，我们来看看：</p>
 <ul>
 <li>
-<p><strong>文件魔数</strong>，用于识别ELF格式</p>
+<p><strong>基于模式的混淆</strong></p>
+<p>把常见的逻辑替换成了绕人的写法，比如<code>XOR</code>交换</p>
 </li>
 <li>
-<p><strong>文件位数</strong>，32位还是64位</p>
+<p><strong>常量展开</strong></p>
+<p>用计算代替常量<code>0</code>和<code>0A609832AH</code>，必须一步步分析才知道最后的结果</p>
 </li>
 <li>
-<p><strong>数据编码存储方式</strong>，大端序还是小端序</p>
+<p><strong>无关代码插入</strong></p>
+<p>大量的垃圾指令，完全没有意义的操作</p>
 </li>
 <li>
-<p><strong>指令集体系结构</strong>，如 x86-64、ARM</p>
+<p><strong>基于栈的混淆</strong></p>
+<p>运算结果暂存在栈上，光看寄存器或者内存什么都看不出来</p>
 </li>
 <li>
-<p><strong>程序执行的入口点地址</strong></p>
-</li>
-<li>
-<p><strong>程序头表和节头表在文件中的偏移量、条目数量和大小</strong></p>
+<p><strong>使用不常用指令</strong></p>
+<p><code>RCL</code>、<code>SBB</code>、<code>PUSHFD</code>、<code>PUSHAD</code>，这几个指令除了RCL，我都没有写在逆向基础的第一章&hellip;&hellip;</p>
 </li>
 </ul>
-<p>还由其他的一些信息</p>
-<p>可以使用<code>readelf</code>命令查看ELF头：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>readelf -h &lt;filename&gt;
-</span></span></code></pre></div><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251010205639241" href="http://picture.928330.xyz/typora/image-20251010205639241.png">
-<img src="http://picture.928330.xyz/typora/image-20251010205639241.png" alt="image-20251010205639241"  />
-</a>
-</div>
-</p>
-<h2 id="节头表与重要节区">节头表与重要节区
-</h2><p>这是<strong>链接视图</strong>的核心</p>
-<p><strong>它是一个数组，描述了文件中所有的节，每个节都是一块具有相似属性的数据或代码的集合</strong></p>
-<p>一些重要的节：</p>
+<p>这些混淆方法后面我们一个个说</p>
+<h2 id="理论上的安全性">理论上的安全性
+</h2><p>理论上，一个完美的混淆器应该具有所谓的**虚拟黑盒（Virtual Black-Box, VBB）**属性</p>
+<p>这意味着，一个源程序$P$被混淆后得到的程序$P&rsquo;$所能提取到的任何信息，都应该同样能通过“黑盒”访问（即只观察输入和输出）得到</p>
+<p>换句话说，对于攻击者而言，拥有$P&rsquo;$的代码文本并不比只拥有$P$的执行权限能获得更多信息</p>
+<p>一个完美的混淆器应满足三个条件：</p>
+<ol>
+<li><strong>功能性</strong>：混淆后的程序$P&rsquo;$与原程序$P$功能完全相同</li>
+<li><strong>多项式减速</strong>：$P&rsquo;$的执行时间和空间开销相比$P$最多呈多项式级增长</li>
+<li><strong>虚拟黑盒属性</strong>：如上所述，拥有$P&rsquo;$代码的攻击者无法比只拥有$P$的访问权的攻击者推断出更多信息</li>
+</ol>
+<h2 id="现状与应用">现状与应用
+</h2><p>但理论终究是理论而已</p>
+<p>2001年已有研究证明，能够满足上述所有条件的完美混淆器是不存在的！</p>
+<p>因此，在现实世界中，混淆的目标并非实现理论上的绝对不可分析，而是使逆向分析付出的成本要大于通过逆向可能获得的收益，也就是努力让破解软件的人放弃</p>
+<p>混淆技术被广泛应用在以下领域：</p>
+<ul>
+<li><strong>恶意软件</strong>：病毒、木马等用于对抗安全软件的分析和检测</li>
+<li><strong>软件知识产权保护</strong>：保护商业软件的核心算法不被窃取</li>
+<li><strong>软件防篡改</strong>：增加攻击者修改程序逻辑（如绕过付费验证）的难度</li>
+</ul>
+<p>+++</p>
+<p><strong>下面我们正式来介绍混淆方法</strong></p>
+<h1 id="数据混淆">数据混淆
+</h1><p>数据混淆侧重于隐藏程序中使用的数据，如常量、字符串、变量等</p>
+<h2 id="常量展开">常量展开
+</h2><h3 id="defend">defend
+</h3><p>常量展开是一种与编译器优化相反的技术，它将代码中一个明文常量替换为一组计算过程，而这个过程的最终结果等于该常量</p>
+<p>也就是说，攻击者不能通过简单的查看某一个明文值来得到最终的结果，必须对大块的代码进行分析</p>
+<p>之前例子我们已经见过：</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">PUSH 0F9CBE47AH      ; 压入一个立即数
+ADD DWORD PTR [ESP], 6341B86H ; 栈顶值变为 0F9CBE47AH + 6341B86H = 0
+</code></pre><p>这就是把<code>0</code>这个值隐性地加入了逻辑中</p>
+<p>更高级的常量展开不会将计算指令紧挨着放在一起，而是将它们交错在大量不相关的垃圾指令之间：</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">MOV EAX, 0F9CBE47AH
+; ... (大量垃圾指令)
+XOR EBX, EBX
+CMP ECX, 5
+; ... (更多垃圾指令)
+PUSH EAX
+ADD DWORD PTR [ESP], 6341B86H
+</code></pre><p>分析器很难将<code>PUSH</code>和<code>ADD</code>两条指令关联起来，从而无法轻易识别出<code>0</code>这个常量</p>
+<h3 id="attack">attack
+</h3><p>如何破解这种混淆呢？</p>
+<p>最简单的方法是动态分析，在调试器中运行到该代码块之后，直接看栈顶或目标寄存器的值就行</p>
+<p>如果是静态分析，大多数工具会将寄存器和内存视为符号变量，而不是具体数值</p>
+<p>比如，当它们分析<code>MOV EAX, 0F9CBE47AH</code>时，<code>EAX</code>的值会被记为类似这样的形式：</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">sym_EAX = 0F9CBE47AH
+</code></pre><p>之后到<code>ADD DWORD PTR [ESP], 6341B86H</code>时，会自动计算出：</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">sym_ESP_val = 0F9CBE47AH + 6341B86H = 0
+</code></pre><p>也就是在静态的时候把变量全部计算出来</p>
+<p>同时，静态分析工具还能追踪特定寄存器或内存位置的值，这可以跨越垃圾指令，找出所有修改该值的指令，并最终计算出结果</p>
+<h2 id="基于模式的混淆">基于模式的混淆
+</h2><h3 id="defend-1">defend
+</h3><p>这种技术将一条或多条指令，替换为另一组功能上等价、但形式上更复杂的指令序列</p>
+<p>其实也就是所谓的把简单问题复杂化</p>
+<p>模式的混淆可以在高级语言，也能在汇编语言，下面给出一些示例</p>
+<p><strong>高级语言层面：</strong></p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
-          <th>节名称</th>
-          <th>含义</th>
+          <th><strong>原始运算</strong></th>
+          <th><strong>等价混淆运算</strong></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>.text</code></td>
-          <td>程序的可执行指令（代码）</td>
+          <td>-x</td>
+          <td>~x + 1</td>
       </tr>
       <tr>
-          <td><code>.data</code></td>
-          <td>已初始化的全局变量和静态变量</td>
+          <td>$x + 1$</td>
+          <td>$-(\sim x)$</td>
       </tr>
       <tr>
-          <td><code>.bss</code></td>
-          <td>未初始化的全局变量和静态变量（在文件中不占空间，加载时才分配）</td>
+          <td>$x - 1$</td>
+          <td>$\sim(-x)$</td>
       </tr>
       <tr>
-          <td><code>.rodata</code></td>
-          <td>只读数据，如字符串常量</td>
-      </tr>
-      <tr>
-          <td><code>.interp</code></td>
-          <td>存放<strong>动态链接器的路径名</strong></td>
-      </tr>
-      <tr>
-          <td><code>.plt</code></td>
-          <td><strong>过程链接表</strong>，用于动态链接中的函数调用跳转</td>
-      </tr>
-      <tr>
-          <td><code>.got</code></td>
-          <td><strong>全局偏移量表</strong>，存储动态链接符号的地址</td>
-      </tr>
-      <tr>
-          <td><code>.rel.&lt;x&gt;</code></td>
-          <td>节<code>&lt;x&gt;</code>的重定位信息，比如<code>.rel.text</code>就是<code>.text</code>节的重定位信息</td>
-      </tr>
-      <tr>
-          <td><code>.dynamic</code></td>
-          <td>动态链接所需的信息</td>
+          <td>rotate left (x, y)</td>
+          <td>$(x&laquo;y)$</td>
       </tr>
   </tbody>
 </table></div>
-<p>可以使用<code>readelf</code>查看详细的节头表信息：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>readelf -S &lt;filename&gt;
-</span></span></code></pre></div><p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251010210448607" href="http://picture.928330.xyz/typora/image-20251010210448607.png">
-<img src="http://picture.928330.xyz/typora/image-20251010210448607.png" alt="image-20251010210448607"  />
-</a>
-</div>
-</p>
-<h2 id="程序头表与段">程序头表与段
-</h2><p>这是<strong>执行视图</strong>的核心</p>
-<p><strong>在加载器眼中，文件被划分为若干个段，而它告诉系统如何将文件内容加载到内存中以创建一个进程</strong></p>
-<p>重要的段类型：</p>
+<p><strong>汇编语言层面：</strong></p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
-          <th>段类型</th>
-          <th>含义</th>
+          <th><strong>原始指令</strong></th>
+          <th><strong>等价混淆指令</strong></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>LOAD</code></td>
-          <td>可加载段，加载器需要将此类型的段从文件映射到内存<br />通常，一个<code>LOAD</code>段对应代码（可读可执行），另一个对应数据（可读可写）</td>
+          <td><code>PUSH REG32</code></td>
+          <td><code>SUB ESP, 4</code>、<code>MOV DWORD PTR [ESP], REG32</code></td>
       </tr>
       <tr>
-          <td><code>INTERP</code></td>
-          <td>指向动态链接器的路径（对应<code>.interp</code>节）</td>
+          <td><code>PUSH REG32</code></td>
+          <td><code>LEA ESP, [ESP-4]</code>、<code>MOV DWORD PTR [ESP], REG32</code></td>
       </tr>
       <tr>
-          <td><code>DYNAMIC</code></td>
-          <td>指向动态链接信息（对应<code>.dynamic</code>节）</td>
+          <td><code>MOV EDX, IMM32</code></td>
+          <td><code>CALL $+5</code>、<code>POP EDX</code>、<code>XOR EDX, (Mask ^ IMM32)</code></td>
       </tr>
       <tr>
-          <td><code>PHDR</code></td>
-          <td>描述程序头表本身的位置和大小</td>
+          <td><code>MOV EDX, OFFSET LBL</code>  <code>JMP EDX</code></td>
+          <td><code>PUSH (OFFSET LBL ^ Mask)</code>、<code>POP EDX</code>、<code>XOR EDX, Mask</code>、<code>JMP EDX</code></td>
       </tr>
   </tbody>
 </table></div>
-<p>可以使用<code>readelf -l &lt;filename&gt;</code>查看程序头表：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251010210617934" href="http://picture.928330.xyz/typora/image-20251010210617934.png">
-<img src="http://picture.928330.xyz/typora/image-20251010210617934.png" alt="image-20251010210617934"  />
-</a>
+<p>汇编层面的模式替换更难，因为它不仅要保证通用寄存器的结果等价，还必须考虑对标志位寄存器的副作用是否等价，但汇编层面的模式替换往往比高级语言层面的更有效，怎么办呢？</p>
+<p>于是，自动化的混淆器诞生了</p>
+<p>高级混淆器拥有一个庞大的等价指令模板库，例如对于<code>ADD EAX, 1</code>，它可能有10种不同的实现方式</p>
+<p>在混淆时，它会随机从库中挑选一个模板，这意味着同一个原始函数在两次不同混淆后，其二进制代码可能是完全不同的，并且这个库还能随时更新，这使得基于签名的模式匹配完全失效</p>
+<h3 id="attack-1">attack
+</h3><p>反编译器对于破解这种混淆非常有效，因为它们的核心功能是语义分析，不关心具体指令的实现</p>
+<p>比如，随便汇编的<code>PUSH</code>怎么玩，反编译器只关心在函数<code>X</code>的第<code>Y</code>行，<code>REG32</code>被放到了栈顶</p>
+<p>这样一来，就算模式被替换了，反编译生成的伪C代码很可能是一样的</p>
+<div class="alert alert-tip">
+    <div class="alert-header">
+        <span class="alert-icon">
+            💡
+        </span>
+        <span class="alert-title">
+            Tip
+        </span>
+    </div>
+    <div class="alert-content">
+        <p>由于各种技术原因，反编译器并不是在还原真实的源代码，而是在猜测性地重建一种“看起来像C的高层语义表示”，它未必是标准C、未必可编译、也未必与原代码逐字等价，所以叫伪C代码（pseudocode）</p></div>
 </div>
-</p>
-<h2 id="节与段到底是什么啊">节与段到底是什么啊
-</h2><p>这俩东西的确有些难以理解，我们展开说一下</p>
-<h3 id="节">节
-</h3><p><strong>节是ELF文件中基本的逻辑单位，用来分类不同类型的数据，编译器在生成目标文件（<code>.o</code>）时，会把不同性质的内容放到不同的节里</strong></p>
-<p>还是拿之前打印输出hello的那个c语言程序举例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#7f848e">#include</span> <span style="color:#7f848e">&lt;stdio.h&gt;</span><span style="color:#7f848e">
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#61afef;font-weight:bold">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">printf</span>(<span style="color:#98c379">&#34;hello&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>我们把它编译链接生成可执行文件后，这个可执行文件内部就有了许多的节</p>
-<p>比如<code>.text</code>存放的是函数的机器指令，也就是<code>main()</code>函数的汇编代码，而<code>.rodata</code>存放只读常量，比如字符串 <code>&quot;hello&quot;</code>，也就是给文件里面的东西分类摆放了</p>
-<p>当多个<code>.o</code>文件被合并时，链接器会把同名的节拼在一起，比如把所有<code>.text</code>合并成一个大<code>.text</code></p>
-<p>注意，这些节只对编译器和链接器有意义，别的东西来看是没有什么用的</p>
-<h3 id="段">段
-</h3><p><strong>当链接器把<code>.o</code>文件合并成最终的可执行文件后，它还要告诉操作系统运行这个程序时要加载哪些部分，这时它就会生成一组段信息</strong></p>
-<p>段描述的是内存映射的区域，比如哪一部分是可执行的（代码段），哪一部分又是可读写的（数据段）等等，<strong>一个段往往包含多个节</strong></p>
-<p>在上面代码编译生成最终的可执行文件会有两个主要的加载段：</p>
-<p>第一个是可执行段，包含<code>.text</code>和<code>.rodata</code>，程序加载时，这部分会映射成只读、可执行的内存区域</p>
-<p>第二个是可读写段，包含<code>.data</code>和<code>.bss</code>，程序加载时，这部分会映射成可读可写的区域，用于存储全局变量</p>
-<p>除了这两个段还会有一些特殊段，就不多说了</p>
-<p>我们上面说的都是“程序加载时”，也就是说段是给加载器看的，在加载的时候才起作用</p>
-<h3 id="如此羁绊">如此羁绊
-</h3><p>总之啊可以这样理解：</p>
+<p>此外，某些脚本或插件可以在汇编层面模拟编译器的优化器，它会检查一个小的指令窗口（例如3-5条指令），如果发现<code>SUB ESP, 4; MOV [ESP], EAX</code>这样的模式，就自动将其折叠（或注释）为<code>PUSH EAX</code></p>
+<p>当然，这种方法在上面也说过，很容易被针对</p>
+<h2 id="数据编码">数据编码
+</h2><p>这是一种更高级的混淆方式</p>
+<h3 id="普通编码">普通编码
+</h3><h4 id="defend-2">defend
+</h4><ol>
+<li><strong>编码</strong>：设定一个编码函数 $y = f(x)$。在程序中不存储原始数据 $x_0$，而是存储编码后的数据 $f(x_0)$</li>
+<li><strong>解码</strong>：在运行时，当需要使用 $x_0$ 时，再通过 $f(x_0)$ 将其恢复（解码）为 $x_0$</li>
+</ol>
+<p>对编码函数$f$的要求是，它必须是难以逆向的，即从 $y_0$ 难以推断 $x_0$，或者从多组 $(x, y)$ 难以推断出 $f$​</p>
+<p>比如，程序中的数据（特别是字符串、API名、常量）是以加密形式存储在<code>.data</code>或<code>.rdata</code>段中的</p>
+<p>一个经典的同态混淆是<strong>MBA (Mixed Boolean-Arithmetic)</strong> ，它将一个简单的算术运算（如<code>z = x + y</code>）替换为一个极其复杂的、但代数上等价的混合布尔-算术表达式</p>
+<p>例如，<code>z = x + y</code>可以被替换为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">z</span> <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">x</span> <span style="color:#56b6c2">^</span> <span style="color:#e06c75">y</span>) <span style="color:#56b6c2">+</span> <span style="color:#d19a66">2</span> <span style="color:#56b6c2">*</span> (<span style="color:#e06c75">x</span> <span style="color:#56b6c2">&amp;</span> <span style="color:#e06c75">y</span>)
+</span></span></code></pre></div><p>更可能是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">z</span> <span style="color:#56b6c2">=</span> ( ( (<span style="color:#e06c75">x</span> <span style="color:#56b6c2">&amp;</span> <span style="color:#56b6c2">~</span><span style="color:#e06c75">y</span>) <span style="color:#56b6c2">|</span> (<span style="color:#56b6c2">~</span><span style="color:#e06c75">x</span> <span style="color:#56b6c2">&amp;</span> <span style="color:#e06c75">y</span>) ) <span style="color:#56b6c2">+</span> ( (<span style="color:#e06c75">x</span> <span style="color:#56b6c2">|</span> <span style="color:#e06c75">y</span>) <span style="color:#56b6c2">&amp;</span> (<span style="color:#e06c75">x</span> <span style="color:#56b6c2">&amp;</span> <span style="color:#e06c75">y</span>) ) <span style="color:#56b6c2">*</span> <span style="color:#d19a66">2</span> )
+</span></span></code></pre></div><p>这样，攻击者面对的就是一个由<code>XOR</code>、<code>OR</code>、<code>AND</code>、<code>ADD</code>等等指令组成的巨大公式，极难将其还原</p>
+<p>这个看上去有点像模式混淆，但是他们其实是不一样的：</p>
 <ul>
 <li>
-<p>节是编译器和链接器关心的划分，它描述<strong>文件中的逻辑内容</strong></p>
-<p>段是操作系统加载器关心的划分，它描述<strong>程序加载到内存后的布局</strong></p>
+<p><strong>模式混淆改的是指令形貌，属于语法层</strong></p>
 </li>
 <li>
-<p>节是<strong>编译时</strong>的单位</p>
-<p>段是<strong>运行时</strong>的单位</p>
-</li>
-<li>
-<p>节存在于<strong>文件逻辑结构</strong>中</p>
-<p>段存在于<strong>文件加载映射</strong>中</p>
+<p><strong>数据编码改的是算式，属于语义层</strong></p>
 </li>
 </ul>
-<p><strong>在链接阶段完成之后，节和段完全就是两个东西，不会互相干扰</strong></p>
-<p>使用<code>readelf -l</code>看文件的时候，其实还会有下面这样的输出：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251010210659755" href="http://picture.928330.xyz/typora/image-20251010210659755.png">
-<img src="http://picture.928330.xyz/typora/image-20251010210659755.png" alt="image-20251010210659755"  />
-</a>
-</div>
-</p>
-<p><strong>左边就是段表各个段的索引号，右边就是对应段里面存储了那些节</strong></p>
-<p>记得之前的<code>strip</code>命令吗，当执行<code>strip</code>时，程序会删除节头表，于是里面的信息，也就是元数据，都没有了</p>
-<p>那为什么删除它不会影响执行呢？现在我们就应该知道了——</p>
-<p>**因为操作系统加载程序时只看段信息！**节没了就没了呗</p>
-<h1 id="程序的链接与装载">程序的链接与装载
-</h1><p>ok，我们已经了解了ELF文件的内部结构，但一个静态的文件是怎么变成一个在内存中运行的进程的呢？</p>
-<p>这个过程的核心就是<strong>链接和装载</strong></p>
-<p>而链接则负责解决不同代码模块之间的依赖关系，而装载负责将文件内容搬入内存</p>
-<h2 id="代码的两种形态">代码的两种形态
-</h2><p>在介绍链接细节之前，我们先看看代码生成的两种不同模式，它们直接决定了文件应如何被加载</p>
-<p><strong>注意，下面的概念都是基于虚拟地址的</strong></p>
-<h3 id="绝对代码absolute-code">绝对代码（Absolute Code）
-</h3><p><strong>这是在编译时就假定自己会被加载到内存中一个固定地址的代码</strong></p>
-<p>这个预设的地址被记录在程序头表的<code>p_vaddr</code>字段中，操作系统加载器必须将代码段存放到这个指定的虚拟地址，否则程序内部的地址引用就会全部出错</p>
-<p>对于一个进程的主程序来说，这是可行的，因为它是第一个被加载的，其首选地址通常是空闲的</p>
-<h3 id="位置无关代码pic-position-independent-code">位置无关代码（PIC, Position-Independent Code）
-</h3><p><strong>这是为共享库（<code>.so</code>文件）量身定做的代码喔</strong>，在之前介绍.so文件的时候已经提到过，使用GCC编译时加上<code>-fPIC</code>选项即可生成</p>
-<p>共享库会被许多不同的进程加载和共享，我们无法为一个库预设一个固定的加载地址，因为这个地址在A进程中可能是空闲的，但在B进程中可能已经被主程序或其他库占用了</p>
-<p><strong>PIC通过生成不依赖于任何绝对地址的代码，完美地解决了这个问题</strong></p>
-<p>当加载一个PIC库时，系统会为它在当前进程中选择一个空闲的虚拟基地址，这意味着同一个<code>.so</code>文件，在不同的进程中其段的起始虚拟地址是不同的</p>
-<p>PIC代码之所以能正常工作，关键在于它内部所有的地址引用（如调用库内另一个函数、访问全局变量）都不是硬编码的绝对地址，而是通过<strong>相对寻址</strong>的方式实现的</p>
-<p>系统为PIC代码维护了段间的相对位置，无论库被加载到多高的基地址，其代码段和数据段之间的虚拟地址差值始终保持不变，这个差值与它们在原始<code>.so</code>文件中的虚拟地址差值是相等的</p>
-<p><mark><strong>叽里呱啦说那么多，总之位置无关代码很灵活，在不同进程的虚拟地址空间里位置可变，但内部各段之间的相对位置保持不变</strong></mark></p>
-<h2 id="静态链接">静态链接
-</h2><p>静态链接发生在程序编译的最后阶段，它是一个将分散的模块组合成一个完整、独立的可执行文件的过程</p>
-<p><strong>链接器读取开发者编写的多个可重定位文件（<code>.o</code>文件）和可能用到的静态库（<code>.a</code>文件），将它们的所有内容“打包”到一个单独的可执行文件中</strong></p>
-<p>链接的核心操作之一是将所有输入文件中的同类型节合并，在之前介绍节的时候提到过的：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="http://picture.928330.xyz/typora/wp_editor_md_3a5fd321b0149ea88c936a9277eb0ea0.jpg">
-<img src="http://picture.928330.xyz/typora/wp_editor_md_3a5fd321b0149ea88c936a9277eb0ea0.jpg" alt="img"  />
-</a>
-</div>
-</p>
-<p>而在合并的过程中，链接器最关键的工作就是进行重定位</p>
-<p>它负责解析各个模块间的符号引用（比如函数调用），并修正代码和数据中的地址，确保它们指向正确的位置</p>
-<h2 id="重定位">重定位
-</h2><h3 id="重定位的作用">重定位的作用
-</h3><p><strong>重定位本质上是一种对二进制文件进行打补丁的机制，它将代码中对符号的引用连接到该符号的定义上，解决地址未知问题</strong></p>
-<p>还是拿之前的<code>hello.c</code>程序举例吧，我们调用了<code>printf</code>函数，但是程序不知道这个函数在哪，所以编译器只能在机器码里留下一个临时的占位符，再用一个重定位入口来告诉链接器“这里有个地址需要你填一下”</p>
-<p>或许你还记得之前使用<code>objdump</code>查看汇编后的文件的那张图片：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251011153952525" href="http://picture.928330.xyz/typora/image-20251011153952525.png">
-<img src="http://picture.928330.xyz/typora/image-20251011153952525.png" alt="image-20251011153952525"  />
-</a>
-</div>
-</p>
-<p>里面call（调用函数）这一行怎么理解呢？</p>
-<p>右边是汇编，我们不管，只看左边：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">17</span>: <span style="color:#e06c75">e8</span> <span style="color:#d19a66">00</span> <span style="color:#d19a66">00</span> <span style="color:#d19a66">00</span> <span style="color:#d19a66">00</span>
-</span></span></code></pre></div><p>冒号前面的<code>17</code>意思是当前指令地址为<code>0x17</code></p>
-<p>冒号后面的<code>e8 00 00 00 00</code>五个字节是指令，其中第一个字节<code>e8</code>是对应call的操作码，后面四个字节是偏移量，都是“00”，这就是“编译器在机器码里留下的临时占位符”！</p>
-<p>之前我们没有看链接后的可执行文件结构，现在我们来看看，还是使用<code>objdump</code>命令：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251011154918553" href="http://picture.928330.xyz/typora/image-20251011154918553.png">
-<img src="http://picture.928330.xyz/typora/image-20251011154918553.png" alt="image-20251011154918553"  />
-</a>
-</div>
-</p>
-<p>哦！链接之后，这里的偏移量被换成了确定的数据了！</p>
-<p>这就是重定位的作用</p>
-<h3 id="重定位入口">重定位入口
-</h3><p>链接器之所以知道要去哪里打补丁，是因为它读取了文件中的重定位节，也就是<code>.rel.&lt;X&gt;</code></p>
-<p>每个入口都用以下字段描述了一个重定位操作：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>字段</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>OFFSET</strong></td>
-          <td>需要修正的位置在节内的偏移量，以字节为单位</td>
-      </tr>
-      <tr>
-          <td><strong>TYPE</strong></td>
-          <td>重定位类型，决定怎么计算地址</td>
-      </tr>
-      <tr>
-          <td><strong>VALUE</strong></td>
-          <td>目标符号，也就是被引用的对象的名称</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>使用<code>objdump</code>能查看重定位表：</p>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="image-20251011160328709" href="http://picture.928330.xyz/typora/image-20251011160328709.png">
-<img src="http://picture.928330.xyz/typora/image-20251011160328709.png" alt="image-20251011160328709"  />
-</a>
-</div>
-</p>
-<p>里面的第二条记录：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#d19a66">0000000000000018</span> <span style="color:#e06c75">R_X86_64_PLT32</span>    <span style="color:#e06c75">printf</span>-<span style="color:#d19a66">0x4</span>
-</span></span></code></pre></div><p>说明在<code>.text</code>段偏移<code>0x18</code>处有一个通过PLT（过程链接表）调用的<code>printf</code>的指令</p>
-<h3 id="重定位地址计算">重定位地址计算
-</h3><p>链接器根据重定位类型使用特定公式来计算最终要填入的值</p>
-<p>上文的记录的类型是<code>R_X86_64_PLT32</code>，用在<code>x86-64</code>架构，即64位架构</p>
-<p>我们这里介绍一个类似的用在32位的<code>R_386_PC32</code>类型，其公式为：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">目标值</span> = <span style="color:#e06c75">S</span> + <span style="color:#e06c75">A</span> - <span style="color:#e06c75">P</span>
-</span></span></code></pre></div><ul>
-<li><strong>S</strong>：是符号的最终值，即被调用函数在内存中的绝对地址</li>
-<li><strong>A</strong>：是存储在要修改位置的原始值，称为隐式加数</li>
-<li><strong>P</strong>：是要修改位置本身的地址</li>
-</ul>
-<h2 id="动态链接">动态链接
-</h2><p>动态链接将链接过程的一部分推迟到程序运行时进行。当程序依赖于共享库（如<code>libc.so</code>）时，操作系统会在程序启动时找到这些库，并将它们动态地绑定到进程上。这种方式极大地减少了可执行文件的体积和系统内存的占用。</p>
-<h3 id="启动过程">启动过程
-</h3><p>系统装载可执行文件本身后，如果在解析程序头表时发现有一个<code>INTERP</code>段，它就知道这个程序需要动态链接</p>
-<p>此时会加载并启动<code>INTERP</code>段中指定的<strong>动态链接器</strong>（在Linux上通常是<code>/lib/ld-linux.so.2</code>），并将控制权移交给动态链接器</p>
-<p>动态连接器会分析可执行文件需要依赖哪些共享库，然后查找、加载这些库，并将它们也映射到进程的内存空间中</p>
-<h3 id="延迟绑定">延迟绑定
-</h3><p>为了加快程序的启动速度，动态链接器默认采用延迟绑定策略：一个外部库函数的地址只有在它第一次被调用时才会被解析</p>
-<p>这个机制由<strong>过程链接表 (PLT)</strong> 和 <strong>全局偏移量表 (GOT)</strong> 协同完成</p>
-<h4 id="过程链接表-plt">过程链接表 (PLT)
-</h4><p>给外部函数提供一个统一的跳板入口，负责第一次调用的动态解析</p>
-<p>它在运行之前就已经确定并且不会被修改</p>
-<h4 id="全局偏移量表-got">全局偏移量表 (GOT)
-</h4><p>保存外部函数或全局变量的真实地址，程序通过它来间接访问外部符号</p>
-<p>它可以在程序运行中被修改（这就导致它很容易作为漏洞利用）</p>
-<p><del>关于PLT和GOT的详细的结构，主要是pwn的内容，我们学逆向就点到为止</del></p>
-<h4 id="绑定过程">绑定过程
-</h4><p>下面我们用<code>printf</code>为例看看什么叫延迟绑定：</p>
+<p>反编译器对前者通常是秒杀，但对后者需要做数学</p>
+<h4 id="attack-2">attack
+</h4><p>这种编码方式有一个致命的缺点：<strong>数据使用的时候，会被解密成明文</strong></p>
+<p>那么，只要攻击者在调试器中对存储加密数据的内存地址设置一个内存断点，当程序读取该数据（准备解密）时，只需单步跟踪，就一定能看见解密的过程，U直到解密完成，即可在内存或寄存器中看到明文</p>
+<p>或者也能在某个函数执行前，转储一次进程内存，执行函数后，再转储一次，比较两次快照的差异，往往能直接发现解密到内存中的明文数据，不过这种方法很容易被**用后即焚（使用完解密数据后立刻清除）**防御住</p>
+<h3 id="同态编码">同态编码
+</h3><h4 id="defend-3">defend
+</h4><p>正如之前所说的，一般的数据编码方案需要在每次使用数据前都进行动态解码，这会带来开销和风险</p>
+<p>一个好的方案是，我们能<strong>直接在编码后的数据上实施运算</strong> —— 这就是<strong>同态</strong>的概念</p>
+<p>在抽象代数中，同态是两个群 $G$（源代数）和 $H$（目标代数）之间的一个映射 $f$，它保留了运算结构</p>
+<p>例如，如果 $G$ 和 $H$ 分别支持 $+_g$ 和 $+_h$ 运算，则 $f(x +_g y) = f(x) +_h f(y)$</p>
+<p>在混淆中，这意味着我们可以对编码后的数据 $f(x)$ 和 $f(y)$ 执行某个操作，其结果等同于对原始数据 $x$ 和 $y$​​ 执行操作后再编码的结果</p>
+<p>最简单的例子就是异或：$f(x)=x⊕k$</p>
+<h4 id="attack-3">attack
+</h4><p>同态编码比较难破解，可以采用黑盒方式</p>
+<p>固定<code>y</code>，然后输入<code>x=1, 2, 3...</code>，观察输出，通过多轮测试和归纳，可以猜出原始操作</p>
+<p>不过编码混淆的基础就是不容易猜出函数，所以真的很难破解啊</p>
+<h1 id="控制流混淆">控制流混淆
+</h1><p>控制流混淆（Control Flow Obfuscation，CFO）的目标是打破静态分析工具对程序执行流程的假设</p>
+<p>静态代码分析工具通常依赖以下假设：</p>
 <ul>
-<li>首次调用函数：
-<ol>
-<li>代码中的<code>call</code>指令实际上跳转到<code>printf</code>在PLT中的一个专属条目，我们称之为<code>printf@plt</code></li>
-<li><code>printf@plt</code>的第一条指令是跳转到GOT中为<code>printf</code>函数预留的地址槽<code>printf_in_got</code></li>
-<li>GOT槽里存放的并不是<code>printf</code>的真实地址，而是<code>printf@plt</code>中下一条指令的地址！所以这个<code>jmp</code>实际上又跳了回来</li>
-<li>程序继续执行PLT条目中的后续指令，它会将<code>printf</code>函数的一个标识信息压栈，然后跳转到动态链接器中一个公共的解析函数</li>
-<li>解析函数根据传入的标识信息，查找<code>printf</code>函数的真实地址，然后用这个真实地址覆盖GOT中<code>printf_in_got</code>原来的值</li>
-<li>最后，解析函数直接跳转到<code>printf</code>的真实地址去执行</li>
-</ol>
-</li>
-<li>再次调用函数：
-<ol>
-<li>代码再次执行<code>call printf@plt</code></li>
-<li>PLT条目再次执行<code>jmp *[printf_in_got]</code></li>
-<li>但这一次，<code>printf_in_got</code>这个槽里已经存放了<code>printf</code>函数的真实地址！所以，程序会直接跳转到<code>printf</code>函数，完全不再需要动态链接器介入，从而实现了高效调用</li>
-</ol>
-</li>
+<li><code>CALL</code>指令只用于函数调用</li>
+<li><code>CALL</code>会返回到紧随其后的下一条指令</li>
+<li><code>RET</code>指令代表函数的边界和返回</li>
+<li>条件跳转的两侧分支均可能被执行，且分支目标都是代码而非数据</li>
+<li>间接跳转的目标是容易确定的（例如<code>switch</code>结构或函数指针）</li>
 </ul>
-<p>
-<div class="post-img-view">
-<a data-fancybox="gallery" data-caption="img" href="http://picture.928330.xyz/typora/3.png">
-<img src="http://picture.928330.xyz/typora/3.png" alt="img"  />
-</a>
-</div>
-</p>
-<p><strong>总之，plt就像指示牌，指向got，而got里面存了真正的地址，第一次使用plt会更新got值，后面就随便用了</strong></p>
-<h1 id="程序的装载">程序的装载
-</h1><p>将一个静态的ELF可执行文件转换为一个动态运行的进程映像，操作系统的加载器有着严谨的步骤</p>
-<h2 id="shell调用">Shell调用
-</h2><p>当用户在shell输入<code>./hello</code>时，shell的执行流程如下：</p>
-<ol>
-<li>调用<code>fork()</code>创建一个子进程</li>
-<li>子进程调用<code>execve(&quot;./a.out&quot;, argv, envp)</code>执行指定的ELF文件</li>
-<li>父进程（shell）继续挂起，等待子进程结束后继续接收用户输入</li>
-</ol>
-<p><strong>也就是说，此时shell本身并不直接执行ELF文件，而是通过<code>execve()</code>请求内核将子进程的地址空间替换为ELF可执行文件</strong></p>
-<p><code>execve()</code>的原型：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#61afef;font-weight:bold">execve</span>(<span style="color:#c678dd">const</span> <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">filename</span>, <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">argv</span>[], <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">envp</span>[]);
-</span></span></code></pre></div><p>参数分别为：程序文件名、命令行参数、环境变量</p>
-<h2 id="execve系统调用">execve系统调用
-</h2><p>系统调用入口为：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#61afef;font-weight:bold">sys_execve</span>(<span style="color:#c678dd">const</span> <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">filename</span>, <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">argv</span>[], <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">envp</span>[]);
-</span></span></code></pre></div><p>在内核中，<code>sys_execve()</code>会调用<code>do_execve()</code>，把用户传入的文件名、<code>argv</code>、<code>envp</code>（环境变量数组）封装为内核可以使用的格式，然后进入<code>do_execve_common()</code>，处理实际加载过程：</p>
-<ol>
-<li>
-<p><strong>检查进程限制</strong></p>
-<p>例如每用户进程数是否超过限制</p>
-</li>
-<li>
-<p><strong>调度准备</strong></p>
-<p><code>sched_exec()</code>选择负载最小的CPU</p>
-</li>
-<li>
-<p><strong>准备执行参数结构</strong></p>
-<p>创建结构体<code>struct linux_binprm bprm</code>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">struct</span> <span style="color:#e06c75">linux_binfmt</span> <span style="color:#e06c75">bprm</span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">struct</span> <span style="color:#e06c75">list_head</span> <span style="color:#e06c75">lh</span>;        <span style="color:#7f848e">// 单链表表头
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">struct</span> <span style="color:#e06c75">module</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">module</span>;      <span style="color:#7f848e">// 模块
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">int</span> (<span style="color:#56b6c2">*</span><span style="color:#e06c75">load_binary</span>)(<span style="color:#c678dd">struct</span> <span style="color:#e06c75">linux_binprm</span> <span style="color:#56b6c2">*</span>); <span style="color:#7f848e">// 装载函数
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>};
-</span></span></code></pre></div><p>保存文件指针、命令行参数和环境变量、文件开头的缓冲区（前128字节）</p>
-</li>
-<li>
-<p><strong>拷贝参数与环境变量到内核</strong></p>
-<p>调用<code>copy_strings()</code>将argv和envp拷贝到内核空间</p>
-</li>
-<li>
-<p><strong>调用<code>exec_binprm()</code></strong></p>
-<p>搜索可执行文件格式，并调用对应加载函数</p>
-</li>
-</ol>
-<h2 id="格式识别">格式识别
-</h2><p><code>exec_binprm()</code>会调用<code>search_binary_handler()</code>，遍历由bprm组成的链表，调用对应格式的<code>load_binary()</code></p>
-<p>接着，对于可能的ELF文件，调用<code>load_elf_binary()</code>，并执行以下操作：</p>
-<ol>
-<li>
-<p><strong>读取ELF头</strong></p>
-<p>读取文件开头128字节，检查魔数 <code>{0x7f, 'E', 'L', 'F'}</code>，验证ELF类型（<code>ET_EXEC</code> 或 <code>ET_DYN</code>）</p>
-<p>你可能奇怪为什么已经知道是ELF了，还要再识别一次，那是因为之前只是初步匹配，这一步才是严格检查</p>
-</li>
-<li>
-<p><strong>读取程序头表</strong></p>
-<p>获取段的数量、偏移位置等信息，确定每个段在文件中的偏移、大小、内存加载地址和权限。</p>
-</li>
-<li>
-<p><strong>检查动态链接器</strong></p>
-<p>如果存在<code>.interp</code>段，说明ELF需要动态链接，内核会打开动态链接器ELF文件，并递归调用 <code>load_elf_binary()</code></p>
-</li>
-</ol>
-<h2 id="规划内存布局">规划内存布局
-</h2><p>在读取程序头表的时候，加载器会特别关注所有类型为<code>LOAD</code>的段，因为这些段是需要被完整加载到内存中的</p>
-<p>程序头表中的每个<code>LOAD</code>条目都精确地指明了下面的内容：</p>
-<ul>
-<li>该段在文件中的偏移量和大小（<code>p_offset</code>, <code>p_filesz</code>）</li>
-<li>该段应该被加载到的目标虚拟内存地址（<code>p_vaddr</code>）</li>
-<li>该段在内存中应该占据的空间大小（<code>p_memsz</code>）</li>
-<li>该段的内存访问权限</li>
-</ul>
-<p>之后，跟据这些信息确定内存布局：</p>
-<ul>
-<li><code>.text</code>、<code>.rodata</code> → 可执行、只读段</li>
-<li><code>.data</code>、<code>.bss</code> → 可写段</li>
-</ul>
-<h2 id="准备工作">准备工作
-</h2><p>调用<code>flush_old_exec(bprm)</code>释放旧程序的代码段、数据段、栈等资源</p>
-<p>使用<code>setup_new_exec(bprm)</code>初始化<code>mm_struct</code>(进程地址空间描述符)、地址空间</p>
-<p>通过<code>setup_arg_pages()</code>，为进程分配用户态栈，将<code>argv</code>、<code>envp</code>写入栈顶</p>
-<h2 id="映射段到内存">映射段到内存
-</h2><p>根据规划好的内存布局，加载器开始为每一个<code>LOAD</code>段执行内存映射操作：</p>
-<p>首先，在进程的虚拟地址空间中，于<code>p_vaddr</code>处开辟一块内存区域，大小为<code>p_memsz</code></p>
-<p>接着，将段的数据从ELF文件中（从<code>p_offset</code>偏移量开始）复制到刚刚开辟的虚拟内存中，复制的数据量为<code>p_filesz</code></p>
+<p>CFO的所有技术都是为了打破上述一个或多个假设，给分析器制造麻烦</p>
+<h2 id="插入无效代码花指令">插入无效代码（花指令）
+</h2><p>这是最常见的混淆手段之一，分为死代码和垃圾代码</p>
 <div class="alert alert-note">
     <div class="alert-header">
         <span class="alert-icon">
@@ -1058,18 +898,333 @@
         </span>
     </div>
     <div class="alert-content">
-        <p>值得注意的是，<code>p_memsz</code>（内存大小）常常会大于<code>p_filesz</code>（文件大小）</p>
-<p>这种差异通常是为了方便<code>.bss</code>节，这里存放的是未初始化的全局和静态变量，它们在程序运行前没有具体值，因此在文件中无需存储，不占用磁盘空间</p>
-<p>加载器会在内存中将<code>p_memsz</code>与<code>p_filesz</code>之间的差额部分全部用0填充，从而完成这些变量的默认初始化</p></div>
+        <p><a class="link" href="https://ctf-wiki.org/reverse/obfuscate/junk-code/"  target="_blank" rel="noopener"
+    >CTFwiki
+    
+    <span style="white-space: nowrap;"><svg width=".7em"
+        height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+        <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+            fill="currentColor">
+    </svg></span>
+    
+</a>：</p>
+<p>“花指令（junk code）是一种专门用来迷惑反编译器的指令片段，这些指令片段不会影响程序的原有功能，但会使得反汇编器的结果出现偏差，从而使破解者分析失败。比较经典的花指令技巧有利用 <code>jmp</code> 、<code>call</code>、<code>ret</code> 指令改变执行流，从而使得反汇编器解析出与运行时不相符的错误代码”</p></div>
 </div>
-<p>最后，加载器根据程序头表中为该段指定的权限位，设置这块内存区域的访问权限</p>
-<h2 id="设置入口点">设置入口点
-</h2><p>对于静态链接程序，直接使用ELF头中的<code>e_entry</code>作为入口</p>
-<p>对于动态链接程序，入口点由动态链接器提供</p>
-<h2 id="返回用户态">返回用户态
-</h2><p>调用<code>start_thread()</code>初始化用户态寄存器，设置<code>EIP</code>为程序入口，设置<code>ESP</code>为栈顶，设置CPU标志位</p>
-<h2 id="启动程序执行">启动程序执行
-</h2><p>控制权交给ELF程序，程序从入口点<code>_start</code>或动态链接器入口开始运行</p>
+<h3 id="死代码">死代码
+</h3><h4 id="defend-4">defend
+</h4><p><strong>死代码是指那些会被执行、但其执行结果对程序的最终状态没有任何影响的指令</strong></p>
+<p>这侧重于数据混淆</p>
+<p>为了插入死代码，混淆器需要进行活跃变量分析（这是静态分析的内容），找出在某个程序点上哪些寄存器或变量是死的，也就是即它们的值在被再次赋值前不会被使用，然后插入修改这些死寄存器的指令</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#61afef;font-weight:bold">f</span>() { 
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">x</span>, <span style="color:#e06c75">y</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;  <span style="color:#7f848e">// &lt;-- 死代码, x 的值在被使用前就被第3行覆盖了
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">y</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>;  <span style="color:#7f848e">// &lt;-- 死代码, y 从未被使用
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">3</span>;  <span style="color:#7f848e">// &lt;-- x 在此变为“活”的
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">x</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="attack-4">attack
+</h4><p>既然他们能用活跃变量分析插入死代码，那么攻击者也可以同样利用活跃变量分析去除死代码</p>
+<p>以上面的例子来说，大部分静态分析工具可以计算出在<code>x = 1</code>之后，<code>x</code>在被<code>x = 3</code>覆盖之前从未被读取过，因此 <code>x=1</code>是死代码，可以安全移除，或标记为死代码</p>
+<h3 id="垃圾代码">垃圾代码
+</h3><h4 id="defend-5">defend
+</h4><p><strong>垃圾代码是指那些永远不会被执行到的代码块，侧重于控制流混淆</strong></p>
+<p>之前说过，静态分析工具会假设条件跳转的两侧分支均可能被执行，插入垃圾代码就会大大增加负担</p>
+<p><strong>eg1：简单的无条件跳转</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    JMP real_code
+    ; --- 垃圾代码开始 ---
+    ADD EAX, 1
+    XOR EBX, EBX
+    PUSH EAX
+    ; --- 垃圾代码结束 ---
+real_code:
+    POP EAX             ; 有效代码
+</code></pre><p><strong>eg2：伪装的条件跳转</strong></p>
+<p>通过数据混淆，将无条件跳转伪装成条件跳转</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    PUSH EAX            ; 保存 EAX
+    XOR EAX, EAX        ; EAX = 0, 同时设置 ZF = 1
+    JZ real_code        ; ZF 永远为 1，所以这条 JZ 永远会跳转
+    
+    ; --- 垃圾代码开始 ---
+    MOV EAX, 0xDEADBEEF
+    CALL some_func
+    ; --- 垃圾代码结束 ---
+
+real_code:
+    POP EAX             ; 恢复 EAX
+</code></pre><p><strong>eg3：无效的条件跳转</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    JZ target_1         ;
+    JMP target_2        ;
+
+target_1:
+    NOP                 ; target_1 只是一个空指令
+target_2:
+    ; --- 真正的有效代码 ---
+</code></pre><p>静态分析器可能会认为<code>target_1</code>和<code>target_2</code>都是有效的分支，但实际上<code>target_1</code>什么用也没有</p>
+<p><strong>eg4：反汇编去同步</strong></p>
+<p>这是一种高级的垃圾代码插入技术，它利用了反汇编器和 CPU实际执行之间的差异</p>
+<p><strong>它会在一个<code>JMP</code>指令后，插入一些看起来像指令、但实际上是数据的字节：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">start:
+    jmp real_code           ; 直接跳过下面这串“数据”
+    db 0x55, 0x8B, 0xEC, 0x83, 0xEC, 0x10
+    ; 看上去像标准 prologue + 写入 0xDEADBEEF
+real_code:
+    ; 真正执行的代码从这里开始
+    mov eax, 1
+    ret
+</code></pre><p>如果是线性扫描式反汇编（从某个起点地址开始，按地址递增顺序一条条解码指令），就会把db的这串数据解码，而这串数据的意义刚好是：</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">55          push ebp
+8B EC       mov  ebp, esp
+83 EC 10    sub  esp, 0x10
+</code></pre><p>这就是一个函数前言，而许多反汇编器和函数识别器会用前言/后言模式来猜测“这里是不是函数的开头”</p>
+<p>一旦在线扫过程中遇到类似<code>55 8B EC</code>的序列，就倾向于标记为函数起点，并继续把后面字节当代码解下去，这就掉进陷阱了</p>
+<h4 id="attack-5">attack
+</h4><p>他们欺骗了静态分析器，关我动态分析什么事？</p>
+<p>攻击者可以利用二进制插桩工具来追踪程序的实际执行路径，运行程序后，所有从未被执行到的代码块都可以被认为是垃圾代码</p>
+<p>这种方法需要尽可能多样的数据输入，来避免有所遗漏，所以也不是很有效，比较通常的还是人工分析</p>
+<h2 id="不透明谓词">不透明谓词
+</h2><p>这是插入垃圾代码的升级版</p>
+<p>不透明谓词是一种特殊的条件表达式，其结果在混淆时是确定的，但对于静态分析器来说却非常难推导</p>
+<ul>
+<li>$P^T$：一个永远为True的不透明谓词</li>
+<li>$P^F$：一个永远为False的不透明谓词</li>
+</ul>
+<p>通过使用不透明谓词作为分支条件，混淆器可以向程序的控制流图（CFG）中插入伪分支</p>
+<p><strong>eg：</strong></p>
+<p><strong>原始代码：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">Block</span> <span style="color:#e06c75">A</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Block</span> <span style="color:#e06c75">B</span>
+</span></span></code></pre></div><p><strong>使用 $P^T$ 混淆后：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">Block</span> <span style="color:#e06c75">A</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">IF</span> (<span style="color:#e06c75">P</span><span style="color:#56b6c2">^</span><span style="color:#e06c75">T</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">GOTO</span> <span style="color:#e06c75">Block</span> <span style="color:#e06c75">B</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ELSE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">GOTO</span> <span style="color:#e06c75">Block_B_Buggy</span>  ; 这是一个包含垃圾代码的伪造块
+</span></span></code></pre></div><p>分析器会看到两个分支，但实际上只有<code>Block B</code>永远会被执行，以此增加分析的负担</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251026203004768" href="http://picture.928330.xyz/typora/image-20251026203004768.png">
+<img src="http://picture.928330.xyz/typora/image-20251026203004768.png" alt="image-20251026203004768"  />
+</a>
+</div>
+</p>
+<h3 id="基于数学的谓词">基于数学的谓词
+</h3><h4 id="defend-6">defend
+</h4><p><strong>这种方法的核心是利用一个数学恒等式或数论属性来构造一个条件表达式</strong></p>
+<p>这个表达式在混淆时被设计为永远为真 ($P^T$) 或永远为假 ($P^F$​)，但其形式对于静态分析器或人类分析师来说并不直观</p>
+<p><strong>一个简单的$P^T$：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">if</span> ((<span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">x</span>) <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">0</span>)
+</span></span></code></pre></div><p>任何实整数的平方永远大于等于零，这对于分析器来说比较容易识别</p>
+<p><strong>一个高级的$P^T$：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">if</span> ((<span style="color:#d19a66">7</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>) <span style="color:#56b6c2">%</span> <span style="color:#d19a66">3</span> <span style="color:#56b6c2">!=</span> <span style="color:#d19a66">0</span>)
+</span></span></code></pre></div><p><code>x * 2</code>总是偶数，<code>偶数 + 1</code>总是奇数，任何奇数对2取模永远不等于0</p>
+<h4 id="attack-6">attack
+</h4><p>可以使用SMT（satisfiability modulo theories，模理论可满足性）求解器，比如大名鼎鼎的Z3，将谓词喂进去，并询问是否存在一个x，使得该表达式为False，如果<code>Z3</code>回答不可满足，则证明该谓词是 $P^T$</p>
+<p>也可以在调试器中，使用不同的输入运行代码成千上万次，如果<code>if</code>语句的<code>True</code>分支每次都被命中，而<code>False</code>分支被命中了0次，那么它有极高的概率是一个$P^T$，这种方法被称为动态探测，是更为廉价暴力的手段</p>
+<h3 id="基于环境的谓词">基于环境的谓词
+</h3><h4 id="defend-7">defend
+</h4><p><strong>这种方法的核心是谓词的结果不依赖于程序内部的计算，而是依赖于外部环境的一个恒定状态</strong></p>
+<p>eg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#61afef;font-weight:bold">GetModuleHandleA</span>(<span style="color:#98c379">&#34;kernel32.dll&#34;</span>) <span style="color:#56b6c2">!=</span> <span style="color:#e5c07b">NULL</span>)
+</span></span></code></pre></div><p><code>kernel32.dll</code>是所有Windows用户模式进程的基础核心库，它必然已经被加载到进程空间中，因此，这个 API 调用永远不会返回<code>NULL</code>，也就是说这个谓词在任何Windows进程中都是$P^T$​</p>
+<p>而静态分析器不知道<code>GetModuleHandleA</code>的返回值，它必须假设这个API既可能成功也可能失败，这会迫使分析器在控制流图中保留两个分支，而<code>False</code>分支会是永远不会被执行的垃圾代码</p>
+<h4 id="attack-7">attack
+</h4><p>可以使用hook或者patch来拦截这个API调用，当检测到输入是<code>&quot;kernel32.dll&quot;</code>时，强行修改其返回值为<code>NULL</code></p>
+<p>或者根据经验判断，通过谓词签名库匹配固定的环境谓词模式，然后标记它</p>
+<h3 id="基于指针别名的谓词">基于指针别名的谓词
+</h3><h4 id="defend-8">defend
+</h4><p>这种方法的核心是利用指针别名（即两个或多个不同的指针变量指向了同一块内存地址）来构造谓词</p>
+<p>比如现在有一个$P^T$:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">p</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">q</span>)
+</span></span></code></pre></div><p>混淆器会通过两条表面上完全不同、但结果相同的复杂计算路径来分别初始化<code>p</code>和<code>q</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#e06c75">int</span> <span style="color:#e06c75">arr</span>[<span style="color:#d19a66">20</span>];
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">int</span>* <span style="color:#e06c75">p</span> = &amp;<span style="color:#e06c75">arr</span>[<span style="color:#d19a66">10</span>]; (<span style="color:#e06c75">路径1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">int</span>* <span style="color:#e06c75">q</span> = &amp;<span style="color:#e06c75">arr</span>[<span style="color:#d19a66">0</span>]; (<span style="color:#e06c75">路径2</span> <span style="color:#e06c75">开始</span>)
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// ... (插入 50 行垃圾指令) ...
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">q</span> = <span style="color:#e06c75">q</span> + <span style="color:#d19a66">5</span>; (<span style="color:#e06c75">路径2</span> <span style="color:#e06c75">继续</span>)
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// ... (插入 50 行垃圾指令) ...
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e06c75">q</span> = <span style="color:#e06c75">q</span> + <span style="color:#d19a66">5</span>; (<span style="color:#e06c75">路径2</span> <span style="color:#e06c75">结束</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">p</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">q</span>) { <span style="color:#56b6c2">..</span>. } (<span style="color:#e06c75">恒为真</span>)
+</span></span></code></pre></div><p>静态分析器很难在数百行垃圾指令的干扰下，静态地跟踪<code>q</code>的值并推导出<code>&amp;arr[0] + 5 + 5</code>等于<code>&amp;arr[10]</code></p>
+<p>因此，它必须假设<code>p == q</code>和<code>p != q</code>两种情况都可能发生</p>
+<h4 id="attack-8">attack
+</h4><p>使用代码切片技术，从<code>if (p == q)</code>开始向上回溯代码，只提取那些对<code>p</code>或<code>q</code>的值有影响的指令：</p>
+<ul>
+<li><code>p</code>的切片可能是：<code>mov eax, OFFSET arr; add eax, 40; mov p, eax</code></li>
+<li><code>q</code>的切片可能是：<code>mov ebx, OFFSET arr; add ebx, 20; add ebx, 20; mov q, ebx</code></li>
+</ul>
+<p>结果就是所有的垃圾指令都被过滤掉了，通过这个简化的切片，可以轻而易举地看出<code>p</code>和<code>q</code>相等</p>
+<p>另外，就上例来说，静态分析工具也可以将arr的基址看做是一个符号，然后顺着指令分析，但不做运算，得到最后的表达式，再喂给SMT求解器他们结果是否相等</p>
+<h2 id="破坏代码局部性">破坏代码局部性
+</h2><h3 id="defend-9">defend
+</h3><h4 id="跳转重排">跳转重排
+</h4><p>通过向基本块中引入无意义的<code>JMP</code>指令，将原本在逻辑上和物理上都连续的代码块打散，破坏其局部性</p>
+<p><strong>eg：</strong></p>
+<p><strong>原始代码：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">start:
+    push offset caption
+    push 0
+    push offset digtxt
+    call MessageBoxA
+    ...
+</code></pre><p><strong>混淆后：</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">start:
+    push 0
+    jmp instr_1
+instr_2:
+    call MessageBoxA
+    jmp instr_5
+instr_3:
+    push 0
+    jmp instr_2
+instr_4:
+    push offset digtxt
+    jmp instr_3
+instr_1:
+    push offset caption
+    jmp instr_4
+instr_5:
+    ...
+</code></pre><h4 id="函数内联与外联">函数内联与外联
+</h4><p><strong>函数内联 (Inlining)</strong>：</p>
+<p>将子函数$P$的代码直接合并到调用者$Q$的代码中，如果$P$被多次调用，会导致代码体积显著膨胀</p>
+<p><strong>函数外联 (Outlining)</strong>：</p>
+<p>将函数$Q$中任意一段代码（特别是逻辑上不相关的部分）提取出来，构成一个新的函数$R$，然后在$Q$​​​的原位置替换为一个<code>CALL R</code></p>
+<h4 id="基本块重排">基本块重排
+</h4><p>将一个函数的所有基本块打乱，并在物理上随机散布到程序的<code>.text</code>段中，甚至插入到其他函数的缝隙中，然后通过<code>JMP</code>将它们重新链接起来</p>
+<h4 id="函数克隆">函数克隆
+</h4><p>复制一个函数$f$，得到 $f&rsquo;$，他们的的功能完全一样，但可能使用了不同的指令模板（也就是基于模式的混淆）</p>
+<p>混淆器将程序中一半对$f$的调用替换为对 $f&rsquo;$的调用，迫使攻击者浪费一倍的时间去分析两个不同的函数，最后才发现它们是等价的</p>
+<h3 id="attack-9">attack
+</h3><p>实际上，破坏代码局部性只能对人工分析造成较大阻碍</p>
+<p>分析工具都不应该关心基本块的物理位置，只应该关心它们之间的逻辑关系，通过跟随这些跳转，可以100%还原出原始的控制流图，这就让前面三种混淆完全无效了，相信用过IDA的一定能体会到这种图的便利</p>
+<p>而对抗函数克隆，可以使用模糊哈希，这些工具比较两个函数的的CFG结构、常量、API调用等，如果相似度极高，就可以判定它们是克隆函数</p>
+<h2 id="控制流间接化">控制流间接化
+</h2><h3 id="defend-10">defend
+</h3><p><strong>使用动态计算的分支地址，或者模拟<code>JMP</code>和<code>CALL</code>指令，来隐藏真实的控制流</strong></p>
+<p><strong>eg1：使用<code>RET</code>模拟<code>JMP</code></strong></p>
+<p><code>JMP &lt;target&gt;</code>可以被等价替换为：</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">PUSH &lt;target&gt;     ;
+RET               ;
+</code></pre><p>这会打破静态分析器“<code>RET</code>代表函数返回”的假设</p>
+<p><strong>eg：：使用<code>CALL</code>模拟<code>JMP</code></strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    CALL real_code      ;
+    ; --- 垃圾代码 ---   
+    ...
+real_code:
+    ADD ESP, 4          ;
+    ; --- 真正的有效代码 ---
+</code></pre><p>这里的<code>CALL</code>只是起到了<code>PUSH &lt;返回地址&gt;</code>和<code>JMP real_code</code>的作用</p>
+<p>而<code>real_code</code>开头的<code>ADD ESP, 4</code>则抛弃了压入栈的返回地址（垃圾代码的地址），从而实现了<code>JMP</code>的效果</p>
+<p><strong>eg3：修改栈上的返回地址</strong></p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    CALL FunctionA      ;
+original_ret_addr:
+    ; --- 垃圾代码 ---   
+actual_ret_addr:
+    NOP                 ;
+    ; --- 真正的有效代码 ---
+    ...
+
+FunctionA:
+    ; 假设垃圾代码长度为 9 字节
+    ADD DWORD PTR [ESP], 9 ; 关键！修改栈顶的返回地址
+    RET                 ;
+</code></pre><p><code>CALL FunctionA</code>时，压入栈的返回地址是<code>original_ret_addr</code>，但<code>FunctionA</code>内部通过<code>[ESP]</code>（即指向返回地址的指针）修改了它，将其改为了<code>actual_ret_addr</code></p>
+<p>其实也就是上一种的变种</p>
+<h3 id="attack-10">attack
+</h3><p>对于<code>PUSH &lt;target&gt;; RET</code>，IDA等现代工具已经可以很好地识别</p>
+<p>它们会分析<code>RET</code>指令时<code>ESP</code>指向的值，如果它不是一个<code>CALL</code>指令的返回地址，而是一个<code>PUSH</code>压入的常量，IDA会自动将其标记为<code>JMP</code>（显示为<code>retn_0</code>并添加注释）</p>
+<h2 id="控制流图扁平化">控制流图扁平化
+</h2><h3 id="defend-11">defend
+</h3><p>这是最复杂的控制流混淆技术之一</p>
+<p>它将一个函数内所有控制结构（如 <code>if-else</code>、<code>while</code>、<code>for</code>）全部“拍平”，用一个单一的分发器结构来替代</p>
+<p><strong>分发器</strong>：这通常是一个巨大的<code>switch</code>结构</p>
+<p><strong>状态变量</strong>：引入一个 <code>swVar</code> 变量</p>
+<p><strong>代码块拆分</strong>：原始函数的所有基本块被拆分，并放入<code>switch</code>的不同<code>case</code>中</p>
+<p><strong>每个基本块的末尾不再是<code>JMP</code>或<code>JZ</code>，而是负责更新<code>swVar</code>，将其设置为下一个应该执行的基本块的 ID</strong></p>
+<p><strong>eg：</strong></p>
+<p><strong>原始代码：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>, <span style="color:#e06c75">b</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">while</span> (<span style="color:#e06c75">a</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">10</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">b</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">b</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">b</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">10</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">a</span><span style="color:#56b6c2">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">b</span><span style="color:#56b6c2">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">use</span>(<span style="color:#e06c75">b</span>);
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251026203050831" href="http://picture.928330.xyz/typora/image-20251026203050831.png">
+<img src="http://picture.928330.xyz/typora/image-20251026203050831.png" alt="image-20251026203050831"  />
+</a>
+</div>
+</p>
+<p><strong>CFG扁平化混淆后 (伪代码)：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#e06c75">a</span>, <span style="color:#e06c75">b</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>; <span style="color:#7f848e">// 状态变量，初始为 1
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">goto</span> <span style="color:#e06c75">dispatcher</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">dispatcher</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">switch</span> (<span style="color:#e06c75">swVar</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">case</span> <span style="color:#d19a66">1</span><span style="color:#56b6c2">:</span> <span style="color:#7f848e">// 对应原始的 S1
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">b</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>; <span style="color:#7f848e">// 下一个去 S2
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">goto</span> <span style="color:#e06c75">dispatcher</span>;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">case</span> <span style="color:#d19a66">2</span><span style="color:#56b6c2">:</span> <span style="color:#7f848e">// 对应原始的 S2 (while)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">if</span> (<span style="color:#56b6c2">!</span>(<span style="color:#e06c75">a</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">10</span>))
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">6</span>; <span style="color:#7f848e">// (while 循环结束，去 S6)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">else</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">3</span>; <span style="color:#7f848e">// (while 循环体，去 S3)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">goto</span> <span style="color:#e06c75">dispatcher</span>;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">case</span> <span style="color:#d19a66">3</span><span style="color:#56b6c2">:</span> <span style="color:#7f848e">// 对应原始的 S3
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#e06c75">b</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">a</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> (<span style="color:#56b6c2">!</span>(<span style="color:#e06c75">b</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">10</span>))
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">5</span>; <span style="color:#7f848e">// (if 为 false，去 S5)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">else</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4</span>; <span style="color:#7f848e">// (if 为 true，去 S4)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">goto</span> <span style="color:#e06c75">dispatcher</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">case</span> <span style="color:#d19a66">4</span><span style="color:#56b6c2">:</span> <span style="color:#7f848e">// 对应原始的 S4 (if-true)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#e06c75">a</span><span style="color:#56b6c2">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>; <span style="color:#7f848e">// 回到 S2 (while 头部)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">goto</span> <span style="color:#e06c75">dispatcher</span>;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">case</span> <span style="color:#d19a66">5</span><span style="color:#56b6c2">:</span> <span style="color:#7f848e">// 对应原始的 S5 (if-false)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#e06c75">b</span><span style="color:#56b6c2">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>; <span style="color:#7f848e">// 回到 S2 (while 头部)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">goto</span> <span style="color:#e06c75">dispatcher</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">case</span> <span style="color:#d19a66">6</span><span style="color:#56b6c2">:</span> <span style="color:#7f848e">// 对应原始的 S6 (use(b))
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#61afef;font-weight:bold">use</span>(<span style="color:#e06c75">b</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">break</span>; <span style="color:#7f848e">// 结束
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    }
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251026203105731" href="http://picture.928330.xyz/typora/image-20251026203105731.png">
+<img src="http://picture.928330.xyz/typora/image-20251026203105731.png" alt="image-20251026203105731"  />
+</a>
+</div>
+</p>
+<p>这种混淆彻底摧毁了原始的<code>while</code>和<code>if</code>逻辑结构，静态分析器和攻击者只能看到一堆基本块和一个<code>switch</code>，基本块之间的逻辑关系被隐藏在对<code>swVar</code>的控制操作中</p>
+<p>更有甚者，<code>swVar</code>的更新不再是简单的赋值，它可能是一个复杂的MBA表达式，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">swVar</span> <span style="color:#56b6c2">=</span> ((<span style="color:#e06c75">swVar_old</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">0xABCDEF</span>) <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0x123456</span>) <span style="color:#56b6c2">^</span> <span style="color:#d19a66">0xDEADBEEF</span>
+</span></span></code></pre></div><p>同时，<code>case</code>标签也不是<code>1,2,3...</code>，而是<code>0xABC, 0xDEF, 0x123...</code>，这使得分析师必须先逆向出状态转换函数，才能重建CFG</p>
+<h3 id="attack-11">attack
+</h3><p><strong>进行静态CFG重建：</strong></p>
+<ol>
+<li>定位分发器<code>switch</code>和状态变量<code>swVar</code></li>
+<li>分析每个<code>case</code>块</li>
+<li>忽略块内的所有业务逻辑，只看块末尾对<code>swVar</code>的写入</li>
+<li><code>case 3:</code> &hellip; <code>swVar = 4;</code>这条指令就是一条从<code>Block 3</code>到<code>Block 4</code>的有向边</li>
+<li><code>case 2:</code> &hellip; <code>if (cond) swVar = 6; else swVar = 3;</code>这是从<code>Block 2</code>出发的两条边，分别指向<code>Block 6</code>和<code>Block 3</code></li>
+</ol>
+<p>通过这个方法，可以100%自动化地重建原始的CFG</p>
 
 </section>
 
@@ -1093,7 +1248,7 @@
 
 
         <span>
-            最后更新于 2025-10-13
+            最后更新于 2025-10-28
         </span>
     </section></footer>
 
@@ -1112,25 +1267,6 @@
             
                 
 <article class="has-image">
-    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">逆向基础5：混淆技术</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/">
         
         
@@ -1143,6 +1279,25 @@
 
         <div class="article-details">
             <h2 class="article-title">逆向基础4：PE文件</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">逆向基础3：ELF文件</h2>
         </div>
     </a>
 </article>

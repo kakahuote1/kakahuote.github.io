@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Wed, 22 Oct 2025 18:14:57 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/forensics/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 Oct 2025 14:13:53 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/forensics/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>美亚杯2024个人赛取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Wed, 22 Oct 2025 14:30:45 +0800</pubDate>
@@ -815,8 +815,8 @@
 &lt;p&gt;根据聊天记录，可以发现这话之间明显是不连贯的，应该是recovery的内容：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235701595&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251017235701595.png&#34; alt=&#34;image-20251017235701595&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251017235701595&#34; href=&#34;http://picture.928330.xyz/typora/image-20251017235701595.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251017235701595.png&#34; alt=&#34;image-20251017235701595&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1061,8 +1061,8 @@
 &lt;p&gt;这里使用MFT brower软件，它可以直接识别磁盘镜像中NTFS的结构：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019124315945&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019124315945.png&#34; alt=&#34;image-20251019124315945&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019124315945&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019124315945.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019124315945.png&#34; alt=&#34;image-20251019124315945&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1298,8 +1298,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;在hex视图改掉这个值：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018214341186&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251018214341186.png&#34; alt=&#34;image-20251018214341186&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251018214341186&#34; href=&#34;http://picture.928330.xyz/typora/image-20251018214341186.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251018214341186.png&#34; alt=&#34;image-20251018214341186&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1443,16 +1443,16 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;连接过的wifi只有一个：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004748962&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004748962.png&#34; alt=&#34;image-20251019004748962&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004748962&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019004748962.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019004748962.png&#34; alt=&#34;image-20251019004748962&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;p&gt;在wifi连接记录里面能看到的都是同一个wifi，网络适配器、网卡guid等都是一样的：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004638268&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019004638268.png&#34; alt=&#34;image-20251019004638268&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019004638268&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019004638268.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019004638268.png&#34; alt=&#34;image-20251019004638268&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1467,8 +1467,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;D. 2024-08-01 14:43:55 UTC+8&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005152484&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005152484.png&#34; alt=&#34;image-20251019005152484&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005152484&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019005152484.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019005152484.png&#34; alt=&#34;image-20251019005152484&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1485,8 +1485,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;D. blockchain.com&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005537464&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005537464.png&#34; alt=&#34;image-20251019005537464&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005537464&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019005537464.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019005537464.png&#34; alt=&#34;image-20251019005537464&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1505,8 +1505,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;看Clara的聊天记录：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005658240&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251019005658240.png&#34; alt=&#34;image-20251019005658240&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251019005658240&#34; href=&#34;http://picture.928330.xyz/typora/image-20251019005658240.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251019005658240.png&#34; alt=&#34;image-20251019005658240&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -1562,7 +1562,28 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;C. 0x59eb2c55eefdd4d8af2886c9fd8fc6f465c3e220&lt;/p&gt;
 &lt;p&gt;D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042&lt;/p&gt;
 &lt;p&gt;不知道怎么写，可能要联网，但是比赛又不让联网，很奇怪了&lt;/p&gt;
-&lt;h2 id=&#34;98根据-idfc-的交易记录作分析-总共有多少次-idfc-交易流入地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c&#34;&gt;98.根据 IDFC 的交易记录作分析, 总共有多少次 IDFC 交易流入地址 0x10a4f01b80203591ccee76081a4489ae1cd1281c?
+&lt;p&gt;*&lt;strong&gt;原来是老考点了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在线计算address网址：https://iancoleman.io/bip39/&lt;/p&gt;
+&lt;p&gt;github离线项目地址：https://github.com/iancoleman/bip39&lt;/p&gt;
+&lt;p&gt;需要输入助记符，以及设置钱币类型（这个类型是在Emma还是David设备里面能找到，我不太清楚）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;stock avocado grab clay light sadness segment ancient toe talk elder oil
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251023133402995&#34; href=&#34;http://picture.928330.xyz/typora/image-20251023133402995.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251023133402995.png&#34; alt=&#34;image-20251023133402995&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;导出的地址能看见ABC三个选项：&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251023133645021&#34; href=&#34;http://picture.928330.xyz/typora/image-20251023133645021.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251023133645021.png&#34; alt=&#34;image-20251023133645021&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ABC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;98根据-idfc-的交易记录作分析-总共有多少次-idfc-交易流入地址-0x10a4f01b80203591ccee76081a4489ae1cd1281c&#34;&gt;98.根据 IDFC 的交易记录作分析, 总共有多少次 IDFC 交易流入地址 0x10a4f01b80203591ccee76081a4489ae1cd1281c?
 &lt;/h2&gt;&lt;p&gt;A. 0&lt;/p&gt;
 &lt;p&gt;B. 1&lt;/p&gt;
 &lt;p&gt;C. 2&lt;/p&gt;
@@ -1590,49 +1611,72 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;图里面有个单词被遮挡了，不过看起来虽然和BC很像，但又不太可能是，猜一个吧&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;B
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;*&lt;strong&gt;错了&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;居然要在内存里面暴力搜索，这完全没提示啊&lt;/p&gt;
+&lt;p&gt;居然要在内存镜像里面暴力搜索，这完全没提示啊&lt;/p&gt;
+&lt;p&gt;内存镜像检材已经删了，先给出答案吧，能搜出来下面这些助记词：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;infant fragile garlic bracket stove blade stick dove aerobic spin term educate
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;ufs导出bitlocker加密盘&#34;&gt;UFS导出bitlocker加密盘
+&lt;/h3&gt;&lt;p&gt;做题过程中尝试的一种方法，虽然应该没什么用，但有必要记录一下&lt;/p&gt;
+&lt;p&gt;首先把包含加密分区的镜像导入UFS，右键加密分区，选择解密：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162838049&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162838049.png&#34; alt=&#34;image-20251022162838049&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162838049&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022162838049.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022162838049.png&#34; alt=&#34;image-20251022162838049&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;接下来有两个选项：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User password (用户密码):&lt;/strong&gt; 启用BitLocker时为该驱动器设置的解锁密码&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Recovery Key (恢复密钥):&lt;/strong&gt; 48位的数字密钥，在启用BitLocker时会自动生成&lt;/p&gt;
+&lt;p&gt;这里我们拿到的是恢复秘钥：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162857838&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022162857838.png&#34; alt=&#34;image-20251022162857838&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022162857838&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022162857838.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022162857838.png&#34; alt=&#34;image-20251022162857838&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;解密成功之后，会得到一个新的磁盘，右键另存：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163222740&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163222740.png&#34; alt=&#34;image-20251022163222740&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163222740&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022163222740.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022163222740.png&#34; alt=&#34;image-20251022163222740&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;选择镜像制作方式，推荐bit2bit：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163242554&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163242554.png&#34; alt=&#34;image-20251022163242554&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163242554&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022163242554.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022163242554.png&#34; alt=&#34;image-20251022163242554&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;选择保存位置，其余选项可以不用动，点击start：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
-&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163525402&#34; href=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png&#34;&gt;
-&lt;img src=&#34;C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251022163525402.png&#34; alt=&#34;image-20251022163525402&#34;  /&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251022163525402&#34; href=&#34;http://picture.928330.xyz/typora/image-20251022163525402.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251022163525402.png&#34; alt=&#34;image-20251022163525402&#34;  /&gt;
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/p&gt;
+&lt;p&gt;这样就得到了解密后的分区的&lt;code&gt;.dsk&lt;/code&gt;文件&lt;/p&gt;
 &lt;h2 id=&#34;100-在-idfc-的交易记录中-下列哪些地址由上述恢复短语所生成&#34;&gt;100. 在 IDFC 的交易记录中, 下列哪些地址由上述恢复短语所生成?
 &lt;/h2&gt;&lt;p&gt;A. 0xb2e3dbea311511ec5bda3e85e061f15366f888a6&lt;/p&gt;
 &lt;p&gt;B. 0xe90ad3f80e39e83b533eef3ed23c641ec51089c6&lt;/p&gt;
 &lt;p&gt;C. 0x90f73497E4446f6Cf9881213C32D6af66d799fE5&lt;/p&gt;
 &lt;p&gt;D. 0x63a8ba1df0404ee41f7c6af8efd2f54006f32042&lt;/p&gt;
 &lt;p&gt;同样不知道怎么写&lt;/p&gt;
-</description>
+&lt;p&gt;*&lt;strong&gt;做法同98题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;div class=&#34;post-img-view&#34;&gt;
+&lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20251023134157060&#34; href=&#34;http://picture.928330.xyz/typora/image-20251023134157060.png&#34;&gt;
+&lt;img src=&#34;http://picture.928330.xyz/typora/image-20251023134157060.png&#34; alt=&#34;image-20251023134157060&#34;  /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CD
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
         <title>RAID与它的重组</title>
@@ -1641,6 +1685,17 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
         
         <guid>https://blog.928330.xyz/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/</guid>
         <description>&lt;img src="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg" alt="Featured image of post RAID与它的重组" /&gt;&lt;p&gt;取证常考知识点，不得不品的一环啊&lt;/p&gt;
+&lt;p&gt;如果对磁盘存储这些的概念不是很熟悉，建议看看：&lt;a class=&#34;link&#34; href=&#34;https://blog.928330.xyz/p/%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%9C%E8%A5%BF/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;磁盘相关的东西
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;参考资料：&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zh.wikipedia.org/wiki/RAID&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;RAID&amp;ndash;维基百科
@@ -5363,9 +5418,9 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dd &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;/dev/sda &lt;span style=&#34;color:#e06c75&#34;&gt;of&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;image.dd &lt;span style=&#34;color:#e06c75&#34;&gt;bs&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;4M &lt;span style=&#34;color:#e06c75&#34;&gt;conv&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;noerror,sync
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;意思是把整块硬盘&lt;code&gt;/dev/sda&lt;/code&gt;按照4MB为单位复制到&lt;code&gt;image.dd&lt;/code&gt;文件里，如果遇到坏扇区，不报错不中止，而是用0填充，保证镜像完整且和原盘大小一致&lt;/p&gt;
 &lt;p&gt;几乎所有主流取证工具都支持创建和导出为&lt;code&gt;.dd&lt;/code&gt;，非常的常见&lt;/p&gt;
-&lt;h4 id=&#34;img--raw--bin&#34;&gt;.img / .raw / .bin
-&lt;/h4&gt;&lt;p&gt;这些都是描述性的扩展名，&lt;code&gt;img&lt;/code&gt;代表 &amp;ldquo;镜像&amp;rdquo;，&lt;code&gt;raw&lt;/code&gt;代表 &amp;ldquo;原始&amp;rdquo;，&lt;code&gt;bin&lt;/code&gt;代表 &amp;ldquo;二进制文件&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;它们在功能和结构上与&lt;code&gt;.dd&lt;/code&gt;文件完全相同，都是指原始的、逐位的副本，只是使用场景和工具不同叫法也不同&lt;/p&gt;
+&lt;h4 id=&#34;img--raw--bin--dsk-等等&#34;&gt;.img / .raw / .bin / .dsk 等等
+&lt;/h4&gt;&lt;p&gt;这些都是描述性的扩展名，&lt;code&gt;img&lt;/code&gt;代表&amp;quot;镜像&amp;quot;，&lt;code&gt;raw&lt;/code&gt;代表&amp;quot;原始&amp;quot;，&lt;code&gt;bin&lt;/code&gt;代表&amp;quot;二进制文件&amp;quot;，&lt;code&gt;.dsk&lt;/code&gt;则是&amp;quot;磁盘镜像&amp;quot;&lt;/p&gt;
+&lt;p&gt;它们在功能和结构上与&lt;code&gt;.dd&lt;/code&gt;文件完全相同，都是指原始逐位的副本，只是使用场景和工具不同叫法不同罢了，后缀名完全不影响分析（不过有些软件还是会限制扩展名，尽管扩展名并未对数据造成任何修改）&lt;/p&gt;
 &lt;p&gt;这些扩展名实际能用于很多场景，遇见了不确定的话就一个个尝试吧，能分析出来就行&lt;/p&gt;
 &lt;h3 id=&#34;封装镜像&#34;&gt;封装镜像
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;本质上也包含了原始磁盘或分区的bit-by-bit数据，但是采用了封装数据 + 元数据（采集者、采集时间、硬盘序列号、哈希值）的形式&lt;/strong&gt;&lt;/p&gt;
@@ -5373,7 +5428,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;h4 id=&#34;e01-ex01&#34;&gt;.E01, .Ex01
 &lt;/h4&gt;&lt;p&gt;由EnCase Forensic开发的证据文件格式，已成为事实上的行业标准，也就是说法庭认可度最高！&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;.Ex01&lt;/code&gt;是其更新的“专家见证”格式，支持更强的AES-256加密和更大的文件大小&lt;/p&gt;
-&lt;p&gt;它主要通过EnCase Forensic软件制作，同时，绝大多数第三方取证工具也都支持直接采集为 &lt;code&gt;.E01&lt;/code&gt; 格式以保证兼容性&lt;/p&gt;
+&lt;p&gt;它主要通过EnCase Forensic软件制作，同时，绝大多数第三方取证工具也都支持直接采集为&lt;code&gt;.E01&lt;/code&gt;格式以保证兼容性&lt;/p&gt;
+&lt;p&gt;想要查看里面具体信息，可以在Xways中创建案例，添加检材之后右键看属性&lt;/p&gt;
 &lt;h4 id=&#34;aff--aff4af4&#34;&gt;.aff / .aff4(.af4)
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.aff&lt;/code&gt;，全称是高级取证格式 (Advanced Forensic Format)&lt;/strong&gt;，它是一个开源项目，旨在克服&lt;code&gt;.dd&lt;/code&gt;格式无元数据和&lt;code&gt;.E01&lt;/code&gt;格式专有的缺点&lt;/p&gt;
 &lt;p&gt;而&lt;code&gt;.aff4&lt;/code&gt;是&lt;code&gt;.aff&lt;/code&gt;的第四代版本，是一个经过大幅重新设计的格式，可以存储多种数据流，包括磁盘映像、内存映像、逻辑文件，甚至是网络流量，也被简写成&lt;code&gt;.af4&lt;/code&gt;&lt;/p&gt;
@@ -5386,6 +5442,7 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;当单个大镜像被分割存储时，会看到一组序列文件：&lt;/p&gt;
 &lt;p&gt;可能是&lt;code&gt;disk_part1.dd&lt;/code&gt;、&lt;code&gt;disk_part2.dd&lt;/code&gt;、 &lt;code&gt;disk_part3.dd&lt;/code&gt;这样的原始文件分卷&lt;/p&gt;
 &lt;p&gt;也能是&lt;code&gt;case.E01&lt;/code&gt;、&lt;code&gt;case.E02&lt;/code&gt;、&lt;code&gt;case.E03&lt;/code&gt;，或者&lt;code&gt;case001.E01&lt;/code&gt;、&lt;code&gt;case002.E01&lt;/code&gt;、&lt;code&gt;case003.E01&lt;/code&gt;这样的封装镜像分卷&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;比较特殊的是，使用通用文件分割工具（如WinRAR、7-Zip等）处理原始镜像生成的分片镜像会以数字作为后缀名，比如&lt;code&gt;.001&lt;/code&gt;、&lt;code&gt;.002&lt;/code&gt;这样的序列&lt;/strong&gt;，看成是&lt;code&gt;.dd&lt;/code&gt;这样的另一种表达方式就行了&lt;/p&gt;
 &lt;p&gt;它们必须放在一起才能被完整加载，也就是之前提到的“多镜像文件”这一栏&lt;/p&gt;
 &lt;h2 id=&#34;物理磁盘与磁盘阵列&#34;&gt;物理磁盘与磁盘阵列
 &lt;/h2&gt;&lt;h3 id=&#34;物理磁盘&#34;&gt;物理磁盘
@@ -5394,8 +5451,19 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;也有可能是使用FTK等工具挂载镜像成为系统盘&lt;/p&gt;
 &lt;h3 id=&#34;磁盘阵列-raid&#34;&gt;磁盘阵列 (RAID)
 &lt;/h3&gt;&lt;p&gt;RAID（Redundant Array of Independent/Inexpensive Disks，独立冗余磁盘阵列）是一种将多块物理磁盘组合成一个逻辑磁盘的技术，用于提升容错能力，抗数据丢失&lt;/p&gt;
-&lt;p&gt;遇到这类检材，一般是考察RAID的磁盘重组，也就是把分散的块组合成可以&lt;/p&gt;
+&lt;p&gt;遇到这类检材，一般是考察RAID的磁盘重组，也就是把分散的块组合成可以访问的正常存储空间&lt;/p&gt;
 &lt;p&gt;这部分内容有点多，后面单开一篇学习&lt;/p&gt;
+&lt;p&gt;移步：&lt;a class=&#34;link&#34; href=&#34;https://blog.928330.xyz/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;RAID与它的重组
+    
+    &lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+        height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+        &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+        &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+            fill=&#34;currentColor&#34;&gt;
+    &lt;/svg&gt;&lt;/span&gt;
+    
+&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;逻辑镜像&#34;&gt;逻辑镜像
 &lt;/h1&gt;&lt;p&gt;与获取整个磁盘不同，这类检材只包含从源系统中选择性提取的部分数据（特定文件和文件夹）&lt;/p&gt;
 &lt;h2 id=&#34;l01--lx01&#34;&gt;.L01 / .Lx01
@@ -5405,15 +5473,18 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;/h2&gt;&lt;p&gt;嗯，就是之前提到过的那个&lt;/p&gt;
 &lt;p&gt;使用FTK软件时，选择获取逻辑证据，然后添加特定的文件/文件夹就能创建&lt;code&gt;.ad1&lt;/code&gt;文件&lt;/p&gt;
 &lt;h2 id=&#34;zip--tar--rar&#34;&gt;.zip / .tar / .rar
-&lt;/h2&gt;&lt;p&gt;其实就是手动打包一系列要分析的文件，不使用专业软件而已&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;其实就是手动打包一系列要分析的文件，不使用专业软件制作而已&lt;/p&gt;
+&lt;p&gt;不过要注意有的时候压缩包内的只是分类的文件集合（比如24年美亚杯），还是需要自己手动查看&lt;/p&gt;
+&lt;p&gt;如果是零散的文件，专业软件无法正常处理，可以尝试使用开源的autopsy进行初步的分析&lt;/p&gt;
 &lt;h1 id=&#34;系统备份&#34;&gt;系统备份
 &lt;/h1&gt;&lt;h2 id=&#34;tib--tibx&#34;&gt;.tib / .tibx
 &lt;/h2&gt;&lt;p&gt;由Acronis True Image软件创建的备份镜像格式&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;.tib&lt;/code&gt;是旧版格式，而&lt;code&gt;.tibx&lt;/code&gt;是较新版本引入的格式，提供了更强的性能和可靠性&lt;/p&gt;
 &lt;p&gt;这类文件包含了整个磁盘或分区的完整快照，可以通过Acronis软件进行恢复或挂载浏览&lt;/p&gt;
-&lt;h2 id=&#34;gho&#34;&gt;.gho
+&lt;h2 id=&#34;gho--s01&#34;&gt;.gho &amp;amp; .s01
 &lt;/h2&gt;&lt;p&gt;来自Symantec Ghost软件的磁盘克隆镜像&lt;/p&gt;
 &lt;p&gt;在21世纪初非常流行，现在虽然少见，但在一些旧的系统备份中仍可能遇到&lt;/p&gt;
+&lt;p&gt;当Ghost镜像被分割存储时，它会生成一个主&lt;code&gt;.gho&lt;/code&gt;文件和一系列&lt;code&gt;.s01&lt;/code&gt;、&lt;code&gt;.s02&lt;/code&gt;&amp;hellip; 的分卷文件&lt;/p&gt;
 &lt;h2 id=&#34;bkf&#34;&gt;.bkf
 &lt;/h2&gt;&lt;p&gt;由旧版Windows（如 XP, Server 2003）自带的NTBackup工具创建的备份文件&lt;/p&gt;
 &lt;p&gt;它主要用于备份文件和系统状态，而不是完整的磁盘镜像&lt;/p&gt;
@@ -5444,13 +5515,20 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;主要通过&lt;code&gt;qemu-img&lt;/code&gt;命令行工具创建，比如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qemu-img create -f qcow2 image.qcow2 20G
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;意思是创建一个大小为20GB、格式为qcow2的虚拟磁盘文件&lt;code&gt;image.qcow2&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;iso&#34;&gt;.iso
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.iso&lt;/code&gt;是光盘（CD/DVD/Blu-ray）的标准镜像格式&lt;/strong&gt;，它包含了光盘的完整文件系统&lt;/p&gt;
+&lt;p&gt;不过火眼似乎对&lt;code&gt;.iso&lt;/code&gt;的直接解析不太支持&lt;/p&gt;
 &lt;h2 id=&#34;dmg--sparseimage&#34;&gt;.dmg / .sparseimage
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.dmg&lt;/code&gt;全称Apple Disk Image&lt;/strong&gt;，是macOS下标准的磁盘映像格式，用于软件分发和数据归档，类似于Windows下的ISO（不过ISO没办法被火眼解析，真是很奇怪了）&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;.dmg&lt;/code&gt;全称Apple Disk Image&lt;/strong&gt;，是macOS下标准的磁盘映像格式，用于软件分发和数据归档，就类似于Windows下的&lt;code&gt;.iso&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;**&lt;code&gt;.sparseimage&lt;/code&gt;**是&lt;code&gt;.dmg&lt;/code&gt;的一种稀疏捆绑磁盘映像，它的特点是文件大小会根据实际存储数据的增多而动态增长，而不是一开始就占用全部分配空间，非常节省存储，类似growable的&lt;code&gt;.vmdk&lt;/code&gt;文件&lt;/p&gt;
 &lt;p&gt;这两种格式都是通过macOS系统自带的磁盘工具应用程序创建&lt;/p&gt;
-&lt;h2 id=&#34;zvhd2&#34;&gt;.zvhd2
-&lt;/h2&gt;&lt;p&gt;这是Parallels Desktop虚拟机软件使用的专有虚拟磁盘格式&lt;/p&gt;
-&lt;p&gt;Parallels是一款在macOS上运行Windows和其他操作系统的流行软件，虚拟机硬盘会以&lt;code&gt;.zvhd2&lt;/code&gt;格式存储&lt;/p&gt;
+&lt;h2 id=&#34;hdd--hds--zvhd2&#34;&gt;.hdd / .hds / .zvhd2
+&lt;/h2&gt;&lt;p&gt;这些都是Parallels Desktop虚拟机软件使用的虚拟磁盘格式&lt;/p&gt;
+&lt;p&gt;Parallels是一款在macOS上运行Windows和其他操作系统的流行软件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;.hdd&lt;/code&gt;&lt;/strong&gt;：是Parallels较早版本使用的格式，它本身是一个包，内部可能包含&lt;code&gt;.hds&lt;/code&gt;磁盘分片文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;.zvhd2&lt;/code&gt;&lt;/strong&gt;：是较新版本Parallels使用的专有虚拟磁盘格式，性能和压缩更好&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;xva&#34;&gt;.xva
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;全称Xen Virtual Appliance&lt;/strong&gt;，是Citrix XenServer/XCP-ng虚拟化平台的虚拟机导出格式&lt;/p&gt;
 &lt;p&gt;它不仅仅是一个磁盘镜像，而是一个包含了虚拟机完整配置（CPU、内存、网络）和所有虚拟磁盘（VHD格式）的归档包（实际上是一个TAR归档文件），用于虚拟机的备份和迁移&lt;/p&gt;
