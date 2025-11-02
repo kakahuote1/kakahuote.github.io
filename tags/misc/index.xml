@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Tue, 28 Oct 2025 14:13:53 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 02 Nov 2025 20:15:11 +0800</lastBuildDate><atom:link href="https://blog.928330.xyz/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>美亚杯2024个人赛取证总结</title>
         <link>https://blog.928330.xyz/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2024%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/</link>
         <pubDate>Wed, 22 Oct 2025 14:30:45 +0800</pubDate>
@@ -4586,7 +4586,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不知道正确的是哪一个&lt;/p&gt;
 &lt;h2 id=&#34;8其中打金平台中13067137585用户的累计产量有多少标准格式10000&#34;&gt;8.其中打金平台中&amp;quot;13067137585&amp;quot;用户的累计产量有多少？[标准格式：100.00]
 &lt;/h2&gt;&lt;p&gt;这题肯定是要连接数据库才能做出来的题目了&lt;/p&gt;
-&lt;p&gt;一个比较好的办法是本地使用navicat链接数据库，因为这个数据库只允许本地访问，直接连是连不上去的，必须要使用ssh隧道，这样才能假装是在本地访问的：&lt;/p&gt;
+&lt;h3 id=&#34;navicat--ssh连接mysql&#34;&gt;navicat + ssh连接mysql
+&lt;/h3&gt;&lt;p&gt;一个比较好的办法是本地使用navicat链接数据库，因为这个数据库只允许本地访问，直接连是连不上去的，必须要使用ssh隧道，这样才能假装是在本地访问的：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
 &lt;a data-fancybox=&#34;gallery&#34; data-caption=&#34;image-20250910233959488&#34; href=&#34;http://picture.928330.xyz/typora/image-20250910233959488.png&#34;&gt;
@@ -4605,7 +4606,8 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;不过root的密码不知道为什么总是登不进去，建议是重启数据库，加上&amp;ndash;skip-grant-tables选项&lt;/p&gt;
 &lt;p&gt;另外，重启还能解决一个问题&lt;/p&gt;
 &lt;p&gt;如果直接使用宝塔面板管理数据库的话，会提示：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;数据库服务器连接失败！&amp;lt;pre&amp;gt;Can&amp;#39;t connect to MySQL server on &amp;#39;localhost&amp;#39; ([Errno 2] No such file or directory)&amp;lt;/pre&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;数据库服务器连接失败！
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#e06c75&#34;&gt;pre&lt;/span&gt;&amp;gt;Can&amp;#39;t connect to MySQL server on &amp;#39;localhost&amp;#39; ([Errno 2] No such file or directory)&amp;lt;/&lt;span style=&#34;color:#e06c75&#34;&gt;pre&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;尝试在直接在这台服务器登录，也会报错&amp;quot;找不到/tmp/socket文件&amp;quot;，和上面其实是一个原因：&lt;/p&gt;
 &lt;p&gt;这个服务器配置了默认使用unix socket作为连接方式，而套接字文件又被他搞不见了！&lt;/p&gt;
 &lt;p&gt;在本机navicat使用ssh隧道可以正常登录，因为它没有使用socket文件，而是用TCP端口（大概是这个原因）&lt;/p&gt;
@@ -4627,7 +4629,9 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;p&gt;此外，mysqld_safe本身是一个shell脚本，默认会在前台运行，把日志直接输出到终端从而会占用整个窗口，&lt;strong&gt;加上&amp;amp;后就不会了&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;最终重启命令：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mysqld_safe --skip-grant-tables &amp;amp;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启后所有问题都消失了，/tmp/socket重现人间，使用&lt;code&gt;mysql -u root&lt;/code&gt;无需密码就能登录root，宝塔的数据库管理面板也不报错，可以使用了&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启后所有问题都消失了，/tmp/socket重现人间，无需密码就能登录root：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mysql -u root
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;宝塔的数据库管理面板也不报错，可以使用了&lt;/p&gt;
 &lt;p&gt;查看集群服务器的二号工作节点，会发现他的数据库也是存在这台一号机里面的：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;
@@ -4660,7 +4664,30 @@ call qword ptr ds:[&amp;lt;MessageBoxA&amp;gt;]       | MessageBoxA
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;43853.21258852
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9其中打金平台会员组最高溢价比例是多少标准格式1000&#34;&gt;9.其中打金平台会员组最高溢价比例是多少？[标准格式：10.00]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;修改sql密码&#34;&gt;修改sql密码
+&lt;/h3&gt;&lt;p&gt;进入mysql后执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#使对 mysql.user 等权限表的直接修改立即生效&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FLUSH PRIVILEGES; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#为 root 在 localhost（仅本地连接）这个账户设置（或重设）密码为 123456&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ALTER USER &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;@&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt; IDENTIFIED BY &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;123456&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;#为 root 在 host=&amp;#39;%&amp;#39;（通配，允许远程连接）这个条目设置密码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ALTER USER &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;@&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; IDENTIFIED BY &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;123456&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 再次刷新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FLUSH PRIVILEGES;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样就把root密码重置为了123456&lt;/p&gt;
+&lt;p&gt;之后正常登录即可：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mysql -u root -p &lt;span style=&#34;color:#d19a66&#34;&gt;123456&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;mysql密码&#34;&gt;mysql密码
+&lt;/h3&gt;&lt;p&gt;**方法一：**运气好点在my.ini或者my.cnf里找到，先去搜一下这两个文件&lt;/p&gt;
+&lt;p&gt;**方法二：**去网站根目录下的配置文件里找，如果是java站点，就去找application，php网站可能在&lt;code&gt;config.php&lt;/code&gt;，&lt;code&gt;wp-config.php&lt;/code&gt;等等&lt;/p&gt;
+&lt;p&gt;**方法三：**内存取证&lt;/p&gt;
+&lt;p&gt;**方法四：**如果是docker容器搭建，可能会在Docker环境变量里（用命令&lt;code&gt;env&lt;/code&gt;或&lt;code&gt;printenv&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;**方法五：**bt面板里可能有数据库连接密码&lt;/p&gt;
+&lt;p&gt;**方法六：**去linux历史命令里找，里面有可能会有配置数据库的命令（用命令&lt;code&gt;history&lt;/code&gt;或者查看&lt;code&gt;~/.bash_history&lt;/code&gt;）&lt;/p&gt;
+&lt;h2 id=&#34;9其中打金平台会员组最高溢价比例是多少标准格式1000&#34;&gt;9.其中打金平台会员组最高溢价比例是多少？[标准格式：10.00]
 &lt;/h2&gt;&lt;p&gt;宝塔网页，文件 -&amp;gt; 文件内容搜索，搜索溢价比：&lt;/p&gt;
 &lt;p&gt;
 &lt;div class=&#34;post-img-view&#34;&gt;

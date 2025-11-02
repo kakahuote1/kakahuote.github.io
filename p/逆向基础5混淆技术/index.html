@@ -10,7 +10,7 @@
 <meta property='og:description' content="代码变得难看了">
 <meta property='og:url' content='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%805%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-26T19:56:22&#43;08:00'/><meta property='article:modified_time' content='2025-10-28T14:13:53&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-10-26T19:56:22&#43;08:00'/><meta property='article:modified_time' content='2025-11-02T20:15:11&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg' />
 <meta name="twitter:title" content="逆向基础5：混淆技术">
 <meta name="twitter:description" content="代码变得难看了"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://picture.928330.xyz/typora/1942e99d5e2b2ffc67184eba1cfe48ea.jpg' />
@@ -562,7 +562,7 @@
 
 
                <time>
-                   更新时间：2025-10-28
+                   更新时间：2025-11-02
                </time>
            </div>
         <div>
@@ -605,78 +605,78 @@
 <li><strong>汇编/二进制级</strong>：直接对编译后的机器码或汇编代码进行修改</li>
 </ul>
 <p>有些不理解？让我们来看一个具体的汇编混淆片段（为了方便观看，前面就加上行号了）：</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">01 XOR EBX, EAX
-02 XOR EAX, EBX
-03 XOR EBX, EAX
-04 INC EAX
-05 NEG EBX
-06 ADD EBX, 0A6098326H
-07 CMP EAX, ESP
-08 MOV EAX, 59F67CD5H
-09 XOR EAX, 0FFFFFFFFH
-10 SUB EBX, EAX
-11 RCL EAX, CL
-12 PUSH 0F9CBE47AH
-13 ADD DWORD PTR [ESP], 6341B86H
-14 SBB EAX, EBP
-15 SUB DWORD PTR [ESP], EBX
-16 PUSHFD
-17 PUSHAD
-18 POP EAX
-19 ADD ESP, 20H
-20 TEST EBX, EAX
-21 POP EAX
-</code></pre><p>哇，真是写了好多啊，那这么长的代码，实现了什么强大的功能呢？</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">01</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">02</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">03</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">04</span> <span style="color:#e06c75">INC</span> <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">05</span> <span style="color:#e06c75">NEG</span> <span style="color:#e06c75">EBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">06</span> <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">0</span><span style="color:#e06c75">A6098326H</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">07</span> <span style="color:#e06c75">CMP</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">ESP</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">08</span> <span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">59F</span><span style="color:#d19a66">67</span><span style="color:#e06c75">CD5H</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">09</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0FF</span><span style="color:#e06c75">FFFFFFH</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">10</span> <span style="color:#e06c75">SUB</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">11</span> <span style="color:#e06c75">RCL</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">CL</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">12</span> <span style="color:#e06c75">PUSH</span> <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">13</span> <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ESP</span>], <span style="color:#d19a66">6341</span><span style="color:#e06c75">B86H</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">14</span> <span style="color:#e06c75">SBB</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EBP</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">15</span> <span style="color:#e06c75">SUB</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ESP</span>], <span style="color:#e06c75">EBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">16</span> <span style="color:#e06c75">PUSHFD</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">17</span> <span style="color:#e06c75">PUSHAD</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">18</span> <span style="color:#e06c75">POP</span> <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">19</span> <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">ESP</span>, <span style="color:#d19a66">20</span><span style="color:#e06c75">H</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">20</span> <span style="color:#e06c75">TEST</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">21</span> <span style="color:#e06c75">POP</span> <span style="color:#e06c75">EAX</span>
+</span></span></code></pre></div><p>哇，真是写了好多啊，那这么长的代码，实现了什么强大的功能呢？</p>
 <p>我们一步一步看：</p>
 <p><strong>寄存器交换：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">; 初始状态: EAX = N, EBX = M
-01 XOR EBX, EAX         ; EBX = M ^ N
-02 XOR EAX, EBX         ; EAX = N ^ (M ^ N) = M (即 EBX 的初始值)
-03 XOR EBX, EAX         ; EBX = (M ^ N) ^ M = N (即 EAX 的初始值)
-</code></pre><p>这是一个不使用第三个寄存器来交换<code>EAX</code>和<code>EBX</code>内容的技巧，看着虽然有些复杂，但也还合理</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>; 初始状态<span style="color:#56b6c2">:</span> <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">N</span>, <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">M</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">01</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>         ; <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">M</span> <span style="color:#56b6c2">^</span> <span style="color:#e06c75">N</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">02</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EBX</span>         ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">N</span> <span style="color:#56b6c2">^</span> (<span style="color:#e06c75">M</span> <span style="color:#56b6c2">^</span> <span style="color:#e06c75">N</span>) <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">M</span> (即 <span style="color:#e06c75">EBX</span> 的初始值)
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">03</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>         ; <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">M</span> <span style="color:#56b6c2">^</span> <span style="color:#e06c75">N</span>) <span style="color:#56b6c2">^</span> <span style="color:#e06c75">M</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">N</span> (即 <span style="color:#e06c75">EAX</span> 的初始值)
+</span></span></code></pre></div><p>这是一个不使用第三个寄存器来交换<code>EAX</code>和<code>EBX</code>内容的技巧，看着虽然有些复杂，但也还合理</p>
 <p><strong>垃圾指令：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">04 INC EAX              ; EAX = EAX + 1
-05 NEG EBX              ; EBX = -N (对N取补)
-06 ADD EBX, 0A6098326H  ; EBX = -N + 0A6098326H
-07 CMP EAX, ESP         ; 比较 EAX 和 ESP
-</code></pre><p>嗯？有些不对劲了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">04</span> <span style="color:#e06c75">INC</span> <span style="color:#e06c75">EAX</span>              ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">05</span> <span style="color:#e06c75">NEG</span> <span style="color:#e06c75">EBX</span>              ; <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#61afef;font-weight:bold">N</span> (对<span style="color:#e06c75">N取补</span>)
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">06</span> <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">EBX</span>, <span style="color:#d19a66">0</span><span style="color:#e06c75">A6098326H</span>  ; <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#e06c75">N</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0</span><span style="color:#e06c75">A6098326H</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">07</span> <span style="color:#e06c75">CMP</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">ESP</span>         ; 比较 <span style="color:#e06c75">EAX</span> 和 <span style="color:#e06c75">ESP</span>
+</span></span></code></pre></div><p>嗯？有些不对劲了</p>
 <p>行<code>04</code>修改了<code>EAX</code> —— 但是<code>EAX</code>的值在后面的第<code>08</code>行被完全覆盖了，所以这次<code>INC</code>没有任何意义！它完全可以不存在，也就是一条垃圾指令！</p>
 <p>行<code>05</code>和<code>06</code>是对<code>EBX</code>的值<code>N</code>的取补计算</p>
 <p>行<code>07</code>的<code>CMP</code>会设置<code>EFLAGS</code>标志寄存器，但这些标志位在被任何条件跳转指令使用之前，就被第<code>09</code>行的 <code>XOR</code>指令给覆盖了（它也会修改标志位），所以这也是一条垃圾指令！</p>
 <p>好吧好吧，反正这部分结束之后，<code>EBX</code>的值变成了<code>-N + 0A6098326H</code></p>
 <p><strong>常量展开：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">08 MOV EAX, 59F67CD5H   ; EAX = 59F67CD5H
-09 XOR EAX, 0FFFFFFFFH   ; EAX = NOT 59F67CD5H = 0A609832AH
-10 SUB EBX, EAX          ; EBX = EBX - EAX
-</code></pre><p>行<code>08</code>和<code>09</code>没有直接使用<code>MOV EAX, 0A609832AH</code>修改EAX，而是通过两步计算（<code>XOR 0xFFFFFFFF</code>等同于<code>NOT</code>，即按位取反）来得到这个值，增加了分析难度，这种方法叫做常量展开</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">08</span> <span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">59F</span><span style="color:#d19a66">67</span><span style="color:#e06c75">CD5H</span>   ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">59F</span><span style="color:#d19a66">67</span><span style="color:#e06c75">CD5H</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">09</span> <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0FF</span><span style="color:#e06c75">FFFFFFH</span>   ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">NOT</span> <span style="color:#d19a66">59F</span><span style="color:#d19a66">67</span><span style="color:#e06c75">CD5H</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span><span style="color:#e06c75">A609832AH</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">10</span> <span style="color:#e06c75">SUB</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>          ; <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">EBX</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">EAX</span>
+</span></span></code></pre></div><p>行<code>08</code>和<code>09</code>没有直接使用<code>MOV EAX, 0A609832AH</code>修改EAX，而是通过两步计算（<code>XOR 0xFFFFFFFF</code>等同于<code>NOT</code>，即按位取反）来得到这个值，增加了分析难度，这种方法叫做常量展开</p>
 <p>行<code>10</code>用<code>EBX</code>减去<code>EAX</code>：<code>EBX = (-N + 0A6098326H) - 0A609832AH = -N - 4</code></p>
 <p>这是一个重要的中间结果, <code>EBX</code>的值变成了<code>-N - 4</code></p>
 <p><strong>基于栈的混淆：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">11 RCL EAX, CL          ; [垃圾指令]
-12 PUSH 0F9CBE47AH      ; 压入一个常量
-13 ADD DWORD PTR [ESP], 6341B86H ; 0F9CBE47AH + 6341B86H = 0
-14 SBB EAX, EBP          ; [垃圾指令]
-15 SUB DWORD PTR [ESP], EBX ; [ESP] = 0 - EBX
-</code></pre><p>行<code>11</code>和<code>14</code>都是垃圾指令，因为<code>EAX</code>的值在第<code>18</code>行被<code>POP</code>覆盖了</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">11</span> <span style="color:#e06c75">RCL</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">CL</span>          ; [垃圾指令]
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">12</span> <span style="color:#e06c75">PUSH</span> <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span>      ; 压入一个常量
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">13</span> <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ESP</span>], <span style="color:#d19a66">6341</span><span style="color:#e06c75">B86H</span> ; <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">6341</span><span style="color:#e06c75">B86H</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">14</span> <span style="color:#e06c75">SBB</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EBP</span>          ; [垃圾指令]
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">15</span> <span style="color:#e06c75">SUB</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ESP</span>], <span style="color:#e06c75">EBX</span> ; [<span style="color:#e06c75">ESP</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">EBX</span>
+</span></span></code></pre></div><p>行<code>11</code>和<code>14</code>都是垃圾指令，因为<code>EAX</code>的值在第<code>18</code>行被<code>POP</code>覆盖了</p>
 <p>行<code>12</code>和<code>13</code>再次使用了常量展，它们的目的仅仅是<code>PUSH 0</code></p>
 <p>行<code>15</code>从栈顶的值中减去<code>EBX</code>，也就是：<code>[ESP] = 0 - (-N - 4) = N + 4</code></p>
 <p>此时，<code>N + 4</code>这个值在栈顶，没有在代码表面</p>
 <p><strong>复杂的空操作：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">16 PUSHFD                ; 压入 EFLAGS (4 字节)
-17 PUSHAD                ; 压入所有通用寄存器 (8 * 4 = 32 字节)
-18 POP EAX               ; 弹出 4 字节 (PUSHAD 压入的 EAX)
-19 ADD ESP, 20H          ; 弹出 32 字节 (20H = 32)
-20 TEST EBX, EAX         ; [垃圾指令]
-</code></pre><p>行<code>16</code>和<code>17</code>一共向栈上压入了<code>4 + 32 = 36</code>字节的数据，行<code>18</code>和<code>19</code>一共从栈上弹出了<code>4 + 32 = 36</code> 字节的数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">16</span> <span style="color:#e06c75">PUSHFD</span>                ; 压入 <span style="color:#61afef;font-weight:bold">EFLAGS</span> (<span style="color:#d19a66">4</span> 字节)
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">17</span> <span style="color:#e06c75">PUSHAD</span>                ; 压入所有通用寄存器 (<span style="color:#d19a66">8</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">4</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">32</span> 字节)
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">18</span> <span style="color:#e06c75">POP</span> <span style="color:#e06c75">EAX</span>               ; 弹出 <span style="color:#d19a66">4</span> 字节 (<span style="color:#e06c75">PUSHAD</span> 压入的 <span style="color:#e06c75">EAX</span>)
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">19</span> <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">ESP</span>, <span style="color:#d19a66">20</span><span style="color:#e06c75">H</span>          ; 弹出 <span style="color:#d19a66">32</span> 字节 (<span style="color:#d19a66">20</span><span style="color:#e06c75">H</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">32</span>)
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">20</span> <span style="color:#e06c75">TEST</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EAX</span>         ; [垃圾指令]
+</span></span></code></pre></div><p>行<code>16</code>和<code>17</code>一共向栈上压入了<code>4 + 32 = 36</code>字节的数据，行<code>18</code>和<code>19</code>一共从栈上弹出了<code>4 + 32 = 36</code> 字节的数据</p>
 <p>这四条指令 <code>(16, 17, 18, 19)</code> 组合起来，是什么也没做！同时，它还搅乱了<code>EAX</code>寄存器，真是太坏了</p>
 <p>行<code>20</code>也是垃圾指令，它设置的标志位并没有被使用</p>
 <p>所以，这四行完全就是纯废话</p>
 <p><strong>获取最终结果：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">21 POP EAX               ; 弹出栈顶的值到 EAX
-</code></pre><p>结果是<code>EAX = N + 4</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">21</span> <span style="color:#e06c75">POP</span> <span style="color:#e06c75">EAX</span>               ; 弹出栈顶的值到 <span style="color:#e06c75">EAX</span>
+</span></span></code></pre></div><p>结果是<code>EAX = N + 4</code></p>
 <p><strong>也就是说，这一长串令人眼花缭乱的代码，其等价语义仅仅是：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">ADD EAX, 4
-</code></pre><p>真是神乎其技，对吧？<del>哎呦，恶心死了</del></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">ADD</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">4</span>
+</span></span></code></pre></div><p>真是神乎其技，对吧？<del>哎呦，恶心死了</del></p>
 <p>这个例子里面体现了哪些混淆的方法呢，我们来看看：</p>
 <ul>
 <li>
@@ -702,7 +702,7 @@
 </ul>
 <p>这些混淆方法后面我们一个个说</p>
 <h2 id="理论上的安全性">理论上的安全性
-</h2><p>理论上，一个完美的混淆器应该具有所谓的**虚拟黑盒（Virtual Black-Box, VBB）**属性</p>
+</h2><p>理论上，一个完美的混淆器应该具有所谓的<strong>虚拟黑盒</strong>（Virtual Black-Box, VBB）属性</p>
 <p>这意味着，一个源程序$P$被混淆后得到的程序$P&rsquo;$所能提取到的任何信息，都应该同样能通过“黑盒”访问（即只观察输入和输出）得到</p>
 <p>换句话说，对于攻击者而言，拥有$P&rsquo;$的代码文本并不比只拥有$P$的执行权限能获得更多信息</p>
 <p>一个完美的混淆器应满足三个条件：</p>
@@ -730,27 +730,27 @@
 </h3><p>常量展开是一种与编译器优化相反的技术，它将代码中一个明文常量替换为一组计算过程，而这个过程的最终结果等于该常量</p>
 <p>也就是说，攻击者不能通过简单的查看某一个明文值来得到最终的结果，必须对大块的代码进行分析</p>
 <p>之前例子我们已经见过：</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">PUSH 0F9CBE47AH      ; 压入一个立即数
-ADD DWORD PTR [ESP], 6341B86H ; 栈顶值变为 0F9CBE47AH + 6341B86H = 0
-</code></pre><p>这就是把<code>0</code>这个值隐性地加入了逻辑中</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">PUSH</span> <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span>      ; 压入一个立即数
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ADD</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ESP</span>], <span style="color:#d19a66">6341</span><span style="color:#e06c75">B86H</span> ; 栈顶值变为 <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">6341</span><span style="color:#e06c75">B86H</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>
+</span></span></code></pre></div><p>这就是把<code>0</code>这个值隐性地加入了逻辑中</p>
 <p>更高级的常量展开不会将计算指令紧挨着放在一起，而是将它们交错在大量不相关的垃圾指令之间：</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">MOV EAX, 0F9CBE47AH
-; ... (大量垃圾指令)
-XOR EBX, EBX
-CMP ECX, 5
-; ... (更多垃圾指令)
-PUSH EAX
-ADD DWORD PTR [ESP], 6341B86H
-</code></pre><p>分析器很难将<code>PUSH</code>和<code>ADD</code>两条指令关联起来，从而无法轻易识别出<code>0</code>这个常量</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span>
+</span></span><span style="display:flex;"><span>; ... (大量垃圾指令)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">CMP</span> <span style="color:#e06c75">ECX</span>, <span style="color:#d19a66">5</span>
+</span></span><span style="display:flex;"><span>; ... (更多垃圾指令)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ADD</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ESP</span>], <span style="color:#d19a66">6341</span><span style="color:#e06c75">B86H</span>
+</span></span></code></pre></div><p>分析器很难将<code>PUSH</code>和<code>ADD</code>两条指令关联起来，从而无法轻易识别出<code>0</code>这个常量</p>
 <h3 id="attack">attack
 </h3><p>如何破解这种混淆呢？</p>
 <p>最简单的方法是动态分析，在调试器中运行到该代码块之后，直接看栈顶或目标寄存器的值就行</p>
 <p>如果是静态分析，大多数工具会将寄存器和内存视为符号变量，而不是具体数值</p>
 <p>比如，当它们分析<code>MOV EAX, 0F9CBE47AH</code>时，<code>EAX</code>的值会被记为类似这样的形式：</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">sym_EAX = 0F9CBE47AH
-</code></pre><p>之后到<code>ADD DWORD PTR [ESP], 6341B86H</code>时，会自动计算出：</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">sym_ESP_val = 0F9CBE47AH + 6341B86H = 0
-</code></pre><p>也就是在静态的时候把变量全部计算出来</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">sym_EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span>
+</span></span></code></pre></div><p>之后到<code>ADD DWORD PTR [ESP], 6341B86H</code>时，会自动计算出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">sym_ESP_val</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0F</span><span style="color:#d19a66">9</span><span style="color:#e06c75">CBE47AH</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">6341</span><span style="color:#e06c75">B86H</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>
+</span></span></code></pre></div><p>也就是在静态的时候把变量全部计算出来</p>
 <p>同时，静态分析工具还能追踪特定寄存器或内存位置的值，这可以跨越垃圾指令，找出所有修改该值的指令，并最终计算出结果</p>
 <h2 id="基于模式的混淆">基于模式的混淆
 </h2><h3 id="defend-1">defend
@@ -931,52 +931,52 @@ ADD DWORD PTR [ESP], 6341B86H
 </h4><p><strong>垃圾代码是指那些永远不会被执行到的代码块，侧重于控制流混淆</strong></p>
 <p>之前说过，静态分析工具会假设条件跳转的两侧分支均可能被执行，插入垃圾代码就会大大增加负担</p>
 <p><strong>eg1：简单的无条件跳转</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    JMP real_code
-    ; --- 垃圾代码开始 ---
-    ADD EAX, 1
-    XOR EBX, EBX
-    PUSH EAX
-    ; --- 垃圾代码结束 ---
-real_code:
-    POP EAX             ; 有效代码
-</code></pre><p><strong>eg2：伪装的条件跳转</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">JMP</span> <span style="color:#e06c75">real_code</span>
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 垃圾代码开始 <span style="color:#56b6c2">---</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EBX</span>, <span style="color:#e06c75">EBX</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 垃圾代码结束 <span style="color:#56b6c2">---</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">real_code</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">POP</span> <span style="color:#e06c75">EAX</span>             ; 有效代码
+</span></span></code></pre></div><p><strong>eg2：伪装的条件跳转</strong></p>
 <p>通过数据混淆，将无条件跳转伪装成条件跳转</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    PUSH EAX            ; 保存 EAX
-    XOR EAX, EAX        ; EAX = 0, 同时设置 ZF = 1
-    JZ real_code        ; ZF 永远为 1，所以这条 JZ 永远会跳转
-    
-    ; --- 垃圾代码开始 ---
-    MOV EAX, 0xDEADBEEF
-    CALL some_func
-    ; --- 垃圾代码结束 ---
-
-real_code:
-    POP EAX             ; 恢复 EAX
-</code></pre><p><strong>eg3：无效的条件跳转</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    JZ target_1         ;
-    JMP target_2        ;
-
-target_1:
-    NOP                 ; target_1 只是一个空指令
-target_2:
-    ; --- 真正的有效代码 ---
-</code></pre><p>静态分析器可能会认为<code>target_1</code>和<code>target_2</code>都是有效的分支，但实际上<code>target_1</code>什么用也没有</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">PUSH</span> <span style="color:#e06c75">EAX</span>            ; 保存 <span style="color:#e06c75">EAX</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">XOR</span> <span style="color:#e06c75">EAX</span>, <span style="color:#e06c75">EAX</span>        ; <span style="color:#e06c75">EAX</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>, 同时设置 <span style="color:#e06c75">ZF</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">JZ</span> <span style="color:#e06c75">real_code</span>        ; <span style="color:#e06c75">ZF</span> 永远为 <span style="color:#d19a66">1</span>，所以这条 <span style="color:#e06c75">JZ</span> 永远会跳转
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 垃圾代码开始 <span style="color:#56b6c2">---</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">MOV</span> <span style="color:#e06c75">EAX</span>, <span style="color:#d19a66">0xDEADBEEF</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">CALL</span> <span style="color:#e06c75">some_func</span>
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 垃圾代码结束 <span style="color:#56b6c2">---</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">real_code</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">POP</span> <span style="color:#e06c75">EAX</span>             ; 恢复 <span style="color:#e06c75">EAX</span>
+</span></span></code></pre></div><p><strong>eg3：无效的条件跳转</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">JZ</span> <span style="color:#e06c75">target_1</span>         ;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">JMP</span> <span style="color:#e06c75">target_2</span>        ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">target_1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">NOP</span>                 ; <span style="color:#e06c75">target_1</span> 只是一个空指令
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">target_2</span>:
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 真正的有效代码 <span style="color:#56b6c2">---</span>
+</span></span></code></pre></div><p>静态分析器可能会认为<code>target_1</code>和<code>target_2</code>都是有效的分支，但实际上<code>target_1</code>什么用也没有</p>
 <p><strong>eg4：反汇编去同步</strong></p>
 <p>这是一种高级的垃圾代码插入技术，它利用了反汇编器和 CPU实际执行之间的差异</p>
 <p><strong>它会在一个<code>JMP</code>指令后，插入一些看起来像指令、但实际上是数据的字节：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">start:
-    jmp real_code           ; 直接跳过下面这串“数据”
-    db 0x55, 0x8B, 0xEC, 0x83, 0xEC, 0x10
-    ; 看上去像标准 prologue + 写入 0xDEADBEEF
-real_code:
-    ; 真正执行的代码从这里开始
-    mov eax, 1
-    ret
-</code></pre><p>如果是线性扫描式反汇编（从某个起点地址开始，按地址递增顺序一条条解码指令），就会把db的这串数据解码，而这串数据的意义刚好是：</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">55          push ebp
-8B EC       mov  ebp, esp
-83 EC 10    sub  esp, 0x10
-</code></pre><p>这就是一个函数前言，而许多反汇编器和函数识别器会用前言/后言模式来猜测“这里是不是函数的开头”</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">start</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">jmp</span> <span style="color:#e06c75">real_code</span>           ; 直接跳过下面这串“数据”
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">db</span> <span style="color:#d19a66">0x55</span>, <span style="color:#d19a66">0x8B</span>, <span style="color:#d19a66">0xEC</span>, <span style="color:#d19a66">0x83</span>, <span style="color:#d19a66">0xEC</span>, <span style="color:#d19a66">0x10</span>
+</span></span><span style="display:flex;"><span>    ; 看上去像标准 <span style="color:#e06c75">prologue</span> <span style="color:#56b6c2">+</span> 写入 <span style="color:#d19a66">0xDEADBEEF</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">real_code</span>:
+</span></span><span style="display:flex;"><span>    ; 真正执行的代码从这里开始
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">mov</span> <span style="color:#e06c75">eax</span>, <span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ret</span>
+</span></span></code></pre></div><p>如果是线性扫描式反汇编（从某个起点地址开始，按地址递增顺序一条条解码指令），就会把db的这串数据解码，而这串数据的意义刚好是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">55</span>          <span style="color:#e06c75">push</span> <span style="color:#e06c75">ebp</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">8</span><span style="color:#e06c75">B</span> <span style="color:#e06c75">EC</span>       <span style="color:#e06c75">mov</span>  <span style="color:#e06c75">ebp</span>, <span style="color:#e06c75">esp</span>
+</span></span><span style="display:flex;"><span><span style="color:#d19a66">83</span> <span style="color:#e06c75">EC</span> <span style="color:#d19a66">10</span>    <span style="color:#e06c75">sub</span>  <span style="color:#e06c75">esp</span>, <span style="color:#d19a66">0x10</span>
+</span></span></code></pre></div><p>这就是一个函数前言，而许多反汇编器和函数识别器会用前言/后言模式来猜测“这里是不是函数的开头”</p>
 <p>一旦在线扫过程中遇到类似<code>55 8B EC</code>的序列，就倾向于标记为函数起点，并继续把后面字节当代码解下去，这就掉进陷阱了</p>
 <h4 id="attack-5">attack
 </h4><p>他们欺骗了静态分析器，关我动态分析什么事？</p>
@@ -1061,31 +1061,31 @@ real_code:
 </h4><p>通过向基本块中引入无意义的<code>JMP</code>指令，将原本在逻辑上和物理上都连续的代码块打散，破坏其局部性</p>
 <p><strong>eg：</strong></p>
 <p><strong>原始代码：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">start:
-    push offset caption
-    push 0
-    push offset digtxt
-    call MessageBoxA
-    ...
-</code></pre><p><strong>混淆后：</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">start:
-    push 0
-    jmp instr_1
-instr_2:
-    call MessageBoxA
-    jmp instr_5
-instr_3:
-    push 0
-    jmp instr_2
-instr_4:
-    push offset digtxt
-    jmp instr_3
-instr_1:
-    push offset caption
-    jmp instr_4
-instr_5:
-    ...
-</code></pre><h4 id="函数内联与外联">函数内联与外联
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">start</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#e06c75">offset</span> <span style="color:#e06c75">caption</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#e06c75">offset</span> <span style="color:#e06c75">digtxt</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">call</span> <span style="color:#e06c75">MessageBoxA</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span></code></pre></div><p><strong>混淆后：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">start</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">jmp</span> <span style="color:#e06c75">instr_1</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">instr_2</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">call</span> <span style="color:#e06c75">MessageBoxA</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">jmp</span> <span style="color:#e06c75">instr_5</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">instr_3</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">jmp</span> <span style="color:#e06c75">instr_2</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">instr_4</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#e06c75">offset</span> <span style="color:#e06c75">digtxt</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">jmp</span> <span style="color:#e06c75">instr_3</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">instr_1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">push</span> <span style="color:#e06c75">offset</span> <span style="color:#e06c75">caption</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">jmp</span> <span style="color:#e06c75">instr_4</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">instr_5</span>:
+</span></span><span style="display:flex;"><span>    ...
+</span></span></code></pre></div><h4 id="函数内联与外联">函数内联与外联
 </h4><p><strong>函数内联 (Inlining)</strong>：</p>
 <p>将子函数$P$的代码直接合并到调用者$Q$的代码中，如果$P$被多次调用，会导致代码体积显著膨胀</p>
 <p><strong>函数外联 (Outlining)</strong>：</p>
@@ -1104,32 +1104,32 @@ instr_5:
 </h3><p><strong>使用动态计算的分支地址，或者模拟<code>JMP</code>和<code>CALL</code>指令，来隐藏真实的控制流</strong></p>
 <p><strong>eg1：使用<code>RET</code>模拟<code>JMP</code></strong></p>
 <p><code>JMP &lt;target&gt;</code>可以被等价替换为：</p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">PUSH &lt;target&gt;     ;
-RET               ;
-</code></pre><p>这会打破静态分析器“<code>RET</code>代表函数返回”的假设</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">PUSH</span> <span style="color:#56b6c2">&lt;</span><span style="color:#e06c75">target</span><span style="color:#56b6c2">&gt;</span>     ;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">RET</span>               ;
+</span></span></code></pre></div><p>这会打破静态分析器“<code>RET</code>代表函数返回”的假设</p>
 <p><strong>eg：：使用<code>CALL</code>模拟<code>JMP</code></strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    CALL real_code      ;
-    ; --- 垃圾代码 ---   
-    ...
-real_code:
-    ADD ESP, 4          ;
-    ; --- 真正的有效代码 ---
-</code></pre><p>这里的<code>CALL</code>只是起到了<code>PUSH &lt;返回地址&gt;</code>和<code>JMP real_code</code>的作用</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">CALL</span> <span style="color:#e06c75">real_code</span>      ;
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 垃圾代码 <span style="color:#56b6c2">---</span>   
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">real_code</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">ESP</span>, <span style="color:#d19a66">4</span>          ;
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 真正的有效代码 <span style="color:#56b6c2">---</span>
+</span></span></code></pre></div><p>这里的<code>CALL</code>只是起到了<code>PUSH &lt;返回地址&gt;</code>和<code>JMP real_code</code>的作用</p>
 <p>而<code>real_code</code>开头的<code>ADD ESP, 4</code>则抛弃了压入栈的返回地址（垃圾代码的地址），从而实现了<code>JMP</code>的效果</p>
 <p><strong>eg3：修改栈上的返回地址</strong></p>
-<pre tabindex="0"><code class="language-assembly" data-lang="assembly">    CALL FunctionA      ;
-original_ret_addr:
-    ; --- 垃圾代码 ---   
-actual_ret_addr:
-    NOP                 ;
-    ; --- 真正的有效代码 ---
-    ...
-
-FunctionA:
-    ; 假设垃圾代码长度为 9 字节
-    ADD DWORD PTR [ESP], 9 ; 关键！修改栈顶的返回地址
-    RET                 ;
-</code></pre><p><code>CALL FunctionA</code>时，压入栈的返回地址是<code>original_ret_addr</code>，但<code>FunctionA</code>内部通过<code>[ESP]</code>（即指向返回地址的指针）修改了它，将其改为了<code>actual_ret_addr</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#e06c75">CALL</span> <span style="color:#e06c75">FunctionA</span>      ;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">original_ret_addr</span>:
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 垃圾代码 <span style="color:#56b6c2">---</span>   
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">actual_ret_addr</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">NOP</span>                 ;
+</span></span><span style="display:flex;"><span>    ; <span style="color:#56b6c2">---</span> 真正的有效代码 <span style="color:#56b6c2">---</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">FunctionA</span>:
+</span></span><span style="display:flex;"><span>    ; 假设垃圾代码长度为 <span style="color:#d19a66">9</span> 字节
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ADD</span> <span style="color:#e06c75">DWORD</span> <span style="color:#e06c75">PTR</span> [<span style="color:#e06c75">ESP</span>], <span style="color:#d19a66">9</span> ; 关键！修改栈顶的返回地址
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">RET</span>                 ;
+</span></span></code></pre></div><p><code>CALL FunctionA</code>时，压入栈的返回地址是<code>original_ret_addr</code>，但<code>FunctionA</code>内部通过<code>[ESP]</code>（即指向返回地址的指针）修改了它，将其改为了<code>actual_ret_addr</code></p>
 <p>其实也就是上一种的变种</p>
 <h3 id="attack-10">attack
 </h3><p>对于<code>PUSH &lt;target&gt;; RET</code>，IDA等现代工具已经可以很好地识别</p>
@@ -1248,7 +1248,7 @@ FunctionA:
 
 
         <span>
-            最后更新于 2025-10-28
+            最后更新于 2025-11-02
         </span>
     </section></footer>
 
@@ -1264,6 +1264,25 @@ FunctionA:
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%806dll%E6%B3%A8%E5%85%A5/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/a09dbc5b24b5dd58f1f021f69aca8682.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/a09dbc5b24b5dd58f1f021f69aca8682.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">逆向基础6：DLL注入</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -1336,25 +1355,6 @@ FunctionA:
 
         <div class="article-details">
             <h2 class="article-title">逆向基础1：内存与汇编</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/raid%E4%B8%8E%E5%AE%83%E7%9A%84%E9%87%8D%E7%BB%84/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/56ab540a33f6eab79937c1187dd72855.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">RAID与它的重组</h2>
         </div>
     </a>
 </article>
