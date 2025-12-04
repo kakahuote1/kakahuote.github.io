@@ -33,6 +33,8 @@
         font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
         transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         overflow: hidden;
+        cursor: progress;
+        touch-action: none;  
     }
 
      
@@ -40,16 +42,13 @@
         content: " ";
         display: block;
         position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background: 
-            linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-            linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
         z-index: 2;
         background-size: 100% 2px, 3px 100%;
         pointer-events: none;
+        opacity: 0.6;
     }
 
     .terminal-window {
@@ -59,19 +58,32 @@
         background: rgba(13, 17, 23, 0.96);
         border: 1px solid #30363d;
         border-radius: 8px;
-        box-shadow: 
-            0 0 0 1px rgba(255, 255, 255, 0.05),
-            0 50px 100px rgba(0, 0, 0, 0.8), 
-            0 0 50px rgba(0, 255, 127, 0.05);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 
+                    0 50px 100px rgba(0, 0, 0, 0.8), 
+                    0 0 50px rgba(0, 255, 127, 0.05);
         display: flex;
         flex-direction: column;
         position: relative;
         backdrop-filter: blur(12px);
         transform: translateY(0);
         overflow: hidden;
-        transition: filter 0.2s, transform 0.2s, box-shadow 0.5s;
+        transition: filter 0.1s, transform 0.1s, border-color 0.1s;
     }
 
+     
+    @media (max-width: 768px) {
+        .terminal-window {
+            height: 60vh; 
+            max-width: 92%;
+            backdrop-filter: none;
+            background: #0d1117;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+        #geek-loader::after { opacity: 0.2; }  
+    }
+
+     
+    
      
     .terminal-window.interference {
         animation: glitch-anim 0.2s infinite;
@@ -79,15 +91,11 @@
         border-color: #ffbd2e;  
     }
     
-    .terminal-window.interference .terminal-content {
-        text-shadow: 2px 0 rgba(255,0,0,0.5), -2px 0 rgba(0,0,255,0.5);
-    }
-
      
     .terminal-window.critical-error {
         animation: glitch-anim-hard 0.1s infinite;
         filter: contrast(1.5) brightness(0.8) sepia(1) hue-rotate(-50deg);
-        border-color: #ff5f56;
+        border-color: #ff5f56;  
     }
 
     @keyframes glitch-anim {
@@ -111,34 +119,20 @@
      
     .noise-overlay {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 10;
+        top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none; z-index: 10;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
         opacity: 0;
         transition: opacity 0.1s;
     }
+    .terminal-window.interference .noise-overlay { opacity: 0.15; }
+    .terminal-window.critical-error .noise-overlay { opacity: 0.35; }
 
-    .terminal-window.interference .noise-overlay {
-        opacity: 0.15;
-    }
-    
-    .terminal-window.critical-error .noise-overlay {
-        opacity: 0.3;
-    }
-
+     
     .terminal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 16px;
-        background: #0d1117;
-        border-bottom: 1px solid #30363d;
-        flex-shrink: 0;
-        z-index: 5;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 10px 16px; background: #0d1117;
+        border-bottom: 1px solid #30363d; flex-shrink: 0; z-index: 5;
     }
 
     .terminal-controls { display: flex; gap: 8px; }
@@ -148,60 +142,36 @@
     .maximize { background: #27c93f; }
 
     .terminal-status {
-        color: #8b949e;
-        font-size: 12px;
-        font-family: monospace;
-        display: flex;
-        gap: 15px;
-        opacity: 0.8;
+        color: #8b949e; font-size: 12px; font-family: monospace;
+        display: flex; gap: 15px; opacity: 0.8;
     }
     
      
-    .signal-indicator {
-        display: flex;
-        gap: 2px;
-        align-items: flex-end;
-        height: 12px;
-    }
-    .signal-bar { width: 3px; background: #30363d; }
+    .signal-indicator { display: flex; gap: 2px; align-items: flex-end; height: 12px; }
+    .signal-bar { width: 3px; background: #30363d; transition: background 0.2s; }
     .signal-bar.active { background: #7ee787; }
     .signal-bar.weak { background: #ffbd2e; }
     .signal-bar.offline { background: #ff5f56; }
-    
     .signal-bar:nth-child(1) { height: 4px; }
     .signal-bar:nth-child(2) { height: 6px; }
     .signal-bar:nth-child(3) { height: 8px; }
     .signal-bar:nth-child(4) { height: 12px; }
 
     .terminal-content {
-        flex: 1;
-        padding: 16px;
-        overflow: hidden;
-        color: #c9d1d9;
-        font-size: 14px;
-        line-height: 1.6;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        position: relative;
-        z-index: 1;
+        flex: 1; padding: 16px; overflow: hidden;
+        color: #c9d1d9; font-size: 13px; line-height: 1.6;
+        display: flex; flex-direction: column; justify-content: flex-start;
+        position: relative; z-index: 1;
     }
 
-    .line {
-        min-height: 1.6em;
-        white-space: pre-wrap;
-        word-break: break-all;
-        margin-bottom: 2px;
-    }
+    .line { min-height: 1.6em; white-space: pre-wrap; word-break: break-all; margin-bottom: 2px; }
 
      
     .c-user { color: #d2a8ff; font-weight: bold; }
     .c-host { color: #c9d1d9; }
     .c-path { color: #79c0ff; font-weight: bold; }
     .c-prompt { color: #7ee787; }
-    
     .c-cmd { color: #e6edf3; font-weight: bold; }
-    
     .c-green { color: #7ee787; }
     .c-red { color: #ff7b72; }
     .c-blue { color: #79c0ff; }
@@ -210,33 +180,31 @@
     .c-gray { color: #8b949e; }
     .c-orange { color: #ffa657; }
     .c-matrix { color: #0f0; text-shadow: 0 0 5px #0f0; }
-    
-     
     .blink-red { animation: blink-red 0.5s infinite; color: #ff7b72; font-weight: bold; }
-    @keyframes blink-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-     
+    
     .cursor-block {
-        display: inline-block;
-        width: 9px;
-        height: 16px;
-        background-color: #c9d1d9;
-        vertical-align: middle;
-        margin-left: 2px;
-        margin-bottom: -2px;
+        display: inline-block; width: 9px; height: 16px;
+        background-color: #c9d1d9; vertical-align: middle;
+        margin-left: 2px; margin-bottom: -2px;
         animation: blink 1s step-end infinite;
     }
-    
     .typing .cursor-block { animation: none; opacity: 1; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes blink-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
     .loader-hidden {
-        opacity: 0;
-        transform: scale(0.95) translateY(20px);
-        pointer-events: none;
+        opacity: 0; transform: scale(0.95) translateY(20px); pointer-events: none;
     }
     
     .progress-track { color: #30363d; }
+    
+     
+    .skip-hint {
+        position: absolute; bottom: 15px; width: 100%; text-align: center;
+        color: #484f58; font-size: 10px; opacity: 0;
+        animation: fadeInHint 1s ease-in forwards 1s; pointer-events: none;
+    }
+    @keyframes fadeInHint { to { opacity: 1; } }
 </style>
 
 <div id="geek-loader">
@@ -260,6 +228,7 @@
             </div>
         </div>
         <div class="terminal-content" id="term-content"></div>
+        <div class="skip-hint">Double tap to skip initialization...</div>
     </div>
 </div>
 
@@ -268,12 +237,16 @@
      
      
      
+    const isMobile = window.innerWidth < 768;
+    
     const CONFIG = {
-        minLoadTime: 2200,    
-        typingBaseSpeed: 25,  
-        typingVariance: 15,   
-        isLoaded: false,      
-        interferenceChance: 0.12 
+        typingBaseSpeed: 15,    
+        typingVariance: 10,
+        
+        maxLoadTime: isMobile ? 4000 : 6000, 
+        isLoaded: false,
+        skipMode: false,
+        interferenceChance: 0.15
     };
 
     const loader = document.getElementById('geek-loader');
@@ -284,62 +257,74 @@
     const connectionStatus = document.getElementById('connection-status');
 
     
+    
+    
+    
+    
+    window.addEventListener('load', () => { CONFIG.isLoaded = true; });
+    
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        setTimeout(() => { CONFIG.isLoaded = true; }, 1000);
+    });
+
+    if (document.readyState === 'complete') CONFIG.isLoaded = true;
+
+    
+    setTimeout(() => {
+        if (!CONFIG.isLoaded) {
+            CONFIG.isLoaded = true; 
+            CONFIG.skipMode = true; 
+        }
+    }, CONFIG.maxLoadTime);
+
+    
+    loader.addEventListener('dblclick', () => { CONFIG.skipMode = true; CONFIG.isLoaded = true; });
+    loader.addEventListener('touchstart', (e) => {
+        if(e.touches.length > 1) { CONFIG.skipMode = true; CONFIG.isLoaded = true; } 
+    });
+
+     
+    
     setInterval(() => {
         if (!CONFIG.isLoaded) {
-            memUsage.innerText = Math.floor(Math.random() * 40) + 10;
+            memUsage.innerText = Math.floor(Math.random() * 40) + 20;
             
             
-            if (Math.random() > 0.85) {
-                const quality = Math.floor(Math.random() * 4); 
-                signalBars.forEach((bar, index) => {
-                    bar.className = 'signal-bar'; 
-                    if (index <= quality) {
-                        if (quality === 0) bar.classList.add('offline');
-                        else if (quality < 2) bar.classList.add('weak');
-                        else bar.classList.add('active');
-                    }
+            if (Math.random() > 0.8) {
+                const quality = Math.floor(Math.random() * 4);
+                signalBars.forEach((bar, i) => {
+                    bar.className = 'signal-bar';
+                    if (i <= quality) bar.classList.add(quality < 2 ? 'weak' : 'active');
                 });
-                
-                if (quality === 0) {
-                    connectionStatus.innerText = "NET: LOST";
-                    connectionStatus.style.color = "#ff5f56";
-                    triggerInterference(400, true); 
-                } else if (quality < 2) {
-                    connectionStatus.innerText = "NET: WEAK";
+                if (quality < 2) {
+                    connectionStatus.innerText = "NET: FLUCTUATING";
                     connectionStatus.style.color = "#ffbd2e";
-                    triggerInterference(200);
+                    if (!CONFIG.skipMode) triggerInterference(150);
                 } else {
                     connectionStatus.innerText = "NET: STABLE";
                     connectionStatus.style.color = "#8b949e";
                 }
             }
         } else {
-            
             signalBars.forEach(b => b.className = 'signal-bar active');
             connectionStatus.innerText = "NET: SECURE";
             connectionStatus.style.color = "#7ee787";
         }
-    }, 800);
-
-    window.addEventListener('load', () => { CONFIG.isLoaded = true; });
-    if (document.readyState === 'complete') CONFIG.isLoaded = true;
+    }, 600);
 
      
      
      
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    const sleep = ms => new Promise(r => setTimeout(r, CONFIG.skipMode ? 0 : ms));
     const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-    
     function triggerInterference(duration = 150, critical = false) {
-        if (CONFIG.isLoaded) return; 
-        
+        if (CONFIG.skipMode || CONFIG.isLoaded) return;
         const className = critical ? 'critical-error' : 'interference';
         termWindow.classList.add(className);
-        
-        setTimeout(() => {
-            termWindow.classList.remove(className);
-        }, duration);
+        setTimeout(() => termWindow.classList.remove(className), duration);
     }
 
     function createLine() {
@@ -351,23 +336,28 @@
     }
 
     function getPrompt() {
-        const paths = ['~', '~/blog', '~/deploy', '/var/www', '~/scripts', '/etc/nginx', '~/projects', '~/satellite', '/usr/bin', '~/lab'];
+        const paths = ['~', '~/blog', '~/deploy', '/var/www', '/etc/nginx', '~/satellite', '/usr/bin', '~/lab', '/tmp/cache'];
         const path = paths[Math.floor(Math.random() * paths.length)];
-        return `<span class="c-user">admin</span><span class="c-gray">@</span><span class="c-host">node-01</span>:<span class="c-path">${path}</span><span class="c-prompt">$</span> `;
+        return `<span class="c-user">admin</span><span class="c-gray">@</span><span class="c-host">node-x</span>:<span class="c-path">${path}</span><span class="c-prompt">$</span> `;
     }
 
-    async function typeText(text, element, speedMod = 1.0) {
+    async function typeText(text, element) {
+        if (CONFIG.skipMode) {
+            element.innerHTML = element.innerHTML.replace('<span class="cursor-block"></span>', '') + text;
+            return;
+        }
         element.classList.add('typing');
         let cursorHtml = '<span class="cursor-block"></span>';
         let currentHtml = element.innerHTML.replace(cursorHtml, '');
         
         for (let i = 0; i < text.length; i++) {
-            const speed = CONFIG.isLoaded ? 3 : randomInt(CONFIG.typingBaseSpeed, CONFIG.typingBaseSpeed + CONFIG.typingVariance);
-            await sleep(speed / speedMod);
+            if (CONFIG.skipMode) {
+                element.innerHTML = currentHtml + text.substring(i);
+                break;
+            }
             
-            
-            if (Math.random() < 0.03) triggerInterference(50);
-
+            const speed = CONFIG.isLoaded ? 1 : randomInt(CONFIG.typingBaseSpeed, CONFIG.typingBaseSpeed + CONFIG.typingVariance);
+            await sleep(speed);
             currentHtml += text[i];
             element.innerHTML = currentHtml + cursorHtml;
             termContent.scrollTop = termContent.scrollHeight;
@@ -376,12 +366,13 @@
     }
 
     async function backspace(count, element) {
+        if (CONFIG.skipMode) return;
         element.classList.add('typing');
         let cursorHtml = '<span class="cursor-block"></span>';
         let fullHtml = element.innerHTML.replace(cursorHtml, '');
-        
         for (let i = 0; i < count; i++) {
-            await sleep(CONFIG.isLoaded ? 5 : 50);
+            if (CONFIG.skipMode) break;
+            await sleep(20); 
             fullHtml = fullHtml.slice(0, -1);
             element.innerHTML = fullHtml + cursorHtml;
         }
@@ -390,36 +381,40 @@
 
     async function printLog(text, colorClass = '') {
         const line = createLine();
+        if (CONFIG.skipMode) {
+            line.innerHTML = `<span class="c-gray">>></span> <span class="${colorClass}">${text}</span>`;
+            return;
+        }
         const timestamp = new Date().toLocaleTimeString('en-US', {hour12: false});
         line.innerHTML = `<span class="c-gray">[${timestamp}]</span> <span class="${colorClass}">${text}</span>`;
-        
-        if (Math.random() < CONFIG.interferenceChance) triggerInterference(randomInt(50, 150));
-        
-        await sleep(CONFIG.isLoaded ? 5 : randomInt(10, 60));
+        if (Math.random() < CONFIG.interferenceChance) triggerInterference(80);
+        await sleep(CONFIG.isLoaded ? 2 : randomInt(5, 30)); 
     }
 
-    async function progressBar(label, width = 20) {
+    async function progressBar(label, width = 15) {
+        if (CONFIG.skipMode) {
+            createLine().innerHTML = `${label} [DONE] 100%`;
+            return;
+        }
         const line = createLine();
         const empty = '░';
         const fill = '█';
+        const barWidth = isMobile ? 10 : width;
         
-        for (let i = 0; i <= width; i++) {
-            if (CONFIG.isLoaded && i < width) i = width; 
-            
-            const percent = Math.round((i / width) * 100);
+        for (let i = 0; i <= barWidth; i++) {
+            if (CONFIG.skipMode || (CONFIG.isLoaded && i < barWidth)) i = barWidth; 
+            const percent = Math.round((i / barWidth) * 100);
             const filledStr = fill.repeat(i);
-            const emptyStr = empty.repeat(width - i);
-            const color = i === width ? 'c-green' : 'c-blue';
-            
+            const emptyStr = empty.repeat(barWidth - i);
+            const color = i === barWidth ? 'c-green' : 'c-blue';
             line.innerHTML = `${label} [<span class="${color}">${filledStr}<span class="progress-track">${emptyStr}</span></span>] ${percent}%`;
             
             
-            if (i > width * 0.6 && i < width * 0.9 && Math.random() < 0.25) {
-                triggerInterference(150);
-                await sleep(250); 
+            if (i === Math.floor(barWidth/2) && Math.random() < 0.3) {
+                triggerInterference(200);
+                await sleep(300);
             }
-
-            await sleep(CONFIG.isLoaded ? 5 : randomInt(20, 60));
+            await sleep(CONFIG.isLoaded ? 2 : randomInt(15, 50));
         }
     }
 
@@ -432,9 +427,9 @@
         async () => { 
             const line = createLine(); line.innerHTML = getPrompt() + '<span class="cursor-block"></span>';
             await typeText('sudo rm -rf /', line);
-            await sleep(800); triggerInterference(300, true); 
+            await sleep(600); triggerInterference(300, true);
             await backspace(11, line);
-            await sleep(200);
+            await sleep(100);
             await typeText('./deploy.sh --safe', line);
             line.innerHTML = line.innerHTML.replace('<span class="cursor-block"></span>', '');
             await printLog('Initializing safety protocols...', 'c-green');
@@ -447,9 +442,9 @@
             await printLog('TensorFlow v2.14.0 init...', 'c-purple');
             for(let i=1; i<=3; i++) { createLine().innerHTML = `Epoch ${i}/100: loss: 0.${9-i}23`; await sleep(50); }
             createLine().innerHTML = `<span class="c-red blink-red">WARNING: SENTIENCE DETECTED</span>`;
-            triggerInterference(500, true); await sleep(500);
+            triggerInterference(500, true); await sleep(300);
             createLine().innerHTML = `<span class="c-purple">AI: "I see you."</span>`;
-            await sleep(600);
+            await sleep(400);
             createLine().innerHTML = `<span class="c-gray">Purging buffer...</span>`;
             await progressBar('Memory Wipe');
         },
@@ -472,205 +467,194 @@
     
     const normalScenarios = [
         
-        async () => { 
+        async () => {
             await typeText('dmesg | tail -n 5', createLine());
-            const logs = ["[    0.000000] Linux version 6.5.0-generic", "[    0.451203] ACPI: Added _OSI(Linux-Dell-Video)", "[    1.022301] EXT4-fs (nvme0n1p2): mounted", "[    1.455211] systemd[1]: Detected architecture x86-64."];
+            const logs = ["[ 0.000] Linux version 6.5.0", "[ 0.451] ACPI: OK", "[ 1.022] EXT4-fs: mounted", "[ 1.455] systemd: OK"];
             for (let l of logs) await printLog(l, 'c-gray');
             await printLog('Kernel initialized.', 'c-green');
         },
-        async () => { 
+        async () => {
             await typeText('docker build -t blog .', createLine());
-            await printLog('Sending build context to Docker daemon  45.06MB', 'c-gray');
-            await printLog('Step 1/5 : FROM node:alpine', 'c-blue');
-            await progressBar('Pulling fs layer');
-            await printLog('Successfully built 3a1b2c', 'c-green');
+            await printLog('Sending context 45MB', 'c-gray');
+            await progressBar('Pulling layers');
+            await printLog('Built 3a1b2c', 'c-green');
         },
-        async () => { 
-            await typeText('nmap -v -A 10.0.0.1', createLine());
-            await printLog('Scanning 10.0.0.1 [1000 ports]', 'c-blue');
+        async () => {
+            await typeText('kubectl get pods', createLine());
+            await printLog('api-0   0/1     CrashLoopBackOff', 'c-red');
+            await sleep(200); triggerInterference(100);
+            await typeText('kubectl scale --replicas=3 deploy/api', createLine());
+            await printLog('deployment.apps/api scaled', 'c-green');
+        },
+        async () => {
+            await typeText('terraform apply -auto-approve', createLine());
+            await printLog('+ aws_instance.web', 'c-green');
+            await progressBar('Provisioning', 15);
+            await printLog('Apply complete!', 'c-green');
+        },
+        async () => {
+            await typeText('ansible-playbook site.yml', createLine());
+            await printLog('TASK [Gathering Facts] ... ok', 'c-green');
+            await printLog('TASK [Install Nginx] ... changed', 'c-yellow');
+            await progressBar('Deploying Configs');
+        },
+        
+        async () => {
+            await typeText('nmap -v 10.0.0.1', createLine());
+            await printLog('Scanning 1000 ports', 'c-blue');
             await progressBar('Stealth Scan');
-            await printLog('Discovered open port 443/tcp', 'c-green');
+            await printLog('Open ports: 80, 443', 'c-green');
+        },
+        async () => {
+            await typeText('msfconsole -x "run"', createLine());
+            await printLog('=[ metasploit v6.3.4 ]', 'c-blue');
+            await printLog('[*] Started reverse TCP handler', 'c-gray');
+            await progressBar('Sending Stage', 10);
+            await printLog('[+] Session 1 opened', 'c-green');
+        },
+        async () => {
+            await typeText('./ghidra_analyze binary.exe', createLine());
+            await printLog('Analyzing PE Header...', 'c-gray');
+            triggerInterference(100);
+            await progressBar('Decompiling', 12);
+            await printLog('42 functions exported.', 'c-green');
+        },
+        async () => {
+            await typeText('tshark -i eth0 -f "port 80"', createLine());
+            await printLog('Capturing on \'eth0\'', 'c-gray');
+            for(let i=0; i<4; i++) { await printLog(`192.168.1.${randomInt(10,99)} -> GET /index.html`, 'c-blue'); await sleep(30); }
+            await printLog('Packets captured.', 'c-green');
         },
         async () => { 
-            await typeText('apt-get dist-upgrade -y', createLine());
-            await printLog('Reading package lists... Done', 'c-gray');
-            await progressBar('Unpacking');
-            await printLog('Upgrade complete.', 'c-green');
+            await typeText('./matrix.sh', createLine());
+            for(let i=0; i<5; i++) {
+                if(CONFIG.skipMode) break;
+                createLine().innerHTML = `<span class="c-matrix">${Math.random().toString(36).substring(2).repeat(3)}</span>`;
+                await sleep(50);
+            }
+            await printLog('Follow the white rabbit.', 'c-green');
         },
-        async () => { 
+        
+        async () => {
             await typeText('git push origin main', createLine());
-            await printLog('Enumerating objects: 32, done.', 'c-gray');
+            await printLog('Enumerating objects: 32', 'c-gray');
             await progressBar('Compressing');
-            await printLog('To github.com:user/repo.git', 'c-green');
+            await printLog('Push successful.', 'c-green');
         },
-        async () => { 
+        async () => {
+            await typeText('npm run start', createLine());
+            await printLog('Starting react-scripts...', 'c-blue');
+            await progressBar('Optimizing');
+            await printLog('Compiled successfully.', 'c-green');
+        },
+        async () => {
+            await typeText('cargo build --release', createLine());
+            await progressBar('Compiling', 12);
+            await printLog('Finished release [optimized]', 'c-green');
+        },
+        async () => {
             await typeText('go run main.go', createLine());
             await printLog('Compiling...', 'c-blue');
             await sleep(100);
-            await printLog('Server listening on port 8080', 'c-green');
+            await printLog('Server listening on :8080', 'c-green');
         },
-        async () => { 
+        async () => {
+            await typeText('python3 manage.py migrate', createLine());
+            await printLog('Applying contenttypes...', 'c-gray');
+            await printLog('Applying auth...', 'c-gray');
+            await printLog('Migration applied.', 'c-green');
+        },
+        
+        async () => {
             await typeText('./xmrig --donate-level 1', createLine());
             await printLog('XMRig 6.18.0', 'c-orange');
             await printLog('CPU: AMD Ryzen 9 5950X', 'c-blue');
             await printLog('speed 14200.5 H/s', 'c-green');
         },
-        async () => { 
-            await typeText('./matrix_screensaver.sh', createLine());
-            for(let i=0; i<10; i++) {
-                const chars = "01010101023456789ABCDEF";
-                let str = "";
-                for(let j=0; j<45; j++) str += chars.charAt(Math.floor(Math.random() * chars.length)) + " ";
-                createLine().innerHTML = `<span class="c-matrix">${str}</span>`;
-                await sleep(30);
-            }
-            await printLog('Follow the white rabbit.', 'c-green');
+        async () => {
+            await typeText('java -jar server.jar nogui', createLine());
+            await printLog('[INFO]: Starting Minecraft 1.20', 'c-gray');
+            await progressBar('Generating World', 10);
+            await printLog('[INFO]: Done (2.4s)!', 'c-green');
         },
-        async () => { 
-            await typeText('npm run migrate', createLine());
-            await printLog('Migrating: 2023_10_01_create_users', 'c-yellow');
-            await printLog('Migrated (0.04s)', 'c-green');
+        async () => {
+            await typeText('blender -b file.blend -f 1', createLine());
+            await printLog('Fra:1 Mem:4096M', 'c-gray');
+            await progressBar('Ray Tracing', 12);
+            await printLog('Frame 1 saved.', 'c-green');
         },
-        async () => { 
-            await typeText('kubectl get pods', createLine());
-            await printLog('NAME           READY   STATUS             RESTARTS', 'c-gray');
-            await printLog('api-server-0   0/1     CrashLoopBackOff   4', 'c-red');
-            await sleep(200); triggerInterference(100);
-            await typeText('kubectl scale --replicas=3 deploy/api', createLine());
-            await printLog('deployment.apps/api scaled', 'c-green');
-        },
-        async () => { 
-            await typeText('cargo build --release', createLine());
-            await printLog('   Compiling libc v0.2.147', 'c-green');
-            await progressBar('Optimizing', 15);
-            await printLog('    Finished release [optimized] target(s)', 'c-green');
-        },
-        async () => { 
-            await typeText('tail -f /var/log/nginx/access.log', createLine());
-            for(let i=0; i<5; i++) await printLog(`192.168.1.${randomInt(10,99)} - - "GET / HTTP/1.1" 500`, 'c-red');
-            await typeText('iptables -A INPUT -j DROP', createLine());
-            await printLog('Traffic normalized.', 'c-green');
-        },
-        async () => { 
+        async () => {
             await typeText('uplink --connect sat-42', createLine());
-            await printLog('Aligning telemetry dish...', 'c-blue');
+            await printLog('Aligning dish...', 'c-blue');
             await progressBar('Signal Lock');
-            triggerInterference(400); 
-            await printLog('Connection established.', 'c-green');
+            triggerInterference(300);
+            await printLog('Uplink established.', 'c-green');
         },
-        async () => { 
-            await typeText('q-solve --target hash.enc', createLine());
-            await printLog('Initializing Qubits...', 'c-purple');
-            await printLog('Key found: 42', 'c-green');
-        },
-        async () => { 
-            await typeText('seq_align --input sample.dna', createLine());
-            await progressBar('Matching Base Pairs');
-            await printLog('Match found: 99.9%', 'c-green');
-        },
-        async () => { 
-            await typeText('geth --syncmode "fast"', createLine());
-            await printLog('Peer connected: 104.23.xx.xx', 'c-green');
-            await progressBar('Importing Blocks');
-            await printLog('Chain synchronized.', 'c-green');
-        },
-        async () => { 
-            await typeText('xbps-install -S void-repo-nonfree', createLine());
-            await printLog('installing nvidia-535...', 'c-blue');
-            await printLog('Successfully installed.', 'c-green');
-        },
-        async () => { 
-            await typeText('UnrealBuildTool.exe Win64', createLine());
-            await progressBar('Compiling Shaders', 15);
-            await printLog('Lightmaps calculated.', 'c-green');
-        },
-        async () => { 
-            await typeText('', createLine()); 
+        async () => {
+            await typeText('make coffee', createLine());
             await sleep(200);
-            const line = createLine();
-            line.innerHTML = getPrompt() + 'npm install is-odd'; 
+            await printLog('Error: 418 I\'m a teapot', 'c-yellow');
+            await typeText('brew install coffee', createLine());
+            await printLog('Pouring...', 'c-green');
+        },
+        async () => {
+            await typeText('whoami', createLine());
             await sleep(100);
-            await printLog('added 1 package', 'c-green');
+            await printLog('root', 'c-green');
+            await typeText('ls -la', createLine());
+            await printLog('drwxr-xr-x 2 root root 4096 .', 'c-gray');
+            await printLog('drwxr-xr-x 3 root root 4096 ..', 'c-gray');
+            await printLog('-rw-r--r-- 1 root root  120 secret.txt', 'c-gray');
         },
-        
-        
-        async () => { 
-            await typeText('terraform apply -auto-approve', createLine());
-            await printLog('Terraform will perform the following actions:', 'c-gray');
-            await printLog('  + aws_instance.web_server', 'c-green');
-            await printLog('  + aws_s3_bucket.logs', 'c-green');
-            await progressBar('Provisioning Resources', 15);
-            await printLog('Apply complete! Resources: 2 added, 0 changed.', 'c-green');
+        async () => {
+            await typeText('grep -r "TODO" .', createLine());
+            await sleep(300); 
+            await printLog('./main.js: // TODO: fix memory leak', 'c-yellow');
+            await printLog('./style.css: // TODO: center div', 'c-yellow');
+            await printLog('Found 2 matches.', 'c-gray');
         },
-        async () => { 
-            await typeText('msfconsole -x "use exploit/multi/handler; run"', createLine());
-            await printLog('=[ metasploit v6.3.4-dev ]', 'c-blue');
-            await printLog('[*] Started reverse TCP handler on 0.0.0.0:4444', 'c-gray');
-            await printLog('[*] Sending stage (175174 bytes) to 192.168.1.5', 'c-gray');
-            await progressBar('Meterpreter Session', 10);
-            await printLog('[+] Meterpreter session 1 opened', 'c-green');
+        async () => {
+            await typeText('ping 8.8.8.8', createLine());
+            await printLog('64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=14.2 ms', 'c-gray');
+            await printLog('64 bytes from 8.8.8.8: icmp_seq=2 ttl=118 time=13.8 ms', 'c-gray');
+            await typeText('^C', createLine()); 
         },
-        async () => { 
-            await typeText('torchrun --nproc_per_node=8 train.py', createLine());
-            await printLog('Loading LLaMA-2-7b checkpoint...', 'c-purple');
-            await printLog('Gradient checkpointing enabled.', 'c-gray');
-            for(let i=0; i<3; i++) {
-                await printLog(`Step ${i*100}: loss=${(2.5-i*0.5).toFixed(4)} lr=2e-5`, 'c-gray');
-                await sleep(50);
-            }
-            await printLog('Saving adapter weights to ./lora-out', 'c-green');
+        async () => {
+            await typeText('. build/envsetup.sh', createLine());
+            await printLog('including device/generic/mini_emulator/vendorsetup.sh', 'c-gray');
+            await typeText('lunch aosp_arm-eng', createLine());
+            await progressBar('Building ROM');
+            await printLog('Build completed.', 'c-green');
         },
-        async () => { 
-            await typeText('blender -b project.blend -f 1', createLine());
-            await printLog('Fra:1 Mem:4096.00M (Peak 8192.00M)', 'c-gray');
-            await printLog('Writing: /tmp/0001.png', 'c-gray');
-            await progressBar('Ray Tracing Tiles', 12);
-            await printLog('Blender quit', 'c-gray');
+        async () => {
+            await typeText('redis-cli ping', createLine());
+            await printLog('PONG', 'c-green');
+            await typeText('redis-cli info | grep memory', createLine());
+            await printLog('used_memory_human: 1.2M', 'c-gray');
         },
-        async () => { 
-            await typeText('java -Xmx4G -jar server.jar nogui', createLine());
-            await printLog('[Server thread/INFO]: Starting minecraft server version 1.20.1', 'c-gray');
-            await printLog('[Server thread/INFO]: Preparing level "world"', 'c-blue');
-            await progressBar('Generating Spawn Area', 10);
-            await printLog('[Server thread/INFO]: Done (4.2s)! For help, type "help"', 'c-green');
+        async () => {
+            await typeText('ffmpeg -i video.mp4 output.gif', createLine());
+            await printLog('Stream #0:0 -> #0:0 (h264 -> gif)', 'c-blue');
+            await progressBar('Encoding', 15);
+            await printLog('Conversion failed successfully.', 'c-green');
         },
-        async () => { 
-            await typeText('tshark -i eth0 -f "tcp port 80"', createLine());
-            await printLog('Capturing on \'eth0\'', 'c-gray');
-            for(let i=0; i<4; i++) {
-                await printLog(`${randomInt(100,999)}.123 -> HTTP GET /index.html`, 'c-blue');
-                await sleep(30);
-            }
-            await printLog('4 packets captured', 'c-green');
+        async () => {
+            await typeText('ssh user@192.168.1.5', createLine());
+            await printLog('Authenticating...', 'c-gray');
+            await sleep(300);
+            await printLog('Welcome to Ubuntu 22.04 LTS', 'c-green');
         },
-        async () => { 
-            await typeText('./ghidra_analyze unknown_binary.exe', createLine());
-            await printLog('Analyzing PE Header...', 'c-gray');
-            await printLog('Detected compiler: MSVC 2019', 'c-blue');
+        async () => {
+            await typeText('cat /var/log/syslog | grep "error"', createLine());
             triggerInterference(100);
-            await progressBar('Decompiling Functions', 15);
-            await printLog('Analysis complete. 42 functions exported.', 'c-green');
+            await printLog('Oct 27 10:00:01 server kernel: [Hardware Error]', 'c-red');
+            await printLog('Oct 27 10:00:02 server systemd[1]: Failed to start service.', 'c-red');
         },
-        async () => { 
-            await typeText('./telemetry_check.py --flight=SN15', createLine());
-            await printLog('T-minus 60 seconds. Systems internal.', 'c-yellow');
-            await printLog('LOX load complete. Venting.', 'c-gray');
-            await printLog('Guidance: Internal.', 'c-green');
-            await printLog('Stage 1 telemetry: NOMINAL', 'c-green');
-        },
-        async () => { 
-            await typeText('. build/envsetup.sh && lunch lineage_bacon-userdebug && mka bacon', createLine());
-            await printLog('PLATFORM_VERSION_CODENAME=REL', 'c-gray');
-            await printLog('[ 10% 1234/99999] //frameworks/base:framework-cppstreams', 'c-gray');
-            await progressBar('Compiling Modules', 20);
-            await printLog('#### build completed successfully (02:45 (mm:ss)) ####', 'c-green');
-        },
-        async () => { 
-            await typeText('redis-cli --cluster create 127.0.0.1:7000 ...', createLine());
-            await printLog('>>> Performing hash slots allocation on 6 nodes...', 'c-yellow');
-            await printLog('Master[0] -> Slots 0 - 5460', 'c-gray');
-            await printLog('M: 127.0.0.1:7000 slots:0-5460 (5461 slots) master', 'c-gray');
-            await printLog('[OK] All 16384 slots covered.', 'c-green');
+        async () => {
+            await typeText('openssl genrsa -out key.pem 2048', createLine());
+            await printLog('Generating RSA private key, 2048 bit long modulus', 'c-gray');
+            await printLog('...................................+++++', 'c-gray');
+            await printLog('e is 65537 (0x010001)', 'c-gray');
         }
     ];
 
@@ -682,13 +666,9 @@
         
         
         const roll = Math.random();
-        let scenario;
-        
-        if (roll < 0.1) {
-            scenario = rareScenarios[Math.floor(Math.random() * rareScenarios.length)];
-        } else {
-            scenario = normalScenarios[Math.floor(Math.random() * normalScenarios.length)];
-        }
+        const scenario = roll < 0.1 
+            ? rareScenarios[Math.floor(Math.random() * rareScenarios.length)]
+            : normalScenarios[Math.floor(Math.random() * normalScenarios.length)];
         
         await scenario();
 
@@ -696,35 +676,53 @@
         
         
         let waitCounter = 0;
-        const waitingMessages = [
-            "Waiting for I/O response...",
-            "Resolving DNS pool...",
-            "Handshake validation pending...",
-            "Optimizing content delivery...",
-            "Bypassing proxy firewall...",
-            "Warming up cache nodes...",
-            "Establishing secure uplink..."
+        
+        
+        const networkLogs = [
+            "Resolving CDN topology...", 
+            "Handshake negotiation pending...", 
+            "Optimizing asset delivery...", 
+            "Bypassing proxy gateway...", 
+            "Allocating swap memory...", 
+            "Verifying integrity checksums...",
+            "Hydrating DOM tree...",
+            "Mounting virtual filesystem...",
+            "Syncing with satellite relay..."
+        ];
+        
+        const retryLogs = [
+            { msg: "Connection unstable. Retrying...", color: "c-yellow" },
+            { msg: "Packet loss detected. Rerouting...", color: "c-orange" },
+            { msg: "Switching to backup node...", color: "c-blue" },
+            { msg: "Flushing DNS cache...", color: "c-gray" }
         ];
 
-        while (!CONFIG.isLoaded) {
-            const msg = waitingMessages[Math.floor(Math.random() * waitingMessages.length)];
-            await printLog(msg, 'c-gray');
+        
+        while (!CONFIG.isLoaded && !CONFIG.skipMode) {
+            
+            const logIdx = Math.floor(Math.random() * networkLogs.length);
+            await printLog(networkLogs[logIdx], 'c-gray');
             
             waitCounter++;
             
             
-            if (waitCounter > 3 && waitCounter % 4 === 0) {
+            if (waitCounter % 3 === 0) {
+                const retryAction = retryLogs[Math.floor(Math.random() * retryLogs.length)];
                 triggerInterference(200); 
-                await printLog('Connection unstable. Retrying...', 'c-yellow');
+                await printLog(retryAction.msg, retryAction.color);
             }
             
-            await sleep(800);
+            await sleep(600);
         }
 
         
+        
+        
         const line = createLine();
         line.innerHTML = getPrompt() + '<span class="cursor-block"></span>';
-        await typeText('init 5', line, 4.0);
+        
+        
+        await typeText('init 5', line, 5.0); 
         line.innerHTML = line.innerHTML.replace('<span class="cursor-block"></span>', '');
         
         await sleep(50);
@@ -736,7 +734,7 @@
         welcome.innerHTML = `<span class="c-green">System Ready. GUI Starting...</span>`;
         welcome.style.textShadow = "0 0 10px #7ee787";
         
-        await sleep(400);
+        await sleep(300);
         
         
         loader.classList.add('loader-hidden');
