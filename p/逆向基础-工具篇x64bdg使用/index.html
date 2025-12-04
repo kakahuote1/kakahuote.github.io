@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head>
-	<meta name="generator" content="Hugo 0.152.2"><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="靡不有初，鲜克有终">
-<title>Pager 2 - kakahuote</title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="好用的动态调试器">
+<title>逆向基础-工具篇：x64bdg使用</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/'>
+<link rel='canonical' href='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80-%E5%B7%A5%E5%85%B7%E7%AF%87x64bdg%E4%BD%BF%E7%94%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="kakahuote">
-<meta property='og:description' content="靡不有初，鲜克有终">
-<meta property='og:url' content='https://blog.928330.xyz/'>
+<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="逆向基础-工具篇：x64bdg使用">
+<meta property='og:description' content="好用的动态调试器">
+<meta property='og:url' content='https://blog.928330.xyz/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80-%E5%B7%A5%E5%85%B7%E7%AF%87x64bdg%E4%BD%BF%E7%94%A8/'>
 <meta property='og:site_name' content='kakahuote'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-12-04T21:20:43&#43;08:00 '/>
-<meta name="twitter:title" content="kakahuote">
-<meta name="twitter:description" content="靡不有初，鲜克有终"><link rel="alternate" type="application/rss&#43;xml" href="https://blog.928330.xyz/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='re' /><meta property='article:published_time' content='2025-11-04T23:56:45&#43;08:00'/><meta property='article:modified_time' content='2025-12-04T21:20:43&#43;08:00'/><meta property='og:image' content='http://picture.928330.xyz/typora/a09dbc5b24b5dd58f1f021f69aca8682.jpg' />
+<meta name="twitter:title" content="逆向基础-工具篇：x64bdg使用">
+<meta name="twitter:description" content="好用的动态调试器"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://picture.928330.xyz/typora/a09dbc5b24b5dd58f1f021f69aca8682.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <style>
      
@@ -749,7 +749,9 @@
 })();
 </script>
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -850,7 +852,7 @@
         
         
         
-        <li  class='current' >
+        <li >
             <a href='/' >
                 
                 
@@ -958,61 +960,10 @@
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2025">
-                        
-                            <span class="year">2025</span>
-                            <span class="count">31</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -1022,508 +973,67 @@
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#cpu窗口">CPU窗口</a>
+      <ol>
+        <li><a href="#反汇编窗口">反汇编窗口</a></li>
+        <li><a href="#寄存器窗口">寄存器窗口</a></li>
+        <li><a href="#内存窗口">内存窗口</a></li>
+        <li><a href="#堆栈窗口">堆栈窗口</a></li>
+      </ol>
+    </li>
+    <li><a href="#快捷键">快捷键</a></li>
+    <li><a href="#断点">断点</a>
+      <ol>
+        <li><a href="#软件断点">软件断点</a>
+          <ol>
+            <li><a href="#快捷键下断点">快捷键下断点</a></li>
+            <li><a href="#命令下断点">命令下断点</a></li>
+            <li><a href="#跳转目标位置下断点">跳转目标位置下断点</a></li>
+            <li><a href="#结合条件下断点">结合条件下断点</a></li>
+          </ol>
+        </li>
+        <li><a href="#硬件断点">硬件断点</a>
+          <ol>
+            <li><a href="#硬件访问断点">硬件访问断点</a></li>
+            <li><a href="#硬件写入断点">硬件写入断点</a></li>
+            <li><a href="#硬件执行断点">硬件执行断点</a></li>
+          </ol>
+        </li>
+        <li><a href="#内存断点">内存断点</a>
+          <ol>
+            <li><a href="#内存访问断点">内存访问断点</a></li>
+            <li><a href="#内存读取断点">内存读取断点</a></li>
+            <li><a href="#内存写入断点">内存写入断点</a></li>
+            <li><a href="#内存执行断点">内存执行断点</a></li>
+          </ol>
+        </li>
+        <li><a href="#消息断点">消息断点</a></li>
+      </ol>
+    </li>
+    <li><a href="#保存文件">保存文件</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
-    <div class="tagCloud-tags">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" class="font_size_14">
-                技术学习
-            </a>
-        
-            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="font_size_7">
-                工具使用
-            </a>
-        
-            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/" class="font_size_7">
-                比赛复盘
-            </a>
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/" class="font_size_3">
-                技术随笔
-            </a>
-        
-    </div>
-</section>
-
-
-
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
-  <circle cx="9" cy="9" r="2" />
-</svg>
-
-
-
-    </div>
-    <h2 class="widget-title section-title">标签云</h2>
-
-    <div class="tagCloud-tags">
-        
-            <a href="/tags/forensics/" class="font_size_13">
-                Forensics
-            </a>
-        
-            <a href="/tags/misc/" class="font_size_9">
-                Misc
-            </a>
-        
-            <a href="/tags/re/" class="font_size_7">
-                Re
-            </a>
-        
-            <a href="/tags/linux/" class="font_size_6">
-                Linux
-            </a>
-        
-            <a href="/tags/web/" class="font_size_3">
-                Web
-            </a>
-        
-            <a href="/tags/windows/" class="font_size_3">
-                Windows
-            </a>
-        
-            <a href="/tags/server/" class="font_size_2">
-                Server
-            </a>
-        
-            <a href="/tags/sql/" class="font_size_2">
-                SQL
-            </a>
-        
-            <a href="/tags/docker/" class="font_size_1">
-                Docker
-            </a>
-        
-            <a href="/tags/latex/" class="font_size_1">
-                LaTeX
-            </a>
-        
-    </div>
-</section>
             
         
     </aside>
 
 
             <main class="main full-width">
-    
-    
-    
-    
-
-    
-    <div class="elegant-welcome">
-      <div class="welcome-content" id="welcome-content">
-        
-        <div class="welcome-decoration left">
-          <div class="decoration-dash"></div>
-          <div class="decoration-dot"></div>
-        </div>
-        
-        <div class="welcome-main">
-          <div class="welcome-emoji" id="welcome-emoji">👋</div>
-          <div class="welcome-text">
-            <span class="welcome-greeting" id="welcome-greeting">欢迎来到</span>
-            <div class="welcome-name">
-              <span class="name-text" id="name-text">Kakahuote's Blog</span>
-            </div>
-          </div>
-        </div>
-        
-        
-        <div class="welcome-bg-text-container" id="welcome-bg-text-container">
-          <span class="bg-text" id="bg-text-1">欢</span>
-          <span class="bg-text" id="bg-text-2">迎</span>
-          <span class="bg-text" id="bg-text-3">来</span>
-          <span class="bg-text" id="bg-text-4">到</span>
-        </div>
-        
-        
-        <div class="welcome-decoration right">
-          <div class="decoration-dot"></div>
-          <div class="decoration-dash"></div>
-        </div>
-        
-        
-        <div class="click-effects" id="click-effects"></div>
-      </div>
-    </div>
-
-    <script>
-      
-      document.addEventListener('DOMContentLoaded', function() {
-        const welcomeContent = document.getElementById('welcome-content');
-        const welcomeEmoji = document.getElementById('welcome-emoji');
-        const decorationDashes = document.querySelectorAll('.decoration-dash');
-        const decorationDots = document.querySelectorAll('.decoration-dot');
-        const clickEffects = document.getElementById('click-effects');
-        
-        let isInitialState = true;
-        let clickCount = 0;
-        let isTransitioning = false; 
-        
-        
-        const emotionEmojis = [
-          
-          ['😊', '😄', '😉', '🤗', '😍', '🥰', '😇', '🤩', '😌', '😋', '😎', '🤠', '👋', '🙋‍♂️', '💁‍♂️', '🤝'],
-          
-          
-          ['🤔', '🤨', '🧐', '🤓', '😏', '😶', '😐', '😑', '😯', '😦', '😧', '😮', '🤭', '🤫', '🤐', '😶'],
-          
-          
-          ['😒', '😕', '😟', '😔', '😞', '😣', '😖', '😫', '😩', '😤', '😠', '😡', '🤬', '😈', '👿', '💀'],
-          
-          
-          ['😢', '😭', '😿', '😾', '😤', '😡', '🤬', '😈', '👿', '💀', '☠️', '👻', '💩', '🤡', '👺', '👹'],
-          
-          
-          ['😅', '😂', '🤣', '😆', '😁', '😃', '😀', '🙂', '😌', '😋', '😊', '😄', '😉', '🤗', '😍', '🥰']
-        ];
-        
-        
-        const gestureEmojis = [
-          '👆', '👈', '👉', '👇', '👌', '✌️', '🤞', '🤟', '🤘', '🤙', '👍', '👊', '✊', '🤝', '🙏',
-          '👏', '🤲', '👐', '🙌', '🤚', '🖐️', '✋', '🖖', '🤌', '🤏'
-        ];
-        
-        
-        let secondEmoji = gestureEmojis[Math.floor(Math.random() * gestureEmojis.length)];
-        
-        let currentEmotionStage = 0;
-        let animationTriggered = false; 
-        
-        
-        function triggerWelcomeAnimation() {
-          console.log('触发欢迎横幅动画');
-          if (animationTriggered) {
-            console.log('动画已经触发过，跳过');
-            return;
-          }
-          animationTriggered = true;
-          
-          const welcomeGreeting = document.getElementById('welcome-greeting');
-          const nameText = document.getElementById('name-text');
-          const bgTextContainer = document.getElementById('welcome-bg-text-container');
-          const bgTexts = document.querySelectorAll('.bg-text');
-          
-          
-          welcomeGreeting.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          welcomeGreeting.style.opacity = '0';
-          welcomeGreeting.style.transform = 'scale(0.8)';
-          
-          
-          console.log('开始背景大字动画');
-          bgTextContainer.style.display = 'block';
-          
-          
-          bgTexts.forEach((text, index) => {
-            console.log(`设置背景大字 ${index + 1}:`, text);
-            
-            
-            const positions = [
-              { left: '10%', top: '25%' },  
-              { left: '20%', top: '75%' },  
-              { left: '80%', top: '20%' },  
-              { left: '90%', top: '80%' }   
-            ];
-            
-            
-            text.style.left = '50%';
-            text.style.top = '50%';
-            text.style.transform = 'translate(-50%, -50%) scale(1)';
-            text.style.opacity = '0';
-            text.style.transition = 'none'; 
-            
-            
-            text.offsetHeight;
-          });
-          
-          
-          requestAnimationFrame(() => {
-            bgTexts.forEach((text, index) => {
-              const positions = [
-                { left: '10%', top: '25%' },  
-                { left: '20%', top: '75%' },  
-                { left: '80%', top: '20%' },  
-                { left: '90%', top: '80%' }   
-              ];
-              
-              
-              text.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-              text.style.left = positions[index].left;
-              text.style.top = positions[index].top;
-              text.style.transform = 'translate(-50%, -50%) scale(1.2)';
-              text.style.opacity = '0.15';
-            });
-          });
-          
-          
-          setTimeout(() => {
-            nameText.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            nameText.style.fontSize = '2.5rem';
-            nameText.style.marginTop = '-2.5rem';
-            
-            
-            const welcomeMain = document.querySelector('.welcome-main');
-            welcomeMain.style.flexDirection = 'row';
-            welcomeMain.style.alignItems = 'center';
-            welcomeMain.style.gap = '2rem';
-          }, 800);
-        }
-        
-        
-        const effectTypes = [
-          
-          { type: 'star', symbol: '⭐', class: 'effect-star' },
-          { type: 'sparkle', symbol: '✨', class: 'effect-sparkle' },
-          { type: 'diamond', symbol: '💎', class: 'effect-diamond' },
-          { type: 'crown', symbol: '👑', class: 'effect-crown' },
-          { type: 'gem', symbol: '💍', class: 'effect-gem' },
-          
-          
-          { type: 'fire', symbol: '🔥', class: 'effect-fire' },
-          { type: 'lightning', symbol: '⚡', class: 'effect-lightning' },
-          { type: 'snowflake', symbol: '❄️', class: 'effect-snowflake' },
-          { type: 'sun', symbol: '☀️', class: 'effect-sun' },
-          { type: 'moon', symbol: '🌙', class: 'effect-moon' },
-          { type: 'rainbow', symbol: '🌈', class: 'effect-rainbow' },
-          { type: 'flower', symbol: '🌸', class: 'effect-flower' },
-          { type: 'leaf', symbol: '🍃', class: 'effect-leaf' },
-          { type: 'tree', symbol: '🌳', class: 'effect-tree' },
-          
-          
-          { type: 'butterfly', symbol: '🦋', class: 'effect-butterfly' },
-          { type: 'bird', symbol: '🐦', class: 'effect-bird' },
-          { type: 'fish', symbol: '🐠', class: 'effect-fish' },
-          { type: 'dragon', symbol: '🐉', class: 'effect-dragon' },
-          { type: 'unicorn', symbol: '🦄', class: 'effect-unicorn' },
-          { type: 'phoenix', symbol: '🦅', class: 'effect-phoenix' },
-          
-          
-          { type: 'rocket', symbol: '🚀', class: 'effect-rocket' },
-          { type: 'satellite', symbol: '🛰️', class: 'effect-satellite' },
-          { type: 'ufo', symbol: '🛸', class: 'effect-ufo' },
-          { type: 'robot', symbol: '🤖', class: 'effect-robot' },
-          { type: 'alien', symbol: '👽', class: 'effect-alien' },
-          
-          
-          { type: 'pizza', symbol: '🍕', class: 'effect-pizza' },
-          { type: 'hamburger', symbol: '🍔', class: 'effect-hamburger' },
-          { type: 'icecream', symbol: '🍦', class: 'effect-icecream' },
-          { type: 'cake', symbol: '🎂', class: 'effect-cake' },
-          { type: 'candy', symbol: '🍬', class: 'effect-candy' },
-          
-          
-          { type: 'trophy', symbol: '🏆', class: 'effect-trophy' },
-          { type: 'medal', symbol: '🥇', class: 'effect-medal' },
-          { type: 'ball', symbol: '⚽', class: 'effect-ball' },
-          { type: 'basketball', symbol: '🏀', class: 'effect-basketball' },
-          { type: 'tennis', symbol: '🎾', class: 'effect-tennis' },
-          
-          
-          { type: 'musical_note', symbol: '🎵', class: 'effect-musical-note' },
-          { type: 'guitar', symbol: '🎸', class: 'effect-guitar' },
-          { type: 'piano', symbol: '🎹', class: 'effect-piano' },
-          { type: 'microphone', symbol: '🎤', class: 'effect-microphone' },
-          { type: 'headphones', symbol: '🎧', class: 'effect-headphones' },
-          
-          
-          { type: 'game_die', symbol: '🎲', class: 'effect-game-die' },
-          { type: 'joystick', symbol: '🕹️', class: 'effect-joystick' },
-          { type: 'controller', symbol: '🎮', class: 'effect-controller' },
-          { type: 'puzzle', symbol: '🧩', class: 'effect-puzzle' },
-          { type: 'chess', symbol: '♟️', class: 'effect-chess' },
-          
-          
-          { type: 'sparkles', symbol: '✨', class: 'effect-sparkles' },
-          { type: 'crystal_ball', symbol: '🔮', class: 'effect-crystal-ball' },
-          { type: 'magic_wand', symbol: '🪄', class: 'effect-magic-wand' },
-          { type: 'fairy', symbol: '🧚', class: 'effect-fairy' },
-          { type: 'wizard', symbol: '🧙‍♂️', class: 'effect-wizard' }
-        ];
-        
-        
-        function createClickEffect() {
-          const effect = effectTypes[Math.floor(Math.random() * effectTypes.length)];
-          const effectElement = document.createElement('div');
-          effectElement.className = `click-effect ${effect.class}`;
-          effectElement.textContent = effect.symbol;
-          
-          
-          const isLeft = Math.random() > 0.5;
-          let x, y;
-          
-          if (isLeft) {
-            
-            x = Math.random() * 20 + 5; 
-          } else {
-            
-            x = Math.random() * 20 + 75; 
-          }
-          
-          
-          const verticalZone = Math.random();
-          if (verticalZone < 0.4) {
-            
-            y = Math.random() * 30 + 10;
-          } else {
-            
-            y = Math.random() * 30 + 60;
-          }
-          
-          effectElement.style.left = `${x}%`;
-          effectElement.style.top = `${y}%`;
-          
-          clickEffects.appendChild(effectElement);
-          
-          
-          setTimeout(() => {
-            effectElement.remove();
-          }, 2000);
-        }
-        
-        
-        function transitionEmoji(fromEmoji, toEmoji, callback) {
-          if (isTransitioning) return;
-          isTransitioning = true;
-          
-          
-          welcomeEmoji.classList.add('emoji-bounce-shake');
-          
-          setTimeout(() => {
-            
-            welcomeEmoji.classList.remove('emoji-bounce-shake');
-            welcomeEmoji.classList.add('emoji-spin-transition');
-            welcomeEmoji.textContent = toEmoji;
-            
-            
-            setTimeout(() => {
-              welcomeEmoji.classList.remove('emoji-spin-transition');
-              welcomeEmoji.classList.add('emoji-normalize');
-              
-              setTimeout(() => {
-                welcomeEmoji.classList.remove('emoji-normalize');
-                isTransitioning = false;
-                if (callback) callback();
-              }, 300);
-            }, 500);
-          }, 400);
-        }
-        
-        
-        setTimeout(() => {
-          if (isInitialState) {
-            
-            transitionEmoji('👋', secondEmoji, () => {
-              welcomeContent.classList.add('hint-click');
-            });
-            
-            
-            triggerWelcomeAnimation();
-          }
-        }, 2000);
-        
-        
-        welcomeContent.addEventListener('click', function() {
-          
-          this.classList.remove('hint-click');
-          isInitialState = false;
-          
-          
-          if (welcomeEmoji.textContent === '👆') {
-            this.classList.add('hint-shake');
-            setTimeout(() => {
-              this.classList.remove('hint-shake');
-            }, 600);
-          } else {
-            
-            this.classList.add('clicked');
-            setTimeout(() => {
-              this.classList.remove('clicked');
-            }, 600);
-          }
-          
-          
-          decorationDots.forEach((dot, index) => {
-            setTimeout(() => {
-              dot.style.animation = 'dotPulse 0.6s ease-in-out';
-              setTimeout(() => {
-                dot.style.animation = 'dotFloat 4s ease-in-out infinite';
-              }, 600);
-            }, index * 150);
-          });
-          
-          decorationDashes.forEach((dash, index) => {
-            setTimeout(() => {
-              dash.style.animation = 'dashExpand 0.6s ease-in-out';
-              setTimeout(() => {
-                dash.style.animation = 'dashFloat 4s ease-in-out infinite';
-              }, 600);
-            }, index * 150);
-          });
-          
-          
-          for (let i = 0; i < 4; i++) {
-            setTimeout(() => {
-              createClickEffect();
-            }, i * 120);
-          }
-          
-          
-          clickCount++;
-          
-          
-          if (clickCount <= 15) {
-            currentEmotionStage = 0; 
-          } else if (clickCount <= 30) {
-            currentEmotionStage = 1; 
-          } else if (clickCount <= 45) {
-            currentEmotionStage = 2; 
-          } else if (clickCount <= 60) {
-            currentEmotionStage = 3; 
-          } else {
-            currentEmotionStage = 4; 
-            if (clickCount > 75) {
-              clickCount = 0; 
-            }
-          }
-          
-          const currentEmotions = emotionEmojis[currentEmotionStage];
-          const randomEmoji = currentEmotions[Math.floor(Math.random() * currentEmotions.length)];
-          
-          
-          transitionEmoji(welcomeEmoji.textContent, randomEmoji);
-          
-          
-        });
-        
-        
-        welcomeContent.addEventListener('mouseenter', function() {
-          if (isInitialState) {
-            
-            this.style.cursor = '';
-          }
-        });
-      });
-    </script>
-
-    <section class="article-list">
-        
-            
-<article class="has-image">
+    <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%9C%E8%A5%BF/">
+            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80-%E5%B7%A5%E5%85%B7%E7%AF%87x64bdg%E4%BD%BF%E7%94%A8/">
                 
-                    <img src="http://picture.928330.xyz/typora/image-20251022010316720.png" loading="lazy" alt="Featured image of post 磁盘相关的东西" />
+                    <img src="http://picture.928330.xyz/typora/a09dbc5b24b5dd58f1f021f69aca8682.jpg" loading="lazy" alt="Featured image of post 逆向基础-工具篇：x64bdg使用" />
                 
             </a>
         </div>
@@ -1533,8 +1043,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/" >
-                技术随笔
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" >
+                工具使用
             </a>
         
     </header>
@@ -1544,11 +1054,11 @@
 
 
         <h2 class="article-title">
-            <a href="/p/%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%9C%E8%A5%BF/">磁盘相关的东西</a>
+            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80-%E5%B7%A5%E5%85%B7%E7%AF%87x64bdg%E4%BD%BF%E7%94%A8/">逆向基础-工具篇：x64bdg使用</a>
         </h2>
         
         <h3 class="article-subtitle">
-            学RAID之前必须知道的和可以知道的
+            好用的动态调试器
         </h3>
         
 
@@ -1571,7 +1081,7 @@
   <path d="M18 16.496v1.504l1 1" />
 </svg>
                 <time class="article-time--published">
-                    发布时间：2025-10-18</time>
+                    发布时间：2025-11-04</time>
             </div>
         
 
@@ -1587,7 +1097,7 @@
 
 
                <time>
-                   更新时间：2025-10-22
+                   更新时间：2025-12-04
                </time>
            </div>
         <div>
@@ -1603,400 +1113,684 @@
 </div>
 
 </header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
-                
-                    <img src="http://picture.928330.xyz/typora/113644svdcd71dd4fdd7sc.jpg" loading="lazy" alt="Featured image of post 美亚杯2023个人赛取证总结" />
-                
-            </a>
-        </div>
+
+    <section class="article-content">
     
-
-    <div class="article-details">
     
-    <header class="article-category">
-        
-            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/" >
-                比赛复盘
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">美亚杯2023个人赛取证总结</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            打基础
-        </h3>
-        
-
+    <p>x64dbg开源，一直在更新，支持64位程序，还多了一些功能，比Ollydbg好用，没学OD的可以不用学了（</p>
+<div class="alert alert-warning">
+    <div class="alert-header">
+        <span class="alert-icon">
+            ⚠️
+        </span>
+        <span class="alert-title">
+            Warning
+        </span>
     </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-16</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-22
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
-
-    
+    <div class="alert-content">
+        <p>以下内容分析目标是64位程序，使用的是x64dbg，部分功能具体可能不同（比如寄存器名称、硬件断点可用字节数）</p></div>
 </div>
+<h1 id="cpu窗口">CPU窗口
+</h1><p>随便拖入一个可执行文件，会自动进入到CPU选项卡界面，可以看到四个窗口：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103105758147" href="http://picture.928330.xyz/typora/image-20251103105758147.png">
+<img src="http://picture.928330.xyz/typora/image-20251103105758147.png" alt="image-20251103105758147"  />
+</a>
+</div>
+</p>
+<h2 id="反汇编窗口">反汇编窗口
+</h2><p>左上角的反汇编窗口，这里显示是我们要分析的程序的反汇编代码（注意是可以上下左右拖动的）：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103105813878" href="http://picture.928330.xyz/typora/image-20251103105813878.png">
+<img src="http://picture.928330.xyz/typora/image-20251103105813878.png" alt="image-20251103105813878"  />
+</a>
+</div>
+</p>
+<p>最左侧蓝色箭头显示的是EIP寄存器的指向，也就是运行到此处时下一条执行指令的位置，一般用于查看跳转，点击对应行，相应的箭头指示会变粗</p>
+<p>黑灰色的一行表示程序的入口</p>
+<p>拿出来一行看看：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#d19a66">00007FF</span><span style="color:#e06c75">A08B44402</span> <span style="color:#56b6c2">|</span> <span style="color:#d19a66">48</span><span style="color:#56b6c2">:</span><span style="color:#e06c75">C7C1</span> <span style="color:#e06c75">FEFFFFFF</span>      <span style="color:#56b6c2">|</span> <span style="color:#e06c75">mov</span> <span style="color:#e06c75">rcx</span>,<span style="color:#e06c75">FFFFFFFFFFFFFFFE</span>         <span style="color:#56b6c2">|</span> <span style="color:#e06c75">rcx</span>:<span style="color:#e06c75">NtQueryInformationThread</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">14</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>第一列：<code>00007FFA08B44402</code></strong></p>
+<p>表示的是当前这条汇编指令所在的地址</p>
+<p>每一列的地址都是依次排序的，第二行的地址是第一行的地址再加上指令长度</p>
+<p>在第一列双击可以看到一个箭头，你可以 以这个位置为起始地址，看到相对于这个地址的偏移：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103110008124" href="http://picture.928330.xyz/typora/image-20251103110008124.png">
+<img src="http://picture.928330.xyz/typora/image-20251103110008124.png" alt="image-20251103110008124"  />
+</a>
+</div>
+</p>
+</li>
+<li>
+<p><strong>第二列：<code>48:C7C1 FEFFFFFF</code></strong></p>
+<p>是机器码/操作码opcode，是给计算机看的语言</p>
+<p>在这个位置双击（或者选择该行点击F2），可以下一个断点，对应的地址列会变红：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103110116880" href="http://picture.928330.xyz/typora/image-20251103110116880.png">
+<img src="http://picture.928330.xyz/typora/image-20251103110116880.png" alt="image-20251103110116880"  />
+</a>
+</div>
+</p>
+</li>
+<li>
+<p><strong>第三列：<code>mov rcx,FFFFFFFFFFFFFFFE</code></strong></p>
+<p>是汇编指令，也就是opcode指令翻译成的汇编语言</p>
+<p>在这个位置按空格可以修改汇编代码（最好勾选上剩余字节以NOP填充）：
 
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/">
-                
-                    <img src="http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg" loading="lazy" alt="Featured image of post 逆向基础4：PE文件" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
-                技术学习
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/">逆向基础4：PE文件</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            windows的可执行文件格式
-        </h3>
-        
-
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103110531515" href="http://picture.928330.xyz/typora/image-20251103110531515.png">
+<img src="http://picture.928330.xyz/typora/image-20251103110531515.png" alt="image-20251103110531515"  />
+</a>
+</div>
+</p>
+</li>
+<li>
+<p><strong>第四列：<code>rcx:NtQueryInformationThread+14</code></strong></p>
+<p>是注释</p>
+<p>点击<code>;</code>键可以添加/修改注释：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103110658442" href="http://picture.928330.xyz/typora/image-20251103110658442.png">
+<img src="http://picture.928330.xyz/typora/image-20251103110658442.png" alt="image-20251103110658442"  />
+</a>
+</div>
+</p>
+</li>
+</ul>
+<h2 id="寄存器窗口">寄存器窗口
+</h2><p>右上角的寄存器窗口显示调试程序的寄存器信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103111126272" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251103111126272.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251103111126272.png" alt="image-20251103111126272"  />
+</a>
+</div>
+</p>
+<p>可以双击某一个寄存器对值进行修改：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103113500162" href="http://picture.928330.xyz/typora/image-20251103113500162.png">
+<img src="http://picture.928330.xyz/typora/image-20251103113500162.png" alt="image-20251103113500162"  />
+</a>
+</div>
+</p>
+<div class="alert alert-tip">
+    <div class="alert-header">
+        <span class="alert-icon">
+            💡
+        </span>
+        <span class="alert-title">
+            Tip
+        </span>
     </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-12</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-22
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
-
-    
+    <div class="alert-content">
+        <p>或许你会看见不同的寄存器名称：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>时代</th>
+          <th>位宽</th>
+          <th>寄存器命名特征</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>8086（out）</td>
+          <td>16 位</td>
+          <td><strong>AX、BX、CX、DX、SI、DI、BP、SP、IP</strong></td>
+          <td>如：AX 表示累加寄存器</td>
+      </tr>
+      <tr>
+          <td>80386</td>
+          <td>32 位</td>
+          <td>在 16 位基础上加前缀 <strong>E</strong>（Extended，扩展）</td>
+          <td>EAX、EBX、ECX、EDX、ESI、EDI、EBP、ESP、EIP</td>
+      </tr>
+      <tr>
+          <td>x86-64</td>
+          <td>64 位</td>
+          <td>在 16 位基础上加前缀 <strong>R</strong>（Register）</td>
+          <td>RAX、RBX、RCX、RDX、RSI、RDI、RBP、RSP、RIP</td>
+      </tr>
+  </tbody>
+</table></div></div>
 </div>
-
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">
-                
-                    <img src="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg" loading="lazy" alt="Featured image of post 逆向基础3：ELF文件" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
-                技术学习
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">逆向基础3：ELF文件</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            linux的可执行文件格式
-        </h3>
-        
-
+<h2 id="内存窗口">内存窗口
+</h2><p>左下角的数据窗口是内存地址的内容</p>
+<p>最左边是内存地址，接着是对应地址的十六进制数据，最右侧是十六进制对应的ASCII码：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103111357147" href="http://picture.928330.xyz/typora/image-20251103111357147.png">
+<img src="http://picture.928330.xyz/typora/image-20251103111357147.png" alt="image-20251103111357147"  />
+</a>
+</div>
+</p>
+<p>我们可以选中数据进行复制：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103113354760" href="http://picture.928330.xyz/typora/image-20251103113354760.png">
+<img src="http://picture.928330.xyz/typora/image-20251103113354760.png" alt="image-20251103113354760"  />
+</a>
+</div>
+</p>
+<p>也可以双击某一个字节进行修改：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103113421990" href="http://picture.928330.xyz/typora/image-20251103113421990.png">
+<img src="http://picture.928330.xyz/typora/image-20251103113421990.png" alt="image-20251103113421990"  />
+</a>
+</div>
+</p>
+<h2 id="堆栈窗口">堆栈窗口
+</h2><p>右下角是堆栈窗口，显示的是堆栈信息：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103111420920" href="http://picture.928330.xyz/typora/image-20251103111420920.png">
+<img src="http://picture.928330.xyz/typora/image-20251103111420920.png" alt="image-20251103111420920"  />
+</a>
+</div>
+</p>
+<p>可以双击某一行对它进行修改：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103113546302" href="http://picture.928330.xyz/typora/image-20251103113546302.png">
+<img src="http://picture.928330.xyz/typora/image-20251103113546302.png" alt="image-20251103113546302"  />
+</a>
+</div>
+</p>
+<h1 id="快捷键">快捷键
+</h1><div class="alert alert-tip">
+    <div class="alert-header">
+        <span class="alert-icon">
+            💡
+        </span>
+        <span class="alert-title">
+            Tip
+        </span>
     </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-11</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-13
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
-
-    
+    <div class="alert-content">
+        <p>善用鼠标右键，很多功能都在里面，包括常用的查找搜索功能等等，快捷键只是更快使用它们而已</p></div>
 </div>
-
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">
-                
-                    <img src="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png" loading="lazy" alt="Featured image of post 逆向基础2：可执行文件概述" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
-                技术学习
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">逆向基础2：可执行文件概述</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            或许应该放在基础1
-        </h3>
-        
-
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-09</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-13
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
-
-    
+<p>选项 -&gt; 快捷键，可以查看和自定义快捷键：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103122728365" href="http://picture.928330.xyz/typora/image-20251103122728365.png">
+<img src="http://picture.928330.xyz/typora/image-20251103122728365.png" alt="image-20251103122728365"  />
+</a>
 </div>
+</p>
+<p>下面是一些常用的快捷键：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>功能说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>F2</strong></td>
+          <td><strong>设置 / 取消断点</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + F2</strong></td>
+          <td><strong>重新启动调试（F2的断点还在）</strong></td>
+      </tr>
+      <tr>
+          <td>Alt + F2</td>
+          <td>关闭当前程序</td>
+      </tr>
+      <tr>
+          <td><strong>F4</strong></td>
+          <td><strong>运行到选中行处</strong></td>
+      </tr>
+      <tr>
+          <td><strong>F7</strong></td>
+          <td><strong>单步步入（进入函数，跟着call去函数内部）</strong></td>
+      </tr>
+      <tr>
+          <td><strong>F8</strong></td>
+          <td><strong>单步步过（不进入函数，跳过call，执行完当前函数）</strong></td>
+      </tr>
+      <tr>
+          <td>Shift + F7</td>
+          <td>条件单步步入</td>
+      </tr>
+      <tr>
+          <td>Shift + F8</td>
+          <td>条件单步步过</td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + F7</strong></td>
+          <td><strong>自动步入（重复单步进入）</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + F8</strong></td>
+          <td><strong>自动步过（重复单步步过）</strong></td>
+      </tr>
+      <tr>
+          <td><strong>F9</strong></td>
+          <td><strong>运行程序 / 继续执行</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + F9</strong></td>
+          <td><strong>执行到返回，用于快速跳出当前函数</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Alt + F9</strong></td>
+          <td><strong>执行到用户代码，用于快速跳出系统函数</strong></td>
+      </tr>
+      <tr>
+          <td><strong>F12</strong></td>
+          <td><strong>暂停程序</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + G</strong></td>
+          <td><strong>跳转到目标地址 / 表达式</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + Shift + F</strong></td>
+          <td><strong>在模块中搜索字符串</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + F</strong></td>
+          <td><strong>搜索指令或数据</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + B</strong></td>
+          <td><strong>搜索十六进制</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ctrl + L</strong></td>
+          <td><strong>搜索下一个</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Alt + Ins</strong></td>
+          <td><strong>复制地址</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Shift + D</strong></td>
+          <td><strong>在引用窗口全局搜索字符串</strong></td>
+      </tr>
+      <tr>
+          <td>Enter</td>
+          <td>跟随跳转（如 call / jmp 目标）</td>
+      </tr>
+      <tr>
+          <td>Alt + M</td>
+          <td>打开内存映射窗口</td>
+      </tr>
+      <tr>
+          <td>Alt + K</td>
+          <td>打开调用堆栈窗口</td>
+      </tr>
+      <tr>
+          <td><strong>Alt + B</strong></td>
+          <td><strong>打开断点列表</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Space</strong></td>
+          <td><strong>汇编 / 编辑当前指令</strong></td>
+      </tr>
+      <tr>
+          <td><strong>;</strong></td>
+          <td><strong>添加注释</strong></td>
+      </tr>
+      <tr>
+          <td>Ctrl + P</td>
+          <td>打开补丁窗口</td>
+      </tr>
+  </tbody>
+</table></div>
+<h1 id="断点">断点
+</h1><h2 id="软件断点">软件断点
+</h2><p><strong>在程序执行到特定指令时暂停程序执行</strong></p>
+<p>这种断点类型是由调试器模拟实现的，通常通过修改程序指令来实现</p>
+<p>它是最常见的断点类型，因为可以在任何代码段中设置断点（但有些地方下断会导致系统崩溃，特别是内核）</p>
+<h3 id="快捷键下断点">快捷键下断点
+</h3><p>通过<code>F2</code> / 双击操作码可以在对应位置下断点，会以红色标注，而当前IP指针则会使灰色显示，如下图所示：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103122930653" href="http://picture.928330.xyz/typora/image-20251103122930653.png">
+<img src="http://picture.928330.xyz/typora/image-20251103122930653.png" alt="image-20251103122930653"  />
+</a>
+</div>
+</p>
+<h3 id="命令下断点">命令下断点
+</h3><p>软件断点同样可以在最下方的命令输入窗口使用<code>bp/bpx</code>等命令下断，或通过<code>bc</code>来取消断点：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">bp</span> <span style="color:#d19a66">00007FF</span><span style="color:#e06c75">A08B44425</span>
+</span></span></code></pre></div><p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103124533917" href="http://picture.928330.xyz/typora/image-20251103124533917.png">
+<img src="http://picture.928330.xyz/typora/image-20251103124533917.png" alt="image-20251103124533917"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103124509514" href="http://picture.928330.xyz/typora/image-20251103124509514.png">
+<img src="http://picture.928330.xyz/typora/image-20251103124509514.png" alt="image-20251103124509514"  />
+</a>
+</div>
+</p>
+<h3 id="跳转目标位置下断点">跳转目标位置下断点
+</h3><p>当需要在特定函数上下断点时，可通过<code>Ctrl+G</code>调出地址跳转表达窗口，输入目标函数，跳转后手动下断点：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103124638825" href="http://picture.928330.xyz/typora/image-20251103124638825.png">
+<img src="http://picture.928330.xyz/typora/image-20251103124638825.png" alt="image-20251103124638825"  />
+</a>
+</div>
+</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103124650419" href="http://picture.928330.xyz/typora/image-20251103124650419.png">
+<img src="http://picture.928330.xyz/typora/image-20251103124650419.png" alt="image-20251103124650419"  />
+</a>
+</div>
+</p>
+<p>当然也支持输入命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">bp</span> <span style="color:#e06c75">MessageBoxA</span>
+</span></span></code></pre></div><h3 id="结合条件下断点">结合条件下断点
+</h3><p>这个是对断点附加触发条件的方法</p>
+<p>右键对应指令设置条件断点：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103132426611" href="http://picture.928330.xyz/typora/image-20251103132426611.png">
+<img src="http://picture.928330.xyz/typora/image-20251103132426611.png" alt="image-20251103132426611"  />
+</a>
+</div>
+</p>
+<p>输入暂停条件，只有当满足特定条件表达式时，断点才会触发：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103132440008" href="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251103132440008.png">
+<img src="C:%5cUsers%5clenovo%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251103132440008.png" alt="image-20251103132440008"  />
+</a>
+</div>
+</p>
+<h2 id="硬件断点">硬件断点
+</h2><p><strong>硬件断点是利用CPU的调试寄存器DR0–DR3来实现的，这些寄存器用于跟踪指令地址和数据访问地址</strong></p>
+<p>硬件断点不修改内存，通常比软件断点更快，但是受到硬件限制，每次能断的字节和总数量有限</p>
+<p>在内存数据窗口选中某一块地址，之后右键即可选择要下的硬件断点：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103125236902" href="http://picture.928330.xyz/typora/image-20251103125236902.png">
+<img src="http://picture.928330.xyz/typora/image-20251103125236902.png" alt="image-20251103125236902"  />
+</a>
+</div>
+</p>
+<h3 id="硬件访问断点">硬件访问断点
+</h3><p><strong>当程序尝试从指定内存地址读取数据时触发</strong></p>
+<p>比较少使用，主要是监控敏感变量或内存内容被读取</p>
+<h3 id="硬件写入断点">硬件写入断点
+</h3><p><strong>当程序尝试向指定内存地址写入数据时触发</strong></p>
+<p>是常用的类型，比如跟踪变量、缓冲区、密钥、解密结果等数据什么时候被修改</p>
+<h3 id="硬件执行断点">硬件执行断点
+</h3><p><strong>当程序执行到指定地址时触发</strong></p>
+<p>相当于软件断点，但由CPU调试寄存器实现，不修改代码，无<code>INT3</code>中断指令</p>
+<p>放在函数入口或特定指令上中断执行，能避免被反调试检测</p>
+<h2 id="内存断点">内存断点
+</h2><p><strong>通过改变页表属性或分段保护实现，当程序在特定内存地址处读取、写入或执行时，暂停程序执行</strong></p>
+<p>内存断点是按照内存页（4KB）监控的，也就是一旦监控了一个地址，就等于监控该地址所在整个页面</p>
+<p>它的范围广，但性能开销高，并且某些情况下是不够精确的，因为页的内存可能有很多指令在修改，会有干扰</p>
+<p>内存断点分两种：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>触发次数</th>
+          <th>触发后行为</th>
+          <th>说明</th>
+          <th>常见用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>一次性断点</strong></td>
+          <td>仅触发 <strong>一次</strong></td>
+          <td>命中后自动删除</td>
+          <td>程序命中该断点暂停一次后，调试器会自动清除该断点</td>
+          <td>临时观察某处是否会被访问或执行，用于快速验证逻辑</td>
+      </tr>
+      <tr>
+          <td><strong>重复断点</strong></td>
+          <td>可触发 <strong>多次</strong></td>
+          <td>命中后仍保留</td>
+          <td>程序每次命中都会暂停</td>
+          <td>长期监控某个内存或代码地址，例如循环中的多次写入或读取</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103125851853" href="http://picture.928330.xyz/typora/image-20251103125851853.png">
+<img src="http://picture.928330.xyz/typora/image-20251103125851853.png" alt="image-20251103125851853"  />
+</a>
+</div>
+</p>
+<h3 id="内存访问断点">内存访问断点
+</h3><p><strong>当程序试图访问特定内存地址时触发</strong></p>
+<p>最通用的类型，监控任意对敏感内存的操作，如全局变量或关键数据区</p>
+<h3 id="内存读取断点">内存读取断点
+</h3><p><strong>当程序试图从特定内存地址读取数据时触发</strong></p>
+<p>用于分析某数据在何处被读取，例如密码、密钥或结构体成员</p>
+<h3 id="内存写入断点">内存写入断点
+</h3><p><strong>当程序试图写入特定内存地址时触发</strong></p>
+<p>用于跟踪变量变化、解密过程、缓冲区写入等场景</p>
+<h3 id="内存执行断点">内存执行断点
+</h3><p><strong>当程序试图执行特定内存地址处的指令时触发</strong></p>
+<p>类似软件断点，但不依靠<code>INT3</code>，而是靠修改页属性，用于检测动态代码执行、Shellcode或自修改代码</p>
+<h2 id="消息断点">消息断点
+</h2><p><strong>这是一种特殊的断点，通过监控处理消息循环实现，当程序接收到指定类型的消息时，暂停程序执行</strong></p>
+<p>可以用于监视程序执行期间的Windows消息，包括键盘输入、鼠标操作、窗口消息等</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="img" href="https://img2023.cnblogs.com/blog/1379525/202307/1379525-20230706085932488-320751447.png">
+<img src="https://img2023.cnblogs.com/blog/1379525/202307/1379525-20230706085932488-320751447.png" alt="img"  />
+</a>
+</div>
+</p>
+<p>消息断点在调试GUI程序时非常有用，可以帮助调试窗口消息的处理代码，定位程序中的错误或异常行为</p>
+<p>例如，当你想要调试一个窗口消息处理函数时，可以在该函数上设置消息断点，当程序接收到对应的消息时，程序会暂停在该函数内部，方便进行调试</p>
+<h1 id="保存文件">保存文件
+</h1><p>如图，我们随便修改了这个程序的一些指令：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103133647080" href="http://picture.928330.xyz/typora/image-20251103133647080.png">
+<img src="http://picture.928330.xyz/typora/image-20251103133647080.png" alt="image-20251103133647080"  />
+</a>
+</div>
+</p>
+<p>为了试运行而不影响源文件，就需要另存为新的文件</p>
+<p>在反汇编窗口右键，选择补丁（patch），或者Ctrl+P：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103133749663" href="http://picture.928330.xyz/typora/image-20251103133749663.png">
+<img src="http://picture.928330.xyz/typora/image-20251103133749663.png" alt="image-20251103133749663"  />
+</a>
+</div>
+</p>
+<p>接着点击修补文件即可另存：</p>
+<p>
+<div class="post-img-view">
+<a data-fancybox="gallery" data-caption="image-20251103164713057" href="http://picture.928330.xyz/typora/image-20251103164713057.png">
+<img src="http://picture.928330.xyz/typora/image-20251103164713057.png" alt="image-20251103164713057"  />
+</a>
+</div>
+</p>
+<p>基础使用就到这里，更多方法还要在实战里体会~</p>
 
-</header>
-</article>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/re/">Re</a>
         
     </section>
-    <nav class='pagination'>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-12-04
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/apache%E5%85%A5%E9%97%A8/">
         
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/66d1339d8d7af.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/66d1339d8d7af.jpg"/>
+                
+            </div>
         
 
-        
-            
-                    <a class='page-link' href='/'>1</a>
-                
-            
-            
-                <span class='page-link current'>2</span>
-                
-            
-            
-                    <a class='page-link' href='/page/3/'>3</a>
-                
-            
-            
-                    
-                        
-                        <span class='page-link dots'>&hellip;</span>
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    <a class='page-link' href='/page/7/'>7</a>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">Apache入门</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="has-image">
+    <a href="/p/nginx%E5%85%A5%E9%97%A8/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/94b5f0d5aceb41498d7d03bcff81ecf5.jpeg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/94b5f0d5aceb41498d7d03bcff81ecf5.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Nginx入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bdocker/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/docker.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/docker.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快速上手docker</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/volatility%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/11656e3e84668fccb365afc0b917f85b.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/11656e3e84668fccb365afc0b917f85b.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">volatility使用说明</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/wiresharktshark%E7%AE%80%E6%98%93%E6%8C%87%E5%8C%97/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/wireshark-for-cybersecurity.jpg" loading="lazy" data-key="" data-hash="http://picture.928330.xyz/typora/wireshark-for-cybersecurity.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wireshark&amp;tshark简易指北</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://npm.elemecdn.com/@waline/emojis@1.1.0/bilibili","https://npm.elemecdn.com/@waline/emojis@1.1.0/bmoji","https://npm.elemecdn.com/@waline/emojis@1.1.0/weibo"],"lang":"zh-cn","locale":{"admin":"Admin","placeholder":null},"pageview":true,"placeholder":"欢迎评论，不好的评论我会删🙄💅🏻","requiredMeta":["name","email","url"],"serverURL":"https://comment.928330.xyz/"});
+</script>
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 2025 - 2025 kakahuote | 引用请注明文章链接
     </section>
@@ -2019,6 +1813,1814 @@
         <span>...当然还有kakahuote🤓👆</span>
     </section>
 </footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+    <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+   
+   
+   
+  @font-face {
+   font-family: 'yuan';
+   src: url('https://blog.928330.xyz/font/round.ttf') format('truetype');
+  }
+
+   
+   
+   
+  :root {
+   --base-font-family: 'yuan';
+   --code-font-family: 'yuan';
+  }
+
+   
+   
+   
+  #backTopBtn {
+   position: fixed;
+   bottom: 30px;
+   right: 450px;
+   z-index: 99;
+   cursor: pointer;
+   width: 32px;
+   height: 32px;
+   background-image: url('/icons/backTop.svg');
+   background-size: cover;
+   background-color: rgba(255, 255, 255, 0.9);
+   border-radius: 50%;
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+   transform-origin: center center;
+   animation: gentleFloat 3s ease-in-out infinite;
+   overflow: visible;
+  }
+
+  [data-scheme="dark"] #backTopBtn {
+   background-image: url('/icons/backTop-dark.svg') !important;
+   background-color: rgba(0, 0, 0, 0.8) !important;
+   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    #backTopBtn {
+      background-image: url('/icons/backTop-dark.svg') !important;
+      background-color: rgba(0, 0, 0, 0.8) !important;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
+    }
+    .button-ripple {
+      background-image: url('/icons/backTop-dark.svg') !important;
+    }
+  }
+
+  html[data-scheme="dark"] #backTopBtn,
+  body[data-scheme="dark"] #backTopBtn,
+  .dark #backTopBtn,
+  .dark-mode #backTopBtn {
+    background-image: url('/icons/backTop-dark.svg') !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1) !important;
+  }
+
+  html[data-scheme="dark"] .button-ripple,
+  body[data-scheme="dark"] .button-ripple,
+  .dark .button-ripple,
+  .dark-mode .button-ripple {
+    background-image: url('/icons/backTop-dark.svg') !important;
+  }
+
+  [data-scheme="dark"] #backTopBtn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid #ffffff;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: var(--show-css-arrow, none);
+  }
+
+  #backTopBtn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid #000000;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: var(--show-css-arrow, none);
+  }
+
+  @keyframes gentleFloat {
+   0%, 100% { transform: translateY(0px); }
+   50% { transform: translateY(-6px); }
+  }
+
+  .button-ripple {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 32px;
+   height: 32px;
+   border-radius: 50%;
+   background-image: url('/icons/backTop.svg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   pointer-events: none;
+   z-index: -1;
+   animation: buttonRippleExpand 2.5s linear infinite;
+   transform-origin: center center;
+   will-change: transform, opacity;
+   backface-visibility: hidden;
+   perspective: 1000px;
+   contain: layout style;
+   transform: translateZ(0);
+   transition: animation-duration 0.3s ease;
+   --show-css-arrow: none !important;
+   opacity: var(--ripple-opacity, 0.8) !important;
+  }
+
+  [data-scheme="dark"] .button-ripple {
+   background-image: url('/icons/backTop-dark.svg') !important;
+   --show-css-arrow: none !important;
+  }
+
+  .button-ripple.hover-mode {
+   animation-duration: 1s;
+  }
+
+  @keyframes buttonRippleExpand {
+   0% { --ripple-opacity: 0.8; transform: scale(1); }
+   50% { --ripple-opacity: 0.3; transform: scale(1.5); }
+   100% { --ripple-opacity: 0; transform: scale(2.0); }
+  }
+
+  .button-tooltip {
+   position: absolute;
+   bottom: 45px;
+   right: 450px;
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 8px 12px;
+   border-radius: 6px;
+   font-size: 12px;
+   white-space: nowrap;
+   opacity: 0;
+   transform: translateY(10px);
+   transition: all 0.3s ease;
+   pointer-events: none;
+   z-index: 100;
+  }
+
+  .button-tooltip.show {
+   opacity: 1;
+   transform: translateY(0);
+  }
+
+  .button-tooltip::after {
+   content: '';
+   position: absolute;
+   top: 100%;
+   left: 50%;
+   transform: translateX(-50%);
+   border: 5px solid transparent;
+   border-top-color: rgba(0, 0, 0, 0.8);
+  }
+
+  #backTopBtn:hover {
+   transform: translateY(-8px) scale(1.1);
+   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+   background-color: rgba(255, 255, 255, 1);
+  }
+
+  #backTopBtn.sprinting {
+   animation: energyBurst 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  @keyframes energyBurst {
+   0% {
+     transform: scale(1) rotate(0deg);
+     opacity: 1;
+     filter: brightness(1) hue-rotate(0deg);
+     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+   }
+   100% {
+     transform: scale(1) rotate(0deg);
+     opacity: 1;
+     filter: brightness(1) hue-rotate(360deg);
+     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+   }
+  }
+
+  #backTopBtn.reappearing {
+   animation: reappear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  #backTopBtn.exploding {
+   animation: explosionTransition 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+   z-index: 1000;
+  }
+
+  #backTopBtn.exploding .button-ripple {
+   opacity: 0;
+   animation-play-state: paused;
+  }
+
+  @keyframes explosionTransition {
+   0% { transform: scale(1.6); opacity: 1; }
+   100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes reappear {
+   0% { transform: scale(0.85); opacity: 0.7; }
+   100% { transform: scale(1); opacity: 1; }
+  }
+
+  .particle {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 4px;
+   height: 4px;
+   background: radial-gradient(circle, #fff, #ffd700, #ff69b4, #87ceeb);
+   border-radius: 50%;
+   pointer-events: none;
+   z-index: -2;
+   animation: particleExplode 1s ease-out forwards;
+  }
+
+  @keyframes particleExplode {
+   0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+   100% { transform: translate(-50%, -50%) scale(1) translate(var(--x), var(--y)); opacity: 0; }
+  }
+
+  .energy-wave {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 0;
+   height: 0;
+   border: 2px solid transparent;
+   border-radius: 50%;
+   pointer-events: none;
+   z-index: -3;
+   animation: energyWave 1.2s ease-out forwards;
+  }
+
+  @keyframes energyWave {
+   0% { width: 0; height: 0; border-color: rgba(255, 215, 0, 0.8); opacity: 1; }
+   100% { width: 120px; height: 120px; border-color: rgba(255, 215, 0, 0); opacity: 0; }
+  }
+
+  .hero-aura {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
+   background: conic-gradient(from 0deg, #ffd700, #ff69b4, #87ceeb, #98fb98, #ffa07a, #ffd700);
+   background-size: 200% 200%;
+   pointer-events: none;
+   z-index: -4;
+   animation: heroAura 2s linear infinite;
+   opacity: 0;
+   transition: opacity 0.3s ease;
+  }
+
+  #backTopBtn.sprinting .hero-aura { opacity: 0.6; }
+
+  @keyframes heroAura {
+   0% { background-position: 0% 0%; transform: translate(-50%, -50%) rotate(0deg); }
+   100% { background-position: 100% 100%; transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+   
+   
+   
+  @media (max-width: 768px) {
+     #backTopBtn {
+       left: 20px !important;  
+       right: auto !important;
+       bottom: 20px;
+       width: 28px;
+       height: 28px;
+     }
+     .button-tooltip {
+       left: 20px !important;
+       right: auto !important;
+       bottom: 35px;
+     }
+  }
+  
+  @media (max-width: 480px) {
+     #backTopBtn {
+       left: 15px !important;
+       right: auto !important;
+       bottom: 15px;
+       width: 26px;
+       height: 26px;
+     }
+     .button-tooltip {
+       left: 15px !important;
+       right: auto !important;
+       bottom: 31px;
+     }
+  }
+
+  .no-text-selection {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+   
+   
+   
+  
+  #rope-physics-container,
+  #rope-svg-container {
+    pointer-events: none; 
+  }
+
+  #pull-ring-physics {
+    pointer-events: auto !important;
+    touch-action: none; 
+  }
+
+   
+  @media (max-width: 767px) {
+    #rope-container,
+    #rope-physics-container,
+    #rope-svg-container,
+    #pull-ring-physics {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  }
+  
+  #rope-container {
+    position: fixed;
+    top: 0;
+    left: 20px;
+    z-index: 10002; 
+    width: 50px;
+    height: 100vh;
+    pointer-events: none;
+  }
+
+   
+   
+   
+  .highlight {
+   max-height: 400px;
+   overflow: hidden;
+   position: relative;
+   transition: max-height 0.3s ease-out;
+  }
+
+  .code-show {
+   max-height: none !important;
+  }
+
+  .code-more-box {
+   width: 100%;
+   padding-top: 20px;
+   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   z-index: 1;
+   text-align: center;
+  }
+
+  .code-more-btn {
+   display: inline-block;
+   padding: 5px 15px;
+   background: #f0f0f5;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 0.9em;
+  }
+
+   
+   
+   
+  #particles-js {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   z-index: -1;
+   pointer-events: none;
+  }
+  
+  #particles-js canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+
+   
+   
+   
+  .toc-lock-btn {
+    position: absolute;
+    top: 32px;
+    right: 5px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toc-lock-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .toc-lock-btn:active {
+    transform: scale(0.95);
+  }
+  
+  .toc-lock-btn:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.08);
+  }
+  
+  .toc-lock-btn.locked {
+    color: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .toc-lock-btn.locked:hover {
+    background: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+  
+  .toc-lock-btn.locked .lock-icon.locked { display: block; }
+  .toc-lock-btn.locked .lock-icon.unlocked { display: none; }
+  .toc-lock-btn .lock-icon.locked { display: none; }
+  .toc-lock-btn .lock-icon.unlocked { display: block; }
+  
+  .toc-lock-btn .lock-icon {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: all 0.3s ease;
+  }
+  
+  .toc-lock-label {
+    position: absolute;
+    top: 38px;
+    right: 28px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 700;
+    z-index: 100;
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  [data-scheme="dark"] .toc-lock-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  [data-scheme="dark"] .toc-lock-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+  }
+  
+  [data-scheme="dark"] .toc-lock-btn:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 2px 8px rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  [data-scheme="dark"] .toc-lock-btn.locked {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+  }
+  
+  [data-scheme="dark"] .toc-lock-btn.locked:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  }
+  
+  [data-scheme="dark"] .toc-lock-label {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  #TableOfContents[data-scrollspy-disabled="true"] { opacity: 0.8 !important; }
+  #TableOfContents[data-scrollspy-disabled="true"] .active-class { display: block !important; opacity: 1 !important; }
+  #TableOfContents[data-scrollspy-disabled="true"] a { cursor: pointer !important; }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+   
+   
+   
+
+  (function() { 
+  let s1 = '2025-5-8 15:00:00'; 
+  s1 = new Date(s1.replace(/-/g, "/"));
+  let s2 = new Date();
+  let timeDifference = s2.getTime() - s1.getTime();
+
+  let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+  let result = days + "天" + hours + "小时" + minutes + "分钟";
+  if (document.getElementById('runningdays')) {
+      document.getElementById('runningdays').innerHTML = result;
+  }
+  })(); 
+  
+   
+   
+   
+  
+  function startContinuousRipple(button) {
+   const buttonRipple = document.createElement('div');
+   buttonRipple.className = 'button-ripple';
+   button.appendChild(buttonRipple);
+   button.buttonRipple = buttonRipple;
+  }
+  
+  function createContinuousRipple(button) {
+   if (button.querySelector('.continuous-ripple')) return;
+   const rippleContainer = document.createElement('div');
+   rippleContainer.className = 'ripple-container continuous-ripple';
+   const ripple = document.createElement('div');
+   ripple.className = 'ripple';
+   ripple.style.background = 'radial-gradient(circle, rgba(255, 107, 107, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%)';
+   rippleContainer.appendChild(ripple);
+   button.appendChild(rippleContainer);
+   setTimeout(() => {
+     if (rippleContainer.parentNode) rippleContainer.parentNode.removeChild(rippleContainer);
+   }, 800);
+  }
+  
+  function createHoverRipple(button) {
+   if (button.buttonRipple) {
+     button.buttonRipple.style.animationDuration = '1s';
+     button.buttonRipple.classList.add('hover-mode');
+   }
+  }
+  
+  function showTooltip(button) {
+   hideTooltip();
+   const tooltip = document.createElement('div');
+   tooltip.className = 'button-tooltip';
+   tooltip.textContent = '返回顶部';
+   document.body.appendChild(tooltip);
+   setTimeout(() => { tooltip.classList.add('show'); }, 10);
+   button.tooltip = tooltip;
+  }
+  
+  function hideTooltip() {
+   const existingTooltip = document.querySelector('.button-tooltip');
+   if (existingTooltip) {
+     existingTooltip.classList.remove('show');
+     setTimeout(() => {
+       if (existingTooltip.parentNode) existingTooltip.parentNode.removeChild(existingTooltip);
+     }, 300);
+   }
+  }
+  
+  function createRippleEffect(button) {
+   const energyWave = document.createElement('div');
+   energyWave.className = 'energy-wave';
+   document.body.appendChild(energyWave);
+   createParticleExplosion(button);
+   setTimeout(() => {
+     if (energyWave.parentNode) energyWave.parentNode.removeChild(energyWave);
+   }, 1200);
+  }
+
+  function createParticleExplosion(button) {
+   const particleCount = 16;
+   const particleColors = [
+     'radial-gradient(circle, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff)',
+     'radial-gradient(circle, #ff8e8e, #ffed4e, #7ddb8f, #6ba6ff)',
+     'radial-gradient(circle, #ffa1a1, #fff15f, #8ee79f, #89b6ff)',
+     'radial-gradient(circle, #ffb4b4, #fff570, #9ff3af, #a7c6ff)'
+   ];
+   
+   for (let i = 0; i < particleCount; i++) {
+     const particle = document.createElement('div');
+     particle.className = 'particle';
+     const randomColor = particleColors[Math.floor(Math.random() * particleColors.length)];
+     particle.style.background = randomColor;
+     const angle = (i / particleCount) * 2 * Math.PI;
+     const distance = 40 + Math.random() * 30;
+     const x = Math.cos(angle) * distance;
+     const y = Math.sin(angle) * distance;
+     
+     particle.style.setProperty('--x', `${x}px`);
+     particle.style.setProperty('--y', `${y}px`);
+     particle.style.animationDelay = `${Math.random() * 0.4}s`;
+     
+     button.appendChild(particle);
+     
+     setTimeout(() => {
+       if (particle.parentNode) particle.parentNode.removeChild(particle);
+     }, 1000);
+   }
+  }
+
+   
+   
+   
+  function initScrollTop() {
+   let rightSideBar = document.querySelector(".right-sidebar");
+   if (!rightSideBar) return;
+
+   let btn = document.createElement("div");
+   btn.id = "backTopBtn";
+   let isRotating = false;
+
+   const heroAura = document.createElement('div');
+   heroAura.className = 'hero-aura';
+   btn.appendChild(heroAura);
+
+   btn.addEventListener('mouseenter', function() {
+     createHoverRipple(this);
+     showTooltip(this);
+   });
+   
+   btn.addEventListener('mouseleave', function() {
+     if (this.buttonRipple) {
+       this.buttonRipple.style.animationDuration = '2s';
+       this.buttonRipple.classList.remove('hover-mode');
+     }
+     hideTooltip();
+   });
+
+   btn.onclick = function() {
+    if (!isRotating) {
+     isRotating = true;
+     backToTop(this, () => {
+      isRotating = false;
+     });
+    }
+   };
+   rightSideBar.appendChild(btn);
+   btn.style.display = "block";
+   startContinuousRipple(btn);
+  }
+
+  function backToTop(button, onComplete) {
+   button.classList.add('sprinting');
+   if (button.buttonRipple) button.buttonRipple.style.display = 'none';
+   createRippleEffect(button);
+   window.scrollTo({ top: 0, behavior: "smooth" });
+   
+   const checkScrollComplete = () => {
+     if (window.scrollY === 0) {
+       button.classList.remove('sprinting');
+       button.classList.add('exploding');
+       createParticleExplosion(button);
+       if (button.buttonRipple) button.buttonRipple.style.display = 'block';
+       setTimeout(() => {
+         button.classList.remove('exploding');
+         if (button.buttonRipple) {
+           button.buttonRipple.style.animationPlayState = 'paused';
+           button.buttonRipple.style.animation = 'none';
+           button.buttonRipple.offsetHeight;
+           button.buttonRipple.style.animation = 'buttonRippleExpand 2s steps(25, end) infinite';
+           button.buttonRipple.style.animationPlayState = 'running';
+         }
+         button.classList.add('reappearing');
+         setTimeout(() => {
+           button.classList.remove('reappearing');
+           if (onComplete) onComplete();
+         }, 600);
+       }, 800);
+       return;
+     }
+     requestAnimationFrame(checkScrollComplete);
+   };
+   
+   checkScrollComplete();
+  }
+
+  initScrollTop();
+  
+   
+   
+   
+  function initRope() {
+    if (window.innerWidth < 768) return;
+
+    if (typeof Matter === 'undefined') {
+      console.error('Matter.js 库未加载');
+      return;
+    }
+    if (document.getElementById('rope-physics-container')) return;
+
+    let ropeContainer = document.getElementById('rope-container');
+    if (!ropeContainer) return;
+    
+    ropeContainer.innerHTML = '';
+    
+    const monthlyEmojis = [
+      { month: 1, name: "一月", ring: "❄️", falling: "❄️", description: "寒冬腊月，雪花飞舞" },
+      { month: 2, name: "二月", ring: "🏮", falling: "🏮", description: "新春正月，灯笼高挂" },
+      { month: 3, name: "三月", ring: "🌸", falling: "🌸", description: "春暖花开，樱花绽放" },
+      { month: 4, name: "四月", ring: "🌧️", falling: "🌧️", description: "清明时节，春雨绵绵" },
+      { month: 5, name: "五月", ring: "🌺", falling: "🌺", description: "立夏时节，牡丹盛开" },
+      { month: 6, name: "六月", ring: "🌻", falling: "🌻", description: "芒种时节，向日葵开" },
+      { month: 7, name: "七月", ring: "🌿", falling: "🌿", description: "小暑时节，绿意盎然" },
+      { month: 8, name: "八月", ring: "🍉", falling: "🍉", description: "七夕时节，西瓜清甜" },
+      { month: 9, name: "九月", ring: "🍁", falling: "🍁", description: "白露时节，秋葉飘落" },
+      { month: 10, name: "十月", ring: "🍂", falling: "🍂", description: "寒露时节，落叶纷飞" },
+      { month: 11, name: "十一月", ring: "🍊", falling: "🍊", description: "霜降时节，柑橘飘香" },
+      { month: 12, name: "十二月", ring: "🌨️", falling: "🌨️", description: "大雪时节，雪花纷飞" }
+    ];
+    window.timeEmojis = [
+      { period: "morning", name: "早晨", emojis: ["☀️", "🌤️", "🌱", "🌺", "🌿"], description: "晨曦初露，万物苏醒" },
+      { period: "noon", name: "中午", emojis: ["🌞", "🌻", "🦋", "🦜", "🐝"], description: "烈日当空，生机勃勃" },
+      { period: "evening", name: "傍晚", emojis: ["🌙", "⭐", "🦉"], description: "夕阳西下，夜幕降临" }
+    ];
+    
+    const currentMonth = new Date().getMonth() + 1;
+    const currentEmoji = monthlyEmojis.find(emoji => emoji.month === currentMonth);
+    
+    const ropeContainerLeft = 30;
+    const { Engine, World, Bodies, Composite, Constraint, Runner, Mouse, MouseConstraint, Events } = Matter;
+    const engine = Engine.create();
+    const world = engine.world;
+    
+    engine.world.gravity.y = 0;
+
+    const ropeSegments = 10; 
+    const segmentLength = 20;
+    const ropeGroup = Matter.Body.nextGroup(true);
+    const ropeChain = Composite.create({ label: 'Rope' });
+
+    for (let i = 0; i < ropeSegments; i++) {
+      const segment = Bodies.circle(ropeContainerLeft, i * segmentLength, 2, {
+          collisionFilter: { group: ropeGroup },
+          density: 0.5,
+          frictionAir: 0.05,
+          render: { visible: false }
+      });
+      Composite.add(ropeChain, segment);
+      
+      if (i > 0) {
+          Composite.addConstraint(ropeChain, Constraint.create({
+              bodyA: ropeChain.bodies[i - 1],
+              bodyB: segment,
+              stiffness: 0.8,
+              length: segmentLength,
+              render: { visible: false }
+          }));
+      } else {
+          Composite.addConstraint(ropeChain, Constraint.create({
+              bodyB: segment,
+              pointA: { x: ropeContainerLeft, y: -20 },
+              stiffness: 1,
+              render: { visible: false }
+          }));
+      }
+    }
+
+    const lastBody = ropeChain.bodies[ropeChain.bodies.length - 1];
+    const pullRingRadius = 20;
+    const pullRingBody = Bodies.circle(
+      ropeContainerLeft, 
+      ropeSegments * segmentLength, 
+      pullRingRadius, 
+      {
+        collisionFilter: { group: ropeGroup },
+        density: 1.5,
+        frictionAir: 0.02,
+        label: 'PullRing'
+      }
+    );
+    Composite.add(ropeChain, pullRingBody);
+    
+    Composite.addConstraint(ropeChain, Constraint.create({
+        bodyA: lastBody,
+        bodyB: pullRingBody,
+        stiffness: 0.8,
+        length: segmentLength,
+        render: { visible: false }
+    }));
+
+    World.add(world, ropeChain);
+
+    const domContainer = document.createElement('div');
+    domContainer.id = 'rope-physics-container';
+    domContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 10002;';
+    document.body.appendChild(domContainer);
+
+    const svgContainer = document.createElement('div');
+    svgContainer.id = 'rope-svg-container';
+    svgContainer.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;';
+    
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.style.cssText = 'width: 100%; height: 100%; overflow: visible;';
+    
+    const defs = document.createElementNS(svgNS, 'defs');
+    const gradient = document.createElementNS(svgNS, 'linearGradient');
+    gradient.setAttribute('id', 'ropeGradient');
+    gradient.setAttribute('x1', '0%');
+    gradient.setAttribute('y1', '0%');
+    gradient.setAttribute('x2', '0%');
+    gradient.setAttribute('y2', '100%');
+
+    const stop1 = document.createElementNS(svgNS, 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', '#654321');
+    const stop2 = document.createElementNS(svgNS, 'stop');
+    stop2.setAttribute('offset', '50%');
+    stop2.setAttribute('stop-color', '#A0522D');
+    const stop3 = document.createElementNS(svgNS, 'stop');
+    stop3.setAttribute('offset', '100%');
+    stop3.setAttribute('stop-color', '#654321');
+
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    gradient.appendChild(stop3);
+    defs.appendChild(gradient);
+    svg.appendChild(defs);
+
+    const ropePath = document.createElementNS(svgNS, 'path');
+    ropePath.setAttribute('id', 'rope-path');
+    ropePath.setAttribute('fill', 'none');
+    ropePath.setAttribute('stroke-width', '3');
+    ropePath.setAttribute('stroke-linecap', 'round');
+    ropePath.setAttribute('stroke-linejoin', 'round');
+    
+    ropePath.style.stroke = '#654321';
+    ropePath.setAttribute('stroke', 'url(#ropeGradient)');
+    
+    let initialPath = `M ${ropeContainerLeft} -20`;
+    for(let i=0; i<ropeSegments; i++) {
+        initialPath += ` L ${ropeContainerLeft} ${i * segmentLength}`;
+    }
+    ropePath.setAttribute('d', initialPath);
+    
+    svg.appendChild(ropePath);
+    svgContainer.appendChild(svg);
+    domContainer.appendChild(svgContainer);
+
+    const pullRingDiv = document.createElement('div');
+    pullRingDiv.id = 'pull-ring-physics';
+    pullRingDiv.innerHTML = currentEmoji.ring;
+    
+    const initialRingTop = ropeSegments * segmentLength;
+    pullRingDiv.style.cssText = `
+      position: absolute; left: ${ropeContainerLeft}px; top: ${initialRingTop}px;
+      width: 40px; height: 40px; line-height: 40px; 
+      font-size: 28px; text-align: center;
+      cursor: grab; pointer-events: auto;
+      user-select: none; touch-action: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s linear;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    `;
+    
+    pullRingDiv.addEventListener('mousedown', () => pullRingDiv.style.cursor = 'grabbing');
+    pullRingDiv.addEventListener('mouseup', () => pullRingDiv.style.cursor = 'grab');
+    
+    domContainer.appendChild(pullRingDiv);
+
+    const mouse = Mouse.create(document.body);
+    const mouseConstraint = MouseConstraint.create(engine, {
+      mouse: mouse,
+      constraint: {
+        stiffness: 0.2,
+        render: { visible: false }
+      }
+    });
+    World.add(world, mouseConstraint);
+
+    function render() {
+        let pathData = `M ${ropeContainerLeft} -20`;
+        ropeChain.bodies.forEach(body => {
+            pathData += ` L ${body.position.x} ${body.position.y}`;
+        });
+        ropePath.setAttribute('d', pathData);
+
+        pullRingDiv.style.left = `${pullRingBody.position.x}px`;
+        pullRingDiv.style.top = `${pullRingBody.position.y}px`;
+        pullRingDiv.style.transform = `translate(-50%, -50%) rotate(${pullRingBody.angle}rad)`;
+
+        requestAnimationFrame(render);
+    }
+    render();
+
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+
+    setTimeout(() => {
+        engine.world.gravity.y = 1;
+    }, 500);
+
+    let startY = 0;
+    Events.on(mouseConstraint, 'startdrag', (e) => {
+        if (e.body === pullRingBody) startY = pullRingBody.position.y;
+    });
+
+    Events.on(mouseConstraint, 'enddrag', (e) => {
+        if (e.body === pullRingBody) {
+            if (pullRingBody.position.y - startY > 50) {
+                createSeasonalFalling(currentEmoji);
+            }
+        }
+    });
+  }
+
+  
+
+  function createSeasonalFalling(emojiConfig) {
+   const fallingContainer = document.createElement('div');
+   fallingContainer.id = 'falling-container';
+   fallingContainer.style.cssText = `
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     pointer-events: none;
+     z-index: 9999;
+     overflow: hidden;
+   `;
+   document.body.appendChild(fallingContainer);
+
+   const currentHour = new Date().getHours();
+   let currentTimePeriod;
+   if (currentHour >= 5 && currentHour < 11) {
+    currentTimePeriod = window.timeEmojis.find(t => t.period === "morning");
+   } else if (currentHour >= 11 && currentHour < 17) {
+    currentTimePeriod = window.timeEmojis.find(t => t.period === "noon");
+   } else {
+    currentTimePeriod = window.timeEmojis.find(t => t.period === "evening");
+   }
+   
+   const totalElements = emojiConfig.month >= 11 || emojiConfig.month <= 2 ? 30 : 25;
+   let activeElements = 0;
+   
+   for (let i = 0; i < totalElements; i++) {
+    setTimeout(() => {
+     const element = document.createElement('div');
+     
+     let selectedEmoji, emojiType;
+     if (Math.random() < 0.7) {
+      selectedEmoji = emojiConfig.falling;
+      emojiType = "monthly";
+     } else {
+      selectedEmoji = currentTimePeriod.emojis[Math.floor(Math.random() * currentTimePeriod.emojis.length)];
+      emojiType = "time";
+     }
+     
+     element.innerHTML = selectedEmoji;
+     
+     let fontSize, color, textShadow;
+     if (emojiType === "time") {
+      if (currentTimePeriod.period === "morning") {
+       fontSize = Math.random() * 18 + 16;
+       color = '#FFD700';
+       textShadow = '0 0 5px rgba(255, 215, 0, 0.7)';
+      } else if (currentTimePeriod.period === "noon") {
+       fontSize = Math.random() * 18 + 16;
+       color = '#FF8C00';
+       textShadow = '0 0 5px rgba(255, 140, 0, 0.7)';
+      } else {
+       fontSize = Math.random() * 18 + 16;
+       color = '#4B0082';
+       textShadow = '0 0 5px rgba(75, 0, 130, 0.7)';
+      }
+     } else {
+      if (emojiConfig.month >= 11 || emojiConfig.month <= 2) {
+       fontSize = Math.random() * 20 + 15;
+       color = 'white';
+       textShadow = '0 0 5px rgba(255, 255, 255, 0.8)';
+      } else if (emojiConfig.month >= 3 && emojiConfig.month <= 5) {
+       fontSize = Math.random() * 18 + 16;
+       color = '#FF69B4';
+       textShadow = '0 0 5px rgba(255, 105, 180, 0.6)';
+      } else if (emojiConfig.month >= 6 && emojiConfig.month <= 8) {
+       fontSize = Math.random() * 18 + 15;
+       color = '#32CD32';
+       textShadow = '0 0 5px rgba(50, 205, 50, 0.6)';
+      } else {
+       fontSize = Math.random() * 18 + 15;
+       color = '#FF8C00';
+       textShadow = '0 0 5px rgba(255, 140, 0, 0.6)';
+      }
+     }
+     
+     element.style.cssText = `
+       position: absolute;
+       font-size: ${fontSize}px;
+       color: ${color};
+       text-shadow: ${textShadow};
+       left: ${Math.random() * window.innerWidth}px;
+       top: -50px;
+       user-select: none;
+       pointer-events: none;
+       z-index: 9999;
+       transition: all 0.3s ease;
+     `;
+     
+     fallingContainer.appendChild(element);
+     activeElements++;
+     
+     const duration = 4000 + Math.random() * 2000;
+     const endX = parseFloat(element.style.left) + (Math.random() - 0.5) * 400;
+     const endY = window.innerHeight + 50;
+     
+     element.style.transition = `all ${duration}ms linear`;
+     
+     setTimeout(() => {
+      element.style.left = endX + 'px';
+      element.style.top = endY + 'px';
+      element.style.opacity = '0';
+     }, 50);
+     
+     setTimeout(() => {
+      if (element.parentNode) element.parentNode.removeChild(element);
+      activeElements--;
+      if (activeElements === 0) {
+       if (fallingContainer && fallingContainer.parentNode) fallingContainer.parentNode.removeChild(fallingContainer);
+      }
+     }, duration);
+    }, i * 150);
+   }
+  }
+
+  function initCodeMoreBox() {
+   let codeBlocks = document.querySelectorAll(".highlight");
+   if (!codeBlocks) return;
+   codeBlocks.forEach(codeBlock => {
+    if (codeBlock.scrollHeight <= codeBlock.clientHeight) return;
+    let codeMoreBox = document.createElement('div');
+    codeMoreBox.classList.add('code-more-box');
+    let codeMoreBtn = document.createElement('span');
+    codeMoreBtn.classList.add('code-more-btn');
+    codeMoreBtn.innerText = '显示更多';
+    let isExpanded = false;
+
+    codeMoreBtn.addEventListener('click', () => {
+     if (!isExpanded) {
+      codeBlock.classList.add('code-show');
+      codeMoreBtn.innerText = '折叠';
+      isExpanded = true;
+     } else {
+      codeBlock.classList.remove('code-show');
+      codeMoreBtn.innerText = '显示更多';
+      isExpanded = false;
+     }
+     window.dispatchEvent(new Event('resize'));
+    });
+    codeMoreBox.appendChild(codeMoreBtn);
+    codeBlock.appendChild(codeMoreBox);
+   });
+  }
+  
+  function captureScrollListeners() {
+    setTimeout(() => { overrideScrollspy(); }, 2000);
+  }
+  
+  function overrideScrollspy() {
+    window.tocScrollspyEnabled = true;
+    setTimeout(() => {
+      if (!window.originalScrollTo) {
+        window.originalScrollTo = HTMLElement.prototype.scrollTo;
+        HTMLElement.prototype.scrollTo = function(options) {
+          if (this.id === 'TableOfContents' && window.tocScrollDisabled) return;
+          return window.originalScrollTo.call(this, options);
+        };
+      }
+      if (!window.originalScrollIntoView) {
+        window.originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
+        HTMLElement.prototype.scrollIntoView = function(options) {
+          if (this.closest('#TableOfContents') && window.tocScrollDisabled) return;
+          return window.originalScrollIntoView.call(this, options);
+        };
+      }
+    }, 3000);
+  }
+  
+  function initTocLock() {
+    const articleToc = document.querySelector('#TableOfContents');
+    if (!articleToc) return;
+    const tocContainer = document.querySelector('.widget.archives');
+    if (!tocContainer) return;
+    
+    tocContainer.style.position = 'relative';
+    captureScrollListeners();
+    
+    const lockLabel = document.createElement('div');
+    lockLabel.className = 'toc-lock-label';
+    lockLabel.textContent = '锁定：';
+    
+    const lockBtn = document.createElement('div');
+    lockBtn.className = 'toc-lock-btn';
+    lockBtn.innerHTML = `
+      <svg class="lock-icon unlocked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      <svg class="lock-icon locked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="11" width="18" height="10" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        <path d="M9 12v3a3 3 0 0 0 6 0v-3"/>
+      </svg>
+    `;
+    
+    lockBtn.addEventListener('click', function() {
+      const isLocked = this.classList.contains('locked');
+      if (isLocked) {
+        this.classList.remove('locked');
+        localStorage.setItem('tocLocked', 'false');
+        enableTocScroll();
+      } else {
+        this.classList.add('locked');
+        localStorage.setItem('tocLocked', 'true');
+        disableTocScroll();
+      }
+    });
+    
+    tocContainer.appendChild(lockLabel);
+    tocContainer.appendChild(lockBtn);
+    
+    lockBtn.classList.remove('locked');
+    localStorage.setItem('tocLocked', 'false');
+    
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          const isLocked = lockBtn.classList.contains('locked');
+          if (isLocked) disableTocScroll(); else enableTocScroll();
+        }
+      });
+    });
+    
+    observer.observe(lockBtn, { attributes: true });
+  }
+
+  function disableTocScroll() {
+    window.tocScrollDisabled = true;
+    const tocContainer = document.querySelector('#TableOfContents');
+    if (tocContainer) {
+      window.savedTocScrollTop = tocContainer.scrollTop;
+      const currentActive = tocContainer.querySelector('.active-class');
+      if (currentActive) window.savedActiveElement = currentActive;
+    }
+    if (tocContainer) {
+      tocContainer.setAttribute('data-scrollspy-disabled', 'true');
+      tocContainer.title = '目录已锁定，不会自动跟随滚动';
+    }
+    const archivesContainer = document.querySelector('.widget.archives');
+    if (archivesContainer) {
+      archivesContainer.style.opacity = '0.8';
+      archivesContainer.title = '目录已锁定，不会自动跟随滚动';
+    }
+  }
+
+  function enableTocScroll() {
+    window.tocScrollDisabled = false;
+    const tocContainer = document.querySelector('#TableOfContents');
+    if (tocContainer) {
+      tocContainer.removeAttribute('data-scrollspy-disabled');
+      tocContainer.title = '';
+    }
+    const archivesContainer = document.querySelector('.widget.archives');
+    if (archivesContainer) {
+      archivesContainer.style.opacity = '1';
+      archivesContainer.title = '';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initCodeMoreBox();
+    initRope();
+    setTimeout(initTocLock, 1000);
+  });
+
+</script>
+
+<div id="rope-container"></div>
+
+<div id="particles-js"></div>
+
+<script>
+particlesJS('particles-js', {
+  "particles": {
+    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+    "color": { "value": ["#888888", "#aaaaaa", "#cccccc", "#eeeeee"] },
+    "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 } },
+    "opacity": { "value": 0.5, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } },
+    "size": { "value": 2, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } },
+    "line_linked": { "enable": true, "distance": 150, "color": "#888888", "opacity": 0.4, "width": 1 },
+    "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+    "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 200, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } }
+  },
+  "retina_detect": true
+});
+</script>
+
+<script>
+(function() {
+  'use strict';
+  const categoryColors = [
+    '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57',
+    '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43',
+    '#10ac84', '#ff6348', '#a55eea', '#e17055', '#d63031',
+    '#00b894', '#fdcb6e', '#6c5ce7', '#fd79a8', '#f39c12',
+    '#e67e22', '#e74c3c', '#9b59b6', '#3498db', '#1abc9c',
+    '#16a085', '#27ae60', '#2ecc71', '#f1c40f', '#e67e22'
+  ];
+  function hashString(str) {
+    let hash = 0;
+    if (str.length === 0) return hash;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash);
+  }
+  function assignCategoryColors() {
+    const isArchivesPage = document.body.classList.contains('template-archives') || window.location.pathname.includes('/archives/');
+    const isArticlePage = document.querySelector('#TableOfContents') || document.querySelector('.article-category');
+    
+    if (isArticlePage && !isArchivesPage) {
+      const categoryLinks = document.querySelectorAll('.article-category a');
+      categoryLinks.forEach((link, index) => {
+        const href = link.getAttribute('href');
+        const categoryName = href.split('/').pop() || href.split('/').slice(-2, -1)[0] || 'default';
+        const hash = hashString(categoryName);
+        const colorIndex = hash % categoryColors.length;
+        const backgroundColor = categoryColors[colorIndex];
+        link.style.setProperty('background-color', backgroundColor, 'important');
+        link.style.setProperty('color', '#fff', 'important');
+        link.addEventListener('mouseenter', function() { this.style.opacity = '0.8'; this.style.transform = 'scale(1.05)'; });
+        link.addEventListener('mouseleave', function() { this.style.opacity = '1'; this.style.transform = 'scale(1)'; });
+      });
+    }
+    if (!isArchivesPage) {
+      const sidebarCategories = document.querySelectorAll('.widget.categories a, .widget.tagCloud a');
+      sidebarCategories.forEach((link, index) => {
+        const href = link.getAttribute('href');
+        const categoryName = href.split('/').pop() || href.split('/').slice(-2, -1)[0] || 'default';
+        const hash = hashString(categoryName);
+        const colorIndex = hash % categoryColors.length;
+        const backgroundColor = categoryColors[colorIndex];
+        link.style.setProperty('background-color', backgroundColor, 'important');
+        link.style.setProperty('color', '#fff', 'important');
+        link.style.setProperty('border-radius', '6px', 'important');
+        link.style.setProperty('padding', '8px 12px', 'important');
+        link.style.setProperty('margin', '4px 0', 'important');
+        link.style.setProperty('display', 'inline-block', 'important');
+        link.style.setProperty('text-decoration', 'none', 'important');
+        link.style.setProperty('transition', 'all 0.3s ease', 'important');
+        link.addEventListener('mouseenter', function() { this.style.opacity = '0.8'; this.style.transform = 'scale(1.05)'; this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)'; });
+        link.addEventListener('mouseleave', function() { this.style.opacity = '1'; this.style.transform = 'scale(1)'; this.style.boxShadow = 'none'; });
+      });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', assignCategoryColors); else assignCategoryColors();
+  setTimeout(assignCategoryColors, 500);
+  setTimeout(assignCategoryColors, 1000);
+  setTimeout(assignCategoryColors, 2000);
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        const hasNewCategories = Array.from(mutation.addedNodes).some(node => {
+          return node.nodeType === 1 && (node.classList.contains('article-category') || node.querySelector('.article-category') || node.classList.contains('widget') || node.querySelector('.widget'));
+        });
+        if (hasNewCategories) { setTimeout(assignCategoryColors, 100); setTimeout(assignCategoryColors, 500); }
+      }
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
+<script>
+(function() {
+  'use strict';
+  function fixDarkModeToggleText() {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+    toggleBtn.classList.add('dark-mode-toggle-fix');
+    const span = toggleBtn.querySelector('span');
+    if (!span) return;
+    function updateText() {
+      const isDark = document.documentElement.dataset.scheme === 'dark';
+      span.textContent = isDark ? '亮色模式' : '暗色模式';
+    }
+    updateText();
+    function handleThemeChange() { setTimeout(updateText, 100); }
+    window.addEventListener('onColorSchemeChange', handleThemeChange);
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-scheme') handleThemeChange();
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-scheme'] });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
+    toggleBtn.addEventListener('click', function() { setTimeout(updateText, 200); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fixDarkModeToggleText); else fixDarkModeToggleText();
+  setTimeout(fixDarkModeToggleText, 1000);
+  setTimeout(fixDarkModeToggleText, 2000);
+})();
+</script>
+
+  <script>
+  if (!document.getElementById('new-theme-switch')) {
+    document.write(`
+      <div id="new-theme-switch">
+        <label class="theme-switch">
+          <input type="checkbox" class="theme-switch__checkbox" id="theme-switch-checkbox">
+          <div class="theme-switch__container">
+            <div class="theme-switch__clouds"></div>
+            <div class="theme-switch__stars-container">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 4.38368 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <div class="theme-switch__circle-container">
+              <div class="theme-switch__sun-moon-container">
+                <div class="theme-switch__moon">
+                  <div class="theme-switch__spot"></div>
+                  <div class="theme-switch__spot"></div>
+                  <div class="theme-switch__spot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <div id="theme-switch-text" style="color: #fff; font-size: 14px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.5); margin-top: 8px; text-align: center;">亮色模式</div>
+      </div>
+    `);
+  }
+  </script>
+
+<style>
+   
+  #new-theme-switch {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    z-index: 1000;
+    text-align: center;
+    width: fit-content;  
+  }
+
+  .theme-switch {
+    --toggle-size: 20px;
+    --container-width: 3.75em;
+    --container-height: 1.7em;
+    --container-radius: 4.2em;
+    --container-light-bg: #3D7EAE;
+    --container-night-bg: #1D1F2C;
+    --circle-container-diameter: 2.25em;
+    --sun-moon-diameter: 1.4em;
+    --sun-bg: #ECCA2F;
+    --moon-bg: #C4C9D1;
+    --spot-color: #959DB1;
+    --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+    --stars-color: #fff;
+    --clouds-color: #F3FDFF;
+    --back-clouds-color: #AACADF;
+    --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
+  }
+
+   
+  @media (max-width: 768px) {
+    #new-theme-switch {
+      left: auto !important;    
+      right: 20px !important;   
+      bottom: 20px !important;  
+      transform: scale(0.8);    
+      transform-origin: bottom right;  
+      z-index: 9999 !important;  
+    }
+    
+     
+    #theme-switch-text {
+      font-size: 12px !important;
+      margin-top: 4px !important;
+    }
+  }
+
+  .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: var(--toggle-size);
+  }
+
+  .theme-switch__container {
+    width: var(--container-width);
+    height: var(--container-height);
+    background-color: var(--container-light-bg);
+    border-radius: var(--container-radius);
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+    box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .theme-switch__container::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    -webkit-box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+    border-radius: var(--container-radius)
+  }
+
+  .theme-switch__checkbox { display: none; }
+
+  .theme-switch__circle-container {
+    width: var(--circle-container-diameter);
+    height: var(--circle-container-diameter);
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    left: var(--circle-container-offset);
+    top: var(--circle-container-offset);
+    border-radius: var(--container-radius);
+    -webkit-box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition: var(--circle-transition);
+    -o-transition: var(--circle-transition);
+    transition: var(--circle-transition);
+    pointer-events: none;
+  }
+
+  .theme-switch__sun-moon-container {
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+    width: var(--sun-moon-diameter);
+    height: var(--sun-moon-diameter);
+    margin: auto;
+    border-radius: var(--container-radius);
+    background-color: var(--sun-bg);
+    -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+    box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+    -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+    overflow: hidden;
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+  }
+
+  .theme-switch__moon {
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+    width: 100%;
+    height: 100%;
+    background-color: var(--moon-bg);
+    border-radius: inherit;
+    -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+    box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .theme-switch__spot {
+    position: absolute;
+    top: 0.75em;
+    left: 0.312em;
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: var(--container-radius);
+    background-color: var(--spot-color);
+    -webkit-box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+  }
+
+  .theme-switch__spot:nth-of-type(2) {
+    width: 0.375em;
+    height: 0.375em;
+    top: 0.937em;
+    left: 1.375em;
+  }
+
+  .theme-switch__spot:nth-last-of-type(3) {
+    width: 0.25em;
+    height: 0.25em;
+    top: 0.312em;
+    left: 0.812em;
+  }
+
+  .theme-switch__clouds {
+    width: 1.25em;
+    height: 1.25em;
+    background-color: var(--clouds-color);
+    border-radius: var(--container-radius);
+    position: absolute;
+    bottom: -0.625em;
+    left: 0.312em;
+    -webkit-box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+    box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+    -webkit-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    -o-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+  }
+
+  .theme-switch__stars-container {
+    position: absolute;
+    color: var(--stars-color);
+    top: -100%;
+    left: 0.312em;
+    width: 2.75em;
+    height: auto;
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    transition: var(--transition);
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container {
+    background-color: var(--container-night-bg);
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
+    left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container:hover {
+    left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter) - 0.187em)
+  }
+
+  .theme-switch__circle-container:hover {
+    left: calc(var(--circle-container-offset) + 0.187em);
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
+    -webkit-transform: translate(0);
+    -ms-transform: translate(0);
+    transform: translate(0);
+    transform: translate(0);
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
+    bottom: -4.062em;
+  }
+
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  #dark-mode-toggle { display: none !important; }
+  .dark-mode-toggle-fix span { font-size: 18px !important; font-weight: 600 !important; }
+</style>
+
+<script>
+(function() {
+  'use strict';
+  if (window.themeSwitchInitialized) return;
+  let isInitialized = false;
+  let observer = null;
+  function initNewThemeSwitch() {
+    if (isInitialized) return;
+    const checkbox = document.getElementById('theme-switch-checkbox');
+    if (!checkbox) return;
+    function updateCheckboxState() {
+      const isDark = document.documentElement.dataset.scheme === 'dark';
+      checkbox.checked = isDark;
+      const textElement = document.getElementById('theme-switch-text');
+      if (textElement) textElement.textContent = isDark ? '暗色模式' : '亮色模式';
+    }
+    function waitForThemeSystem() {
+      const schemeFromData = document.documentElement.dataset.scheme;
+      const schemeFromClass = document.documentElement.className.includes('dark') ? 'dark' : (document.documentElement.className.includes('light') ? 'light' : null);
+      const schemeFromLocalStorage = localStorage.getItem('StackColorScheme');
+      if (schemeFromData || schemeFromClass || schemeFromLocalStorage) {
+        let finalScheme = schemeFromData || schemeFromClass || schemeFromLocalStorage;
+        if (schemeFromData) finalScheme = schemeFromData;
+        document.documentElement.dataset.scheme = finalScheme;
+        updateCheckboxState();
+        isInitialized = true;
+        window.themeSwitchInitialized = true;
+      } else { setTimeout(waitForThemeSystem, 100); }
+    }
+    waitForThemeSystem();
+    checkbox.addEventListener('change', function() {
+      const scheme = this.checked ? 'dark' : 'light';
+      document.documentElement.dataset.scheme = scheme;
+      localStorage.setItem('StackColorScheme', scheme);
+      document.dispatchEvent(new CustomEvent('onColorSchemeChange'));
+    });
+    window.addEventListener('onColorSchemeChange', updateCheckboxState);
+    observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-scheme') updateCheckboxState();
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-scheme'] });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNewThemeSwitch); else initNewThemeSwitch();
+  setTimeout(initNewThemeSwitch, 1500);
+})();
+</script>
+
+<script>
+(function() {
+  'use strict';
+  if (window.hoverEffectsInitialized) return;
+  let isHoverEffectsInitialized = false;
+  let hoverObserver = null;
+  function forceCategoryHoverEffects() {
+    if (isHoverEffectsInitialized) return;
+    const articles = document.querySelectorAll('.article-list--compact article');
+    if (articles.length > 0) {
+      articles.forEach(article => {
+        if (article.hasAttribute('data-hover-initialized')) return;
+        article.style.setProperty('transition', 'all 0.3s ease', 'important');
+        article.style.setProperty('will-change', 'transform, box-shadow', 'important');
+        article.addEventListener('mouseenter', function() { this.style.setProperty('transform', 'translateY(-5px)', 'important'); this.style.setProperty('box-shadow', '0 10px 30px rgba(0, 0, 0, 0.12)', 'important'); });
+        article.addEventListener('mouseleave', function() { this.style.setProperty('transform', 'translateY(0)', 'important'); this.style.setProperty('box-shadow', 'none', 'important'); });
+        article.setAttribute('data-hover-initialized', 'true');
+      });
+      isHoverEffectsInitialized = true;
+      window.hoverEffectsInitialized = true;
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', forceCategoryHoverEffects); else forceCategoryHoverEffects();
+  setTimeout(forceCategoryHoverEffects, 1000);
+  hoverObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) setTimeout(forceCategoryHoverEffects, 100);
+    });
+  });
+  hoverObserver.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
             </main>
         </div>
         <script 

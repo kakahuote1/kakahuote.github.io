@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head>
-	<meta name="generator" content="Hugo 0.152.2"><meta charset='utf-8'>
+    <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="靡不有初，鲜克有终">
-<title>Pager 2 - kakahuote</title>
+<title>Posts</title>
 
-<link rel='canonical' href='https://blog.928330.xyz/'>
+<link rel='canonical' href='https://blog.928330.xyz/post/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="kakahuote">
+<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="Posts">
 <meta property='og:description' content="靡不有初，鲜克有终">
-<meta property='og:url' content='https://blog.928330.xyz/'>
+<meta property='og:url' content='https://blog.928330.xyz/post/'>
 <meta property='og:site_name' content='kakahuote'>
 <meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-12-04T21:20:43&#43;08:00 '/>
-<meta name="twitter:title" content="kakahuote">
-<meta name="twitter:description" content="靡不有初，鲜克有终"><link rel="alternate" type="application/rss&#43;xml" href="https://blog.928330.xyz/index.xml">
+<meta name="twitter:title" content="Posts">
+<meta name="twitter:description" content="靡不有初，鲜克有终"><link rel="alternate" type="application/rss&#43;xml" href="https://blog.928330.xyz/post/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 <style>
      
@@ -850,7 +849,7 @@
         
         
         
-        <li  class='current' >
+        <li >
             <a href='/' >
                 
                 
@@ -1114,847 +1113,48 @@
 
 
             <main class="main full-width">
-    
-    
-    
-    
+    <header>
+        <h3 class="section-title">
+            
+                章节
+            
+        </h3>
 
-    
-    <div class="elegant-welcome">
-      <div class="welcome-content" id="welcome-content">
-        
-        <div class="welcome-decoration left">
-          <div class="decoration-dash"></div>
-          <div class="decoration-dot"></div>
-        </div>
-        
-        <div class="welcome-main">
-          <div class="welcome-emoji" id="welcome-emoji">👋</div>
-          <div class="welcome-text">
-            <span class="welcome-greeting" id="welcome-greeting">欢迎来到</span>
-            <div class="welcome-name">
-              <span class="name-text" id="name-text">Kakahuote's Blog</span>
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count">31 个页面</h3>
+                <h1 class="section-term">Posts</h1>
+                
             </div>
-          </div>
         </div>
-        
-        
-        <div class="welcome-bg-text-container" id="welcome-bg-text-container">
-          <span class="bg-text" id="bg-text-1">欢</span>
-          <span class="bg-text" id="bg-text-2">迎</span>
-          <span class="bg-text" id="bg-text-3">来</span>
-          <span class="bg-text" id="bg-text-4">到</span>
-        </div>
-        
-        
-        <div class="welcome-decoration right">
-          <div class="decoration-dot"></div>
-          <div class="decoration-dash"></div>
-        </div>
-        
-        
-        <div class="click-effects" id="click-effects"></div>
-      </div>
-    </div>
-
-    <script>
-      
-      document.addEventListener('DOMContentLoaded', function() {
-        const welcomeContent = document.getElementById('welcome-content');
-        const welcomeEmoji = document.getElementById('welcome-emoji');
-        const decorationDashes = document.querySelectorAll('.decoration-dash');
-        const decorationDots = document.querySelectorAll('.decoration-dot');
-        const clickEffects = document.getElementById('click-effects');
-        
-        let isInitialState = true;
-        let clickCount = 0;
-        let isTransitioning = false; 
-        
-        
-        const emotionEmojis = [
-          
-          ['😊', '😄', '😉', '🤗', '😍', '🥰', '😇', '🤩', '😌', '😋', '😎', '🤠', '👋', '🙋‍♂️', '💁‍♂️', '🤝'],
-          
-          
-          ['🤔', '🤨', '🧐', '🤓', '😏', '😶', '😐', '😑', '😯', '😦', '😧', '😮', '🤭', '🤫', '🤐', '😶'],
-          
-          
-          ['😒', '😕', '😟', '😔', '😞', '😣', '😖', '😫', '😩', '😤', '😠', '😡', '🤬', '😈', '👿', '💀'],
-          
-          
-          ['😢', '😭', '😿', '😾', '😤', '😡', '🤬', '😈', '👿', '💀', '☠️', '👻', '💩', '🤡', '👺', '👹'],
-          
-          
-          ['😅', '😂', '🤣', '😆', '😁', '😃', '😀', '🙂', '😌', '😋', '😊', '😄', '😉', '🤗', '😍', '🥰']
-        ];
-        
-        
-        const gestureEmojis = [
-          '👆', '👈', '👉', '👇', '👌', '✌️', '🤞', '🤟', '🤘', '🤙', '👍', '👊', '✊', '🤝', '🙏',
-          '👏', '🤲', '👐', '🙌', '🤚', '🖐️', '✋', '🖖', '🤌', '🤏'
-        ];
-        
-        
-        let secondEmoji = gestureEmojis[Math.floor(Math.random() * gestureEmojis.length)];
-        
-        let currentEmotionStage = 0;
-        let animationTriggered = false; 
-        
-        
-        function triggerWelcomeAnimation() {
-          console.log('触发欢迎横幅动画');
-          if (animationTriggered) {
-            console.log('动画已经触发过，跳过');
-            return;
-          }
-          animationTriggered = true;
-          
-          const welcomeGreeting = document.getElementById('welcome-greeting');
-          const nameText = document.getElementById('name-text');
-          const bgTextContainer = document.getElementById('welcome-bg-text-container');
-          const bgTexts = document.querySelectorAll('.bg-text');
-          
-          
-          welcomeGreeting.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          welcomeGreeting.style.opacity = '0';
-          welcomeGreeting.style.transform = 'scale(0.8)';
-          
-          
-          console.log('开始背景大字动画');
-          bgTextContainer.style.display = 'block';
-          
-          
-          bgTexts.forEach((text, index) => {
-            console.log(`设置背景大字 ${index + 1}:`, text);
-            
-            
-            const positions = [
-              { left: '10%', top: '25%' },  
-              { left: '20%', top: '75%' },  
-              { left: '80%', top: '20%' },  
-              { left: '90%', top: '80%' }   
-            ];
-            
-            
-            text.style.left = '50%';
-            text.style.top = '50%';
-            text.style.transform = 'translate(-50%, -50%) scale(1)';
-            text.style.opacity = '0';
-            text.style.transition = 'none'; 
-            
-            
-            text.offsetHeight;
-          });
-          
-          
-          requestAnimationFrame(() => {
-            bgTexts.forEach((text, index) => {
-              const positions = [
-                { left: '10%', top: '25%' },  
-                { left: '20%', top: '75%' },  
-                { left: '80%', top: '20%' },  
-                { left: '90%', top: '80%' }   
-              ];
-              
-              
-              text.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-              text.style.left = positions[index].left;
-              text.style.top = positions[index].top;
-              text.style.transform = 'translate(-50%, -50%) scale(1.2)';
-              text.style.opacity = '0.15';
-            });
-          });
-          
-          
-          setTimeout(() => {
-            nameText.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            nameText.style.fontSize = '2.5rem';
-            nameText.style.marginTop = '-2.5rem';
-            
-            
-            const welcomeMain = document.querySelector('.welcome-main');
-            welcomeMain.style.flexDirection = 'row';
-            welcomeMain.style.alignItems = 'center';
-            welcomeMain.style.gap = '2rem';
-          }, 800);
-        }
-        
-        
-        const effectTypes = [
-          
-          { type: 'star', symbol: '⭐', class: 'effect-star' },
-          { type: 'sparkle', symbol: '✨', class: 'effect-sparkle' },
-          { type: 'diamond', symbol: '💎', class: 'effect-diamond' },
-          { type: 'crown', symbol: '👑', class: 'effect-crown' },
-          { type: 'gem', symbol: '💍', class: 'effect-gem' },
-          
-          
-          { type: 'fire', symbol: '🔥', class: 'effect-fire' },
-          { type: 'lightning', symbol: '⚡', class: 'effect-lightning' },
-          { type: 'snowflake', symbol: '❄️', class: 'effect-snowflake' },
-          { type: 'sun', symbol: '☀️', class: 'effect-sun' },
-          { type: 'moon', symbol: '🌙', class: 'effect-moon' },
-          { type: 'rainbow', symbol: '🌈', class: 'effect-rainbow' },
-          { type: 'flower', symbol: '🌸', class: 'effect-flower' },
-          { type: 'leaf', symbol: '🍃', class: 'effect-leaf' },
-          { type: 'tree', symbol: '🌳', class: 'effect-tree' },
-          
-          
-          { type: 'butterfly', symbol: '🦋', class: 'effect-butterfly' },
-          { type: 'bird', symbol: '🐦', class: 'effect-bird' },
-          { type: 'fish', symbol: '🐠', class: 'effect-fish' },
-          { type: 'dragon', symbol: '🐉', class: 'effect-dragon' },
-          { type: 'unicorn', symbol: '🦄', class: 'effect-unicorn' },
-          { type: 'phoenix', symbol: '🦅', class: 'effect-phoenix' },
-          
-          
-          { type: 'rocket', symbol: '🚀', class: 'effect-rocket' },
-          { type: 'satellite', symbol: '🛰️', class: 'effect-satellite' },
-          { type: 'ufo', symbol: '🛸', class: 'effect-ufo' },
-          { type: 'robot', symbol: '🤖', class: 'effect-robot' },
-          { type: 'alien', symbol: '👽', class: 'effect-alien' },
-          
-          
-          { type: 'pizza', symbol: '🍕', class: 'effect-pizza' },
-          { type: 'hamburger', symbol: '🍔', class: 'effect-hamburger' },
-          { type: 'icecream', symbol: '🍦', class: 'effect-icecream' },
-          { type: 'cake', symbol: '🎂', class: 'effect-cake' },
-          { type: 'candy', symbol: '🍬', class: 'effect-candy' },
-          
-          
-          { type: 'trophy', symbol: '🏆', class: 'effect-trophy' },
-          { type: 'medal', symbol: '🥇', class: 'effect-medal' },
-          { type: 'ball', symbol: '⚽', class: 'effect-ball' },
-          { type: 'basketball', symbol: '🏀', class: 'effect-basketball' },
-          { type: 'tennis', symbol: '🎾', class: 'effect-tennis' },
-          
-          
-          { type: 'musical_note', symbol: '🎵', class: 'effect-musical-note' },
-          { type: 'guitar', symbol: '🎸', class: 'effect-guitar' },
-          { type: 'piano', symbol: '🎹', class: 'effect-piano' },
-          { type: 'microphone', symbol: '🎤', class: 'effect-microphone' },
-          { type: 'headphones', symbol: '🎧', class: 'effect-headphones' },
-          
-          
-          { type: 'game_die', symbol: '🎲', class: 'effect-game-die' },
-          { type: 'joystick', symbol: '🕹️', class: 'effect-joystick' },
-          { type: 'controller', symbol: '🎮', class: 'effect-controller' },
-          { type: 'puzzle', symbol: '🧩', class: 'effect-puzzle' },
-          { type: 'chess', symbol: '♟️', class: 'effect-chess' },
-          
-          
-          { type: 'sparkles', symbol: '✨', class: 'effect-sparkles' },
-          { type: 'crystal_ball', symbol: '🔮', class: 'effect-crystal-ball' },
-          { type: 'magic_wand', symbol: '🪄', class: 'effect-magic-wand' },
-          { type: 'fairy', symbol: '🧚', class: 'effect-fairy' },
-          { type: 'wizard', symbol: '🧙‍♂️', class: 'effect-wizard' }
-        ];
-        
-        
-        function createClickEffect() {
-          const effect = effectTypes[Math.floor(Math.random() * effectTypes.length)];
-          const effectElement = document.createElement('div');
-          effectElement.className = `click-effect ${effect.class}`;
-          effectElement.textContent = effect.symbol;
-          
-          
-          const isLeft = Math.random() > 0.5;
-          let x, y;
-          
-          if (isLeft) {
-            
-            x = Math.random() * 20 + 5; 
-          } else {
-            
-            x = Math.random() * 20 + 75; 
-          }
-          
-          
-          const verticalZone = Math.random();
-          if (verticalZone < 0.4) {
-            
-            y = Math.random() * 30 + 10;
-          } else {
-            
-            y = Math.random() * 30 + 60;
-          }
-          
-          effectElement.style.left = `${x}%`;
-          effectElement.style.top = `${y}%`;
-          
-          clickEffects.appendChild(effectElement);
-          
-          
-          setTimeout(() => {
-            effectElement.remove();
-          }, 2000);
-        }
-        
-        
-        function transitionEmoji(fromEmoji, toEmoji, callback) {
-          if (isTransitioning) return;
-          isTransitioning = true;
-          
-          
-          welcomeEmoji.classList.add('emoji-bounce-shake');
-          
-          setTimeout(() => {
-            
-            welcomeEmoji.classList.remove('emoji-bounce-shake');
-            welcomeEmoji.classList.add('emoji-spin-transition');
-            welcomeEmoji.textContent = toEmoji;
-            
-            
-            setTimeout(() => {
-              welcomeEmoji.classList.remove('emoji-spin-transition');
-              welcomeEmoji.classList.add('emoji-normalize');
-              
-              setTimeout(() => {
-                welcomeEmoji.classList.remove('emoji-normalize');
-                isTransitioning = false;
-                if (callback) callback();
-              }, 300);
-            }, 500);
-          }, 400);
-        }
-        
-        
-        setTimeout(() => {
-          if (isInitialState) {
-            
-            transitionEmoji('👋', secondEmoji, () => {
-              welcomeContent.classList.add('hint-click');
-            });
-            
-            
-            triggerWelcomeAnimation();
-          }
-        }, 2000);
-        
-        
-        welcomeContent.addEventListener('click', function() {
-          
-          this.classList.remove('hint-click');
-          isInitialState = false;
-          
-          
-          if (welcomeEmoji.textContent === '👆') {
-            this.classList.add('hint-shake');
-            setTimeout(() => {
-              this.classList.remove('hint-shake');
-            }, 600);
-          } else {
-            
-            this.classList.add('clicked');
-            setTimeout(() => {
-              this.classList.remove('clicked');
-            }, 600);
-          }
-          
-          
-          decorationDots.forEach((dot, index) => {
-            setTimeout(() => {
-              dot.style.animation = 'dotPulse 0.6s ease-in-out';
-              setTimeout(() => {
-                dot.style.animation = 'dotFloat 4s ease-in-out infinite';
-              }, 600);
-            }, index * 150);
-          });
-          
-          decorationDashes.forEach((dash, index) => {
-            setTimeout(() => {
-              dash.style.animation = 'dashExpand 0.6s ease-in-out';
-              setTimeout(() => {
-                dash.style.animation = 'dashFloat 4s ease-in-out infinite';
-              }, 600);
-            }, index * 150);
-          });
-          
-          
-          for (let i = 0; i < 4; i++) {
-            setTimeout(() => {
-              createClickEffect();
-            }, i * 120);
-          }
-          
-          
-          clickCount++;
-          
-          
-          if (clickCount <= 15) {
-            currentEmotionStage = 0; 
-          } else if (clickCount <= 30) {
-            currentEmotionStage = 1; 
-          } else if (clickCount <= 45) {
-            currentEmotionStage = 2; 
-          } else if (clickCount <= 60) {
-            currentEmotionStage = 3; 
-          } else {
-            currentEmotionStage = 4; 
-            if (clickCount > 75) {
-              clickCount = 0; 
-            }
-          }
-          
-          const currentEmotions = emotionEmojis[currentEmotionStage];
-          const randomEmoji = currentEmotions[Math.floor(Math.random() * currentEmotions.length)];
-          
-          
-          transitionEmoji(welcomeEmoji.textContent, randomEmoji);
-          
-          
-        });
-        
-        
-        welcomeContent.addEventListener('mouseenter', function() {
-          if (isInitialState) {
-            
-            this.style.cursor = '';
-          }
-        });
-      });
-    </script>
-
-    <section class="article-list">
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%9C%E8%A5%BF/">
-                
-                    <img src="http://picture.928330.xyz/typora/image-20251022010316720.png" loading="lazy" alt="Featured image of post 磁盘相关的东西" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/" >
-                技术随笔
-            </a>
-        
     </header>
     
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%9C%E8%A5%BF/">磁盘相关的东西</a>
-        </h2>
+    <section class="article-list--compact">
         
-        <h3 class="article-subtitle">
-            学RAID之前必须知道的和可以知道的
-        </h3>
-        
-
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-18</time>
+            <article>
+    <a href="/p/vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        <div class="article-details">
+            <h2 class="article-title">Vim编辑器完全使用教程</h2>
+            <footer class="article-time">
+                <time datetime='2025-05-08T15:28:02&#43;08:00'>
+                    发布时间：2025-05-08</time>
+            </footer>
+        </div>
+            <div class="article-image">
+                
+                    <img src="http://picture.928330.xyz/typora/DeWatermark.ai_1756040226707.jpeg" loading="lazy" alt="Featured image of post Vim编辑器完全使用教程" />
+                
             </div>
         
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-22
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
+    </a>
 
     
-</div>
-
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">
-                
-                    <img src="http://picture.928330.xyz/typora/113644svdcd71dd4fdd7sc.jpg" loading="lazy" alt="Featured image of post 美亚杯2023个人赛取证总结" />
-                
-            </a>
-        </div>
     
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%9B%98/" >
-                比赛复盘
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E7%BE%8E%E4%BA%9A%E6%9D%AF2023%E4%B8%AA%E4%BA%BA%E8%B5%9B%E5%8F%96%E8%AF%81%E6%80%BB%E7%BB%93/">美亚杯2023个人赛取证总结</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            打基础
-        </h3>
-        
-
+    <div class="article-subtitle-archive">
+        你应该放下一切，立刻学习宇宙第一编辑器Vim😎
     </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-16</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-22
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
     
 
-    
-</div>
-
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/">
-                
-                    <img src="http://picture.928330.xyz/typora/d9dc6363235d1bc4e4bf2e1debb14e39.jpg" loading="lazy" alt="Featured image of post 逆向基础4：PE文件" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
-                技术学习
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%804pe%E6%96%87%E4%BB%B6/">逆向基础4：PE文件</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            windows的可执行文件格式
-        </h3>
-        
-
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-12</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-22
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">
-                
-                    <img src="http://picture.928330.xyz/typora/16e7b03d07acb9525b5cade30292739c.jpg" loading="lazy" alt="Featured image of post 逆向基础3：ELF文件" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
-                技术学习
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%803elf%E6%96%87%E4%BB%B6/">逆向基础3：ELF文件</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            linux的可执行文件格式
-        </h3>
-        
-
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-11</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-13
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">
-                
-                    <img src="http://picture.928330.xyz/typora/fd5a5ff7fbfb389c2ea3c8f72e2c9e69.png" loading="lazy" alt="Featured image of post 逆向基础2：可执行文件概述" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" >
-                技术学习
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-
-
-        <h2 class="article-title">
-            <a href="/p/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%802%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0/">逆向基础2：可执行文件概述</a>
-        </h2>
-        
-        <h3 class="article-subtitle">
-            或许应该放在基础1
-        </h3>
-        
-
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">
-                    发布时间：2025-10-09</time>
-            </div>
-        
-
-        
-
-        <div class="article-lastmod">
-               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-               <time>
-                   更新时间：2025-10-13
-               </time>
-           </div>
-        <div>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--published">
-                浏览量：<span class="waline-pageview-count" data-waline-pageview-count="0">0</span>
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-
-</header>
 </article>
         
     </section>
@@ -1964,15 +1164,7 @@
 
         
             
-                    <a class='page-link' href='/'>1</a>
-                
-            
-            
-                <span class='page-link current'>2</span>
-                
-            
-            
-                    <a class='page-link' href='/page/3/'>3</a>
+                    <a class='page-link' href='/post/'>1</a>
                 
             
             
@@ -1991,7 +1183,15 @@
                 
             
             
-                    <a class='page-link' href='/page/7/'>7</a>
+                    
+                
+            
+            
+                    <a class='page-link' href='/post/page/6/'>6</a>
+                
+            
+            
+                <span class='page-link current'>7</span>
                 
             
     </nav>
@@ -2019,6 +1219,7 @@
         <span>...当然还有kakahuote🤓👆</span>
     </section>
 </footer>
+
             </main>
         </div>
         <script 
