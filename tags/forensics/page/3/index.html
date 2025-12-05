@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://blog.928330.xyz/tags/forensics/'>
 
-<link rel="stylesheet" href="/scss/style.min.6eb8014a7c47067a823017bd97e0272008650fbf090fa26d21e955bb600446ce.css"><meta property='og:title' content="Tag: Forensics - kakahuote">
+<link rel="stylesheet" href="/scss/style.min.39ecf65bc226010541aa6d3e165db03375656b61e3e66bd0edb6ef189caf76fb.css"><meta property='og:title' content="Tag: Forensics - kakahuote">
 <meta property='og:description' content="靡不有初，鲜克有终">
 <meta property='og:url' content='https://blog.928330.xyz/tags/forensics/'>
 <meta property='og:site_name' content='kakahuote'>
@@ -2981,5 +2981,430 @@ particlesJS('particles-js', {
   hoverObserver.observe(document.body, { childList: true, subtree: true });
 })();
 </script>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      
+      
+      
+      const config = {
+          texts: ["Kakahuote's Blog", "Misc...FFForensics！", "Keep Learning......"],
+          typeSpeed: 90, deleteSpeed: 40, waitBeforeDelete: 2000, waitBeforeType: 500,
+          emojis: ['🍊', '💻', '🔍', '🚀', '🐱'],
+          styles: ['style-gradient', 'style-console', 'style-glitch']
+      };
+  
+      let fileSystem = {
+          'flag.txt': { type: 'file', content: 'CTF{Kakahuote_Is_The_Best_Hacker_!!}' },
+          'readme.md': { type: 'file', content: 'Welcome to the blog terminal. Use "ls" to view posts.' },
+          'secrets': { type: 'dir' }
+      };
+  
+      let blogPosts = [];
+      let isGlobalMode = false; 
+  
+      
+      
+      
+      async function initFileSystem() {
+          try {
+              const response = await fetch('/index.xml');
+              if (response.ok) {
+                  const text = await response.text();
+                  const parser = new DOMParser();
+                  const xmlDoc = parser.parseFromString(text, "text/xml");
+                  const items = xmlDoc.querySelectorAll("item");
+                  
+                  if (items.length > 0) {
+                      items.forEach((item, index) => {
+                          const title = item.querySelector("title").textContent;
+                          const link = item.querySelector("link").textContent;
+                          addPostToSystem(title, link, index);
+                      });
+                      return;
+                  }
+              }
+          } catch (e) {}
+  
+          
+          const articles = document.querySelectorAll('.article-list article, .article-list--compact article');
+          if (articles.length > 0) {
+              articles.forEach((article, index) => {
+                  const titleEl = article.querySelector('.article-title a');
+                  if (titleEl) {
+                      addPostToSystem(titleEl.innerText.trim(), titleEl.getAttribute('href'), index);
+                  }
+              });
+          }
+      }
+  
+      function addPostToSystem(rawTitle, link, index) {
+          
+          
+          
+          let fileName = rawTitle
+              .replace(/\s+/g, '_') 
+              
+              .replace(/[^\w\u4e00-\u9fa5_\-\.\uff01-\uff5e\u3000-\u303f\uff1a\uff0c\uff08\uff09]/g, '')
+              + '.md';
+          
+          if (fileName.length > 50) fileName = fileName.substring(0, 45) + '....md';
+          if (fileSystem[fileName]) fileName = fileName.replace('.md', `_${index}.md`);
+  
+          blogPosts.push({ name: fileName, title: rawTitle, link: link });
+          fileSystem[fileName] = { type: 'post', link: link, title: rawTitle };
+      }
+  
+      
+      
+      
+      function ensureGlobalAccess() {
+          let container = document.querySelector('.welcome-content');
+          
+          
+          if (!container) {
+              isGlobalMode = true;
+              createGlobalTerminal();
+              createTriggerButton();
+          } 
+          
+          else {
+              
+              
+          }
+      }
+  
+      function createGlobalTerminal() {
+          
+          const overlay = document.createElement('div');
+          overlay.className = 'global-terminal-overlay';
+          
+          
+          const termBox = document.createElement('div');
+          termBox.className = 'welcome-content terminal-active'; 
+          
+          
+          
+          const output = document.createElement('div');
+          output.className = 'terminal-output-area';
+          output.style.userSelect = "text"; 
+          
+          termBox.appendChild(output);
+          overlay.appendChild(termBox);
+          document.body.appendChild(overlay);
+          
+          
+          dom.container = termBox;
+          dom.terminalOutput = output;
+          
+          
+          overlay.addEventListener('click', (e) => {
+              if (e.target === overlay) toggleGlobalTerminal(false);
+          });
+      }
+  
+      function createTriggerButton() {
+          const btn = document.createElement('div');
+          btn.id = 'terminal-trigger';
+          btn.innerHTML = `>_ SYSTEM`;
+          btn.title = "Open Terminal (Alt + T)";
+          document.body.appendChild(btn);
+          
+          btn.addEventListener('click', () => toggleGlobalTerminal(true));
+      }
+  
+      function toggleGlobalTerminal(show) {
+          const overlay = document.querySelector('.global-terminal-overlay');
+          if (!overlay) return;
+          
+          if (show) {
+              overlay.classList.add('active');
+              if (!state.isTerminal) enterTerminal(); 
+              setTimeout(() => {
+                 if(dom.cmdInput) dom.cmdInput.focus();
+              }, 100);
+          } else {
+              overlay.classList.remove('active');
+              
+          }
+      }
+  
+      
+      document.addEventListener('keydown', (e) => {
+          if (e.altKey && e.key.toLowerCase() === 't') {
+              e.preventDefault();
+              const overlay = document.querySelector('.global-terminal-overlay');
+              if (overlay) {
+                  const isActive = overlay.classList.contains('active');
+                  toggleGlobalTerminal(!isActive);
+              } else {
+                  
+                  const banner = document.querySelector('.welcome-content');
+                  if (banner && !isGlobalMode) {
+                      if (state.isTerminal) exitTerminal();
+                      else enterTerminal();
+                  }
+              }
+          }
+      });
+  
+      
+      
+      
+      const dom = {
+          container: null,
+          nameText: null,
+          terminalOutput: null,
+          cmdInput: null
+      };
+  
+      
+      const homeBanner = document.querySelector('.welcome-content');
+      
+      
+      initFileSystem().then(() => {
+          
+          if (isGlobalMode && state.isTerminal) {
+               
+          }
+      });
+  
+      if (homeBanner) {
+          
+          dom.container = homeBanner;
+          dom.nameText = document.querySelector('.welcome-name .name-text');
+          dom.terminalOutput = document.createElement('div');
+          dom.terminalOutput.className = 'terminal-output-area';
+          dom.terminalOutput.style.userSelect = "text"; 
+          dom.container.appendChild(dom.terminalOutput);
+          
+          
+          const cursor = document.createElement('span');
+          cursor.className = 'cursor';
+          document.querySelector('.welcome-name').appendChild(cursor);
+          
+          
+          bindHomeEvents();
+          
+          
+          dom.nameText.classList.add('style-gradient');
+          setTimeout(autoLoop, 1000);
+      } 
+      
+      
+      ensureGlobalAccess();
+  
+      
+      let state = {
+          textIndex: 0, charIndex: 0, isDeleting: false, timer: null,
+          clickCount: 0, clickTimer: null,
+          isTerminal: false,
+          cmdHistory: [], historyIndex: -1
+      };
+  
+      
+      
+      
+      function bindHomeEvents() {
+          dom.container.addEventListener('click', (e) => {
+              if (state.isTerminal) {
+                  if (window.getSelection().toString().length === 0 && dom.cmdInput) {
+                      dom.cmdInput.focus();
+                  }
+                  return;
+              }
+              state.clickCount++;
+              if (state.clickCount === 1) setTimeout(() => state.clickCount = 0, 800);
+              if (state.clickCount === 3) enterTerminal();
+          });
+  
+          document.addEventListener('click', (e) => {
+              if (!isGlobalMode && state.isTerminal && !dom.container.contains(e.target)) {
+                  exitTerminal();
+              }
+          });
+      }
+  
+      
+      
+      
+      function autoLoop() {
+          if (state.isTerminal || !dom.nameText) return; 
+  
+          const currentFullText = config.texts[state.textIndex];
+          if (state.isDeleting) state.charIndex--; else state.charIndex++;
+          
+          dom.nameText.innerHTML = currentFullText.substring(0, state.charIndex);
+  
+          let nextSpeed = state.isDeleting ? config.deleteSpeed : config.typeSpeed;
+          if (!state.isDeleting && state.charIndex === currentFullText.length) {
+              nextSpeed = config.waitBeforeDelete;
+              state.isDeleting = true;
+          } else if (state.isDeleting && state.charIndex === 0) {
+              state.isDeleting = false;
+              state.textIndex = (state.textIndex + 1) % config.texts.length;
+              nextSpeed = config.waitBeforeType;
+              dom.nameText.className = 'name-text ' + config.styles[Math.floor(Math.random() * config.styles.length)];
+          }
+          state.timer = setTimeout(autoLoop, nextSpeed);
+      }
+  
+      
+      
+      
+      function enterTerminal() {
+          if (state.isTerminal && !isGlobalMode) return; 
+          state.isTerminal = true;
+          clearTimeout(state.timer);
+          
+          if (!isGlobalMode) {
+              dom.container.classList.add('terminal-active');
+              dom.container.style.userSelect = "text";
+          }
+          
+          dom.terminalOutput.innerHTML = '';
+          printLine('KakahuoteOS [Version 3.1.0-global]', 'term-gray');
+          printLine('(c) 2025 Kakahuote Corp. Access granted.', 'term-gray');
+          printLine('<br>');
+          printLine('Welcome back, root.', 'term-blue');
+          
+          if (blogPosts.length > 0) printLine(`Loaded ${blogPosts.length} articles.`, 'term-green');
+          else printLine('System initializing...', 'term-gray');
+          
+          printLine('Type "help" for commands.', 'term-gray');
+          printLine('<br>');
+          
+          newInputLine();
+      }
+  
+      function exitTerminal() {
+          if (isGlobalMode) return; 
+          
+          state.isTerminal = false;
+          dom.container.classList.remove('terminal-active');
+          dom.container.style.userSelect = "none";
+          dom.nameText.innerHTML = '';
+          state.charIndex = 0;
+          state.isDeleting = false;
+          state.textIndex = 0;
+          autoLoop();
+      }
+  
+      function newInputLine() {
+          const line = document.createElement('div');
+          line.className = 'input-line';
+          line.innerHTML = `<span class="prompt">root@blog:~$</span><input type="text" class="cmd-input" autocomplete="off" spellcheck="false">`;
+          dom.terminalOutput.appendChild(line);
+          
+          const input = line.querySelector('.cmd-input');
+          dom.cmdInput = input;
+          input.focus();
+          scrollToBottom();
+          input.addEventListener('keydown', handleInput);
+      }
+  
+      function scrollToBottom() {
+          requestAnimationFrame(() => dom.terminalOutput.scrollTop = dom.terminalOutput.scrollHeight);
+      }
+  
+      function handleInput(e) {
+          if (e.key === 'Enter') {
+              const cmd = this.value.trim();
+              this.parentElement.innerHTML = `<span class="prompt">root@blog:~$</span><span>${this.value.replace(/</g, '&lt;')}</span>`;
+              if (cmd) {
+                  state.cmdHistory.push(cmd);
+                  state.historyIndex = state.cmdHistory.length;
+                  processCmd(cmd);
+              } else {
+                  newInputLine();
+              }
+          } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+              e.preventDefault();
+              if (e.key === 'ArrowUp' && state.historyIndex > 0) state.historyIndex--;
+              else if (e.key === 'ArrowDown' && state.historyIndex < state.cmdHistory.length - 1) state.historyIndex++;
+              else if (e.key === 'ArrowDown') { state.historyIndex = state.cmdHistory.length; this.value = ''; return; }
+              this.value = state.cmdHistory[state.historyIndex];
+          } else if (e.key === 'Tab') {
+              e.preventDefault();
+              const partial = this.value.trim();
+              if (partial) {
+                  const match = Object.keys(fileSystem).find(f => f.toLowerCase().startsWith(partial.toLowerCase()));
+                  if (match) this.value = match;
+              }
+          }
+      }
+  
+      function processCmd(rawCmd) {
+          const parts = rawCmd.match(/(?:[^\s"]+|"[^"]*")+/g) || [];
+          if (parts.length === 0) { newInputLine(); return; }
+          const cmd = parts[0].toLowerCase();
+          const args = parts.slice(1).map(arg => arg.replace(/^"|"$/g, ''));
+  
+          switch(cmd) {
+              case 'help':
+                  printLine('Commands: ls, cat, open, whoami, clear, reboot', 'term-gray');
+                  break;
+              case 'ls':
+                  let posts = [];
+                  Object.keys(fileSystem).forEach(key => {
+                      if (fileSystem[key].type === 'post') posts.push(key);
+                  });
+                  
+                  printLine('<span class="term-blue">secrets/</span>  <span class="term-gray">flag.txt  readme.md</span>');
+                  
+                  if (posts.length > 0) {
+                      printLine('<br><span class="term-gray">--- Articles ---</span>');
+                      
+                      for (let i = 0; i < posts.length; i += 2) {
+                          let html = `<span class="term-green" style="display:inline-block;width:48%">${posts[i]}</span>`;
+                          if (i+1 < posts.length) html += `<span class="term-green" style="display:inline-block;width:48%">${posts[i+1]}</span>`;
+                          printLine(html);
+                      }
+                  }
+                  break;
+              case 'cat':
+              case 'open':
+                  const target = args[0];
+                  const file = fileSystem[target];
+                  if (file) {
+                      if (file.type === 'post') {
+                          printLine(`Opening "${file.title}"...`, 'term-blue');
+                          setTimeout(() => window.location.href = file.link, 500);
+                      } else if (file.type === 'file') {
+                          printLine(file.content);
+                      } else {
+                          printLine('Access denied.', 'term-red');
+                      }
+                  } else {
+                      printLine(`File not found: ${target}`, 'term-red');
+                  }
+                  break;
+              case 'clear':
+                  dom.terminalOutput.innerHTML = '';
+                  break;
+              case 'reboot':
+                  printLine('Rebooting...', 'term-red');
+                  setTimeout(() => window.location.reload(), 1000);
+                  return;
+              case 'whoami':
+                  printLine('root', 'term-green');
+                  break;
+              default:
+                  printLine(`Command not found: ${cmd}`, 'term-red');
+          }
+          newInputLine();
+      }
+  
+      function printLine(html, cls) {
+          const div = document.createElement('div');
+          div.className = 'term-line ' + (cls || '');
+          div.innerHTML = html;
+          dom.terminalOutput.appendChild(div);
+          scrollToBottom();
+      }
+  });
+  </script>
     </body>
 </html>
